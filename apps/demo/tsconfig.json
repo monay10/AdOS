@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "references": [
+    { "path": "../../packages/kernel" },
+    { "path": "../../packages/contracts" },
+    { "path": "../../packages/event-bus" },
+    { "path": "../../packages/tenancy" },
+    { "path": "../../domains/agency-os" },
+    { "path": "../../domains/marketing-intelligence" },
+    { "path": "../../domains/creative-studio" },
+    { "path": "../../domains/campaign-engine" },
+    { "path": "../../domains/analytics-engine" },
+    { "path": "../../domains/executive-ai" }
+  ],
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules", "**/*.test.ts"]
+}

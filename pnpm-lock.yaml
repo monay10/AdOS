@@ -21,6 +21,46 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@22.20.1)
 
+  apps/demo:
+    dependencies:
+      '@ados/agency-os':
+        specifier: workspace:*
+        version: link:../../domains/agency-os
+      '@ados/analytics-engine':
+        specifier: workspace:*
+        version: link:../../domains/analytics-engine
+      '@ados/campaign-engine':
+        specifier: workspace:*
+        version: link:../../domains/campaign-engine
+      '@ados/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@ados/creative-studio':
+        specifier: workspace:*
+        version: link:../../domains/creative-studio
+      '@ados/event-bus':
+        specifier: workspace:*
+        version: link:../../packages/event-bus
+      '@ados/executive-ai':
+        specifier: workspace:*
+        version: link:../../domains/executive-ai
+      '@ados/kernel':
+        specifier: workspace:*
+        version: link:../../packages/kernel
+      '@ados/marketing-intelligence':
+        specifier: workspace:*
+        version: link:../../domains/marketing-intelligence
+      '@ados/tenancy':
+        specifier: workspace:*
+        version: link:../../packages/tenancy
+    devDependencies:
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.20.1)
+
   domains/agency-os:
     dependencies:
       '@ados/contracts':
@@ -79,6 +119,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
@@ -123,6 +166,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
@@ -208,6 +254,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
@@ -230,6 +279,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
@@ -296,6 +348,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
