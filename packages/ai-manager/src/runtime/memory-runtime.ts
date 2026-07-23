@@ -1,6 +1,43 @@
 import { randomUUID } from 'node:crypto';
-import type { DecisionMemoryPort, DecisionMemoryRecord } from '@ados/contracts';
+import type { AISession, AISessionPort, DecisionMemoryPort, DecisionMemoryRecord } from '@ados/contracts';
+import { NotFoundError } from '@ados/kernel';
 import type { MemoryRecord, MemoryRegistryPort, MemoryScope } from '../ports.js';
+
+/**
+ * AI Session lifecycle. Every mission runs as one session so a mission's tasks
+ * share context and can be traced together (Sprint 2.1 AISession). Sessions move
+ * active → completed | aborted.
+ */
+export class InMemoryAISession implements AISessionPort {
+  private readonly sessions = new Map<string, AISession>();
+
+  constructor(private readonly now: () => string = () => new Date().toISOString()) {}
+
+  async start(input: { tenantId: string; missionId?: string; startedBy: string }): Promise<AISession> {
+    const id = randomUUID();
+    const session: AISession = {
+      id,
+      tenantId: input.tenantId,
+      ...(input.missionId ? { missionId: input.missionId } : {}),
+      startedBy: input.startedBy,
+      startedAt: this.now(),
+      status: 'active',
+      contextRef: `session:${id}`,
+    };
+    this.sessions.set(id, session);
+    return session;
+  }
+
+  async get(id: string): Promise<AISession | null> {
+    return this.sessions.get(id) ?? null;
+  }
+
+  async end(id: string, status: 'completed' | 'aborted'): Promise<void> {
+    const session = this.sessions.get(id);
+    if (!session) throw new NotFoundError(`Session "${id}" not found`, { details: { id } });
+    this.sessions.set(id, { ...session, status });
+  }
+}
 
 /**
  * Decision Memory — records WHY the company acted (decision + reason + evidence),

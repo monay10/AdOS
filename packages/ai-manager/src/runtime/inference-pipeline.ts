@@ -184,7 +184,8 @@ export class InferencePipeline {
   private async withTimeout<T>(op: (signal: AbortSignal) => Promise<T>, timeoutMs: number, external?: AbortSignal): Promise<T> {
     const ac = new AbortController();
     const onAbort = () => ac.abort();
-    external?.addEventListener('abort', onAbort, { once: true });
+    if (external?.aborted) ac.abort(); // already-aborted signals never re-fire 'abort'
+    else external?.addEventListener('abort', onAbort, { once: true });
     const timer = setTimeout(() => ac.abort(), timeoutMs);
     try {
       return await op(ac.signal);

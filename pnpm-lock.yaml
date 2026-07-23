@@ -375,6 +375,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../tenancy
@@ -489,6 +492,9 @@ importers:
       '@ados/config':
         specifier: workspace:*
         version: link:../config
+      '@ados/kernel':
+        specifier: workspace:*
+        version: link:../kernel
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../tenancy

@@ -1,9 +1,11 @@
-import { ForbiddenError, ValidationError } from '@ados/kernel';
+import { ForbiddenError, NotFoundError, ValidationError } from '@ados/kernel';
 import type {
   AICapability,
   AIConstitutionCheckerPort,
   AIManagerPort,
   AIMessage,
+  AISession,
+  AISessionPort,
   AIStreamChunk,
   AITaskRequest,
   AITaskResult,
@@ -14,8 +16,10 @@ import type {
   EvidenceEnginePort,
   EvidenceRef,
   ExecutiveRole,
+  ToolRegistryPort,
 } from '@ados/contracts';
 import { TenantContext } from '@ados/tenancy';
+import { telemetry, type Telemetry } from '@ados/observability';
 import type {
   ContextBuilderPort,
   ModelRouterPort,
@@ -25,6 +29,7 @@ import type {
   MonitoringPort,
   LearningEnginePort,
   AiEventPublisherPort,
+  QueueManagerPort,
 } from '../ports.js';
 import type { InferencePipeline } from './inference-pipeline.js';
 import { repairInstruction } from './validation-engine.js';
@@ -55,6 +60,9 @@ export interface AIManagerDeps {
   decisions?: DecisionMemoryPort;
   brain?: CompanyBrainPort;
   learning?: LearningEnginePort;
+  sessions?: AISessionPort;
+  tools?: ToolRegistryPort;
+  queue?: QueueManagerPort;
   clock?: Clock;
   options?: { maxValidationRetries?: number; temperature?: number; defaultRole?: ExecutiveRole };
 }
@@ -74,6 +82,7 @@ export interface AIManagerDeps {
 export class AIManager implements AIManagerPort {
   private readonly clock: Clock;
   private readonly maxValidationRetries: number;
+  private readonly tele: Telemetry = telemetry('ai-manager');
 
   constructor(private readonly deps: AIManagerDeps) {
     this.clock = deps.clock ?? systemClock;
@@ -85,6 +94,35 @@ export class AIManager implements AIManagerPort {
     return execution.response as AITaskResult<T>;
   }
 
+  // ── AI Session lifecycle ──
+  async openSession(input: { tenantId: string; missionId?: string; startedBy: string }): Promise<AISession> {
+    if (!this.deps.sessions) throw new Error('No AISessionPort configured');
+    const session = await this.deps.sessions.start(input);
+    this.tele.logger.info({ sessionId: session.id, missionId: input.missionId }, 'ai session opened');
+    return session;
+  }
+
+  async closeSession(id: string, status: 'completed' | 'aborted'): Promise<void> {
+    if (!this.deps.sessions) throw new Error('No AISessionPort configured');
+    await this.deps.sessions.end(id, status);
+    this.tele.logger.info({ sessionId: id, status }, 'ai session closed');
+  }
+
+  // ── Queue Manager integration ──
+  async enqueue(request: AITaskRequest): Promise<{ taskId: string; position: number }> {
+    if (!this.deps.queue) throw new Error('No QueueManagerPort configured');
+    return this.deps.queue.enqueue(request);
+  }
+
+  /** Drain queued tasks through the full pipeline; returns each execution. */
+  async drain(dequeue: () => { request: AITaskRequest } | undefined): Promise<AIExecution[]> {
+    const executions: AIExecution[] = [];
+    for (let next = dequeue(); next; next = dequeue()) {
+      executions.push(await this.execute(next.request));
+    }
+    return executions;
+  }
+
   async *stream(request: AITaskRequest): AsyncIterable<AIStreamChunk> {
     const safe = await this.deps.safety.inspectInput(request);
     if (!safe.safe) throw new ForbiddenError('Unsafe input rejected', { details: { issues: safe.issues } });
@@ -93,8 +131,29 @@ export class AIManager implements AIManagerPort {
     yield* this.deps.pipeline.stream(decision, messages, this.inferenceParams(request));
   }
 
-  /** The full pipeline. Returns the job, sealed trace, and response. */
-  async execute(request: AITaskRequest): Promise<AIExecution> {
+  /** The full pipeline (traced). Returns the job, sealed trace, and response. */
+  async execute(request: AITaskRequest, opts: { signal?: AbortSignal } = {}): Promise<AIExecution> {
+    return this.tele.span('execute', async () => {
+      this.tele.count('tasks_submitted');
+      const started = this.clock.monotonic();
+      try {
+        const execution = await this.runExecute(request, opts.signal);
+        this.tele.count('tasks_completed');
+        this.tele.observe('latency_ms', this.clock.monotonic() - started);
+        this.tele.logger.info(
+          { taskId: execution.response?.taskId, model: execution.response?.model, capability: request.capability },
+          'ai task completed',
+        );
+        return execution;
+      } catch (e) {
+        this.tele.count('tasks_failed');
+        this.tele.logger.error({ capability: request.capability, err: e instanceof Error ? e.message : String(e) }, 'ai task failed');
+        throw e;
+      }
+    });
+  }
+
+  private async runExecute(request: AITaskRequest, signal?: AbortSignal): Promise<AIExecution> {
     const v = { ...(request.variables ?? {}), ...(request.input ?? {}) };
     const ctx = TenantContext.current();
     const tenantId = ctx?.tenantId ?? (v['tenantId'] as string | undefined) ?? 'public';
@@ -120,14 +179,24 @@ export class AIManager implements AIManagerPort {
       job = transition(job, 'context', this.clock);
       trace.step('context.build');
       const messages = await this.deps.context.build(request);
+
+      // Tool Registry integration: validate declared tools and record them (Rule #8).
+      const declaredTools = Array.isArray(v['tools']) ? (v['tools'] as string[]).map(String) : [];
+      if (this.deps.tools) {
+        for (const toolId of declaredTools) {
+          if (!this.deps.tools.get(toolId)) throw new NotFoundError(`Capability declares unknown tool "${toolId}"`, { details: { toolId } });
+        }
+      }
+
       trace.set({
         contextRefs: extractLabels(messages),
+        tools: declaredTools,
         ...(request.promptRef?.key ? { promptKey: request.promptRef.key } : {}),
         ...(request.promptRef?.version !== undefined ? { promptVersion: request.promptRef.version } : {}),
         temperature: this.deps.options?.temperature ?? request.hints?.temperature ?? 0.2,
         ...(sessionId ? { sessionId } : {}),
         ...(v['missionId'] ? { missionId: String(v['missionId']) } : {}),
-        capability: request.capability,
+        capability: (v['capabilityId'] as string | undefined) ?? request.capability,
       });
 
       // 3) evidence + 4) confidence (grounding — Constitution rules #7/#8)
@@ -158,7 +227,7 @@ export class AIManager implements AIManagerPort {
 
       job = transition(job, 'validating', this.clock);
       for (let attempt = 0; attempt <= this.maxValidationRetries; attempt++) {
-        const outcome = await this.deps.pipeline.run(decision, messagesForRun, this.inferenceParams(request));
+        const outcome = await this.deps.pipeline.run(decision, messagesForRun, this.inferenceParams(request, signal));
         model = outcome.model;
         engine = outcome.engine;
         promptTokens = outcome.promptTokens;
@@ -273,11 +342,15 @@ export class AIManager implements AIManagerPort {
     }
   }
 
-  private inferenceParams(request: AITaskRequest): { maxTokens?: number; temperature?: number; timeoutMs?: number } {
+  private inferenceParams(
+    request: AITaskRequest,
+    signal?: AbortSignal,
+  ): { maxTokens?: number; temperature?: number; timeoutMs?: number; signal?: AbortSignal } {
     return {
       temperature: this.deps.options?.temperature ?? request.hints?.temperature ?? 0.2,
       ...(request.hints?.maxTokens !== undefined ? { maxTokens: request.hints.maxTokens } : {}),
       ...(request.timeoutMs !== undefined ? { timeoutMs: request.timeoutMs } : {}),
+      ...(signal ? { signal } : {}),
     };
   }
 

@@ -8,7 +8,8 @@
     { "path": "../kernel" },
     { "path": "../contracts" },
     { "path": "../tenancy" },
-    { "path": "../event-bus" }
+    { "path": "../event-bus" },
+    { "path": "../observability" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

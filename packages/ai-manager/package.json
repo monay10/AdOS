@@ -20,7 +20,8 @@
     "@ados/kernel": "workspace:*",
     "@ados/contracts": "workspace:*",
     "@ados/tenancy": "workspace:*",
-    "@ados/event-bus": "workspace:*"
+    "@ados/event-bus": "workspace:*",
+    "@ados/observability": "workspace:*"
   },
   "devDependencies": {
     "@ados/company-brain": "workspace:*",

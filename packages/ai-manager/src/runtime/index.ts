@@ -13,4 +13,5 @@ export * from './memory-runtime.js';
 export * from './capability-runtime.js';
 export * from './model-health.js';
 export * from './manager.js';
+export * from './capability-executor.js';
 export * from './tools/index.js';
