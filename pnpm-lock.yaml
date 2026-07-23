@@ -379,6 +379,15 @@ importers:
         specifier: workspace:*
         version: link:../tenancy
     devDependencies:
+      '@ados/company-brain':
+        specifier: workspace:*
+        version: link:../../domains/company-brain
+      '@ados/executive-memory':
+        specifier: workspace:*
+        version: link:../../domains/executive-memory
+      '@ados/prompt-registry':
+        specifier: workspace:*
+        version: link:../../domains/prompt-registry
       typescript:
         specifier: ^5.6.0
         version: 5.9.3

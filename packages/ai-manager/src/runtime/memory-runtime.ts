@@ -1,5 +1,28 @@
 import { randomUUID } from 'node:crypto';
+import type { DecisionMemoryPort, DecisionMemoryRecord } from '@ados/contracts';
 import type { MemoryRecord, MemoryRegistryPort, MemoryScope } from '../ports.js';
+
+/**
+ * Decision Memory — records WHY the company acted (decision + reason + evidence),
+ * feeding the Cognitive Core and the COS Decision Log. Distinct from the
+ * executive Decision Journal: this is the session-scoped runtime memory the AI
+ * Pipeline writes to and the Context Builder reads from.
+ */
+export class InMemoryDecisionMemory implements DecisionMemoryPort {
+  private readonly records: DecisionMemoryRecord[] = [];
+
+  async record(entry: Omit<DecisionMemoryRecord, 'id'>): Promise<void> {
+    this.records.push({ ...entry, id: randomUUID() });
+  }
+
+  async recall(query: { subjectId?: string; sessionId?: string; k: number }): Promise<DecisionMemoryRecord[]> {
+    return this.records
+      .filter((r) => (query.subjectId ? r.subjectId === query.subjectId : true))
+      .filter((r) => (query.sessionId ? r.sessionId === query.sessionId : true))
+      .sort((a, b) => b.at.localeCompare(a.at))
+      .slice(0, query.k);
+  }
+}
 
 /**
  * Memory Runtime — Memory Registry. Tenant/owner-scoped memory with keyword

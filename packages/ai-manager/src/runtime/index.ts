@@ -12,3 +12,5 @@ export * from './queue-manager.js';
 export * from './memory-runtime.js';
 export * from './capability-runtime.js';
 export * from './model-health.js';
+export * from './manager.js';
+export * from './tools/index.js';

@@ -62,12 +62,18 @@ executive-ai · organization · corporate-os · agency-os · autonomy`
 See [`ROADMAP.md`](ROADMAP.md). Books 2→13 each implement one layer to full
 production depth.
 
-## ✅ Verified green
+## ✅ Verified green — Book 2 complete
 `pnpm install && pnpm build && pnpm test` all pass: **27/27 build tasks** compile
-under the strict `tsconfig.base.json`, and **40 unit tests** pass across kernel,
-event-bus, ai-manager (routing + Tool/Capability registries + runtime kernel),
-prompt-registry, company-brain, and executive-memory. Under Development Mode,
-every commit must keep this green.
+under the strict `tsconfig.base.json`, and **79 unit tests** pass. **Book 2 (AI
+Manager, enterprise) is fully implemented** across all 18 sprints — model
+adapters (Ollama/vLLM/llama.cpp/LM Studio/SGLang + offline Fake), resource
+scheduler, inference pipeline (retry/timeout/circuit-breaker/fallback/streaming),
+validation + safety runtimes, context runtime, monitoring/cost, learning, event
+publisher, queue + task graph, capability + memory runtimes, model health, the
+unified `AIManager` pipeline, offline tools, and an end-to-end walking skeleton
+that runs Mission→Brain→ExecMemory→local model→validation→constitution→journal→
+event→enrich with a complete ExecutionTrace (Rule #8). See `docs/BOOK-2-SPRINTS.md`.
+Under Development Mode, every commit keeps this green.
 
 ## Why it was built in this order
 You asked for many engines at once, but your own first instruction was "finish

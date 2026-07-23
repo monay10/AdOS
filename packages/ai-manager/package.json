@@ -23,6 +23,9 @@
     "@ados/event-bus": "workspace:*"
   },
   "devDependencies": {
+    "@ados/company-brain": "workspace:*",
+    "@ados/executive-memory": "workspace:*",
+    "@ados/prompt-registry": "workspace:*",
     "typescript": "^5.6.0",
     "vitest": "^2.1.0"
   }
