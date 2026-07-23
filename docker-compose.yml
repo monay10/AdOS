@@ -1,0 +1,84 @@
+# AdOS local infrastructure — 100% self-hosted, no paid cloud service.
+# Everything below runs offline on a single machine.
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ados
+      POSTGRES_PASSWORD: ados
+      POSTGRES_DB: ados
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ados"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6379:6379"]
+    volumes: ["redisdata:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  nats:
+    image: nats:2.10-alpine
+    command: ["-js", "-sd", "/data"]
+    ports: ["4222:4222", "8222:8222"]
+    volumes: ["natsdata:/data"]
+
+  minio:
+    image: minio/minio:latest
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ados
+      MINIO_ROOT_PASSWORD: ados-secret
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["miniodata:/data"]
+
+  # Local AI inference engine (offline). Pull models with: ollama pull <model>
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+    volumes: ["ollamadata:/root/.ollama"]
+    # Uncomment for GPU passthrough:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices: [{ driver: nvidia, count: all, capabilities: [gpu] }]
+
+  # Observability stack (self-hosted)
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes: ["./docs/otel-collector.yaml:/etc/otelcol/config.yaml:ro"]
+    ports: ["4318:4318", "4317:4317"]
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports: ["16686:16686"]
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes: ["./docs/prometheus.yml:/etc/prometheus/prometheus.yml:ro"]
+    ports: ["9090:9090"]
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ados
+    ports: ["3001:3000"]
+    volumes: ["grafanadata:/var/lib/grafana"]
+
+volumes:
+  pgdata:
+  redisdata:
+  natsdata:
+  miniodata:
+  ollamadata:
+  grafanadata:

@@ -1,0 +1,74 @@
+# AdOS — Advertising Operating System
+
+> An **offline-first, autonomous AI advertising agency**. You don't operate
+> agents — you run an **AI Company**. State a business objective and the company
+> plans, creates, launches, and optimizes campaigns on locally-installed models,
+> surfacing only results and the steps that need your approval.
+
+```
+"Launch a patient-acquisition operation for a new dental clinic,
+ 80.000 TRY/month."
+        └─► CEO approves ─► PMO plans ─► Marketing researches ─►
+            Creative produces ─► Performance launches ─► Analytics watches ─►
+            Strategy optimizes ─► CEO reports back to you.
+```
+
+## Principles (the Product Constitution)
+1. **Offline-first** — works with no internet; no paid cloud AI ever *required*.
+2. **AI Manager is the only thing that talks to models** — agents submit `AITask`s.
+3. **Cognitive Core is the only thing that decides how to think** — agents delegate reasoning.
+4. **Everything integrates through events** — no context imports another.
+5. **Replaceable · configurable · multi-tenant · observable · testable** — no hardcoded rules, no placeholders.
+
+Read [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full layered stack and
+[`ROADMAP.md`](ROADMAP.md) for the build order. Current state is in
+[`STATUS.md`](STATUS.md).
+
+## Tech (all self-hostable)
+- **Runtime:** TypeScript (strict) · Node ≥ 20 · NestJS · pnpm + Turborepo monorepo
+- **Inference (local):** Ollama · vLLM · llama.cpp · SGLang · LM Studio · ComfyUI (FLUX/SD) · Whisper · Piper/XTTS
+- **Data:** PostgreSQL / SQLite · LanceDB / FAISS (vectors) · Redis · NATS JetStream (events) · MinIO (storage)
+- **Observability:** OpenTelemetry · Prometheus · Grafana · Jaeger · pino
+
+## Repository layout
+```
+packages/            platform foundation (built)
+  kernel/            DDD building blocks, Result, errors, CQRS ports
+  config/            zod-validated configuration
+  tenancy/           multi-tenant AsyncLocalStorage context
+  observability/     pino + OpenTelemetry + Prometheus
+  event-bus/         EventBus port + in-memory & NATS adapters + outbox
+  contracts/         shared types, AITask, Cognitive Core, Mission contracts
+  ai-manager/        AI Manager ports + Model Registry + capability Router
+  cognitive-core/    AI Brain engine ports
+domains/             bounded contexts (scaffolded: event contracts defined)
+  corporate-os/ organization/ executive-ai/ agent-framework/
+  marketing-intelligence/ creative-studio/ campaign-engine/ analytics-engine/
+  workflow-engine/ connector-hub/ knowledge-engine/ agency-os/ autonomy/
+docs/                architecture support, event map, otel/prometheus config
+scripts/             tooling (domain topology generator)
+```
+
+## Getting started
+```bash
+# 1. Install a package manager if needed
+npm i -g pnpm
+
+# 2. Install workspace dependencies
+pnpm install
+
+# 3. Start local infrastructure (Postgres, Redis, NATS, MinIO, Ollama, observability)
+pnpm infra:up
+
+# 4. Pull local models (examples; match your inventory)
+ollama pull qwen3:32b && ollama pull deepseek-r1:32b && ollama pull bge-m3
+
+# 5. Build & test the foundation
+cp .env.example .env
+pnpm build && pnpm test
+```
+
+## Next
+The foundation is complete. **Book 2 (AI Manager)** is the recommended next
+pass — real Ollama/vLLM adapters + the `submit()`/`stream()` composition that
+proves the golden rule end-to-end. Say **"build Book 2"** to proceed.
