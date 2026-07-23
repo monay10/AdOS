@@ -77,7 +77,7 @@ export class NatsEventBus implements EventBus {
     const subject = `${this.prefix}.${pattern}`;
     const durable = options.durable ?? `c-${pattern.replace(/[.*>]/g, '_')}`;
     const sub = await this.js.subscribe(subject, {
-      queue: options.queueGroup,
+      ...(options.queueGroup ? { queue: options.queueGroup } : {}),
       config: {
         durable_name: durable,
         max_deliver: options.maxDeliver ?? 5,

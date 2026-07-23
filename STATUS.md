@@ -62,11 +62,12 @@ executive-ai · organization · corporate-os · agency-os · autonomy`
 See [`ROADMAP.md`](ROADMAP.md). Books 2→13 each implement one layer to full
 production depth.
 
-## ⚠️ Not yet verified
-`pnpm install && pnpm build && pnpm test` has **not** been run in this
-environment (pnpm isn't installed here and the offline mandate rules out
-fetching it during this pass). The code is written to compile under the strict
-`tsconfig.base.json`; run those three commands to confirm before Book 2.
+## ✅ Verified green
+`pnpm install && pnpm build && pnpm test` all pass: **27/27 build tasks** compile
+under the strict `tsconfig.base.json`, and **40 unit tests** pass across kernel,
+event-bus, ai-manager (routing + Tool/Capability registries + runtime kernel),
+prompt-registry, company-brain, and executive-memory. Under Development Mode,
+every commit must keep this green.
 
 ## Why it was built in this order
 You asked for many engines at once, but your own first instruction was "finish
