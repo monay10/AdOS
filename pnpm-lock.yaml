@@ -369,9 +369,15 @@ importers:
       '@ados/contracts':
         specifier: workspace:*
         version: link:../contracts
+      '@ados/event-bus':
+        specifier: workspace:*
+        version: link:../event-bus
       '@ados/kernel':
         specifier: workspace:*
         version: link:../kernel
+      '@ados/tenancy':
+        specifier: workspace:*
+        version: link:../tenancy
     devDependencies:
       typescript:
         specifier: ^5.6.0

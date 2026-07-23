@@ -4,3 +4,7 @@ export * from './resource-scheduler.js';
 export * from './inference-pipeline.js';
 export * from './validation-engine.js';
 export * from './safety-engine.js';
+export * from './context-builder.js';
+export * from './monitoring.js';
+export * from './learning.js';
+export * from './event-publisher.js';
