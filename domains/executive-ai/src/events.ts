@@ -12,6 +12,7 @@ export const EXECUTIVE_AI_EVENTS = {
   EXEC_APPROVAL_GRANTED_V1: 'exec.approval.granted.v1',
   EXEC_BUDGET_ALLOCATED_V1: 'exec.budget.allocated.v1',
   EXEC_REPORT_REQUESTED_V1: 'exec.report.requested.v1',
+  EXEC_DASHBOARD_GENERATED_V1: 'exec.dashboard.generated.v1',
 } as const;
 
 /** Event patterns this context subscribes to. */
