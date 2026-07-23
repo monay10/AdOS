@@ -32,6 +32,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../../packages/observability
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
