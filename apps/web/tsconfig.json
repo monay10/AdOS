@@ -12,6 +12,8 @@
     { "path": "../../packages/event-bus" },
     { "path": "../../packages/tenancy" },
     { "path": "../../packages/observability" },
+    { "path": "../../packages/deploy" },
+    { "path": "../../packages/workers" },
     { "path": "../../domains/agency-os" },
     { "path": "../../domains/marketing-intelligence" },
     { "path": "../../domains/creative-studio" },

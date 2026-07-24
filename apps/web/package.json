@@ -29,6 +29,7 @@
     "@ados/company-brain": "workspace:*",
     "@ados/contracts": "workspace:*",
     "@ados/creative-studio": "workspace:*",
+    "@ados/deploy": "workspace:*",
     "@ados/event-bus": "workspace:*",
     "@ados/executive-ai": "workspace:*",
     "@ados/executive-memory": "workspace:*",
@@ -38,6 +39,7 @@
     "@ados/persistence": "workspace:*",
     "@ados/security": "workspace:^",
     "@ados/tenancy": "workspace:*",
+    "@ados/workers": "workspace:*",
     "@node-rs/argon2": "^2.0.2"
   },
   "devDependencies": {

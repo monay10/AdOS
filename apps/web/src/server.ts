@@ -3,6 +3,7 @@ import { telemetry } from '@ados/observability';
 import { App } from './app.js';
 import type { AuthGateway } from './auth/routes.js';
 import { makeRes, parseRequest } from './http.js';
+import { handleOps, type OpsOptions } from './ops.js';
 import { handle } from './routes.js';
 
 export interface ServerOptions {
@@ -13,6 +14,8 @@ export interface ServerOptions {
   /** When present, production email/password authentication; otherwise the
    * open/dev passwordless login. */
   auth?: AuthGateway;
+  /** Container ops endpoints (health/readiness/metrics); always exposed. */
+  ops?: OpsOptions;
 }
 
 /**
@@ -29,6 +32,8 @@ export function buildServer(options: ServerOptions): { app: App; server: Server 
     void (async () => {
       try {
         const req = await parseRequest(rawReq);
+        // Ops endpoints (health/readiness/metrics) answer before auth + routing.
+        if (await handleOps(req, res, options.ops)) return;
         await handle(app, options.sessionSecret, req, res, options.auth);
       } catch (err) {
         // Last-resort handler: never leak a stack trace to the client.

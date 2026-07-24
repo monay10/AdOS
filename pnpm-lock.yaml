@@ -81,6 +81,9 @@ importers:
       '@ados/creative-studio':
         specifier: workspace:*
         version: link:../../domains/creative-studio
+      '@ados/deploy':
+        specifier: workspace:*
+        version: link:../../packages/deploy
       '@ados/event-bus':
         specifier: workspace:*
         version: link:../../packages/event-bus
@@ -108,6 +111,9 @@ importers:
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
+      '@ados/workers':
+        specifier: workspace:*
+        version: link:../../packages/workers
       '@node-rs/argon2':
         specifier: ^2.0.2
         version: 2.0.2
@@ -598,6 +604,15 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../kernel
+    devDependencies:
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.20.1)
+
+  packages/deploy:
     devDependencies:
       typescript:
         specifier: ^5.6.0

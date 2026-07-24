@@ -1,0 +1,21 @@
+# AdOS production Prometheus — scrapes the app tier's /metrics endpoints.
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: ados-web
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["web:4000"]
+        labels: { role: web }
+
+  - job_name: ados-workers
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["workers:9465"]
+        labels: { role: worker }
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

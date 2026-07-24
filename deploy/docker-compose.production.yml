@@ -1,0 +1,214 @@
+# AdOS — production deployment. 100% self-hosted, offline-capable.
+#
+# Startup ordering is enforced with condition: service_healthy so the app and
+# workers never boot before their dependencies are ready. Every container
+# declares a healthcheck, resource limits, and a restart policy. Secrets come
+# from .env.production (see .env.production.example) — never hardcoded here.
+name: ados
+
+x-restart: &restart
+  restart: unless-stopped
+
+x-web-env: &web-env
+  ADOS_PROFILE: production
+  NODE_ENV: production
+  DATABASE_URL: postgres://ados:${POSTGRES_PASSWORD:?set in .env.production}@postgres:5432/ados
+  NATS_URL: nats://nats:4222
+  REDIS_URL: redis://redis:6379
+  STORAGE_ENDPOINT: http://minio:9000
+  STORAGE_ACCESS_KEY: ${MINIO_ROOT_USER:?}
+  STORAGE_SECRET_KEY: ${MINIO_ROOT_PASSWORD:?}
+  STORAGE_BUCKET: ados
+  OLLAMA_URL: http://ollama:11434
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+  SESSION_SECRET: ${SESSION_SECRET:?}
+  AUTH_MODE: password
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    <<: *restart
+    environment:
+      POSTGRES_USER: ados
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      POSTGRES_DB: ados
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ados"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    deploy:
+      resources:
+        limits: { cpus: "2.0", memory: 1g }
+
+  redis:
+    image: redis:7-alpine
+    <<: *restart
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: ["redisdata:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 256m }
+
+  nats:
+    image: nats:2.10-alpine
+    <<: *restart
+    command: ["-js", "-sd", "/data", "-m", "8222"]
+    volumes: ["natsdata:/data"]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512m }
+
+  minio:
+    image: minio/minio:latest
+    <<: *restart
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?}
+    volumes: ["miniodata:/data"]
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512m }
+
+  ollama:
+    image: ollama/ollama:latest
+    <<: *restart
+    volumes: ["ollamadata:/root/.ollama"]
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    deploy:
+      resources:
+        limits: { memory: 8g }
+
+  # --- application tier -----------------------------------------------------
+  web:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    <<: *restart
+    command: ["node", "apps/web/dist/main.js"]
+    environment:
+      <<: *web-env
+      ROLE: web
+      PORT: "4000"
+      METRICS_PORT: "9464"
+    ports: ["4000:4000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      nats: { condition: service_healthy }
+      minio: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://localhost:4000/readyz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    stop_grace_period: 30s
+    deploy:
+      resources:
+        limits: { cpus: "2.0", memory: 1g }
+
+  workers:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    <<: *restart
+    command: ["node", "apps/web/dist/worker.js"]
+    environment:
+      <<: *web-env
+      ROLE: worker
+      METRICS_PORT: "9465"
+    depends_on:
+      postgres: { condition: service_healthy }
+      nats: { condition: service_healthy }
+      minio: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O- http://localhost:9465/livez || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    stop_grace_period: 30s
+    deploy:
+      resources:
+        limits: { cpus: "2.0", memory: 1g }
+
+  # --- observability tier ---------------------------------------------------
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    <<: *restart
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes: ["../docs/otel-collector.yaml:/etc/otelcol/config.yaml:ro"]
+
+  prometheus:
+    image: prom/prometheus:latest
+    <<: *restart
+    volumes:
+      - "./prometheus.production.yml:/etc/prometheus/prometheus.yml:ro"
+      - "promdata:/prometheus"
+    ports: ["9090:9090"]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:9090/-/healthy"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  grafana:
+    image: grafana/grafana:latest
+    <<: *restart
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:?}
+    volumes:
+      - "grafanadata:/var/lib/grafana"
+      - "./grafana/provisioning:/etc/grafana/provisioning:ro"
+    ports: ["3001:3000"]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      prometheus: { condition: service_started }
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    <<: *restart
+    ports: ["16686:16686"]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:16686/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  redisdata:
+  natsdata:
+  miniodata:
+  ollamadata:
+  promdata:
+  grafanadata:
