@@ -12,10 +12,14 @@ tenant-isolated.
 
 ## Run
 
+From the repo root — builds what's needed, then starts:
+
 ```bash
-pnpm build
-pnpm --filter @ados/web start          # http://localhost:4000
+pnpm start                             # http://localhost:4000
 ```
+
+(Equivalently `pnpm web`. If you've already run `pnpm build`, you can also
+`pnpm --filter @ados/web start` to skip the build.)
 
 Environment:
 

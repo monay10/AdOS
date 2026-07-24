@@ -10,6 +10,8 @@
   "type": "module",
   "scripts": {
     "build": "turbo run build",
+    "start": "turbo run build --filter=@ados/web && node apps/web/dist/main.js",
+    "web": "turbo run build --filter=@ados/web && node apps/web/dist/main.js",
     "dev": "turbo run dev",
     "test": "turbo run test",
     "lint": "turbo run lint",
