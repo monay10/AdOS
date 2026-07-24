@@ -48,9 +48,12 @@ import {
   type ReportView,
 } from './views/pages.js';
 import { esc } from './views/layout.js';
+import { handleAuth, type AuthGateway } from './auth/routes.js';
 
 function ctxOf(session: Session): RequestContext {
-  return { tenantId: session.tenantId, correlationId: session.correlationId, actor: session.actor, roles: [] };
+  // Roles are resolved at login (RBAC); empty in open/dev mode. Preserves the
+  // existing tenant-scoped authorization — no new permission gate is added.
+  return { tenantId: session.tenantId, correlationId: session.correlationId, actor: session.actor, roles: session.roles ?? [] };
 }
 
 function toMinor(major: string): number {
@@ -77,29 +80,23 @@ function nextStep(stats: DashStats): NextStep {
 }
 
 /**
- * The entire HTTP surface for Phase 1. Public routes: /login, /logout. Every
+ * The entire HTTP surface. The authentication surface (login/logout, plus
+ * register/reset/change-password in password mode) is handled first; every
  * other route requires a session and runs inside its TenantContext so all data
  * access is tenant-isolated.
+ *
+ * `auth` selects the mode: when present, production email/password
+ * authentication; when absent (default), the open/dev passwordless login. The
+ * authenticated application routes are identical in both modes.
  */
-export async function handle(app: App, secret: string, req: Req, res: Res): Promise<void> {
+export async function handle(app: App, secret: string, req: Req, res: Res, auth?: AuthGateway): Promise<void> {
   const session = readSessionCookie(req.headers.cookie, secret);
 
-  // ── Public routes ──
-  if (req.path === '/login' && req.method === 'GET') {
-    if (session) return res.redirect('/dashboard');
-    return res.html(loginPage());
-  }
-  if (req.path === '/login' && req.method === 'POST') {
-    const email = (req.body['email'] ?? '').trim();
-    const company = (req.body['company'] ?? '').trim();
-    if (!email || !company) {
-      return res.html(loginPage('Please provide both your email and company.', req.body), 400);
-    }
-    const created = newSession(slugifyTenant(company), email);
-    return res.redirect('/dashboard', sessionSetCookie(created, secret));
-  }
-  if (req.path === '/logout' && req.method === 'POST') {
-    return res.redirect('/login', sessionClearCookie());
+  // ── Authentication surface ──
+  if (auth) {
+    if (await handleAuth(secret, auth, session, req, res)) return;
+  } else if (handleOpenPublic(secret, session, req, res)) {
+    return;
   }
 
   // ── Auth gate ──
@@ -108,6 +105,32 @@ export async function handle(app: App, secret: string, req: Req, res: Res): Prom
   await TenantContext.run(ctxOf(session), async () => {
     await route(app, secret, session, req, res);
   });
+}
+
+/** Open/dev-mode public routes: passwordless login + logout. Returns true when
+ * it handled the request. This is the original, unchanged behavior. */
+function handleOpenPublic(secret: string, session: Session | null, req: Req, res: Res): boolean {
+  if (req.path === '/login' && req.method === 'GET') {
+    if (session) res.redirect('/dashboard');
+    else res.html(loginPage());
+    return true;
+  }
+  if (req.path === '/login' && req.method === 'POST') {
+    const email = (req.body['email'] ?? '').trim();
+    const company = (req.body['company'] ?? '').trim();
+    if (!email || !company) {
+      res.html(loginPage('Please provide both your email and company.', req.body), 400);
+      return true;
+    }
+    const created = newSession(slugifyTenant(company), email);
+    res.redirect('/dashboard', sessionSetCookie(created, secret));
+    return true;
+  }
+  if (req.path === '/logout' && req.method === 'POST') {
+    res.redirect('/login', sessionClearCookie());
+    return true;
+  }
+  return false;
 }
 
 async function route(app: App, secret: string, session: Session, req: Req, res: Res): Promise<void> {

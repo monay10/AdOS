@@ -151,11 +151,16 @@ left.
 
 ## Notes
 
-- **Persistence** is in-memory (per running process), so data lives for the
-  server's lifetime. A durable Postgres adapter is a later phase.
-- **Auth** establishes a tenant from the company name and signs the session
-  cookie; it does not yet verify a password. Real authentication is a later
-  phase.
+- **Persistence**: set `DATABASE_URL` for durable PostgreSQL (migrations run at
+  startup); unset, the app uses in-memory persistence (dev only). See
+  `@ados/persistence` and `src/db/`.
+- **Auth**: set `AUTH_MODE=password` for production email/password
+  authentication — Argon2id hashing, signed HttpOnly (optionally `Secure`)
+  session cookies with server-enforced expiry, CSRF-protected authenticated
+  mutations, remember-me, password change, a local password-reset flow, RBAC
+  role resolution and tenant resolution from the account, and per-event audit
+  logging. Unset, the app uses the open/dev passwordless login (do not use in
+  production). See `src/auth/`.
 - Tenant isolation is enforced everywhere via `TenantContext`; each request runs
   inside the signed-in tenant's scope.
 

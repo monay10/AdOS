@@ -23,20 +23,22 @@
     "clean": "rm -rf dist .turbo *.tsbuildinfo"
   },
   "dependencies": {
-    "@ados/kernel": "workspace:*",
-    "@ados/contracts": "workspace:*",
-    "@ados/persistence": "workspace:*",
-    "@ados/event-bus": "workspace:*",
-    "@ados/tenancy": "workspace:*",
-    "@ados/observability": "workspace:*",
     "@ados/agency-os": "workspace:*",
-    "@ados/marketing-intelligence": "workspace:*",
-    "@ados/creative-studio": "workspace:*",
-    "@ados/campaign-engine": "workspace:*",
     "@ados/analytics-engine": "workspace:*",
+    "@ados/campaign-engine": "workspace:*",
     "@ados/company-brain": "workspace:*",
+    "@ados/contracts": "workspace:*",
+    "@ados/creative-studio": "workspace:*",
+    "@ados/event-bus": "workspace:*",
+    "@ados/executive-ai": "workspace:*",
     "@ados/executive-memory": "workspace:*",
-    "@ados/executive-ai": "workspace:*"
+    "@ados/kernel": "workspace:*",
+    "@ados/marketing-intelligence": "workspace:*",
+    "@ados/observability": "workspace:*",
+    "@ados/persistence": "workspace:*",
+    "@ados/security": "workspace:^",
+    "@ados/tenancy": "workspace:*",
+    "@node-rs/argon2": "^2.0.2"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

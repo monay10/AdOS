@@ -2,6 +2,9 @@ import { randomUUID } from 'node:crypto';
 import { initLogger } from '@ados/observability';
 import { PostgresDatabase, SqlAggregateStore, runMigrations } from '@ados/persistence';
 import { App } from './app.js';
+import { AuthService } from './auth/auth-service.js';
+import { authCredentialsMigration, InMemoryCredentialStore, SqlCredentialStore } from './auth/credential-store.js';
+import type { AuthGateway } from './auth/routes.js';
 import { sqlRepositories } from './db/repositories.js';
 import { buildServer } from './server.js';
 
@@ -17,6 +20,9 @@ import { buildServer } from './server.js';
  *   DATABASE_URL     — Postgres connection string. When set, persistence is
  *                      durable Postgres (migrations run at startup); otherwise
  *                      the app uses in-memory persistence (dev only).
+ *   AUTH_MODE        — "password" for production email/password authentication;
+ *                      otherwise the open/dev passwordless login.
+ *   AUTH_SECURE_COOKIES — "false" to omit the Secure cookie flag (local HTTP).
  */
 async function main(): Promise<void> {
   const port = Number.parseInt(process.env['PORT'] ?? '4000', 10);
@@ -28,10 +34,13 @@ async function main(): Promise<void> {
   });
 
   const databaseUrl = process.env['DATABASE_URL'];
+  const passwordAuth = process.env['AUTH_MODE'] === 'password';
+
+  let db: PostgresDatabase | undefined;
   let app: App;
   if (databaseUrl) {
-    const db = await PostgresDatabase.connect(databaseUrl);
-    const { applied } = await runMigrations(db);
+    db = await PostgresDatabase.connect(databaseUrl);
+    const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
     app = new App(undefined, undefined, sqlRepositories(new SqlAggregateStore(db)));
   } else {
@@ -39,7 +48,16 @@ async function main(): Promise<void> {
     app = new App();
   }
 
-  const { server } = buildServer({ sessionSecret, app });
+  let auth: AuthGateway | undefined;
+  if (passwordAuth) {
+    const store = db ? new SqlCredentialStore(db) : new InMemoryCredentialStore();
+    auth = { service: new AuthService(store), secureCookies: process.env['AUTH_SECURE_COOKIES'] !== 'false' };
+    logger.info({ secureCookies: auth.secureCookies }, 'password authentication enabled');
+  } else {
+    logger.warn('AUTH_MODE not "password" — using open/dev passwordless login (do NOT use in production)');
+  }
+
+  const { server } = buildServer({ sessionSecret, app, ...(auth ? { auth } : {}) });
   await app.start();
 
   server.listen(port, () => {

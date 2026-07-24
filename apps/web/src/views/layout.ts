@@ -138,7 +138,7 @@ export function layout(opts: {
   <div class="who">
     <b>${esc(opts.session.actor)}</b>
     <span>Tenant: ${esc(opts.session.tenantId)}</span>
-    <form method="post" action="/logout"><button class="btn ghost" style="width:100%;padding:7px">Sign out</button></form>
+    <form method="post" action="/logout"><input type="hidden" name="_csrf" value="${esc(opts.session.csrf ?? '')}"><button class="btn ghost" style="width:100%;padding:7px">Sign out</button></form>
   </div>
 </aside>
 <main class="main">${opts.body}</main>

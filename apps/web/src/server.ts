@@ -1,6 +1,7 @@
 import { createServer, type Server } from 'node:http';
 import { telemetry } from '@ados/observability';
 import { App } from './app.js';
+import type { AuthGateway } from './auth/routes.js';
 import { makeRes, parseRequest } from './http.js';
 import { handle } from './routes.js';
 
@@ -9,6 +10,9 @@ export interface ServerOptions {
   sessionSecret: string;
   /** Pre-built App (compose your own bus in tests); a fresh one otherwise. */
   app?: App;
+  /** When present, production email/password authentication; otherwise the
+   * open/dev passwordless login. */
+  auth?: AuthGateway;
 }
 
 /**
@@ -25,7 +29,7 @@ export function buildServer(options: ServerOptions): { app: App; server: Server 
     void (async () => {
       try {
         const req = await parseRequest(rawReq);
-        await handle(app, options.sessionSecret, req, res);
+        await handle(app, options.sessionSecret, req, res, options.auth);
       } catch (err) {
         // Last-resort handler: never leak a stack trace to the client.
         tele.logger.error({ err }, 'unhandled request error');

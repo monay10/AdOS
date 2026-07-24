@@ -12,9 +12,16 @@ export interface Session {
   correlationId: string;
   workspaceId?: string;
   clientId?: string;
+  /** RBAC roles resolved at login (empty in open/dev mode). */
+  roles?: string[];
+  /** Absolute expiry, epoch seconds. Enforced server-side on every request. */
+  exp?: number;
+  /** Per-session CSRF token, embedded in authenticated forms. */
+  csrf?: string;
 }
 
 const COOKIE = 'ados_session';
+const DEFAULT_TTL_SECONDS = 86_400; // 24h
 
 export function slugifyTenant(company: string): string {
   const slug = company
@@ -25,8 +32,20 @@ export function slugifyTenant(company: string): string {
   return slug || 'public';
 }
 
-export function newSession(tenantId: string, actor: string): Session {
-  return { tenantId, actor, correlationId: randomUUID() };
+export function newSession(
+  tenantId: string,
+  actor: string,
+  opts: { roles?: string[]; ttlSeconds?: number } = {},
+): Session {
+  const exp = Math.floor(Date.now() / 1000) + (opts.ttlSeconds ?? DEFAULT_TTL_SECONDS);
+  return {
+    tenantId,
+    actor,
+    correlationId: randomUUID(),
+    roles: opts.roles ?? [],
+    exp,
+    csrf: randomUUID(),
+  };
 }
 
 export function encodeSession(session: Session, secret: string): string {
@@ -46,6 +65,8 @@ export function decodeSession(raw: string | undefined, secret: string): Session 
   try {
     const parsed = JSON.parse(Buffer.from(body, 'base64url').toString('utf8')) as Session;
     if (!parsed.tenantId || !parsed.actor) return null;
+    // Enforce absolute session expiry server-side (not just via cookie Max-Age).
+    if (typeof parsed.exp === 'number' && parsed.exp * 1000 < Date.now()) return null;
     return parsed;
   } catch {
     return null;
@@ -62,13 +83,19 @@ export function readSessionCookie(cookieHeader: string | undefined, secret: stri
   return null;
 }
 
-export function sessionSetCookie(session: Session, secret: string): string {
+export function sessionSetCookie(
+  session: Session,
+  secret: string,
+  opts: { secure?: boolean; maxAgeSeconds?: number } = {},
+): string {
   const value = encodeSession(session, secret);
-  return `${COOKIE}=${encodeURIComponent(value)}; HttpOnly; SameSite=Lax; Path=/; Max-Age=86400`;
+  const maxAge = opts.maxAgeSeconds ?? DEFAULT_TTL_SECONDS;
+  const flags = `HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}${opts.secure ? '; Secure' : ''}`;
+  return `${COOKIE}=${encodeURIComponent(value)}; ${flags}`;
 }
 
-export function sessionClearCookie(): string {
-  return `${COOKIE}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0`;
+export function sessionClearCookie(opts: { secure?: boolean } = {}): string {
+  return `${COOKIE}=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0${opts.secure ? '; Secure' : ''}`;
 }
 
 function sign(body: string, secret: string): string {
