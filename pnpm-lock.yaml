@@ -75,6 +75,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../../packages/kernel
+      '@ados/marketing-intelligence':
+        specifier: workspace:*
+        version: link:../../domains/marketing-intelligence
       '@ados/observability':
         specifier: workspace:*
         version: link:../../packages/observability

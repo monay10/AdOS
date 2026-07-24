@@ -32,11 +32,18 @@ Environment:
 
 ## Screens
 
-Login · Dashboard · Create Workspace · Create Client · Create Brand ·
-Create Product · Create Mission — plus tenant-scoped list views for Clients,
-Brands, Products and Missions. The left nav also lists the later-phase screens
-(Marketing Brief, Creative Studio, Campaigns, Analytics, Reports, Settings)
-marked **soon**.
+**Phase 1 — Onboarding:** Login · Dashboard · Create Workspace · Create Client ·
+Create Brand · Create Product · Create Mission, plus tenant-scoped list views for
+Clients, Brands, Products and Missions.
+
+**Phase 2 — Mission Processing:** Mission detail with **Generate Marketing Brief**
+(Marketing Intelligence via the AI Manager) → **Executive Approve / Reject** →
+Dashboard pending-approvals + Marketing Brief list. Offline by default: the app
+injects an `OfflineAIManager` (a drop-in `AIManagerPort`) so briefs generate with
+no model server attached; swap in `@ados/ai-manager` for a real local engine.
+
+The left nav lists the remaining later-phase screens (Creative Studio, Campaigns,
+Analytics, Reports, Settings) marked **soon**.
 
 ## Notes
 

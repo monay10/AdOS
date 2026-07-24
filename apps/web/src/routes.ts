@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { MissionWizard, type ProductPricing } from '@ados/agency-os';
+import { ClientId, MissionId, MissionWizard, type Mission, type ProductPricing } from '@ados/agency-os';
 import type { App } from './app.js';
 import type { Req, Res } from './http.js';
 import {
@@ -16,12 +16,15 @@ import {
   dashboardPage,
   listPage,
   loginPage,
+  missionDetailPage,
   missionForm,
   productForm,
   workspaceForm,
+  type BriefView,
   type DashStats,
   type NextStep,
 } from './views/pages.js';
+import { esc } from './views/layout.js';
 
 function ctxOf(session: Session): RequestContext {
   return { tenantId: session.tenantId, correlationId: session.correlationId, actor: session.actor, roles: [] };
@@ -93,7 +96,10 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
   if (path === '/dashboard' && method === 'GET') {
     const stats = await collectStats(app);
     const feed = app.recentEvents(session.tenantId, 10);
-    return res.html(dashboardPage({ session, stats, next: nextStep(stats), feed }));
+    const pending = (await app.missions.list())
+      .filter((m) => m.status === 'awaiting_approval')
+      .map((m) => ({ id: m.id.toString(), objective: m.brief }));
+    return res.html(dashboardPage({ session, stats, next: nextStep(stats), pending, feed }));
   }
 
   // ── Workspace ──
@@ -245,7 +251,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
         newLabel: '+ New mission',
         columns: ['Objective', 'Budget', 'Status'],
         rows: missions.map((m) => [
-          m.brief,
+          `<a href="/missions/${m.id.toString()}">${esc(m.brief)}</a>`,
           m.budget ? `${(m.budget.amountMinor / 100).toFixed(0)} ${m.budget.currency}/${m.budget.period}` : '—',
           `<span class="badge active">${m.status}</span>`,
         ]),
@@ -291,17 +297,163 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     return res.redirect('/dashboard');
   }
 
+  // ── Marketing Brief list ──
+  if (path === '/brief' && method === 'GET') {
+    const briefs = await app.briefs.list();
+    return res.html(
+      listPage({
+        session,
+        active: '/brief',
+        title: 'Marketing Briefs',
+        subtitle: 'AI-generated strategy for each Mission, produced by Marketing Intelligence.',
+        newHref: '/missions',
+        newLabel: 'Go to Missions',
+        columns: ['Objective', 'Channels', 'Model'],
+        rows: briefs.map((b) => [
+          `<a href="/missions/${esc(b.missionId)}">${esc(b.content.objective)}</a>`,
+          b.content.recommendedChannels.map((c) => `<span class="badge">${esc(c)}</span>`).join(' '),
+          `<span class="badge">${esc(b.provenance.model)}</span>`,
+        ]),
+        empty: 'No briefs yet. Open a Mission and generate its Marketing Brief.',
+      }),
+    );
+  }
+
+  // ── Mission detail + processing (Phase 2) ──
+  if (path.startsWith('/missions/') && path !== '/missions/new') {
+    const seg = path.slice('/missions/'.length).split('/');
+    const id = seg[0] ?? '';
+    const action = seg[1];
+    if (!id) return res.html(notFound(session), 404);
+
+    if (!action && method === 'GET') return renderMissionDetail(app, session, res, id);
+    if (action === 'brief' && method === 'POST') return generateBrief(app, session, res, id);
+    if (action === 'approve' && method === 'POST') {
+      const r = await app.missions.approve(MissionId.of(id), 'strategy_and_budget');
+      if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+      return res.redirect(`/missions/${id}`);
+    }
+    if (action === 'reject' && method === 'POST') {
+      const r = await app.missions.fail(MissionId.of(id), 'Rejected by executive');
+      if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+      return res.redirect(`/missions/${id}`);
+    }
+    return res.html(notFound(session), 404);
+  }
+
   // ── Fallback ──
   return res.html(notFound(session), 404);
 }
 
+/** Load a mission, its brief and approval state, and render the detail screen. */
+async function renderMissionDetail(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+  const briefs = await app.briefs.list(id);
+  const brief = briefs[0];
+
+  const view = {
+    session,
+    mission: {
+      id,
+      objective: mission.brief,
+      status: mission.status,
+      ...(mission.budget
+        ? { budget: { amount: mission.budget.amountMinor / 100, currency: mission.budget.currency, period: mission.budget.period } }
+        : {}),
+    },
+    approval: approvalOf(mission, Boolean(brief)),
+    ...(brief ? { brief: toBriefView(brief) } : {}),
+    ...(error ? { error } : {}),
+  };
+  return res.html(missionDetailPage(view));
+}
+
+/** Marketing Intelligence: generate the brief, then move the mission to approval. */
+async function generateBrief(app: App, session: Session, res: Res, id: string): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+
+  const clientRes = await app.clients.get(ClientId.of(mission.clientId));
+  const brand = (await app.brands.list(mission.clientId))[0];
+  const product = (await app.products.list(mission.clientId))[0];
+  if (clientRes.isErr || !brand || !product) {
+    return res.html(
+      missionDetailPage({
+        session,
+        mission: { id, objective: mission.brief, status: mission.status },
+        approval: 'none',
+        prereqMissing: 'Add a brand and a product for this client before generating a brief.',
+      }),
+    );
+  }
+  const client = clientRes.value;
+
+  const generated = await app.briefs.generate({
+    tenantId: session.tenantId,
+    missionId: id,
+    clientId: mission.clientId,
+    clientName: client.name,
+    industry: client.industry,
+    brandVoice: brand.profile.voice,
+    brandValues: [...brand.profile.values],
+    productName: product.name,
+    productDescription: product.description,
+    missionBrief: mission.brief,
+    ...(mission.budget
+      ? { budget: { amountMinor: mission.budget.amountMinor, currency: mission.budget.currency, period: mission.budget.period } }
+      : {}),
+  });
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+
+  // Advance the mission into the executive approval gate.
+  if (mission.status === 'submitted') await app.missions.plan(MissionId.of(id));
+  await app.missions.requestApproval(MissionId.of(id), 'strategy_and_budget');
+  return res.redirect(`/missions/${id}`);
+}
+
+function approvalOf(mission: Mission, hasBrief: boolean): 'none' | 'pending' | 'approved' | 'rejected' {
+  if (!hasBrief) return 'none';
+  if (mission.status === 'awaiting_approval') return 'pending';
+  if (mission.status === 'failed') return 'rejected';
+  if (mission.status === 'planning' || mission.status === 'executing' || mission.status === 'completed') return 'approved';
+  return 'none';
+}
+
+function toBriefView(brief: {
+  content: {
+    objective: string;
+    targetAudience: string;
+    positioning: string;
+    keyMessages: string[];
+    recommendedChannels: string[];
+    budgetAllocation: Array<{ channel: string; percentage: number }>;
+    kpis: Array<{ name: string; target: number; unit: string }>;
+  };
+  provenance: { model: string };
+}): BriefView {
+  return {
+    objective: brief.content.objective,
+    targetAudience: brief.content.targetAudience,
+    positioning: brief.content.positioning,
+    keyMessages: [...brief.content.keyMessages],
+    recommendedChannels: [...brief.content.recommendedChannels],
+    budgetAllocation: brief.content.budgetAllocation.map((b) => ({ ...b })),
+    kpis: brief.content.kpis.map((k) => ({ ...k })),
+    model: brief.provenance.model,
+  };
+}
+
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
     app.products.list(),
     app.missions.list(),
+    app.briefs.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -309,6 +461,7 @@ async function collectStats(app: App): Promise<DashStats> {
     brands: brands.length,
     products: products.length,
     missions: missions.length,
+    briefs: briefs.length,
   };
 }
 

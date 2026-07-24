@@ -28,7 +28,8 @@
     "@ados/event-bus": "workspace:*",
     "@ados/tenancy": "workspace:*",
     "@ados/observability": "workspace:*",
-    "@ados/agency-os": "workspace:*"
+    "@ados/agency-os": "workspace:*",
+    "@ados/marketing-intelligence": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

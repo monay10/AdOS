@@ -10,7 +10,8 @@
     { "path": "../../packages/event-bus" },
     { "path": "../../packages/tenancy" },
     { "path": "../../packages/observability" },
-    { "path": "../../domains/agency-os" }
+    { "path": "../../domains/agency-os" },
+    { "path": "../../domains/marketing-intelligence" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

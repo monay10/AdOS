@@ -1,3 +1,4 @@
+import type { AIManagerPort } from '@ados/contracts';
 import { InMemoryEventBus, type EventBus } from '@ados/event-bus';
 import { telemetry, type Telemetry } from '@ados/observability';
 import {
@@ -12,6 +13,8 @@ import {
   ProductService,
   WorkspaceService,
 } from '@ados/agency-os';
+import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/marketing-intelligence';
+import { OfflineAIManager } from './ai.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
 export interface FeedEntry {
@@ -36,18 +39,20 @@ export class App {
   readonly brands: BrandService;
   readonly products: ProductService;
   readonly missions: MissionService;
+  readonly briefs: MarketingBriefService;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
   private readonly maxFeed = 50;
 
-  constructor(bus: EventBus = new InMemoryEventBus()) {
+  constructor(bus: EventBus = new InMemoryEventBus(), ai: AIManagerPort = new OfflineAIManager()) {
     this.bus = bus;
     this.workspaces = new WorkspaceService(new InMemoryWorkspaceRepository(), bus);
     this.clients = new ClientService(new InMemoryClientRepository(), bus);
     this.brands = new BrandService(new InMemoryBrandRepository(), bus);
     this.products = new ProductService(new InMemoryProductRepository(), bus);
     this.missions = new MissionService(new InMemoryMissionRepository(), bus);
+    this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
   }
 
   /** Subscribe the activity feed + audit log to every domain event. */
