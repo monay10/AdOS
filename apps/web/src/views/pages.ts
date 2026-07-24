@@ -39,6 +39,7 @@ export interface DashStats {
   missions: number;
   briefs: number;
   creatives: number;
+  campaigns: number;
 }
 
 export interface NextStep {
@@ -85,7 +86,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}
       </div>
       ${doneNote}
       ${pending}
@@ -115,6 +116,19 @@ export interface CreativeView {
   model: string;
 }
 
+export interface CampaignView {
+  name: string;
+  objective: string;
+  totalBudget: { amount: number; currency: string };
+  channels: Array<{
+    channel: string;
+    budgetPercentage: number;
+    adSets: Array<{ name: string; audience: string; headline: string; primaryText: string; cta: string }>;
+  }>;
+  schedule: { startHint: string; durationDays: number };
+  model: string;
+}
+
 export type Approval = 'none' | 'pending' | 'approved' | 'rejected';
 
 export function missionDetailPage(opts: {
@@ -124,6 +138,8 @@ export function missionDetailPage(opts: {
   briefApproval: Approval;
   creative?: CreativeView;
   creativeApproval: Approval;
+  campaign?: CampaignView;
+  campaignApproval: Approval;
   prereqMissing?: string;
   error?: string;
 }): string {
@@ -175,6 +191,18 @@ export function missionDetailPage(opts: {
             <form method="post" action="/missions/${esc(m.id)}/creative"><button class="btn">Generate Creative</button></form>
           </div>`;
 
+  // Campaign builder unlocks only once the creative is approved.
+  const campaignBlock =
+    opts.creativeApproval !== 'approved'
+      ? ''
+      : opts.campaign
+        ? renderCampaign(m.id, opts.campaign, opts.campaignApproval)
+        : `<div class="panel" style="margin-top:20px">
+            <h2>Campaign Builder</h2>
+            <p class="sub">Turn the approved creative into a structured campaign draft — budget, audience and schedule.</p>
+            <form method="post" action="/missions/${esc(m.id)}/campaign"><button class="btn">Generate Campaign Draft</button></form>
+          </div>`;
+
   return layout({
     title: 'Mission',
     active: '/missions',
@@ -187,8 +215,27 @@ export function missionDetailPage(opts: {
         <label>Budget</label><div>${esc(budget)}</div>
       </div>
       ${briefBlock}
-      ${creativeBlock}`,
+      ${creativeBlock}
+      ${campaignBlock}`,
   });
+}
+
+function renderCampaign(missionId: string, c: CampaignView, approval: Approval): string {
+  const budgetRows = c.channels
+    .map((ch) => `<tr><td>${esc(ch.channel)}</td><td>${ch.budgetPercentage}%</td><td>${esc(ch.adSets.map((a) => a.audience).join('; '))}</td></tr>`)
+    .join('');
+  const adSets = c.channels
+    .flatMap((ch) => ch.adSets.map((a) => `<li><b>${esc(a.name)}</b> — ${esc(a.headline)} · <span class="badge">${esc(a.cta)}</span></li>`))
+    .join('');
+  return `<div class="panel" style="margin-top:20px">
+    <h2>Campaign Draft <span class="badge">${esc(c.model)}</span> <span class="badge">draft</span></h2>
+    <p class="sub">${esc(c.name)} — total budget ${c.totalBudget.amount.toLocaleString()} ${esc(c.totalBudget.currency)}.</p>
+    <label>Budget &amp; Audience</label>
+    <table><thead><tr><th>Channel</th><th>Budget</th><th>Audience</th></tr></thead><tbody>${budgetRows}</tbody></table>
+    <label style="margin-top:16px">Ad sets</label><ul>${adSets}</ul>
+    <label>Schedule</label><div><span class="badge">start: ${esc(c.schedule.startHint)}</span> <span class="badge">${c.schedule.durationDays} days</span></div>
+    ${reviewControls(`/missions/${esc(missionId)}/campaign/approve`, `/missions/${esc(missionId)}/campaign/reject`, approval, 'campaign', 'ready for Analytics')}
+  </div>`;
 }
 
 function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string): string {

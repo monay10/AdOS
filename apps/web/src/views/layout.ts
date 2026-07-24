@@ -26,7 +26,7 @@ const NAV: NavItem[] = [
   { href: '/missions', label: 'Missions', icon: '➤', ready: true },
   { href: '/brief', label: 'Marketing Brief', icon: '✎', ready: true },
   { href: '/creative', label: 'Creative Studio', icon: '❖', ready: true },
-  { href: '/campaigns', label: 'Campaigns', icon: '◎', ready: false },
+  { href: '/campaigns', label: 'Campaigns', icon: '◎', ready: true },
   { href: '/analytics', label: 'Analytics', icon: '▤', ready: false },
   { href: '/reports', label: 'Reports', icon: '❐', ready: false },
   { href: '/settings', label: 'Settings', icon: '⚙', ready: false },

@@ -49,8 +49,14 @@ Review** (approve / reject). Creative Studio list screen + a Dashboard creatives
 count. Brief and creative reviews are tracked independently via the Mission's
 `strategy_and_budget` and `creative_assets` approval gates.
 
-The left nav lists the remaining later-phase screens (Campaigns, Analytics,
-Reports, Settings) marked **soon**.
+**Phase 4 — Campaign:** once the creative is approved, the Mission unlocks the
+**Campaign Builder** — **Generate Campaign Draft** produces a structured plan
+(budget split, per-channel audiences/ad sets, schedule) which stays a *draft*,
+followed by **Executive Launch Approval** (approve / reject). Campaigns list
+screen + a Dashboard campaigns count. Uses the Mission's `campaign_launch` gate.
+
+The left nav lists the remaining later-phase screens (Analytics, Reports,
+Settings) marked **soon**.
 
 ## Notes
 

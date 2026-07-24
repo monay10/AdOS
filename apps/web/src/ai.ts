@@ -41,6 +41,9 @@ export class OfflineAIManager implements AIManagerPort {
     if (request.promptRef?.key === 'creative.set') {
       return this.creativeSet(v);
     }
+    if (request.promptRef?.key === 'campaign.draft') {
+      return this.campaignDraft(v);
+    }
     return {};
   }
 
@@ -93,6 +96,40 @@ export class OfflineAIManager implements AIManagerPort {
         subject: `Meet ${product}`,
         body: `${lead}. Reply to get started with ${product} today.`,
       },
+    };
+  }
+
+  private campaignDraft(v: Record<string, unknown>): unknown {
+    const objective = str(v['objective'], 'Grow demand');
+    const audience = str(v['targetAudience'], 'the target audience');
+    const headline = str(v['headline'], 'Discover more');
+    const adCopy = str(v['adCopy'], 'A choice you can trust.');
+    const cta = str(v['cta'], 'Get started');
+
+    const allocation = Array.isArray(v['budgetAllocation'])
+      ? (v['budgetAllocation'] as Array<{ channel?: unknown; percentage?: unknown }>)
+      : [];
+    const channelsSource = allocation.length
+      ? allocation.map((a) => ({ channel: String(a.channel ?? 'meta'), percentage: Number(a.percentage ?? 100) }))
+      : [{ channel: 'meta', percentage: 100 }];
+
+    return {
+      name: `${objective.slice(0, 40)} — launch`,
+      objective,
+      channels: channelsSource.map((ch) => ({
+        channel: ch.channel,
+        budgetPercentage: ch.percentage,
+        adSets: [
+          {
+            name: `${ch.channel} — primary`,
+            audience,
+            headline,
+            primaryText: adCopy,
+            cta,
+          },
+        ],
+      })),
+      schedule: { startHint: 'launch week', durationDays: 30 },
     };
   }
 }

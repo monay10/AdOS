@@ -12,7 +12,8 @@
     { "path": "../../packages/observability" },
     { "path": "../../domains/agency-os" },
     { "path": "../../domains/marketing-intelligence" },
-    { "path": "../../domains/creative-studio" }
+    { "path": "../../domains/creative-studio" },
+    { "path": "../../domains/campaign-engine" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

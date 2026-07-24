@@ -15,6 +15,7 @@ import {
 } from '@ados/agency-os';
 import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/marketing-intelligence';
 import { CreativeStudioService, InMemoryCreativeSetRepository } from '@ados/creative-studio';
+import { CampaignDraftService, InMemoryCampaignDraftRepository } from '@ados/campaign-engine';
 import { OfflineAIManager } from './ai.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -42,6 +43,7 @@ export class App {
   readonly missions: MissionService;
   readonly briefs: MarketingBriefService;
   readonly creative: CreativeStudioService;
+  readonly campaigns: CampaignDraftService;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -56,6 +58,7 @@ export class App {
     this.missions = new MissionService(new InMemoryMissionRepository(), bus);
     this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
     this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
+    this.campaigns = new CampaignDraftService(new InMemoryCampaignDraftRepository(), bus, ai);
   }
 
   /** Subscribe the activity feed + audit log to every domain event. */
