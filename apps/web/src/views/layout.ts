@@ -32,7 +32,7 @@ const NAV: NavItem[] = [
   { href: '/approvals', label: 'Approvals', icon: '☑', ready: true },
   { href: '/assets', label: 'Assets', icon: '▣', ready: true },
   { href: '/executive', label: 'Executive', icon: '★', ready: true },
-  { href: '/reports', label: 'Reports', icon: '❐', ready: false },
+  { href: '/reports', label: 'Reports', icon: '❐', ready: true },
   { href: '/settings', label: 'Settings', icon: '⚙', ready: true },
 ];
 

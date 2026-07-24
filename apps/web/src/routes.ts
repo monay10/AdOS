@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, ProjectId, WorkspaceId, type AssetKind, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
+import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, PerformanceReportId, ProjectId, WorkspaceId, type AssetKind, type ProductPricing, type ProjectStatus, type ReportMetric } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
@@ -29,11 +29,14 @@ import {
   productForm,
   projectDashboardPage,
   projectForm,
+  reportDetailPage,
+  reportForm,
   settingsPage,
   workspaceForm,
   type ApprovalDetailData,
   type AssetDetailData,
   type ProjectDashboardData,
+  type ReportDetailData,
   type Approval,
   type BriefView,
   type CampaignView,
@@ -610,6 +613,65 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
         empty: 'No reports yet. Approve a campaign and generate its analytics report.',
       }),
     );
+  }
+
+  // ── Reports (client performance reports) ──
+  if (path === '/reports' && method === 'GET') {
+    const [reports, clients] = [await app.performance.list(), await app.clients.list()];
+    const clientName = (cid: string): string => clients.find((c) => c.id.toString() === cid)?.name ?? '—';
+    return res.html(
+      listPage({
+        session,
+        active: '/reports',
+        title: 'Reports',
+        subtitle: 'Saved client performance reports — a snapshot of how a client’s work performed.',
+        newHref: '/reports/new',
+        newLabel: '+ New report',
+        columns: ['Title', 'Client', 'Period', 'Generated'],
+        rows: reports.map((r) => [
+          `<a href="/reports/${r.id.toString()}">${esc(r.title)}</a>`,
+          esc(clientName(r.clientId)),
+          esc(r.period),
+          esc(r.generatedAt.replace('T', ' ').slice(0, 16)),
+        ]),
+        empty: 'No reports yet. Generate one to snapshot a client’s performance.',
+      }),
+    );
+  }
+  if (path === '/reports/new' && method === 'GET') {
+    const [clients, projects] = [await app.clients.list(), await app.projects.list()];
+    if (clients.length === 0) return res.redirect('/clients/new');
+    return res.html(reportForm({ session, clients: idName(clients), projects: idName(projects) }));
+  }
+  if (path === '/reports' && method === 'POST') {
+    const [clients, projects] = [await app.clients.list(), await app.projects.list()];
+    const rerender = (msg: string): void => res.html(reportForm({ session, clients: idName(clients), projects: idName(projects), error: msg, values: req.body }), 400);
+    const clientId = (req.body['clientId'] ?? '').trim();
+    const client = clients.find((c) => c.id.toString() === clientId);
+    if (!client) return rerender('Select a client for the report.');
+    const title = (req.body['title'] ?? '').trim();
+    if (!title) return rerender('A title is required.');
+    const projectId = (req.body['projectId'] ?? '').trim();
+
+    const snapshot = await buildReportSnapshot(app, clientId, client.name, projectId || undefined);
+    const r = await app.performance.generate({
+      tenantId: session.tenantId,
+      clientId,
+      ...(projectId ? { projectId } : {}),
+      title,
+      period: (req.body['period'] ?? '').trim(),
+      metrics: snapshot.metrics,
+      summary: snapshot.summary,
+      generatedBy: session.actor,
+      generatedAt: new Date().toISOString(),
+    });
+    if (r.isErr) return rerender(r.error.message);
+    return res.redirect(`/reports/${r.value.id.toString()}`);
+  }
+  if (path.startsWith('/reports/') && path !== '/reports/new') {
+    const id = path.slice('/reports/'.length).split('/')[0] ?? '';
+    if (id && method === 'GET') return renderReportDetail(app, session, res, id);
+    return res.html(notFound(session), 404);
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
@@ -1324,6 +1386,90 @@ async function mutateAsset(
   const r = await change(AssetId.of(id));
   if (r.isErr) return renderAssetDetail(app, session, res, id, r.error?.message ?? 'Update failed');
   return res.redirect(`/assets/${id}`);
+}
+
+/** Aggregate a client's work into a deterministic performance snapshot. */
+async function buildReportSnapshot(
+  app: App,
+  clientId: string,
+  clientName: string,
+  projectId?: string,
+): Promise<{ metrics: ReportMetric[]; summary: string }> {
+  const missions = (await app.missions.list()).filter(
+    (m) => m.clientId === clientId && (projectId === undefined || m.projectId === projectId),
+  );
+  const completed = missions.filter((m) => m.status === 'completed').length;
+
+  let campaignCount = 0;
+  let totalBudgetMinor = 0;
+  let currency = 'TRY';
+  const roasValues: number[] = [];
+  const verdicts = { exceeded: 0, on_track: 0, at_risk: 0 };
+
+  for (const m of missions) {
+    if (m.budget) {
+      totalBudgetMinor += m.budget.amountMinor;
+      currency = m.budget.currency;
+    }
+    const mid = m.id.toString();
+    const [campaigns, reports, execs] = await Promise.all([
+      app.campaigns.list(mid),
+      app.reports.list(mid),
+      app.executive.list(mid),
+    ]);
+    campaignCount += campaigns.length;
+    for (const rep of reports) roasValues.push(rep.kpi('roas') ?? 0);
+    for (const ex of execs) {
+      if (ex.verdict === 'exceeded') verdicts.exceeded += 1;
+      else if (ex.verdict === 'on_track') verdicts.on_track += 1;
+      else verdicts.at_risk += 1;
+    }
+  }
+
+  const avgRoas = roasValues.length ? Math.round((roasValues.reduce((a, b) => a + b, 0) / roasValues.length) * 100) / 100 : 0;
+  const totalBudget = `${(totalBudgetMinor / 100).toLocaleString()} ${currency}`;
+
+  const metrics: ReportMetric[] = [
+    { label: 'Missions', value: String(missions.length) },
+    { label: 'Completed', value: String(completed) },
+    { label: 'Campaigns', value: String(campaignCount) },
+    { label: 'Total budget', value: totalBudget },
+    { label: 'Avg ROAS', value: `${avgRoas}x` },
+    { label: 'CEO verdicts', value: verdicts.exceeded + verdicts.on_track + verdicts.at_risk ? `${verdicts.exceeded} exceeded · ${verdicts.on_track} on track · ${verdicts.at_risk} at risk` : '—' },
+  ];
+
+  const summary =
+    missions.length === 0
+      ? `${clientName} has no missions in this scope yet.`
+      : `${clientName} ran ${missions.length} mission${missions.length === 1 ? '' : 's'} (${completed} completed) across ${campaignCount} campaign${campaignCount === 1 ? '' : 's'} on a total budget of ${totalBudget}${roasValues.length ? `, averaging ${avgRoas}x ROAS` : ''}.`;
+
+  return { metrics, summary };
+}
+
+/** Load a performance report and render its detail page. */
+async function renderReportDetail(app: App, session: Session, res: Res, id: string): Promise<void> {
+  const found = await app.performance.get(PerformanceReportId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const report = found.value;
+
+  const clientRes = await app.clients.get(ClientId.of(report.clientId));
+  const clientName = clientRes.isOk ? clientRes.value.name : '—';
+  const projectName = report.projectId
+    ? (await app.projects.list()).find((p) => p.id.toString() === report.projectId)?.name
+    : undefined;
+
+  const data: ReportDetailData = {
+    id,
+    title: report.title,
+    clientName,
+    ...(projectName ? { projectName } : {}),
+    period: report.period,
+    generatedBy: report.generatedBy,
+    generatedAt: report.generatedAt,
+    metrics: report.metrics.map((m) => ({ ...m })),
+    summary: report.summary,
+  };
+  return res.html(reportDetailPage({ session, data }));
 }
 
 async function collectStats(app: App): Promise<DashStats> {

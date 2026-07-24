@@ -129,7 +129,19 @@ persistence in every context, the complete event chain, the project-dashboard
 timeline, the populated home dashboard, and tenant isolation. This is the
 "can a real customer run their first day on AdOS?" test — and it passes.
 
-The left nav lists the remaining later-phase screen (Reports) marked **soon**.
+**Phase 13 — Reports:** a **Reports** section for saved **client performance
+reports**. Pick a client (optionally narrowed to one project), give the report a
+title and period, and AdOS aggregates that client's work into a deterministic,
+timestamped snapshot — missions, completed count, campaigns, total budget,
+blended **avg ROAS** and the CEO-verdict rollup — with a one-line summary. The
+report is immutable once generated (the artifact you show a client), listed on
+the Reports screen and viewable in full, and it emits
+`performance.report.generated.v1`. Distinct from **Analytics** (per-campaign
+KPIs) and the **CEO Dashboard** (per-mission executive synthesis): Reports is the
+client/portfolio-level rollup.
+
+Every customer-facing screen is now built; the left nav has no **soon** items
+left.
 
 ## Notes
 

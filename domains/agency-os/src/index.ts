@@ -6,4 +6,5 @@ export * from './product/index.js';
 export * from './project/index.js';
 export * from './approval/index.js';
 export * from './asset/index.js';
+export * from './report/index.js';
 export * from './mission/index.js';
