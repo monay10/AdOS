@@ -27,7 +27,7 @@ const NAV: NavItem[] = [
   { href: '/brief', label: 'Marketing Brief', icon: '✎', ready: true },
   { href: '/creative', label: 'Creative Studio', icon: '❖', ready: true },
   { href: '/campaigns', label: 'Campaigns', icon: '◎', ready: true },
-  { href: '/analytics', label: 'Analytics', icon: '▤', ready: false },
+  { href: '/analytics', label: 'Analytics', icon: '▤', ready: true },
   { href: '/reports', label: 'Reports', icon: '❐', ready: false },
   { href: '/settings', label: 'Settings', icon: '⚙', ready: false },
 ];
@@ -97,6 +97,13 @@ th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;le
 .empty{color:var(--muted);padding:18px 0}
 .badge{display:inline-block;font-size:12px;padding:2px 9px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
 .badge.active{color:var(--ok);border-color:rgba(63,185,80,.5)}
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.bar{display:grid;grid-template-columns:70px 1fr 74px;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.bar .track{background:var(--panel-2);border-radius:6px;height:12px;overflow:hidden}
+.bar .fill{height:100%;background:linear-gradient(90deg,var(--brand),#9d7bff)}
+.bar .v{text-align:right;color:var(--text);font-weight:600}
+.recs{list-style:none;margin:8px 0 0;padding:0}
+.recs li{padding:9px 12px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;margin-bottom:8px}
 .login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
 .login-card{width:100%;max-width:380px}
 .login-brand{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:22px;font-size:22px;font-weight:700}

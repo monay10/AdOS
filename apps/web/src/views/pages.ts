@@ -40,6 +40,7 @@ export interface DashStats {
   briefs: number;
   creatives: number;
   campaigns: number;
+  reports: number;
 }
 
 export interface NextStep {
@@ -86,7 +87,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}
       </div>
       ${doneNote}
       ${pending}
@@ -129,6 +130,14 @@ export interface CampaignView {
   model: string;
 }
 
+export interface ReportView {
+  kpis: Array<{ name: string; value: number; unit: string }>;
+  summary: string;
+  highlights: string[];
+  recommendations: string[];
+  model: string;
+}
+
 export type Approval = 'none' | 'pending' | 'approved' | 'rejected';
 
 export function missionDetailPage(opts: {
@@ -140,6 +149,8 @@ export function missionDetailPage(opts: {
   creativeApproval: Approval;
   campaign?: CampaignView;
   campaignApproval: Approval;
+  report?: ReportView;
+  reportDefaults?: { spend: number; revenue: number; currency: string };
   prereqMissing?: string;
   error?: string;
 }): string {
@@ -203,6 +214,32 @@ export function missionDetailPage(opts: {
             <form method="post" action="/missions/${esc(m.id)}/campaign"><button class="btn">Generate Campaign Draft</button></form>
           </div>`;
 
+  // Analytics unlocks only once the campaign is approved.
+  const d = opts.reportDefaults ?? { spend: 0, revenue: 0, currency: 'TRY' };
+  const analyticsBlock =
+    opts.campaignApproval !== 'approved'
+      ? ''
+      : opts.report
+        ? renderReport(opts.report)
+        : `<div class="panel" style="margin-top:20px">
+            <h2>Analytics</h2>
+            <p class="sub">Enter the campaign's results to compute KPIs and get an executive summary.</p>
+            <form method="post" action="/missions/${esc(m.id)}/analytics">
+              <div class="row-3">
+                <div><label>Impressions</label><input name="impressions" type="number" min="0" value="100000"></div>
+                <div><label>Clicks</label><input name="clicks" type="number" min="0" value="2000"></div>
+                <div><label>Conversions</label><input name="conversions" type="number" min="0" value="100"></div>
+              </div>
+              <div class="row-3">
+                <div><label>Leads</label><input name="leads" type="number" min="0" value="130"></div>
+                <div><label>Spend (major)</label><input name="spend" type="number" min="0" step="0.01" value="${esc(String(d.spend))}"></div>
+                <div><label>Revenue (major)</label><input name="revenue" type="number" min="0" step="0.01" value="${esc(String(d.revenue))}"></div>
+              </div>
+              <input type="hidden" name="currency" value="${esc(d.currency)}">
+              <div class="actions"><button class="btn">Generate Analytics Report</button></div>
+            </form>
+          </div>`;
+
   return layout({
     title: 'Mission',
     active: '/missions',
@@ -216,8 +253,42 @@ export function missionDetailPage(opts: {
       </div>
       ${briefBlock}
       ${creativeBlock}
-      ${campaignBlock}`,
+      ${campaignBlock}
+      ${analyticsBlock}`,
   });
+}
+
+/** KPI cards + bar charts + executive summary + recommendations. */
+function renderReport(r: ReportView): string {
+  const fmt = (k: { name: string; value: number; unit: string }): string => {
+    if (k.unit === '%') return `${k.value}%`;
+    if (k.unit === 'x') return `${k.value}x`;
+    if (k.unit.endsWith('_minor')) return `${(k.value / 100).toLocaleString()} ${k.unit.replace('_minor', '')}`;
+    return `${k.value} ${k.unit}`;
+  };
+  const cards = r.kpis
+    .map((k) => `<div class="card stat"><div class="n">${esc(fmt(k))}</div><div class="l">${esc(k.name.toUpperCase())}</div></div>`)
+    .join('');
+
+  // Bars for the headline ratio KPIs, each scaled to a sensible ceiling.
+  const scale: Record<string, number> = { roas: 5, roi: 300, ctr: 10 };
+  const bars = r.kpis
+    .filter((k) => k.name in scale)
+    .map((k) => {
+      const pct = Math.max(0, Math.min(100, (k.value / (scale[k.name] ?? 1)) * 100));
+      return `<div class="bar"><span>${esc(k.name.toUpperCase())}</span><span class="track"><span class="fill" style="width:${pct.toFixed(0)}%"></span></span><span class="v">${esc(fmt(k))}</span></div>`;
+    })
+    .join('');
+
+  return `<div class="panel" style="margin-top:20px">
+    <h2>Analytics Report <span class="badge">${esc(r.model)}</span></h2>
+    <p class="sub">Deterministic KPIs with an AI-generated executive summary and recommendations.</p>
+    <div class="grid" style="margin-bottom:6px">${cards}</div>
+    <div class="bars">${bars}</div>
+    <label style="margin-top:20px">Executive summary</label><div>${esc(r.summary)}</div>
+    ${r.highlights.length ? `<label>Highlights</label><div>${r.highlights.map((h) => `<span class="badge">${esc(h)}</span>`).join(' ')}</div>` : ''}
+    <label>Recommendations</label><ul class="recs">${r.recommendations.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+  </div>`;
 }
 
 function renderCampaign(missionId: string, c: CampaignView, approval: Approval): string {

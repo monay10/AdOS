@@ -66,6 +66,9 @@ importers:
       '@ados/agency-os':
         specifier: workspace:*
         version: link:../../domains/agency-os
+      '@ados/analytics-engine':
+        specifier: workspace:*
+        version: link:../../domains/analytics-engine
       '@ados/campaign-engine':
         specifier: workspace:*
         version: link:../../domains/campaign-engine

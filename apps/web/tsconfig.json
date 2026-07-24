@@ -13,7 +13,8 @@
     { "path": "../../domains/agency-os" },
     { "path": "../../domains/marketing-intelligence" },
     { "path": "../../domains/creative-studio" },
-    { "path": "../../domains/campaign-engine" }
+    { "path": "../../domains/campaign-engine" },
+    { "path": "../../domains/analytics-engine" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

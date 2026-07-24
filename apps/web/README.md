@@ -55,8 +55,15 @@ count. Brief and creative reviews are tracked independently via the Mission's
 followed by **Executive Launch Approval** (approve / reject). Campaigns list
 screen + a Dashboard campaigns count. Uses the Mission's `campaign_launch` gate.
 
-The left nav lists the remaining later-phase screens (Analytics, Reports,
-Settings) marked **soon**.
+**Phase 5 — Analytics:** once the campaign is approved, the Mission unlocks the
+**Analytics** section — enter the campaign's results and **Generate Analytics
+Report** computes deterministic KPIs (CTR/CPC/CPA/CPL/ROAS/ROI), renders KPI
+cards + bar charts, and adds an AI executive summary + recommendations. Analytics
+list screen + a Dashboard reports count. KPI math is pure and division-by-zero
+safe; only the narrative is AI-generated.
+
+The left nav lists the remaining later-phase screens (Reports, Settings) marked
+**soon**.
 
 ## Notes
 

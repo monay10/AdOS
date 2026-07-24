@@ -44,6 +44,9 @@ export class OfflineAIManager implements AIManagerPort {
     if (request.promptRef?.key === 'campaign.draft') {
       return this.campaignDraft(v);
     }
+    if (request.promptRef?.key === 'analytics.report') {
+      return this.analyticsReport(v);
+    }
     return {};
   }
 
@@ -130,6 +133,31 @@ export class OfflineAIManager implements AIManagerPort {
         ],
       })),
       schedule: { startHint: 'launch week', durationDays: 30 },
+    };
+  }
+
+  private analyticsReport(v: Record<string, unknown>): unknown {
+    const kpis = Array.isArray(v['kpis'])
+      ? (v['kpis'] as Array<{ name?: unknown; value?: unknown; unit?: unknown }>)
+      : [];
+    const byName = (n: string): number => Number(kpis.find((k) => String(k.name) === n)?.value ?? 0);
+    const roas = byName('roas');
+    const roi = byName('roi');
+    const ctr = byName('ctr');
+    const leads = Number(v['leads'] ?? 0);
+
+    const verdict = roas >= 1 ? 'delivered a positive return' : 'is below break-even';
+    return {
+      summary: `The campaign ${verdict}: ${roas}x ROAS, ${roi}% ROI, ${ctr}% CTR, ${leads} leads.`,
+      highlights: [
+        `ROAS of ${roas}x`,
+        `Click-through rate of ${ctr}%`,
+        `${leads} leads generated`,
+      ],
+      recommendations:
+        roas >= 1
+          ? ['Scale the best-performing channel by 20%', 'Reallocate budget away from the weakest ad set', 'Test new creative variants against the current winner']
+          : ['Pause the weakest channel', 'Tighten targeting to the highest-intent audience', 'Revise the offer and creative before scaling'],
     };
   }
 }

@@ -26,6 +26,7 @@ import {
   type CreativeView,
   type DashStats,
   type NextStep,
+  type ReportView,
 } from './views/pages.js';
 import { esc } from './views/layout.js';
 
@@ -367,7 +368,30 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     );
   }
 
-  // ── Mission detail + processing (Phases 2–4) ──
+  // ── Analytics list ──
+  if (path === '/analytics' && method === 'GET') {
+    const reports = await app.reports.list();
+    return res.html(
+      listPage({
+        session,
+        active: '/analytics',
+        title: 'Analytics',
+        subtitle: 'Campaign KPI reports with AI-generated executive summaries.',
+        newHref: '/missions',
+        newLabel: 'Go to Missions',
+        columns: ['ROAS', 'ROI', 'CTR', 'Summary'],
+        rows: reports.map((rep) => [
+          `<a href="/missions/${esc(rep.missionId)}">${rep.kpi('roas') ?? 0}x</a>`,
+          `${rep.kpi('roi') ?? 0}%`,
+          `${rep.kpi('ctr') ?? 0}%`,
+          esc(rep.narrative.summary),
+        ]),
+        empty: 'No reports yet. Approve a campaign and generate its analytics report.',
+      }),
+    );
+  }
+
+  // ── Mission detail + processing (Phases 2–5) ──
   if (path.startsWith('/missions/') && path !== '/missions/new') {
     const seg = path.slice('/missions/'.length).split('/');
     const id = seg[0] ?? '';
@@ -392,6 +416,9 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     if (action === 'campaign' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'campaign_launch');
     if (action === 'campaign' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Campaign rejected by executive');
 
+    // Phase 5 — analytics report (no approval gate; produces KPIs + summary).
+    if (action === 'analytics' && method === 'POST') return generateReport(app, session, res, id, req);
+
     return res.html(notFound(session), 404);
   }
 
@@ -407,11 +434,15 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const brief = (await app.briefs.list(id))[0];
   const creative = (await app.creative.list(id))[0];
   const campaign = (await app.campaigns.list(id))[0];
+  const report = (await app.reports.list(id))[0];
 
   // Each earlier stage is implicitly approved once the next artifact exists.
   const briefApproval: Approval = !brief ? 'none' : creative ? 'approved' : statusApproval(mission.status);
   const creativeApproval: Approval = !creative ? 'none' : campaign ? 'approved' : statusApproval(mission.status);
-  const campaignApproval: Approval = !campaign ? 'none' : statusApproval(mission.status);
+  const campaignApproval: Approval = !campaign ? 'none' : report ? 'approved' : statusApproval(mission.status);
+
+  const spend = mission.budget ? mission.budget.amountMinor / 100 : 1000;
+  const currency = mission.budget?.currency ?? 'TRY';
 
   return res.html(
     missionDetailPage({
@@ -427,9 +458,11 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       briefApproval,
       creativeApproval,
       campaignApproval,
+      reportDefaults: { spend, revenue: spend * 3, currency },
       ...(brief ? { brief: toBriefView(brief) } : {}),
       ...(creative ? { creative: toCreativeView(creative) } : {}),
       ...(campaign ? { campaign: toCampaignView(campaign) } : {}),
+      ...(report ? { report: toReportView(report) } : {}),
       ...(error ? { error } : {}),
     }),
   );
@@ -572,6 +605,44 @@ async function generateCampaign(app: App, session: Session, res: Res, id: string
   return res.redirect(`/missions/${id}`);
 }
 
+/** Analytics: compute KPIs from the entered results + an AI executive summary. */
+async function generateReport(app: App, session: Session, res: Res, id: string, req: Req): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+
+  const campaign = (await app.campaigns.list(id))[0];
+  if (!campaign || statusApproval(mission.status) !== 'approved') {
+    return renderMissionDetail(app, session, res, id, 'Approve the campaign before generating analytics.');
+  }
+
+  const intOf = (v: string | undefined): number => {
+    const n = Number.parseInt(v ?? '', 10);
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  };
+  const currency = req.body['currency'] || 'TRY';
+  const spendMinor = toMinor(req.body['spend'] ?? '0');
+  const revenueMinor = toMinor(req.body['revenue'] ?? '0');
+  if (Number.isNaN(spendMinor) || Number.isNaN(revenueMinor)) {
+    return renderMissionDetail(app, session, res, id, 'Spend and revenue must be numbers.');
+  }
+
+  const generated = await app.reports.generate({
+    tenantId: session.tenantId,
+    missionId: id,
+    clientId: mission.clientId,
+    campaignDraftId: campaign.id.toString(),
+    impressions: intOf(req.body['impressions']),
+    clicks: intOf(req.body['clicks']),
+    conversions: intOf(req.body['conversions']),
+    leads: intOf(req.body['leads']),
+    spend: { amountMinor: spendMinor, currency },
+    revenue: { amountMinor: revenueMinor, currency },
+  });
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  return res.redirect(`/missions/${id}`);
+}
+
 function toBriefView(brief: {
   content: {
     objective: string;
@@ -646,8 +717,22 @@ function toCampaignView(draft: {
   };
 }
 
+function toReportView(report: {
+  kpis: ReadonlyArray<{ name: string; value: number; unit: string }>;
+  narrative: { summary: string; highlights: string[]; recommendations: string[] };
+  provenance: { model: string };
+}): ReportView {
+  return {
+    kpis: report.kpis.map((k) => ({ ...k })),
+    summary: report.narrative.summary,
+    highlights: [...report.narrative.highlights],
+    recommendations: [...report.narrative.recommendations],
+    model: report.provenance.model,
+  };
+}
+
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
@@ -656,6 +741,7 @@ async function collectStats(app: App): Promise<DashStats> {
     app.briefs.list(),
     app.creative.list(),
     app.campaigns.list(),
+    app.reports.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -666,6 +752,7 @@ async function collectStats(app: App): Promise<DashStats> {
     briefs: briefs.length,
     creatives: creatives.length,
     campaigns: campaigns.length,
+    reports: reports.length,
   };
 }
 
