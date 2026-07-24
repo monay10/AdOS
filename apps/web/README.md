@@ -36,6 +36,14 @@ Environment:
 Create Brand · Create Product · Create Mission, plus tenant-scoped list views for
 Clients, Brands, Products and Missions.
 
+**Phase 7 — Projects:** a **Projects** nav item with a create form (a project
+belongs to a Brand, and through it a Client) and a **Project Dashboard** —
+status control (active/paused/completed) + archive, goals, members, an
+artifact-rollup (missions/briefs/creatives/campaigns/reports counts), the owned
+missions, and a timeline of what has happened. Missions can be assigned to a
+project (optional selector on the Mission form); the project then owns them and
+their downstream briefs/creatives/campaigns/reports.
+
 **Phase 2 — Mission Processing:** Mission detail with **Generate Marketing Brief**
 (Marketing Intelligence via the AI Manager) → **Executive Approve / Reject** →
 Dashboard pending-approvals + Marketing Brief list. Offline by default: the app

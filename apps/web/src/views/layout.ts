@@ -23,6 +23,7 @@ const NAV: NavItem[] = [
   { href: '/clients', label: 'Clients', icon: '◑', ready: true },
   { href: '/brands', label: 'Brands', icon: '✦', ready: true },
   { href: '/products', label: 'Products', icon: '❑', ready: true },
+  { href: '/projects', label: 'Projects', icon: '▦', ready: true },
   { href: '/missions', label: 'Missions', icon: '➤', ready: true },
   { href: '/brief', label: 'Marketing Brief', icon: '✎', ready: true },
   { href: '/creative', label: 'Creative Studio', icon: '❖', ready: true },

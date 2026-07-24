@@ -479,6 +479,7 @@ export function missionForm(opts: {
   session: Session;
   workspaces: Array<{ id: string; name: string }>;
   clients: Array<{ id: string; name: string }>;
+  projects?: Array<{ id: string; name: string }>;
   error?: string;
   values?: Vals;
 }): string {
@@ -489,6 +490,12 @@ export function missionForm(opts: {
   const clOpts = opts.clients
     .map((c) => `<option value="${esc(c.id)}" ${v['clientId'] === c.id ? 'selected' : ''}>${esc(c.name)}</option>`)
     .join('');
+  const projects = opts.projects ?? [];
+  const projField = projects.length
+    ? `<label>Project (optional)</label><select name="projectId"><option value="">— none —</option>${projects
+        .map((p) => `<option value="${esc(p.id)}" ${v['projectId'] === p.id ? 'selected' : ''}>${esc(p.name)}</option>`)
+        .join('')}</select>`
+    : '';
   const period = v['period'] || 'monthly';
   const pOpt = (val: string, label: string): string => `<option value="${val}" ${period === val ? 'selected' : ''}>${label}</option>`;
   return layout({
@@ -503,6 +510,7 @@ export function missionForm(opts: {
           <div><label>Workspace</label><select name="workspaceId" required>${wsOpts}</select></div>
           <div><label>Client</label><select name="clientId" required>${clOpts}</select></div>
         </div>
+        ${projField}
         <label>Objective</label>
         <textarea name="objective" rows="3" placeholder="Acquire new patients for a dental clinic opening next month" required>${esc(v['objective'])}</textarea>
         <div class="row-3">
@@ -517,6 +525,125 @@ export function missionForm(opts: {
         </div>
         <div class="actions"><button class="btn">Submit Mission</button></div>
       </form></div>`,
+  });
+}
+
+// ── Create Project (Phase 7) ────────────────────────────────────────────────────
+export function projectForm(opts: {
+  session: Session;
+  brands: Array<{ id: string; name: string; clientName: string }>;
+  error?: string;
+  values?: Vals;
+}): string {
+  const v = opts.values ?? {};
+  const brandOpts = opts.brands
+    .map((b) => `<option value="${esc(b.id)}" ${v['brandId'] === b.id ? 'selected' : ''}>${esc(b.name)} · ${esc(b.clientName)}</option>`)
+    .join('');
+  return layout({
+    title: 'Create Project',
+    active: '/projects',
+    session: opts.session,
+    body: `<div class="panel">
+      <h2>Create a project</h2><p class="sub">A project runs a brand's work — its missions, briefs, creatives, campaigns and reports.</p>
+      ${banner(opts.error)}
+      <form method="post" action="/projects">
+        <label>Brand</label><select name="brandId" required>${brandOpts}</select>
+        <label>Project name</label><input name="name" placeholder="Spring Launch" value="${esc(v['name'])}" required>
+        <label>Description</label><textarea name="description" rows="2" placeholder="Acquire new patients in Q2">${esc(v['description'])}</textarea>
+        <div class="actions"><button class="btn">Create project</button></div>
+      </form></div>`,
+  });
+}
+
+// ── Project Dashboard (Phase 7) ──────────────────────────────────────────────────
+export interface ProjectDashboardData {
+  project: { id: string; name: string; description: string; status: string; clientName: string; brandName: string };
+  goals: Array<{ description: string; metric: string; target: number }>;
+  members: Array<{ name: string; email: string; role: string }>;
+  timeline: Array<{ label: string; detail: string }>;
+  missions: Array<{ id: string; objective: string; status: string }>;
+  rollup: { briefs: number; creatives: number; campaigns: number; reports: number };
+}
+
+export function projectDashboardPage(opts: { session: Session; data: ProjectDashboardData; error?: string }): string {
+  const p = opts.data.project;
+  const archived = p.status === 'archived';
+  const statusOpt = (val: string): string => `<option value="${val}" ${p.status === val ? 'selected' : ''}>${val}</option>`;
+
+  const goals = opts.data.goals.length
+    ? `<table><thead><tr><th>Goal</th><th>Metric</th><th>Target</th></tr></thead><tbody>${opts.data.goals
+        .map((g) => `<tr><td>${esc(g.description)}</td><td>${esc(g.metric)}</td><td>${g.target}</td></tr>`)
+        .join('')}</tbody></table>`
+    : `<div class="empty">No goals yet.</div>`;
+
+  const members = opts.data.members.length
+    ? `<table><thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>${opts.data.members
+        .map((m) => `<tr><td>${esc(m.name)}</td><td>${esc(m.email)}</td><td><span class="badge">${esc(m.role)}</span></td></tr>`)
+        .join('')}</tbody></table>`
+    : `<div class="empty">No members yet.</div>`;
+
+  const timeline = opts.data.timeline.length
+    ? `<ul class="feed">${opts.data.timeline
+        .map((t) => `<li><span>${esc(t.label)}</span><span class="t">${esc(t.detail)}</span></li>`)
+        .join('')}</ul>`
+    : `<div class="empty">No activity yet.</div>`;
+
+  const missions = opts.data.missions.length
+    ? `<table><thead><tr><th>Objective</th><th>Status</th></tr></thead><tbody>${opts.data.missions
+        .map((m) => `<tr><td><a href="/missions/${esc(m.id)}">${esc(m.objective)}</a></td><td><span class="badge active">${esc(m.status)}</span></td></tr>`)
+        .join('')}</tbody></table>`
+    : `<div class="empty">No missions in this project yet. <a href="/missions/new">Create one</a> and assign it here.</div>`;
+
+  const r = opts.data.rollup;
+  const stat = (n: number, l: string): string => `<div class="card stat"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+
+  const controls = archived
+    ? `<span class="badge">archived</span>`
+    : `<form method="post" action="/projects/${esc(p.id)}/status" style="display:flex;gap:8px;align-items:center">
+         <select name="status">${statusOpt('active')}${statusOpt('paused')}${statusOpt('completed')}</select>
+         <button class="btn ghost" style="padding:8px 12px">Set status</button>
+       </form>
+       <form method="post" action="/projects/${esc(p.id)}/archive"><button class="btn ghost" style="padding:8px 12px">Archive</button></form>`;
+
+  return layout({
+    title: p.name,
+    active: '/projects',
+    session: opts.session,
+    body: `<div class="head"><div><h1>${esc(p.name)}</h1>
+        <p><a href="/projects">← All projects</a> · ${esc(p.clientName)} · ${esc(p.brandName)}</p></div>
+        <div style="display:flex;gap:10px;align-items:center">${controls}</div></div>
+      ${opts.error ? `<div class="err">${esc(opts.error)}</div>` : ''}
+      <div class="panel">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px"><span class="badge ${archived ? '' : 'active'}">${esc(p.status)}</span></div>
+        <label>Description</label><div>${esc(p.description) || '—'}</div>
+      </div>
+
+      <div class="grid" style="margin-top:20px">
+        ${stat(opts.data.missions.length, 'Missions')}${stat(r.briefs, 'Briefs')}${stat(r.creatives, 'Creatives')}${stat(r.campaigns, 'Campaigns')}${stat(r.reports, 'Reports')}
+      </div>
+
+      <div class="panel" style="margin-top:20px"><h2>Goals</h2>${goals}
+        ${archived ? '' : `<form method="post" action="/projects/${esc(p.id)}/goal" style="margin-top:14px">
+          <div class="row-3">
+            <div><label>Goal</label><input name="description" placeholder="Book consultations" required></div>
+            <div><label>Metric</label><input name="metric" placeholder="leads" required></div>
+            <div><label>Target</label><input name="target" type="number" min="0" value="0"></div>
+          </div>
+          <div class="actions"><button class="btn">Add goal</button></div></form>`}
+      </div>
+
+      <div class="panel" style="margin-top:20px"><h2>Members</h2>${members}
+        ${archived ? '' : `<form method="post" action="/projects/${esc(p.id)}/member" style="margin-top:14px">
+          <div class="row-3">
+            <div><label>Name</label><input name="name" placeholder="Ada Lovelace" required></div>
+            <div><label>Email</label><input name="email" type="email" placeholder="ada@acme.com" required></div>
+            <div><label>Role</label><input name="role" placeholder="manager"></div>
+          </div>
+          <div class="actions"><button class="btn">Add member</button></div></form>`}
+      </div>
+
+      <div class="panel" style="margin-top:20px"><h2>Missions</h2>${missions}</div>
+      <div class="panel" style="margin-top:20px"><h2>Timeline</h2><p class="sub">What has happened across this project's work.</p>${timeline}</div>`,
   });
 }
 

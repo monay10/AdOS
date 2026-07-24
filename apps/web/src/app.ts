@@ -11,8 +11,10 @@ import {
   InMemoryMissionRepository,
   InMemoryProductRepository,
   InMemoryWorkspaceRepository,
+  InMemoryProjectRepository,
   MissionService,
   ProductService,
+  ProjectService,
   WorkspaceService,
 } from '@ados/agency-os';
 import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/marketing-intelligence';
@@ -45,6 +47,7 @@ export class App {
   readonly clients: ClientService;
   readonly brands: BrandService;
   readonly products: ProductService;
+  readonly projects: ProjectService;
   readonly missions: MissionService;
   readonly briefs: MarketingBriefService;
   readonly creative: CreativeStudioService;
@@ -64,6 +67,7 @@ export class App {
     this.clients = new ClientService(new InMemoryClientRepository(), bus);
     this.brands = new BrandService(new InMemoryBrandRepository(), bus);
     this.products = new ProductService(new InMemoryProductRepository(), bus);
+    this.projects = new ProjectService(new InMemoryProjectRepository(), bus);
     this.missions = new MissionService(new InMemoryMissionRepository(), bus);
     this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
     this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);

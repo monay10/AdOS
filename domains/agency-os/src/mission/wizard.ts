@@ -23,6 +23,7 @@ interface WizardState {
   workspaceId?: string;
   clientId?: string;
   createdBy?: string;
+  projectId?: string;
   brief?: string;
   budget?: MissionBudget;
   targetMetric?: MissionTargetMetric;
@@ -67,6 +68,11 @@ export class MissionWizard {
     return new MissionWizard({ ...this.state, approvalGates: gates });
   }
 
+  /** Optional: associate the mission with an owning Project. */
+  withProject(projectId: string): MissionWizard {
+    return new MissionWizard({ ...this.state, projectId });
+  }
+
   /** Which step the user is currently on (first incomplete step). */
   currentStep(): MissionWizardStep {
     if (!this.state.tenantId || !this.state.workspaceId || !this.state.clientId || !this.state.createdBy) return 'context';
@@ -104,6 +110,7 @@ export class MissionWizard {
       workspaceId: this.state.workspaceId!,
       clientId: this.state.clientId!,
       createdBy: this.state.createdBy!,
+      ...(this.state.projectId ? { projectId: this.state.projectId } : {}),
       brief: this.state.brief!,
       ...(this.state.budget ? { budget: this.state.budget } : {}),
       ...(this.state.targetMetric ? { targetMetric: this.state.targetMetric } : {}),

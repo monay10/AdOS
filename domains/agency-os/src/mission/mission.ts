@@ -33,6 +33,8 @@ export interface MissionProps {
   tenantId: string;
   workspaceId: string;
   clientId: string;
+  /** Optional owning project (a Project groups a brand's missions). */
+  projectId?: string;
   /** The raw business objective, in the user's own words. */
   brief: string;
   budget?: MissionBudget;
@@ -82,6 +84,7 @@ export class Mission extends AggregateRoot<MissionId> {
     tenantId: string;
     workspaceId: string;
     clientId: string;
+    projectId?: string;
     brief: string;
     createdBy: string;
     budget?: MissionBudget;
@@ -97,6 +100,7 @@ export class Mission extends AggregateRoot<MissionId> {
       tenantId: input.tenantId,
       workspaceId: input.workspaceId,
       clientId: input.clientId,
+      ...(input.projectId ? { projectId: input.projectId } : {}),
       brief: input.brief.trim(),
       ...(input.budget ? { budget: input.budget } : {}),
       ...(input.targetMetric ? { targetMetric: input.targetMetric } : {}),
@@ -128,6 +132,9 @@ export class Mission extends AggregateRoot<MissionId> {
   }
   get clientId(): string {
     return this.props.clientId;
+  }
+  get projectId(): string | undefined {
+    return this.props.projectId;
   }
   get brief(): string {
     return this.props.brief;

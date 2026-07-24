@@ -43,6 +43,15 @@ describe('MissionWizard (domain)', () => {
     expect(wizard.currentStep()).toBe('context');
     expect(wizard.validate().isErr).toBe(true);
   });
+
+  it('optionally associates the mission with an owning project', () => {
+    const m = MissionWizard.start(context)
+      .withObjective('Acquire new patients for a dental clinic opening next month')
+      .withProject('proj-1')
+      .build();
+    expect(m.isOk).toBe(true);
+    if (m.isOk) expect(m.value.projectId).toBe('proj-1');
+  });
 });
 
 describe('Mission (domain lifecycle)', () => {

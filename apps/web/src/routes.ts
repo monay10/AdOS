@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ClientId, MissionId, MissionWizard, type ProductPricing } from '@ados/agency-os';
+import { ClientId, MissionId, MissionWizard, ProjectId, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
@@ -21,7 +21,10 @@ import {
   missionDetailPage,
   missionForm,
   productForm,
+  projectDashboardPage,
+  projectForm,
   workspaceForm,
+  type ProjectDashboardData,
   type Approval,
   type BriefView,
   type CampaignView,
@@ -267,23 +270,24 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     );
   }
   if (path === '/missions/new' && method === 'GET') {
-    const [workspaces, clients] = [await app.workspaces.list(), await app.clients.list()];
+    const [workspaces, clients, projects] = [await app.workspaces.list(), await app.clients.list(), await app.projects.list()];
     if (workspaces.length === 0) return res.redirect('/workspaces/new');
     if (clients.length === 0) return res.redirect('/clients/new');
     const values: Record<string, string> = {};
     if (session.workspaceId) values['workspaceId'] = session.workspaceId;
     if (session.clientId) values['clientId'] = session.clientId;
-    return res.html(missionForm({ session, workspaces: idName(workspaces), clients: idName(clients), values }));
+    if (req.query.get('projectId')) values['projectId'] = req.query.get('projectId')!;
+    return res.html(missionForm({ session, workspaces: idName(workspaces), clients: idName(clients), projects: idName(projects), values }));
   }
   if (path === '/missions' && method === 'POST') {
-    const [workspaces, clients] = [await app.workspaces.list(), await app.clients.list()];
+    const [workspaces, clients, projects] = [await app.workspaces.list(), await app.clients.list(), await app.projects.list()];
     const budgetMinor = toMinor(req.body['budget'] ?? '0');
     const target = Number.parseInt(req.body['metricTarget'] ?? '', 10);
     const rerender = (msg: string): void =>
-      res.html(missionForm({ session, workspaces: idName(workspaces), clients: idName(clients), error: msg, values: req.body }), 400);
+      res.html(missionForm({ session, workspaces: idName(workspaces), clients: idName(clients), projects: idName(projects), error: msg, values: req.body }), 400);
     if (Number.isNaN(budgetMinor) || budgetMinor <= 0) return rerender('Budget must be a positive number.');
 
-    const wizard = MissionWizard.start({
+    let wizard = MissionWizard.start({
       tenantId: session.tenantId,
       workspaceId: req.body['workspaceId'] ?? '',
       clientId: req.body['clientId'] ?? '',
@@ -295,13 +299,85 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
         currency: req.body['currency'] || 'TRY',
         period: (req.body['period'] ?? 'monthly') as 'daily' | 'weekly' | 'monthly' | 'total',
       });
+    if (req.body['projectId']) wizard = wizard.withProject(req.body['projectId']);
     const ready = Number.isFinite(target) && target > 0
       ? wizard.withTarget({ name: req.body['metricName'] || 'leads', target, unit: req.body['metricUnit'] || 'count' })
       : wizard;
 
     const r = await app.missions.submit(ready);
     if (r.isErr) return rerender(r.error.message);
-    return res.redirect('/dashboard');
+    return res.redirect(req.body['projectId'] ? `/projects/${req.body['projectId']}` : '/dashboard');
+  }
+
+  // ── Projects (Phase 7) ──
+  if (path === '/projects' && method === 'GET') {
+    const [projects, clients, brands] = [await app.projects.list(), await app.clients.list(), await app.brands.list()];
+    const brandName = (bid: string): string => brands.find((b) => b.id.toString() === bid)?.name ?? '—';
+    const clientName = (cid: string): string => clients.find((c) => c.id.toString() === cid)?.name ?? '—';
+    return res.html(
+      listPage({
+        session,
+        active: '/projects',
+        title: 'Projects',
+        subtitle: "A client's bodies of work — each owns its missions, briefs, creatives, campaigns and reports.",
+        newHref: '/projects/new',
+        newLabel: '+ New project',
+        columns: ['Name', 'Client', 'Brand', 'Status'],
+        rows: projects.map((p) => [
+          `<a href="/projects/${p.id.toString()}">${esc(p.name)}</a>`,
+          esc(clientName(p.clientId)),
+          esc(brandName(p.brandId)),
+          `<span class="badge active">${esc(p.status)}</span>`,
+        ]),
+        empty: 'No projects yet. Create one to group a brand’s work.',
+      }),
+    );
+  }
+  if (path === '/projects/new' && method === 'GET') {
+    const [brands, clients] = [await app.brands.list(), await app.clients.list()];
+    if (brands.length === 0) return res.redirect('/brands/new');
+    const clientName = (cid: string): string => clients.find((c) => c.id.toString() === cid)?.name ?? '—';
+    return res.html(projectForm({ session, brands: brands.map((b) => ({ id: b.id.toString(), name: b.name, clientName: clientName(b.clientId) })) }));
+  }
+  if (path === '/projects' && method === 'POST') {
+    const [brands, clients] = [await app.brands.list(), await app.clients.list()];
+    const clientName = (cid: string): string => clients.find((c) => c.id.toString() === cid)?.name ?? '—';
+    const rerender = (msg: string): void =>
+      res.html(projectForm({ session, brands: brands.map((b) => ({ id: b.id.toString(), name: b.name, clientName: clientName(b.clientId) })), error: msg, values: req.body }), 400);
+    const brand = brands.find((b) => b.id.toString() === (req.body['brandId'] ?? ''));
+    if (!brand) return rerender('Select a brand for the project.');
+    const r = await app.projects.create({
+      tenantId: session.tenantId,
+      clientId: brand.clientId,
+      brandId: brand.id.toString(),
+      name: (req.body['name'] ?? '').trim(),
+      description: (req.body['description'] ?? '').trim(),
+    });
+    if (r.isErr) return rerender(r.error.message);
+    return res.redirect(`/projects/${r.value.id.toString()}`);
+  }
+  if (path.startsWith('/projects/') && path !== '/projects/new') {
+    const seg = path.slice('/projects/'.length).split('/');
+    const id = seg[0] ?? '';
+    const action = seg[1];
+    if (!id) return res.html(notFound(session), 404);
+
+    if (!action && method === 'GET') return renderProjectDashboard(app, session, res, id);
+    if (action === 'update' && method === 'POST') return mutateProject(app, session, res, id, (pid) => app.projects.update(pid, { name: (req.body['name'] ?? '').trim(), description: req.body['description'] ?? '' }));
+    if (action === 'status' && method === 'POST') return mutateProject(app, session, res, id, (pid) => app.projects.changeStatus(pid, (req.body['status'] ?? 'active') as ProjectStatus));
+    if (action === 'goal' && method === 'POST') {
+      const target = Number.parseInt(req.body['target'] ?? '0', 10);
+      return mutateProject(app, session, res, id, (pid) => app.projects.addGoal(pid, { description: (req.body['description'] ?? '').trim(), metric: (req.body['metric'] ?? '').trim(), target: Number.isFinite(target) ? target : 0 }));
+    }
+    if (action === 'member' && method === 'POST') {
+      return mutateProject(app, session, res, id, (pid) => app.projects.addMember(pid, { name: (req.body['name'] ?? '').trim(), email: (req.body['email'] ?? '').trim(), role: (req.body['role'] ?? '').trim() }));
+    }
+    if (action === 'archive' && method === 'POST') {
+      const r = await app.projects.archive(ProjectId.of(id));
+      if (r.isErr) return renderProjectDashboard(app, session, res, id, r.error.message);
+      return res.redirect('/projects');
+    }
+    return res.html(notFound(session), 404);
   }
 
   // ── Marketing Brief list ──
@@ -848,6 +924,71 @@ function toReportView(report: {
     recommendations: [...report.narrative.recommendations],
     model: report.provenance.model,
   };
+}
+
+/** Assemble and render the Project Dashboard: details, status, goals, members,
+ * owned missions (+ artifact rollup) and a timeline. */
+async function renderProjectDashboard(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
+  const found = await app.projects.get(ProjectId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const project = found.value;
+
+  const clientRes = await app.clients.get(ClientId.of(project.clientId));
+  const clientName = clientRes.isOk ? clientRes.value.name : '—';
+  const brandName = (await app.brands.list()).find((b) => b.id.toString() === project.brandId)?.name ?? '—';
+
+  const missions = (await app.missions.list()).filter((m) => m.projectId === id);
+  const rollup = { briefs: 0, creatives: 0, campaigns: 0, reports: 0 };
+  const timeline: Array<{ label: string; detail: string }> = [{ label: 'Project created', detail: project.name }];
+
+  for (const m of missions) {
+    const mid = m.id.toString();
+    const [briefs, creatives, campaigns, reports] = await Promise.all([
+      app.briefs.list(mid),
+      app.creative.list(mid),
+      app.campaigns.list(mid),
+      app.reports.list(mid),
+    ]);
+    rollup.briefs += briefs.length;
+    rollup.creatives += creatives.length;
+    rollup.campaigns += campaigns.length;
+    rollup.reports += reports.length;
+    timeline.push({ label: 'Mission started', detail: m.brief });
+    if (briefs.length) timeline.push({ label: 'Marketing brief generated', detail: m.brief });
+    if (creatives.length) timeline.push({ label: 'Creative produced', detail: m.brief });
+    if (campaigns.length) timeline.push({ label: 'Campaign drafted', detail: m.brief });
+    if (reports.length) timeline.push({ label: 'Analytics report generated', detail: m.brief });
+    if (m.status === 'completed') timeline.push({ label: 'Learning recorded · mission completed', detail: m.brief });
+  }
+
+  const data: ProjectDashboardData = {
+    project: {
+      id,
+      name: project.name,
+      description: project.description,
+      status: project.status,
+      clientName,
+      brandName,
+    },
+    goals: project.goals.map((g) => ({ ...g })),
+    members: project.members.map((m) => ({ ...m })),
+    timeline,
+    missions: missions.map((m) => ({ id: m.id.toString(), objective: m.brief, status: m.status })),
+    rollup,
+  };
+  return res.html(projectDashboardPage({ session, data, ...(error ? { error } : {}) }));
+}
+
+async function mutateProject(
+  app: App,
+  session: Session,
+  res: Res,
+  id: string,
+  change: (pid: ProjectId) => Promise<{ isErr: boolean; error?: { message: string } }>,
+): Promise<void> {
+  const r = await change(ProjectId.of(id));
+  if (r.isErr) return renderProjectDashboard(app, session, res, id, r.error?.message ?? 'Update failed');
+  return res.redirect(`/projects/${id}`);
 }
 
 async function collectStats(app: App): Promise<DashStats> {
