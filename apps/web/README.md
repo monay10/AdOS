@@ -100,6 +100,17 @@ and the library screen **searches** by name or tag. Each change emits a domain
 event (`asset.created/version_added/tag_added.v1`) and a Dashboard assets count
 grows.
 
+**Phase 10 — CEO Dashboard:** once a Mission has an analytics report, it unlocks
+a **CEO Dashboard** section — **Generate CEO Dashboard** submits the whole
+picture (objective + report KPIs) to the AI Manager (reasoning task via
+`promptRef`, never a model directly) and produces the executive synthesis: a
+headline **verdict** (exceeded / on track / at risk), **key results**,
+**decisions** and **next actions**, carrying AI provenance so it is
+reproducible. Generation is idempotent. A dedicated **Executive** nav item lists
+every generated dashboard, and a Dashboard "CEO Dashboards" count grows. Offline
+by default (the injected `OfflineAIManager` answers the `executive.dashboard`
+prompt); emits `exec.dashboard.generated.v1`.
+
 The left nav lists the remaining later-phase screens (Reports, Settings) marked
 **soon**.
 

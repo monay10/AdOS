@@ -16,7 +16,8 @@
     { "path": "../../domains/campaign-engine" },
     { "path": "../../domains/analytics-engine" },
     { "path": "../../domains/company-brain" },
-    { "path": "../../domains/executive-memory" }
+    { "path": "../../domains/executive-memory" },
+    { "path": "../../domains/executive-ai" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

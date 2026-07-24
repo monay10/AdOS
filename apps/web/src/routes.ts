@@ -38,6 +38,7 @@ import {
   type CampaignView,
   type CreativeView,
   type DashStats,
+  type ExecutiveView,
   type LearningView,
   type NextStep,
   type ReportView,
@@ -610,6 +611,31 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     );
   }
 
+  // ── Executive (CEO Dashboards, Phase 10) ──
+  if (path === '/executive' && method === 'GET') {
+    const [reports, missions] = [await app.executive.list(), await app.missions.list()];
+    const objective = (mid: string): string => missions.find((m) => m.id.toString() === mid)?.brief ?? '—';
+    const verdictBadge = (v: string): string => `<span class="badge ${v === 'exceeded' ? 'active' : ''}">${esc(v.replace('_', ' '))}</span>`;
+    return res.html(
+      listPage({
+        session,
+        active: '/executive',
+        title: 'Executive',
+        subtitle: 'CEO Dashboards — the executive synthesis of each completed mission.',
+        newHref: '/missions',
+        newLabel: 'Go to Missions',
+        columns: ['Mission', 'Verdict', 'Headline', 'Model'],
+        rows: reports.map((r) => [
+          `<a href="/missions/${esc(r.missionId)}">${esc(objective(r.missionId))}</a>`,
+          verdictBadge(r.verdict),
+          esc(r.content.headline),
+          `<span class="badge">${esc(r.provenance.model)}</span>`,
+        ]),
+        empty: 'No CEO Dashboards yet. Take a Mission through to its analytics report, then generate one.',
+      }),
+    );
+  }
+
   // ── Mission detail + processing (Phases 2–5) ──
   if (path.startsWith('/missions/') && path !== '/missions/new') {
     const seg = path.slice('/missions/'.length).split('/');
@@ -638,6 +664,9 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     // Phase 5 — analytics report (no approval gate; produces KPIs + summary).
     if (action === 'analytics' && method === 'POST') return generateReport(app, session, res, id, req);
 
+    // Phase 10 — CEO Dashboard: the executive synthesis of the mission.
+    if (action === 'executive' && method === 'POST') return generateExecutive(app, session, res, id);
+
     // Phase 6 — record the outcome into the Company Brain (learning flow).
     if (action === 'learn' && method === 'POST') return recordLearning(app, session, res, id);
 
@@ -657,6 +686,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const creative = (await app.creative.list(id))[0];
   const campaign = (await app.campaigns.list(id))[0];
   const report = (await app.reports.list(id))[0];
+  const executive = (await app.executive.list(id))[0];
 
   // Each earlier stage is implicitly approved once the next artifact exists.
   const briefApproval: Approval = !brief ? 'none' : creative ? 'approved' : statusApproval(mission.status);
@@ -698,6 +728,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(campaign ? { campaign: toCampaignView(campaign) } : {}),
       ...(report ? { report: toReportView(report) } : {}),
       ...(learning ? { learning } : {}),
+      ...(executive ? { executive: toExecutiveView(executive) } : {}),
       ...(error ? { error } : {}),
     }),
   );
@@ -873,6 +904,39 @@ async function generateReport(app: App, session: Session, res: Res, id: string, 
     leads: intOf(req.body['leads']),
     spend: { amountMinor: spendMinor, currency },
     revenue: { amountMinor: revenueMinor, currency },
+  });
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  return res.redirect(`/missions/${id}`);
+}
+
+/** Phase 10 — the CEO Dashboard. Synthesize the mission (objective + report KPIs)
+ * into an executive view via the AI Manager. Requires an analytics report. */
+async function generateExecutive(app: App, session: Session, res: Res, id: string): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+
+  const report = (await app.reports.list(id))[0];
+  if (!report) {
+    return renderMissionDetail(app, session, res, id, 'Generate the analytics report before the CEO Dashboard.');
+  }
+  if ((await app.executive.list(id)).length > 0) return res.redirect(`/missions/${id}`); // idempotent
+
+  const brief = (await app.briefs.list(id))[0];
+  const clientRes = await app.clients.get(ClientId.of(mission.clientId));
+  const clientName = clientRes.isOk ? clientRes.value.name : 'the client';
+
+  const generated = await app.executive.generate({
+    tenantId: session.tenantId,
+    missionId: id,
+    clientId: mission.clientId,
+    clientName,
+    missionBrief: mission.brief,
+    objective: brief?.content.objective ?? mission.brief,
+    reportId: report.id.toString(),
+    kpis: report.kpis.map((k) => ({ name: k.name, value: k.value, unit: k.unit })),
+    reportSummary: report.narrative.summary,
+    reportRecommendations: [...report.narrative.recommendations],
   });
   if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
   return res.redirect(`/missions/${id}`);
@@ -1066,6 +1130,28 @@ function toReportView(report: {
   };
 }
 
+function toExecutiveView(exec: {
+  content: {
+    headline: string;
+    executiveSummary: string;
+    verdict: string;
+    keyResults: Array<{ metric: string; value: number; unit: string; verdict: string }>;
+    decisions: string[];
+    nextActions: string[];
+  };
+  provenance: { model: string };
+}): ExecutiveView {
+  return {
+    headline: exec.content.headline,
+    executiveSummary: exec.content.executiveSummary,
+    verdict: exec.content.verdict,
+    keyResults: exec.content.keyResults.map((k) => ({ ...k })),
+    decisions: [...exec.content.decisions],
+    nextActions: [...exec.content.nextActions],
+    model: exec.provenance.model,
+  };
+}
+
 /** Assemble and render the Project Dashboard: details, status, goals, members,
  * owned missions (+ artifact rollup) and a timeline. */
 async function renderProjectDashboard(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
@@ -1203,7 +1289,7 @@ async function mutateAsset(
 }
 
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports, approvals, assets] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports, approvals, assets, executives] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
@@ -1215,6 +1301,7 @@ async function collectStats(app: App): Promise<DashStats> {
     app.reports.list(),
     app.approvals.list(),
     app.assets.list(),
+    app.executive.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -1229,6 +1316,7 @@ async function collectStats(app: App): Promise<DashStats> {
     learnings: missions.filter((m) => m.status === 'completed').length,
     approvals: approvals.length,
     assets: assets.length,
+    executives: executives.length,
   };
 }
 

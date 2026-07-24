@@ -84,6 +84,9 @@ importers:
       '@ados/event-bus':
         specifier: workspace:*
         version: link:../../packages/event-bus
+      '@ados/executive-ai':
+        specifier: workspace:*
+        version: link:../../domains/executive-ai
       '@ados/executive-memory':
         specifier: workspace:*
         version: link:../../domains/executive-memory

@@ -34,7 +34,8 @@
     "@ados/campaign-engine": "workspace:*",
     "@ados/analytics-engine": "workspace:*",
     "@ados/company-brain": "workspace:*",
-    "@ados/executive-memory": "workspace:*"
+    "@ados/executive-memory": "workspace:*",
+    "@ados/executive-ai": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

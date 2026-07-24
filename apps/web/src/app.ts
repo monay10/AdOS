@@ -27,6 +27,7 @@ import { CampaignDraftService, InMemoryCampaignDraftRepository } from '@ados/cam
 import { CampaignReportService, InMemoryCampaignReportRepository } from '@ados/analytics-engine';
 import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
+import { ExecutiveReportService, InMemoryExecutiveReportRepository } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -59,6 +60,7 @@ export class App {
   readonly creative: CreativeStudioService;
   readonly campaigns: CampaignDraftService;
   readonly reports: CampaignReportService;
+  readonly executive: ExecutiveReportService;
   readonly brain: InMemoryCompanyBrain;
   readonly execMemory: InMemoryExecutiveMemory;
   readonly journal: InMemoryDecisionJournal;
@@ -81,6 +83,7 @@ export class App {
     this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
     this.campaigns = new CampaignDraftService(new InMemoryCampaignDraftRepository(), bus, ai);
     this.reports = new CampaignReportService(new InMemoryCampaignReportRepository(), bus, ai);
+    this.executive = new ExecutiveReportService(new InMemoryExecutiveReportRepository(), bus, ai);
     this.brain = new InMemoryCompanyBrain();
     this.execMemory = new InMemoryExecutiveMemory();
     this.journal = new InMemoryDecisionJournal();

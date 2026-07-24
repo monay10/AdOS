@@ -47,6 +47,9 @@ export class OfflineAIManager implements AIManagerPort {
     if (request.promptRef?.key === 'analytics.report') {
       return this.analyticsReport(v);
     }
+    if (request.promptRef?.key === 'executive.dashboard') {
+      return this.executiveDashboard(v);
+    }
     return {};
   }
 
@@ -158,6 +161,39 @@ export class OfflineAIManager implements AIManagerPort {
         roas >= 1
           ? ['Scale the best-performing channel by 20%', 'Reallocate budget away from the weakest ad set', 'Test new creative variants against the current winner']
           : ['Pause the weakest channel', 'Tighten targeting to the highest-intent audience', 'Revise the offer and creative before scaling'],
+    };
+  }
+
+  private executiveDashboard(v: Record<string, unknown>): unknown {
+    const client = str(v['clientName'], 'the client');
+    const objective = str(v['objective'], 'the mission objective');
+    const kpis = Array.isArray(v['kpis'])
+      ? (v['kpis'] as Array<{ name?: unknown; value?: unknown; unit?: unknown }>)
+      : [];
+    const byName = (n: string): number => Number(kpis.find((k) => String(k.name) === n)?.value ?? 0);
+    const roas = byName('roas');
+    const roi = byName('roi');
+    const verdict = roas >= 2 ? 'exceeded' : roas >= 1 ? 'on_track' : 'at_risk';
+    const verdictLabel = verdict === 'exceeded' ? 'target exceeded' : verdict === 'on_track' ? 'on track' : 'at risk';
+    const summary = str(v['reportSummary'], `The mission returned ${roas}x ROAS and ${roi}% ROI.`);
+    const recs = Array.isArray(v['reportRecommendations']) ? (v['reportRecommendations'] as unknown[]).map(String) : [];
+    const won = roas >= 1;
+
+    return {
+      headline: `${client}: ${objective} — ${verdictLabel} at ${roas}x ROAS`,
+      executiveSummary: summary,
+      verdict,
+      keyResults: kpis.map((k) => ({
+        metric: String(k.name),
+        value: Number(k.value ?? 0),
+        unit: String(k.unit ?? ''),
+        verdict: String(k.name) === 'roas' ? verdictLabel : 'measured',
+      })),
+      decisions: [
+        won ? 'Continue investing in the winning channel mix' : 'Hold spend until the offer is reworked',
+        'Record the outcome to the Company Brain so the company compounds what it learns',
+      ],
+      nextActions: recs.length ? recs : ['Review the analytics report with the client'],
     };
   }
 }
