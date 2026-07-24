@@ -33,7 +33,7 @@ const NAV: NavItem[] = [
   { href: '/assets', label: 'Assets', icon: '▣', ready: true },
   { href: '/executive', label: 'Executive', icon: '★', ready: true },
   { href: '/reports', label: 'Reports', icon: '❐', ready: false },
-  { href: '/settings', label: 'Settings', icon: '⚙', ready: false },
+  { href: '/settings', label: 'Settings', icon: '⚙', ready: true },
 ];
 
 const STYLES = `

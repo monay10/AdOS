@@ -986,6 +986,57 @@ export function assetDetailPage(opts: { session: Session; data: AssetDetailData;
   });
 }
 
+// ── Settings (Phase 11) ─────────────────────────────────────────────────────────
+export function settingsPage(opts: {
+  session: Session;
+  workspaces: Array<{ id: string; name: string }>;
+  selectedId: string;
+  values: { name: string; currency: string; timezone: string; locale: string };
+  saved?: boolean;
+  error?: string;
+}): string {
+  const v = opts.values;
+  const selector =
+    opts.workspaces.length > 1
+      ? `<form method="get" action="/settings" style="margin-bottom:18px">
+           <label>Workspace</label>
+           <div style="display:flex;gap:10px">
+             <select name="workspaceId">${opts.workspaces
+               .map((w) => `<option value="${esc(w.id)}" ${w.id === opts.selectedId ? 'selected' : ''}>${esc(w.name)}</option>`)
+               .join('')}</select>
+             <button class="btn ghost" style="white-space:nowrap">Switch</button>
+           </div>
+         </form>`
+      : '';
+
+  return layout({
+    title: 'Settings',
+    active: '/settings',
+    session: opts.session,
+    body: `<div class="head"><div><h1>Settings</h1><p>Your workspace configuration — currency, timezone and locale used across the app.</p></div></div>
+      ${opts.saved ? `<div class="ok">✓ Settings saved.</div>` : ''}
+      ${banner(opts.error)}
+      <div class="panel" style="margin-bottom:20px">
+        <label>Account</label>
+        <div><span class="badge">Signed in as ${esc(opts.session.actor)}</span> <span class="badge">Tenant: ${esc(opts.session.tenantId)}</span></div>
+      </div>
+      <div class="panel">
+        <h2>Workspace</h2><p class="sub">These values are persisted on your workspace and drive defaults across AdOS.</p>
+        ${selector}
+        <form method="post" action="/settings">
+          <input type="hidden" name="workspaceId" value="${esc(opts.selectedId)}">
+          <label>Workspace name</label><input name="name" value="${esc(v.name)}" required>
+          <div class="row-3">
+            <div><label>Currency</label><input name="currency" value="${esc(v.currency)}" required></div>
+            <div><label>Timezone</label><input name="timezone" value="${esc(v.timezone)}" required></div>
+            <div><label>Locale</label><input name="locale" value="${esc(v.locale)}" required></div>
+          </div>
+          <div class="actions"><button class="btn">Save settings</button></div>
+        </form>
+      </div>`,
+  });
+}
+
 // ── Generic list page ──────────────────────────────────────────────────────────
 export function listPage(opts: {
   session: Session;

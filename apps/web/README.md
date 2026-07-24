@@ -111,8 +111,15 @@ every generated dashboard, and a Dashboard "CEO Dashboards" count grows. Offline
 by default (the injected `OfflineAIManager` answers the `executive.dashboard`
 prompt); emits `exec.dashboard.generated.v1`.
 
-The left nav lists the remaining later-phase screens (Reports, Settings) marked
-**soon**.
+**Phase 11 — Settings:** a **Settings** screen for the tenant's workspace
+configuration — edit the workspace **name**, **currency**, **timezone** and
+**locale** and it persists on the Workspace aggregate. Renaming emits
+`workspace.updated.v1`; changing settings emits `workspace.settings_changed.v1`
+(the rename event is skipped when the name is unchanged). A saved banner confirms
+the write, and tenants with more than one workspace get a switcher. Read-only
+account context (signed-in user + tenant) is shown alongside.
+
+The left nav lists the remaining later-phase screen (Reports) marked **soon**.
 
 ## Notes
 

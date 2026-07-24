@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, ProjectId, type AssetKind, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
+import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, ProjectId, WorkspaceId, type AssetKind, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
@@ -29,6 +29,7 @@ import {
   productForm,
   projectDashboardPage,
   projectForm,
+  settingsPage,
   workspaceForm,
   type ApprovalDetailData,
   type AssetDetailData,
@@ -671,6 +672,43 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     if (action === 'learn' && method === 'POST') return recordLearning(app, session, res, id);
 
     return res.html(notFound(session), 404);
+  }
+
+  // ── Settings (Phase 11) ──
+  if (path === '/settings' && method === 'GET') {
+    const workspaces = await app.workspaces.list();
+    if (workspaces.length === 0) return res.redirect('/workspaces/new');
+    const wanted = req.query.get('workspaceId') || session.workspaceId || workspaces[0]!.id.toString();
+    const ws = workspaces.find((w) => w.id.toString() === wanted) ?? workspaces[0]!;
+    return res.html(
+      settingsPage({
+        session,
+        workspaces: idName(workspaces),
+        selectedId: ws.id.toString(),
+        values: { name: ws.name, currency: ws.settings.currency, timezone: ws.settings.timezone, locale: ws.settings.locale },
+        saved: req.query.get('saved') === '1',
+      }),
+    );
+  }
+  if (path === '/settings' && method === 'POST') {
+    const workspaces = await app.workspaces.list();
+    const id = (req.body['workspaceId'] ?? '').trim();
+    const name = (req.body['name'] ?? '').trim();
+    const currency = (req.body['currency'] ?? '').trim();
+    const timezone = (req.body['timezone'] ?? '').trim();
+    const locale = (req.body['locale'] ?? '').trim();
+    const rerender = (msg: string): void =>
+      res.html(settingsPage({ session, workspaces: idName(workspaces), selectedId: id, values: { name, currency, timezone, locale }, error: msg }), 400);
+    const ws = workspaces.find((w) => w.id.toString() === id);
+    if (!ws) return rerender('Select a workspace to update.');
+    if (!name || !currency || !timezone || !locale) return rerender('Name, currency, timezone and locale are all required.');
+    if (name !== ws.name) {
+      const renamed = await app.workspaces.rename(WorkspaceId.of(id), name);
+      if (renamed.isErr) return rerender(renamed.error.message);
+    }
+    const saved = await app.workspaces.updateSettings(WorkspaceId.of(id), { currency, timezone, locale });
+    if (saved.isErr) return rerender(saved.error.message);
+    return res.redirect(`/settings?workspaceId=${encodeURIComponent(id)}&saved=1`);
   }
 
   // ── Fallback ──
