@@ -25,6 +25,7 @@
   "dependencies": {
     "@ados/kernel": "workspace:*",
     "@ados/contracts": "workspace:*",
+    "@ados/persistence": "workspace:*",
     "@ados/event-bus": "workspace:*",
     "@ados/tenancy": "workspace:*",
     "@ados/observability": "workspace:*",

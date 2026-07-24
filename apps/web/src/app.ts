@@ -8,29 +8,21 @@ import {
   AssetService,
   BrandService,
   ClientService,
-  InMemoryApprovalRepository,
-  InMemoryAssetRepository,
-  InMemoryBrandRepository,
-  InMemoryClientRepository,
-  InMemoryMissionRepository,
-  InMemoryPerformanceReportRepository,
-  InMemoryProductRepository,
-  InMemoryWorkspaceRepository,
-  InMemoryProjectRepository,
   MissionService,
   PerformanceReportService,
   ProductService,
   ProjectService,
   WorkspaceService,
 } from '@ados/agency-os';
-import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/marketing-intelligence';
-import { CreativeStudioService, InMemoryCreativeSetRepository } from '@ados/creative-studio';
-import { CampaignDraftService, InMemoryCampaignDraftRepository } from '@ados/campaign-engine';
-import { CampaignReportService, InMemoryCampaignReportRepository } from '@ados/analytics-engine';
+import { MarketingBriefService } from '@ados/marketing-intelligence';
+import { CreativeStudioService } from '@ados/creative-studio';
+import { CampaignDraftService } from '@ados/campaign-engine';
+import { CampaignReportService } from '@ados/analytics-engine';
 import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
-import { ExecutiveReportService, InMemoryExecutiveReportRepository } from '@ados/executive-ai';
+import { ExecutiveReportService } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
+import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
 export interface FeedEntry {
@@ -41,12 +33,14 @@ export interface FeedEntry {
 
 /**
  * The composition root for the AdOS web app. Wires every onboarding application
- * service over one shared event bus and one set of in-memory repositories, and
- * keeps a bounded activity feed so the UI can show that events really fire.
+ * service over one shared event bus and one repository bundle, and keeps a
+ * bounded activity feed so the UI can show that events really fire.
  *
- * Repositories are tenant-scoped internally (they read the ambient
- * TenantContext), so sharing a single instance per type across all requests is
- * safe: tenant A never sees tenant B's data.
+ * The repository bundle defaults to in-memory; production injects the SQL
+ * (Postgres) bundle via `main.ts`. Either way repositories are tenant-scoped
+ * internally (they read the ambient TenantContext), so sharing a single
+ * instance per type across all requests is safe: tenant A never sees tenant B's
+ * data.
  */
 export class App {
   readonly bus: EventBus;
@@ -72,22 +66,26 @@ export class App {
   private readonly feed: FeedEntry[] = [];
   private readonly maxFeed = 50;
 
-  constructor(bus: EventBus = new InMemoryEventBus(), ai: AIManagerPort = new OfflineAIManager()) {
+  constructor(
+    bus: EventBus = new InMemoryEventBus(),
+    ai: AIManagerPort = new OfflineAIManager(),
+    repos: RepositoryBundle = inMemoryRepositories(),
+  ) {
     this.bus = bus;
-    this.workspaces = new WorkspaceService(new InMemoryWorkspaceRepository(), bus);
-    this.clients = new ClientService(new InMemoryClientRepository(), bus);
-    this.brands = new BrandService(new InMemoryBrandRepository(), bus);
-    this.products = new ProductService(new InMemoryProductRepository(), bus);
-    this.projects = new ProjectService(new InMemoryProjectRepository(), bus);
-    this.approvals = new ApprovalService(new InMemoryApprovalRepository(), bus);
-    this.assets = new AssetService(new InMemoryAssetRepository(), bus);
-    this.performance = new PerformanceReportService(new InMemoryPerformanceReportRepository(), bus);
-    this.missions = new MissionService(new InMemoryMissionRepository(), bus);
-    this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
-    this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
-    this.campaigns = new CampaignDraftService(new InMemoryCampaignDraftRepository(), bus, ai);
-    this.reports = new CampaignReportService(new InMemoryCampaignReportRepository(), bus, ai);
-    this.executive = new ExecutiveReportService(new InMemoryExecutiveReportRepository(), bus, ai);
+    this.workspaces = new WorkspaceService(repos.workspaces, bus);
+    this.clients = new ClientService(repos.clients, bus);
+    this.brands = new BrandService(repos.brands, bus);
+    this.products = new ProductService(repos.products, bus);
+    this.projects = new ProjectService(repos.projects, bus);
+    this.approvals = new ApprovalService(repos.approvals, bus);
+    this.assets = new AssetService(repos.assets, bus);
+    this.performance = new PerformanceReportService(repos.performance, bus);
+    this.missions = new MissionService(repos.missions, bus);
+    this.briefs = new MarketingBriefService(repos.briefs, bus, ai);
+    this.creative = new CreativeStudioService(repos.creative, bus, ai);
+    this.campaigns = new CampaignDraftService(repos.campaigns, bus, ai);
+    this.reports = new CampaignReportService(repos.reports, bus, ai);
+    this.executive = new ExecutiveReportService(repos.executive, bus, ai);
     this.brain = new InMemoryCompanyBrain();
     this.execMemory = new InMemoryExecutiveMemory();
     this.journal = new InMemoryDecisionJournal();

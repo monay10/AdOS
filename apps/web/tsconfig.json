@@ -7,6 +7,7 @@
   "references": [
     { "path": "../../packages/kernel" },
     { "path": "../../packages/contracts" },
+    { "path": "../../packages/persistence" },
     { "path": "../../packages/event-bus" },
     { "path": "../../packages/tenancy" },
     { "path": "../../packages/observability" },

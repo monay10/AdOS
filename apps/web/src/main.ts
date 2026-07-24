@@ -1,5 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { initLogger } from '@ados/observability';
+import { PostgresDatabase, SqlAggregateStore, runMigrations } from '@ados/persistence';
+import { App } from './app.js';
+import { sqlRepositories } from './db/repositories.js';
 import { buildServer } from './server.js';
 
 /**
@@ -11,6 +14,9 @@ import { buildServer } from './server.js';
  *                      unset — fine for local dev, set it in production so
  *                      sessions survive a restart)
  *   LOG_PRETTY       — "true" for human-readable logs
+ *   DATABASE_URL     — Postgres connection string. When set, persistence is
+ *                      durable Postgres (migrations run at startup); otherwise
+ *                      the app uses in-memory persistence (dev only).
  */
 async function main(): Promise<void> {
   const port = Number.parseInt(process.env['PORT'] ?? '4000', 10);
@@ -21,7 +27,19 @@ async function main(): Promise<void> {
     pretty: process.env['LOG_PRETTY'] === 'true',
   });
 
-  const { app, server } = buildServer({ sessionSecret });
+  const databaseUrl = process.env['DATABASE_URL'];
+  let app: App;
+  if (databaseUrl) {
+    const db = await PostgresDatabase.connect(databaseUrl);
+    const { applied } = await runMigrations(db);
+    logger.info({ applied }, 'database migrations applied');
+    app = new App(undefined, undefined, sqlRepositories(new SqlAggregateStore(db)));
+  } else {
+    logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
+    app = new App();
+  }
+
+  const { server } = buildServer({ sessionSecret, app });
   await app.start();
 
   server.listen(port, () => {
