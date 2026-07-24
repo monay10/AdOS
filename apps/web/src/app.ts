@@ -1,5 +1,7 @@
+import { randomUUID } from 'node:crypto';
 import type { AIManagerPort } from '@ados/contracts';
 import { InMemoryEventBus, type EventBus } from '@ados/event-bus';
+import { TenantContext } from '@ados/tenancy';
 import { telemetry, type Telemetry } from '@ados/observability';
 import {
   BrandService,
@@ -17,6 +19,8 @@ import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/m
 import { CreativeStudioService, InMemoryCreativeSetRepository } from '@ados/creative-studio';
 import { CampaignDraftService, InMemoryCampaignDraftRepository } from '@ados/campaign-engine';
 import { CampaignReportService, InMemoryCampaignReportRepository } from '@ados/analytics-engine';
+import { InMemoryCompanyBrain } from '@ados/company-brain';
+import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
 import { OfflineAIManager } from './ai.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -46,6 +50,9 @@ export class App {
   readonly creative: CreativeStudioService;
   readonly campaigns: CampaignDraftService;
   readonly reports: CampaignReportService;
+  readonly brain: InMemoryCompanyBrain;
+  readonly execMemory: InMemoryExecutiveMemory;
+  readonly journal: InMemoryDecisionJournal;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -62,6 +69,33 @@ export class App {
     this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
     this.campaigns = new CampaignDraftService(new InMemoryCampaignDraftRepository(), bus, ai);
     this.reports = new CampaignReportService(new InMemoryCampaignReportRepository(), bus, ai);
+    this.brain = new InMemoryCompanyBrain();
+    this.execMemory = new InMemoryExecutiveMemory();
+    this.journal = new InMemoryDecisionJournal();
+  }
+
+  /**
+   * Publish an integration event for a subsystem that has no service of its own
+   * (the Company Brain + Executive Memory stores). Uses the ambient
+   * TenantContext for metadata so the event is tenant-scoped and correlated.
+   */
+  async emit(eventName: string, aggregateId: string, payload: Record<string, unknown> = {}): Promise<void> {
+    const ctx = TenantContext.current();
+    await this.bus.publish([
+      {
+        eventName,
+        aggregateId,
+        payload,
+        metadata: {
+          eventId: randomUUID(),
+          occurredAt: new Date().toISOString(),
+          tenantId: ctx?.tenantId ?? 'public',
+          correlationId: ctx?.correlationId ?? randomUUID(),
+          causationId: undefined,
+          actor: ctx?.actor,
+        },
+      },
+    ]);
   }
 
   /** Subscribe the activity feed + audit log to every domain event. */

@@ -14,7 +14,9 @@
     { "path": "../../domains/marketing-intelligence" },
     { "path": "../../domains/creative-studio" },
     { "path": "../../domains/campaign-engine" },
-    { "path": "../../domains/analytics-engine" }
+    { "path": "../../domains/analytics-engine" },
+    { "path": "../../domains/company-brain" },
+    { "path": "../../domains/executive-memory" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

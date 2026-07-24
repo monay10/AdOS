@@ -32,7 +32,9 @@
     "@ados/marketing-intelligence": "workspace:*",
     "@ados/creative-studio": "workspace:*",
     "@ados/campaign-engine": "workspace:*",
-    "@ados/analytics-engine": "workspace:*"
+    "@ados/analytics-engine": "workspace:*",
+    "@ados/company-brain": "workspace:*",
+    "@ados/executive-memory": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.6.0",

@@ -41,6 +41,7 @@ export interface DashStats {
   creatives: number;
   campaigns: number;
   reports: number;
+  learnings: number;
 }
 
 export interface NextStep {
@@ -87,7 +88,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}
       </div>
       ${doneNote}
       ${pending}
@@ -138,6 +139,14 @@ export interface ReportView {
   model: string;
 }
 
+export interface LearningView {
+  decision: string;
+  chosen: string;
+  confidence: number;
+  outcome: Array<{ label: string; value: string }>;
+  learned: string;
+}
+
 export type Approval = 'none' | 'pending' | 'approved' | 'rejected';
 
 export function missionDetailPage(opts: {
@@ -151,6 +160,7 @@ export function missionDetailPage(opts: {
   campaignApproval: Approval;
   report?: ReportView;
   reportDefaults?: { spend: number; revenue: number; currency: string };
+  learning?: LearningView;
   prereqMissing?: string;
   error?: string;
 }): string {
@@ -240,6 +250,17 @@ export function missionDetailPage(opts: {
             </form>
           </div>`;
 
+  // Company Brain learning unlocks once the analytics report exists.
+  const learningBlock = !opts.report
+    ? ''
+    : opts.learning
+      ? renderLearning(opts.learning)
+      : `<div class="panel" style="margin-top:20px">
+          <h2>Company Brain — Learning</h2>
+          <p class="sub">Record this campaign's outcome so the company compounds what it knows — Decision Journal, Executive Memory, Company Brain, Pattern Library and Knowledge Graph.</p>
+          <form method="post" action="/missions/${esc(m.id)}/learn"><button class="btn">Record learning to Company Brain</button></form>
+        </div>`;
+
   return layout({
     title: 'Mission',
     active: '/missions',
@@ -254,8 +275,23 @@ export function missionDetailPage(opts: {
       ${briefBlock}
       ${creativeBlock}
       ${campaignBlock}
-      ${analyticsBlock}`,
+      ${analyticsBlock}
+      ${learningBlock}`,
   });
+}
+
+function renderLearning(l: LearningView): string {
+  const stores = ['Decision Journal', 'Executive Memory', 'Company Brain', 'Pattern Library', 'Knowledge Graph'];
+  return `<div class="panel" style="margin-top:20px">
+    <h2>Company Brain — Learning <span class="badge active">recorded</span></h2>
+    <p class="sub">This mission's outcome now compounds across the company's knowledge.</p>
+    <label>Decision</label><div>${esc(l.decision)}</div>
+    <label>Chosen</label><div>${esc(l.chosen)}</div>
+    <label>Confidence</label><div><span class="badge">${l.confidence}/100</span></div>
+    <label>Outcome</label><div>${l.outcome.map((o) => `<span class="badge">${esc(o.label)}: ${esc(o.value)}</span>`).join(' ')}</div>
+    <label>Learned</label><div>${esc(l.learned)}</div>
+    <label>Written to</label><div>${stores.map((s) => `<span class="badge active">${esc(s)}</span>`).join(' ')}</div>
+  </div>`;
 }
 
 /** KPI cards + bar charts + executive summary + recommendations. */

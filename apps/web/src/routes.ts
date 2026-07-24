@@ -1,5 +1,7 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
 import { ClientId, MissionId, MissionWizard, type ProductPricing } from '@ados/agency-os';
+import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
+import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
 import type { Req, Res } from './http.js';
 import {
@@ -25,6 +27,7 @@ import {
   type CampaignView,
   type CreativeView,
   type DashStats,
+  type LearningView,
   type NextStep,
   type ReportView,
 } from './views/pages.js';
@@ -419,6 +422,9 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     // Phase 5 — analytics report (no approval gate; produces KPIs + summary).
     if (action === 'analytics' && method === 'POST') return generateReport(app, session, res, id, req);
 
+    // Phase 6 — record the outcome into the Company Brain (learning flow).
+    if (action === 'learn' && method === 'POST') return recordLearning(app, session, res, id);
+
     return res.html(notFound(session), 404);
   }
 
@@ -444,6 +450,18 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const spend = mission.budget ? mission.budget.amountMinor / 100 : 1000;
   const currency = mission.budget?.currency ?? 'TRY';
 
+  // Learning is recorded once the mission is completed (Phase 6).
+  const journalEntry = mission.status === 'completed' ? (await app.journal.history({ subjectId: id, k: 1 }))[0] : undefined;
+  const learning: LearningView | undefined = journalEntry
+    ? {
+        decision: journalEntry.decision,
+        chosen: journalEntry.chosen,
+        confidence: journalEntry.confidence.score,
+        outcome: Object.entries(journalEntry.outcome ?? {}).map(([label, value]) => ({ label, value: String(value) })),
+        learned: String((journalEntry.outcome as Record<string, unknown> | undefined)?.['learned'] ?? journalEntry.decision),
+      }
+    : undefined;
+
   return res.html(
     missionDetailPage({
       session,
@@ -463,6 +481,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(creative ? { creative: toCreativeView(creative) } : {}),
       ...(campaign ? { campaign: toCampaignView(campaign) } : {}),
       ...(report ? { report: toReportView(report) } : {}),
+      ...(learning ? { learning } : {}),
       ...(error ? { error } : {}),
     }),
   );
@@ -643,6 +662,106 @@ async function generateReport(app: App, session: Session, res: Res, id: string, 
   return res.redirect(`/missions/${id}`);
 }
 
+/**
+ * Phase 6 — the learning flow. Once a mission has an analytics report, record its
+ * outcome across the company's knowledge stores so the company compounds what it
+ * learns: Decision Journal → Executive Memory → Company Brain (Experience →
+ * Pattern Library → Knowledge Graph). Completes the mission.
+ */
+async function recordLearning(app: App, session: Session, res: Res, id: string): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+  if (mission.status === 'completed') return res.redirect(`/missions/${id}`); // idempotent
+
+  const brief = (await app.briefs.list(id))[0];
+  const campaign = (await app.campaigns.list(id))[0];
+  const report = (await app.reports.list(id))[0];
+  if (!campaign || !report) {
+    return renderMissionDetail(app, session, res, id, 'Generate the analytics report before recording learning.');
+  }
+  const clientRes = await app.clients.get(ClientId.of(mission.clientId));
+  const vertical = clientRes.isOk ? clientRes.value.industry : 'general';
+
+  const roas = report.kpi('roas') ?? 0;
+  const roi = report.kpi('roi') ?? 0;
+  const ctr = report.kpi('ctr') ?? 0;
+  const channels = campaign.content.channels.map((c) => c.channel);
+  const won = roas >= 1;
+  const chosen = won ? 'Scale the winning channel mix' : 'Rework the offer before scaling';
+  const learned = `In ${vertical}, "${campaign.content.name}" on ${channels.join(' + ')} returned ${roas}x ROAS. ${won ? 'Reuse this structure.' : 'Avoid this structure as-is.'}`;
+  const now = new Date().toISOString();
+  const at = now;
+
+  // 1) Decision Journal — why the CMO decided what they did, with evidence.
+  await app.journal.record({
+    tenantId: session.tenantId,
+    role: 'cmo',
+    subjectId: id,
+    decision: `Post-campaign review for "${campaign.content.name}"`,
+    evidence: [
+      { source: 'campaign', ref: campaign.id.toString(), weight: 0.6 },
+      { source: 'metric', ref: report.id.toString(), detail: `roas ${roas}x`, weight: 0.9 },
+    ],
+    alternatives: ['Scale', 'Hold', 'Rework'],
+    chosen,
+    rejected: won ? ['Rework'] : ['Scale'],
+    confidence: { score: Math.round(Math.max(10, Math.min(95, roas * 25))), reason: `Based on ${roas}x ROAS`, basis: { sampleSize: 1, roas } },
+    outcome: { roas, roi, ctr, learned },
+    at,
+  });
+
+  // 2) Executive Memory — durable CMO memory of this campaign.
+  await app.execMemory.remember({
+    tenantId: session.tenantId,
+    role: 'cmo',
+    category: 'campaign',
+    content: `Mission ${id}: ${mission.brief} → ${roas}x ROAS on ${channels.join(', ')}. ${learned}`,
+    importance: Math.max(0, Math.min(1, roas / 5)),
+    metadata: { missionId: id, roas },
+  });
+
+  // 3) Company Brain — experience, reusable pattern, knowledge graph facts.
+  await app.brain.experience.record({
+    tenantId: session.tenantId,
+    vertical,
+    context: { channels },
+    action: campaign.content.name,
+    result: { roas, ctr, roi },
+    reason: won ? 'Positive return on the chosen channel mix' : 'Below break-even',
+    learned,
+    at,
+  });
+  await app.brain.patterns.capture({
+    domain: vertical,
+    name: `${vertical}: ${channels.join('+')} launch`,
+    structure: [...channels.map((ch) => `${ch} ad set`), 'measure', 'reallocate'],
+    evidence: { sampleSize: 1, metric: 'roas', value: roas },
+  });
+  const campaignNode = `campaign:${campaign.id.toString()}`;
+  const reportNode = `report:${report.id.toString()}`;
+  const missionNode = `mission:${id}`;
+  await app.brain.graph.upsertNode({ id: missionNode, type: 'Mission', props: { objective: mission.brief } });
+  await app.brain.graph.upsertNode({ id: campaignNode, type: 'Campaign', props: { name: campaign.content.name } });
+  await app.brain.graph.upsertNode({ id: reportNode, type: 'Report', props: { roas, roi } });
+  if (brief) await app.brain.graph.relate({ from: missionNode, to: `brief:${brief.id.toString()}`, relation: 'planned_by' });
+  await app.brain.graph.relate({ from: missionNode, to: campaignNode, relation: 'ran' });
+  await app.brain.graph.relate({ from: campaignNode, to: reportNode, relation: 'produced' });
+
+  // 4) Announce the learning + complete the mission.
+  await app.emit(EXECUTIVE_MEMORY_EVENTS.DECISION_JOURNALED, id, { role: 'cmo', roas });
+  await app.emit(EXECUTIVE_MEMORY_EVENTS.MEMORY_UPDATED, id, { role: 'cmo' });
+  await app.emit(COMPANY_BRAIN_EVENTS.EXPERIENCE_RECORDED, id, { vertical, roas });
+  await app.emit(COMPANY_BRAIN_EVENTS.PATTERN_CAPTURED, id, { vertical });
+  await app.emit(COMPANY_BRAIN_EVENTS.BRAIN_ENRICHED, id, { vertical, roas });
+
+  // Close out the mission: planning → executing → completed.
+  await app.missions.startExecuting(MissionId.of(id));
+  await app.missions.complete(MissionId.of(id));
+
+  return res.redirect(`/missions/${id}`);
+}
+
 function toBriefView(brief: {
   content: {
     objective: string;
@@ -753,6 +872,7 @@ async function collectStats(app: App): Promise<DashStats> {
     creatives: creatives.length,
     campaigns: campaigns.length,
     reports: reports.length,
+    learnings: missions.filter((m) => m.status === 'completed').length,
   };
 }
 

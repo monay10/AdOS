@@ -62,6 +62,14 @@ cards + bar charts, and adds an AI executive summary + recommendations. Analytic
 list screen + a Dashboard reports count. KPI math is pure and division-by-zero
 safe; only the narrative is AI-generated.
 
+**Phase 6 — Company Brain Learning:** once the analytics report exists, the
+Mission offers **Record learning to Company Brain** — the outcome is written
+across every knowledge store (Decision Journal → Executive Memory → Company
+Brain Experience → Pattern Library → Knowledge Graph) and the mission is
+completed. The recorded decision, confidence, outcome and captured stores render
+on the Mission, and a Dashboard "Brain Learnings" count grows. This is the
+compounding-company loop: every finished mission makes the company smarter.
+
 The left nav lists the remaining later-phase screens (Reports, Settings) marked
 **soon**.
 
