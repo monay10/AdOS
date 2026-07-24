@@ -12,14 +12,33 @@ import type { Database } from './database.js';
  * parameters are JSON-serialised for the `jsonb` `data` column, and `jsonb`
  * reads come back already parsed.
  */
+/** Connection-pool tuning. Sensible production defaults; override per deployment. */
+export interface PostgresPoolOptions {
+  /** Max pooled connections (default 20 — matches config `database.maxConnections`). */
+  readonly maxConnections?: number;
+  /** Close idle clients after this many ms (default 30s). */
+  readonly idleTimeoutMillis?: number;
+  /** Fail a checkout that waits longer than this (default 10s). */
+  readonly connectionTimeoutMillis?: number;
+}
+
 export class PostgresDatabase implements Database {
   readonly dialect = 'postgres' as const;
 
   private constructor(private readonly pool: Pool) {}
 
-  static async connect(connectionString: string): Promise<PostgresDatabase> {
+  static async connect(connectionString: string, options: PostgresPoolOptions = {}): Promise<PostgresDatabase> {
     const { default: pg } = await import('pg');
-    return new PostgresDatabase(new pg.Pool({ connectionString }));
+    // Explicitly size the pool (node-postgres defaults to max 10 with no
+    // connection timeout) so throughput and back-pressure are tunable.
+    return new PostgresDatabase(
+      new pg.Pool({
+        connectionString,
+        max: options.maxConnections ?? 20,
+        idleTimeoutMillis: options.idleTimeoutMillis ?? 30_000,
+        connectionTimeoutMillis: options.connectionTimeoutMillis ?? 10_000,
+      }),
+    );
   }
 
   async query<T = unknown>(sql: string, params: unknown[] = []): Promise<T[]> {

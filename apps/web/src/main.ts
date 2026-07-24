@@ -39,7 +39,8 @@ async function main(): Promise<void> {
   let db: PostgresDatabase | undefined;
   let app: App;
   if (databaseUrl) {
-    db = await PostgresDatabase.connect(databaseUrl);
+    const maxConnections = process.env['DATABASE_MAX_CONNECTIONS'];
+    db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
     app = new App(undefined, undefined, sqlRepositories(new SqlAggregateStore(db)));

@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import type { DatabaseSync as DatabaseSyncType } from 'node:sqlite';
+import type { DatabaseSync as DatabaseSyncType, StatementSync } from 'node:sqlite';
 import type { UnitOfWorkContext } from '@ados/kernel';
 import type { Database } from './database.js';
 
@@ -18,22 +18,36 @@ const { DatabaseSync } = createRequire(import.meta.url)('node:sqlite') as typeof
 export class SqliteDatabase implements Database {
   readonly dialect = 'sqlite' as const;
   private readonly db: DatabaseSyncType;
+  /** Prepared-statement cache: repositories run the same SQL constantly, so
+   * compiling each statement once (instead of on every call) is a measurable
+   * win with identical behaviour. */
+  private readonly stmts = new Map<string, StatementSync>();
 
   constructor(filename = ':memory:') {
     this.db = new DatabaseSync(filename);
   }
 
+  private prepare(sql: string): StatementSync {
+    const translated = translate(sql);
+    let stmt = this.stmts.get(translated);
+    if (!stmt) {
+      stmt = this.db.prepare(translated);
+      this.stmts.set(translated, stmt);
+    }
+    return stmt;
+  }
+
   async query<T = unknown>(sql: string, params: unknown[] = []): Promise<T[]> {
-    return this.db.prepare(translate(sql)).all(...bind(params)) as T[];
+    return this.prepare(sql).all(...bind(params)) as T[];
   }
 
   async execute(sql: string, params: unknown[] = []): Promise<{ rowCount: number }> {
-    const info = this.db.prepare(translate(sql)).run(...bind(params));
+    const info = this.prepare(sql).run(...bind(params));
     return { rowCount: Number(info.changes) };
   }
 
   async ping(): Promise<boolean> {
-    this.db.prepare('SELECT 1').get();
+    this.prepare('SELECT 1').get();
     return true;
   }
 
