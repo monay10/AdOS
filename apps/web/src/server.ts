@@ -5,6 +5,7 @@ import { App } from './app.js';
 import type { AuthGateway } from './auth/routes.js';
 import { makeRes, parseRequest } from './http.js';
 import { handleOps, type OpsOptions } from './ops.js';
+import { applySecurityHeaders } from './security.js';
 import { handle } from './routes.js';
 
 export interface ServerOptions {
@@ -17,6 +18,8 @@ export interface ServerOptions {
   auth?: AuthGateway;
   /** Container ops endpoints (health/readiness/metrics); always exposed. */
   ops?: OpsOptions;
+  /** Emit HSTS (behind HTTPS). Defaults to the auth secure-cookie setting. */
+  secure?: boolean;
 }
 
 /**
@@ -33,8 +36,10 @@ export function buildServer(options: ServerOptions): { app: App; server: Server 
   const app = options.app ?? new App();
   const tele = telemetry('web.server');
 
+  const secure = options.secure ?? options.auth?.secureCookies ?? false;
   const server = createServer((rawReq, rawRes) => {
     const res = makeRes(rawRes);
+    applySecurityHeaders(rawRes, { secure }); // defence-in-depth on every response
     const start = Date.now();
     const requestId = randomUUID();
     const method = (rawReq.method ?? 'GET').toUpperCase();

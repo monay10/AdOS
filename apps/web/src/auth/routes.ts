@@ -1,4 +1,5 @@
 import { timingSafeEqual } from 'node:crypto';
+import { BruteForceGuard } from '@ados/security';
 import type { Req, Res } from '../http.js';
 import {
   newSession,
@@ -15,10 +16,20 @@ export interface AuthGateway {
   service: AuthService;
   /** Emit the `Secure` cookie flag (true behind HTTPS in production). */
   secureCookies: boolean;
+  /** Brute-force guard for credential endpoints (a default is used if omitted). */
+  bruteForce?: BruteForceGuard;
 }
 
 const DAY = 86_400;
 const REMEMBER_TTL = 30 * DAY;
+
+/** Process-wide default: lock a (ip, email) pair after 5 failures for 15 minutes. */
+const defaultBruteForceGuard = new BruteForceGuard();
+
+function loginKey(req: Req, email: string): string {
+  const ip = req.raw.socket.remoteAddress ?? 'unknown';
+  return `${ip}:${email.toLowerCase()}`;
+}
 
 /**
  * Handle the password-mode authentication surface. Returns true when it has
@@ -36,11 +47,22 @@ export async function handleAuth(secret: string, gateway: AuthGateway, session: 
   }
   if (path === '/login' && method === 'POST') {
     const email = (req.body['email'] ?? '').trim();
+    const guard = gateway.bruteForce ?? defaultBruteForceGuard;
+    const key = loginKey(req, email);
+    // Brute-force protection: refuse further attempts once locked.
+    const locked = guard.status(key);
+    if (locked.locked) {
+      res.raw.setHeader('Retry-After', String(Math.ceil(locked.retryAfterMs / 1000)));
+      res.html(authLoginPage('Too many failed attempts. Please try again later.', { email }), 429);
+      return true;
+    }
     const result = await gateway.service.login(email, req.body['password'] ?? '');
     if (!result.ok) {
+      guard.fail(key);
       res.html(authLoginPage(result.message, { email }), 401);
       return true;
     }
+    guard.reset(key); // successful login clears the counter
     startSession(res, secret, secure, result.user, req.body['remember'] === '1');
     return true;
   }
