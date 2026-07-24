@@ -119,6 +119,16 @@ configuration — edit the workspace **name**, **currency**, **timezone** and
 the write, and tenants with more than one workspace get a switcher. Read-only
 account context (signed-in user + tenant) is shown alongside.
 
+**Phase 12 — First Live Pilot:** the whole product proven in one customer
+session — sign-in → workspace → client → brand → product → **project** →
+**mission** → brief → creative → campaign → analytics → **CEO dashboard** →
+**learning** (mission completes), plus the **asset library**, an **approval**
+and **settings** — all driven through the real HTTP server exactly as a person
+clicks it. `src/pilot.test.ts` runs the full journey end-to-end and asserts
+persistence in every context, the complete event chain, the project-dashboard
+timeline, the populated home dashboard, and tenant isolation. This is the
+"can a real customer run their first day on AdOS?" test — and it passes.
+
 The left nav lists the remaining later-phase screen (Reports) marked **soon**.
 
 ## Notes
