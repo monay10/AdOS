@@ -4,4 +4,5 @@ export * from './client/index.js';
 export * from './brand/index.js';
 export * from './product/index.js';
 export * from './project/index.js';
+export * from './approval/index.js';
 export * from './mission/index.js';

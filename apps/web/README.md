@@ -78,6 +78,16 @@ completed. The recorded decision, confidence, outcome and captured stores render
 on the Mission, and a Dashboard "Brain Learnings" count grows. This is the
 compounding-company loop: every finished mission makes the company smarter.
 
+**Phase 8 — Approval Workflow:** a first-class **Approvals** section for routing
+any decision through an explicit state machine: **Draft → In Review → Approved /
+Rejected / Revision Requested**, where a *Revision Requested* request returns to
+*In Review* when resubmitted. Create an approval (optionally tied to a project),
+then submit / approve / reject / request-revision — each with an optional note.
+Every transition appends to the request's **timeline** and emits a domain event
+(`approval.created/submitted/approved/rejected/revision_requested.v1`), so each
+decision is auditable and other contexts can react. Approvals list screen +
+detail page with the timeline + a Dashboard approvals count.
+
 The left nav lists the remaining later-phase screens (Reports, Settings) marked
 **soon**.
 

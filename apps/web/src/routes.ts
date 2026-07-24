@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ClientId, MissionId, MissionWizard, ProjectId, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
+import { ApprovalId, ClientId, MissionId, MissionWizard, ProjectId, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
@@ -13,6 +13,9 @@ import {
   type Session,
 } from './session.js';
 import {
+  approvalDetailPage,
+  approvalForm,
+  approvalStatusLabel,
   brandForm,
   clientForm,
   dashboardPage,
@@ -24,6 +27,7 @@ import {
   projectDashboardPage,
   projectForm,
   workspaceForm,
+  type ApprovalDetailData,
   type ProjectDashboardData,
   type Approval,
   type BriefView,
@@ -377,6 +381,66 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       if (r.isErr) return renderProjectDashboard(app, session, res, id, r.error.message);
       return res.redirect('/projects');
     }
+    return res.html(notFound(session), 404);
+  }
+
+  // ── Approvals (Phase 8) ──
+  if (path === '/approvals' && method === 'GET') {
+    const [approvals, projects] = [await app.approvals.list(), await app.projects.list()];
+    const projectName = (pid: string | undefined): string => (pid ? projects.find((p) => p.id.toString() === pid)?.name ?? '—' : '—');
+    return res.html(
+      listPage({
+        session,
+        active: '/approvals',
+        title: 'Approvals',
+        subtitle: 'Decisions routed through Draft → In Review → Approved / Rejected / Revision Requested.',
+        newHref: '/approvals/new',
+        newLabel: '+ New approval',
+        columns: ['Title', 'Project', 'Requested by', 'Status'],
+        rows: approvals.map((a) => [
+          `<a href="/approvals/${a.id.toString()}">${esc(a.title)}</a>`,
+          esc(projectName(a.projectId)),
+          esc(a.requestedBy),
+          `<span class="badge ${a.status === 'approved' ? 'active' : ''}">${esc(approvalStatusLabel(a.status))}</span>`,
+        ]),
+        empty: 'No approvals yet. Create one to route a decision through review.',
+      }),
+    );
+  }
+  if (path === '/approvals/new' && method === 'GET') {
+    const projects = await app.projects.list();
+    return res.html(approvalForm({ session, projects: idName(projects) }));
+  }
+  if (path === '/approvals' && method === 'POST') {
+    const projects = await app.projects.list();
+    const rerender = (msg: string): void => res.html(approvalForm({ session, projects: idName(projects), error: msg, values: req.body }), 400);
+    const title = (req.body['title'] ?? '').trim();
+    if (!title) return rerender('A title is required.');
+    const projectId = (req.body['projectId'] ?? '').trim();
+    const r = await app.approvals.create({
+      tenantId: session.tenantId,
+      title,
+      description: (req.body['description'] ?? '').trim(),
+      requestedBy: session.actor,
+      ...(projectId ? { projectId } : {}),
+      at: new Date().toISOString(),
+    });
+    if (r.isErr) return rerender(r.error.message);
+    return res.redirect(`/approvals/${r.value.id.toString()}`);
+  }
+  if (path.startsWith('/approvals/') && path !== '/approvals/new') {
+    const seg = path.slice('/approvals/'.length).split('/');
+    const id = seg[0] ?? '';
+    const action = seg[1];
+    if (!id) return res.html(notFound(session), 404);
+
+    if (!action && method === 'GET') return renderApprovalDetail(app, session, res, id);
+
+    const input = { actor: session.actor, at: new Date().toISOString(), note: (req.body['note'] ?? '').trim() };
+    if (action === 'submit' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.submit(aid, input));
+    if (action === 'approve' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.approve(aid, input));
+    if (action === 'reject' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.reject(aid, input));
+    if (action === 'revise' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.requestRevision(aid, input));
     return res.html(notFound(session), 404);
   }
 
@@ -991,8 +1055,41 @@ async function mutateProject(
   return res.redirect(`/projects/${id}`);
 }
 
+/** Load an approval and render its detail page (details, decision controls, timeline). */
+async function renderApprovalDetail(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
+  const found = await app.approvals.get(ApprovalId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const approval = found.value;
+  const projectName = approval.projectId
+    ? (await app.projects.list()).find((p) => p.id.toString() === approval.projectId)?.name
+    : undefined;
+
+  const data: ApprovalDetailData = {
+    id,
+    title: approval.title,
+    description: approval.description,
+    status: approval.status,
+    requestedBy: approval.requestedBy,
+    ...(projectName ? { projectName } : {}),
+    timeline: approval.timeline.map((t) => ({ action: t.action, from: t.from, to: t.to, note: t.note, actor: t.actor, at: t.at })),
+  };
+  return res.html(approvalDetailPage({ session, data, ...(error ? { error } : {}) }));
+}
+
+async function mutateApproval(
+  app: App,
+  session: Session,
+  res: Res,
+  id: string,
+  change: (aid: ApprovalId) => Promise<{ isErr: boolean; error?: { message: string } }>,
+): Promise<void> {
+  const r = await change(ApprovalId.of(id));
+  if (r.isErr) return renderApprovalDetail(app, session, res, id, r.error?.message ?? 'Transition failed');
+  return res.redirect(`/approvals/${id}`);
+}
+
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports, approvals] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
@@ -1002,6 +1099,7 @@ async function collectStats(app: App): Promise<DashStats> {
     app.creative.list(),
     app.campaigns.list(),
     app.reports.list(),
+    app.approvals.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -1014,6 +1112,7 @@ async function collectStats(app: App): Promise<DashStats> {
     campaigns: campaigns.length,
     reports: reports.length,
     learnings: missions.filter((m) => m.status === 'completed').length,
+    approvals: approvals.length,
   };
 }
 

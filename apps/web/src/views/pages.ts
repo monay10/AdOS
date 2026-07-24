@@ -42,6 +42,7 @@ export interface DashStats {
   campaigns: number;
   reports: number;
   learnings: number;
+  approvals: number;
 }
 
 export interface NextStep {
@@ -88,7 +89,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}${stat(s.approvals, 'Approvals')}
       </div>
       ${doneNote}
       ${pending}
@@ -644,6 +645,122 @@ export function projectDashboardPage(opts: { session: Session; data: ProjectDash
 
       <div class="panel" style="margin-top:20px"><h2>Missions</h2>${missions}</div>
       <div class="panel" style="margin-top:20px"><h2>Timeline</h2><p class="sub">What has happened across this project's work.</p>${timeline}</div>`,
+  });
+}
+
+// ── Approval Workflow (Phase 8) ─────────────────────────────────────────────────
+/** Human labels + badge classes for each workflow state. */
+const APPROVAL_LABEL: Record<string, string> = {
+  draft: 'Draft',
+  in_review: 'In Review',
+  approved: 'Approved',
+  rejected: 'Rejected',
+  revision_requested: 'Revision Requested',
+};
+
+export function approvalStatusLabel(status: string): string {
+  return APPROVAL_LABEL[status] ?? status;
+}
+
+function approvalBadgeClass(status: string): string {
+  if (status === 'approved') return 'active';
+  return '';
+}
+
+export function approvalForm(opts: {
+  session: Session;
+  projects?: Array<{ id: string; name: string }>;
+  error?: string;
+  values?: Vals;
+}): string {
+  const v = opts.values ?? {};
+  const projects = opts.projects ?? [];
+  const projField = projects.length
+    ? `<label>Project (optional)</label><select name="projectId"><option value="">— none —</option>${projects
+        .map((p) => `<option value="${esc(p.id)}" ${v['projectId'] === p.id ? 'selected' : ''}>${esc(p.name)}</option>`)
+        .join('')}</select>`
+    : '';
+  return layout({
+    title: 'New Approval',
+    active: '/approvals',
+    session: opts.session,
+    body: `<div class="panel">
+      <h2>Request an approval</h2><p class="sub">Route a decision through Draft → In Review → Approved / Rejected / Revision Requested. Every step is recorded on a timeline.</p>
+      ${banner(opts.error)}
+      <form method="post" action="/approvals">
+        <label>Title</label><input name="title" placeholder="Q2 launch budget sign-off" value="${esc(v['title'])}" required autofocus>
+        <label>Description</label><textarea name="description" rows="3" placeholder="What needs a decision, and why.">${esc(v['description'])}</textarea>
+        ${projField}
+        <div class="actions"><button class="btn">Create draft</button></div>
+      </form></div>`,
+  });
+}
+
+export interface ApprovalDetailData {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  requestedBy: string;
+  projectName?: string;
+  timeline: Array<{ action: string; from: string; to: string; note: string; actor: string; at: string }>;
+}
+
+export function approvalDetailPage(opts: { session: Session; data: ApprovalDetailData; error?: string }): string {
+  const a = opts.data;
+  const post = (action: string): string => `/approvals/${esc(a.id)}/${action}`;
+
+  // Controls depend on the current state.
+  let controls = '';
+  if (a.status === 'draft') {
+    controls = `<form method="post" action="${post('submit')}"><button class="btn">Submit for review</button></form>`;
+  } else if (a.status === 'in_review') {
+    controls = `<form method="post">
+        <label>Decision note (optional)</label>
+        <textarea name="note" rows="2" placeholder="Reasoning for your decision."></textarea>
+        <div class="actions">
+          <button class="btn" formaction="${post('approve')}">Approve</button>
+          <button class="btn ghost" formaction="${post('revise')}">Request revision</button>
+          <button class="btn ghost" formaction="${post('reject')}">Reject</button>
+        </div>
+      </form>`;
+  } else if (a.status === 'revision_requested') {
+    const lastNote = [...a.timeline].reverse().find((t) => t.action === 'revision_requested')?.note;
+    controls = `${lastNote ? `<div class="err" style="margin-bottom:14px">Revision requested: ${esc(lastNote)}</div>` : ''}
+      <form method="post" action="${post('submit')}"><button class="btn">Resubmit for review</button></form>`;
+  } else if (a.status === 'approved') {
+    controls = `<div class="ok">✓ Approved — this request is closed.</div>`;
+  } else if (a.status === 'rejected') {
+    controls = `<div class="err">✕ Rejected — this request is closed.</div>`;
+  }
+
+  const timeline = a.timeline.length
+    ? `<ul class="feed">${a.timeline
+        .map((t) => {
+          const flow = t.action === 'created' ? 'created' : `${approvalStatusLabel(t.from)} → ${approvalStatusLabel(t.to)}`;
+          const note = t.note ? ` — ${esc(t.note)}` : '';
+          return `<li><span><span class="ev">${esc(flow)}</span>${note} · ${esc(t.actor)}</span><span class="t">${esc(t.at.replace('T', ' ').slice(0, 19))}</span></li>`;
+        })
+        .join('')}</ul>`
+    : `<div class="empty">No activity yet.</div>`;
+
+  return layout({
+    title: a.title,
+    active: '/approvals',
+    session: opts.session,
+    body: `<div class="head"><div><h1>${esc(a.title)}</h1>
+        <p><a href="/approvals">← All approvals</a> · requested by ${esc(a.requestedBy)}${a.projectName ? ` · ${esc(a.projectName)}` : ''}</p></div>
+        <span class="badge ${approvalBadgeClass(a.status)}">${esc(approvalStatusLabel(a.status))}</span></div>
+      ${opts.error ? `<div class="err">${esc(opts.error)}</div>` : ''}
+      <div class="panel">
+        <label>Description</label><div>${esc(a.description) || '—'}</div>
+      </div>
+      <div class="panel" style="margin-top:20px"><h2>Decision</h2>
+        <p class="sub">Current state: <b>${esc(approvalStatusLabel(a.status))}</b>.</p>
+        ${controls}
+      </div>
+      <div class="panel" style="margin-top:20px"><h2>Timeline</h2>
+        <p class="sub">Every transition on this request, newest last.</p>${timeline}</div>`,
   });
 }
 
