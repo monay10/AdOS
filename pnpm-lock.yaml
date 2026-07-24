@@ -730,6 +730,37 @@ importers:
         specifier: ^2.1.0
         version: 2.1.9(@types/node@22.20.1)
 
+  packages/recovery:
+    dependencies:
+      '@ados/kernel':
+        specifier: workspace:*
+        version: link:../kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../observability
+    devDependencies:
+      '@ados/backup':
+        specifier: workspace:*
+        version: link:../backup
+      '@ados/config':
+        specifier: workspace:*
+        version: link:../config
+      '@ados/deploy':
+        specifier: workspace:*
+        version: link:../deploy
+      '@ados/persistence':
+        specifier: workspace:*
+        version: link:../persistence
+      '@ados/workers':
+        specifier: workspace:*
+        version: link:../workers
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@22.20.1)
+
   packages/security:
     dependencies:
       '@ados/kernel':

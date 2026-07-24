@@ -1,0 +1,32 @@
+{
+  "name": "@ados/recovery",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "clean": "rm -rf dist .turbo *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@ados/kernel": "workspace:*",
+    "@ados/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "@ados/backup": "workspace:*",
+    "@ados/config": "workspace:*",
+    "@ados/deploy": "workspace:*",
+    "@ados/persistence": "workspace:*",
+    "@ados/workers": "workspace:*",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
