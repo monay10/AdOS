@@ -579,6 +579,9 @@ importers:
       '@ados/kernel':
         specifier: workspace:*
         version: link:../kernel
+      '@ados/observability':
+        specifier: workspace:*
+        version: link:../observability
       zod:
         specifier: ^3.23.8
         version: 3.25.76

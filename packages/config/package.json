@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@ados/kernel": "workspace:*",
+    "@ados/observability": "workspace:*",
     "zod": "^3.23.8"
   },
   "devDependencies": {
