@@ -17,6 +17,7 @@
     "clean": "rm -rf dist .turbo *.tsbuildinfo"
   },
   "dependencies": {
+    "@ados/backup": "workspace:*",
     "@ados/event-bus": "workspace:*",
     "@ados/kernel": "workspace:*",
     "@ados/persistence": "workspace:*",

@@ -8,6 +8,7 @@ import { InMemoryEventBus } from '@ados/event-bus';
 import { SqliteDatabase, SqlAggregateStore, runMigrations } from '@ados/persistence';
 import { LocalFileStorage } from '@ados/storage';
 import { InMemoryJobStore, WorkerHost, WorkerRegistry } from '@ados/workers';
+import { BackupService, DatabaseBackupSource, InMemoryBackupArchiveStore, InMemoryBackupRepository, RestoreService } from '@ados/backup';
 import { timeBlock, timeEach, type BenchResult } from './timer.js';
 
 const sqlite = createRequire(import.meta.url)('node:sqlite') as typeof import('node:sqlite');
@@ -105,6 +106,28 @@ export async function benchJson(iterations: number): Promise<{ stringify: BenchR
   const stringify = await timeEach('json: stringify', iterations, () => { JSON.stringify(sample); });
   const parse = await timeEach('json: parse', iterations, () => { JSON.parse(json); });
   return { stringify, parse };
+}
+
+/** Backup (full + auto-validate) and restore duration over the real services. */
+export async function benchBackup(iterations: number): Promise<{ backup: BenchResult; restore: BenchResult }> {
+  const db = new SqliteDatabase(':memory:');
+  await db.execute('CREATE TABLE items (id text PRIMARY KEY, v text NOT NULL)');
+  for (let i = 0; i < 200; i++) await db.execute('INSERT INTO items (id, v) VALUES ($1, $2)', [`i${i}`, `value-${i}`]);
+  const sources = [new DatabaseBackupSource('db', db, ['items'])];
+  const repository = new InMemoryBackupRepository();
+  const archives = new InMemoryBackupArchiveStore();
+  const service = new BackupService({ sources, repository, archives });
+  const restorer = new RestoreService({ sources, repository, archives });
+
+  const ids: string[] = [];
+  const backup = await timeEach('backup: full + auto-validate', iterations, async () => {
+    ids.push((await service.backup({ tenantId: 'acme' })).id);
+  });
+  const restore = await timeEach('restore: verify + apply', iterations, async (i) => {
+    await restorer.restore({ backupId: ids[i % ids.length]! });
+  });
+  await db.close();
+  return { backup, restore };
 }
 
 export function memorySnapshot(): { rssMb: number; heapUsedMb: number } {

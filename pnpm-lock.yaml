@@ -550,6 +550,9 @@ importers:
 
   packages/bench:
     dependencies:
+      '@ados/backup':
+        specifier: workspace:*
+        version: link:../backup
       '@ados/event-bus':
         specifier: workspace:*
         version: link:../event-bus

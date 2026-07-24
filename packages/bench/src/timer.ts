@@ -1,4 +1,5 @@
-import { performance } from 'node:perf_hooks';
+import { PerformanceObserver, performance } from 'node:perf_hooks';
+import { getHeapStatistics } from 'node:v8';
 
 export interface BenchResult {
   readonly name: string;
@@ -8,6 +9,7 @@ export interface BenchResult {
   readonly meanMs: number;
   readonly p50Ms: number;
   readonly p95Ms: number;
+  readonly p99Ms: number;
 }
 
 function percentile(sortedMs: number[], p: number): number {
@@ -28,6 +30,46 @@ export function summarize(name: string, samplesMs: number[]): BenchResult {
     meanMs: round(total / n),
     p50Ms: round(percentile(sorted, 50)),
     p95Ms: round(percentile(sorted, 95)),
+    p99Ms: round(percentile(sorted, 99)),
+  };
+}
+
+export interface GcStats {
+  readonly count: number;
+  readonly pauseMs: number;
+}
+
+/** Run `fn` while observing V8 garbage-collection pauses. */
+export async function withGc<T>(fn: () => Promise<T>): Promise<{ result: T; gc: GcStats }> {
+  let count = 0;
+  let pause = 0;
+  const obs = new PerformanceObserver((list) => {
+    for (const e of list.getEntries()) { count++; pause += e.duration; }
+  });
+  obs.observe({ entryTypes: ['gc'] });
+  try {
+    const result = await fn();
+    return { result, gc: { count, pauseMs: round(pause) } };
+  } finally {
+    obs.disconnect();
+  }
+}
+
+export interface HeapSnapshot {
+  readonly heapUsedMb: number;
+  readonly heapTotalMb: number;
+  readonly rssMb: number;
+  readonly externalMb: number;
+}
+
+export function heapSnapshot(): HeapSnapshot {
+  const m = process.memoryUsage();
+  const h = getHeapStatistics();
+  return {
+    heapUsedMb: Math.round(h.used_heap_size / 1_048_576),
+    heapTotalMb: Math.round(h.total_heap_size / 1_048_576),
+    rssMb: Math.round(m.rss / 1_048_576),
+    externalMb: Math.round(m.external / 1_048_576),
   };
 }
 
@@ -48,7 +90,7 @@ export async function timeBlock(name: string, count: number, fn: () => Promise<v
   await fn();
   const totalMs = performance.now() - t;
   const meanMs = totalMs / (count || 1);
-  return { name, iterations: count, totalMs: round(totalMs), opsPerSec: round((count / totalMs) * 1000), meanMs: round(meanMs), p50Ms: round(meanMs), p95Ms: round(meanMs) };
+  return { name, iterations: count, totalMs: round(totalMs), opsPerSec: round((count / totalMs) * 1000), meanMs: round(meanMs), p50Ms: round(meanMs), p95Ms: round(meanMs), p99Ms: round(meanMs) };
 }
 
 export function round(n: number): number {

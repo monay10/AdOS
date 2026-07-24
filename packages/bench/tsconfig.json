@@ -6,7 +6,8 @@
     { "path": "../event-bus" },
     { "path": "../persistence" },
     { "path": "../storage" },
-    { "path": "../workers" }
+    { "path": "../workers" },
+    { "path": "../backup" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]
