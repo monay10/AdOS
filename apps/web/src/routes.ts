@@ -733,6 +733,9 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     // Phase 6 — record the outcome into the Company Brain (learning flow).
     if (action === 'learn' && method === 'POST') return recordLearning(app, session, res, id);
 
+    // Customer-initiated cancellation — fail the mission with a reason.
+    if (action === 'cancel' && method === 'POST') return cancelMission(app, session, res, id, (req.body['reason'] ?? '').trim());
+
     return res.html(notFound(session), 404);
   }
 
@@ -829,6 +832,8 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(report ? { report: toReportView(report) } : {}),
       ...(learning ? { learning } : {}),
       ...(executive ? { executive: toExecutiveView(executive) } : {}),
+      canCancel: mission.status !== 'completed' && mission.status !== 'failed',
+      ...(mission.failureReason ? { failureReason: mission.failureReason } : {}),
       ...(error ? { error } : {}),
     }),
   );
@@ -850,6 +855,13 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
 
 async function gateReject(app: App, session: Session, res: Res, id: string, reason: string): Promise<void> {
   const r = await app.missions.fail(MissionId.of(id), reason);
+  if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+  return res.redirect(`/missions/${id}`);
+}
+
+/** Customer-initiated cancellation: fail the mission with the given reason. */
+async function cancelMission(app: App, session: Session, res: Res, id: string, reason: string): Promise<void> {
+  const r = await app.missions.fail(MissionId.of(id), reason || 'Cancelled by the customer');
   if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
   return res.redirect(`/missions/${id}`);
 }

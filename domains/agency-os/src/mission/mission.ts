@@ -43,6 +43,8 @@ export interface MissionProps {
   approvalGates: MissionApprovalGate[];
   status: MissionStatus;
   createdBy: string;
+  /** Why the mission ended in `failed` (executive rejection or customer cancellation). */
+  failureReason?: string;
 }
 
 // ── Domain events ─────────────────────────────────────────────────────────────
@@ -154,6 +156,9 @@ export class Mission extends AggregateRoot<MissionId> {
   get createdBy(): string {
     return this.props.createdBy;
   }
+  get failureReason(): string | undefined {
+    return this.props.failureReason;
+  }
 
   snapshot(): MissionProps {
     return {
@@ -205,7 +210,7 @@ export class Mission extends AggregateRoot<MissionId> {
     if (this.props.status === 'completed' || this.props.status === 'failed') {
       return this.invalidTransition('fail');
     }
-    this.props = { ...this.props, status: 'failed' };
+    this.props = { ...this.props, status: 'failed', failureReason: reason };
     this.addDomainEvent(new MissionFailed(this.id.toString(), { reason }, { tenantId: this.props.tenantId }));
     return ok(undefined);
   }

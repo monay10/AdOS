@@ -175,11 +175,25 @@ export function missionDetailPage(opts: {
   reportDefaults?: { spend: number; revenue: number; currency: string };
   learning?: LearningView;
   executive?: ExecutiveView;
+  failureReason?: string;
+  canCancel?: boolean;
   prereqMissing?: string;
   error?: string;
 }): string {
   const m = opts.mission;
   const budget = m.budget ? `${m.budget.amount.toLocaleString()} ${m.budget.currency} / ${m.budget.period}` : '—';
+
+  const failureBanner =
+    m.status === 'failed'
+      ? `<div class="err" style="margin-bottom:16px">✕ Mission failed${opts.failureReason ? ` — ${esc(opts.failureReason)}` : ''}</div>`
+      : '';
+
+  const cancelControl = opts.canCancel
+    ? `<form method="post" action="/missions/${esc(m.id)}/cancel" style="margin-top:16px;display:flex;gap:10px;align-items:flex-end">
+         <div style="flex:1"><label>Cancel this mission</label><input name="reason" placeholder="Reason (optional)"></div>
+         <button class="btn ghost" style="margin-top:0;white-space:nowrap">Cancel mission</button>
+       </form>`
+    : '';
 
   const briefBlock = opts.brief
     ? `<div class="panel" style="margin-top:20px">
@@ -293,9 +307,11 @@ export function missionDetailPage(opts: {
     body: `<div class="head"><div><h1>Mission</h1><p><a href="/missions">← All missions</a></p></div>
         <span class="badge ${m.status === 'failed' ? '' : 'active'}">${esc(m.status)}</span></div>
       ${opts.error ? `<div class="err">${esc(opts.error)}</div>` : ''}
+      ${failureBanner}
       <div class="panel">
         <label>Objective</label><div>${esc(m.objective)}</div>
         <label>Budget</label><div>${esc(budget)}</div>
+        ${cancelControl}
       </div>
       ${briefBlock}
       ${creativeBlock}

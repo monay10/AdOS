@@ -85,6 +85,18 @@ describe('Mission (domain lifecycle)', () => {
     expect(m.complete().isErr).toBe(true); // can't complete a submitted mission
     expect(m.approve('campaign_launch').isErr).toBe(true); // not awaiting approval
   });
+
+  it('fails with a persisted reason and refuses to fail twice', () => {
+    const m = submitted();
+    m.pullDomainEvents();
+    expect(m.fail('Cancelled by the customer').isOk).toBe(true);
+    expect(m.status).toBe('failed');
+    expect(m.failureReason).toBe('Cancelled by the customer');
+    expect(m.snapshot().failureReason).toBe('Cancelled by the customer'); // survives persistence
+    const failed = m.pullDomainEvents();
+    expect(failed[0]!.eventName).toBe('mission.failed.v1');
+    expect(m.fail('again').isErr).toBe(true); // already terminal
+  });
 });
 
 // ── Integration tests: service + repository + event bus ───────────────────────

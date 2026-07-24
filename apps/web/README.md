@@ -78,6 +78,12 @@ completed. The recorded decision, confidence, outcome and captured stores render
 on the Mission, and a Dashboard "Brain Learnings" count grows. This is the
 compounding-company loop: every finished mission makes the company smarter.
 
+**Mission cancellation:** any in-flight Mission (one that hasn't completed or
+failed) offers a **Cancel mission** control that fails it with a reason. The
+reason is persisted on the Mission and shown as a failure banner on its screen,
+and `mission.failed.v1` fires — the same terminal path an executive rejection
+takes, now reachable by the customer and no longer a silent dead-end.
+
 **Phase 8 — Approval Workflow:** a first-class **Approvals** section for routing
 any decision through an explicit state machine: **Draft → In Review → Approved /
 Rejected / Revision Requested**, where a *Revision Requested* request returns to
