@@ -38,6 +38,7 @@ export interface DashStats {
   products: number;
   missions: number;
   briefs: number;
+  creatives: number;
 }
 
 export interface NextStep {
@@ -84,7 +85,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}
       </div>
       ${doneNote}
       ${pending}
@@ -104,11 +105,25 @@ export interface BriefView {
   model: string;
 }
 
+export interface CreativeView {
+  headline: string;
+  adCopy: string;
+  cta: string;
+  socialPost: string;
+  landingPage: { headline: string; body: string; cta: string };
+  email: { subject: string; body: string };
+  model: string;
+}
+
+export type Approval = 'none' | 'pending' | 'approved' | 'rejected';
+
 export function missionDetailPage(opts: {
   session: Session;
   mission: { id: string; objective: string; status: string; budget?: { amount: number; currency: string; period: string } };
   brief?: BriefView;
-  approval: 'none' | 'pending' | 'approved' | 'rejected';
+  briefApproval: Approval;
+  creative?: CreativeView;
+  creativeApproval: Approval;
   prereqMissing?: string;
   error?: string;
 }): string {
@@ -128,7 +143,7 @@ export function missionDetailPage(opts: {
           <div><label>Budget split</label><div>${opts.brief.budgetAllocation.map((b) => `<span class="badge">${esc(b.channel)} ${b.percentage}%</span>`).join(' ')}</div></div>
         </div>
         <label>KPIs</label><div>${opts.brief.kpis.map((k) => `<span class="badge">${esc(k.name)}: ${k.target} ${esc(k.unit)}</span>`).join(' ')}</div>
-        ${approvalControls(m.id, opts.approval)}
+        ${reviewControls(`/missions/${esc(m.id)}/approve`, `/missions/${esc(m.id)}/reject`, opts.briefApproval, 'brief', 'ready for the Creative phase')}
       </div>`
     : opts.prereqMissing
       ? `<div class="panel" style="margin-top:20px"><div class="err">${esc(opts.prereqMissing)}</div></div>`
@@ -137,6 +152,28 @@ export function missionDetailPage(opts: {
           <p class="sub">Generate the Marketing Brief — the AI Company's strategy for this Mission.</p>
           <form method="post" action="/missions/${esc(m.id)}/brief"><button class="btn">Generate Marketing Brief</button></form>
         </div>`;
+
+  // Creative Studio unlocks only once the brief is approved.
+  const creativeBlock =
+    opts.briefApproval !== 'approved'
+      ? ''
+      : opts.creative
+        ? `<div class="panel" style="margin-top:20px">
+            <h2>Creative Studio <span class="badge">${esc(opts.creative.model)}</span></h2>
+            <p class="sub">Publish-ready copy generated from the approved brief.</p>
+            <label>Headline</label><div>${esc(opts.creative.headline)}</div>
+            <label>Ad copy</label><div>${esc(opts.creative.adCopy)}</div>
+            <label>Call to action</label><div><span class="badge">${esc(opts.creative.cta)}</span></div>
+            <label>Social post</label><div>${esc(opts.creative.socialPost)}</div>
+            <label>Landing page</label><div><b>${esc(opts.creative.landingPage.headline)}</b><br>${esc(opts.creative.landingPage.body)}<br><span class="badge">${esc(opts.creative.landingPage.cta)}</span></div>
+            <label>Email</label><div><b>${esc(opts.creative.email.subject)}</b><br>${esc(opts.creative.email.body)}</div>
+            ${reviewControls(`/missions/${esc(m.id)}/creative/approve`, `/missions/${esc(m.id)}/creative/reject`, opts.creativeApproval, 'creative', 'ready to build the Campaign')}
+          </div>`
+        : `<div class="panel" style="margin-top:20px">
+            <h2>Creative Studio</h2>
+            <p class="sub">Generate ad copy, headline, CTA, social post, landing page and email from the approved brief.</p>
+            <form method="post" action="/missions/${esc(m.id)}/creative"><button class="btn">Generate Creative</button></form>
+          </div>`;
 
   return layout({
     title: 'Mission',
@@ -149,17 +186,18 @@ export function missionDetailPage(opts: {
         <label>Objective</label><div>${esc(m.objective)}</div>
         <label>Budget</label><div>${esc(budget)}</div>
       </div>
-      ${briefBlock}`,
+      ${briefBlock}
+      ${creativeBlock}`,
   });
 }
 
-function approvalControls(missionId: string, approval: 'none' | 'pending' | 'approved' | 'rejected'): string {
-  if (approval === 'approved') return `<div class="ok" style="margin-top:18px">✓ Approved by executive — ready for the Creative phase.</div>`;
-  if (approval === 'rejected') return `<div class="err" style="margin-top:18px">✕ Rejected by executive.</div>`;
+function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string): string {
+  if (approval === 'approved') return `<div class="ok" style="margin-top:18px">✓ ${noun[0]!.toUpperCase() + noun.slice(1)} approved by executive — ${nextHint}.</div>`;
+  if (approval === 'rejected') return `<div class="err" style="margin-top:18px">✕ ${noun[0]!.toUpperCase() + noun.slice(1)} rejected by executive.</div>`;
   if (approval === 'pending') {
     return `<div class="actions" style="margin-top:20px">
-      <form method="post" action="/missions/${esc(missionId)}/approve"><button class="btn">Approve brief</button></form>
-      <form method="post" action="/missions/${esc(missionId)}/reject"><button class="btn ghost">Reject</button></form>
+      <form method="post" action="${approveHref}"><button class="btn">Approve ${esc(noun)}</button></form>
+      <form method="post" action="${rejectHref}"><button class="btn ghost">Reject</button></form>
     </div>`;
   }
   return '';

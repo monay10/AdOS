@@ -111,7 +111,7 @@ describe('Phase 2 — Mission Processing (Mission → Brief → Executive Approv
 
     // Approved state shows on screen; no longer pending on the dashboard.
     const approved = await (await c.req('GET', `/missions/${missionId}`)).text();
-    expect(approved).toContain('Approved by executive');
+    expect(approved).toContain('Brief approved by executive');
     const dash2 = await (await c.req('GET', '/dashboard')).text();
     expect(dash2).not.toContain('Pending executive approvals');
 
@@ -146,7 +146,7 @@ describe('Phase 2 — Mission Processing (Mission → Brief → Executive Approv
     const r = await c.req('POST', `/missions/${missionId}/reject`);
     expect(r.status).toBe(303);
     const rejected = await (await c.req('GET', `/missions/${missionId}`)).text();
-    expect(rejected).toContain('Rejected by executive');
+    expect(rejected).toContain('Brief rejected by executive');
     expect(app.recentEvents(t, 20).map((e) => e.eventName)).toContain('mission.failed.v1');
   });
 

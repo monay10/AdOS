@@ -38,6 +38,9 @@ export class OfflineAIManager implements AIManagerPort {
     if (request.promptRef?.key === 'marketing.brief') {
       return this.marketingBrief(v);
     }
+    if (request.promptRef?.key === 'creative.set') {
+      return this.creativeSet(v);
+    }
     return {};
   }
 
@@ -67,6 +70,29 @@ export class OfflineAIManager implements AIManagerPort {
         { name: 'leads', target: 100, unit: 'count' },
         { name: 'cpl', target: 50, unit: 'currency_minor' },
       ],
+    };
+  }
+
+  private creativeSet(v: Record<string, unknown>): unknown {
+    const product = str(v['productName'], 'the product');
+    const voice = str(v['brandVoice'], 'professional');
+    const messages = Array.isArray(v['keyMessages']) ? (v['keyMessages'] as unknown[]).map(String) : [];
+    const lead = messages[0] ?? `Discover ${product}`;
+
+    return {
+      headline: `${product}: ${lead}`,
+      adCopy: `${lead}. A ${voice} choice you can trust — ${messages[1] ?? 'made for you'}.`,
+      cta: 'Get started',
+      socialPost: `✨ ${lead}! ${product} is here. ${messages[1] ?? ''}`.trim(),
+      landingPage: {
+        headline: `${product}, done right`,
+        body: `${lead}. Our ${voice} team delivers ${messages.length ? messages.join(', ') : 'real results'}.`,
+        cta: 'Book your spot',
+      },
+      email: {
+        subject: `Meet ${product}`,
+        body: `${lead}. Reply to get started with ${product} today.`,
+      },
     };
   }
 }

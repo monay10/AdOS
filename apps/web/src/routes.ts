@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ClientId, MissionId, MissionWizard, type Mission, type ProductPricing } from '@ados/agency-os';
+import { ClientId, MissionId, MissionWizard, type ProductPricing } from '@ados/agency-os';
 import type { App } from './app.js';
 import type { Req, Res } from './http.js';
 import {
@@ -20,7 +20,9 @@ import {
   missionForm,
   productForm,
   workspaceForm,
+  type Approval,
   type BriefView,
+  type CreativeView,
   type DashStats,
   type NextStep,
 } from './views/pages.js';
@@ -319,25 +321,48 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     );
   }
 
-  // ── Mission detail + processing (Phase 2) ──
+  // ── Creative Studio list ──
+  if (path === '/creative' && method === 'GET') {
+    const sets = await app.creative.list();
+    return res.html(
+      listPage({
+        session,
+        active: '/creative',
+        title: 'Creative Studio',
+        subtitle: 'Publish-ready copy generated from approved Marketing Briefs.',
+        newHref: '/missions',
+        newLabel: 'Go to Missions',
+        columns: ['Headline', 'CTA', 'Model'],
+        rows: sets.map((s) => [
+          `<a href="/missions/${esc(s.missionId)}">${esc(s.content.headline)}</a>`,
+          `<span class="badge">${esc(s.content.cta)}</span>`,
+          `<span class="badge">${esc(s.provenance.model)}</span>`,
+        ]),
+        empty: 'No creatives yet. Approve a brief and generate its creative set.',
+      }),
+    );
+  }
+
+  // ── Mission detail + processing (Phases 2 & 3) ──
   if (path.startsWith('/missions/') && path !== '/missions/new') {
     const seg = path.slice('/missions/'.length).split('/');
     const id = seg[0] ?? '';
     const action = seg[1];
+    const sub = seg[2];
     if (!id) return res.html(notFound(session), 404);
 
     if (!action && method === 'GET') return renderMissionDetail(app, session, res, id);
+
+    // Phase 2 — brief approval gate.
     if (action === 'brief' && method === 'POST') return generateBrief(app, session, res, id);
-    if (action === 'approve' && method === 'POST') {
-      const r = await app.missions.approve(MissionId.of(id), 'strategy_and_budget');
-      if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
-      return res.redirect(`/missions/${id}`);
-    }
-    if (action === 'reject' && method === 'POST') {
-      const r = await app.missions.fail(MissionId.of(id), 'Rejected by executive');
-      if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
-      return res.redirect(`/missions/${id}`);
-    }
+    if (action === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'strategy_and_budget');
+    if (action === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Rejected by executive');
+
+    // Phase 3 — creative + creative-review gate.
+    if (action === 'creative' && !sub && method === 'POST') return generateCreative(app, session, res, id);
+    if (action === 'creative' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'creative_assets');
+    if (action === 'creative' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Creative rejected by executive');
+
     return res.html(notFound(session), 404);
   }
 
@@ -345,29 +370,56 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
   return res.html(notFound(session), 404);
 }
 
-/** Load a mission, its brief and approval state, and render the detail screen. */
+/** Load a mission, its brief + creative and their review states, and render. */
 async function renderMissionDetail(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
   const found = await app.missions.get(MissionId.of(id));
   if (found.isErr) return res.html(notFound(session), 404);
   const mission = found.value;
-  const briefs = await app.briefs.list(id);
-  const brief = briefs[0];
+  const brief = (await app.briefs.list(id))[0];
+  const creative = (await app.creative.list(id))[0];
 
-  const view = {
-    session,
-    mission: {
-      id,
-      objective: mission.brief,
-      status: mission.status,
-      ...(mission.budget
-        ? { budget: { amount: mission.budget.amountMinor / 100, currency: mission.budget.currency, period: mission.budget.period } }
-        : {}),
-    },
-    approval: approvalOf(mission, Boolean(brief)),
-    ...(brief ? { brief: toBriefView(brief) } : {}),
-    ...(error ? { error } : {}),
-  };
-  return res.html(missionDetailPage(view));
+  // Brief is implicitly approved once a creative exists (creative only follows approval).
+  const briefApproval: Approval = !brief ? 'none' : creative ? 'approved' : statusApproval(mission.status);
+  const creativeApproval: Approval = !creative ? 'none' : statusApproval(mission.status);
+
+  return res.html(
+    missionDetailPage({
+      session,
+      mission: {
+        id,
+        objective: mission.brief,
+        status: mission.status,
+        ...(mission.budget
+          ? { budget: { amount: mission.budget.amountMinor / 100, currency: mission.budget.currency, period: mission.budget.period } }
+          : {}),
+      },
+      briefApproval,
+      creativeApproval,
+      ...(brief ? { brief: toBriefView(brief) } : {}),
+      ...(creative ? { creative: toCreativeView(creative) } : {}),
+      ...(error ? { error } : {}),
+    }),
+  );
+}
+
+/** Map a mission status to a review state for whichever artifact is in the gate. */
+function statusApproval(status: string): Approval {
+  if (status === 'awaiting_approval') return 'pending';
+  if (status === 'failed') return 'rejected';
+  if (status === 'planning' || status === 'executing' || status === 'completed') return 'approved';
+  return 'none';
+}
+
+async function gateApprove(app: App, session: Session, res: Res, id: string, gate: 'strategy_and_budget' | 'creative_assets'): Promise<void> {
+  const r = await app.missions.approve(MissionId.of(id), gate);
+  if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+  return res.redirect(`/missions/${id}`);
+}
+
+async function gateReject(app: App, session: Session, res: Res, id: string, reason: string): Promise<void> {
+  const r = await app.missions.fail(MissionId.of(id), reason);
+  if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+  return res.redirect(`/missions/${id}`);
 }
 
 /** Marketing Intelligence: generate the brief, then move the mission to approval. */
@@ -384,7 +436,8 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
       missionDetailPage({
         session,
         mission: { id, objective: mission.brief, status: mission.status },
-        approval: 'none',
+        briefApproval: 'none',
+        creativeApproval: 'none',
         prereqMissing: 'Add a brand and a product for this client before generating a brief.',
       }),
     );
@@ -414,12 +467,39 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
   return res.redirect(`/missions/${id}`);
 }
 
-function approvalOf(mission: Mission, hasBrief: boolean): 'none' | 'pending' | 'approved' | 'rejected' {
-  if (!hasBrief) return 'none';
-  if (mission.status === 'awaiting_approval') return 'pending';
-  if (mission.status === 'failed') return 'rejected';
-  if (mission.status === 'planning' || mission.status === 'executing' || mission.status === 'completed') return 'approved';
-  return 'none';
+/** Creative Studio: generate the creative set from the approved brief, then move
+ * the mission into the creative-review gate. */
+async function generateCreative(app: App, session: Session, res: Res, id: string): Promise<void> {
+  const found = await app.missions.get(MissionId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const mission = found.value;
+
+  const brief = (await app.briefs.list(id))[0];
+  if (!brief || mission.status !== 'planning') {
+    return renderMissionDetail(app, session, res, id, 'Approve the Marketing Brief before generating creative.');
+  }
+  const brand = (await app.brands.list(mission.clientId))[0];
+  const product = (await app.products.list(mission.clientId))[0];
+  if (!brand || !product) {
+    return renderMissionDetail(app, session, res, id, 'A brand and product are required to generate creative.');
+  }
+
+  const generated = await app.creative.generate({
+    tenantId: session.tenantId,
+    missionId: id,
+    clientId: mission.clientId,
+    briefId: brief.id.toString(),
+    productName: product.name,
+    brandVoice: brand.profile.voice,
+    objective: brief.content.objective,
+    targetAudience: brief.content.targetAudience,
+    positioning: brief.content.positioning,
+    keyMessages: [...brief.content.keyMessages],
+  });
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+
+  await app.missions.requestApproval(MissionId.of(id), 'creative_assets');
+  return res.redirect(`/missions/${id}`);
 }
 
 function toBriefView(brief: {
@@ -446,14 +526,37 @@ function toBriefView(brief: {
   };
 }
 
+function toCreativeView(set: {
+  content: {
+    headline: string;
+    adCopy: string;
+    cta: string;
+    socialPost: string;
+    landingPage: { headline: string; body: string; cta: string };
+    email: { subject: string; body: string };
+  };
+  provenance: { model: string };
+}): CreativeView {
+  return {
+    headline: set.content.headline,
+    adCopy: set.content.adCopy,
+    cta: set.content.cta,
+    socialPost: set.content.socialPost,
+    landingPage: { ...set.content.landingPage },
+    email: { ...set.content.email },
+    model: set.provenance.model,
+  };
+}
+
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions, briefs] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs, creatives] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
     app.products.list(),
     app.missions.list(),
     app.briefs.list(),
+    app.creative.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -462,6 +565,7 @@ async function collectStats(app: App): Promise<DashStats> {
     products: products.length,
     missions: missions.length,
     briefs: briefs.length,
+    creatives: creatives.length,
   };
 }
 

@@ -42,8 +42,15 @@ Dashboard pending-approvals + Marketing Brief list. Offline by default: the app
 injects an `OfflineAIManager` (a drop-in `AIManagerPort`) so briefs generate with
 no model server attached; swap in `@ados/ai-manager` for a real local engine.
 
-The left nav lists the remaining later-phase screens (Creative Studio, Campaigns,
-Analytics, Reports, Settings) marked **soon**.
+**Phase 3 — Creative:** once the brief is approved, the Mission unlocks the
+**Creative Studio** section — **Generate Creative** produces headline, ad copy,
+CTA, social post, landing page and email, followed by **Executive Creative
+Review** (approve / reject). Creative Studio list screen + a Dashboard creatives
+count. Brief and creative reviews are tracked independently via the Mission's
+`strategy_and_budget` and `creative_assets` approval gates.
+
+The left nav lists the remaining later-phase screens (Campaigns, Analytics,
+Reports, Settings) marked **soon**.
 
 ## Notes
 

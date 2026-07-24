@@ -11,7 +11,8 @@
     { "path": "../../packages/tenancy" },
     { "path": "../../packages/observability" },
     { "path": "../../domains/agency-os" },
-    { "path": "../../domains/marketing-intelligence" }
+    { "path": "../../domains/marketing-intelligence" },
+    { "path": "../../domains/creative-studio" }
   ],
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

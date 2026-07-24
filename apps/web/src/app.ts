@@ -14,6 +14,7 @@ import {
   WorkspaceService,
 } from '@ados/agency-os';
 import { InMemoryMarketingBriefRepository, MarketingBriefService } from '@ados/marketing-intelligence';
+import { CreativeStudioService, InMemoryCreativeSetRepository } from '@ados/creative-studio';
 import { OfflineAIManager } from './ai.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -40,6 +41,7 @@ export class App {
   readonly products: ProductService;
   readonly missions: MissionService;
   readonly briefs: MarketingBriefService;
+  readonly creative: CreativeStudioService;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -53,6 +55,7 @@ export class App {
     this.products = new ProductService(new InMemoryProductRepository(), bus);
     this.missions = new MissionService(new InMemoryMissionRepository(), bus);
     this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
+    this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
   }
 
   /** Subscribe the activity feed + audit log to every domain event. */
