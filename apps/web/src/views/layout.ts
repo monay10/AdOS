@@ -30,6 +30,7 @@ const NAV: NavItem[] = [
   { href: '/campaigns', label: 'Campaigns', icon: '◎', ready: true },
   { href: '/analytics', label: 'Analytics', icon: '▤', ready: true },
   { href: '/approvals', label: 'Approvals', icon: '☑', ready: true },
+  { href: '/assets', label: 'Assets', icon: '▣', ready: true },
   { href: '/reports', label: 'Reports', icon: '❐', ready: false },
   { href: '/settings', label: 'Settings', icon: '⚙', ready: false },
 ];

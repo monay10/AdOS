@@ -88,6 +88,18 @@ Every transition appends to the request's **timeline** and emits a domain event
 decision is auditable and other contexts can react. Approvals list screen +
 detail page with the timeline + a Dashboard approvals count.
 
+**Phase 9 — Asset Library:** an **Assets** section — a reusable library of
+creative organised under a client (and optionally a brand + project). Add an
+asset by pasting its content (text for **copy**/**document**, or an http(s)/
+`data:` URL for an **image**/**link** — no binary multipart, so it stays fully
+offline), give it comma-separated **tags**, and it lands as version 1. The
+detail page **previews** the current version by kind (images inline, copy/docs
+as text, links as a safe anchor — a pasted `javascript:` URL is rendered inert),
+lets you **add tags** and **add new versions** (history is never overwritten),
+and the library screen **searches** by name or tag. Each change emits a domain
+event (`asset.created/version_added/tag_added.v1`) and a Dashboard assets count
+grows.
+
 The left nav lists the remaining later-phase screens (Reports, Settings) marked
 **soon**.
 

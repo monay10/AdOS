@@ -43,6 +43,7 @@ export interface DashStats {
   reports: number;
   learnings: number;
   approvals: number;
+  assets: number;
 }
 
 export interface NextStep {
@@ -89,7 +90,7 @@ export function dashboardPage(opts: {
     body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
         ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}${stat(s.approvals, 'Approvals')}
+        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}${stat(s.approvals, 'Approvals')}${stat(s.assets, 'Assets')}
       </div>
       ${doneNote}
       ${pending}
@@ -761,6 +762,180 @@ export function approvalDetailPage(opts: { session: Session; data: ApprovalDetai
       </div>
       <div class="panel" style="margin-top:20px"><h2>Timeline</h2>
         <p class="sub">Every transition on this request, newest last.</p>${timeline}</div>`,
+  });
+}
+
+// ── Asset Library (Phase 9) ─────────────────────────────────────────────────────
+const ASSET_KIND_LABEL: Record<string, string> = { image: 'Image', copy: 'Copy', document: 'Document', link: 'Link' };
+
+export function assetKindLabel(kind: string): string {
+  return ASSET_KIND_LABEL[kind] ?? kind;
+}
+
+/** Only render URLs we trust as a src/href — keeps a pasted javascript: URL inert. */
+function safeUrl(value: string): string {
+  return /^(https?:|data:)/i.test(value.trim()) ? value.trim() : '';
+}
+
+/** Render an asset's current content according to its kind. */
+function assetPreview(kind: string, content: string): string {
+  if (kind === 'image') {
+    const src = safeUrl(content);
+    return src
+      ? `<img src="${esc(src)}" alt="asset preview" style="max-width:100%;border-radius:9px;border:1px solid var(--line)">`
+      : `<div class="empty">Preview unavailable — image content must be an http(s) or data: URL.</div>`;
+  }
+  if (kind === 'link') {
+    const href = safeUrl(content);
+    return href
+      ? `<a href="${esc(href)}" target="_blank" rel="noreferrer noopener">${esc(content)}</a>`
+      : `<div>${esc(content)}</div>`;
+  }
+  // copy / document → show the text.
+  return `<div style="white-space:pre-wrap;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:12px">${esc(content)}</div>`;
+}
+
+export function assetLibraryPage(opts: {
+  session: Session;
+  assets: Array<{ id: string; name: string; kind: string; clientName: string; tags: string[]; version: number }>;
+  query: string;
+  tag: string;
+}): string {
+  const rows = opts.assets.length
+    ? `<table><thead><tr><th>Name</th><th>Kind</th><th>Client</th><th>Tags</th><th>Version</th></tr></thead>
+       <tbody>${opts.assets
+         .map(
+           (a) =>
+             `<tr><td><a href="/assets/${esc(a.id)}">${esc(a.name)}</a></td>
+              <td><span class="badge">${esc(assetKindLabel(a.kind))}</span></td>
+              <td>${esc(a.clientName)}</td>
+              <td>${a.tags.map((t) => `<a class="badge" href="/assets?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join(' ') || '—'}</td>
+              <td><span class="badge active">v${a.version}</span></td></tr>`,
+         )
+         .join('')}</tbody></table>`
+    : `<div class="empty">${opts.query || opts.tag ? 'No assets match your search.' : 'No assets yet. Add your first asset to the library.'}</div>`;
+
+  return layout({
+    title: 'Assets',
+    active: '/assets',
+    session: opts.session,
+    body: `<div class="head"><div><h1>Asset Library</h1><p>Reusable creative — images, copy, documents and links — organized by client, brand and project.</p></div>
+      <a class="btn" href="/assets/new">+ New asset</a></div>
+      <div class="panel" style="margin-bottom:20px">
+        <form method="get" action="/assets" style="display:flex;gap:10px;align-items:flex-end">
+          <div style="flex:1"><label>Search</label><input name="q" placeholder="Search by name or tag" value="${esc(opts.query)}"></div>
+          ${opts.tag ? `<input type="hidden" name="tag" value="${esc(opts.tag)}">` : ''}
+          <button class="btn" style="margin-top:0">Search</button>
+          ${opts.query || opts.tag ? `<a class="btn ghost" href="/assets" style="margin-top:0">Clear</a>` : ''}
+        </form>
+        ${opts.tag ? `<p class="sub" style="margin-top:12px">Filtered by tag <span class="badge">${esc(opts.tag)}</span></p>` : ''}
+      </div>
+      <div class="panel">${rows}</div>`,
+  });
+}
+
+export function assetForm(opts: {
+  session: Session;
+  clients: Array<{ id: string; name: string }>;
+  brands: Array<{ id: string; name: string }>;
+  projects: Array<{ id: string; name: string }>;
+  error?: string;
+  values?: Vals;
+}): string {
+  const v = opts.values ?? {};
+  const clOpts = opts.clients
+    .map((c) => `<option value="${esc(c.id)}" ${v['clientId'] === c.id ? 'selected' : ''}>${esc(c.name)}</option>`)
+    .join('');
+  const optional = (
+    items: Array<{ id: string; name: string }>,
+    field: string,
+    label: string,
+  ): string =>
+    items.length
+      ? `<div><label>${esc(label)} (optional)</label><select name="${field}"><option value="">— none —</option>${items
+          .map((i) => `<option value="${esc(i.id)}" ${v[field] === i.id ? 'selected' : ''}>${esc(i.name)}</option>`)
+          .join('')}</select></div>`
+      : '';
+  const kind = v['kind'] || 'image';
+  const kindOpt = (val: string, label: string): string => `<option value="${val}" ${kind === val ? 'selected' : ''}>${label}</option>`;
+  return layout({
+    title: 'New Asset',
+    active: '/assets',
+    session: opts.session,
+    body: `<div class="panel">
+      <h2>Add an asset</h2><p class="sub">Paste content directly — text for copy/documents, or an http(s)/data: URL for images and links. New versions never overwrite the old ones.</p>
+      ${banner(opts.error)}
+      <form method="post" action="/assets">
+        <label>Client</label><select name="clientId" required>${clOpts}</select>
+        <div class="row">${optional(opts.brands, 'brandId', 'Brand')}${optional(opts.projects, 'projectId', 'Project')}</div>
+        <div class="row">
+          <div><label>Name</label><input name="name" placeholder="Spring hero banner" value="${esc(v['name'])}" required></div>
+          <div><label>Kind</label><select name="kind">${kindOpt('image', 'Image')}${kindOpt('copy', 'Copy')}${kindOpt('document', 'Document')}${kindOpt('link', 'Link')}</select></div>
+        </div>
+        <label>Content</label><textarea name="content" rows="4" placeholder="Paste text, an image URL, or a link" required>${esc(v['content'])}</textarea>
+        <label>Tags (comma separated)</label><input name="tags" placeholder="hero, spring, q2" value="${esc(v['tags'])}">
+        <div class="actions"><button class="btn">Add to library</button></div>
+      </form></div>`,
+  });
+}
+
+export interface AssetDetailData {
+  id: string;
+  name: string;
+  kind: string;
+  clientName: string;
+  brandName?: string;
+  projectName?: string;
+  tags: string[];
+  currentContent: string;
+  currentVersion: number;
+  versions: Array<{ version: number; note: string; by: string; at: string }>;
+}
+
+export function assetDetailPage(opts: { session: Session; data: AssetDetailData; error?: string }): string {
+  const a = opts.data;
+  const scope = [a.clientName, a.brandName, a.projectName].filter(Boolean).map((s) => esc(s!)).join(' · ');
+
+  const tags = a.tags.length
+    ? a.tags.map((t) => `<a class="badge" href="/assets?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join(' ')
+    : '<span class="sub">No tags yet.</span>';
+
+  const history = a.versions.length
+    ? `<ul class="feed">${[...a.versions]
+        .reverse()
+        .map(
+          (v) =>
+            `<li><span><span class="ev">v${v.version}</span>${v.version === a.currentVersion ? ' <span class="badge active">current</span>' : ''}${v.note ? ` — ${esc(v.note)}` : ''} · ${esc(v.by)}</span><span class="t">${esc(v.at.replace('T', ' ').slice(0, 19))}</span></li>`,
+        )
+        .join('')}</ul>`
+    : `<div class="empty">No versions.</div>`;
+
+  return layout({
+    title: a.name,
+    active: '/assets',
+    session: opts.session,
+    body: `<div class="head"><div><h1>${esc(a.name)}</h1>
+        <p><a href="/assets">← Asset library</a> · ${scope}</p></div>
+        <div style="display:flex;gap:8px;align-items:center"><span class="badge">${esc(assetKindLabel(a.kind))}</span><span class="badge active">v${a.currentVersion}</span></div></div>
+      ${opts.error ? `<div class="err">${esc(opts.error)}</div>` : ''}
+      <div class="panel"><h2>Preview <span class="sub">— version ${a.currentVersion}</span></h2>${assetPreview(a.kind, a.currentContent)}</div>
+
+      <div class="panel" style="margin-top:20px"><h2>Tags</h2>
+        <div style="margin-bottom:14px">${tags}</div>
+        <form method="post" action="/assets/${esc(a.id)}/tag" style="display:flex;gap:10px;align-items:flex-end">
+          <div style="flex:1"><label>Add tag</label><input name="tag" placeholder="evergreen" required></div>
+          <button class="btn" style="margin-top:0">Add tag</button>
+        </form>
+      </div>
+
+      <div class="panel" style="margin-top:20px"><h2>Versions</h2>
+        <p class="sub">Each new version is kept — nothing is overwritten.</p>${history}
+        <form method="post" action="/assets/${esc(a.id)}/version" style="margin-top:14px">
+          <label>New version content</label><textarea name="content" rows="3" placeholder="Paste the updated text or URL" required></textarea>
+          <label>Note</label><input name="note" placeholder="What changed">
+          <div class="actions"><button class="btn">Add version</button></div>
+        </form>
+      </div>`,
   });
 }
 

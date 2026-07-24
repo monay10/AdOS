@@ -1,5 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
-import { ApprovalId, ClientId, MissionId, MissionWizard, ProjectId, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
+import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, ProjectId, type AssetKind, type ProductPricing, type ProjectStatus } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
@@ -16,6 +16,9 @@ import {
   approvalDetailPage,
   approvalForm,
   approvalStatusLabel,
+  assetDetailPage,
+  assetForm,
+  assetLibraryPage,
   brandForm,
   clientForm,
   dashboardPage,
@@ -28,6 +31,7 @@ import {
   projectForm,
   workspaceForm,
   type ApprovalDetailData,
+  type AssetDetailData,
   type ProjectDashboardData,
   type Approval,
   type BriefView,
@@ -441,6 +445,78 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     if (action === 'approve' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.approve(aid, input));
     if (action === 'reject' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.reject(aid, input));
     if (action === 'revise' && method === 'POST') return mutateApproval(app, session, res, id, (aid) => app.approvals.requestRevision(aid, input));
+    return res.html(notFound(session), 404);
+  }
+
+  // ── Asset Library (Phase 9) ──
+  if (path === '/assets' && method === 'GET') {
+    const [assets, clients] = [await app.assets.list(), await app.clients.list()];
+    const clientName = (cid: string): string => clients.find((c) => c.id.toString() === cid)?.name ?? '—';
+    const q = (req.query.get('q') ?? '').trim().toLowerCase();
+    const tag = (req.query.get('tag') ?? '').trim().toLowerCase();
+    const matches = assets.filter((a) => {
+      if (tag && !a.tags.includes(tag)) return false;
+      if (q && !(a.name.toLowerCase().includes(q) || a.tags.some((t) => t.includes(q)))) return false;
+      return true;
+    });
+    return res.html(
+      assetLibraryPage({
+        session,
+        assets: matches.map((a) => ({
+          id: a.id.toString(),
+          name: a.name,
+          kind: a.kind,
+          clientName: clientName(a.clientId),
+          tags: [...a.tags],
+          version: a.currentVersion,
+        })),
+        query: req.query.get('q') ?? '',
+        tag: req.query.get('tag') ?? '',
+      }),
+    );
+  }
+  if (path === '/assets/new' && method === 'GET') {
+    const [clients, brands, projects] = [await app.clients.list(), await app.brands.list(), await app.projects.list()];
+    if (clients.length === 0) return res.redirect('/clients/new');
+    const values = session.clientId ? { clientId: session.clientId } : {};
+    return res.html(assetForm({ session, clients: idName(clients), brands: idName(brands), projects: idName(projects), values }));
+  }
+  if (path === '/assets' && method === 'POST') {
+    const [clients, brands, projects] = [await app.clients.list(), await app.brands.list(), await app.projects.list()];
+    const rerender = (msg: string): void =>
+      res.html(assetForm({ session, clients: idName(clients), brands: idName(brands), projects: idName(projects), error: msg, values: req.body }), 400);
+    const brandId = (req.body['brandId'] ?? '').trim();
+    const projectId = (req.body['projectId'] ?? '').trim();
+    const r = await app.assets.create({
+      tenantId: session.tenantId,
+      clientId: (req.body['clientId'] ?? '').trim(),
+      ...(brandId ? { brandId } : {}),
+      ...(projectId ? { projectId } : {}),
+      name: (req.body['name'] ?? '').trim(),
+      kind: (req.body['kind'] ?? 'image') as AssetKind,
+      content: (req.body['content'] ?? '').trim(),
+      tags: parseList(req.body['tags']),
+      by: session.actor,
+      at: new Date().toISOString(),
+    });
+    if (r.isErr) return rerender(r.error.message);
+    return res.redirect(`/assets/${r.value.id.toString()}`);
+  }
+  if (path.startsWith('/assets/') && path !== '/assets/new') {
+    const seg = path.slice('/assets/'.length).split('/');
+    const id = seg[0] ?? '';
+    const action = seg[1];
+    if (!id) return res.html(notFound(session), 404);
+
+    if (!action && method === 'GET') return renderAssetDetail(app, session, res, id);
+    if (action === 'version' && method === 'POST') {
+      return mutateAsset(app, session, res, id, (aid) =>
+        app.assets.addVersion(aid, { content: (req.body['content'] ?? '').trim(), note: (req.body['note'] ?? '').trim(), by: session.actor, at: new Date().toISOString() }),
+      );
+    }
+    if (action === 'tag' && method === 'POST') {
+      return mutateAsset(app, session, res, id, (aid) => app.assets.addTag(aid, req.body['tag'] ?? ''));
+    }
     return res.html(notFound(session), 404);
   }
 
@@ -1088,8 +1164,46 @@ async function mutateApproval(
   return res.redirect(`/approvals/${id}`);
 }
 
+/** Load an asset and render its preview + tags + version history. */
+async function renderAssetDetail(app: App, session: Session, res: Res, id: string, error?: string): Promise<void> {
+  const found = await app.assets.get(AssetId.of(id));
+  if (found.isErr) return res.html(notFound(session), 404);
+  const asset = found.value;
+
+  const clientRes = await app.clients.get(ClientId.of(asset.clientId));
+  const clientName = clientRes.isOk ? clientRes.value.name : '—';
+  const brandName = asset.brandId ? (await app.brands.list()).find((b) => b.id.toString() === asset.brandId)?.name : undefined;
+  const projectName = asset.projectId ? (await app.projects.list()).find((p) => p.id.toString() === asset.projectId)?.name : undefined;
+
+  const data: AssetDetailData = {
+    id,
+    name: asset.name,
+    kind: asset.kind,
+    clientName,
+    ...(brandName ? { brandName } : {}),
+    ...(projectName ? { projectName } : {}),
+    tags: [...asset.tags],
+    currentContent: asset.currentContent,
+    currentVersion: asset.currentVersion,
+    versions: asset.versions.map((v) => ({ version: v.version, note: v.note, by: v.by, at: v.at })),
+  };
+  return res.html(assetDetailPage({ session, data, ...(error ? { error } : {}) }));
+}
+
+async function mutateAsset(
+  app: App,
+  session: Session,
+  res: Res,
+  id: string,
+  change: (aid: AssetId) => Promise<{ isErr: boolean; error?: { message: string } }>,
+): Promise<void> {
+  const r = await change(AssetId.of(id));
+  if (r.isErr) return renderAssetDetail(app, session, res, id, r.error?.message ?? 'Update failed');
+  return res.redirect(`/assets/${id}`);
+}
+
 async function collectStats(app: App): Promise<DashStats> {
-  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports, approvals] = await Promise.all([
+  const [workspaces, clients, brands, products, missions, briefs, creatives, campaigns, reports, approvals, assets] = await Promise.all([
     app.workspaces.list(),
     app.clients.list(),
     app.brands.list(),
@@ -1100,6 +1214,7 @@ async function collectStats(app: App): Promise<DashStats> {
     app.campaigns.list(),
     app.reports.list(),
     app.approvals.list(),
+    app.assets.list(),
   ]);
   return {
     workspaces: workspaces.length,
@@ -1113,6 +1228,7 @@ async function collectStats(app: App): Promise<DashStats> {
     reports: reports.length,
     learnings: missions.filter((m) => m.status === 'completed').length,
     approvals: approvals.length,
+    assets: assets.length,
   };
 }
 

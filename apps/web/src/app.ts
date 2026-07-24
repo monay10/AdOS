@@ -5,9 +5,11 @@ import { TenantContext } from '@ados/tenancy';
 import { telemetry, type Telemetry } from '@ados/observability';
 import {
   ApprovalService,
+  AssetService,
   BrandService,
   ClientService,
   InMemoryApprovalRepository,
+  InMemoryAssetRepository,
   InMemoryBrandRepository,
   InMemoryClientRepository,
   InMemoryMissionRepository,
@@ -51,6 +53,7 @@ export class App {
   readonly products: ProductService;
   readonly projects: ProjectService;
   readonly approvals: ApprovalService;
+  readonly assets: AssetService;
   readonly missions: MissionService;
   readonly briefs: MarketingBriefService;
   readonly creative: CreativeStudioService;
@@ -72,6 +75,7 @@ export class App {
     this.products = new ProductService(new InMemoryProductRepository(), bus);
     this.projects = new ProjectService(new InMemoryProjectRepository(), bus);
     this.approvals = new ApprovalService(new InMemoryApprovalRepository(), bus);
+    this.assets = new AssetService(new InMemoryAssetRepository(), bus);
     this.missions = new MissionService(new InMemoryMissionRepository(), bus);
     this.briefs = new MarketingBriefService(new InMemoryMarketingBriefRepository(), bus, ai);
     this.creative = new CreativeStudioService(new InMemoryCreativeSetRepository(), bus, ai);
