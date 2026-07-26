@@ -6,8 +6,10 @@ import type { UnitOfWork, UnitOfWorkContext } from '@ados/kernel';
  * depend only on the port, never on a driver.
  *
  * Multi-tenancy strategy: a single database with a `tenant_id` column on every
- * table, enforced by Row-Level Security AND by every query passing through the
- * ambient TenantContext. Adapters MUST scope reads/writes to the current tenant.
+ * table. Isolation is enforced in the application layer — every query passes
+ * through the ambient TenantContext and adapters scope reads to the current
+ * tenant. (Database-level Row-Level Security is a planned hardening item and is
+ * NOT yet configured; see PRODUCT_TRUTH.md §2/§6.)
  */
 export interface QueryExecutor {
   query<T = unknown>(sql: string, params?: unknown[]): Promise<T[]>;

@@ -1,9 +1,16 @@
-# AdOS — Enterprise AI Operating System
+# AdOS — Enterprise AI Operating System for Advertising
 
-> An **offline-first, autonomous AI advertising agency**. You don't operate
-> agents — you run an **AI Company**. State a business objective and the company
-> plans, creates, launches, and optimizes campaigns on locally-installed models,
-> surfacing only results and the steps that need your approval.
+> An **offline-first, AI advertising agency** platform. You don't operate agents —
+> you run an **AI Company**. State a business objective and the platform, on
+> locally-installed models, drafts the marketing brief, creative, and campaign
+> plan — surfacing results and gating **every** step on your approval.
+>
+> **Honest scope (see [`PRODUCT_TRUTH.md`](PRODUCT_TRUTH.md), a source-of-code
+> audit):** AdOS produces human-approved campaign **drafts**; it does not yet
+> launch or optimize live campaigns on ad platforms, and several domains
+> (agents/autonomy/workflow/connectors) are roadmap scaffolding. The default AI is
+> a deterministic offline mode; connect a local engine (Ollama/vLLM) for live model
+> output.
 
 ```
 "Launch a patient-acquisition operation for a new dental clinic,
@@ -18,7 +25,7 @@
 2. **AI Manager is the only thing that talks to models** — agents submit `AITask`s.
 3. **Cognitive Core is the only thing that decides how to think** — agents delegate reasoning.
 4. **Everything integrates through events** — no context imports another.
-5. **Replaceable · configurable · multi-tenant · observable · testable** — no hardcoded rules, no placeholders.
+5. **Replaceable · configurable · multi-tenant · observable · testable** — the wired advertising pipeline is placeholder-free; some future domains (agent-framework, autonomy, workflow-engine, knowledge-engine, connector-hub) are event-contract scaffolding pending implementation.
 
 Read [`ARCHITECTURE.md`](ARCHITECTURE.md) for the full layered stack and
 [`ROADMAP.md`](ROADMAP.md) for the build order. Current state is in
