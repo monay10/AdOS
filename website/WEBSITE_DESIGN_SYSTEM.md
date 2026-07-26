@@ -272,7 +272,7 @@ WCAG 2.2 AA minimum (`Constitution §15`). Design responsibilities:
 ## 16. Brand rules
 
 - **Name:** always "AdOS" (capital A, capital OS). Never "Ados," "ADOS," "adOS."
-- **Tagline:** "The Advertising Operating System" (EN) / "Reklam İşletim Sistemi"
+- **Tagline:** "The Enterprise AI Operating System" (EN) / "Kurumsal Yapay Zekâ İşletim Sistemi"
   (TR). Use verbatim.
 - **Voice:** precise, calm, credible (`Constitution §19`). No buzzwords, no
   exclamation marks in body.

@@ -52,7 +52,7 @@ type Dict = Record<string, { en: string; tr: string }>;
 // UI strings, keyed. English is the source of truth; add `tr` for each.
 const DICT: Dict = {
   // ── App chrome / navigation ──
-  'app.tagline': { en: 'Advertising Operating System', tr: 'Reklam İşletim Sistemi' },
+  'app.tagline': { en: 'Enterprise AI Operating System', tr: 'Kurumsal Yapay Zekâ İşletim Sistemi' },
   'nav.dashboard': { en: 'Dashboard', tr: 'Panel' },
   'nav.clients': { en: 'Clients', tr: 'Müşteriler' },
   'nav.brands': { en: 'Brands', tr: 'Markalar' },
@@ -80,7 +80,7 @@ const DICT: Dict = {
   // ── Login ──
   'login.title': { en: 'Sign in', tr: 'Giriş yap' },
   'login.welcome': { en: 'Welcome back', tr: 'Tekrar hoş geldiniz' },
-  'login.subtitle': { en: 'Sign in to your advertising operating system.', tr: 'Reklam işletim sisteminize giriş yapın.' },
+  'login.subtitle': { en: 'Sign in to your enterprise AI operating system.', tr: 'Kurumsal Yapay Zekâ İşletim Sisteminize giriş yapın.' },
   'login.email': { en: 'Work email', tr: 'İş e-postası' },
   'login.company': { en: 'Company', tr: 'Şirket' },
   'login.submit': { en: 'Sign in', tr: 'Giriş yap' },

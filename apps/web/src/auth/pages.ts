@@ -20,7 +20,7 @@ function authShell(title: string, subtitle: string, body: string, error?: string
 export function authLoginPage(error?: string, values: Vals = {}, notice?: string): string {
   return authShell(
     'Sign in',
-    'Sign in to your advertising operating system.',
+    'Sign in to your enterprise AI operating system.',
     `<form method="post" action="/login">
        <label>Work email</label>
        <input name="email" type="email" placeholder="you@company.com" value="${esc(values['email'])}" required autofocus>

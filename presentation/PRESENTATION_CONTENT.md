@@ -14,8 +14,8 @@ lines), and **Speaker notes**. `[EN]` / `[TR]` mark the language.
 ## Slide 1 — Opening
 
 **Title**
-- `[EN]` AdOS — The Advertising Operating System
-- `[TR]` AdOS — Reklam İşletim Sistemi
+- `[EN]` AdOS — The Enterprise AI Operating System
+- `[TR]` AdOS — Kurumsal Yapay Zekâ İşletim Sistemi
 
 **On-slide copy**
 - `[EN]` Enterprise AI that never leaves your building.

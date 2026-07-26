@@ -155,7 +155,7 @@ export interface Content {
 
 const en: Content = {
   meta: {
-    home: { title: 'AdOS — The Advertising Operating System', description: 'Run an autonomous AI ad agency entirely on your own infrastructure. Local AI, no cloud, no API keys, no data egress.' },
+    home: { title: 'AdOS — The Enterprise AI Operating System', description: 'Run an autonomous AI ad agency entirely on your own infrastructure. Local AI, no cloud, no API keys, no data egress.' },
     security: { title: 'Security — AdOS', description: 'Enterprise security by architecture: multi-tenant isolation, Argon2id, encrypted backups, disaster recovery. No cloud, no data egress.' },
     local: { title: 'Local AI — AdOS', description: 'The models run on your hardware. Runs on Ollama, vLLM, LM Studio and more. No cloud call, no API key.' },
     offline: { title: 'Offline AI — AdOS', description: 'Offline-first. Runs in air-gapped environments with no outbound connection required.' },
@@ -181,7 +181,7 @@ const en: Content = {
     backHome: 'Back to home', readMore: 'Read more',
   },
   home: {
-    eyebrow: 'The Advertising Operating System',
+    eyebrow: 'The Enterprise AI Operating System',
     headline: 'Run an AI ad agency inside your own walls.',
     subhero: 'AdOS plans and runs your campaigns end to end — using AI models that stay entirely on your own infrastructure. No cloud. No API keys. No data leaving the building.',
     trustStrip: '100% local models · No cloud · No API keys · Your data never leaves your network',
@@ -328,7 +328,7 @@ const en: Content = {
     ],
   },
   footer: {
-    positioning: 'The Advertising Operating System — enterprise AI advertising that never leaves your building.',
+    positioning: 'The Enterprise AI Operating System — enterprise AI advertising that never leaves your building.',
     cols: { product: 'Product', solutions: 'Solutions', resources: 'Resources', company: 'Company', legal: 'Legal' },
     cookiePrefs: 'Cookie preferences',
     security: 'Report a vulnerability',
@@ -371,7 +371,7 @@ const en: Content = {
 
 const tr: Content = {
   meta: {
-    home: { title: 'AdOS — Reklam İşletim Sistemi', description: 'Otonom bir yapay zekâ reklam ajansını tamamen kendi altyapınızda çalıştırın. Yerel yapay zekâ, bulut yok, API anahtarı yok, veri çıkışı yok.' },
+    home: { title: 'AdOS — Kurumsal Yapay Zekâ İşletim Sistemi', description: 'Otonom bir yapay zekâ reklam ajansını tamamen kendi altyapınızda çalıştırın. Yerel yapay zekâ, bulut yok, API anahtarı yok, veri çıkışı yok.' },
     security: { title: 'Güvenlik — AdOS', description: 'Mimariyle kurumsal güvenlik: çok kiracılı izolasyon, Argon2id, şifreli yedekler, felaket kurtarma. Bulut yok, veri çıkışı yok.' },
     local: { title: 'Yerel Yapay Zekâ — AdOS', description: 'Modeller sizin donanımınızda çalışır. Ollama, vLLM, LM Studio ve daha fazlasıyla çalışır. Bulut çağrısı yok, API anahtarı yok.' },
     offline: { title: 'Çevrimdışı Yapay Zekâ — AdOS', description: 'Çevrimdışı öncelikli. Dışa bağlantı gerektirmeden izole (air-gapped) ortamlarda çalışır.' },
@@ -397,7 +397,7 @@ const tr: Content = {
     backHome: 'Ana sayfaya dön', readMore: 'Daha fazlası',
   },
   home: {
-    eyebrow: 'Reklam İşletim Sistemi',
+    eyebrow: 'Kurumsal Yapay Zekâ İşletim Sistemi',
     headline: 'Yapay zekâ reklam ajansını kendi duvarlarınızın içinde çalıştırın.',
     subhero: 'AdOS kampanyalarınızı baştan sona planlayıp yürütür — tamamen kendi altyapınızda kalan yapay zekâ modelleriyle. Bulut yok. API anahtarı yok. Verileriniz binadan çıkmaz.',
     trustStrip: '%100 yerel modeller · Bulut yok · API anahtarı yok · Verileriniz ağınızdan çıkmaz',
@@ -544,7 +544,7 @@ const tr: Content = {
     ],
   },
   footer: {
-    positioning: 'Reklam İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı.',
+    positioning: 'Kurumsal Yapay Zekâ İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı.',
     cols: { product: 'Ürün', solutions: 'Çözümler', resources: 'Kaynaklar', company: 'Şirket', legal: 'Yasal' },
     cookiePrefs: 'Çerez tercihleri',
     security: 'Güvenlik açığı bildirin',

@@ -8,7 +8,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 **Bilingual glossary (consistent terms):**
 | EN | TR |
 | --- | --- |
-| Advertising Operating System | Reklam İşletim Sistemi |
+| Enterprise AI Operating System | Kurumsal Yapay Zekâ İşletim Sistemi |
 | on-prem / on-premise | kurum içi |
 | local AI | yerel yapay zekâ |
 | offline-first | çevrimdışı öncelikli |
@@ -43,7 +43,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 **Hero**
 | Element | English | Türkçe |
 | --- | --- | --- |
-| Eyebrow | The Advertising Operating System | Reklam İşletim Sistemi |
+| Eyebrow | The Enterprise AI Operating System | Kurumsal Yapay Zekâ İşletim Sistemi |
 | Headline | Run an AI ad agency inside your own walls. | Yapay zekâ reklam ajansını kendi duvarlarınızın içinde çalıştırın. |
 | Subhero | AdOS plans and runs your campaigns end to end — using AI models that stay entirely on your own infrastructure. No cloud. No API keys. No data leaving the building. | AdOS kampanyalarınızı baştan sona planlayıp yürütür — tamamen kendi altyapınızda kalan yapay zekâ modelleriyle. Bulut yok. API anahtarı yok. Verileriniz binadan çıkmaz. |
 | Primary button | Book a demo | Demo talep edin |
@@ -281,7 +281,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 
 | Element | English | Türkçe |
 | --- | --- | --- |
-| Positioning line | The Advertising Operating System — enterprise AI advertising that never leaves your building. | Reklam İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı. |
+| Positioning line | The Enterprise AI Operating System — enterprise AI advertising that never leaves your building. | Kurumsal Yapay Zekâ İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı. |
 | Col: Product | Product | Ürün |
 | Col: Solutions | Solutions | Çözümler |
 | Col: Resources | Resources | Kaynaklar |

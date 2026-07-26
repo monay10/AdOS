@@ -237,7 +237,7 @@ legal/blog get fewer (footer + contextual).
 
 ## 8. SEO hierarchy
 
-**Category ambition:** own "Advertising Operating System" + "on-prem / local AI
+**Category ambition:** own "Enterprise AI Operating System" + "on-prem / local AI
 advertising" in EN and TR.
 
 **Page-level hierarchy:**
@@ -253,7 +253,7 @@ advertising" in EN and TR.
 | /solutions/on-prem-offline | self-hosted / on-prem AI marketing | kurum içi reklam yapay zekâsı |
 | /security | secure AI advertising, data residency | veri egemenliği reklam yapay zekâsı |
 | /product/ai-pipeline | AI campaign automation pipeline | yapay zekâ kampanya otomasyonu |
-| / | Advertising Operating System | reklam işletim sistemi |
+| / | Enterprise AI Operating System | kurumsal yapay zekâ işletim sistemi |
 
 **Structured data:** `Organization`, `SoftwareApplication`, `BreadcrumbList` on
 all pages; `FAQPage` on Home/FAQ; `Article` on blog.

@@ -1,6 +1,6 @@
 # AdOS — Architecture
 
-**AdOS (Advertising Operating System)** is an offline-first, autonomous AI advertising agency: an operating system of AI agents organized like a real company, capable of planning, creating, launching, and optimizing advertising campaigns without human intervention except final approvals.
+**AdOS (Enterprise AI Operating System)** is an offline-first, autonomous AI advertising agency: an operating system of AI agents organized like a real company, capable of planning, creating, launching, and optimizing advertising campaigns without human intervention except final approvals.
 
 This document is the single canonical reference for how the system is layered and what rules every module obeys.
 

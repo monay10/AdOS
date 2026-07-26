@@ -2,7 +2,7 @@
   "name": "ados",
   "version": "1.0.0",
   "private": true,
-  "description": "AdOS — Advertising Operating System. Autonomous AI advertising platform.",
+  "description": "AdOS — Enterprise AI Operating System. Autonomous AI advertising platform.",
   "packageManager": "pnpm@9.12.0",
   "engines": {
     "node": ">=20.0.0"

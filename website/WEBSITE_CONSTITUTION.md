@@ -25,21 +25,21 @@ specifies **what** and **why**, not the build.
 ## 1. Brand positioning
 
 **One-line positioning**
-> AdOS is the Advertising Operating System that runs an autonomous AI ad agency
+> AdOS is the Enterprise AI Operating System that runs an autonomous AI ad agency
 > entirely on your own infrastructure — no cloud, no API keys, no data leaving
 > your walls.
 
 **Positioning statement (long form)**
 For enterprises and regulated organizations that need modern AI advertising but
 cannot send their customer data to third-party clouds, AdOS is an on-premise,
-offline-first advertising operating system that plans and runs campaigns end to
+offline-first enterprise AI operating system that plans and runs campaigns end to
 end — brief, creative, campaign, analytics, executive review — using local AI
 models the customer controls. Unlike cloud martech suites and API-dependent AI
 tools, AdOS keeps every prompt, asset and result inside the customer's own
 network, with enterprise-grade security, multi-tenancy and disaster recovery
 built in.
 
-**Category:** Advertising Operating System (a new category — not "another
+**Category:** Enterprise AI Operating System (a new category — not "another
 martech point tool," not "a ChatGPT wrapper").
 
 **Brand character:** Precise, calm, credible, sovereign. We sound like
@@ -60,7 +60,7 @@ growth-marketing. Confidence through specificity, never through adjectives.
 
 **Message architecture (pyramid):**
 
-- **Tagline (hero):** *The Advertising Operating System.*
+- **Tagline (hero):** *The Enterprise AI Operating System.*
 - **Sub-tagline:** *Run an autonomous AI ad agency — 100% on your own
   infrastructure.*
 - **Three proof messages (below the fold):**
@@ -504,7 +504,7 @@ responsive `srcset`; the body never scrolls horizontally at any width.
 ## 17. SEO strategy
 
 **Goals:** rank for sovereignty/on-prem/local-AI advertising intent in EN and TR;
-establish the "Advertising Operating System" category.
+establish the "Enterprise AI Operating System" category.
 
 - **Information architecture:** one clear H1 per page; descriptive, keyword-aware
   titles (≤60 chars) and meta descriptions (≤155 chars); clean, human-readable

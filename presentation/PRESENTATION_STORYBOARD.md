@@ -18,7 +18,7 @@ room for discussion. Slides marked *(cuttable)* can be dropped if time is short.
 
 ### Slide 1 — Title
 - **Objective:** Set a premium, calm, trustworthy tone.
-- **Title:** AdOS — The Advertising Operating System.
+- **Title:** AdOS — The Enterprise AI Operating System.
 - **Key Message:** Enterprise AI that never leaves your building.
 - **Visual:** Full-bleed dark canvas, centered AdOS mark + wordmark, one-line
   positioning beneath.
@@ -122,7 +122,7 @@ room for discussion. Slides marked *(cuttable)* can be dropped if time is short.
 
 ### Slide 6 — Introducing AdOS
 - **Objective:** Present AdOS as the answer to the reframe.
-- **Title:** AdOS — the Advertising Operating System.
+- **Title:** AdOS — the Enterprise AI Operating System.
 - **Key Message:** A complete AI platform that runs entirely on your
   infrastructure.
 - **Visual:** Product wordmark + a one-line definition; a clean product glimpse.

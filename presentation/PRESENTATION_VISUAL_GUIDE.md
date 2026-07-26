@@ -30,7 +30,7 @@ frame, single-weight line diagrams, the perimeter motif).
 - **Mood:** premium, quiet, infrastructural.
 - **Motion:** mark fades in (300ms); perimeter line draws left-to-right (500ms),
   then rests.
-- **Caption:** "The Advertising Operating System."
+- **Caption:** "The Enterprise AI Operating System."
 
 ### H2 — The reversal (Slides 3 & 5, paired)
 - **Content:** a building silhouette on the left, a distant cloud on the right.

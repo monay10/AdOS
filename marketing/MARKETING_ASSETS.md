@@ -180,7 +180,7 @@ captures (auto-detected bilingual UI).
 | Dashboard / overview | System at-a-glance | CIO/GM, MOFU | 2560×1440 | PNG | PMM | P1 |
 | Mobile/responsive capture | Show responsive UI | IT/BT, MOFU | 1290×2796 (device frame) | PNG | PMM | P2 |
 | Light-theme capture set | Theme-aware proof (light mirror) | Any, MOFU | 2560×1440 | PNG | PMM | P2 |
-| Airgap/offline indicator capture | Prove no-internet operation | CISO/CTO, BOFU | 2560×1440 | PNG | PMM | P1 |
+| Air-gap/offline indicator capture | Prove no-internet operation | CISO/CTO, BOFU | 2560×1440 | PNG | PMM | P1 |
 
 ---
 

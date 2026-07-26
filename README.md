@@ -1,4 +1,4 @@
-# AdOS — Advertising Operating System
+# AdOS — Enterprise AI Operating System
 
 > An **offline-first, autonomous AI advertising agency**. You don't operate
 > agents — you run an **AI Company**. State a business objective and the company

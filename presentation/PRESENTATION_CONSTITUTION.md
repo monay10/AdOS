@@ -101,7 +101,7 @@ a single job. Numbers are guidance, not a straitjacket.
 | 3 | **The catch** | Cloud AI means handing over your data. |
 | 4 | **The stakes** | For regulated orgs, that is a non-starter (cost, control, compliance, dependency). |
 | 5 | **The reframe** | What if the AI came to your data instead? |
-| 6 | **Introducing AdOS** | The Advertising Operating System — on your infrastructure. |
+| 6 | **Introducing AdOS** | The Enterprise AI Operating System — on your infrastructure. |
 | 7 | **What it does** | From an objective to a finished campaign, autonomously. |
 | 8 | **The pipeline (plain)** | Brief → creative → campaign → results → executive view, you approve each step. |
 | 9 | **The one big idea** | Your data never leaves your building. (Perimeter visual.) |
