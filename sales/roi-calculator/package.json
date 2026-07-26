@@ -1,0 +1,11 @@
+{
+  "name": "ados-roi-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AdOS ROI Calculator — offline, static, deterministic. Implements sales/ROI_CALCULATOR_SPEC.md 1:1.",
+  "scripts": {
+    "test": "node --test",
+    "serve": "node ./serve.js"
+  }
+}

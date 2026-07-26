@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AdOS ROI Calculator</title>
+  <meta name="description" content="AdOS ROI Calculator — an offline planning model you control. Sovereign, on-premise enterprise AI." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">AdOS</span>
+      <div>
+        <h1 id="app-title">AdOS ROI Calculator</h1>
+        <p id="app-subtitle" class="subtitle">A planning model you control — not a guarantee.</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="lang-toggle" class="btn ghost" type="button">Türkçe</button>
+      <button id="theme-toggle" class="btn ghost" type="button" aria-label="Theme">◐</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel inputs-panel" aria-labelledby="h-inputs">
+      <h2 id="h-inputs">Your organization</h2>
+      <div id="inputs" class="grid"></div>
+
+      <details class="assumptions" open>
+        <summary id="h-assumptions">Assumptions panel</summary>
+        <div id="assumptions" class="grid"></div>
+      </details>
+
+      <div class="actions">
+        <button id="reset-btn" class="btn" type="button">Reset to defaults</button>
+        <button id="pdf-btn" class="btn primary" type="button">Export PDF</button>
+        <button id="excel-btn" class="btn" type="button">Export Excel</button>
+        <button id="print-btn" class="btn" type="button">Print report</button>
+      </div>
+      <p id="currency-note" class="currency-note"></p>
+    </section>
+
+    <section class="panel results-panel" aria-labelledby="h-results">
+      <h2 id="h-results">Results</h2>
+      <p id="honest-frame" class="honest-frame"></p>
+      <div id="tiles" class="tiles"></div>
+      <div id="warnings" class="warnings"></div>
+
+      <h2 id="h-charts" class="sr-only">Charts</h2>
+      <div class="chart-block">
+        <h3 id="h-breakdown">Savings breakdown</h3>
+        <div id="chart-bar"></div>
+      </div>
+      <div class="chart-block">
+        <h3 id="h-cumulative">Cumulative savings vs investment (36 months)</h3>
+        <div id="chart-line"></div>
+      </div>
+      <div class="chart-block gauge-block">
+        <h3 id="h-gauge">Efficiency gain</h3>
+        <div id="chart-gauge"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>AdOS — Sovereign enterprise AI. Runs 100% on your infrastructure.</span>
+  </footer>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
