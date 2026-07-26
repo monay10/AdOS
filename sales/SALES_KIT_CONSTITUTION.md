@@ -28,21 +28,31 @@ buyer question, the Kit has failed and must be extended.
 These facts are **binding**. Never contradict them. Never soften them. Never
 embellish beyond them.
 
+> **Alignment note (2026-07-27):** these facts were re-grounded against a
+> source-of-code audit (`../PRODUCT_TRUTH.md`). Claims are limited to what the
+> product implements today; roadmap items are labeled as such.
+
 ### 1.1 What AdOS is
 
-AdOS is an **AI-powered enterprise operating system** that runs **entirely on the
-customer's own infrastructure**. It unifies an organization's knowledge, its
-people, and its day-to-day work under one system with three pillars:
+AdOS is an **Enterprise AI Operating System for advertising** — an offline-first
+**AI advertising-agency platform** that runs **entirely on the customer's own
+infrastructure**. You don't operate agents; you run an **AI Company**. A client
+states a marketing objective (a **Mission**) in plain language, and AdOS drafts the
+work through a human-approved pipeline:
 
-- **Company Brain** — the organization's private, permission-aware knowledge
-  base. Every AI answer is grounded in the company's own documents and **cites
-  its sources**. Citations are permission-scoped: a user only ever sees, and the
-  AI only ever cites, documents that user is entitled to.
-- **Digital Employees** — AI agents that perform real knowledge work: answering
-  questions, drafting content, routing requests, preparing approvals, and moving
-  workflows forward. They act within defined roles and permissions.
-- **Workflows & Approvals** — structured business processes with tiered approval
-  authority, full audit trails, and deterministic routing.
+- **The Agency model** — Workspaces → Clients → Brands → Products → **Missions**.
+  Brands carry voice, rules, and banned words; the whole workspace is tenant-isolated.
+- **The Mission pipeline** — each Mission produces, in order and gated on your
+  approval at every step: a **Marketing Brief** → a **Creative Set** (ad copy,
+  CTAs, social/landing/email) → a **Campaign Draft** (channels, ad sets, budget
+  split) → a **Performance Report** (deterministic ad KPIs: CTR/CPC/CPA/CPL/ROAS/
+  ROI) → an **Executive (CEO) Dashboard**.
+- **Company Brain** — AdOS's **marketing-performance memory**: it accumulates
+  brand, creative, and campaign insight, a campaign→lead→ROI knowledge graph, and
+  winning-ad patterns so future campaigns improve. *(It is a performance memory,
+  not a document Q&A system, and it does not emit source citations.)*
+- **Approvals** — every stage is gated by an explicit human approval
+  (strategy & budget, creative, campaign launch).
 
 ### 1.2 The non-negotiable technical truths
 
@@ -50,25 +60,32 @@ people, and its day-to-day work under one system with three pillars:
 |---|---|
 | **Local AI** | All AI inference runs on the customer's own hardware via a local engine (Ollama, or any OpenAI-compatible local server such as vLLM, LM Studio, llama.cpp, SGLang). |
 | **No cloud dependency** | AdOS requires **no external API, no API keys, and no internet connection** to operate. |
-| **Data sovereignty** | Customer data — documents, prompts, answers, workflows — **never leaves the customer's premises**. There is no telemetry of business content. |
+| **Data sovereignty** | Customer data — prompts, briefs, creative, campaigns — **never leaves the customer's premises**. There is no telemetry of business content. |
 | **On-Prem** | AdOS deploys on-premise (or in the customer's private cloud/VPC). The customer owns the entire stack. |
-| **Offline-first** | The platform is designed to run fully air-gapped. |
-| **Multi-tenant** | Strict tenant isolation; one deployment can serve multiple business units with segregated data. |
+| **Offline-first** | Designed to run fully air-gapped. The **default AI mode is deterministic offline**; connect a local engine (Ollama/vLLM) for live model output. |
+| **Human-gated** | Every consequential step requires an explicit human approval; nothing is auto-launched. |
+| **Tenant isolation** | Application-level isolation (ambient tenant context + per-query tenant scoping); one deployment can serve multiple workspaces. *(Database-level RLS and finer-grained per-user permission enforcement are roadmap.)* |
 | **Bilingual** | Full Turkish and English UI, auto-detected from the user's environment. |
-| **Auditable** | Every consequential action is recorded in an immutable audit trail. |
-| **Permission-aware AI** | The AI can never surface content a user is not authorized to see. |
+| **Activity log** | Actions emit structured events and approvals keep an ordered timeline. *(A tamper-evident immutable audit store is roadmap.)* |
 
 ### 1.3 What AdOS is **not**
 
-- Not a public cloud SaaS. Not a wrapper around a hosted AI API.
-- Not dependent on OpenAI, Anthropic, Google, or any external model provider.
-- Not a chatbot bolted onto a website. It is an operating layer for the business.
+- Not a public cloud SaaS. Not a wrapper around a hosted AI API. Not dependent on
+  OpenAI, Anthropic, Google, or any external model provider.
+- **Not a generic enterprise document knowledge base or document-Q&A system** —
+  the "knowledge" it holds is marketing-performance data, not arbitrary company
+  documents, and it does not produce cited answers over documents.
+- **Does not launch or optimize live advertising** — it produces human-approved
+  **drafts**; it does not connect to ad platforms today.
+- **Has no autonomous "Digital Employees" yet** — the pipeline is AI-assisted and
+  human-gated; an autonomous agent layer is roadmap.
 - Not a data collector. AdOS does not monetize, transmit, or train on customer data.
 
 > **The one sentence every salesperson must be able to say:**
-> *"AdOS is an enterprise AI operating system that runs 100% on your own
-> infrastructure — your data never leaves your building, and it works with no
-> internet at all."*
+> *"AdOS is an Enterprise AI Operating System for advertising that runs 100% on
+> your own infrastructure — it drafts your marketing briefs, creative, and
+> campaigns with local AI, your data never leaves your building, and it works with
+> no internet at all."*
 
 ---
 

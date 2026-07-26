@@ -23,23 +23,39 @@ it is** — a sovereign, on-premise, enterprise AI operating system.
 
 ## 1. Inherited canonical facts (binding — do not restate differently)
 
-AdOS is an **AI-powered enterprise operating system** that runs **entirely on the
-customer's own infrastructure**. Three pillars: **Company Brain** (private,
-permission-aware knowledge base; every answer cited and permission-scoped),
-**Digital Employees** (AI agents doing real knowledge work), **Workflows &
-Approvals** (structured, tiered, audited).
+> **Alignment note (2026-07-27):** re-grounded against a source-of-code audit
+> (`../PRODUCT_TRUTH.md`). Only implemented capabilities are stated as facts;
+> roadmap items are labeled.
+
+AdOS is an **Enterprise AI Operating System for advertising** — an offline-first
+**AI advertising-agency platform** that runs **entirely on the customer's own
+infrastructure**. A client states a marketing objective (a **Mission**) and AdOS
+drafts the work through a human-approved pipeline: **Marketing Brief → Creative Set
+→ Campaign Draft → Performance Report → Executive Dashboard**, on the agency model
+Workspaces → Clients → Brands → Products → Missions. **Company Brain** is AdOS's
+**marketing-performance memory** (brand/creative/campaign insight, a
+campaign→lead→ROI knowledge graph, winning-ad patterns) — not a document Q&A system
+and not a source of citations.
 
 Non-negotiable truths: **Local AI** (runs on the customer's hardware via Ollama or
 any OpenAI-compatible local engine — no cloud, no external API, no keys, no
 internet required) · **data sovereignty** (customer data never leaves the
-premises) · **on-premise** · **offline/air-gap capable** · **multi-tenant** ·
-**bilingual TR/EN** · **auditable** · **permission-aware AI** · **no per-token
-billing** · **no vendor lock-in** · honest performance trade-off (local CPU
-inference is seconds, not milliseconds; better hardware closes the gap).
+premises) · **on-premise** · **offline/air-gap capable** (default AI mode is
+deterministic offline; connect a local engine for live output) · **tenant
+isolation** (application-level; DB-level RLS is roadmap) · **human-gated** (every
+step needs explicit approval; nothing auto-launches) · **bilingual TR/EN** · **no
+per-token billing** · **no vendor lock-in** · honest performance trade-off (local
+CPU inference is seconds, not milliseconds; better hardware closes the gap).
 
-**The one sentence:** *"AdOS is an enterprise AI operating system that runs 100%
-on your own infrastructure — your data never leaves your building, and it works
-with no internet at all."*
+Not yet implemented (do not claim as shipped): document knowledge base / cited
+answers, autonomous "Digital Employees," enforced per-user permission-aware AI,
+immutable audit trail, external connectors, and live ad-platform launch. See
+`../POSITIONING_GAP_ANALYSIS.md`.
+
+**The one sentence:** *"AdOS is an Enterprise AI Operating System for advertising
+that runs 100% on your own infrastructure — it drafts your briefs, creative, and
+campaigns with local AI, your data never leaves your building, and it works with no
+internet at all."*
 
 These facts are shared with the Sales Kit. Any change propagates to both.
 
