@@ -21,9 +21,9 @@ export function loginPage(error?: string, values: Vals = {}): string {
       ${banner(error)}
       <form method="post" action="/login">
         <label>${esc(t('login.email'))}</label>
-        <input name="email" type="email" placeholder="you@company.com" value="${esc(values['email'])}" required>
+        <input name="email" type="email" placeholder="${esc(t('ph.email'))}" value="${esc(values['email'])}" required>
         <label>${esc(t('login.company'))}</label>
-        <input name="company" placeholder="Bright Smiles Dental" value="${esc(values['company'])}" required>
+        <input name="company" placeholder="${esc(t('ph.company'))}" value="${esc(values['company'])}" required>
         <div class="actions"><button class="btn" style="width:100%">${esc(t('login.submit'))}</button></div>
       </form>
       <p class="sub" style="text-align:center;margin-top:16px">${esc(t('login.tenantNote'))}</p>
@@ -436,7 +436,7 @@ export function workspaceForm(session: Session, error?: string, values: Vals = {
       ${banner(error)}
       <form method="post" action="/workspaces">
         <label>${esc(t('form.workspace.nameLabel'))}</label>
-        <input name="name" placeholder="Bright Smiles Workspace" value="${esc(values['name'])}" required autofocus>
+        <input name="name" placeholder="${esc(t('ph.workspaceName'))}" value="${esc(values['name'])}" required autofocus>
         <div class="row">
           <div><label>${esc(t('common.currency'))}</label><input name="currency" placeholder="TRY" value="${esc(values['currency'] || 'TRY')}"></div>
           <div><label>${esc(t('common.timezone'))}</label><input name="timezone" placeholder="Europe/Istanbul" value="${esc(values['timezone'] || 'Europe/Istanbul')}"></div>
@@ -466,10 +466,10 @@ export function clientForm(opts: {
       ${banner(opts.error)}
       <form method="post" action="/clients">
         <label>${esc(t('common.workspace'))}</label><select name="workspaceId" required>${options}</select>
-        <label>${esc(t('form.client.nameLabel'))}</label><input name="name" placeholder="Bright Smiles Dental" value="${esc(v['name'])}" required>
+        <label>${esc(t('form.client.nameLabel'))}</label><input name="name" placeholder="${esc(t('ph.company'))}" value="${esc(v['name'])}" required>
         <div class="row">
-          <div><label>${esc(t('form.client.industry'))}</label><input name="industry" placeholder="healthcare" value="${esc(v['industry'])}"></div>
-          <div><label>${esc(t('form.client.contactEmail'))}</label><input name="email" type="email" placeholder="owner@brightsmiles.com" value="${esc(v['email'])}" required></div>
+          <div><label>${esc(t('form.client.industry'))}</label><input name="industry" placeholder="${esc(t('ph.industry'))}" value="${esc(v['industry'])}"></div>
+          <div><label>${esc(t('form.client.contactEmail'))}</label><input name="email" type="email" placeholder="${esc(t('ph.contactEmail'))}" value="${esc(v['email'])}" required></div>
         </div>
         <div class="actions"><button class="btn">${esc(t('form.client.submit'))}</button></div>
       </form></div>`,
@@ -496,12 +496,12 @@ export function brandForm(opts: {
       ${banner(opts.error)}
       <form method="post" action="/brands">
         <label>${esc(t('common.client'))}</label><select name="clientId" required>${options}</select>
-        <label>${esc(t('form.brand.nameLabel'))}</label><input name="name" placeholder="Bright Smiles" value="${esc(v['name'])}" required>
+        <label>${esc(t('form.brand.nameLabel'))}</label><input name="name" placeholder="${esc(t('ph.brandName'))}" value="${esc(v['name'])}" required>
         <div class="row">
-          <div><label>${esc(t('form.brand.voice'))}</label><input name="voice" placeholder="warm and trustworthy" value="${esc(v['voice'] || 'professional')}"></div>
-          <div><label>${esc(t('form.brand.targetAudience'))}</label><input name="targetAudience" placeholder="local families" value="${esc(v['targetAudience'])}"></div>
+          <div><label>${esc(t('form.brand.voice'))}</label><input name="voice" placeholder="${esc(t('ph.voice'))}" value="${esc(v['voice'] || 'professional')}"></div>
+          <div><label>${esc(t('form.brand.targetAudience'))}</label><input name="targetAudience" placeholder="${esc(t('ph.audience'))}" value="${esc(v['targetAudience'])}"></div>
         </div>
-        <label>${esc(t('form.brand.values'))}</label><input name="values" placeholder="care, expertise" value="${esc(v['values'])}">
+        <label>${esc(t('form.brand.values'))}</label><input name="values" placeholder="${esc(t('ph.values'))}" value="${esc(v['values'])}">
         <div class="actions"><button class="btn">${esc(t('form.brand.submit'))}</button></div>
       </form></div>`,
   });
@@ -529,9 +529,9 @@ export function productForm(opts: {
       ${banner(opts.error)}
       <form method="post" action="/products">
         <label>${esc(t('common.client'))}</label><select name="clientId" required>${options}</select>
-        <label>${esc(t('form.product.nameLabel'))}</label><input name="name" placeholder="Whitening Treatment" value="${esc(v['name'])}" required>
-        <label>${esc(t('common.description'))}</label><textarea name="description" rows="2" placeholder="Professional in-clinic teeth whitening">${esc(v['description'])}</textarea>
-        <label>${esc(t('form.product.categories'))}</label><input name="categories" placeholder="dental, cosmetic" value="${esc(v['categories'])}">
+        <label>${esc(t('form.product.nameLabel'))}</label><input name="name" placeholder="${esc(t('ph.productName'))}" value="${esc(v['name'])}" required>
+        <label>${esc(t('common.description'))}</label><textarea name="description" rows="2" placeholder="${esc(t('ph.productDesc'))}">${esc(v['description'])}</textarea>
+        <label>${esc(t('form.product.categories'))}</label><input name="categories" placeholder="${esc(t('ph.categories'))}" value="${esc(v['categories'])}">
         <div class="row-3">
           <div><label>${esc(t('form.product.pricingModel'))}</label><select name="pricingModel">${modelOpt('one_time', t('form.product.oneTime'))}${modelOpt('subscription', t('form.product.subscription'))}${modelOpt('usage', t('form.product.usage'))}${modelOpt('free', t('form.product.free'))}</select></div>
           <div><label>${esc(t('form.product.price'))}</label><input name="price" type="number" min="0" step="0.01" placeholder="129" value="${esc(v['price'])}"></div>
@@ -580,16 +580,16 @@ export function missionForm(opts: {
         </div>
         ${projField}
         <label>${esc(t('form.mission.objective'))}</label>
-        <textarea name="objective" rows="3" placeholder="Acquire new patients for a dental clinic opening next month" required>${esc(v['objective'])}</textarea>
+        <textarea name="objective" rows="3" placeholder="${esc(t('ph.missionObjective'))}" required>${esc(v['objective'])}</textarea>
         <div class="row-3">
           <div><label>${esc(t('form.mission.budget'))}</label><input name="budget" type="number" min="1" step="0.01" placeholder="80000" value="${esc(v['budget'])}" required></div>
           <div><label>${esc(t('common.currency'))}</label><input name="currency" placeholder="TRY" value="${esc(v['currency'] || 'TRY')}"></div>
           <div><label>${esc(t('common.period'))}</label><select name="period">${pOpt('daily', t('form.period.daily'))}${pOpt('weekly', t('form.period.weekly'))}${pOpt('monthly', t('form.period.monthly'))}${pOpt('total', t('form.period.total'))}</select></div>
         </div>
         <div class="row-3">
-          <div><label>${esc(t('form.mission.targetMetric'))}</label><input name="metricName" placeholder="leads" value="${esc(v['metricName'] || 'leads')}"></div>
+          <div><label>${esc(t('form.mission.targetMetric'))}</label><input name="metricName" placeholder="${esc(t('ph.metricName'))}" value="${esc(v['metricName'] || 'leads')}"></div>
           <div><label>${esc(t('form.mission.targetValue'))}</label><input name="metricTarget" type="number" min="1" placeholder="120" value="${esc(v['metricTarget'])}"></div>
-          <div><label>${esc(t('form.mission.unit'))}</label><input name="metricUnit" placeholder="count" value="${esc(v['metricUnit'] || 'count')}"></div>
+          <div><label>${esc(t('form.mission.unit'))}</label><input name="metricUnit" placeholder="${esc(t('ph.metricUnit'))}" value="${esc(v['metricUnit'] || 'count')}"></div>
         </div>
         <div class="actions"><button class="btn">${esc(t('form.mission.submit'))}</button></div>
       </form></div>`,
@@ -616,8 +616,8 @@ export function projectForm(opts: {
       ${banner(opts.error)}
       <form method="post" action="/projects">
         <label>${esc(t('common.brand'))}</label><select name="brandId" required>${brandOpts}</select>
-        <label>${esc(t('form.project.nameLabel'))}</label><input name="name" placeholder="Spring Launch" value="${esc(v['name'])}" required>
-        <label>${esc(t('common.description'))}</label><textarea name="description" rows="2" placeholder="Acquire new patients in Q2">${esc(v['description'])}</textarea>
+        <label>${esc(t('form.project.nameLabel'))}</label><input name="name" placeholder="${esc(t('ph.projectName'))}" value="${esc(v['name'])}" required>
+        <label>${esc(t('common.description'))}</label><textarea name="description" rows="2" placeholder="${esc(t('ph.projectDesc'))}">${esc(v['description'])}</textarea>
         <div class="actions"><button class="btn">${esc(t('form.project.submit'))}</button></div>
       </form></div>`,
   });
@@ -693,8 +693,8 @@ export function projectDashboardPage(opts: { session: Session; data: ProjectDash
       <div class="panel" style="margin-top:20px"><h2>${esc(t('proj.goals'))}</h2>${goals}
         ${archived ? '' : `<form method="post" action="/projects/${esc(p.id)}/goal" style="margin-top:14px">
           <div class="row-3">
-            <div><label>${esc(t('proj.goal'))}</label><input name="description" placeholder="Book consultations" required></div>
-            <div><label>${esc(t('proj.metric'))}</label><input name="metric" placeholder="leads" required></div>
+            <div><label>${esc(t('proj.goal'))}</label><input name="description" placeholder="${esc(t('ph.goalDesc'))}" required></div>
+            <div><label>${esc(t('proj.metric'))}</label><input name="metric" placeholder="${esc(t('ph.metricName'))}" required></div>
             <div><label>${esc(t('proj.target'))}</label><input name="target" type="number" min="0" value="0"></div>
           </div>
           <div class="actions"><button class="btn">${esc(t('proj.addGoal'))}</button></div></form>`}
@@ -705,7 +705,7 @@ export function projectDashboardPage(opts: { session: Session; data: ProjectDash
           <div class="row-3">
             <div><label>${esc(t('common.name'))}</label><input name="name" placeholder="Ada Lovelace" required></div>
             <div><label>${esc(t('common.email'))}</label><input name="email" type="email" placeholder="ada@acme.com" required></div>
-            <div><label>${esc(t('common.role'))}</label><input name="role" placeholder="manager"></div>
+            <div><label>${esc(t('common.role'))}</label><input name="role" placeholder="${esc(t('ph.memberRole'))}"></div>
           </div>
           <div class="actions"><button class="btn">${esc(t('proj.addMember'))}</button></div></form>`}
       </div>
@@ -749,7 +749,7 @@ export function approvalForm(opts: {
       <h2>${esc(t('appr.requestH'))}</h2><p class="sub">${esc(t('appr.requestSub'))}</p>
       ${banner(opts.error)}
       <form method="post" action="/approvals">
-        <label>${esc(t('common.title'))}</label><input name="title" placeholder="Q2 launch budget sign-off" value="${esc(v['title'])}" required autofocus>
+        <label>${esc(t('common.title'))}</label><input name="title" placeholder="${esc(t('ph.approvalTitle'))}" value="${esc(v['title'])}" required autofocus>
         <label>${esc(t('common.description'))}</label><textarea name="description" rows="3" placeholder="${esc(t('appr.descPlaceholder'))}">${esc(v['description'])}</textarea>
         ${projField}
         <div class="actions"><button class="btn">${esc(t('appr.createDraft'))}</button></div>
@@ -929,11 +929,11 @@ export function assetForm(opts: {
         <label>${esc(t('common.client'))}</label><select name="clientId" required>${clOpts}</select>
         <div class="row">${optional(opts.brands, 'brandId', t('common.brand'))}${optional(opts.projects, 'projectId', t('common.project'))}</div>
         <div class="row">
-          <div><label>${esc(t('common.name'))}</label><input name="name" placeholder="Spring hero banner" value="${esc(v['name'])}" required></div>
+          <div><label>${esc(t('common.name'))}</label><input name="name" placeholder="${esc(t('ph.assetName'))}" value="${esc(v['name'])}" required></div>
           <div><label>${esc(t('asset.kindCol'))}</label><select name="kind">${kindOpt('image', t('asset.kind.image'))}${kindOpt('copy', t('asset.kind.copy'))}${kindOpt('document', t('asset.kind.document'))}${kindOpt('link', t('asset.kind.link'))}</select></div>
         </div>
         <label>${esc(t('asset.content'))}</label><textarea name="content" rows="4" placeholder="${esc(t('asset.contentPh'))}" required>${esc(v['content'])}</textarea>
-        <label>${esc(t('asset.tagsLabel'))}</label><input name="tags" placeholder="hero, spring, q2" value="${esc(v['tags'])}">
+        <label>${esc(t('asset.tagsLabel'))}</label><input name="tags" placeholder="${esc(t('ph.assetTags'))}" value="${esc(v['tags'])}">
         <div class="actions"><button class="btn">${esc(t('asset.addToLibrary'))}</button></div>
       </form></div>`,
   });
@@ -983,7 +983,7 @@ export function assetDetailPage(opts: { session: Session; data: AssetDetailData;
       <div class="panel" style="margin-top:20px"><h2>${esc(t('asset.tags'))}</h2>
         <div style="margin-bottom:14px">${tags}</div>
         <form method="post" action="/assets/${esc(a.id)}/tag" style="display:flex;gap:10px;align-items:flex-end">
-          <div style="flex:1"><label>${esc(t('asset.addTag'))}</label><input name="tag" placeholder="evergreen" required></div>
+          <div style="flex:1"><label>${esc(t('asset.addTag'))}</label><input name="tag" placeholder="${esc(t('ph.tag'))}" required></div>
           <button class="btn" style="margin-top:0">${esc(t('asset.addTag'))}</button>
         </form>
       </div>
@@ -1078,7 +1078,7 @@ export function reportForm(opts: {
         <label>${esc(t('common.client'))}</label><select name="clientId" required>${clOpts}</select>
         ${projField}
         <div class="row">
-          <div><label>${esc(t('common.title'))}</label><input name="title" placeholder="Q3 performance review" value="${esc(v['title'])}" required></div>
+          <div><label>${esc(t('common.title'))}</label><input name="title" placeholder="${esc(t('ph.reportTitle'))}" value="${esc(v['title'])}" required></div>
           <div><label>${esc(t('common.period'))}</label><input name="period" placeholder="${esc(t('rep.periodPh'))}" value="${esc(v['period'])}"></div>
         </div>
         <div class="actions"><button class="btn">${esc(t('rep.generate'))}</button></div>
