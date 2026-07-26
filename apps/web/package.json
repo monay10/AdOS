@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@ados/agency-os": "workspace:*",
+    "@ados/ai-manager": "workspace:*",
     "@ados/analytics-engine": "workspace:*",
     "@ados/campaign-engine": "workspace:*",
     "@ados/company-brain": "workspace:*",

@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { initLogger } from '@ados/observability';
 import { PostgresDatabase, SqlAggregateStore, runMigrations } from '@ados/persistence';
 import { App } from './app.js';
+import { createAIManager } from './ai-factory.js';
 import { AuthService } from './auth/auth-service.js';
 import { authCredentialsMigration, InMemoryCredentialStore, SqlCredentialStore } from './auth/credential-store.js';
 import type { AuthGateway } from './auth/routes.js';
@@ -36,6 +37,11 @@ async function main(): Promise<void> {
   const databaseUrl = process.env['DATABASE_URL'];
   const passwordAuth = process.env['AUTH_MODE'] === 'password';
 
+  // AI Manager — 100% local. Offline deterministic stub by default; a local
+  // inference engine (Ollama / vLLM / LM Studio …) when AI_ENGINE is set. Never a
+  // cloud API. See ai-factory.ts.
+  const ai = createAIManager((msg) => logger.info(msg));
+
   let db: PostgresDatabase | undefined;
   let app: App;
   if (databaseUrl) {
@@ -43,10 +49,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, undefined, sqlRepositories(new SqlAggregateStore(db)));
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)));
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App();
+    app = new App(undefined, ai);
   }
 
   let auth: AuthGateway | undefined;
