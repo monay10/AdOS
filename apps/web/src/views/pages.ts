@@ -1,4 +1,5 @@
 import type { Session } from '../session.js';
+import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
 
 type Vals = Record<string, string>;
@@ -12,20 +13,20 @@ function banner(error?: string, ok?: string): string {
 // ── Login ─────────────────────────────────────────────────────────────────────
 export function loginPage(error?: string, values: Vals = {}): string {
   return bare({
-    title: 'Sign in',
+    title: t('login.title'),
     body: `<div class="login-wrap"><div class="panel login-card">
       <div class="login-brand"><span class="mark" style="width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#5b8cff,#9d7bff);display:grid;place-items:center;color:#fff">▲</span> AdOS</div>
-      <h2 style="text-align:center;margin:0 0 4px">Welcome back</h2>
-      <p class="sub" style="text-align:center">Sign in to your advertising operating system.</p>
+      <h2 style="text-align:center;margin:0 0 4px">${esc(t('login.welcome'))}</h2>
+      <p class="sub" style="text-align:center">${esc(t('login.subtitle'))}</p>
       ${banner(error)}
       <form method="post" action="/login">
-        <label>Work email</label>
+        <label>${esc(t('login.email'))}</label>
         <input name="email" type="email" placeholder="you@company.com" value="${esc(values['email'])}" required>
-        <label>Company</label>
+        <label>${esc(t('login.company'))}</label>
         <input name="company" placeholder="Bright Smiles Dental" value="${esc(values['company'])}" required>
-        <div class="actions"><button class="btn" style="width:100%">Sign in</button></div>
+        <div class="actions"><button class="btn" style="width:100%">${esc(t('login.submit'))}</button></div>
       </form>
-      <p class="sub" style="text-align:center;margin-top:16px">Your company name becomes your isolated tenant.</p>
+      <p class="sub" style="text-align:center;margin-top:16px">${esc(t('login.tenantNote'))}</p>
     </div></div>`,
   });
 }
@@ -66,36 +67,36 @@ export function dashboardPage(opts: {
     ? `<ul class="feed">${opts.feed
         .map((e) => `<li><span class="ev">${esc(e.eventName)}</span><span class="t">${esc(e.occurredAt.replace('T', ' ').slice(0, 19))}</span></li>`)
         .join('')}</ul>`
-    : `<div class="empty">No activity yet. Complete your first Mission to see events here.</div>`;
+    : `<div class="empty">${esc(t('dash.feedEmpty'))}</div>`;
 
   const cta = opts.next.done
-    ? `<a class="btn" href="/missions">View missions →</a>`
+    ? `<a class="btn" href="/missions">${esc(t('dash.viewMissions'))} →</a>`
     : `<a class="btn" href="${opts.next.href}">${esc(opts.next.label)} →</a>`;
 
   const doneNote = opts.next.done
-    ? `<div class="ok" style="margin-bottom:20px">🎉 Onboarding complete — your first Mission is in the system.</div>`
+    ? `<div class="ok" style="margin-bottom:20px">${esc(t('dash.onboardingDone'))}</div>`
     : '';
 
   const pending = opts.pending.length
-    ? `<div class="panel" style="margin-bottom:20px"><h2>Pending executive approvals</h2>
-       <p class="sub">Marketing briefs awaiting your sign-off before work continues.</p>
+    ? `<div class="panel" style="margin-bottom:20px"><h2>${esc(t('dash.pendingTitle'))}</h2>
+       <p class="sub">${esc(t('dash.pendingSub'))}</p>
        <ul class="feed">${opts.pending
-         .map((m) => `<li><a href="/missions/${esc(m.id)}">${esc(m.objective)}</a><a class="badge" href="/missions/${esc(m.id)}">review →</a></li>`)
+         .map((m) => `<li><a href="/missions/${esc(m.id)}">${esc(m.objective)}</a><a class="badge" href="/missions/${esc(m.id)}">${esc(t('dash.review'))} →</a></li>`)
          .join('')}</ul></div>`
     : '';
 
   return layout({
-    title: 'Dashboard',
+    title: t('dash.title'),
     active: '/dashboard',
     session: opts.session,
-    body: `<div class="head"><div><h1>Dashboard</h1><p>Welcome, ${esc(opts.session.actor)}.</p></div>${cta}</div>
+    body: `<div class="head"><div><h1>${esc(t('dash.title'))}</h1><p>${esc(t('dash.welcome', { name: opts.session.actor }))}</p></div>${cta}</div>
       <div class="grid" style="margin-bottom:26px">
-        ${stat(s.workspaces, 'Workspaces')}${stat(s.clients, 'Clients')}${stat(s.brands, 'Brands')}
-        ${stat(s.products, 'Products')}${stat(s.missions, 'Missions')}${stat(s.briefs, 'Marketing Briefs')}${stat(s.creatives, 'Creatives')}${stat(s.campaigns, 'Campaigns')}${stat(s.reports, 'Reports')}${stat(s.learnings, 'Brain Learnings')}${stat(s.approvals, 'Approvals')}${stat(s.assets, 'Assets')}${stat(s.executives, 'CEO Dashboards')}
+        ${stat(s.workspaces, t('dash.stat.workspaces'))}${stat(s.clients, t('dash.stat.clients'))}${stat(s.brands, t('dash.stat.brands'))}
+        ${stat(s.products, t('dash.stat.products'))}${stat(s.missions, t('dash.stat.missions'))}${stat(s.briefs, t('dash.stat.briefs'))}${stat(s.creatives, t('dash.stat.creatives'))}${stat(s.campaigns, t('dash.stat.campaigns'))}${stat(s.reports, t('dash.stat.reports'))}${stat(s.learnings, t('dash.stat.learnings'))}${stat(s.approvals, t('dash.stat.approvals'))}${stat(s.assets, t('dash.stat.assets'))}${stat(s.executives, t('dash.stat.executives'))}
       </div>
       ${doneNote}
       ${pending}
-      <div class="panel"><h2>Activity feed</h2><p class="sub">Domain events emitted by the system, newest first.</p>${feed}</div>`,
+      <div class="panel"><h2>${esc(t('dash.feedTitle'))}</h2><p class="sub">${esc(t('dash.feedSub'))}</p>${feed}</div>`,
   });
 }
 

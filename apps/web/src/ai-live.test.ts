@@ -61,6 +61,18 @@ describe('LiveAIManager (local engine)', () => {
     await expect(ai.submit({ capability: 'reasoning', submittedBy: 't' })).rejects.toThrow(/valid JSON/);
   });
 
+  it('instructs the model to answer in the resolved language', async () => {
+    let systemPrompt = '';
+    const engine = new FakeInferenceEngine('ollama', (msgs: AIMessage[]) => {
+      systemPrompt = msgs.find((m) => m.role === 'system')?.content ?? '';
+      return JSON.stringify(BRIEF);
+    });
+    const ai = new LiveAIManager(engine, { defaultModel: 'm', resolveLanguage: () => 'Turkish' });
+
+    await ai.submit({ capability: 'reasoning', submittedBy: 't', responseSchema: { type: 'object' } });
+    expect(systemPrompt).toContain('Turkish');
+  });
+
   it('honours per-capability model overrides and preferModel hints', async () => {
     const seen: string[] = [];
     const engine = new FakeInferenceEngine('ollama', (_m: AIMessage[], model: string) => {

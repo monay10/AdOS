@@ -34,7 +34,7 @@ export class LiveAIManager implements AIManagerPort {
   async submit<T = unknown>(request: AITaskRequest): Promise<AITaskResult<T>> {
     this.counter += 1;
     const model = this.modelFor(request);
-    const messages = buildMessages(request);
+    const messages = buildMessages(request, this.config.resolveLanguage?.());
     const attempts: Array<{ model: string; ok: boolean; error?: string }> = [];
     const started = performance.now();
 
@@ -89,7 +89,7 @@ export class LiveAIManager implements AIManagerPort {
     const temperature = request.hints?.temperature ?? this.config.temperature;
     yield* this.engine.stream({
       model: this.modelFor(request),
-      messages: buildMessages(request),
+      messages: buildMessages(request, this.config.resolveLanguage?.()),
       ...(temperature !== undefined ? { temperature } : {}),
       ...(request.hints?.maxTokens ? { maxTokens: request.hints.maxTokens } : {}),
     });
@@ -111,6 +111,12 @@ export interface LiveAIConfig {
   models?: Partial<Record<AITaskRequest['capability'], string>>;
   /** Sampling temperature; low by default for structured, deterministic output. */
   temperature?: number;
+  /**
+   * Returns the human-readable language the model should answer in (e.g.
+   * "Turkish" / "English"), evaluated per request. Wired to the request locale
+   * by the factory so AI output matches the UI language. Omit for no constraint.
+   */
+  resolveLanguage?: () => string;
 }
 
 /** System instructions per prompt, keyed by the versioned promptRef the services submit. */
@@ -128,13 +134,16 @@ const ROLES: Record<string, string> = {
 };
 
 /** Build the chat prompt the local model sees, from the service's structured request. */
-function buildMessages(request: AITaskRequest): AIMessage[] {
+function buildMessages(request: AITaskRequest, language?: string): AIMessage[] {
   const role = (request.promptRef && ROLES[request.promptRef.key]) ?? 'You are a helpful assistant.';
+  const lang = language
+    ? `\n\nWrite ALL natural-language text values in ${language}. Keep JSON keys in English.`
+    : '';
   const schema = request.responseSchema
     ? `\n\nReturn ONLY a single JSON object that satisfies this JSON Schema (no prose, no markdown fences):\n${JSON.stringify(request.responseSchema)}`
     : '\n\nReturn ONLY a single JSON object (no prose, no markdown fences).';
 
-  const system: AIMessage = { role: 'system', content: `${role}${schema}` };
+  const system: AIMessage = { role: 'system', content: `${role}${lang}${schema}` };
   const context = request.variables ? formatVariables(request.variables) : '';
   const user: AIMessage = {
     role: 'user',

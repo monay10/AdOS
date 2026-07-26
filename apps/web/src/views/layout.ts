@@ -1,4 +1,5 @@
 import type { Session } from '../session.js';
+import { currentLocale, t } from '../i18n.js';
 
 /** HTML-escape untrusted values before interpolation. */
 export function esc(value: unknown): string {
@@ -18,22 +19,29 @@ export interface NavItem {
   ready: boolean;
 }
 
-const NAV: NavItem[] = [
-  { href: '/dashboard', label: 'Dashboard', icon: '◫', ready: true },
-  { href: '/clients', label: 'Clients', icon: '◑', ready: true },
-  { href: '/brands', label: 'Brands', icon: '✦', ready: true },
-  { href: '/products', label: 'Products', icon: '❑', ready: true },
-  { href: '/projects', label: 'Projects', icon: '▦', ready: true },
-  { href: '/missions', label: 'Missions', icon: '➤', ready: true },
-  { href: '/brief', label: 'Marketing Brief', icon: '✎', ready: true },
-  { href: '/creative', label: 'Creative Studio', icon: '❖', ready: true },
-  { href: '/campaigns', label: 'Campaigns', icon: '◎', ready: true },
-  { href: '/analytics', label: 'Analytics', icon: '▤', ready: true },
-  { href: '/approvals', label: 'Approvals', icon: '☑', ready: true },
-  { href: '/assets', label: 'Assets', icon: '▣', ready: true },
-  { href: '/executive', label: 'Executive', icon: '★', ready: true },
-  { href: '/reports', label: 'Reports', icon: '❐', ready: true },
-  { href: '/settings', label: 'Settings', icon: '⚙', ready: true },
+interface NavDef {
+  href: string;
+  key: string;
+  icon: string;
+  ready: boolean;
+}
+
+const NAV: NavDef[] = [
+  { href: '/dashboard', key: 'nav.dashboard', icon: '◫', ready: true },
+  { href: '/clients', key: 'nav.clients', icon: '◑', ready: true },
+  { href: '/brands', key: 'nav.brands', icon: '✦', ready: true },
+  { href: '/products', key: 'nav.products', icon: '❑', ready: true },
+  { href: '/projects', key: 'nav.projects', icon: '▦', ready: true },
+  { href: '/missions', key: 'nav.missions', icon: '➤', ready: true },
+  { href: '/brief', key: 'nav.brief', icon: '✎', ready: true },
+  { href: '/creative', key: 'nav.creative', icon: '❖', ready: true },
+  { href: '/campaigns', key: 'nav.campaigns', icon: '◎', ready: true },
+  { href: '/analytics', key: 'nav.analytics', icon: '▤', ready: true },
+  { href: '/approvals', key: 'nav.approvals', icon: '☑', ready: true },
+  { href: '/assets', key: 'nav.assets', icon: '▣', ready: true },
+  { href: '/executive', key: 'nav.executive', icon: '★', ready: true },
+  { href: '/reports', key: 'nav.reports', icon: '❐', ready: true },
+  { href: '/settings', key: 'nav.settings', icon: '⚙', ready: true },
 ];
 
 const STYLES = `
@@ -122,13 +130,13 @@ export function layout(opts: {
 }): string {
   const nav = NAV.map((item) => {
     const cls = [item.href === opts.active ? 'active' : '', item.ready ? '' : 'soon'].filter(Boolean).join(' ');
-    const inner = `<span class="ic">${item.icon}</span>${esc(item.label)}${item.ready ? '' : '<span class="tag">soon</span>'}`;
+    const inner = `<span class="ic">${item.icon}</span>${esc(t(item.key))}${item.ready ? '' : `<span class="tag">${esc(t('chrome.soon'))}</span>`}`;
     return item.ready
       ? `<a class="${cls}" href="${item.href}">${inner}</a>`
-      : `<a class="${cls}" title="Coming in a later phase">${inner}</a>`;
+      : `<a class="${cls}">${inner}</a>`;
   }).join('');
 
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8">
+  return `<!doctype html><html lang="${currentLocale()}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(opts.title)} · AdOS</title><style>${STYLES}</style></head>
 <body><div class="shell">
@@ -137,8 +145,8 @@ export function layout(opts: {
   <nav class="nav">${nav}</nav>
   <div class="who">
     <b>${esc(opts.session.actor)}</b>
-    <span>Tenant: ${esc(opts.session.tenantId)}</span>
-    <form method="post" action="/logout"><input type="hidden" name="_csrf" value="${esc(opts.session.csrf ?? '')}"><button class="btn ghost" style="width:100%;padding:7px">Sign out</button></form>
+    <span>${esc(t('chrome.tenant'))}: ${esc(opts.session.tenantId)}</span>
+    <form method="post" action="/logout"><input type="hidden" name="_csrf" value="${esc(opts.session.csrf ?? '')}"><button class="btn ghost" style="width:100%;padding:7px">${esc(t('chrome.signOut'))}</button></form>
   </div>
 </aside>
 <main class="main">${opts.body}</main>
@@ -147,7 +155,7 @@ export function layout(opts: {
 
 /** Bare page chrome (login) — no nav. */
 export function bare(opts: { title: string; body: string }): string {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8">
+  return `<!doctype html><html lang="${currentLocale()}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(opts.title)} · AdOS</title><style>${STYLES}</style></head>
 <body>${opts.body}</body></html>`;

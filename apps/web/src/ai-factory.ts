@@ -2,6 +2,7 @@ import type { AIManagerPort } from '@ados/contracts';
 import { OllamaEngine, OpenAICompatibleEngine, type InferenceEnginePort, type InferenceEngineId } from '@ados/ai-manager';
 import { OfflineAIManager } from './ai.js';
 import { LiveAIManager, type LiveAIConfig } from './ai-live.js';
+import { currentLocale, languageName } from './i18n.js';
 
 /**
  * Choose the AI Manager from the environment. Everything is 100% local — a
@@ -30,6 +31,9 @@ export function createAIManager(log: (msg: string) => void = () => {}): AIManage
   const config: LiveAIConfig = {
     defaultModel: process.env['AI_MODEL'] ?? 'qwen2.5:7b',
     temperature: process.env['AI_TEMPERATURE'] ? Number.parseFloat(process.env['AI_TEMPERATURE']) : 0.2,
+    // AI answers in the visitor's language (resolved from the browser/OS), so
+    // the generated ads match the UI language.
+    resolveLanguage: () => languageName(currentLocale()),
   };
   log(`AI_ENGINE ${engine.id} (local) — model ${config.defaultModel}`);
   return new LiveAIManager(engine, config);

@@ -4,6 +4,7 @@ import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
 import type { App } from './app.js';
 import type { Req, Res } from './http.js';
+import { resolveLocale, t, withLocale } from './i18n.js';
 import {
   newSession,
   readSessionCookie,
@@ -90,20 +91,25 @@ function nextStep(stats: DashStats): NextStep {
  * authenticated application routes are identical in both modes.
  */
 export async function handle(app: App, secret: string, req: Req, res: Res, auth?: AuthGateway): Promise<void> {
-  const session = readSessionCookie(req.headers.cookie, secret);
+  // Resolve the request locale from the browser/OS language and make it ambient
+  // so every page, the layout chrome, and the AI Manager render in that language.
+  const locale = resolveLocale(req.headers['accept-language']);
+  await withLocale(locale, async () => {
+    const session = readSessionCookie(req.headers.cookie, secret);
 
-  // ── Authentication surface ──
-  if (auth) {
-    if (await handleAuth(secret, auth, session, req, res)) return;
-  } else if (handleOpenPublic(secret, session, req, res)) {
-    return;
-  }
+    // ── Authentication surface ──
+    if (auth) {
+      if (await handleAuth(secret, auth, session, req, res)) return;
+    } else if (handleOpenPublic(secret, session, req, res)) {
+      return;
+    }
 
-  // ── Auth gate ──
-  if (!session) return res.redirect('/login');
+    // ── Auth gate ──
+    if (!session) return res.redirect('/login');
 
-  await TenantContext.run(ctxOf(session), async () => {
-    await route(app, secret, session, req, res);
+    await TenantContext.run(ctxOf(session), async () => {
+      await route(app, secret, session, req, res);
+    });
   });
 }
 
@@ -119,7 +125,7 @@ function handleOpenPublic(secret: string, session: Session | null, req: Req, res
     const email = (req.body['email'] ?? '').trim();
     const company = (req.body['company'] ?? '').trim();
     if (!email || !company) {
-      res.html(loginPage('Please provide both your email and company.', req.body), 400);
+      res.html(loginPage(t('login.missingFields'), req.body), 400);
       return true;
     }
     const created = newSession(slugifyTenant(company), email);
