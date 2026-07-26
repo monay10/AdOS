@@ -164,11 +164,11 @@ export function bare(opts: { title: string; body: string }): string {
 /** The onboarding progress rail shared by the create screens. */
 export function steps(current: 'workspace' | 'client' | 'brand' | 'product' | 'mission' | 'done'): string {
   const order: Array<{ key: string; label: string }> = [
-    { key: 'workspace', label: '1 · Workspace' },
-    { key: 'client', label: '2 · Client' },
-    { key: 'brand', label: '3 · Brand' },
-    { key: 'product', label: '4 · Product' },
-    { key: 'mission', label: '5 · Mission' },
+    { key: 'workspace', label: `1 · ${t('step.workspace')}` },
+    { key: 'client', label: `2 · ${t('step.client')}` },
+    { key: 'brand', label: `3 · ${t('step.brand')}` },
+    { key: 'product', label: `4 · ${t('step.product')}` },
+    { key: 'mission', label: `5 · ${t('step.mission')}` },
   ];
   const idx = order.findIndex((s) => s.key === current);
   const curIdx = current === 'done' ? order.length : idx;

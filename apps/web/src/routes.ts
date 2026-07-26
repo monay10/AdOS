@@ -172,13 +172,13 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/clients',
-        title: 'Clients',
-        subtitle: 'Customers whose brands and products the AI Company markets.',
+        title: t('nav.clients'),
+        subtitle: t('list.clients.sub'),
         newHref: '/clients/new',
-        newLabel: '+ New client',
-        columns: ['Name', 'Industry', 'Email', 'Status'],
+        newLabel: t('list.clients.new'),
+        columns: [t('common.name'), t('list.col.industry'), t('common.email'), t('common.status')],
         rows: clients.map((c) => [c.name, c.industry, c.contact.email, `<span class="badge active">${c.status}</span>`]),
-        empty: 'No clients yet. Add your first client to begin.',
+        empty: t('list.clients.empty'),
       }),
     );
   }
@@ -209,13 +209,13 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/brands',
-        title: 'Brands',
-        subtitle: 'Voice, values and rules the Creative Studio must respect.',
+        title: t('nav.brands'),
+        subtitle: t('list.brands.sub'),
         newHref: '/brands/new',
-        newLabel: '+ New brand',
-        columns: ['Name', 'Voice', 'Audience', 'Status'],
+        newLabel: t('list.brands.new'),
+        columns: [t('common.name'), t('list.col.voice'), t('list.col.audience'), t('common.status')],
         rows: brands.map((b) => [b.name, b.profile.voice, b.profile.targetAudience || '—', `<span class="badge active">${b.status}</span>`]),
-        empty: 'No brands yet. Define your first brand.',
+        empty: t('list.brands.empty'),
       }),
     );
   }
@@ -248,18 +248,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/products',
-        title: 'Products',
-        subtitle: 'What each client sells — the thing the AI Company markets.',
+        title: t('nav.products'),
+        subtitle: t('list.products.sub'),
         newHref: '/products/new',
-        newLabel: '+ New product',
-        columns: ['Name', 'Categories', 'Pricing', 'Status'],
+        newLabel: t('list.products.new'),
+        columns: [t('common.name'), t('list.col.categories'), t('list.col.pricing'), t('common.status')],
         rows: products.map((p) => [
           p.name,
           p.categories.join(', ') || '—',
           `${p.pricing.model} · ${(p.pricing.amount.amountMinor / 100).toFixed(2)} ${p.pricing.amount.currency}`,
           `<span class="badge active">${p.status}</span>`,
         ]),
-        empty: 'No products yet. Add your first product.',
+        empty: t('list.products.empty'),
       }),
     );
   }
@@ -275,7 +275,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const currency = req.body['currency'] || 'TRY';
     const amountMinor = model === 'free' ? 0 : toMinor(req.body['price'] ?? '0');
     if (Number.isNaN(amountMinor)) {
-      return res.html(productForm({ session, clients: idName(clients), error: 'Price must be a number.', values: req.body }), 400);
+      return res.html(productForm({ session, clients: idName(clients), error: t('err.priceNumber'), values: req.body }), 400);
     }
     const pricing: ProductPricing = { model, amount: { amountMinor, currency }, ...(model === 'subscription' ? { period: 'monthly' } : {}) };
     const r = await app.products.create({
@@ -297,17 +297,17 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/missions',
-        title: 'Missions',
-        subtitle: 'Business objectives the AI Company plans and runs.',
+        title: t('nav.missions'),
+        subtitle: t('list.missions.sub'),
         newHref: '/missions/new',
-        newLabel: '+ New mission',
-        columns: ['Objective', 'Budget', 'Status'],
+        newLabel: t('list.missions.new'),
+        columns: [t('list.col.objective'), t('list.col.budget'), t('common.status')],
         rows: missions.map((m) => [
           `<a href="/missions/${m.id.toString()}">${esc(m.brief)}</a>`,
           m.budget ? `${(m.budget.amountMinor / 100).toFixed(0)} ${m.budget.currency}/${m.budget.period}` : '—',
           `<span class="badge active">${m.status}</span>`,
         ]),
-        empty: 'No missions yet. State your first objective.',
+        empty: t('list.missions.empty'),
       }),
     );
   }
@@ -327,7 +327,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const target = Number.parseInt(req.body['metricTarget'] ?? '', 10);
     const rerender = (msg: string): void =>
       res.html(missionForm({ session, workspaces: idName(workspaces), clients: idName(clients), projects: idName(projects), error: msg, values: req.body }), 400);
-    if (Number.isNaN(budgetMinor) || budgetMinor <= 0) return rerender('Budget must be a positive number.');
+    if (Number.isNaN(budgetMinor) || budgetMinor <= 0) return rerender(t('err.budgetPositive'));
 
     let wizard = MissionWizard.start({
       tenantId: session.tenantId,
@@ -360,18 +360,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/projects',
-        title: 'Projects',
-        subtitle: "A client's bodies of work — each owns its missions, briefs, creatives, campaigns and reports.",
+        title: t('nav.projects'),
+        subtitle: t('list.projects.sub'),
         newHref: '/projects/new',
-        newLabel: '+ New project',
-        columns: ['Name', 'Client', 'Brand', 'Status'],
+        newLabel: t('list.projects.new'),
+        columns: [t('common.name'), t('common.client'), t('common.brand'), t('common.status')],
         rows: projects.map((p) => [
           `<a href="/projects/${p.id.toString()}">${esc(p.name)}</a>`,
           esc(clientName(p.clientId)),
           esc(brandName(p.brandId)),
           `<span class="badge active">${esc(p.status)}</span>`,
         ]),
-        empty: 'No projects yet. Create one to group a brand’s work.',
+        empty: t('list.projects.empty'),
       }),
     );
   }
@@ -387,7 +387,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const rerender = (msg: string): void =>
       res.html(projectForm({ session, brands: brands.map((b) => ({ id: b.id.toString(), name: b.name, clientName: clientName(b.clientId) })), error: msg, values: req.body }), 400);
     const brand = brands.find((b) => b.id.toString() === (req.body['brandId'] ?? ''));
-    if (!brand) return rerender('Select a brand for the project.');
+    if (!brand) return rerender(t('err.selectBrand'));
     const r = await app.projects.create({
       tenantId: session.tenantId,
       clientId: brand.clientId,
@@ -430,18 +430,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/approvals',
-        title: 'Approvals',
-        subtitle: 'Decisions routed through Draft → In Review → Approved / Rejected / Revision Requested.',
+        title: t('nav.approvals'),
+        subtitle: t('list.approvals.sub'),
         newHref: '/approvals/new',
-        newLabel: '+ New approval',
-        columns: ['Title', 'Project', 'Requested by', 'Status'],
+        newLabel: t('list.approvals.new'),
+        columns: [t('common.title'), t('common.project'), t('list.col.requestedBy'), t('common.status')],
         rows: approvals.map((a) => [
           `<a href="/approvals/${a.id.toString()}">${esc(a.title)}</a>`,
           esc(projectName(a.projectId)),
           esc(a.requestedBy),
           `<span class="badge ${a.status === 'approved' ? 'active' : ''}">${esc(approvalStatusLabel(a.status))}</span>`,
         ]),
-        empty: 'No approvals yet. Create one to route a decision through review.',
+        empty: t('list.approvals.empty'),
       }),
     );
   }
@@ -453,7 +453,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const projects = await app.projects.list();
     const rerender = (msg: string): void => res.html(approvalForm({ session, projects: idName(projects), error: msg, values: req.body }), 400);
     const title = (req.body['title'] ?? '').trim();
-    if (!title) return rerender('A title is required.');
+    if (!title) return rerender(t('err.titleRequired'));
     const projectId = (req.body['projectId'] ?? '').trim();
     const r = await app.approvals.create({
       tenantId: session.tenantId,
@@ -561,17 +561,17 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/brief',
-        title: 'Marketing Briefs',
-        subtitle: 'AI-generated strategy for each Mission, produced by Marketing Intelligence.',
+        title: t('dash.stat.briefs'),
+        subtitle: t('list.briefs.sub'),
         newHref: '/missions',
-        newLabel: 'Go to Missions',
-        columns: ['Objective', 'Channels', 'Model'],
+        newLabel: t('list.goToMissions'),
+        columns: [t('list.col.objective'), t('list.col.channels'), t('common.model')],
         rows: briefs.map((b) => [
           `<a href="/missions/${esc(b.missionId)}">${esc(b.content.objective)}</a>`,
           b.content.recommendedChannels.map((c) => `<span class="badge">${esc(c)}</span>`).join(' '),
           `<span class="badge">${esc(b.provenance.model)}</span>`,
         ]),
-        empty: 'No briefs yet. Open a Mission and generate its Marketing Brief.',
+        empty: t('list.briefs.empty'),
       }),
     );
   }
@@ -583,17 +583,17 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/creative',
-        title: 'Creative Studio',
-        subtitle: 'Publish-ready copy generated from approved Marketing Briefs.',
+        title: t('nav.creative'),
+        subtitle: t('list.creative.sub'),
         newHref: '/missions',
-        newLabel: 'Go to Missions',
-        columns: ['Headline', 'CTA', 'Model'],
+        newLabel: t('list.goToMissions'),
+        columns: [t('mission.headline'), t('mission.cta'), t('common.model')],
         rows: sets.map((s) => [
           `<a href="/missions/${esc(s.missionId)}">${esc(s.content.headline)}</a>`,
           `<span class="badge">${esc(s.content.cta)}</span>`,
           `<span class="badge">${esc(s.provenance.model)}</span>`,
         ]),
-        empty: 'No creatives yet. Approve a brief and generate its creative set.',
+        empty: t('list.creative.empty'),
       }),
     );
   }
@@ -605,18 +605,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/campaigns',
-        title: 'Campaigns',
-        subtitle: 'Approval-ready campaign drafts built from approved creative.',
+        title: t('nav.campaigns'),
+        subtitle: t('list.campaigns.sub'),
         newHref: '/missions',
-        newLabel: 'Go to Missions',
-        columns: ['Name', 'Budget', 'Channels', 'Model'],
+        newLabel: t('list.goToMissions'),
+        columns: [t('common.name'), t('list.col.budget'), t('list.col.channels'), t('common.model')],
         rows: drafts.map((d) => [
           `<a href="/missions/${esc(d.missionId)}">${esc(d.content.name)}</a>`,
           `${(d.totalBudget.amountMinor / 100).toLocaleString()} ${esc(d.totalBudget.currency)}`,
           d.content.channels.map((c) => `<span class="badge">${esc(c.channel)} ${c.budgetPercentage}%</span>`).join(' '),
           `<span class="badge">${esc(d.provenance.model)}</span>`,
         ]),
-        empty: 'No campaigns yet. Approve a creative and generate its campaign draft.',
+        empty: t('list.campaigns.empty'),
       }),
     );
   }
@@ -628,18 +628,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/analytics',
-        title: 'Analytics',
-        subtitle: 'Campaign KPI reports with AI-generated executive summaries.',
+        title: t('nav.analytics'),
+        subtitle: t('list.analytics.sub'),
         newHref: '/missions',
-        newLabel: 'Go to Missions',
-        columns: ['ROAS', 'ROI', 'CTR', 'Summary'],
+        newLabel: t('list.goToMissions'),
+        columns: ['ROAS', 'ROI', 'CTR', t('list.col.summary')],
         rows: reports.map((rep) => [
           `<a href="/missions/${esc(rep.missionId)}">${rep.kpi('roas') ?? 0}x</a>`,
           `${rep.kpi('roi') ?? 0}%`,
           `${rep.kpi('ctr') ?? 0}%`,
           esc(rep.narrative.summary),
         ]),
-        empty: 'No reports yet. Approve a campaign and generate its analytics report.',
+        empty: t('list.analytics.empty'),
       }),
     );
   }
@@ -652,18 +652,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/reports',
-        title: 'Reports',
-        subtitle: 'Saved client performance reports — a snapshot of how a client’s work performed.',
+        title: t('nav.reports'),
+        subtitle: t('list.reports.sub'),
         newHref: '/reports/new',
-        newLabel: '+ New report',
-        columns: ['Title', 'Client', 'Period', 'Generated'],
+        newLabel: t('list.reports.new'),
+        columns: [t('common.title'), t('common.client'), t('list.col.period'), t('list.col.generated')],
         rows: reports.map((r) => [
           `<a href="/reports/${r.id.toString()}">${esc(r.title)}</a>`,
           esc(clientName(r.clientId)),
           esc(r.period),
           esc(r.generatedAt.replace('T', ' ').slice(0, 16)),
         ]),
-        empty: 'No reports yet. Generate one to snapshot a client’s performance.',
+        empty: t('list.reports.empty'),
       }),
     );
   }
@@ -677,9 +677,9 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const rerender = (msg: string): void => res.html(reportForm({ session, clients: idName(clients), projects: idName(projects), error: msg, values: req.body }), 400);
     const clientId = (req.body['clientId'] ?? '').trim();
     const client = clients.find((c) => c.id.toString() === clientId);
-    if (!client) return rerender('Select a client for the report.');
+    if (!client) return rerender(t('err.selectClientReport'));
     const title = (req.body['title'] ?? '').trim();
-    if (!title) return rerender('A title is required.');
+    if (!title) return rerender(t('err.titleRequired'));
     const projectId = (req.body['projectId'] ?? '').trim();
 
     const snapshot = await buildReportSnapshot(app, clientId, client.name, projectId || undefined);
@@ -712,18 +712,18 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       listPage({
         session,
         active: '/executive',
-        title: 'Executive',
-        subtitle: 'CEO Dashboards — the executive synthesis of each completed mission.',
+        title: t('nav.executive'),
+        subtitle: t('list.executive.sub'),
         newHref: '/missions',
-        newLabel: 'Go to Missions',
-        columns: ['Mission', 'Verdict', 'Headline', 'Model'],
+        newLabel: t('list.goToMissions'),
+        columns: [t('list.col.mission'), t('list.col.verdict'), t('mission.headline'), t('common.model')],
         rows: reports.map((r) => [
           `<a href="/missions/${esc(r.missionId)}">${esc(objective(r.missionId))}</a>`,
           verdictBadge(r.verdict),
           esc(r.content.headline),
           `<span class="badge">${esc(r.provenance.model)}</span>`,
         ]),
-        empty: 'No CEO Dashboards yet. Take a Mission through to its analytics report, then generate one.',
+        empty: t('list.executive.empty'),
       }),
     );
   }
@@ -794,8 +794,8 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const rerender = (msg: string): void =>
       res.html(settingsPage({ session, workspaces: idName(workspaces), selectedId: id, values: { name, currency, timezone, locale }, error: msg }), 400);
     const ws = workspaces.find((w) => w.id.toString() === id);
-    if (!ws) return rerender('Select a workspace to update.');
-    if (!name || !currency || !timezone || !locale) return rerender('Name, currency, timezone and locale are all required.');
+    if (!ws) return rerender(t('err.selectWorkspace'));
+    if (!name || !currency || !timezone || !locale) return rerender(t('err.settingsRequired'));
     if (name !== ws.name) {
       const renamed = await app.workspaces.rename(WorkspaceId.of(id), name);
       if (renamed.isErr) return rerender(renamed.error.message);
@@ -912,7 +912,7 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
         briefApproval: 'none',
         creativeApproval: 'none',
         campaignApproval: 'none',
-        prereqMissing: 'Add a brand and a product for this client before generating a brief.',
+        prereqMissing: t('err.brandProductForBrief'),
       }),
     );
   }
@@ -950,12 +950,12 @@ async function generateCreative(app: App, session: Session, res: Res, id: string
 
   const brief = (await app.briefs.list(id))[0];
   if (!brief || mission.status !== 'planning') {
-    return renderMissionDetail(app, session, res, id, 'Approve the Marketing Brief before generating creative.');
+    return renderMissionDetail(app, session, res, id, t('err.approveBriefFirst'));
   }
   const brand = (await app.brands.list(mission.clientId))[0];
   const product = (await app.products.list(mission.clientId))[0];
   if (!brand || !product) {
-    return renderMissionDetail(app, session, res, id, 'A brand and product are required to generate creative.');
+    return renderMissionDetail(app, session, res, id, t('err.brandProductForCreative'));
   }
 
   const generated = await app.creative.generate({
@@ -986,7 +986,7 @@ async function generateCampaign(app: App, session: Session, res: Res, id: string
   const brief = (await app.briefs.list(id))[0];
   const creative = (await app.creative.list(id))[0];
   if (!brief || !creative || mission.status !== 'planning') {
-    return renderMissionDetail(app, session, res, id, 'Approve the creative before building the campaign.');
+    return renderMissionDetail(app, session, res, id, t('err.approveCreativeFirst'));
   }
 
   const generated = await app.campaigns.draft({
@@ -1020,7 +1020,7 @@ async function generateReport(app: App, session: Session, res: Res, id: string, 
 
   const campaign = (await app.campaigns.list(id))[0];
   if (!campaign || statusApproval(mission.status) !== 'approved') {
-    return renderMissionDetail(app, session, res, id, 'Approve the campaign before generating analytics.');
+    return renderMissionDetail(app, session, res, id, t('err.approveCampaignFirst'));
   }
 
   const intOf = (v: string | undefined): number => {
@@ -1031,7 +1031,7 @@ async function generateReport(app: App, session: Session, res: Res, id: string, 
   const spendMinor = toMinor(req.body['spend'] ?? '0');
   const revenueMinor = toMinor(req.body['revenue'] ?? '0');
   if (Number.isNaN(spendMinor) || Number.isNaN(revenueMinor)) {
-    return renderMissionDetail(app, session, res, id, 'Spend and revenue must be numbers.');
+    return renderMissionDetail(app, session, res, id, t('err.spendRevenueNumbers'));
   }
 
   const generated = await app.reports.generate({
@@ -1059,7 +1059,7 @@ async function generateExecutive(app: App, session: Session, res: Res, id: strin
 
   const report = (await app.reports.list(id))[0];
   if (!report) {
-    return renderMissionDetail(app, session, res, id, 'Generate the analytics report before the CEO Dashboard.');
+    return renderMissionDetail(app, session, res, id, t('err.reportBeforeCeo'));
   }
   if ((await app.executive.list(id)).length > 0) return res.redirect(`/missions/${id}`); // idempotent
 
@@ -1099,7 +1099,7 @@ async function recordLearning(app: App, session: Session, res: Res, id: string):
   const campaign = (await app.campaigns.list(id))[0];
   const report = (await app.reports.list(id))[0];
   if (!campaign || !report) {
-    return renderMissionDetail(app, session, res, id, 'Generate the analytics report before recording learning.');
+    return renderMissionDetail(app, session, res, id, t('err.reportBeforeLearning'));
   }
   const clientRes = await app.clients.get(ClientId.of(mission.clientId));
   const vertical = clientRes.isOk ? clientRes.value.industry : 'general';
@@ -1109,8 +1109,8 @@ async function recordLearning(app: App, session: Session, res: Res, id: string):
   const ctr = report.kpi('ctr') ?? 0;
   const channels = campaign.content.channels.map((c) => c.channel);
   const won = roas >= 1;
-  const chosen = won ? 'Scale the winning channel mix' : 'Rework the offer before scaling';
-  const learned = `In ${vertical}, "${campaign.content.name}" on ${channels.join(' + ')} returned ${roas}x ROAS. ${won ? 'Reuse this structure.' : 'Avoid this structure as-is.'}`;
+  const chosen = won ? t('learn.chosen.scale') : t('learn.chosen.rework');
+  const learned = t('learn.insight', { vertical, name: campaign.content.name, channels: channels.join(' + '), roas, verdict: won ? t('learn.reuse') : t('learn.avoid') });
   const now = new Date().toISOString();
   const at = now;
 
@@ -1553,12 +1553,12 @@ function notFound(session: Session): string {
   return listPage({
     session,
     active: '/dashboard',
-    title: 'Not found',
-    subtitle: 'That screen does not exist yet.',
+    title: t('list.notFound.title'),
+    subtitle: t('list.notFound.sub'),
     newHref: '/dashboard',
-    newLabel: '← Back to dashboard',
+    newLabel: t('list.notFound.back'),
     columns: [],
     rows: [],
-    empty: 'This part of AdOS is coming in a later phase.',
+    empty: t('list.notFound.sub'),
   });
 }
