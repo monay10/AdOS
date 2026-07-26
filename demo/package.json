@@ -1,0 +1,13 @@
+{
+  "name": "ados-demo-environment",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Official AdOS enterprise demo environment (NovaMak). Deterministic, isolated, repeatable. No production data, no external dependencies.",
+  "scripts": {
+    "setup": "node src/setup.mjs",
+    "reset": "node src/reset.mjs",
+    "validate": "node src/validate.mjs",
+    "test": "node --test"
+  }
+}
