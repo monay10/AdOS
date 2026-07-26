@@ -4,13 +4,19 @@ An **offline, static, deterministic** ROI calculator that implements
 [`../ROI_CALCULATOR_SPEC.md`](../ROI_CALCULATOR_SPEC.md) 1:1. It produces a
 **planning model the buyer controls — never a guaranteed result** (spec §0.1).
 
+It models savings from what AdOS — the **Enterprise AI Operating System for
+Advertising** — actually does: **drafting** human-approved advertising work
+(briefs, ad copy, campaign plans, performance reports) on **100% local AI**, and a
+marketing-performance **Company Brain**. It does not model launching or optimizing
+live campaigns (drafts only) — see spec §0.3 for what is excluded (Roadmap).
+
 - **Offline / air-gapped** — no backend, no external API, no CDN, no fonts to
   fetch, no analytics. Open `index.html` and it works with no internet, exactly
   like AdOS itself.
 - **Deterministic** — the engine is a pure function `f(inputs, assumptions) →
   outputs`; identical inputs always yield identical outputs.
 - **Bilingual TR/EN** — auto-detected, toggleable. Product terms (AdOS, Company
-  Brain, Digital Employees) stay in English in both languages.
+  Brain) stay in English in both languages.
 - **Responsive · dark/light** — system font stack; theme follows the OS and a
   manual toggle.
 - **Exports** — downloadable **PDF** (self-contained writer), **Excel**

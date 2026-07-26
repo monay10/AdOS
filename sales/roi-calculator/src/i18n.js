@@ -1,6 +1,7 @@
 // Bilingual UI strings — SPEC §9 glossary + CANON bilingual rule.
-// Product terms stay English in both languages (AdOS, Company Brain, Digital
-// Employees, Workflows & Approvals).
+// Product terms stay English in both languages (AdOS, Company Brain).
+// Note: object keys below are engine identifiers (see calc.js / BREAKDOWN_ORDER);
+// only the human-readable string VALUES are edited here.
 
 export const STR = {
   en: {
@@ -20,10 +21,10 @@ export const STR = {
     // inputs (SPEC §1)
     employee_count: 'Employee count',
     avg_annual_salary: 'Average annual salary (fully loaded)',
-    search_minutes_per_day: 'Knowledge search time (min/employee/day)',
-    manual_process_count: 'Number of manual processes',
+    search_minutes_per_day: 'Campaign & creative research time (min/employee/day)',
+    manual_process_count: 'Recurring marketing production tasks',
     avg_approval_delay_hours: 'Average approval delay (hours)',
-    monthly_document_volume: 'Monthly document volume',
+    monthly_document_volume: 'Monthly report & asset volume',
     meetings_per_week: 'Meetings per week per employee',
     annual_training_cost: 'Annual training cost',
     ai_adoption_rate: 'Expected AI adoption rate (%)',
@@ -34,12 +35,12 @@ export const STR = {
     WORKING_DAYS_PER_YEAR: 'Working days per year',
     WORKING_HOURS_PER_DAY: 'Working hours per day',
     WORKING_WEEKS_PER_YEAR: 'Working weeks per year',
-    SEARCH_TIME_RECOVERABLE: 'Search time recovered by Company Brain',
+    SEARCH_TIME_RECOVERABLE: 'Campaign-research time recovered by Company Brain',
     APPROVAL_DELAY_REDUCTION: 'Approval delay reduction',
-    MANUAL_PROCESS_TIME_SAVED: 'Manual-process time saved by Digital Employees',
-    HOURS_PER_MANUAL_PROCESS_PER_YEAR: 'Labor hours per manual process per year',
-    MINUTES_PER_DOCUMENT: 'Human handling time per document (min)',
-    DOCUMENT_TIME_SAVED: 'Document-handling time saved',
+    MANUAL_PROCESS_TIME_SAVED: 'Production-task time saved by AI-assisted drafting',
+    HOURS_PER_MANUAL_PROCESS_PER_YEAR: 'Labor hours per production task per year',
+    MINUTES_PER_DOCUMENT: 'Human time to draft/prepare per report or asset (min)',
+    DOCUMENT_TIME_SAVED: 'Report & asset drafting time saved',
     MEETING_DURATION_HOURS: 'Average meeting duration (hours)',
     MEETING_TIME_SAVED: 'Meeting time saved',
     TRAINING_COST_REDUCTION: 'Training-cost reduction',
@@ -60,11 +61,11 @@ export const STR = {
     tile_subtext: 'Based on your inputs and assumptions.',
 
     // breakdown sources (SPEC §4.1)
-    company_brain_search: 'Company Brain – Search',
-    digital_employees_process: 'Digital Employees – Processes',
-    workflows_approvals: 'Workflows & Approvals',
-    digital_employees_docs: 'Digital Employees – Documents',
-    company_brain_meetings: 'Company Brain – Meetings',
+    company_brain_search: 'Company Brain – Research',
+    digital_employees_process: 'AI Drafting – Production',
+    workflows_approvals: 'Human-Approved Pipeline',
+    digital_employees_docs: 'AI Drafting – Reports & Assets',
+    company_brain_meetings: 'Company Brain – Review Meetings',
     training: 'Training',
 
     honest_frame:
@@ -111,10 +112,10 @@ export const STR = {
 
     employee_count: 'Çalışan sayısı',
     avg_annual_salary: 'Ortalama yıllık maaş (tüm maliyetler dahil)',
-    search_minutes_per_day: 'Bilgi arama süresi (dk/çalışan/gün)',
-    manual_process_count: 'Manuel süreç sayısı',
+    search_minutes_per_day: 'Kampanya ve kreatif araştırma süresi (dk/çalışan/gün)',
+    manual_process_count: 'Yinelenen pazarlama üretim görevi sayısı',
     avg_approval_delay_hours: 'Ortalama onay gecikmesi (saat)',
-    monthly_document_volume: 'Aylık doküman hacmi',
+    monthly_document_volume: 'Aylık rapor ve kreatif varlık hacmi',
     meetings_per_week: 'Çalışan başına haftalık toplantı',
     annual_training_cost: 'Yıllık eğitim maliyeti',
     ai_adoption_rate: 'Beklenen AI benimseme oranı (%)',
@@ -124,12 +125,12 @@ export const STR = {
     WORKING_DAYS_PER_YEAR: 'Yıllık çalışma günü',
     WORKING_HOURS_PER_DAY: 'Günlük çalışma saati',
     WORKING_WEEKS_PER_YEAR: 'Yıllık çalışma haftası',
-    SEARCH_TIME_RECOVERABLE: 'Company Brain ile geri kazanılan arama süresi',
+    SEARCH_TIME_RECOVERABLE: 'Company Brain ile geri kazanılan kampanya araştırma süresi',
     APPROVAL_DELAY_REDUCTION: 'Onay gecikmesi azalması',
-    MANUAL_PROCESS_TIME_SAVED: 'Digital Employees ile azalan manuel süreç süresi',
-    HOURS_PER_MANUAL_PROCESS_PER_YEAR: 'Manuel süreç başına yıllık iş gücü saati',
-    MINUTES_PER_DOCUMENT: 'Doküman başına insan işleme süresi (dk)',
-    DOCUMENT_TIME_SAVED: 'Doküman işleme süresinden tasarruf',
+    MANUAL_PROCESS_TIME_SAVED: 'Yapay zekâ destekli taslak hazırlama ile azalan üretim görevi süresi',
+    HOURS_PER_MANUAL_PROCESS_PER_YEAR: 'Üretim görevi başına yıllık iş gücü saati',
+    MINUTES_PER_DOCUMENT: 'Rapor/varlık başına insan hazırlama süresi (dk)',
+    DOCUMENT_TIME_SAVED: 'Rapor ve varlık hazırlama süresinden tasarruf',
     MEETING_DURATION_HOURS: 'Ortalama toplantı süresi (saat)',
     MEETING_TIME_SAVED: 'Toplantı süresinden tasarruf',
     TRAINING_COST_REDUCTION: 'Eğitim maliyeti azalması',
@@ -148,11 +149,11 @@ export const STR = {
     efficiency_gauge: 'Verimlilik artışı',
     tile_subtext: 'Girdi ve varsayımlarınıza dayanır.',
 
-    company_brain_search: 'Company Brain – Arama',
-    digital_employees_process: 'Digital Employees – Süreçler',
-    workflows_approvals: 'Workflows & Approvals',
-    digital_employees_docs: 'Digital Employees – Dokümanlar',
-    company_brain_meetings: 'Company Brain – Toplantılar',
+    company_brain_search: 'Company Brain – Araştırma',
+    digital_employees_process: 'Yapay Zekâ Taslak – Üretim',
+    workflows_approvals: 'İnsan Onaylı Süreç',
+    digital_employees_docs: 'Yapay Zekâ Taslak – Rapor ve Varlıklar',
+    company_brain_meetings: 'Company Brain – Değerlendirme Toplantıları',
     training: 'Eğitim',
 
     honest_frame:

@@ -1,5 +1,10 @@
 # AdOS ROI Calculator — Specification
 
+**Product:** AdOS — Enterprise AI Operating System for Advertising (an AI
+advertising-agency OS). AdOS **drafts** human-approved advertising work — marketing
+briefs, ad copy, campaign plans, and performance reports — on **100% local AI**
+(no cloud, no per-token billing, data stays on your infrastructure). It does not
+launch or optimize live campaigns; the ROI below is built only on that reality.
 **Owner:** Office of the Chief Revenue Officer (with Solution Engineering)
 **Status:** Official — binding on the implemented calculator
 **Version:** 1.0.0 · Aligned to AdOS v1.0.0 and `SALES_KIT_CONSTITUTION.md` §10
@@ -41,13 +46,44 @@ not a disclaimer to bury — it is the product.
 ### 0.2 Alignment to CANON
 
 - **No per-token / per-query cost** anywhere in the model. Local inference has no
-  marginal API bill (CANON, Constitution §12, §17). Investment is **value-based**:
-  platform license + support/success only. See `annual_investment`.
+  marginal API bill — unlike per-token/per-query cloud SaaS — so scaling AI usage
+  does not scale the bill (CANON, Constitution §12, §17). Investment is
+  **value-based**: platform license + support/success only. See `annual_investment`.
 - Outputs headline in the Constitution §10 order: **Annual Savings, ROI %,
   Payback Period, Efficiency Gain**, with **payback period led** in narration.
-- Savings map to the three pillars: Company Brain (knowledge search),
-  Digital Employees (manual processes, document handling, meetings),
-  Workflows & Approvals (approval delay).
+- Savings map to what AdOS actually does — drafting human-approved advertising
+  work on 100% local AI:
+  - **Company Brain** (a marketing-performance memory): less time hunting for past
+    campaign results and creative references; fewer status/review meetings.
+  - **AI-assisted drafting** (human-in-the-loop): AI drafts marketing briefs, ad
+    copy, campaign plans, and performance reports for human review, cutting manual
+    agency / creative / reporting effort.
+  - **Human-approved pipeline**: the gated Mission → Brief → Creative → Campaign
+    Draft → Report → Executive-dashboard stages remove idle wait between approvals.
+
+  Every AdOS stage produces a **draft for human approval** — nothing is launched,
+  optimized live, or pushed to an ad platform (see §0.3).
+
+### 0.3 Not included in this ROI model (Roadmap)
+
+This model counts only savings from capabilities AdOS ships **today**: AI-assisted
+drafting of human-approved advertising work on 100% local inference, plus the
+marketing-performance Company Brain. It deliberately does **not** credit savings
+that depend on capabilities the product does not have. The following are
+**excluded from this ROI** and belong to the Roadmap:
+
+- Revenue or media savings from **launching or optimizing live ad campaigns** —
+  AdOS produces drafts only; nothing is launched or optimized on an ad platform.
+- Labor savings from **connector / integration automation** (ad platforms, CRMs,
+  data warehouses) — performance metrics are entered by hand today.
+- Savings from **document Q&A / a document knowledge base** — Company Brain is a
+  marketing-performance memory, not a document-answering system.
+- Headcount savings from **autonomous "digital employees" replacing staff** — the
+  pipeline is human-in-the-loop and every stage requires a human approval click.
+- Savings attributed to **enforced role-based permissions, an immutable audit
+  trail, or cloud inference** — the model relies on none of these.
+
+If and when these ship, they may be added later as clearly labeled, separate lines.
 
 ---
 
@@ -61,10 +97,10 @@ placeholders**, not benchmarks.
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | `employee_count` | Employee count | Çalışan sayısı | integer | people | 500 | 1 | 100000 | required; integer; `min ≤ x ≤ max` |
 | 2 | `avg_annual_salary` | Average annual salary (fully loaded) | Ortalama yıllık maaş (tüm maliyetler dahil) | number | currency/year | 600000 | 1 | 100000000 | required; `> 0`; loaded cost (salary + employer burden) |
-| 3 | `search_minutes_per_day` | Knowledge search time | Bilgi arama süresi | number | minutes/employee/day | 30 | 0 | 480 | `0 ≤ x ≤ 480` (≤ one 8h day) |
-| 4 | `manual_process_count` | Number of manual processes | Manuel süreç sayısı | integer | processes | 25 | 0 | 10000 | integer; `≥ 0` |
+| 3 | `search_minutes_per_day` | Campaign & creative research time | Kampanya ve kreatif araştırma süresi | number | minutes/employee/day | 30 | 0 | 480 | `0 ≤ x ≤ 480` (≤ one 8h day) |
+| 4 | `manual_process_count` | Recurring marketing production tasks | Yinelenen pazarlama üretim görevi sayısı | integer | tasks | 25 | 0 | 10000 | integer; `≥ 0` |
 | 5 | `avg_approval_delay_hours` | Average approval delay | Ortalama onay gecikmesi | number | hours/approval | 24 | 0 | 2000 | `≥ 0` |
-| 6 | `monthly_document_volume` | Monthly document volume | Aylık doküman hacmi | integer | documents/month | 5000 | 0 | 100000000 | integer; `≥ 0` |
+| 6 | `monthly_document_volume` | Monthly report & asset volume | Aylık rapor ve kreatif varlık hacmi | integer | items/month | 5000 | 0 | 100000000 | integer; `≥ 0` |
 | 7 | `meetings_per_week` | Meetings per week per employee | Çalışan başına haftalık toplantı | number | meetings/employee/week | 5 | 0 | 100 | `≥ 0` |
 | 8 | `annual_training_cost` | Annual training cost | Yıllık eğitim maliyeti | number | currency/year | 2000000 | 0 | 10000000000 | `≥ 0` |
 | 9 | `ai_adoption_rate` | Expected AI adoption rate | Beklenen AI benimseme oranı | number | percent | 60 | 0 | 100 | `0 ≤ x ≤ 100` |
@@ -96,15 +132,15 @@ them as percent.
 | `WORKING_DAYS_PER_YEAR` | Working days per year | Yıllık çalışma günü | 220 | days | ~260 weekdays minus leave/holidays. |
 | `WORKING_HOURS_PER_DAY` | Working hours per day | Günlük çalışma saati | 8 | hours | Standard full workday. |
 | `WORKING_WEEKS_PER_YEAR` | Working weeks per year | Yıllık çalışma haftası | 44 | weeks | `220 / 5`; keeps weekly inputs consistent with annual days. |
-| `SEARCH_TIME_RECOVERABLE` | Search time recovered by Company Brain | Company Brain ile geri kazanılan arama süresi | 0.50 | fraction | Cited, permission-aware answers cut repeated hunting; not all search is removable. |
-| `APPROVAL_DELAY_REDUCTION` | Approval delay reduction (Workflows & Approvals) | Onay gecikmesi azalması | 0.60 | fraction | Deterministic routing + tiered authority removes idle wait, not decision time. |
-| `MANUAL_PROCESS_TIME_SAVED` | Manual-process time saved by Digital Employees | Digital Employees ile azalan manuel süreç süresi | 0.40 | fraction | Agents handle routing/drafting/prep; humans keep judgment steps. |
-| `HOURS_PER_MANUAL_PROCESS_PER_YEAR` | Labor hours per manual process per year | Manuel süreç başına yıllık iş gücü saati | 200 | hours/process/year | Illustrative annual human effort per recurring manual process. |
-| `MINUTES_PER_DOCUMENT` | Human handling time per document | Doküman başına insan işleme süresi | 5 | minutes/doc | Read/classify/route/file per document. |
-| `DOCUMENT_TIME_SAVED` | Document-handling time saved | Doküman işleme süresinden tasarruf | 0.40 | fraction | Digital Employees pre-process and route; humans confirm. |
+| `SEARCH_TIME_RECOVERABLE` | Campaign-research time recovered by Company Brain | Company Brain ile geri kazanılan kampanya araştırma süresi | 0.50 | fraction | Company Brain surfaces past winning campaigns and creative patterns, cutting repeated hunting; not all research is removable. |
+| `APPROVAL_DELAY_REDUCTION` | Approval delay reduction (human-approved pipeline) | Onay gecikmesi azalması | 0.60 | fraction | Human-approved pipeline gates remove idle wait between stages, not decision time. |
+| `MANUAL_PROCESS_TIME_SAVED` | Production-task time saved by AI-assisted drafting | Yapay zekâ destekli taslak hazırlama ile azalan üretim görevi süresi | 0.40 | fraction | AI drafts briefs / creative / campaign plans; humans keep judgment and approval steps. |
+| `HOURS_PER_MANUAL_PROCESS_PER_YEAR` | Labor hours per production task per year | Üretim görevi başına yıllık iş gücü saati | 200 | hours/task/year | Illustrative annual human effort per recurring marketing production task. |
+| `MINUTES_PER_DOCUMENT` | Human time to draft/prepare per report or asset | Rapor/varlık başına insan hazırlama süresi | 5 | minutes/item | Draft / assemble / format per report or creative asset. |
+| `DOCUMENT_TIME_SAVED` | Report & asset drafting time saved | Rapor ve varlık hazırlama süresinden tasarruf | 0.40 | fraction | AI drafts reports and creative assets; humans review and approve. |
 | `MEETING_DURATION_HOURS` | Average meeting duration | Ortalama toplantı süresi | 1.0 | hours/meeting | Illustrative mean. |
-| `MEETING_TIME_SAVED` | Meeting time saved (fewer/shorter, better prepared) | Toplantı süresinden tasarruf | 0.20 | fraction | Grounded answers reduce status/lookup meetings; most meetings remain. |
-| `TRAINING_COST_REDUCTION` | Training-cost reduction (knowledge retention) | Eğitim maliyeti azalması | 0.30 | fraction | Company Brain retains institutional knowledge; onboarding shortens. |
+| `MEETING_TIME_SAVED` | Meeting time saved (fewer/shorter, better prepared) | Toplantı süresinden tasarruf | 0.20 | fraction | Auto-drafted performance reports and the executive dashboard reduce status/review meetings; most meetings remain. |
+| `TRAINING_COST_REDUCTION` | Training-cost reduction (campaign-learning retention) | Eğitim maliyeti azalması | 0.30 | fraction | Company Brain retains which campaigns and creative worked, shortening ramp-up on past-campaign learnings. |
 | `EFFICIENCY_BASELINE_HOURS_PCT` | Denominator basis for efficiency gain | Verimlilik payda temeli | 1.0 | fraction | Efficiency measured against total available productive hours (§3.6). |
 
 **Adoption ramp** (used only for the 36-month cumulative chart, §4.2). Adoption is
@@ -141,10 +177,10 @@ adoption    = ai_adoption_rate / 100
 ### 3.1 Time savings (hours/year)
 
 Five independent components, each an annual gross-hours figure before adoption
-scaling. Company Brain, Digital Employees, and Workflows & Approvals each map to
-named components.
+scaling. Company Brain, AI-assisted drafting, and the human-approved pipeline each
+map to named components.
 
-**(a) Knowledge search — Company Brain**
+**(a) Campaign & creative research — Company Brain**
 ```
 search_hours_gross =
     employee_count
@@ -154,7 +190,7 @@ search_hours_gross =
   * SEARCH_TIME_RECOVERABLE
 ```
 
-**(b) Manual processes — Digital Employees**
+**(b) Marketing production tasks — AI-assisted drafting**
 ```
 process_hours_gross =
     manual_process_count
@@ -162,7 +198,7 @@ process_hours_gross =
   * MANUAL_PROCESS_TIME_SAVED
 ```
 
-**(c) Approval delay — Workflows & Approvals**
+**(c) Approval delay — human-approved pipeline**
 Approval delay reduces *elapsed wait*, not necessarily labor hours. To keep one
 consistent hours-based model, delay hours saved are counted as recovered process
 throughput time, scaled by the number of manual processes that carry approvals.
@@ -176,7 +212,7 @@ approval_hours_gross =
 > recovered cycle time, valued at `hourly_cost` as a proxy. This is the most
 > assumption-sensitive term; buyers should tune `APPROVAL_DELAY_REDUCTION`.
 
-**(d) Document handling — Digital Employees**
+**(d) Report & asset drafting — AI-assisted drafting**
 ```
 document_hours_gross =
     monthly_document_volume
@@ -186,7 +222,7 @@ document_hours_gross =
   * DOCUMENT_TIME_SAVED
 ```
 
-**(e) Meetings — Company Brain (better-prepared, fewer status meetings)**
+**(e) Review meetings — Company Brain (auto-drafted reports, fewer status meetings)**
 ```
 meeting_hours_gross =
     employee_count
@@ -323,10 +359,11 @@ UI language. Currency axes use the formatting in §7.
 ### 4.1 Savings breakdown — horizontal bar
 
 - **Type:** horizontal bar chart (one bar per source).
-- **Purpose:** show where annual savings come from, tied to the three pillars.
+- **Purpose:** show where annual savings come from, tied to Company Brain,
+  AI-assisted drafting, and the human-approved pipeline.
 - **Y axis (categories):** the six `savings_breakdown` sources, labeled:
-  Company Brain – Search, Digital Employees – Processes, Workflows & Approvals,
-  Digital Employees – Documents, Company Brain – Meetings, Training.
+  Company Brain – Research, AI Drafting – Production, Human-Approved Pipeline,
+  AI Drafting – Reports & Assets, Company Brain – Review Meetings, Training.
 - **X axis:** currency/year, formatted per §7; starts at 0.
 - **Series:** one series = the currency value of each source.
 - **Annotations:** each bar labeled with its value and its % of `annual_savings`.
@@ -528,17 +565,17 @@ transcription error.
 ## 9. Turkish label glossary (UI)
 
 Product names stay in English in both languages (CANON §20.3): **AdOS**,
-**Company Brain**, **Digital Employees**, **Workflows & Approvals**.
+**Company Brain**.
 
 ### Inputs
 | EN | TR |
 |---|---|
 | Employee count | Çalışan sayısı |
 | Average annual salary (fully loaded) | Ortalama yıllık maaş (tüm maliyetler dahil) |
-| Knowledge search time (min/employee/day) | Bilgi arama süresi (dk/çalışan/gün) |
-| Number of manual processes | Manuel süreç sayısı |
+| Campaign & creative research time (min/employee/day) | Kampanya ve kreatif araştırma süresi (dk/çalışan/gün) |
+| Recurring marketing production tasks | Yinelenen pazarlama üretim görevi sayısı |
 | Average approval delay (hours) | Ortalama onay gecikmesi (saat) |
-| Monthly document volume | Aylık doküman hacmi |
+| Monthly report & asset volume | Aylık rapor ve kreatif varlık hacmi |
 | Meetings per week per employee | Çalışan başına haftalık toplantı |
 | Annual training cost | Yıllık eğitim maliyeti |
 | Expected AI adoption rate (%) | Beklenen AI benimseme oranı (%) |
@@ -551,10 +588,10 @@ Product names stay in English in both languages (CANON §20.3): **AdOS**,
 | Working days per year | Yıllık çalışma günü |
 | Working hours per day | Günlük çalışma saati |
 | Working weeks per year | Yıllık çalışma haftası |
-| Search time recovered by Company Brain | Company Brain ile geri kazanılan arama süresi |
+| Campaign-research time recovered by Company Brain | Company Brain ile geri kazanılan kampanya araştırma süresi |
 | Approval delay reduction | Onay gecikmesi azalması |
-| Manual-process time saved by Digital Employees | Digital Employees ile azalan manuel süreç süresi |
-| Document-handling time saved | Doküman işleme süresinden tasarruf |
+| Production-task time saved by AI-assisted drafting | Yapay zekâ destekli taslak hazırlama ile azalan üretim görevi süresi |
+| Report & asset drafting time saved | Rapor ve varlık hazırlama süresinden tasarruf |
 | Meeting time saved | Toplantı süresinden tasarruf |
 | Training-cost reduction | Eğitim maliyeti azalması |
 | Adoption ramp length | Benimseme rampası süresi |

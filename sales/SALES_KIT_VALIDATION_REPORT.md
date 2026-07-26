@@ -1,151 +1,137 @@
 # AdOS Sales Kit — Validation Report
 
 **Owner:** Office of the Chief Revenue Officer
-**Status:** ✅ PASS — zero contradictions
+**Status:** ✅ PASS — 100% aligned to `PRODUCT_TRUTH.md`
 **Scope:** every artifact in `sales/`
-**Method:** automated grep checks + manual review against
-`SALES_KIT_CONSTITUTION.md` and the Canonical Brief
-**Aligned to:** AdOS v1.0.0
+**Source of truth:** `PRODUCT_TRUTH.md` (repo root). No sales claim may promise a
+capability that is not stated as implemented there. Forbidden capabilities may
+appear **only** inside an explicit **Roadmap** label or a negation.
+**Method:** automated grep sweep for forbidden capability terms + manual review
+against `PRODUCT_TRUTH.md` and `SALES_KIT_CONSTITUTION.md`
+**Aligned to:** AdOS v1.0.0 (code as of 2026-07-27)
 
 ---
 
 ## 0. Summary
 
-The complete Sales Kit was validated for cross-document consistency,
-terminology, TR/EN parity, brand consistency, messaging consistency, and internal
-contradictions. **Result: PASS.** No blocking issues. Two automated flags were
-investigated and confirmed as **false positives** (see §7). The Kit is declared
-**official**.
+The complete Sales Kit was re-validated against `PRODUCT_TRUTH.md` — the single
+source of code truth — after the full-alignment pass. Every claim that previously
+described a not-yet-built capability (generic document knowledge base / document
+Q&A, cited answers, "Digital Employees" as a shipped capability, live ad launch or
+optimization, external connectors, enforced RBAC / permission-aware AI, immutable
+audit trail, DB-level RLS, cloud inference, tiered approval authority) has been
+removed, reframed to the true equivalent, or relocated under an explicit Roadmap
+label. **Result: PASS.**
 
 | Dimension | Result |
 |---|---|
+| Alignment to `PRODUCT_TRUTH.md` (no unsupported claim as shipped) | ✅ PASS |
+| Forbidden terms appear only in Roadmap labels / negations | ✅ PASS |
+| Product category = "Enterprise AI Operating System for Advertising" | ✅ PASS |
+| Legacy "Advertising-OS" category label (EN + TR) absent | ✅ PASS (0 hits) |
 | Cross-document consistency | ✅ PASS |
 | Terminology | ✅ PASS |
-| TR/EN consistency | ✅ PASS |
-| Brand consistency | ✅ PASS |
-| Messaging consistency | ✅ PASS |
-| No contradictions | ✅ PASS |
+| TR/EN parity | ✅ PASS |
+| Roadmap vs Implemented never interleaved unlabeled | ✅ PASS |
 | ROI calculator determinism & tests | ✅ PASS (19/19) |
 
 ---
 
 ## 1. Artifacts validated
 
-| Artifact | Present | Notes |
+| Artifact | Present | Alignment notes |
 |---|---|---|
-| `SALES_KIT_CONSTITUTION.md` | ✅ | The binding frame (§1 canonical facts, §20 terminology) |
-| `ONE_PAGER.md` | ✅ | Bilingual; all 10 required blocks per language |
-| `BROCHURE.md` | ✅ | 12 pages EN + 12 pages TR |
-| `ROI_CALCULATOR_SPEC.md` | ✅ | 11 inputs, named assumptions, formulas, verification vector |
-| `roi-calculator/` | ✅ | Offline app; 7 `src/` modules; 19 tests pass |
-| `CASE_STUDIES.md` | ✅ | 8 verticals, bilingual, illustrative disclaimer |
-| `OBJECTION_HANDLING.md` | ✅ | 12 objections × 5-beat structure |
-| `SALES_FAQ.md` | ✅ | 107 questions × TR/EN (214 numbered entries) |
-| `PROPOSAL_TEMPLATE.md` | ✅ | 13 sections, placeholder commercials |
+| `SALES_KIT_CONSTITUTION.md` | ✅ | Canon anchor; §1 facts, §8 pillars, §11 security, §14 competitive, §15 demo, §20 glossary all reframed to code truth |
+| `ONE_PAGER.md` | ✅ | Pillars reframed; honest Roadmap section (EN+TR) |
+| `BROCHURE.md` | ✅ | 12 EN + 12 TR pages; "Digital Employees" eliminated; 8 Roadmap callouts |
+| `ROI_CALCULATOR_SPEC.md` | ✅ | Drivers reframed to campaign-drafting/local-inference; new §0.3 Roadmap-exclusion note |
+| `roi-calculator/` | ✅ | Display copy reframed; engine keys/formulas untouched; 19 tests pass |
+| `CASE_STUDIES.md` | ✅ | 8 verticals recast to campaign drafting; personas → marketing roles; figures unchanged |
+| `OBJECTION_HANDLING.md` | ✅ | Rebuttals stand on true strengths; forbidden capabilities → Roadmap |
+| `SALES_FAQ.md` | ✅ | 107 EN / 107 TR; 33 Roadmap labels; honest answers to capability questions |
+| `PROPOSAL_TEMPLATE.md` | ✅ | Deliverables de-risked; §4.6 Roadmap excluded from contracted scope |
 
 ---
 
-## 2. Terminology consistency
+## 2. Forbidden-capability sweep (the core check)
 
-Checked every document for the canonical terms and forbidden variants
-(Constitution §20.1).
+Automated grep across all `sales/*.md` for the PRODUCT_TRUTH §2/§4 forbidden
+capabilities. Every surviving hit was inspected in context.
 
-- **`AdOS` capitalization** — grep for `ADOS|Ados|adOS|AdOs` returned **1 hit**,
-  which is the Constitution's own terminology table *listing the forbidden
-  variants*. **Zero misuses in body copy.** ✅
-- **Product terms** — `Company Brain`, `Digital Employees`, `Workflows &
-  Approvals` used consistently. Loose-pattern grep surfaced 12 lines; all are
-  legitimate singular/possessive uses ("a Digital Employee", "Digital Employee's
-  task"). **Zero misspellings.** ✅
-- **Product names kept in English in both languages** (Turkish sections retain
-  `Company Brain` / `Digital Employees`). ✅
+| Term | Live claims (must be 0) | Where survivors sit |
+|---|---|---|
+| Legacy "Advertising-OS" label (EN) | 0 | — |
+| Legacy Turkish category label | 0 | — |
+| `Digital Employee(s)` (as shipped capability) | 0 | Roadmap answers (FAQ Q33/S33), constitution negation ("has no autonomous Digital Employees yet"), Never-use glossary cell |
+| `permission-aware` AI | 0 | Roadmap labels only (OBJECTION §, PROPOSAL §4.6, FAQ Q21/Q33/Q83, constitution §11 Roadmap note) |
+| `immutable audit` trail | 0 | Roadmap labels only (all files) |
+| `tiered approval` authority | 0 | PROPOSAL §4.6 Roadmap; constitution Never-use glossary cell |
+| `cited answer(s)` / `cites its sources` / `permission-scoped` | 0 | Roadmap labels + negations only |
+| live ad launch / optimize campaigns | 0 | Reframed to "drafts / export to your own ad platform"; Roadmap for connectors |
 
----
-
-## 3. TR/EN consistency
-
-- Every buyer-facing artifact (`ONE_PAGER`, `BROCHURE`, `CASE_STUDIES`,
-  `SALES_FAQ`) contains both English and Turkish sections. Marker counts:
-  ONE_PAGER (EN 3 / TR 4), BROCHURE (EN 5 / TR 8), CASE_STUDIES (EN 9 / TR 8),
-  SALES_FAQ (EN 10 / TR 17). ✅
-- **FAQ parity:** 107 questions in English (Q1–Q107) mirrored by 107 in Turkish
-  (S1–S107), same order and numbering. ✅
-- **No claim exists in only one language** — spot-checked headline claims,
-  pricing framing, and numbers across both sections. Turkish is idiomatic, not
-  literal. ✅
-- The ROI calculator ships every input, assumption, output, warning, and the
-  honest-frame note in both TR and EN (`src/i18n.js`). ✅
+**No forbidden capability is stated as a present-tense product capability anywhere
+in the Sales Kit.** ✅
 
 ---
 
-## 4. Brand & messaging consistency
+## 3. Positioning & terminology
 
-- **Sovereignty message present in every document** (data never leaves the
-  premises): BROCHURE 16, SALES_FAQ 21, PROPOSAL 14, OBJECTION 11, CASE_STUDIES
-  10, CONSTITUTION 7, ONE_PAGER 5. (`ROI_CALCULATOR_SPEC` is an internal formula
-  spec; sovereignty is asserted in its CANON-alignment §0.2, not as marketing
-  copy — expected.) ✅
-- **Value pillars** (Sovereign · Capable · Accountable) and the
-  Sovereignty→Capability→Outcome framework are applied consistently. ✅
-- **Voice discipline** — no banned hype words introduced; claims trace to
-  canonical facts. ✅
+- **Category:** every document positions AdOS as the **"Enterprise AI Operating
+  System for Advertising"** (TR: "Reklam için Kurumsal Yapay Zekâ İşletim
+  Sistemi"). The legacy advertising-category label (EN and TR variants) appears
+  **0 times**. ✅
+- **Company Brain** is consistently described as a **marketing-performance memory**
+  (CompanyDNA, brand profiles, campaign→ad→lead→ROI knowledge graph, winning-ad
+  pattern library, past-campaign experience engine) — never a document Q&A KB. ✅
+- **Pipeline** language ("drafts", "human-approved", "brief → creative → campaign
+  draft → report → executive dashboard") is used in place of autonomy claims. ✅
+- **Isolation** is described as **application-level multi-tenant isolation**, never
+  DB-level RLS or "strict isolation". ✅
 
 ---
 
-## 5. No-contradiction checks
+## 4. TR/EN parity
 
-- **No positive cloud/API-key dependency:** grep for "requires internet / API key
-  / cloud-based platform / needs the cloud" → **0 hits.** Every mention of cloud
-  is a contrast, never a dependency. ✅
-- **Per-token/per-query cost:** 45 mentions across the Kit, **all negative**
-  ("no per-token billing", "never per-token", "no per-query charge"). No document
-  implies a metered cost. ✅ (Consistent with Constitution §12/§17 and the ROI
-  spec §0.2.)
-- **Pricing discipline:** no invented hard prices in the general sales documents.
-  The only currency figures are inside `CASE_STUDIES.md`, which carries a bold
-  TR/EN **ILLUSTRATIVE/FICTIONAL** disclaimer at the top and marks investment
-  figures "(placeholder / yer tutucu)"; the `PROPOSAL_TEMPLATE.md` commercials are
-  `{{token}}` placeholders. Permitted by Constitution §20.4 and §17. ✅
-- **Case-study internal reconciliation:** savings sub-components sum to stated
-  totals (e.g. ₺4.8M + ₺2.4M + ₺1.2M = ₺8.4M). ✅
-- **Honest trade-offs stated, not hidden:** performance (local inference is
-  seconds, not milliseconds) appears in OBJECTION_HANDLING, SALES_FAQ, and the
-  Constitution; ROI is framed as a buyer-controlled model, never a guarantee. ✅
+- Every buyer-facing artifact carries both English and Turkish. FAQ parity: 107
+  EN (Q1–Q107) ↔ 107 TR (S1–S107), same order. ✅
+- All alignment edits were mirrored across both languages; Turkish uses proper
+  diacritics (İ/ı/ş/ğ/ç/ö/ü) and idiomatic phrasing; Roadmap rendered
+  "Yol Haritası". ✅
+
+---
+
+## 5. Roadmap discipline
+
+- Roadmap capabilities never appear in an unlabeled list alongside shipped
+  capabilities. Each is under a heading or callout containing "Roadmap" /
+  "Yol Haritası" (or a clear negation). ✅
+- Roadmap items map exactly to PRODUCT_TRUTH §4/§5: document KB & cited answers,
+  autonomous agents, live ad launch/optimization + connectors, enforced RBAC /
+  permission-aware AI, immutable audit trail, DB-level RLS, cloud inference,
+  vision/speech AI, tiered approval authority. ✅
+- In `PROPOSAL_TEMPLATE.md`, §4.6 Roadmap items are explicitly excluded from the
+  §7 contracted deliverables. ✅
 
 ---
 
 ## 6. ROI calculator verification
 
-- **Determinism:** engine is a pure function; identical inputs → identical
-  outputs (asserted across fixed vectors). ✅
-- **Spec §8 verification vector reproduced exactly** on default inputs
-  (annual_savings ≈ ₺11,376,818; ROI ≈ 279.2%; payback ≈ 3.2 months; efficiency
-  ≈ 3.7%). ✅
+- **Determinism:** pure function; identical inputs → identical outputs. ✅
+- **Display copy** reframed to campaign-drafting / local-inference savings; engine
+  identifier keys and formulas unchanged; §0.3 states what is *not* in the model. ✅
 - **Offline:** no backend, no external API/CDN/font/analytics. ✅
-- **Exports:** PDF (valid `%PDF-…%%EOF` stream), Excel (well-formed
-  SpreadsheetML with numeric cells), print report. ✅
 - **Tests:** `node --test` → **19 pass / 0 fail.** ✅
 
 ---
 
-## 7. Investigated flags (false positives)
+## 7. Conclusion
 
-| Flag | Finding | Verdict |
-|---|---|---|
-| 1 `AdOS` wrong-caps (1 hit) | The hit is the Constitution's terminology table listing the *forbidden* variants for guidance. | False positive — no body-copy misuse. |
-| 2 Product-term variants (12 lines) | All are legitimate singular ("a Digital Employee") or possessive ("Digital Employee's") usages; product name is the plural. | False positive — terminology is correct. |
-| 3 Currency figures in `CASE_STUDIES.md` | Inside an explicitly labeled illustrative/fictional document with a bold TR/EN disclaimer; investment lines marked placeholder. | Permitted — not an invented real price. |
+The AdOS Sales Kit is **100% aligned to `PRODUCT_TRUTH.md`**: no document promises a
+capability the code does not have; every future capability is explicitly labeled
+Roadmap; positioning is uniformly "Enterprise AI Operating System for Advertising";
+TR/EN parity holds; the ROI calculator passes 19/19 tests.
 
----
-
-## 8. Conclusion
-
-The AdOS Sales Kit is **internally consistent, terminologically clean,
-bilingually complete, on-brand, contradiction-free, and functionally verified**
-(ROI calculator 19/19 tests). It conforms to `SALES_KIT_CONSTITUTION.md` and the
-Canonical Brief.
-
-**Status: ✅ OFFICIAL.**
+**Status: ✅ OFFICIAL — aligned to PRODUCT_TRUTH.md.**
 
 *Validation is isolated in `sales/`; it references but does not modify the AdOS
-application, its packages, or its tests.*
+application, its packages, its domains, or its tests.*

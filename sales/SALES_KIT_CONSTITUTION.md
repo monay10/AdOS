@@ -148,9 +148,9 @@ work through a human-approved pipeline:
 | **CEO / General Manager** | Strategic edge, risk, outcomes, ROI | Sovereign AI as competitive advantage; measurable business outcomes |
 | **CIO** | Fit with IT strategy, TCO, supportability | On-prem control, no vendor lock-in, predictable cost |
 | **CTO** | Architecture, model choice, extensibility | Open local engines, OpenAI-compatible, no black box |
-| **CISO / Security** | Data leakage, attack surface, compliance | Data never leaves premises; air-gap capable; full audit trail |
-| **HR / People** | Adoption, training load, knowledge retention | Company Brain retains institutional knowledge; bilingual UX |
-| **Operations** | Process efficiency, approvals, throughput | Workflow & approval automation; Digital Employees |
+| **CISO / Security** | Data leakage, attack surface, compliance | Data never leaves premises; air-gap capable; activity log & per-approval timeline |
+| **HR / People** | Adoption, training load, knowledge retention | Company Brain retains marketing-performance know-how; bilingual UX |
+| **Operations** | Process efficiency, approvals, throughput | Human-approved campaign pipeline; AI-assisted drafting |
 | **IT / BT (operators)** | Deployment, backup, day-2 ops | One-command deploy, standard Docker, documented runbooks |
 | **Finance / Procurement** | Cost model, payback, contract terms | Value-based pricing, no per-token cost, clear payback period |
 
@@ -224,15 +224,17 @@ Every value statement follows **Sovereignty → Capability → Outcome**:
 
 - **Sovereignty (the differentiator):** Your data and your AI stay entirely
   under your control, on your hardware, offline-capable.
-- **Capability (the how):** Company Brain, Digital Employees, Workflows &
-  Approvals — permission-aware and auditable.
-- **Outcome (the why-it-matters):** Faster answers, fewer stalled approvals,
-  retained knowledge, lower training cost, quantifiable ROI.
+- **Capability (the how):** Company Brain (marketing-performance memory), the
+  AI-assisted campaign pipeline, and human approval gates — traceable via an
+  activity log and per-approval timeline.
+- **Outcome (the why-it-matters):** Faster campaign drafts, fewer stalled
+  approvals, retained campaign know-how, lower cost, quantifiable ROI.
 
 **The three headline value pillars (use everywhere, in this order):**
 1. **Sovereign** — 100% on your infrastructure; data never leaves.
-2. **Capable** — a real AI operating system, not a chatbot.
-3. **Accountable** — permission-aware, cited, and fully audited.
+2. **Capable** — a real AI operating system for advertising, not a chatbot.
+3. **Accountable** — human-approved at every stage, with an activity log and a
+   per-approval timeline.
 
 ---
 
@@ -273,9 +275,11 @@ a demonstration.
   supports this.
 - **Attack surface:** no external API calls means no third-party data path to
   breach; air-gap capable.
-- **Access control:** permission-aware AI — the model cannot cite or reveal what a
-  user may not see.
-- **Auditability:** every consequential action is in an immutable audit trail.
+- **Access control:** application-level multi-tenant isolation — data is scoped and
+  segregated by tenant, and every campaign stage advances only on an explicit human
+  approval click. *(Enforced per-user RBAC / permission-aware AI is Roadmap.)*
+- **Auditability:** consequential actions are recorded in an activity log with an
+  ordered per-approval timeline. *(A tamper-evident immutable audit store is Roadmap.)*
 - **Compliance posture:** on-prem/air-gap directly satisfies data-residency
   mandates (public sector, healthcare, finance).
 - **Discipline:** we describe our architecture and controls; we do not claim
@@ -316,8 +320,8 @@ We position **by category**, not by feature-war. Three archetypes:
 | Competitor archetype | Their pitch | Our reframe |
 |---|---|---|
 | **Public cloud AI (hosted assistants/APIs)** | "Best models, zero infra" | "…and your data leaves the building, metered forever. AdOS keeps it home, unmetered." |
-| **On-prem point tools (search, chatbots)** | "We're local too" | "A search box isn't an operating system. AdOS unifies knowledge, agents, and approvals — permission-aware and audited." |
-| **Build-it-yourself** | "We'll assemble our own" | "You'd rebuild permissions, citations, audit, workflows, bilingual UX, and day-2 ops. AdOS is that, done and supported." |
+| **On-prem point tools (search, chatbots)** | "We're local too" | "A chatbot isn't an operating system. AdOS is a full advertising pipeline — Company Brain, AI-assisted drafting, and human approval gates — traceable end to end." |
+| **Build-it-yourself** | "We'll assemble our own" | "You'd rebuild the campaign pipeline, Company Brain, approval gates, bilingual UX, and day-2 ops. AdOS is that, done and supported." |
 
 **Rules of engagement:** never name-and-shame; compete on sovereignty,
 integration, and accountability; concede honest trade-offs (§12) to keep trust.
@@ -326,15 +330,17 @@ integration, and accountability; concede honest trade-offs (§12) to keep trust.
 
 ## 15. Demo strategy
 
-- The demo is the **NovaMak Endüstri A.Ş.** environment — a complete, internally
-  consistent, deterministic enterprise world (see `demo/`).
+- The demo is the **NovaMak** client-workspace environment — a complete, internally
+  consistent, deterministic advertising-agency world (a client with brands,
+  products, and campaign missions; see `demo/`).
 - Demo to the **discovered pain**, not a fixed tour. Map each scene to a problem
   the buyer named.
 - **Mandatory proof moments:**
-  1. Ask the Company Brain a question → show the **cited** answer.
-  2. Show that a restricted document is **invisible** to an unentitled user.
-  3. Run a workflow through a **tiered approval**.
-  4. Show a **Digital Employee** completing a real task.
+  1. Show Company Brain surfacing a **past winning campaign/pattern** that shapes
+     the next brief.
+  2. Show **tenant isolation** — one workspace's campaign data invisible to another.
+  3. Advance a **campaign draft through a human approval gate**.
+  4. Show the **AI-assisted pipeline** drafting a creative set for human review.
   5. Pull the network cable (or show air-gap) → **it still works**.
 - Always reset the demo to a known-good state before each session (deterministic
   reset; identical every time).
@@ -393,13 +399,13 @@ and champion.
 | Use | Never use |
 |---|---|
 | **AdOS** (always this capitalization) | ADOS, Ados, adOS, "the AdOS platform" as a name |
-| **Company Brain** | knowledge base (as the product name), "the brain" |
-| **Digital Employees** | bots, chatbots, assistants (as the product name) |
-| **Workflows & Approvals** | "the workflow thing" |
+| **Company Brain** (marketing-performance memory) | document "knowledge base", "the brain" |
+| **AI-assisted campaign pipeline** | "Digital Employees", autonomous "agents" (as shipped capability) |
+| **Workflows & Approvals** / **human approval gates** | "the workflow thing", "tiered approval authority" |
 | **Local AI** / **on-premise** | "on-prem cloud", "private cloud AI" (unless VPC) |
 | **data sovereignty** | "data safety" (weaker, imprecise) |
-| **permission-aware** | "secure AI" (vague) |
-| **enterprise AI operating system** | "AI tool", "AI app" |
+| **human-approved** | "permission-aware AI" (Roadmap, not shipped) |
+| **Enterprise AI Operating System for Advertising** | the legacy "Advertising-OS" label, "AI tool", "AI app" |
 
 ### 20.2 Voice
 

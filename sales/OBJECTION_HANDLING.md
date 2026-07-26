@@ -22,16 +22,17 @@ Every objection is answered in the five mandatory beats from Constitution §9:
 objection into a demonstration. Concede honest trade-offs to keep trust — honesty
 is our competitive weapon.
 
-The NovaMak Endüstri A.Ş. demo world (6 sites, 4 business units, 42 employees, 16
-departments, 12 Digital Employees, 25 workflows) is the proving ground. Every
-"Demo recommendation" below maps to a specific, repeatable NovaMak moment.
+The NovaMak Endüstri A.Ş. demo world (a client workspace with 4 brands, 12
+products, 25 campaign missions, and human-approval gates across 6 markets) is the
+proving ground. Every "Demo recommendation" below maps to a specific, repeatable
+NovaMak moment.
 
 **Bilingual note:** Every key answer is available in Turkish and English; both
 languages carry the same claims and numbers. The three highest-leverage answers —
 **Security**, **Cloud vs Local**, and **Price** — are provided in full in BOTH
 languages at the end of this playbook (see *Bilingual key answers / İki dilli
-temel yanıtlar*). Product terms (AdOS, Company Brain, Digital Employees) stay in
-English in both languages.
+temel yanıtlar*). Product terms (AdOS, Company Brain) stay in English in both
+languages.
 
 ---
 
@@ -90,28 +91,33 @@ English in both languages.
   - *Answer (canonical fact):* "With AdOS your data **never leaves your
     premises**. All inference runs on your own hardware — **no external API, no API
     keys, no internet required**. There is no third-party data path to breach.
-    Access is **permission-aware**: the AI can never surface or cite a document a
-    user isn't entitled to. And every consequential action is written to an
-    **immutable audit trail**."
+    Client workspaces are kept apart by **application-level multi-tenant
+    isolation**, and access is protected by **real authentication** — Argon2id
+    password hashing, HMAC HttpOnly sessions, per-session CSRF, brute-force
+    lockout, and CSP/HSTS security headers. Every approval and consequential
+    action is recorded in the **activity log and per-approval timeline**."
   - *Prove:* "In the demo I'll pull the network cable and it keeps working —
-    because there's nowhere for your data to go. Then I'll log in as a restricted
-    user and show that a confidential document is simply invisible, to them and to
-    the AI."
+    because there's nowhere for your data to go. Then I'll show two separate client
+    workspaces and prove one tenant's campaign data is simply invisible to the
+    other."
   - *Advance:* "Let's bring your CISO to a technical security review and, when
     you're ready, run a pilot air-gapped on your own hardware."
 
 - **Evidence:** CANON — data sovereignty (data never leaves premises, no
   telemetry of business content); Local AI (no cloud, no API keys, no internet);
-  permission-aware AI; immutable audit trail; offline-first / air-gap capable.
+  application-level multi-tenant isolation; real auth (Argon2id, HMAC sessions,
+  CSRF, brute-force lockout, CSP/HSTS); offline-first / air-gap capable.
   Constitution §11 (security messaging) — attack surface, access control,
   auditability. Discipline: describe architecture and controls; claim no
-  certifications AdOS has not earned.
+  certifications AdOS has not earned. **Roadmap:** enforced RBAC / permission-aware
+  AI and an immutable audit trail are planned, not shipped today — do not present
+  them as current controls.
 
 - **Demo recommendation:** The air-gap moment — pull the network cable (or show
-  the air-gapped environment) and ask the Company Brain a question; it still
-  answers. Then the permission moment — an unentitled NovaMak user cannot see or
-  get a citation to a restricted document. Finish on the audit trail entry for
-  the action.
+  the air-gapped environment) and run a Company Brain query on campaign
+  performance; it still answers. Then the isolation moment — a user in one NovaMak
+  client workspace cannot see another tenant's data. Finish on the activity-log
+  and per-approval-timeline entry for the action.
 
 - **Follow-up action:** Book the CISO/Security technical deep-dive; propose an
   air-gapped pilot on customer hardware with defined acceptance criteria.
@@ -167,31 +173,39 @@ English in both languages.
     a made-up answer is worse than no answer."
   - *Reframe:* "The problem with generic AI is that it answers from a vast,
     anonymous internet with no receipts. The fix isn't a smarter guess — it's
-    grounding every answer in *your* documents and making it show its work."
-  - *Answer (canonical fact):* "**Company Brain** grounds every AI answer in **your
-    organization's own documents** and **cites its sources**. You don't get a
-    floating claim — you get an answer with the citation you can click and verify.
-    And citations are **permission-scoped**: a user only ever sees, and the AI only
-    ever cites, documents that user is entitled to."
-  - *Prove:* "In the demo I'll ask Company Brain a real NovaMak question and show
-    the cited answer — then open the source document behind the citation. If it's
-    not in your documents and you're not entitled to it, it isn't cited."
-  - *Advance:* "Let's pick three questions your team actually struggles with and
-    put them to Company Brain in a pilot seeded with your own documents."
+    making the system deterministic, grounding it in *your* marketing performance,
+    and putting a human sign-off on every output."
+  - *Answer (canonical fact):* "AdOS is built to be **deterministic, not a guessing
+    machine**. The default offline engine produces **deterministic, templated
+    output** — the same inputs give the same result — and all ad-KPI math (CTR,
+    CPC, CPA, CPL, ROAS, ROI) is **pure deterministic calculation**, not a model's
+    opinion. Generation is constrained by each **Brand's voice, rules, and
+    banned-word list**, and the **Company Brain** grounds recommendations in **your
+    own campaign-performance history** — what actually worked across past
+    campaigns. And **every stage is human-approved**: a person signs off on the
+    brief, the creative, and the campaign draft before anything moves."
+  - *Prove:* "In the demo I'll run the same brief twice and show identical
+    deterministic output, then show the KPI report math you can recompute by hand,
+    and the human approval gate that sits on every stage."
+  - *Advance:* "Let's pick three real campaign briefs your team is working on and
+    run them through the pipeline in a pilot, so you can judge the drafts and the
+    KPIs yourself."
 
-- **Evidence:** CANON — Company Brain: every AI answer is grounded in the
-  company's own documents and cites its sources; citations are permission-scoped.
-  Permission-aware AI: the model can never surface/cite content a user may not
-  see. Constitution §1.1, §8 ("Show the citation" beats "trust the answer"), §15
-  proof moment #1.
+- **Evidence:** CANON — deterministic offline generation + deterministic ad-KPI
+  math; generation constrained by Brand voice/rules/banned words; Company Brain =
+  a marketing-performance memory grounded in your own campaign history; every
+  pipeline stage requires an explicit human approval click. Constitution §1.1, §8,
+  §15. **Roadmap:** free-text document Q&A and cited answers over your documents
+  are planned, not shipped today — do not promise a citation the product cannot
+  produce.
 
-- **Demo recommendation:** Mandatory proof moment #1 — ask Company Brain a NovaMak
-  question, show the **cited** answer, then click through to open the exact source
-  document. Follow with proof moment #2 — a restricted document is invisible to an
-  unentitled user, so it can never be cited to them.
+- **Demo recommendation:** Run the same brief through the pipeline twice and show
+  the deterministic output is identical, then open a CampaignReport and recompute a
+  KPI by hand to prove the math. Follow with the human approval gate — no brief,
+  creative, or campaign draft advances without a sign-off.
 
-- **Follow-up action:** Agree on three real buyer questions for a seeded pilot;
-  define what a "trustworthy answer" looks like as acceptance criteria.
+- **Follow-up action:** Agree on three real campaign briefs for a pilot; define
+  what a "trustworthy draft" looks like as acceptance criteria.
 
 ---
 
@@ -204,30 +218,38 @@ English in both languages.
   - *Acknowledge:* "Fair concern — a tool that can't reach your existing systems
     just adds work."
   - *Reframe:* "The goal isn't another app to log into; it's an operating layer
-    over the knowledge and processes you already have."
-  - *Answer (canonical fact):* "AdOS is an **enterprise AI operating system**, not
-    a chatbot bolted on. It's built on an **OpenAI-compatible interface** and
-    standard, documented tooling, so it fits alongside your stack rather than
-    replacing it. Company Brain ingests your documents; Workflows & Approvals model
-    your real processes with deterministic routing."
-  - *Prove:* "In NovaMak you'll see 25 workflows and 12 Digital Employees operating
-    across 6 sites and 16 departments — a full enterprise shape, wired to
-    documents and approvals, not a toy."
+    over the advertising work — briefs, creative, campaigns, and approvals — you
+    already run."
+  - *Answer (canonical fact):* "AdOS is an **Enterprise AI Operating System for
+    Advertising**, not a chatbot bolted on. Its AI layer runs on an
+    **OpenAI-compatible interface** to local engines, and it deploys with standard,
+    documented Docker tooling, so it fits alongside your stack. Today it runs a
+    self-contained agency pipeline: analytics metrics are **entered through its
+    forms** and a finished campaign draft is **exported** for you to run in your own
+    ad platform."
+  - *Prove:* "In NovaMak you'll see the full pipeline across 4 client brands and 25
+    campaign missions — brief → creative → campaign draft → report → executive
+    dashboard — with a human approval gate at every stage, a full advertising shape,
+    not a toy."
   - *Advance:* "Let's map your top two integration points with your CTO in a
-    technical deep-dive and scope them into the pilot."
+    technical deep-dive and scope what the export path covers today."
 
-- **Evidence:** CANON — enterprise AI operating system; OpenAI-compatible
-  interface; Workflows & Approvals with deterministic routing; standard Docker
-  tooling. Constitution §14 (a search box isn't an operating system; AdOS unifies
-  knowledge, agents, and approvals). NovaMak scale as proof of enterprise fit.
+- **Evidence:** CANON — Enterprise AI Operating System for Advertising;
+  OpenAI-compatible interface to local engines; human-approved pipeline; standard
+  Docker tooling; analytics metrics entered by form; campaign drafts exportable.
+  Constitution §14 (a search box isn't an operating system; AdOS unifies the
+  pipeline, Company Brain, and approvals). **Roadmap:** real connectors/syncs to
+  external systems (ERP, ad platforms, CRMs, data warehouses) are planned, not
+  shipped — today integration is via export and manual metric entry.
 
-- **Demo recommendation:** Walk the NovaMak workflow map — show a Digital Employee
-  completing a real task that moves a workflow through tiered approval across
-  departments, demonstrating the platform operating over connected knowledge and
-  process.
+- **Demo recommendation:** Walk the NovaMak pipeline — show an AI-assisted stage
+  producing a draft (brief or creative), a human approval moving it forward, and
+  the campaign draft being exported, demonstrating the platform operating over the
+  advertising process end to end.
 
 - **Follow-up action:** Book the CTO technical deep-dive; document the buyer's
-  top integration points and fold them into pilot scope.
+  top integration points and set honest expectations on export vs. roadmap
+  connectors.
 
 ---
 
@@ -241,27 +263,30 @@ English in both languages.
   - *Reframe:* "So let's not do a big bang. The right question is: what's the
     smallest seed that proves value, and how do we grow from there safely?"
   - *Answer (canonical fact):* "AdOS deploys with **standard Docker and a
-    one-command bring-up**, and Company Brain seeds from your existing documents.
-    Onboarding is designed as a path: deploy, seed the Company Brain, add Digital
-    Employees, then expand to more units and sites. You own an
+    one-command bring-up**, and onboarding is a guided path: deploy, create the
+    client workspace, add brands and products, then run your first campaign
+    missions and expand to more brands and markets. The Company Brain builds up a
+    **marketing-performance memory** as your campaigns run. You own an
     **exportable/portable** system throughout — nothing is trapped."
   - *Prove:* "Documented backup, restore, upgrade, and disaster-recovery runbooks
     ship with the platform, so every step of the rollout is reversible and
-    supported. The NovaMak world is exactly this shape, fully seeded."
-  - *Advance:* "Let's scope a pilot around one business unit's documents, prove it,
+    supported. The NovaMak world is exactly this shape, fully set up."
+  - *Advance:* "Let's scope a pilot around one client brand's campaigns, prove it,
     then plan the phased expansion."
 
 - **Evidence:** CANON — standard Docker, one-command bring-up; documented
-  backup/restore/upgrade/DR runbooks; portable/exportable data. Constitution §5
-  (buyer journey: Onboarding & Expansion — deploy, seed, add Digital Employees,
-  expand) and §13 (day-2 covered).
+  backup/restore/upgrade/DR runbooks; portable/exportable data; onboarding wizard
+  (workspace → client → brand → product → mission); Company Brain =
+  marketing-performance memory. Constitution §5 (buyer journey: Onboarding &
+  Expansion — deploy, set up, run missions, expand) and §13 (day-2 covered).
 
-- **Demo recommendation:** Show the seeded NovaMak Company Brain as the
-  after-state, then frame the phased path — one unit first. Point to the
-  backup/restore/DR runbooks to prove reversibility.
+- **Demo recommendation:** Show the set-up NovaMak workspace and its accumulating
+  marketing-performance Company Brain as the after-state, then frame the phased
+  path — one brand first. Point to the backup/restore/DR runbooks to prove
+  reversibility.
 
-- **Follow-up action:** Define a single-business-unit pilot scope with a
-  seed-document list and a phased expansion outline.
+- **Follow-up action:** Define a single-brand pilot scope with a starting brand/
+  product setup and a phased expansion outline.
 
 ---
 
@@ -273,27 +298,30 @@ English in both languages.
 - **Recommended answer:**
   - *Acknowledge:* "Adoption is where most software quietly fails — you're right
     to lead with it."
-  - *Reframe:* "The best training is not needing much. If people can ask a
-    question in their own language and get a cited answer, the learning curve is a
-    conversation."
+  - *Reframe:* "The best training is not needing much. If people can state a
+    campaign objective in their own language and the pipeline drafts the work, the
+    learning curve is a conversation."
   - *Answer (canonical fact):* "AdOS ships a **full Turkish and English UI,
-    auto-detected** from the user's environment, so your people work in their own
-    language from minute one. Company Brain answers questions in plain language and
-    **retains institutional knowledge**, so the system carries expertise rather
-    than demanding it."
-  - *Prove:* "In NovaMak, an employee asks a natural-language question and gets a
-    cited answer — no query syntax, no manual. That's the whole interaction."
+    auto-detected** from the user's environment, and AI output follows the same
+    language, so your people work in their own language from minute one. The
+    pipeline guides each step — brief, creative, campaign draft, report — in plain
+    language, and the Company Brain **retains marketing-performance knowledge**, so
+    the system carries what worked rather than demanding expertise."
+  - *Prove:* "In NovaMak, a user states a campaign objective in natural language and
+    the pipeline produces a draft brief and creative for approval — no query syntax,
+    no manual. That's the whole interaction."
   - *Advance:* "Let's run a small group of your actual end users through a hands-on
-    session in the pilot and measure time-to-first-useful-answer."
+    session in the pilot and measure time-to-first-useful-draft."
 
-- **Evidence:** CANON — Bilingual: full Turkish + English UI, auto-detected;
-  Company Brain grounded, cited answers in plain language. Constitution §4 (HR:
-  Company Brain retains institutional knowledge; bilingual UX) and §8 (Outcome:
-  lower training cost).
+- **Evidence:** CANON — Bilingual: full Turkish + English UI, auto-detected, plus
+  AI output-language injection; Company Brain = marketing-performance memory;
+  natural-language mission → pipeline drafts. Constitution §4 (HR: Company Brain
+  retains marketing-performance knowledge; bilingual UX) and §8 (Outcome: lower
+  training cost).
 
 - **Demo recommendation:** Show the bilingual UI auto-detecting language, then a
-  non-technical NovaMak employee asking a plain-language question and receiving a
-  cited answer with no special training.
+  non-technical NovaMak user stating a campaign objective in plain language and
+  receiving a draft brief and creative to approve, with no special training.
 
 - **Follow-up action:** Arrange a hands-on end-user session in the pilot; capture
   adoption and training-time metrics for the ROI model.
@@ -346,26 +374,29 @@ English in both languages.
     Ask each option one question: *does my data leave the building, and am I
     metered to use it?* That single question sorts the field."
   - *Answer (canonical fact):* "AdOS is a **sovereign, capable, accountable**
-    enterprise AI operating system: **100% on your infrastructure**, data never
-    leaves; a real operating system unifying **Company Brain, Digital Employees,
-    and Workflows & Approvals** — not a search box or a chatbot; and every answer
-    **cited**, every access **permission-aware**, every action **audited**. And
-    **no vendor lock-in** — open engines, OpenAI-compatible, portable data."
-  - *Prove:* "I'll demonstrate all three pillars live in NovaMak — the cited
-    answer, the Digital Employee completing a task, the tiered approval — and the
-    air-gap moment no hosted service can show you."
+    Enterprise AI Operating System for Advertising: **100% on your
+    infrastructure**, data never leaves; a real operating system unifying the
+    **human-approved campaign pipeline, the marketing-performance Company Brain, and
+    deterministic ad-KPIs** — not a search box or a chatbot; and **every stage
+    human-approved**, with an activity log and per-approval timeline. And **no
+    vendor lock-in** — open engines, OpenAI-compatible, portable data."
+  - *Prove:* "I'll demonstrate all three pillars live in NovaMak — the deterministic
+    KPI report you can recompute, an AI-assisted stage drafting creative, the human
+    approval gate — and the air-gap moment no hosted service can show you."
   - *Advance:* "Put us in a pilot on your own hardware against your real criteria
     — the honest way to compare is on your terms."
 
-- **Evidence:** CANON — three headline pillars (Sovereign · Capable · Accountable);
-  three pillars of the product; no vendor lock-in. Constitution §14 (competitive
-  positioning by category; rules of engagement — never name-and-shame; compete on
-  sovereignty, integration, accountability; concede honest trade-offs).
+- **Evidence:** CANON — three headline pillars (Sovereign · Capable · Accountable):
+  100% local/offline AI; human-approved advertising pipeline + marketing Company
+  Brain + deterministic KPIs; human approval gate at every stage plus activity log;
+  no vendor lock-in. Constitution §14 (competitive positioning by category; rules
+  of engagement — never name-and-shame; compete on sovereignty, the pipeline, and
+  accountability; concede honest trade-offs).
 
-- **Demo recommendation:** Run all five mandatory proof moments as the
-  differentiator montage — cited answer, restricted-doc invisibility, tiered
-  approval, Digital Employee task, air-gap. The air-gap moment is the one no
-  hosted competitor can reproduce.
+- **Demo recommendation:** Run the differentiator montage — deterministic KPI
+  recompute, application-level tenant isolation, human approval gate, an AI-assisted
+  pipeline stage drafting creative, and the air-gap moment. The air-gap moment is
+  the one no hosted competitor can reproduce.
 
 - **Follow-up action:** Propose a side-by-side pilot on customer hardware with the
   buyer's own evaluation criteria and acceptance thresholds. Never disparage a
@@ -384,26 +415,28 @@ English in both languages.
   - *Reframe:* "This isn't a policy promise to trust — it's an architecture to
     verify. The safest data path is the one that doesn't exist."
   - *Answer (canonical fact):* "AdOS is **not a data collector**. Customer data —
-    documents, prompts, answers, workflows — **never leaves your premises**, and
+    briefs, creative, campaigns, reports — **never leaves your premises**, and
     there is **no telemetry of business content**. We do not monetize, transmit, or
     train on your data. Because there's **no external API and no internet
-    requirement**, there is no channel for data to leave. Strict **multi-tenant
-    isolation** keeps business units segregated, and every access is
-    **permission-aware** and **audited**."
+    requirement**, there is no channel for data to leave. **Application-level
+    multi-tenant isolation** keeps client workspaces segregated, and every approval
+    is recorded in the activity log and per-approval timeline."
   - *Prove:* "Air-gap the demo and it still works — proof there's no home for data
     to phone. Your team can inspect the deployment and confirm there's no outbound
     business-content path."
   - *Advance:* "Let's give your legal/compliance and CISO teams a technical review
-    of the data-flow architecture and the audit trail."
+    of the data-flow architecture and the activity log."
 
 - **Evidence:** CANON — data sovereignty (never leaves premises; no telemetry of
-  business content); "Not a data collector"; multi-tenant strict isolation;
-  offline / air-gap; permission-aware; auditable. Constitution §1.3, §11
-  (compliance posture: on-prem/air-gap satisfies data-residency mandates).
+  business content); "Not a data collector"; application-level multi-tenant
+  isolation; offline / air-gap; activity log + per-approval timeline. Constitution
+  §1.3, §11 (compliance posture: on-prem/air-gap satisfies data-residency
+  mandates). **Roadmap:** enforced RBAC / permission-aware AI and an immutable
+  audit trail are planned, not shipped — do not present them as current controls.
 
 - **Demo recommendation:** Air-gap moment to prove no outbound path, plus the
-  multi-tenant isolation view showing NovaMak's 4 business units with segregated
-  data, closing on an audit-trail entry.
+  tenant-isolation view showing NovaMak's separate client workspaces with
+  segregated data, closing on an activity-log entry.
 
 - **Follow-up action:** Schedule the legal/compliance + CISO data-flow architecture
   review; provide the audit-trail and tenant-isolation documentation.
@@ -426,7 +459,7 @@ English in both languages.
     that plainly. **Better hardware closes the gap** — the model runs as fast as
     the machine you give it, and you choose and own that model. In return you get
     **sovereignty, no per-token cost, and full control** — and for grounded work
-    over your own documents, seconds is the right unit."
+    over your own campaign data, seconds is the right unit."
   - *Prove:* "In the demo you'll see real response times on representative
     hardware — not a hidden benchmark. And you'll see there's no meter counting
     while you think."
@@ -489,7 +522,7 @@ English in both languages.
 
 The three highest-leverage objection answers are provided below in full in English
 and Turkish. Both versions carry the same claims and numbers. Product terms
-(AdOS, Company Brain, Digital Employees) remain in English.
+(AdOS, Company Brain) remain in English.
 
 ### Security / Güvenlik
 
@@ -497,24 +530,29 @@ and Turkish. Both versions carry the same claims and numbers. Product terms
 right. The real question is: where does your data physically go, and who can touch
 it? With AdOS, your data never leaves your premises. All inference runs on your own
 hardware — no external API, no API keys, no internet required — so there is no
-third-party data path to breach. Access is permission-aware: the AI can never
-surface or cite a document a user isn't entitled to. Every consequential action is
-written to an immutable audit trail. In the demo, we pull the network cable and it
-keeps working, because there is nowhere for your data to go. The next step is a
-technical security review with your CISO and an air-gapped pilot on your own
-hardware."
+third-party data path to breach. Client workspaces are kept apart by
+application-level multi-tenant isolation, and access is protected by real
+authentication — Argon2id password hashing, HMAC HttpOnly sessions, per-session
+CSRF, and brute-force lockout. Every approval and consequential action is recorded
+in the activity log and per-approval timeline. In the demo, we pull the network
+cable and it keeps working, because there is nowhere for your data to go. The next
+step is a technical security review with your CISO and an air-gapped pilot on your
+own hardware."
 
 **TR —** "Bir veri sızıntısı varoluşsal bir risktir; bu konuyu bu kadar ciddiye
 almanız yerinde. Asıl soru şudur: verileriniz fiziksel olarak nereye gidiyor ve
 ona kim dokunabiliyor? AdOS ile verileriniz kurumunuzun dışına asla çıkmaz. Tüm
 çıkarım kendi donanımınızda çalışır — harici API yok, API anahtarı yok, internet
 gerekmez — dolayısıyla ihlal edilebilecek üçüncü taraf bir veri yolu yoktur.
-Erişim izin duyarlıdır (permission-aware): AI, bir kullanıcının yetkisi olmayan bir
-belgeyi asla gösteremez veya kaynak olarak gösteremez. Sonuç doğuran her işlem,
-değiştirilemez bir denetim kaydına (audit trail) yazılır. Demoda ağ kablosunu
-çekeriz ve sistem çalışmaya devam eder; çünkü verilerinizin gidebileceği bir yer
-yoktur. Sonraki adım, CISO'nuzla teknik bir güvenlik incelemesi ve kendi
-donanımınızda hava boşluklu (air-gapped) bir pilot çalışmadır."
+Müşteri çalışma alanları, uygulama düzeyinde çok kiracılı yalıtımla (application-
+level multi-tenant isolation) birbirinden ayrılır ve erişim gerçek kimlik
+doğrulamayla korunur — Argon2id parola özetleme, HMAC imzalı HttpOnly oturumlar,
+oturum başına CSRF ve kaba kuvvet kilidi (brute-force lockout). Her onay ve sonuç
+doğuran işlem, etkinlik günlüğüne ve onay bazlı zaman çizelgesine kaydedilir.
+Demoda ağ kablosunu çekeriz ve sistem çalışmaya devam eder; çünkü verilerinizin
+gidebileceği bir yer yoktur. Sonraki adım, CISO'nuzla teknik bir güvenlik
+incelemesi ve kendi donanımınızda hava boşluklu (air-gapped) bir pilot
+çalışmadır."
 
 ### Cloud vs Local / Bulut mu, Yerel mi
 
