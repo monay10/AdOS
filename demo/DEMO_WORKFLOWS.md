@@ -1,297 +1,263 @@
-# AdOS Demo — Workflows
+# AdOS Demo — Campaign Pipeline & Missions
 
-**25 realistic enterprise workflows** for **NovaMak Endüstri A.Ş.** Each defines
-**Actors** (from `DEMO_USERS.md`), **Steps**, **Approvals**, **SLA**, **AI
-assistance** (from `DEMO_AI_AGENTS.md`), and **KPIs**. Grounded in the knowledge
-base (`DEMO_KNOWLEDGE_BASE.md`). Fictional; isolated to `demo/`.
+**One real workflow** — the **human-approved campaign pipeline** — and the **40
+demo missions** that run through it for **Vega Reklam Ajansı** (İstanbul), the
+advertising agency that is the demo tenant. Grounded entirely in the demo code
+(`src/data-model.mjs`, `src/seed.mjs`, `src/validate.mjs`) and the real product
+model (`PRODUCT_TRUTH.md` §1). Deterministic, offline, tenant-isolated; the same
+seed rebuilds an identical world. Fictional; isolated to `demo/`.
 
-**Conventions:** approval limits follow `KB-POL-004` (Delegation of Authority).
-Every workflow is audited; every AI step cites its source and escalates to a
-human for decisions.
-
----
-
-### WF-01 — Purchase Approval
-- **Actors:** initiator (Kerem Yılmaz / any manager), Buyer (Pelin Ay),
-  Procurement Manager (Levent Bozkurt), Finance approver (Ozan Kurt / Canan
-  Arslan), Warehouse (Serdar Kaya, receipt).
-- **Steps:** raise request (KB-FRM-001) → budget/policy check → sourcing/RFQ →
-  approval → PO → goods receipt → close.
-- **Approvals:** manager ≤ ₺25k; Procurement Manager ≤ ₺100k; Finance Director ≤
-  ₺500k; GM above.
-- **SLA:** approval within 2 business days; PO within 1 day of approval.
-- **AI assistance:** Finance Assistant checks budget + policy; Knowledge Assistant
-  suggests approved suppliers (KB-PUR-002).
-- **KPIs:** avg approval cycle time, % within SLA, spend vs budget, maverick-buy %.
-
-### WF-02 — Vacation / Leave
-- **Actors:** employee, line manager, HR Specialist (Tuğçe Al), HR Director (Ayşe
-  Kaya).
-- **Steps:** submit (KB-FRM-002) → balance check → manager approval → HR record.
-- **Approvals:** line manager; HR for policy exceptions.
-- **SLA:** decision within 1 business day.
-- **AI assistance:** HR Assistant checks leave policy (KB-HR-002) and balance.
-- **KPIs:** avg approval time, leave utilization, policy exceptions.
-
-### WF-03 — Expense
-- **Actors:** employee, manager, Accountant (Derya Kılıç), Finance (Ozan/Canan).
-- **Steps:** submit (KB-FRM-003) → policy check → manager approval → finance
-  processing → reimbursement.
-- **Approvals:** manager ≤ ₺10k; Finance above.
-- **SLA:** reimbursement within 5 business days.
-- **AI assistance:** Finance Assistant validates against expense policy (KB-HR-003).
-- **KPIs:** cycle time, policy-violation %, reimbursement backlog.
-
-### WF-04 — Recruitment
-- **Actors:** hiring manager, HR Specialist (Nalan Er), HR Director, interview
-  panel.
-- **Steps:** raise requisition → approval → post → screen → interview → offer →
-  onboarding.
-- **Approvals:** department director + HR Director; GM for new headcount.
-- **SLA:** shortlist within 10 business days.
-- **AI assistance:** HR Assistant drafts job descriptions (KB-HR-005), prepares
-  onboarding (KB-HR-004).
-- **KPIs:** time-to-hire, offer-accept %, onboarding completion.
-
-### WF-05 — Asset Request
-- **Actors:** requester, manager, Warehouse (Serdar Kaya / Yusuf Er), IT (for IT
-  assets: Burak Öztürk).
-- **Steps:** request → approval → fulfil from stock or purchase → issue → record.
-- **Approvals:** manager; Procurement if purchase needed.
-- **SLA:** fulfil within 3 business days if in stock.
-- **AI assistance:** Operations Assistant checks stock/availability.
-- **KPIs:** fulfilment time, in-stock %, asset utilization.
-
-### WF-06 — Incident
-- **Actors:** reporter (any), HSE Officer (Selin Ak), HSE Manager (Barış Yıldız),
-  Quality (if quality-related).
-- **Steps:** report (KB-FRM-004) → triage → immediate action → investigation →
-  corrective action → close.
-- **Approvals:** HSE Manager closes; escalation to director for serious incidents.
-- **SLA:** acknowledge within 1 hour; investigation within 5 days.
-- **AI assistance:** Risk/HSE Assistant classifies severity, cites procedures
-  (KB-EMG-001, KB-STD-003).
-- **KPIs:** incidents by type, time-to-close, recurrence, near-miss ratio.
-
-### WF-07 — Maintenance
-- **Actors:** requester (Ali Vural / supervisor), Maintenance Manager (Mustafa
-  Doğan), Engineer (Mehmet Aslan), Technician (Okan Er).
-- **Steps:** raise work order → prioritize → diagnose → repair → verify → close;
-  update asset history (KB-MNT-003).
-- **Approvals:** Maintenance Manager for spend/parts.
-- **SLA:** critical fault response within 2 hours; PM per plan (KB-MNT-001).
-- **AI assistance:** Maintenance Assistant diagnoses from fault guide (KB-MNT-004)
-  and history. **← demo scenario.**
-- **KPIs:** MTTR, PM compliance %, repeat-fault %, machine uptime.
-
-### WF-08 — Corrective Action
-- **Actors:** Quality Engineer (Deniz Acar), Quality Manager (Zeynep Şahin),
-  process owner.
-- **Steps:** identify → root cause → action plan → implement → verify → close
-  (KB-PRC-003).
-- **Approvals:** Quality Manager verifies and closes.
-- **SLA:** plan within 3 days; closure within 30 days.
-- **AI assistance:** Quality Assistant guides root-cause and links related NCRs
-  (KB-INC-003).
-- **KPIs:** open actions, on-time closure %, recurrence.
-
-### WF-09 — Customer Complaint
-- **Actors:** Support Specialist (Hüseyin Bal), Support Manager (Gizem Ünal),
-  Sales (İpek Kara), Quality (if product fault).
-- **Steps:** log → categorize → investigate → resolve → respond → (CAPA if
-  systemic).
-- **Approvals:** Support Manager; Quality for CAPA.
-- **SLA:** acknowledge within 4 hours; resolve within 5 business days.
-- **AI assistance:** Knowledge Assistant retrieves product manuals + history;
-  drafts a response.
-- **KPIs:** complaint volume, resolution time, CSAT, repeat complaints.
-
-### WF-10 — Supplier Evaluation
-- **Actors:** Procurement Manager (Levent Bozkurt), Quality Engineer (Deniz Acar),
-  requesting dept.
-- **Steps:** schedule evaluation → score (quality, delivery, price, risk) →
-  review → approve/flag (KB-PUR-003).
-- **Approvals:** Procurement + Quality joint sign-off.
-- **SLA:** quarterly for strategic suppliers.
-- **AI assistance:** Knowledge Assistant compiles supplier history + incidents.
-- **KPIs:** supplier score, on-time delivery %, defect ppm, single-source risks.
-
-### WF-11 — Risk Assessment
-- **Actors:** HSE Manager (Barış Yıldız), area owner, Quality.
-- **Steps:** identify hazards → assess (likelihood × severity) → controls →
-  approve → review.
-- **Approvals:** HSE Manager; director for high risks.
-- **SLA:** review annually or after change/incident.
-- **AI assistance:** Risk Assistant applies methodology, cites legal requirements.
-- **KPIs:** open high-risks, controls implemented %, overdue reviews.
-
-### WF-12 — Contract Approval
-- **Actors:** initiator (İpek Kara / Levent Bozkurt), Legal review (Legal
-  Assistant + Finance), Finance Director (Canan Arslan), GM (Elif Demir).
-- **Steps:** draft → legal/finance review → approval → sign → archive
-  (KB-PUR-004).
-- **Approvals:** Finance Director ≤ ₺1M; GM above; Board for strategic.
-- **SLA:** review within 5 business days.
-- **AI assistance:** Legal Assistant flags non-standard clauses; cites policy.
-- **KPIs:** review cycle time, non-standard-clause rate, contracts in effect.
-
-### WF-13 — Invoice
-- **Actors:** Accountant (Derya Kılıç), Accounting Manager (Ozan Kurt), Finance
-  Director.
-- **Steps:** receive → 3-way match (PO/receipt/invoice) → approve → schedule
-  payment.
-- **Approvals:** Accounting Manager; Finance Director above limit.
-- **SLA:** processed within 3 business days.
-- **AI assistance:** Finance Assistant performs matching, flags discrepancies.
-- **KPIs:** processing time, match-exception %, on-time payment %.
-
-### WF-14 — Document Approval
-- **Actors:** author (e.g. Sibel Demirtaş), reviewer, owner (dept head), Quality
-  (document control, KB-PRC-001).
-- **Steps:** draft → review → approve → publish (versioned) → notify.
-- **Approvals:** department owner; Quality for controlled documents.
-- **SLA:** review within 5 business days.
-- **AI assistance:** Document Assistant checks template/standard, manages versions.
-- **KPIs:** approval time, overdue reviews, superseded-version cleanliness.
-
-### WF-15 — Training
-- **Actors:** HR (Nalan Er), line manager, HSE (for safety training), employee.
-- **Steps:** identify need → schedule → deliver → assess → record.
-- **Approvals:** manager + HR; HSE for mandatory safety.
-- **SLA:** mandatory training completed before role start.
-- **AI assistance:** HR/HSE Assistant recommends modules, tracks completion.
-- **KPIs:** completion %, mandatory-compliance %, competency coverage.
-
-### WF-16 — IT Request
-- **Actors:** requester, IT Support (Ece Nur), System Admin (Cem Yalın), IT
-  Manager (Burak Öztürk).
-- **Steps:** raise ticket → triage → resolve/provision → verify → close.
-- **Approvals:** IT Manager for hardware/spend.
-- **SLA:** standard 2 business days; priority same day.
-- **AI assistance:** Knowledge Assistant answers from IT KB (KB-IT-004), suggests
-  fixes.
-- **KPIs:** resolution time, first-contact-resolution %, reopened tickets.
-
-### WF-17 — Password Reset
-- **Actors:** requester, IT Support (Ece Nur), IT Manager (policy).
-- **Steps:** request → identity verification → reset → confirm (KB-IT-003).
-- **Approvals:** automated with verification; manager for privileged accounts.
-- **SLA:** within 1 hour.
-- **AI assistance:** Knowledge Assistant guides self-service steps.
-- **KPIs:** reset time, self-service %, security exceptions.
-
-### WF-18 — Access Request
-- **Actors:** requester, manager, IT Manager (Burak Öztürk), Security (Tarık
-  Güneş, review).
-- **Steps:** request (KB-FRM-005) → manager approval → security review → grant →
-  record + audit (KB-IT-002).
-- **Approvals:** manager + IT Manager; Security review for sensitive systems.
-- **SLA:** within 2 business days.
-- **AI assistance:** Security Assistant checks least-privilege, flags conflicts.
-- **KPIs:** provisioning time, over-privilege findings, access-review coverage.
-
-### WF-19 — Visitor Management
-- **Actors:** host employee, Security Officer (Volkan Ateş), Security Manager
-  (Tarık Güneş).
-- **Steps:** pre-register → approve → check-in (badge) → escort rules → check-out
-  (KB-SEC-003).
-- **Approvals:** host + Security for restricted areas.
-- **SLA:** pre-registration 1 day ahead; check-in < 5 minutes.
-- **AI assistance:** Security Assistant applies visitor policy, restricted-area
-  rules.
-- **KPIs:** on-time registration %, unescorted-visitor incidents, throughput.
-
-### WF-20 — CAPA (Corrective & Preventive Action)
-- **Actors:** Quality Manager (Zeynep Şahin), process owner, HSE (if safety).
-- **Steps:** trigger (incident/NCR/audit) → root cause → corrective +
-  preventive actions → implement → verify effectiveness → close (KB-QUA-003).
-- **Approvals:** Quality Manager closes after effectiveness check.
-- **SLA:** corrective ≤ 30 days; preventive ≤ 60 days.
-- **AI assistance:** Quality Assistant proposes CAPA steps from ISO procedures.
-  **← demo scenario.**
-- **KPIs:** open CAPAs, on-time closure %, effectiveness %, recurrence.
-
-### WF-21 — Quality Inspection
-- **Actors:** Inspector (Gökhan Uz), Quality Engineer (Deniz Acar), Production.
-- **Steps:** trigger (incoming/in-process/final) → inspect vs standard → record →
-  pass/hold/reject → disposition (KB-QUA-002).
-- **Approvals:** Quality Engineer for rejects/concessions.
-- **SLA:** incoming within 1 day of receipt.
-- **AI assistance:** Quality Assistant retrieves inspection criteria and standards.
-- **KPIs:** first-pass yield, defect ppm, inspection backlog, hold rate.
-
-### WF-22 — Production Change
-- **Actors:** initiator (Kerem Yılmaz / Fatma Şen), Engineering (Onur Kaplan),
-  Quality (Zeynep Şahin), Operations Director (Hakan Çelik).
-- **Steps:** propose change → impact assessment → approvals → implement → verify
-  (KB-PRD-003, KB-PRC-002).
-- **Approvals:** Engineering + Quality + Operations Director.
-- **SLA:** assessment within 3 business days.
-- **AI assistance:** Production Assistant summarizes impact, links standards.
-- **KPIs:** change lead time, change-related defects, on-time implementation.
-
-### WF-23 — Internal Audit
-- **Actors:** Quality Manager (Zeynep Şahin), auditors, auditees, management.
-- **Steps:** plan → conduct → findings → corrective actions → follow-up → report
-  (KB-QUA-004).
-- **Approvals:** Quality Manager; management review of results (KB-MTG-001).
-- **SLA:** per annual audit plan; findings closed ≤ 30 days.
-- **AI assistance:** Quality Assistant compiles evidence, tracks findings.
-- **KPIs:** audits completed %, findings by severity, closure rate.
-
-### WF-24 — Management Approval
-- **Actors:** initiator, relevant director, General Manager (Elif Demir), Board
-  (strategic).
-- **Steps:** proposal → director endorsement → GM decision → record.
-- **Approvals:** GM above director limits; Board for strategic/CAPEX.
-- **SLA:** decision within 5 business days.
-- **AI assistance:** Executive Assistant summarizes the proposal + supporting data.
-- **KPIs:** decision cycle time, approval rate, value approved.
-
-### WF-25 — Emergency Process
-- **Actors:** any employee (trigger), HSE Manager (Barış Yıldız), Security (Tarık
-  Güneş), Operations Director, GM.
-- **Steps:** detect → alarm/evacuate → respond per plan → account for people →
-  stabilize → review (KB-EMG-001, KB-EMG-002).
-- **Approvals:** HSE Manager coordinates; GM for business-continuity decisions
-  (KB-EMG-003).
-- **SLA:** immediate; drills quarterly.
-- **AI assistance:** Risk/Security Assistant surfaces the correct emergency
-  procedure instantly (read-only; humans act).
-- **KPIs:** drill completion %, response time, evacuation time, review actions.
+**Conventions:**
+- There is **one** pipeline. A **Mission** — a client objective stated in natural
+  language (`Marka: hedef`) — advances through five ordered stages, each producing
+  one artifact.
+- Advancement is **human-gated**: three of the stages sit behind an approval
+  **gate** that requires an explicit human click before the next stage may begin.
+- Gates are **flat** — `strategy_and_budget`, `creative_assets`,
+  `campaign_launch`. There is **no** tiered spend/authority ladder; a gate is
+  simply "a named human approved this." Some frontier missions sit `pending`,
+  awaiting that click.
+- A campaign is only ever **drafted**. Its status is always `draft`; the demo
+  never launches, pushes, or optimizes a live ad. A human exports the draft to
+  run it in their own ad platform.
+- Every stage is drafted by the **offline deterministic AI**
+  (`engine: 'offline-deterministic'`) and marked `human_reviewed`. No autonomous
+  agents act on their own.
+- Consequential actions are written to the tenant-scoped **activity log** (mission
+  created, stage drafted, approval approved/pending). It is an ordered log, not a
+  tamper-evident store.
 
 ---
 
-## Workflow index
+## The pipeline — five stages, three gates
 
-| # | Workflow | Owner (dept) | AI assistant |
+`Mission → MarketingBrief → CreativeSet → CampaignDraft → CampaignReport → ExecutiveReport`
+
+| # | Stage key | Artifact | Gate before next stage | Approver |
+| --- | --- | --- | --- | --- |
+| 1 | `brief` | **MarketingBrief** | `strategy_and_budget` | agency (internal) |
+| 2 | `creative` | **CreativeSet** | `creative_assets` | agency (internal) |
+| 3 | `campaign_draft` | **CampaignDraft** | `campaign_launch` | client-side lead |
+| 4 | `report` | **CampaignReport** | — (post-run) | — |
+| 5 | `executive` | **ExecutiveReport** | — (post-run) | — |
+
+### Stage 1 — MarketingBrief
+- **Produces:** objective restated, target **audience** (e.g. `25-45 satın alma
+  niyeti`, `B2B karar vericiler`, `yerel/şehir bazlı`), the brand-safe key
+  message, the mission **budget** (₺), and 2–4 **suggested channels**.
+- **AI:** offline deterministic draft; provenance `ai-offline`.
+- **Gate — `strategy_and_budget`:** an agency human signs off on the strategy and
+  the budget before any creative work starts.
+
+### Stage 2 — CreativeSet (**ad copy only**)
+- **Produces:** headline, ad copy, CTA, social post, landing-page text, and email
+  copy — **drafts only**. Flagged `copy_only`; it never touches an ad platform.
+- **Brand safety:** the set respects the brand's **voice** and **banned words**
+  (`banned_words_respected: true`).
+- **Gate — `creative_assets`:** an agency human approves the copy before it is
+  built into a campaign.
+
+### Stage 3 — CampaignDraft (**never launched**)
+- **Produces:** a `status: 'draft'` plan splitting the total budget across 2–4
+  **channels** (Meta, Google Ads, YouTube, TikTok, LinkedIn, Display), each with a
+  per-channel budget and an **ad-set** count.
+- **Status is always `draft`.** The demo never launches or pushes it anywhere.
+- **Gate — `campaign_launch`:** the **client-side marketing lead** approves the
+  draft. This is the client saying "yes, run this" — the human then exports it to
+  their own platform. AdOS still launches nothing.
+
+### Stage 4 — CampaignReport (KPIs)
+- **Produces:** deterministic performance numbers (impressions, clicks, spend,
+  conversions, leads, revenue) and the derived KPIs recomputed exactly:
+  **CTR, CPC, CPA, CPL, ROAS, ROI**.
+- Feeds the Company Brain: a `campaign → ad → lead → roi` knowledge-graph slice
+  and a past-campaign experience entry (`positive` when ROAS ≥ 1).
+- No gate — this is a post-run readout of results a human entered.
+
+### Stage 5 — ExecutiveReport
+- **Produces:** a single-call AI executive summary with the campaign ROAS and a
+  **recommendation**: `scale` (ROAS ≥ 1.5), `iterate` (ROAS ≥ 1), or `revise`.
+- No gate — it is the closing synthesis for the mission.
+
+---
+
+## The three approval gates
+
+Each gate is one explicit human click recorded as an approval
+(`decision: 'approved' | 'pending'`, `human: true`, with the approver and time).
+
+| Gate | Sits after | Who approves | What it means |
 | --- | --- | --- | --- |
-| 01 | Purchase Approval | Procurement | Finance / Knowledge |
-| 02 | Vacation / Leave | HR | HR |
-| 03 | Expense | Finance | Finance |
-| 04 | Recruitment | HR | HR |
-| 05 | Asset Request | Warehouse/IT | Operations |
-| 06 | Incident | HSE | Risk / HSE |
-| 07 | Maintenance | Maintenance | Maintenance |
-| 08 | Corrective Action | Quality | Quality |
-| 09 | Customer Complaint | Support | Knowledge |
-| 10 | Supplier Evaluation | Procurement | Knowledge |
-| 11 | Risk Assessment | HSE | Risk |
-| 12 | Contract Approval | Commercial/Finance | Legal |
-| 13 | Invoice | Finance | Finance |
-| 14 | Document Approval | Quality/dept | Document |
-| 15 | Training | HR | HR / HSE |
-| 16 | IT Request | IT | Knowledge |
-| 17 | Password Reset | IT | Knowledge |
-| 18 | Access Request | IT/Security | Security |
-| 19 | Visitor Management | Security | Security |
-| 20 | CAPA | Quality | Quality |
-| 21 | Quality Inspection | Quality | Quality |
-| 22 | Production Change | Production/Eng | Production |
-| 23 | Internal Audit | Quality | Quality |
-| 24 | Management Approval | Executive | Executive |
-| 25 | Emergency Process | HSE/Security | Risk / Security |
+| `strategy_and_budget` | MarketingBrief | Agency internal (any of the 16 agency roles) | Strategy + spend approved |
+| `creative_assets` | CreativeSet | Agency internal | Ad copy approved for build |
+| `campaign_launch` | CampaignDraft | **Client-side marketing lead** for that brand's client | Client authorizes the draft to run |
 
-Every actor exists in `DEMO_USERS.md`; every cited document exists in
-`DEMO_KNOWLEDGE_BASE.md`; every assistant exists in `DEMO_AI_AGENTS.md`; every KPI
-is populated in `DEMO_DASHBOARDS.md` / `DEMO_DATASET_SPEC.md`.
+- **No tiered authority.** Approval is binary per gate; there are no spend
+  thresholds and no escalation ladder.
+- **Frontier `pending`.** A mission stopped at its latest gate may sit `pending`
+  (~30% of frontier gates), which is exactly what the reviewer clears in the demo.
+- **Non-gated stages** (`report`, `executive`) carry no approval; they run after
+  the campaign has been exported and results are in.
+
+---
+
+## Actors
+
+Agency staff carry **role labels only** — labels describe the org, they do not
+enforce anything (RBAC is defined in the product but not enforced; the demo
+simulates human approval, not permission checks).
+
+**Agency (internal) — approve `strategy_and_budget` and `creative_assets`:**
+
+| Role | People |
+| --- | --- |
+| Agency Director | Elif Demir |
+| Account Director | Hakan Çelik |
+| Account Manager | Zeynep Şahin, Kerem Yılmaz |
+| Strategy Lead / Strategist | Aslı Yıldırım, Efe Demir |
+| Creative Director / Art Director | Sibel Kaya, Onur Kaplan |
+| Copywriter | Deniz Acar, Ceren Işık |
+| Media Planner | Murat Şahin, İpek Kara |
+| Performance Analyst | Berk Aydın, Gizem Ünal |
+| Data Analyst | Serkan Aydın |
+| Project Coordinator | Pelin Ay |
+
+**Client-side marketing leads — approve `campaign_launch` for their own brand:**
+
+| Client | Marketing lead |
+| --- | --- |
+| NovaMak Endüstri | Levent Bozkurt |
+| Derma Cosmetics | Nalan Er |
+| Fresh Foods | Tuğçe Al |
+| FinTR Katılım | Canan Arslan |
+| Evim Home | Ozan Kurt |
+| Getaway Travel | Derya Kılıç |
+
+---
+
+## The 40 missions
+
+Every mission is generated deterministically from the seed and belongs to one
+client → brand → product → project. It advances 2–5 stages (biased toward fully
+closed pipelines, with a handful held at the frontier awaiting a gate). Budget is
+₺50,000–₺550,000. A closed mission has `stage: 'closed'`, `status: 'closed'`; an
+open one is `in_progress` at its latest reached stage.
+
+**Objective templates** (Turkish natural-language objectives, prefixed with the
+brand name):
+
+| Objective | Emphasis | Typical channels |
+| --- | --- | --- |
+| Yeni ürün lansmanı için farkındalık kampanyası | Awareness / launch | Meta, YouTube, Display |
+| Çeyrek sonu satış artışı için performans kampanyası | Performance / sales | Google Ads, Meta |
+| Marka bilinirliğini yükselten sosyal medya kampanyası | Brand / social | Meta, TikTok, YouTube |
+| Potansiyel müşteri toplama (lead generation) kampanyası | Lead gen | Meta, Google Ads, LinkedIn |
+| Sezonluk kampanya ve indirim dönemi tanıtımı | Seasonal / promo | Meta, Display, Google Ads |
+| Yeniden hedefleme (retargeting) ile dönüşüm kampanyası | Retargeting / conversion | Meta, Display |
+| B2B talep yaratma kampanyası | B2B demand | LinkedIn, Google Ads |
+| Mağaza açılışı için yerel kampanya | Local store opening | Meta, Google Ads |
+
+### Mission portfolios by client
+
+The 40 missions are spread across the six clients and their twelve brands. Each
+brand carries two products and one or two projects (`Yıllık Plan` / `Lansman` /
+`Performans` / `Sezon`); a mission targets one product within a project.
+
+**NovaMak Endüstri** (manufacturing) — brands **NovaMak Pro**, **NovaMak Parts**.
+- Voice: professional, precise, industrial / technical, reliable, B2B.
+- Banned words: `ucuz`, `bedava`, `garanti`, `kesin sonuç`.
+- Products: HMC-500 Machining Center (₺2,450,000), Robotic Welding Cell
+  (₺1,780,000), Precision Spindle Kit (₺42,000), Aftermarket Service Plan
+  (₺96,000).
+- Typical missions: **B2B talep yaratma** and **lead generation**, weighted to
+  LinkedIn + Google Ads. Client gate cleared by **Levent Bozkurt**.
+
+**Derma Cosmetics** (beauty) — brands **Derma Glow**, **Derma Men**.
+- Voice: warm, confident, dermatological / bold, direct, modern.
+- Banned words: `mucize`, `kalıcı tedavi`, `şifa`, `anında`.
+- Products: Glow Repair Serum (₺640), Barrier Day Cream (₺520), Charcoal Face
+  Wash (₺280), Post-Shave Balm (₺340).
+- Typical missions: **social/brand** and **performance**, weighted to Meta +
+  TikTok. Client gate cleared by **Nalan Er**.
+
+**Fresh Foods** (fmcg) — brands **Fresh Daily**, **Fresh Kids**.
+- Voice: friendly, fresh, everyday / playful, caring, wholesome.
+- Banned words: `en iyi`, `birebir`, `bağımlılık`, `sınırsız`.
+- Products: Süzme Yoğurt 1kg (₺78), Günlük Süt 1L (₺42), Meyve Suyu 200ml (₺24),
+  Tam Tahıl Atıştırmalık (₺36).
+- Typical missions: **awareness** and **seasonal promo**, weighted to Meta +
+  Display + YouTube. Client gate cleared by **Tuğçe Al**.
+
+**FinTR Katılım** (finance) — brands **FinTR Invest**, **FinTR Pay**.
+- Voice: trustworthy, clear, compliant / simple, secure, fast.
+- Banned words: `garanti getiri`, `risksiz`, `kesin kazanç`, `sınırsız kredi`.
+- Products: Katılım Emeklilik Fonu, Altın Katılım Hesabı, FinTR Pay Cüzdan, Esnaf
+  POS Çözümü (financial products carry no unit price).
+- Typical missions: **lead generation** and **B2B demand**, weighted to Google Ads
+  + LinkedIn; compliance-tight copy. Client gate cleared by **Canan Arslan**.
+
+**Evim Home** (retail) — brands **Evim Living**, **Evim Garden**.
+- Voice: cozy, aspirational, accessible / natural, calm, seasonal.
+- Banned words: `en ucuz`, `tükeniyor`, `sınırsız`, `birebir`.
+- Products: Nordic 3+2 Koltuk Takımı (₺34,900), Meşe Yemek Masası (₺12,900), Bahçe
+  Mobilya Seti (₺18,900), Mangal & Barbekü İstasyonu (₺6,400).
+- Typical missions: **seasonal promo**, **retargeting**, and **local store
+  opening**, weighted to Meta + Display. Client gate cleared by **Ozan Kurt**.
+
+**Getaway Travel** (travel) — brands **Getaway Sun**, **Getaway City**.
+- Voice: vivid, inviting, escape / smart, curated, urban.
+- Banned words: `garanti tatil`, `kesinlikle`, `en ucuz`, `birebir`.
+- Products: Antalya Ultra Her Şey Dahil (₺42,000), Bodrum Butik Tatil (₺38,000),
+  Paris Şehir Kaçamağı (₺54,000), Roma Kültür Turu (₺46,000).
+- Typical missions: **awareness** and **seasonal** escapes, weighted to Meta +
+  YouTube + TikTok. Client gate cleared by **Derya Kılıç**.
+
+### Anatomy of one mission (example shape)
+
+> **Mission `msn-0007`** — *Derma Glow: marka bilinirliğini yükselten sosyal medya
+> kampanyası*, product Glow Repair Serum, budget ₺212,500.
+> 1. **MarketingBrief** → audience `18-34 ilgi bazlı`, channels {Meta, TikTok,
+>    YouTube}. → gate `strategy_and_budget` **approved** (agency).
+> 2. **CreativeSet** → headline, ad copy, CTA `Hemen İncele`, social/landing/email
+>    drafts; banned words respected. → gate `creative_assets` **approved** (agency).
+> 3. **CampaignDraft** → `status: draft`, budget split across the channels with
+>    ad-set counts. → gate `campaign_launch` — **pending**, awaiting **Nalan Er**.
+>
+> The mission sits `in_progress` at `campaign_draft`, one human click away from
+> completing. Clearing the gate is a canonical demo moment.
+
+---
+
+## Where the results land
+
+- **Company Brain** (marketing-performance memory, not a document store): brand
+  profiles (voice, banned words, top channel, avg ROAS), marketing / creative /
+  sales insights derived from campaign results, per-stage `SopPerformance`
+  (runs + approval rate), the `campaign → ad → lead → roi` knowledge graph, a
+  winning-ad **pattern library** (UGC hook, price anchor, local proof, honest
+  scarcity, benefit-first, question-open), and a past-campaign **experience
+  engine**. See `DEMO_COMPANY_BRAIN.md`.
+- **Dashboards / metrics:** counts of clients, brands, products, missions, closed
+  missions, campaign drafts, reports, human approvals, pending approvals, and
+  average ROAS. See `DEMO_DASHBOARDS.md` / `DEMO_DATASET_SPEC.md`.
+- **Activity log:** every `pipeline.<stage>.drafted`, `approval.approved` /
+  `approval.pending`, and `mission.created` action, tenant-scoped and ordered.
+
+---
+
+## Index — pipeline stages
+
+| Stage | Artifact | Gate | Approver | Company Brain effect |
+| --- | --- | --- | --- | --- |
+| 1 `brief` | MarketingBrief | `strategy_and_budget` | Agency internal | — |
+| 2 `creative` | CreativeSet (copy only) | `creative_assets` | Agency internal | pattern library reference |
+| 3 `campaign_draft` | CampaignDraft (`draft`) | `campaign_launch` | Client marketing lead | — |
+| 4 `report` | CampaignReport (KPIs) | — | — | knowledge graph + experience |
+| 5 `executive` | ExecutiveReport | — | — | closes the mission |
+
+Every client, brand, product, team member, mission, artifact, gate, and metric in
+this document is generated deterministically by `src/seed.mjs` from
+`src/data-model.mjs` and checked by `src/validate.mjs`. The validator fails the
+build if any out-of-model data appears (documents, cited answers, permission
+tiers, launched campaigns, external pushes, or an immutable audit store) — none of
+which exist in this demo, by design.

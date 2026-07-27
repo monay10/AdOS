@@ -1,452 +1,279 @@
 # AdOS Demo — Users
 
-**~42 realistic users** for the demo enterprise **NovaMak Endüstri A.Ş.**,
-consistent with the org chart in `DEMO_COMPANY.md`. Each user has: **Role**,
-**Department**, **Responsibilities**, **Permissions**, **Typical daily tasks**,
-**AI usage**, **Workflow ownership**. Fictional; isolated to `demo/`.
+**~22 realistic users** for the demo agency **Vega Reklam Ajansı** (İstanbul),
+the AdOS tenant that runs its clients' advertising objectives through the
+human-approved campaign pipeline. **16 internal agency members** + **6 client-side
+approvers** (one per client). Each user has: **Role**, **Function**,
+**Responsibilities**, **Pipeline involvement**, **Typical daily tasks**, and
+**AI usage**. Fictional; isolated to `demo/`. Source of truth: `src/data-model.mjs`
+(`TEAM`, `CLIENT_APPROVER`).
 
-**Permission tiers (referenced below):**
-- **T0 Executive** — company-wide read; strategic dashboards; no HR-restricted PII.
-- **T1 Director** — full access to their division + company-wide knowledge.
-- **T2 Manager** — full access to their department; approves within limits.
-- **T3 Specialist** — their department's tools/knowledge; task-level actions.
-- **T4 Operator/Staff** — own tasks + shared company knowledge; no approvals.
-- **Admin (IT)** and **Audit (Security)** are cross-cutting overlays.
+**Roles are LABELS ONLY — honest per `PRODUCT_TRUTH.md` §2.6:**
+- AdOS **defines** roles but **does not enforce per-user RBAC**. `AccessControl` /
+  `authorize` / `permits` are called nowhere in app/route code. No user is
+  permission-scoped, and the AI is not permission-scoped either.
+- There are **no graded permission levels and no ranked approval authority** — no
+  numbered access bands, no ₺ sign-off ceilings. A role here describes *what a person
+  does*, not what the system will or won't let them touch.
+- **Approvals are human clicks at fixed pipeline gates**, not authority levels. The
+  three gates are `strategy_and_budget`, `creative_assets`, and `campaign_launch`
+  (`routes.ts:743-753`). Any internal reviewer can advance a gate; **client-side
+  approvers sign off on their own brand's campaigns**.
+- **Nothing is launched.** The `campaign_launch` gate approves a **draft**; a human
+  exports the budget split to run it in their own ad platform. AdOS never pushes to
+  Meta/Google/etc. (`campaign-draft.ts:48-49`, connector-hub is a stub).
 
-Login format for the demo: `ad.soyad@novamak.com.tr`.
+Login / email format for the demo: `ad.soyad@vega.ajans.tr`.
 
----
-
-## Executive / Management
-
-### Elif Demir — General Manager · Executive `T0`
-- **Responsibilities:** overall performance, strategy, board reporting, cross-
-  division decisions.
-- **Permissions:** company-wide read; Executive Dashboard; all reports; no salary-
-  level PII.
-- **Daily tasks:** review Executive Dashboard, approve above-threshold items, ask
-  strategic questions of the Executive Assistant.
-- **AI usage:** Executive Assistant (KPIs, summaries, "how are the three plants
-  doing?").
-- **Workflow ownership:** final approver on Management Approval and above-limit
-  Contract/Purchase Approvals.
-
----
-
-## Operations
-
-### Hakan Çelik — Operations Director · Operations `T1`
-- **Responsibilities:** production, maintenance, warehouse across all plants;
-  operational KPIs.
-- **Permissions:** full Operations division; Operations Dashboard; company-wide
-  knowledge.
-- **Daily tasks:** review plant output, resolve escalations, approve operational
-  spend within limit.
-- **AI usage:** Operations Assistant (cross-plant status, bottleneck questions).
-- **Workflow ownership:** Production Change (approver), Management Approval (Ops).
-
-### Kerem Yılmaz — Production Manager · Production `T2`
-- **Responsibilities:** production planning and output at Plant 1; shift teams.
-- **Permissions:** Production department; raises purchase/maintenance requests;
-  approves within manager limit.
-- **Daily tasks:** plan shifts, monitor output, raise material purchases, log
-  production changes.
-- **AI usage:** Production Assistant (schedules, work instructions), Finance
-  Assistant (budget check on purchases).
-- **Workflow ownership:** Purchase Approval (initiator), Production Change (owner).
-
-### Serkan Aydın — Production Supervisor (Plant 1) · Production `T3`
-- **Responsibilities:** shift execution, team leadership, first-line issues.
-- **Permissions:** Plant 1 production tasks; shared work instructions.
-- **Daily tasks:** run shift, assign operators, escalate stoppages, confirm output.
-- **AI usage:** Production/Knowledge Assistant (work instructions, setup sheets).
-- **Workflow ownership:** Incident (initiator), Maintenance request (initiator).
-
-### Emre Koç — Production Supervisor (Plant 2) · Production `T3`
-- **Responsibilities:** welding/fabrication shift at Plant 2.
-- **Permissions:** Plant 2 production tasks; shared knowledge; HSE read.
-- **Daily tasks:** manage welding cells, monitor HSE compliance, report output.
-- **AI usage:** Production/HSE Assistant (procedures, PPE rules).
-- **Workflow ownership:** Incident (initiator), Quality Inspection (requester).
-
-### Fatma Şen — Production Planner · Production `T3`
-- **Responsibilities:** master schedule, capacity, material availability.
-- **Permissions:** Production planning; read Warehouse stock; read Sales orders.
-- **Daily tasks:** build/adjust schedule, check material, flag shortages.
-- **AI usage:** Operations Assistant (capacity/lead-time questions).
-- **Workflow ownership:** Production Change (contributor).
-
-### Ali Vural — CNC Operator / Team Lead · Production `T4`
-- **Responsibilities:** operate machining centers; lead a small team.
-- **Permissions:** own tasks; work instructions; report faults.
-- **Daily tasks:** run parts, first-off checks, log a fault if a machine stops.
-- **AI usage:** Knowledge Assistant (setup sheets, tolerances).
-- **Workflow ownership:** Maintenance request (initiator).
+**The pipeline these people run** (human-gated, drafts only):
+Mission → **MarketingBrief** *(gate: strategy_and_budget)* → **CreativeSet**
+*(gate: creative_assets)* → **CampaignDraft** *(gate: campaign_launch)* →
+**CampaignReport** → **ExecutiveReport**.
 
 ---
 
-## Maintenance
+## Leadership
 
-### Mustafa Doğan — Maintenance Manager · Maintenance `T2`
-- **Responsibilities:** preventive + corrective maintenance across plants; asset
-  reliability.
-- **Permissions:** Maintenance department; asset records; approves maintenance
-  spend within limit.
-- **Daily tasks:** schedule PM, assign work orders, review recurring faults.
-- **AI usage:** Maintenance Assistant (fault diagnosis, manuals, history).
-- **Workflow ownership:** Maintenance (owner), Asset Request (approver).
+### Elif Demir — Agency Director · Leadership
+- **Responsibilities:** overall agency performance, client relationships, portfolio
+  strategy, executive reporting across all six clients.
+- **Pipeline involvement:** reviews the **ExecutiveReport** per client; can act at
+  any gate, most often a final internal sign-off on `strategy_and_budget`.
+- **Daily tasks:** review Executive dashboards, steer priorities across accounts,
+  meet client leads, unblock stalled missions.
+- **AI usage:** Executive/CEO dashboard synthesis ("how are the six accounts doing?",
+  portfolio ROAS/ROI summaries) — a single deterministic synthesis call.
 
-### Mehmet Aslan — Maintenance Engineer (new hire) · Maintenance `T3`
-- **Responsibilities:** diagnose and fix machine faults; improve reliability.
-- **Permissions:** Maintenance tasks; asset manuals; maintenance history.
-- **Daily tasks:** respond to work orders, diagnose faults, record fixes.
-- **AI usage:** **Primary demo persona** — asks the Maintenance/Knowledge
-  Assistant how to handle a specific fault; gets a cited answer from the manual.
-- **Workflow ownership:** Maintenance (executor), Corrective Action (contributor).
-
-### Okan Er — Maintenance Technician · Maintenance `T4`
-- **Responsibilities:** hands-on repairs and PM tasks.
-- **Permissions:** own work orders; manuals; spare-parts lookup.
-- **Daily tasks:** execute PM checklists, replace parts, close work orders.
-- **AI usage:** Maintenance Assistant (step-by-step procedures, part numbers).
-- **Workflow ownership:** Maintenance (executor).
+### Hakan Çelik — Account Director · Leadership
+- **Responsibilities:** the whole client book, account health, scope and budget
+  framing, escalations between the agency and client leads.
+- **Pipeline involvement:** frequent internal approver at `strategy_and_budget`;
+  coordinates client-side sign-off at `campaign_launch`.
+- **Daily tasks:** review missions in flight, align briefs to client objectives,
+  arbitrate creative/media trade-offs, brief the Agency Director.
+- **AI usage:** Executive dashboard and per-client CampaignReport summaries.
 
 ---
 
-## Quality
+## Account Management
 
-### Zeynep Şahin — Quality Manager · Quality `T2`
-- **Responsibilities:** quality management system, ISO compliance, CAPA, audits.
-- **Permissions:** Quality department; CAPA/inspection records; company-wide
-  procedures.
-- **Daily tasks:** review inspections, manage CAPA, prepare for audits.
-- **AI usage:** **Demo persona** — Quality Assistant proposes CAPA steps from ISO
-  procedures; human approves.
-- **Workflow ownership:** CAPA (owner), Corrective Action (owner), Quality
-  Inspection (approver), Internal Audit (owner).
+### Zeynep Şahin — Account Manager · Account
+- **Responsibilities:** day-to-day owner for a set of clients; turns client
+  objectives into missions and keeps them moving through the pipeline.
+- **Pipeline involvement:** opens missions, shepherds each artifact to its gate,
+  routes creative and drafts to the right internal and client approvers.
+- **Daily tasks:** capture objectives, chase approvals, keep brand guardrails
+  (voice / banned words) respected, report status to clients.
+- **AI usage:** MarketingBrief generation; reviews AI-drafted briefs before the
+  `strategy_and_budget` gate.
 
-### Deniz Acar — Quality Engineer · Quality `T3`
-- **Responsibilities:** process quality, root-cause analysis, supplier quality.
-- **Permissions:** Quality tasks; inspection + supplier records.
-- **Daily tasks:** investigate non-conformities, run 8D/root-cause, update
-  standards.
-- **AI usage:** Quality Assistant (root-cause guidance, standard lookup).
-- **Workflow ownership:** Corrective Action (executor), Supplier Evaluation
-  (contributor).
-
-### Gökhan Uz — Quality Inspector · Quality `T4`
-- **Responsibilities:** incoming/in-process/final inspection.
-- **Permissions:** inspection tasks; standards; measurement records.
-- **Daily tasks:** inspect parts, record results, raise non-conformities.
-- **AI usage:** Quality/Knowledge Assistant (inspection criteria, standards).
-- **Workflow ownership:** Quality Inspection (executor).
+### Kerem Yılmaz — Account Manager · Account
+- **Responsibilities:** day-to-day owner for the remaining clients; same remit as
+  above across a different slice of the book.
+- **Pipeline involvement:** opens missions, moves artifacts to their gates, requests
+  client sign-off at `campaign_launch`.
+- **Daily tasks:** intake objectives, coordinate strategy/creative/media, track
+  pending missions, prep client review notes.
+- **AI usage:** MarketingBrief generation and CampaignReport read-outs.
 
 ---
 
-## Health, Safety & Environment (HSE)
+## Strategy
 
-### Barış Yıldız — HSE Manager · HSE `T2`
-- **Responsibilities:** occupational safety, environmental compliance, risk
-  assessment, emergency preparedness.
-- **Permissions:** HSE department; incident/risk records; company-wide safety
-  knowledge.
-- **Daily tasks:** review incidents, run risk assessments, drive corrective
-  actions, prepare ISO 45001/14001 evidence.
-- **AI usage:** Risk/HSE Assistant (risk methodology, legal requirements).
-- **Workflow ownership:** Risk Assessment (owner), Incident (approver), Emergency
-  Process (owner).
+### Aslı Yıldırım — Strategy Lead · Strategy
+- **Responsibilities:** campaign strategy, audience and channel logic, budget-split
+  rationale that underpins each brief.
+- **Pipeline involvement:** primary author/reviewer of the **MarketingBrief**;
+  commonly the internal reviewer at the `strategy_and_budget` gate.
+- **Daily tasks:** shape objectives into strategy, define KPIs to target, sanity-
+  check budget allocation before it goes to a client.
+- **AI usage:** MarketingBrief generation; Company Brain marketing insights (top
+  channel, avg ROAS) to inform strategy.
 
-### Selin Ak — HSE Officer · HSE `T3`
-- **Responsibilities:** site safety at the plants; training; PPE; audits.
-- **Permissions:** HSE tasks; incident records; training records.
-- **Daily tasks:** site walks, log incidents, run safety training, check PPE.
-- **AI usage:** HSE Assistant (procedures, PPE matrix, training content).
-- **Workflow ownership:** Incident (executor), Training (initiator).
-
----
-
-## Human Resources
-
-### Ayşe Kaya — HR Director · HR `T1`
-- **Responsibilities:** people strategy, recruitment, payroll oversight, policy,
-  labor compliance.
-- **Permissions:** full HR (including restricted PII); HR Dashboard; company-wide
-  policy.
-- **Daily tasks:** approve leave/recruitment, resolve HR cases, oversee payroll.
-- **AI usage:** **Demo persona** — HR Assistant answers policy questions;
-  onboarding.
-- **Workflow ownership:** Recruitment (owner), Vacation/Leave (approver),
-  Training (approver).
-
-### Nalan Er — HR Specialist (Recruitment) · HR `T3`
-- **Responsibilities:** hiring pipeline, interviews, onboarding.
-- **Permissions:** recruitment records; candidate data; onboarding checklists.
-- **Daily tasks:** post roles, screen candidates, schedule interviews, onboard
-  hires.
-- **AI usage:** HR Assistant (job descriptions, onboarding steps).
-- **Workflow ownership:** Recruitment (executor).
-
-### Tuğçe Al — HR Specialist (Payroll & Records) · HR `T3`
-- **Responsibilities:** payroll input, leave records, employee data.
-- **Permissions:** payroll + leave records (restricted PII).
-- **Daily tasks:** process leave requests, maintain records, prepare payroll.
-- **AI usage:** HR Assistant (leave policy, calculations guidance).
-- **Workflow ownership:** Vacation/Leave (processor).
+### Efe Demir — Strategist · Strategy
+- **Responsibilities:** supports strategy development, competitive and audience
+  inputs, brief drafting.
+- **Pipeline involvement:** contributes to the **MarketingBrief**; prepares material
+  for the `strategy_and_budget` review.
+- **Daily tasks:** research audiences, draft brief sections, pull past-campaign
+  patterns for the lead's review.
+- **AI usage:** MarketingBrief drafting; Company Brain pattern library.
 
 ---
 
-## Finance & Accounting
+## Creative
 
-### Canan Arslan — Finance Director · Finance `T1`
-- **Responsibilities:** financial control, budgets, approvals, reporting,
-  compliance.
-- **Permissions:** full Finance; Finance Dashboard; approves above manager limit.
-- **Daily tasks:** review budgets, approve expenses/invoices/contracts, close
-  month.
-- **AI usage:** **Demo persona** — Finance Assistant checks budget/policy on
-  approvals.
-- **Workflow ownership:** Expense (approver), Invoice (approver), Contract
-  Approval (approver), Management Approval (Finance).
+### Sibel Kaya — Creative Director · Creative
+- **Responsibilities:** creative quality and brand fit across all accounts; owns the
+  bar for headlines, ad copy, and concepts.
+- **Pipeline involvement:** primary internal reviewer at the `creative_assets` gate;
+  approves the **CreativeSet** before it can proceed to a campaign draft.
+- **Daily tasks:** review creative sets against brand voice and banned words, direct
+  copywriters and art direction, resolve creative escalations.
+- **AI usage:** CreativeSet generation (copy only — headline / adCopy / CTA / social
+  post / landing page / email); reviews AI drafts for brand compliance.
 
-### Ozan Kurt — Accounting Manager · Finance `T2`
-- **Responsibilities:** accounts payable/receivable, ledger, tax.
-- **Permissions:** accounting records; invoice processing; approves within limit.
-- **Daily tasks:** process invoices, reconcile accounts, manage AP/AR.
-- **AI usage:** Finance Assistant (invoice matching, policy checks).
-- **Workflow ownership:** Invoice (owner), Expense (processor).
+### Onur Kaplan — Art Director · Creative
+- **Responsibilities:** visual direction and concept framing for creative sets.
+- **Pipeline involvement:** contributes to the **CreativeSet**; supports the
+  Creative Director at the `creative_assets` gate.
+- **Daily tasks:** shape concepts, pair copy with art direction, ensure creative is
+  on-brand and channel-appropriate.
+- **AI usage:** CreativeSet generation (copy assets) as raw material for concepts.
 
-### Derya Kılıç — Accountant · Finance `T3`
-- **Responsibilities:** bookkeeping, expense processing, documentation.
-- **Permissions:** accounting tasks; expense records.
-- **Daily tasks:** enter transactions, process expenses, file documents.
-- **AI usage:** Finance/Document Assistant (categorization, form help).
-- **Workflow ownership:** Expense (processor).
+### Deniz Acar — Copywriter · Creative
+- **Responsibilities:** ad copy across headlines, CTAs, social posts, landing pages
+  and email for assigned brands.
+- **Pipeline involvement:** produces/edits copy inside the **CreativeSet**; submits
+  for `creative_assets` review.
+- **Daily tasks:** write and refine copy, honour each brand's voice and banned
+  words, iterate on Creative Director feedback.
+- **AI usage:** CreativeSet generation (copy only); never touches ad platforms.
 
----
-
-## Procurement
-
-### Levent Bozkurt — Procurement Manager · Procurement `T2`
-- **Responsibilities:** purchasing, supplier management, contracts, cost.
-- **Permissions:** Procurement; supplier + contract records; approves within
-  limit.
-- **Daily tasks:** process purchase requests, negotiate, evaluate suppliers.
-- **AI usage:** Finance/Knowledge Assistant (policy, supplier history, contracts).
-- **Workflow ownership:** Purchase Approval (owner), Supplier Evaluation (owner),
-  Contract Approval (initiator).
-
-### Pelin Ay — Buyer · Procurement `T3`
-- **Responsibilities:** RFQs, POs, delivery follow-up.
-- **Permissions:** purchasing tasks; supplier catalog; PO records.
-- **Daily tasks:** raise RFQs, issue POs, chase deliveries.
-- **AI usage:** Knowledge Assistant (supplier terms, part sourcing).
-- **Workflow ownership:** Purchase Approval (processor).
+### Ceren Işık — Copywriter · Creative
+- **Responsibilities:** ad copy for the remaining brands, including English-language
+  variants where a brand needs them.
+- **Pipeline involvement:** produces/edits copy inside the **CreativeSet**; submits
+  for `creative_assets` review.
+- **Daily tasks:** draft copy, adapt tone per brand, run banned-word checks, revise
+  to brief.
+- **AI usage:** CreativeSet generation (copy only), with output-language selection
+  (TR/EN).
 
 ---
 
-## IT
+## Media Planning
 
-### Burak Öztürk — IT Manager · IT `T2` + **Admin**
-- **Responsibilities:** infrastructure, applications, access, IT security, the
-  on-prem AdOS deployment.
-- **Permissions:** IT admin; access management; audit read; AI Dashboard.
-- **Daily tasks:** approve access, manage systems, monitor AdOS, run IT tickets.
-- **AI usage:** **Demo persona** — shows admin, tenant isolation, audit trail.
-- **Workflow ownership:** IT Request (owner), Access Request (approver), Password
-  Reset (owner).
+### Murat Şahin — Media Planner · Media
+- **Responsibilities:** channel mix and budget split across Meta, Google Ads,
+  YouTube, TikTok, LinkedIn and Display for assigned accounts.
+- **Pipeline involvement:** builds the **CampaignDraft** (channels + ad sets +
+  budget split); prepares it for the `campaign_launch` gate.
+- **Daily tasks:** allocate budget across channels, define ad sets, align the draft
+  to the approved brief and budget.
+- **AI usage:** CampaignDraft assembly; the draft's status is always `draft` and is
+  never launched by AdOS — a human exports it to their own ad platform.
 
-### Cem Yalın — System Administrator · IT `T3` + **Admin**
-- **Responsibilities:** servers, backups, monitoring, AdOS operations.
-- **Permissions:** system admin; backup/monitoring; no HR PII.
-- **Daily tasks:** run backups, monitor health, patch systems, support AdOS.
-- **AI usage:** Knowledge Assistant (runbooks, procedures).
-- **Workflow ownership:** IT Request (executor).
-
-### Ece Nur — IT Support Specialist · IT `T4`
-- **Responsibilities:** help desk, first-line support, device setup.
-- **Permissions:** ticket system; knowledge base; device records.
-- **Daily tasks:** resolve tickets, reset passwords (with approval), set up
-  devices.
-- **AI usage:** Knowledge/Document Assistant (support articles, how-tos).
-- **Workflow ownership:** Password Reset (executor), IT Request (executor).
+### İpek Kara — Media Planner · Media
+- **Responsibilities:** channel mix and budget split for the remaining accounts.
+- **Pipeline involvement:** builds the **CampaignDraft**; readies it for
+  `campaign_launch` sign-off.
+- **Daily tasks:** plan channel budgets, structure ad sets, reconcile spend against
+  the strategy-approved budget.
+- **AI usage:** CampaignDraft assembly (drafts only, never pushed to platforms).
 
 ---
 
-## Security
+## Performance & Analytics
 
-### Tarık Güneş — Security Manager · Security `T2` + **Audit**
-- **Responsibilities:** physical + information security, access control, audit,
-  visitor management.
-- **Permissions:** Security Dashboard; full audit log; access + visitor records.
-- **Daily tasks:** review audit trail, manage access, oversee visitors, respond
-  to alerts.
-- **AI usage:** Security Assistant (audit queries, policy, anomaly summaries).
-- **Workflow ownership:** Access Request (reviewer), Visitor Management (owner),
-  Emergency Process (contributor).
+### Berk Aydın — Performance Analyst · Analytics
+- **Responsibilities:** campaign performance reporting and KPI interpretation for
+  assigned accounts.
+- **Pipeline involvement:** owns the **CampaignReport** (post-`campaign_launch`);
+  metrics are hand-entered via a form, then KPIs are recomputed deterministically.
+- **Daily tasks:** enter impressions/clicks/spend/conversions/leads/revenue, review
+  CTR/CPC/CPA/CPL/ROAS/ROI, flag under-performers.
+- **AI usage:** CampaignReport KPIs (deterministic math); Company Brain performance
+  insights.
 
-### Volkan Ateş — Security Officer · Security `T4`
-- **Responsibilities:** site security, gate control, visitor check-in.
-- **Permissions:** visitor + access tasks; incident logging.
-- **Daily tasks:** manage gate, register visitors, patrol, log incidents.
-- **AI usage:** Security Assistant (procedures, visitor policy).
-- **Workflow ownership:** Visitor Management (executor).
+### Gizem Ünal — Performance Analyst · Analytics
+- **Responsibilities:** performance reporting for the remaining accounts; trend and
+  benchmark analysis.
+- **Pipeline involvement:** owns the **CampaignReport** for her book; feeds results
+  into ExecutiveReport synthesis.
+- **Daily tasks:** compile report metrics, compare against past campaigns, surface
+  what to repeat or cut.
+- **AI usage:** CampaignReport KPIs; Company Brain experience engine (past-campaign
+  ROAS/ROI/outcome).
 
----
-
-## Engineering & R&D
-
-### Onur Kaplan — Engineering Director · Engineering `T1`
-- **Responsibilities:** product design, R&D, industrialization, technical
-  standards.
-- **Permissions:** full Engineering; design + standards records; company-wide
-  knowledge.
-- **Daily tasks:** review designs, approve engineering changes, guide R&D.
-- **AI usage:** Knowledge/Document Assistant (standards, prior designs).
-- **Workflow ownership:** Document Approval (engineering), Production Change
-  (technical approver).
-
-### Sibel Demirtaş — Design Engineer · Engineering `T3`
-- **Responsibilities:** CAD design, drawings, BOMs, revisions.
-- **Permissions:** design tasks; drawing + standards library.
-- **Daily tasks:** create/revise drawings, manage BOMs, submit for approval.
-- **AI usage:** Document Assistant (standards, drawing templates, revision help).
-- **Workflow ownership:** Document Approval (initiator).
-
-### Kaan Yücel — R&D Engineer · Engineering `T3`
-- **Responsibilities:** prototypes, testing, new product development.
-- **Permissions:** R&D tasks; test records; standards.
-- **Daily tasks:** run experiments, record results, propose designs.
-- **AI usage:** Knowledge Assistant (research notes, test standards).
-- **Workflow ownership:** Document Approval (contributor).
+### Serkan Aydın — Data Analyst · Analytics
+- **Responsibilities:** cross-account data quality, deterministic KPI validation,
+  Company Brain knowledge-graph upkeep.
+- **Pipeline involvement:** supports **CampaignReport** and **ExecutiveReport** with
+  clean, validated data.
+- **Daily tasks:** validate metric inputs, reconcile campaign → ad → lead → ROI
+  graph nodes, prep data for executive synthesis.
+- **AI usage:** Company Brain knowledge graph and pattern library.
 
 ---
 
-## Commercial — Sales
+## Delivery
 
-### Murat Şahin — Commercial Director · Sales `T1`
-- **Responsibilities:** sales, marketing, support; revenue and customer strategy.
-- **Permissions:** full Commercial; sales pipeline; company-wide knowledge.
-- **Daily tasks:** review pipeline, approve quotes/contracts, manage key accounts.
-- **AI usage:** Executive/Knowledge Assistant (pipeline, account summaries).
-- **Workflow ownership:** Contract Approval (commercial), Customer Complaint
-  (escalation).
-
-### İpek Kara — Sales Manager · Sales `T2`
-- **Responsibilities:** domestic sales team, quotes, orders, targets.
-- **Permissions:** Sales department; customer + order records; approves quotes
-  within limit.
-- **Daily tasks:** manage quotes, follow orders, coach reps.
-- **AI usage:** Knowledge Assistant (product specs, pricing policy).
-- **Workflow ownership:** Contract Approval (initiator), Customer Complaint
-  (owner).
-
-### Berk Aydın — Sales Representative · Sales `T3`
-- **Responsibilities:** accounts, quotes, order entry, customer relationships.
-- **Permissions:** own accounts; quote + order tasks.
-- **Daily tasks:** visit customers, prepare quotes, enter orders.
-- **AI usage:** Knowledge Assistant (specs, lead times, references).
-- **Workflow ownership:** Customer Complaint (initiator).
-
-### Ceren Işık — Export Sales Specialist · Sales `T3`
-- **Responsibilities:** export accounts (English), customs docs, compliance.
-- **Permissions:** export accounts; documentation; standards.
-- **Daily tasks:** manage export orders, prepare docs, coordinate logistics.
-- **AI usage:** Document Assistant (English docs, export paperwork).
-- **Workflow ownership:** Contract Approval (export), Document Approval (export
-  docs).
+### Pelin Ay — Project Coordinator · Delivery
+- **Responsibilities:** keeps projects and missions on schedule; the connective
+  tissue between account, strategy, creative, media and analytics.
+- **Pipeline involvement:** tracks every mission's stage and pending gate; nudges
+  the right approver (internal or client) when a gate is waiting.
+- **Daily tasks:** maintain the mission board, watch for missions stuck at
+  `pending`, coordinate hand-offs, log consequential actions to the activity feed.
+- **AI usage:** reads pipeline status and CampaignReport summaries; no gate is
+  auto-approved — every advance is a human click.
 
 ---
 
-## Marketing
+## Client-side approvers
 
-### Aslı Yıldırım — Marketing Manager · Marketing `T2`
-- **Responsibilities:** brand, campaigns, content, lead generation.
-- **Permissions:** Marketing department; brand assets; campaign tools.
-- **Daily tasks:** plan campaigns, approve creative, manage brand.
-- **AI usage:** **Advertising pipeline** — states an objective; AdOS produces
-  brief → creative → campaign on local models (sovereignty scenario).
-- **Workflow ownership:** Management Approval (marketing spend), campaign approvals.
+Each client has **one marketing lead** who signs off on **their own brand's**
+campaigns. They approve at pipeline gates (typically `campaign_launch`, and
+`strategy_and_budget` where budget is theirs). They are approvers **by role label
+only** — the product does not enforce that scope in code; the demo simply routes each
+client's approvals to their lead (`CLIENT_APPROVER` in `src/data-model.mjs`).
 
-### Efe Demir — Marketing Specialist · Marketing `T3`
-- **Responsibilities:** content, social, campaign execution, assets.
-- **Permissions:** campaign tasks; asset library.
-- **Daily tasks:** produce content, run campaigns, manage the asset library.
-- **AI usage:** Creative/Document Assistant (copy, asset versioning).
-- **Workflow ownership:** Document Approval (marketing assets).
+### Levent Bozkurt — Client Marketing Lead · NovaMak Endüstri
+- **Responsibilities:** approves campaigns for NovaMak Pro and NovaMak Parts;
+  guards the industrial/B2B brand voice.
+- **Pipeline involvement:** client sign-off at gates for NovaMak missions.
+- **AI usage:** reviews AI-drafted briefs, creative sets and drafts before approving.
 
----
+### Nalan Er — Client Marketing Lead · Derma Cosmetics
+- **Responsibilities:** approves campaigns for Derma Glow and Derma Men; protects
+  the dermatological tone and banned-word rules.
+- **Pipeline involvement:** client sign-off at gates for Derma missions.
+- **AI usage:** reviews AI-drafted artifacts before approving.
 
-## Customer Support
+### Tuğçe Al — Client Marketing Lead · Fresh Foods
+- **Responsibilities:** approves campaigns for Fresh Daily and Fresh Kids; keeps the
+  friendly, wholesome FMCG voice.
+- **Pipeline involvement:** client sign-off at gates for Fresh Foods missions.
+- **AI usage:** reviews AI-drafted artifacts before approving.
 
-### Gizem Ünal — Support Manager · Support `T2`
-- **Responsibilities:** after-sales support, complaints, field-service
-  coordination, SLAs.
-- **Permissions:** Support department; complaint + service records; customer data.
-- **Daily tasks:** manage tickets, resolve complaints, dispatch field service.
-- **AI usage:** Knowledge Assistant (product manuals, complaint history).
-- **Workflow ownership:** Customer Complaint (owner), CAPA (initiator from field).
+### Canan Arslan — Client Marketing Lead · FinTR Katılım
+- **Responsibilities:** approves campaigns for FinTR Invest and FinTR Pay; enforces
+  compliant, no-guaranteed-return messaging.
+- **Pipeline involvement:** client sign-off at gates for FinTR missions.
+- **AI usage:** reviews AI-drafted artifacts for compliance before approving.
 
-### Hüseyin Bal — Support Specialist / Field-Service Coordinator · Support `T3`
-- **Responsibilities:** handle tickets, coordinate on-site service, spare parts.
-- **Permissions:** ticket + service tasks; manuals; parts lookup.
-- **Daily tasks:** log/triage tickets, schedule service, order spares.
-- **AI usage:** Maintenance/Knowledge Assistant (manuals, part numbers).
-- **Workflow ownership:** Customer Complaint (executor).
+### Ozan Kurt — Client Marketing Lead · Evim Home
+- **Responsibilities:** approves campaigns for Evim Living and Evim Garden; holds the
+  cozy, aspirational retail voice.
+- **Pipeline involvement:** client sign-off at gates for Evim missions.
+- **AI usage:** reviews AI-drafted artifacts before approving.
 
----
-
-## Warehouse & Logistics
-
-### Serdar Kaya — Warehouse Manager · Warehouse `T2`
-- **Responsibilities:** inventory, receiving, dispatch, logistics across the
-  central warehouse and plant stores.
-- **Permissions:** Warehouse department; stock + movement records; approves within
-  limit.
-- **Daily tasks:** manage stock, oversee receiving/dispatch, coordinate logistics.
-- **AI usage:** Operations Assistant (stock levels, movement history).
-- **Workflow ownership:** Asset Request (fulfilment), Purchase Approval (goods
-  receipt).
-
-### Melis Tan — Logistics Coordinator · Warehouse `T3`
-- **Responsibilities:** inbound/outbound scheduling, carriers, customs
-  coordination.
-- **Permissions:** logistics tasks; shipment + carrier records.
-- **Daily tasks:** schedule shipments, track deliveries, coordinate carriers.
-- **AI usage:** Knowledge Assistant (shipping docs, carrier terms).
-- **Workflow ownership:** Visitor Management (carriers), Document Approval
-  (shipping docs).
-
-### Yusuf Er — Warehouse Operator / Team Lead · Warehouse `T4`
-- **Responsibilities:** receiving, put-away, picking, dispatch; lead a small team.
-- **Permissions:** warehouse tasks; stock lookup.
-- **Daily tasks:** receive goods, pick orders, stage dispatch, update stock.
-- **AI usage:** Operations/Knowledge Assistant (procedures, locations).
-- **Workflow ownership:** Asset Request (executor).
+### Derya Kılıç — Client Marketing Lead · Getaway Travel
+- **Responsibilities:** approves campaigns for Getaway Sun and Getaway City; keeps
+  the vivid, inviting travel voice.
+- **Pipeline involvement:** client sign-off at gates for Getaway missions.
+- **AI usage:** reviews AI-drafted artifacts before approving.
 
 ---
 
 ## Roster summary
 
-| Department | Users |
+| Function | Users |
 | --- | --- |
-| Executive | 1 |
-| Operations | 1 |
-| Production | 5 |
-| Maintenance | 3 |
-| Quality | 3 |
-| HSE | 2 |
-| HR | 3 |
-| Finance | 3 |
-| Procurement | 2 |
-| IT | 3 |
-| Security | 2 |
-| Engineering | 3 |
-| Sales | 4 |
-| Marketing | 2 |
-| Support | 2 |
-| Warehouse | 3 |
-| **Total** | **42** |
+| Leadership | 2 |
+| Account Management | 2 |
+| Strategy | 2 |
+| Creative | 4 |
+| Media Planning | 2 |
+| Performance & Analytics | 3 |
+| Delivery | 1 |
+| **Internal subtotal** | **16** |
+| Client-side approvers | 6 |
+| **Total** | **22** |
 
-All users, permissions and workflow ownerships are fixed and reconcile with
-`DEMO_COMPANY.md`, `DEMO_WORKFLOWS.md`, `DEMO_AI_AGENTS.md` and
-`DEMO_DATASET_SPEC.md`.
+All users are fixed and reconcile with `src/data-model.mjs` (`TEAM`,
+`CLIENT_APPROVER`). Roles are labels; **RBAC is defined but not enforced**, there are
+**no graded permission levels and no ranked approval authority**, and every gate
+advance is a **human approval click** — internal for agency review, client-side for a
+brand's own sign-off.
