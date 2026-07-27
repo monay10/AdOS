@@ -32,8 +32,8 @@ platform. That framing was corrected and the PPTX/PDF regenerated. **Result: PAS
 
 ## 1. Key corrections
 
-- **Title/subtitle (slides 1 & 22, footers):** "The Advertising Operating System" /
-  "Reklam İşletim Sistemi" → **"Enterprise AI Operating System for Advertising"** /
+- **Title/subtitle (slides 1 & 22, footers):** the legacy "Advertising-OS" label
+  (EN + TR) → **"Enterprise AI Operating System for Advertising"** /
   "Reklam için Kurumsal Yapay Zekâ İşletim Sistemi".
 - **Slide "Digital Employees for every department"** → **"An AI-assisted stage at
   every step"** (brief → creative → campaign draft → report; local AI drafts within
