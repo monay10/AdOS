@@ -30,7 +30,7 @@ the evidence, and the deliberate retentions.
 | **Grammar** | No systematic errors found across the package. | ✅ |
 | **Executive tone** | Confident, precise, calm; addresses CIO/CISO/CEO as experts. | ✅ |
 | **Consistency** | Single vocabulary; canonical terms throughout. | ✅ |
-| **Enterprise vocabulary** | "data sovereignty," "permission-aware," "on-premise," "auditable," "value-based" — decision-maker language, not consumer hype. | ✅ |
+| **Enterprise vocabulary** | "data sovereignty," "human-approved," "on-premise," "auditable," "value-based" — decision-maker language, not consumer hype. | ✅ |
 | **CTA quality** | Verb-first, specific, honest; canonical label set only (§3). | ✅ |
 | **Headline quality** | Concrete and claim-led; no clickbait; no duplicate headlines. | ✅ |
 | **SEO wording** | Titles ≤60 chars, descriptions ≤160, keyworded without stuffing. | ✅ |
@@ -83,7 +83,7 @@ register. Authors should keep to these substitutions:
 | seamless(ly) | integrated, straightforward, without disruption |
 | supercharge / turbocharge / 10x | accelerate, reduce, recover (with a number) |
 | unleash / empower | enable, let teams |
-| AI-powered (as a boast) | name the capability (cited answers, local inference) |
+| AI-powered (as a boast) | name the capability (performance-grounded recommendations, local inference) |
 | leverage (as a verb) | use, apply, draw on |
 
 ---

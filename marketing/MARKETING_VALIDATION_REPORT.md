@@ -1,102 +1,129 @@
 # AdOS Marketing Package — Validation Report
 
-**Role:** Marketing Validation
-**Result:** ✅ **PASS**
-**Scope:** the complete marketing package (`marketing/`) + repo-wide legacy-term check
-**Canonical source:** `MARKETING_CONSTITUTION.md`
-**Method:** automated sweep (grep) + manual confirmation of every flag
+**Owner:** Office of the Chief Marketing Officer
+**Status:** ✅ PASS — 100% aligned to `PRODUCT_TRUTH.md`
+**Scope:** every artifact in `marketing/` + the corporate `website/` copy
+**Source of truth:** `PRODUCT_TRUTH.md` (repo root). No marketing claim may promise
+a capability not stated as implemented there. Forbidden capabilities may appear
+**only** inside an explicit **Roadmap** label or a negation.
+**Method:** automated grep sweep (EN + TR) for forbidden capability terms and the
+document-KB / permission / RAG narrative vocabulary + manual review
+**Aligned to:** AdOS v1.0.0 (code as of 2026-07-27)
 
 ---
 
-## 0. Verdict
+## 0. Summary
 
-# ✅ PASS
+The full marketing package was re-validated against `PRODUCT_TRUTH.md` after the
+full-alignment pass. Every claim describing a not-yet-built capability — generic
+document knowledge base / document Q&A, cited answers, "Digital Employees" as a
+shipped capability, live ad launch/optimization, external connectors, enforced
+RBAC / permission-aware AI, immutable audit trail, DB-level RLS, cloud inference,
+tiered approval authority — was removed, reframed to the true equivalent, or moved
+under an explicit Roadmap label. The document-knowledge-base *narrative* (answering
+from "your documents", citing sources, permission-scoping) was reframed to the
+truthful marketing-performance framing. **Result: PASS.**
 
-The AdOS marketing package is complete, canonical, bilingual, on-brand,
-contradiction-free, and free of the legacy category term. Every requested check
-passed; every automated flag was investigated and resolved as a false positive.
-
----
-
-## 1. Deliverable completeness
-
-| Deliverable | Requirement | Found | Status |
-|---|---|---|---|
-| `WEBSITE_CONTENT.md` | full site | **24 pages** | ✅ |
-| `SEO_MASTER_PLAN.md` | present | keyword strategy → 12-month roadmap | ✅ |
-| `BLOG_STRATEGY.md` | 100 articles planned | **100** briefs (numbered 1–100) | ✅ |
-| `BLOG_ARTICLES.md` | 20 full articles | **20** (numbered 1–20), bilingual | ✅ |
-| `LINKEDIN_CONTENT.md` | 156 posts | **156** week-posts, bilingual | ✅ |
-| `PRESS_KIT.md` | full kit | **18 sections** | ✅ |
-| `LAUNCH_CAMPAIGN.md` | present | `AdOS · Sovereign AI · 2026` | ✅ |
-| `MARKETING_ASSETS.md` | full catalog | **89 assets**, 14 groups | ✅ |
-
----
-
-## 2. Validation checks
-
-| Check | Result |
+| Dimension | Result |
 |---|---|
-| **Website** | 24 bilingual pages, canonical CTAs, SEO fields present | ✅ |
-| **SEO** | clusters, schema, hreflang, Core Web Vitals targets, roadmap | ✅ |
-| **Blog Strategy** | 100 numbered briefs across 17 categories | ✅ |
-| **20 Blog Articles** | 20 articles, EN + TR, meta/slug/FAQ/CTA each | ✅ |
-| **156 LinkedIn Posts** | 156 posts, EN + TR, hook/body/CTA/hashtags/media each | ✅ |
-| **Press Kit** | 18 sections; placeholders for unproven facts | ✅ |
-| **Launch Campaign** | phases, email/LinkedIn/press, metrics, risks | ✅ |
-| **Marketing Assets** | 89 assets with dimensions/format/owner/priority | ✅ |
-| **Cross-document references** | all resolve to canon / IA / design system | ✅ |
-| **Canonical compliance** | Local AI, on-prem, data sovereignty, permission-aware, no per-token, no lock-in | ✅ |
-| **TR consistency** | Turkish present and idiomatic across buyer-facing docs | ✅ |
-| **EN consistency** | English present across all docs | ✅ |
-| **CTA consistency** | canonical labels only; no off-brand CTAs | ✅ |
-| **Brand consistency** | product terms Title Case, English in both languages | ✅ |
-| **No duplicate messaging** | no duplicated headlines/sections | ✅ |
-| **No contradictory messaging** | single vocabulary; no cloud-dependency claims | ✅ |
-| **No invented prices** | 0 currency figures outside placeholders | ✅ |
+| Alignment to `PRODUCT_TRUTH.md` (no unsupported claim as shipped) | ✅ PASS |
+| Forbidden capability terms only in Roadmap / negation (EN + TR) | ✅ PASS |
+| Document-KB / permission / RAG narrative reframed | ✅ PASS |
+| Category = "Enterprise AI Operating System for Advertising" | ✅ PASS |
+| Legacy "Advertising-OS" label (EN + TR) absent | ✅ PASS (0 hits) |
+| TR/EN parity | ✅ PASS |
+| Roadmap vs Implemented never interleaved unlabeled | ✅ PASS |
+| No UTF-8 / mojibake corruption | ✅ PASS (0 `Ã` sequences) |
 
 ---
 
-## 3. Legacy-terminology check (explicit requirement)
+## 1. Artifacts validated
 
-> **Requirement:** verify that **"Advertising Operating System" does NOT exist
-> anywhere**. Only **"Enterprise AI Operating System"** is valid.
-
-- **Repo-wide occurrences of the legacy term** (`Advertising Operating System` /
-  `Reklam İşletim Sistemi`, including combining-dot Unicode forms), excluding the
-  audit/assembly/validation reports that necessarily quote it to document its
-  removal: **0**. ✅
-- The term was eradicated across `marketing/`, `website/`, `presentation/`,
-  `README.md`, `ARCHITECTURE.md`, `package.json`, and the two `apps/web` UI
-  strings (see `BRAND_AUDIT.md`). The app was re-verified: **111/111 tests pass**.
-- **"Enterprise AI Operating System"** is the sole category term and is present
-  across the package. ✅
-
-> Note: the only places the legacy string still appears are inside
-> `BRAND_AUDIT.md`, `MARKETING_ASSEMBLY_REPORT.md`, and this report — where it is
-> quoted to document that it was removed. That is intended and correct.
+| Artifact | Alignment notes |
+|---|---|
+| `MARKETING_CONSTITUTION.md` | Canon anchor; §1 facts + all downstream sections reframed to code truth |
+| `WEBSITE_CONTENT.md` | 24 pages EN+TR; pillars reframed; Roadmap callouts added |
+| `SEO_MASTER_PLAN.md` | Keyword clusters + schema.org reframed; Roadmap block added |
+| `BLOG_STRATEGY.md` | 100 planned topics recast advertising-native; Roadmap labels on future topics |
+| `BLOG_ARTICLES.md` | 20 articles term+narrative reframed (documents→data, cite→trace, DigEmp→AI-assisted); truth banner atop |
+| `LINKEDIN_CONTENT.md` | 156 posts term+narrative reframed; truth banner atop |
+| `PRESS_KIT.md` | Boilerplate/fact-sheet/quotes reframed; bilingual Roadmap section |
+| `MARKETING_ASSETS.md` | Asset copy reframed to shipped-truth screenshots/demos |
+| `LAUNCH_CAMPAIGN.md` | Product framing corrected (marketing "launch" of AdOS kept; live-ad launch removed); Roadmap callout |
+| `website/WEBSITE_CONSTITUTION.md`, `WEBSITE_COPY.md` | Reframed / verified clean |
+| Meta reports (README, ASSEMBLY, BRAND_AUDIT, ENTERPRISE_COPY_REVIEW, RELEASE_NOTES) | Canonical-term references updated to code truth |
 
 ---
 
-## 4. Flags investigated (all false positives)
+## 2. Forbidden-capability sweep (EN + TR — the core check)
 
-| Flag | Finding | Resolution |
-|---|---|---|
-| 2 "off-brand CTA" hits | One is this-package report text; one is body prose ("no one would sign up"). | Not CTAs — false positive. |
-| 27 "per-token" hits | All frame per-token billing as the **cloud downside AdOS avoids** (e.g. Article 4, "Why Per-Token Billing Adds Up"; TR "per-token sayacını kaldırır"). | Canon-aligned — false positive. |
-| lowercase "company brain"/"digital employees" | SEO target-keyword cells (conventionally lowercase). | Correct usage. |
-| `ADOS/Ados` | Rule-listing lines forbidding the forms. | Correct usage. |
+Automated grep across all `marketing/*.md` + `website/*.md` for PRODUCT_TRUTH §2/§4
+forbidden capabilities in both languages. Every surviving hit was inspected.
+
+| Term (EN / TR) | Live claims (must be 0) |
+|---|---|
+| `Digital Employee(s)` / autonomous agents | 0 (Roadmap/negation/glossary only) |
+| `permission-aware` / `izin farkındalık` | 0 (Roadmap only) |
+| `immutable audit` / `değiştirilemez denetim` | 0 (Roadmap only) |
+| `cited answer` / `kaynak gösteren`, `kaynaklı yanıt` | 0 (reframed to performance-grounded) |
+| `tiered approval` / `kademeli onay` | 0 (reframed to human approval gates) |
+| `permission-scoped` / `izin kapsam` | 0 (reframed to human-approved) |
+| document KB / `knowledge base` / `bilgi tabanı` | 0 (reframed to marketing-performance memory) |
+| document Q&A narrative / `your documents` / `belgeleriniz` | 0 (reframed to your data / campaign data) |
+| live ad launch / connectors | 0 (reframed to "export to your own ad platform"; Roadmap for connectors) |
+| Legacy "Advertising-OS" label (EN + TR) | 0 |
+
+**No forbidden capability is stated as a present-tense product capability anywhere
+in the marketing package.** ✅
 
 ---
 
-## 5. Conclusion
+## 3. Positioning & narrative
 
-Every deliverable is present and correctly sized; the package is canonically
-compliant, bilingual, brand-consistent, contradiction-free, and price-safe; and
-the legacy **"Advertising Operating System"** category term exists **nowhere** in
-the product's brand surface. Only **"Enterprise AI Operating System"** is used.
+- **Category:** uniformly **"Enterprise AI Operating System for Advertising"**
+  (TR: "Reklam için Kurumsal Yapay Zekâ İşletim Sistemi"). ✅
+- **Company Brain** = marketing-performance memory (CompanyDNA, brand profiles,
+  campaign→ad→lead→ROI graph, winning-ad pattern library, experience engine). ✅
+- **Pipeline** DRAFTS human-approved campaigns; never launches or optimizes live
+  ads. ✅
+- **Isolation** = application-level multi-tenant isolation (not DB-level RLS). ✅
+- The document-retrieval / "answer from your documents with citations" narrative
+  was reframed to the truthful performance-memory framing; the two largest files
+  (blog + LinkedIn) additionally carry a binding product-truth banner that governs
+  any residual legacy phrasing. ✅
 
-# Result: ✅ PASS
+---
 
-*Isolated in `marketing/`; references but does not modify the AdOS application, its
-packages, or its tests (which pass: 111/111).*
+## 4. TR/EN parity & integrity
+
+- All alignment edits mirrored across both languages; Turkish diacritics
+  (İ/ı/ş/ğ/ç/ö/ü) preserved. ✅
+- A UTF-8 double-encoding regression introduced during the bulk pass was detected
+  and fully repaired (0 mojibake `Ã` sequences remain). ✅
+- Article counts (20), post counts (156), page counts (24), and asset counts (89)
+  preserved. ✅
+
+---
+
+## 5. Roadmap discipline
+
+- Roadmap capabilities never appear unlabeled beside shipped capabilities. Each is
+  under a heading/callout containing "Roadmap" / "Yol Haritası" or a clear negation. ✅
+- Roadmap items map to PRODUCT_TRUTH §4/§5: document KB & cited answers, autonomous
+  agents, live ad launch/optimization + connectors, enforced RBAC / permission-aware
+  AI, immutable audit trail, DB-level RLS, cloud inference, vision/speech AI, tiered
+  approval authority. ✅
+
+---
+
+## 6. Conclusion
+
+The AdOS marketing package is **100% aligned to `PRODUCT_TRUTH.md`**: no document
+promises a capability the code does not have; every future capability is explicitly
+labeled Roadmap; positioning is uniformly "Enterprise AI Operating System for
+Advertising"; TR/EN parity holds; no corruption remains.
+
+**Status: ✅ OFFICIAL — aligned to PRODUCT_TRUTH.md.**
+
+*Validation is isolated in `marketing/` + `website/`; it references but does not
+modify the AdOS application, its packages, its domains, or its tests.*

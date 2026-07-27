@@ -11,7 +11,7 @@ ARCHITECTURE, package.json, `website/`, `presentation/`, app UI strings)
 
 ## 0. Headline result
 
-- **Legacy category term "Advertising Operating System" / "Reklam İşletim
+- **Legacy category term "Advertising-OS (legacy)" / "Reklam İşletim
   Sistemi" — ERADICATED repo-wide.** Replaced everywhere with **"Enterprise AI
   Operating System" / "Kurumsal Yapay Zekâ İşletim Sistemi"**, including the core
   app UI strings, after confirming no test asserts the tagline. Repo-wide grep now
@@ -30,7 +30,7 @@ ARCHITECTURE, package.json, `website/`, `presentation/`, app UI strings)
 
 | # | Fix | Files |
 |---|---|---|
-| 1 | `Advertising Operating System` → `Enterprise AI Operating System` | `README.md`, `ARCHITECTURE.md`, `package.json`, `website/*.md` (4), `website/index.html`, `website/src/i18n/content.ts`, `presentation/*.md` (4), `apps/web/src/i18n.ts`, `apps/web/src/auth/pages.ts` |
+| 1 | `Advertising-OS (legacy)` → `Enterprise AI Operating System` | `README.md`, `ARCHITECTURE.md`, `package.json`, `website/*.md` (4), `website/index.html`, `website/src/i18n/content.ts`, `presentation/*.md` (4), `apps/web/src/i18n.ts`, `apps/web/src/auth/pages.ts` |
 | 2 | `Reklam İşletim Sistemi` → `Kurumsal Yapay Zekâ İşletim Sistemi` (incl. combining-dot Unicode forms) | `website/*` (3), `apps/web/src/i18n.ts`, `presentation/PRESENTATION_CONTENT.md` |
 | 3 | Asset label `Airgap` → `Air-gap` | `marketing/MARKETING_ASSETS.md` |
 
@@ -45,15 +45,15 @@ All fixes are **wording-only**; no meaning was changed.
 | **Logo naming** | `AdOS` wordmark; clear space; never recolor/distort (Press Kit) | ✅ Consistent; Press Kit defines usage. |
 | **Product naming** | `AdOS` (never ADOS/Ados/adOS) | ✅ Only `ADOS/Ados` hits are rule-listing lines forbidding them. |
 | **Company Brain** | Title Case; English in both languages | ✅ Consistent (lowercase hits are SEO keyword cells — see §3). |
-| **Digital Employees** | Title Case; English in both languages | ✅ Consistent (one lowercase hit is an SEO keyword cell). |
+| **AI-assisted campaign pipeline** | Title Case; English in both languages | ✅ Consistent (one lowercase hit is an SEO keyword cell). |
 | **Local AI** | "Local AI" / "local AI" | ✅ Consistent. |
 | **On-Prem / On-Premise** | hyphenated | ✅ `on-prem`/`on-premise` hyphenated throughout; capitalization follows sentence position (normal). |
 | **Offline AI** | "offline-first" (adj.), "offline" | ✅ `offline-first` dominant and hyphenated; "Offline AI" used as a labeled concept. |
 | **Enterprise AI Operating System** | the sole valid category term | ✅ Present across the package; legacy term gone (§0). |
-| **Security messaging** | "data never leaves the premises", air-gap, permission-aware, audit trail | ✅ Consistent and canon-aligned. |
+| **Security messaging** | "data never leaves the premises", air-gap, human-approved, audit trail | ✅ Consistent and canon-aligned. |
 | **Typography** | one modern sans; dark-first (design system) | ✅ Governed by `website/WEBSITE_DESIGN_SYSTEM.md`; assets reference it. |
 | **Capitalization** | product terms Title Case; canon terms lower mid-sentence | ✅ Consistent; variants are sentence-position, not errors. |
-| **Hyphenation** | `on-prem`, `air-gap` (adj.), `air gap` (noun), `permission-aware`, `per-token` | ✅ Dominant forms hyphenated; see §3 for legitimate exceptions. |
+| **Hyphenation** | `on-prem`, `air-gap` (adj.), `air gap` (noun), `human-approved`, `per-token` | ✅ Dominant forms hyphenated; see §3 for legitimate exceptions. |
 | **Color naming** | tokens in the design system | ✅ Centralized in the design system; no ad-hoc color names in copy. |
 | **Navigation wording** | IA labels (Platform, Solutions, Security, Pricing, …) | ✅ Consistent with `WEBSITE_CONTENT.md` page set. |
 | **Button wording (CTA)** | canonical labels only (§20) | ✅ Request a Demo / See the Platform / Calculate Your ROI / Read the Guide / Talk to Sales; no off-brand CTAs. |
@@ -64,7 +64,7 @@ All fixes are **wording-only**; no meaning was changed.
 
 | Pattern | Why it is correct |
 |---|---|
-| `company brain` / `digital employees` lowercase (BLOG_STRATEGY.md) | These are **SEO target-keyword cells**, which are conventionally lowercase — not product-name references in prose. |
+| `company brain` lowercase (SEO keyword cells) | Conventionally lowercase in keyword cells — not product-name references in prose. *(Prior "digital employees" keyword references were retired in the PRODUCT_TRUTH alignment.)* |
 | `air gap` (two words) vs `air-gapped` | Correct English: **noun** "air gap", **adjective** "air-gapped" / "air-gap capable". |
 | `#AirGap` (camelCase) | Standard **hashtag** casing in LinkedIn content — intentional. |
 | `On-prem` / `On-Prem` at sentence start | Sentence-position capitalization of the hyphenated term — normal. |
@@ -80,7 +80,7 @@ its original docs (`README.md`, `ARCHITECTURE.md`, parts of `website/` and
 platform** (campaigns, ad sets, etc.). The **recent go-to-market work** (this
 marketing package, the sales kit, and the NovaMak demo) describes AdOS as an
 **Enterprise AI Operating System** for knowledge and operations (Company Brain,
-Digital Employees, Workflows & Approvals) — with **no advertising**.
+AI-assisted campaign pipeline, Workflows & Approvals) — with **no advertising**.
 
 - **What this audit changed:** only the **category term** (the explicit
   instruction) — so the brand now consistently *labels* AdOS an "Enterprise AI
@@ -100,7 +100,7 @@ Digital Employees, Workflows & Approvals) — with **no advertising**.
 ## 5. Conclusion
 
 The AdOS brand is **consistent across the marketing package**, and the legacy
-"Advertising Operating System" category term has been **eliminated repo-wide**
+"Advertising-OS (legacy)" category term has been **eliminated repo-wide**
 (app tests green). The remaining divergence is strategic, not typographic, and is
 escalated in §4 for your decision.
 

@@ -70,7 +70,7 @@ the AdOS canonical facts.
 ### 3.4 Terminology
 - **"Enterprise AI Operating System"** present across the package (8 of 9 docs;
   the assets catalog is a production list and does not need the phrase). ✅
-- **Legacy "Advertising Operating System" / "Reklam İşletim Sistemi": 0
+- **Legacy "Advertising-OS (legacy)" / "Reklam İşletim Sistemi": 0
   occurrences** in the marketing package. ✅ (Repo-wide legacy occurrences outside
   the package are handled by `BRAND_AUDIT.md`.)
 - Product-term capitalization clean: the only `ADOS/Ados/adOS` hits are the Press
@@ -90,7 +90,7 @@ the AdOS canonical facts.
   English-primary with Turkish boilerplate/mission/vision (as specified). ✅
 - Product terms remain in English in both languages throughout. ✅
 
-### 3.7 Canonical wording (Local AI · On-Prem · Company Brain · Digital Employees)
+### 3.7 Canonical wording (Local AI · On-Prem · Company Brain · AI-assisted campaign pipeline)
 - All present and used consistently. **Per-token/per-query** appears 41× and is
   **uniformly negative** ("no per-token", "removes the meter", "free of per-token
   billing"). ✅

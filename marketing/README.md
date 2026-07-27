@@ -2,8 +2,9 @@
 
 The official AdOS marketing package — bilingual (Turkish + English), isolated in
 `marketing/`, governed by the marketing constitution. Positioning: **AdOS — the
-Enterprise AI Operating System** (sovereign, on-premise, permission-aware AI that
-runs 100% on your own infrastructure).
+Enterprise AI Operating System for Advertising** (sovereign, on-premise,
+offline-first local AI that drafts human-approved advertising campaigns and runs
+100% on your own infrastructure).
 
 **Status:** ✅ Published · Validation **PASS** · ~138,000 words · 15 documents
 
@@ -61,12 +62,15 @@ runs 100% on your own infrastructure).
 
 ## Facts every document upholds
 
-- **Enterprise AI Operating System** — the sole category term (legacy "Advertising
-  Operating System" is retired repo-wide).
+- **Enterprise AI Operating System for Advertising** — the sole category term (the
+  legacy "Advertising-OS" label is retired repo-wide).
 - **Sovereign · on-premise · offline-capable** — runs 100% on the customer's
   infrastructure; **data never leaves the premises**; no external API, no keys.
-- **Company Brain** (cited, permission-aware knowledge) · **Digital Employees**
-  (AI agents that do real work) · **Workflows & Approvals** (audited processes).
+- **Company Brain** (marketing-performance memory) · **AI-assisted campaign
+  pipeline** (drafts brief → creative → campaign, human-approved; never launches
+  live ads) · **Workflows & Approvals** (human approval gates + activity log).
+  *(Document Q&A/cited answers, autonomous agents, permission-aware AI, immutable
+  audit, and connectors are Roadmap — see `PRODUCT_TRUTH.md`.)*
 - **No per-token billing · no vendor lock-in.** Honest performance trade-off
   (local inference is seconds, not milliseconds).
 - **Bilingual TR/EN**; product terms stay in English in both languages.
@@ -81,7 +85,8 @@ runs 100% on your own infrastructure).
   case studies, objection handling, FAQ, proposal, validation).
 - **`website/`** — the corporate website implementation.
 - **`presentation/`** — the executive presentation.
-- **`demo/`** — the NovaMak demonstration environment.
+- **`demo/`** — the agency demonstration environment (Vega Reklam Ajansı; NovaMak
+  is a client brand within it).
 
 *Isolated in `marketing/`; references but does not modify the AdOS application, its
 packages, or its tests.*
