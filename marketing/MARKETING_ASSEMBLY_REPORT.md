@@ -70,7 +70,7 @@ the AdOS canonical facts.
 ### 3.4 Terminology
 - **"Enterprise AI Operating System"** present across the package (8 of 9 docs;
   the assets catalog is a production list and does not need the phrase). ✅
-- **Legacy "Advertising-OS (legacy)" / "Reklam İşletim Sistemi": 0
+- **Legacy "Advertising-OS (legacy)" / "the legacy Turkish category label": 0
   occurrences** in the marketing package. ✅ (Repo-wide legacy occurrences outside
   the package are handled by `BRAND_AUDIT.md`.)
 - Product-term capitalization clean: the only `ADOS/Ados/adOS` hits are the Press

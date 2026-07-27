@@ -33,7 +33,7 @@ truthful marketing-performance framing. **Result: PASS.**
 | Legacy "Advertising-OS" label (EN + TR) absent | ✅ PASS (0 hits) |
 | TR/EN parity | ✅ PASS |
 | Roadmap vs Implemented never interleaved unlabeled | ✅ PASS |
-| No UTF-8 / mojibake corruption | ✅ PASS (0 `Ã` sequences) |
+| No UTF-8 / mojibake corruption | ✅ PASS (0 mojibake sequences) |
 
 ---
 
@@ -99,7 +99,7 @@ in the marketing package.** ✅
 - All alignment edits mirrored across both languages; Turkish diacritics
   (İ/ı/ş/ğ/ç/ö/ü) preserved. ✅
 - A UTF-8 double-encoding regression introduced during the bulk pass was detected
-  and fully repaired (0 mojibake `Ã` sequences remain). ✅
+  and fully repaired (0 mojibake sequences remain). ✅
 - Article counts (20), post counts (156), page counts (24), and asset counts (89)
   preserved. ✅
 

@@ -31,7 +31,7 @@ ARCHITECTURE, package.json, `website/`, `presentation/`, app UI strings)
 | # | Fix | Files |
 |---|---|---|
 | 1 | `Advertising-OS (legacy)` → `Enterprise AI Operating System` | `README.md`, `ARCHITECTURE.md`, `package.json`, `website/*.md` (4), `website/index.html`, `website/src/i18n/content.ts`, `presentation/*.md` (4), `apps/web/src/i18n.ts`, `apps/web/src/auth/pages.ts` |
-| 2 | `Reklam İşletim Sistemi` → `Kurumsal Yapay Zekâ İşletim Sistemi` (incl. combining-dot Unicode forms) | `website/*` (3), `apps/web/src/i18n.ts`, `presentation/PRESENTATION_CONTENT.md` |
+| 2 | `the legacy Turkish category label` → `Kurumsal Yapay Zekâ İşletim Sistemi` (incl. combining-dot Unicode forms) | `website/*` (3), `apps/web/src/i18n.ts`, `presentation/PRESENTATION_CONTENT.md` |
 | 3 | Asset label `Airgap` → `Air-gap` | `marketing/MARKETING_ASSETS.md` |
 
 All fixes are **wording-only**; no meaning was changed.

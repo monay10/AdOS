@@ -51,7 +51,7 @@
 
 **✅ PASS** (`MARKETING_VALIDATION_REPORT.md`). Every deliverable present and
 correctly sized; canonical, bilingual, brand-consistent, contradiction-free, no
-invented prices. The legacy category term **"Advertising Operating System"** was
+invented prices. The legacy category term **"Advertising-OS" (legacy)** was
 verified **absent repo-wide** (0 occurrences outside the reports that document its
 removal); only **"Enterprise AI Operating System"** is used. App re-verified:
 **111/111 tests pass**.
