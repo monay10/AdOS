@@ -1,100 +1,133 @@
-// Validator — enforces DEMO_DATASET_SPEC.md §16. Returns a report; the CLI loads
+// Validator for the AdOS agency demo world. Returns a report; the CLI loads
 // demo/data/world.json and prints PASS/FAIL. A demo is only "ready" on PASS.
+//
+// The checks enforce PRODUCT_TRUTH.md: the pipeline is ordered and human-gated,
+// campaign drafts are never launched, KPIs reconcile from raw numbers, and the
+// world contains NO citations, NO permission tiers, and NO immutable-audit claim.
 
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { buildWorld, checksum, canSee } from './seed.mjs';
+import { buildWorld, checksum } from './seed.mjs';
+import { PIPELINE_STAGES } from './data-model.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DATA = join(HERE, '..', 'data', 'world.json');
+const STAGE_ORDER = PIPELINE_STAGES.map((s) => s.key);
+const r2 = (x) => Math.round(x * 100) / 100;
 
 export function validate(w) {
   const checks = [];
   const ok = (name, cond, detail = '') => checks.push({ name, ok: !!cond, detail });
 
-  const empSet = new Set(w.employees.map((e) => e.id));
-  const deptSet = new Set(w.departments.map((d) => d.id));
-  const siteSet = new Set(w.sites.map((s) => s.id));
-  const docSet = new Set(w.documents.map((d) => d.id));
-  const wfDefSet = new Set(w.workflow_defs.map((d) => d.id));
-  const wfItemSet = new Set(w.workflow_items.map((i) => i.id));
-  const docById = Object.fromEntries(w.documents.map((d) => [d.id, d]));
-  const empById = Object.fromEntries(w.employees.map((e) => [e.id, e]));
+  const clientSet = new Set(w.clients.map((c) => c.id));
+  const brandSet = new Set(w.brands.map((b) => b.id));
+  const productSet = new Set(w.products.map((p) => p.id));
+  const projectSet = new Set(w.projects.map((p) => p.id));
+  const missionSet = new Set(w.missions.map((m) => m.id));
+  const userSet = new Set(w.team.map((u) => u.id));
+  const missionById = Object.fromEntries(w.missions.map((m) => [m.id, m]));
 
   // 1. Referential integrity
   let refOk = true; let refDetail = '';
   const need = (cond, msg) => { if (!cond && refOk) { refOk = false; refDetail = msg; } };
-  for (const e of w.employees) {
-    need(deptSet.has(e.department_id), `emp ${e.id} dept`);
-    need(siteSet.has(e.site_id), `emp ${e.id} site`);
-    need(e.manager_id === null || empSet.has(e.manager_id), `emp ${e.id} manager`);
+  for (const b of w.brands) need(clientSet.has(b.client_id), `brand ${b.id} client`);
+  for (const p of w.products) need(brandSet.has(p.brand_id), `product ${p.id} brand`);
+  for (const p of w.projects) { need(brandSet.has(p.brand_id), `project ${p.id} brand`); need(clientSet.has(p.client_id), `project ${p.id} client`); }
+  for (const m of w.missions) {
+    need(clientSet.has(m.client_id), `mission ${m.id} client`);
+    need(brandSet.has(m.brand_id), `mission ${m.id} brand`);
+    need(productSet.has(m.product_id), `mission ${m.id} product`);
+    need(projectSet.has(m.project_id), `mission ${m.id} project`);
   }
-  for (const a of w.assets) { need(siteSet.has(a.site_id), `asset ${a.id} site`); need(docSet.has(a.manual_doc_id), `asset ${a.id} manual`); }
-  for (const ed of w.doc_edges) { need(docSet.has(ed.from_doc_id) && docSet.has(ed.to_doc_id), 'doc edge'); }
-  for (const i of w.workflow_items) { need(wfDefSet.has(i.wf_def_id), `wf ${i.id} def`); need(empSet.has(i.initiator_emp_id), `wf ${i.id} initiator`); for (const d of i.linked_docs) need(docSet.has(d), `wf ${i.id} doc`); }
-  for (const s of w.workflow_steps) { need(wfItemSet.has(s.wf_item_id), 'step item'); need(empSet.has(s.actor_emp_id), 'step actor'); }
-  for (const a of w.approvals) { need(wfItemSet.has(a.wf_item_id), 'apr item'); need(empSet.has(a.approver_emp_id), 'apr approver'); }
-  for (const t of w.tickets) { need(empSet.has(t.requester_emp_id), 'tkt req'); need(empSet.has(t.assignee_emp_id), 'tkt asg'); }
-  for (const t of w.tasks) { need(empSet.has(t.owner_emp_id), 'task owner'); need(deptSet.has(t.department_id), 'task dept'); }
-  for (const m of w.meetings) { need(docSet.has(m.minutes_doc_id), 'mtg doc'); for (const a of m.attendee_emp_ids) need(empSet.has(a), 'mtg attendee'); }
-  for (const c of w.ai_conversations) { need(empSet.has(c.user_emp_id), 'convo user'); need(c.escalated_to_emp_id === null || empSet.has(c.escalated_to_emp_id), 'convo esc'); }
-  for (const a of w.audit) { need(empSet.has(a.actor_emp_id), 'audit actor'); }
+  const linkArtifacts = [w.briefs, w.creative_sets, w.campaign_drafts, w.campaign_reports, w.executive_reports, w.approvals, w.ai_drafts];
+  for (const arr of linkArtifacts) for (const a of arr) need(missionSet.has(a.mission_id), `artifact ${a.id} mission`);
+  for (const a of w.approvals) need(userSet.has(a.approver_user_id), `approval ${a.id} approver`);
   ok('Referential integrity', refOk, refDetail);
 
-  // 2. Authority
-  const authBad = w.approvals.filter((a) => a.amount != null && a.amount > a.limit_applied && !a.escalated);
-  ok('Approval authority (KB-POL-004)', authBad.length === 0, authBad.length ? `${authBad.length} over-limit` : '');
-
-  // 3 & 5. Citations exist + visible
-  let citeBad = 0;
-  for (const c of w.ai_conversations) for (const id of c.cited_doc_ids) {
-    const d = docById[id]; if (!d || !canSee(empById[c.user_emp_id], d)) citeBad++;
+  // 2. Pipeline order — artifacts exist only for a contiguous prefix of stages
+  const has = (arr, mid) => arr.some((x) => x.mission_id === mid);
+  let orderBad = 0;
+  for (const m of w.missions) {
+    const present = [
+      has(w.briefs, m.id), has(w.creative_sets, m.id), has(w.campaign_drafts, m.id),
+      has(w.campaign_reports, m.id), has(w.executive_reports, m.id),
+    ];
+    // must be a prefix of trues: once false, all later false
+    let seenFalse = false;
+    for (const p of present) { if (!p) seenFalse = true; else if (seenFalse) orderBad++; }
   }
-  ok('AI citations exist + permission-visible', citeBad === 0, citeBad ? `${citeBad} bad citations` : '');
+  ok('Pipeline order (contiguous, brief→executive)', orderBad === 0, orderBad ? `${orderBad} out-of-order` : '');
 
-  // 4. KPI reconciliation
-  const recompute = {
-    'm-users-active': w.employees.filter((e) => e.active).length,
-    'm-docs-total': w.documents.length,
-    'm-wf-open': w.workflow_items.filter((x) => ['open', 'pending'].includes(x.status)).length,
-    'm-wf-closed': w.workflow_items.filter((x) => ['approved', 'rejected', 'closed'].includes(x.status)).length,
-    'm-approvals': w.approvals.length,
-    'm-tickets-open': w.tickets.filter((t) => ['open', 'in_progress'].includes(t.status)).length,
-    'm-convos': w.ai_conversations.length,
-  };
-  const kpiBad = w.metrics.filter((m) => m.id in recompute && m.value !== recompute[m.id]);
-  ok('KPI reconciliation', kpiBad.length === 0, kpiBad.length ? kpiBad.map((m) => m.id).join(',') : '');
+  // 3. Human approval gates — every gate stage reached has a human approval
+  let gateBad = 0;
+  for (const m of w.missions) {
+    if (has(w.creative_sets, m.id) && !w.approvals.some((a) => a.mission_id === m.id && a.gate === 'strategy_and_budget')) gateBad++;
+    if (has(w.campaign_drafts, m.id) && !w.approvals.some((a) => a.mission_id === m.id && a.gate === 'creative_assets')) gateBad++;
+  }
+  const allHuman = w.approvals.every((a) => a.human === true);
+  ok('Human approval at every reached gate', gateBad === 0 && allHuman, gateBad ? `${gateBad} missing gate` : (allHuman ? '' : 'non-human approval'));
 
-  // 6. Temporal (activity records within [today-90d, today])
+  // 4. Drafts are NEVER launched (campaign-draft.ts:48-49)
+  const launched = w.campaign_drafts.filter((d) => d.status !== 'draft');
+  ok('Campaign drafts never launched (status=draft)', launched.length === 0, launched.length ? `${launched.length} launched` : '');
+
+  // 5. KPI reconciliation — every report's KPIs recompute from raw numbers
+  const kpiBad = [];
+  for (const rp of w.campaign_reports) {
+    const exp = {
+      ctr: r2((rp.clicks / rp.impressions) * 100),
+      cpc: r2(rp.spend_try / rp.clicks),
+      cpa: r2(rp.spend_try / Math.max(1, rp.conversions)),
+      cpl: r2(rp.spend_try / Math.max(1, rp.leads)),
+      roas: r2(rp.revenue_try / rp.spend_try),
+      roi: r2(((rp.revenue_try - rp.spend_try) / rp.spend_try) * 100),
+    };
+    for (const k of Object.keys(exp)) if (rp[k] !== exp[k]) kpiBad.push(`${rp.id}.${k}`);
+  }
+  ok('Ad-KPI reconciliation (CTR/CPC/CPA/CPL/ROAS/ROI)', kpiBad.length === 0, kpiBad.slice(0, 3).join(','));
+
+  // 6. Company Brain integrity
+  const cb = w.company_brain;
+  const nodeSet = new Set(cb.knowledge_graph.nodes.map((n) => n.id));
+  const kgOk = cb.knowledge_graph.edges.every((e) => nodeSet.has(e.from) && nodeSet.has(e.to));
+  const profilesCoverBrands = cb.brand_profiles.length === w.brands.length;
+  const expOk = cb.experience_engine.every((e) => missionSet.has(e.mission_id));
+  ok('Company Brain integrity (graph + profiles + experience)', kgOk && profilesCoverBrands && expOk, '');
+
+  // 7. Temporal window (activity within [today-91d, today])
   const today = new Date(w.meta.demo_today).getTime();
   const lo = today - 91 * 86400000;
   const inWindow = (iso) => { const t = new Date(iso).getTime(); return t >= lo && t <= today + 86400000; };
   let tempBad = 0;
-  for (const i of w.workflow_items) if (!inWindow(i.created_at)) tempBad++;
-  for (const s of w.workflow_steps) if (!inWindow(s.at)) tempBad++;
+  for (const m of w.missions) if (!inWindow(m.created_at)) tempBad++;
   for (const a of w.approvals) if (!inWindow(a.at)) tempBad++;
-  for (const c of w.ai_conversations) if (!inWindow(c.at)) tempBad++;
-  for (const a of w.audit) if (!inWindow(a.at)) tempBad++;
+  for (const d of w.ai_drafts) if (!inWindow(d.at)) tempBad++;
+  for (const l of w.activity_log) if (!inWindow(l.at)) tempBad++;
   ok('Temporal window (activity ≤ 90d)', tempBad === 0, tempBad ? `${tempBad} out of window` : '');
 
-  // 7. Determinism (rebuild from meta → same checksum)
+  // 8. Determinism (rebuild from meta → same checksum)
   const rebuilt = buildWorld(w.meta.seed, w.meta.demo_today);
   ok('Determinism (rebuild checksum)', checksum(rebuilt) === checksum(w), '');
 
-  // 8. Audit completeness
-  const auditObj = new Set(w.audit.map((a) => a.object_id));
-  const aprCovered = w.approvals.every((a) => auditObj.has(a.id));
-  const convoCovered = w.ai_conversations.every((c) => auditObj.has(c.id));
-  const wfCovered = w.workflow_items.every((i) => auditObj.has(i.id));
-  ok('Audit completeness', aprCovered && convoCovered && wfCovered, '');
+  // 9. Activity-log completeness (every approval + mission is logged)
+  const logObj = new Set(w.activity_log.map((l) => l.object_id));
+  const aprCovered = w.approvals.every((a) => logObj.has(a.id));
+  const msnCovered = w.missions.every((m) => logObj.has(m.id));
+  ok('Activity-log completeness', aprCovered && msnCovered, '');
 
-  // 9. Volumes
-  const volumes = w.employees.length === 42 && w.departments.length === 16 && w.sites.length === 6 &&
-    w.workflow_defs.length === 25 && w.agents.length === 12 && w.workflow_items.length === 180 &&
-    w.ai_conversations.length === 80 && w.documents.length >= 100 && w.documents.length <= 140 &&
-    w.audit.length >= 3000 && w.history.length >= 1500;
-  ok('Volumes match spec', volumes, `emp=${w.employees.length} docs=${w.documents.length} wf=${w.workflow_items.length} audit=${w.audit.length}`);
+  // 10. PRODUCT-TRUTH guardrail — the world must NOT model absent capabilities
+  const s = JSON.stringify(w);
+  const forbiddenKeys = /"cited_doc_ids"|"citation"|"permission_tier"|"visibility"|"rbac"|"immutable"/i;
+  const noForbidden = !forbiddenKeys.test(s);
+  ok('No absent-capability data (citations/RBAC/tiers/immutable)', noForbidden, noForbidden ? '' : 'forbidden key present');
+
+  // 11. Volumes match spec
+  const volumes = w.clients.length === 6 && w.brands.length === 12 && w.products.length === 24 &&
+    w.missions.length === 40 && w.campaign_drafts.length >= 20 && w.campaign_reports.length >= 15 &&
+    w.approvals.length >= 40 && w.activity_log.length >= 100;
+  ok('Volumes match spec', volumes,
+    `clients=${w.clients.length} brands=${w.brands.length} missions=${w.missions.length} drafts=${w.campaign_drafts.length} reports=${w.campaign_reports.length}`);
 
   const pass = checks.every((c) => c.ok);
   return { pass, checks, checksum: checksum(w), counts: countOf(w) };
@@ -102,9 +135,10 @@ export function validate(w) {
 
 function countOf(w) {
   return {
-    employees: w.employees.length, documents: w.documents.length, workflow_items: w.workflow_items.length,
-    approvals: w.approvals.length, tickets: w.tickets.length, tasks: w.tasks.length,
-    ai_conversations: w.ai_conversations.length, audit: w.audit.length, history: w.history.length,
+    clients: w.clients.length, brands: w.brands.length, products: w.products.length,
+    missions: w.missions.length, campaign_drafts: w.campaign_drafts.length,
+    campaign_reports: w.campaign_reports.length, approvals: w.approvals.length,
+    activity_log: w.activity_log.length,
   };
 }
 

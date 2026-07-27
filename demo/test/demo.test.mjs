@@ -1,13 +1,14 @@
-// Tests for the AdOS demo environment. No external deps (node:test).
-// Verifies determinism, internal consistency, and the validation contract.
+// Tests for the AdOS agency demo environment. No external deps (node:test).
+// Verifies determinism, internal consistency, and the validation contract for
+// the human-approved campaign pipeline (PRODUCT_TRUTH.md §1).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildWorld, checksum, canSee } from '../src/seed.mjs';
+import { buildWorld, checksum } from '../src/seed.mjs';
 import { validate } from '../src/validate.mjs';
 import { SEED } from '../src/data-model.mjs';
 
-const FIXED = '2026-07-26T00:00:00.000Z';
+const FIXED = '2026-07-27T00:00:00.000Z';
 const world = buildWorld(SEED, FIXED);
 
 test('deterministic: same seed + date → identical checksum', () => {
@@ -24,56 +25,66 @@ test('validation passes on the seeded world', () => {
 });
 
 test('volumes match the dataset spec', () => {
-  assert.equal(world.employees.length, 42);
-  assert.equal(world.departments.length, 16);
-  assert.equal(world.sites.length, 6);
-  assert.equal(world.workflow_defs.length, 25);
-  assert.equal(world.agents.length, 12);
-  assert.equal(world.workflow_items.length, 180);
-  assert.equal(world.ai_conversations.length, 80);
-  assert.ok(world.documents.length >= 100 && world.documents.length <= 140);
-  assert.ok(world.audit.length >= 3000);
-  assert.ok(world.history.length >= 1500);
+  assert.equal(world.clients.length, 6);
+  assert.equal(world.brands.length, 12);
+  assert.equal(world.products.length, 24);
+  assert.equal(world.missions.length, 40);
+  assert.ok(world.campaign_drafts.length >= 20);
+  assert.ok(world.campaign_reports.length >= 15);
+  assert.ok(world.approvals.length >= 40);
 });
 
-test('referential integrity: every workflow actor exists', () => {
-  const emp = new Set(world.employees.map((e) => e.id));
-  for (const s of world.workflow_steps) assert.ok(emp.has(s.actor_emp_id));
-  for (const a of world.approvals) assert.ok(emp.has(a.approver_emp_id));
+test('referential integrity: every approval approver exists', () => {
+  const users = new Set(world.team.map((u) => u.id));
+  for (const a of world.approvals) assert.ok(users.has(a.approver_user_id));
 });
 
-test('every AI citation resolves and is permission-visible', () => {
-  const docById = Object.fromEntries(world.documents.map((d) => [d.id, d]));
-  const empById = Object.fromEntries(world.employees.map((e) => [e.id, e]));
-  for (const c of world.ai_conversations) {
-    for (const id of c.cited_doc_ids) {
-      const d = docById[id];
-      assert.ok(d, `citation ${id} missing`);
-      assert.ok(canSee(empById[c.user_emp_id], d), `citation ${id} not visible to ${c.user_emp_id}`);
+test('pipeline is contiguous: a report implies brief + creative + draft', () => {
+  const has = (arr, mid) => arr.some((x) => x.mission_id === mid);
+  for (const m of world.missions) {
+    if (has(world.campaign_reports, m.id)) {
+      assert.ok(has(world.briefs, m.id), `${m.id} report without brief`);
+      assert.ok(has(world.creative_sets, m.id), `${m.id} report without creative`);
+      assert.ok(has(world.campaign_drafts, m.id), `${m.id} report without draft`);
     }
   }
 });
 
-test('approval authority respects tier limits', () => {
-  for (const a of world.approvals) {
-    if (a.amount != null) assert.ok(a.amount <= a.limit_applied || a.escalated);
+test('every campaign draft is a draft — never launched', () => {
+  for (const d of world.campaign_drafts) assert.equal(d.status, 'draft');
+});
+
+test('every reached approval gate has a human approval', () => {
+  const has = (arr, mid) => arr.some((x) => x.mission_id === mid);
+  for (const m of world.missions) {
+    if (has(world.creative_sets, m.id)) {
+      assert.ok(world.approvals.some((a) => a.mission_id === m.id && a.gate === 'strategy_and_budget' && a.human));
+    }
   }
 });
 
-test('KPIs reconcile with underlying records', () => {
-  const m = Object.fromEntries(world.metrics.map((x) => [x.id, x.value]));
-  assert.equal(m['m-docs-total'], world.documents.length);
-  assert.equal(m['m-approvals'], world.approvals.length);
-  assert.equal(m['m-convos'], world.ai_conversations.length);
-  assert.equal(
-    m['m-wf-open'],
-    world.workflow_items.filter((w) => ['open', 'pending'].includes(w.status)).length,
-  );
+test('ad-KPIs reconcile with raw performance numbers', () => {
+  const r2 = (x) => Math.round(x * 100) / 100;
+  for (const rp of world.campaign_reports) {
+    assert.equal(rp.ctr, r2((rp.clicks / rp.impressions) * 100));
+    assert.equal(rp.roas, r2(rp.revenue_try / rp.spend_try));
+    assert.equal(rp.roi, r2(((rp.revenue_try - rp.spend_try) / rp.spend_try) * 100));
+  }
 });
 
-test('permission model: restricted docs hidden from unentitled users', () => {
-  const staff = world.employees.find((e) => e.permission_tier === 'T4');
-  const restricted = world.documents.find((d) => d.visibility.startsWith('restricted:executives'));
-  assert.ok(restricted);
-  assert.equal(canSee(staff, restricted), false);
+test('Company Brain is a marketing-performance memory (no documents/citations)', () => {
+  const cb = world.company_brain;
+  assert.ok(cb.company_dna && cb.brand_profiles.length === world.brands.length);
+  assert.ok(Array.isArray(cb.pattern_library) && cb.pattern_library.length > 0);
+  assert.ok(Array.isArray(cb.experience_engine));
+  // knowledge graph edges resolve to nodes
+  const nodes = new Set(cb.knowledge_graph.nodes.map((n) => n.id));
+  for (const e of cb.knowledge_graph.edges) {
+    assert.ok(nodes.has(e.from) && nodes.has(e.to));
+  }
+});
+
+test('world models no absent capabilities (no citations/RBAC/tiers/immutable)', () => {
+  const s = JSON.stringify(world);
+  assert.ok(!/"cited_doc_ids"|"citation"|"permission_tier"|"visibility"|"immutable"/i.test(s));
 });

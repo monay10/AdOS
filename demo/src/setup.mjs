@@ -4,7 +4,7 @@
 import { runReset } from './reset.mjs';
 
 console.log('AdOS demo environment — setup');
-console.log('Seeding NovaMak demo world (deterministic, isolated, offline)...\n');
+console.log('Seeding the agency demo world — Vega Reklam Ajansı (deterministic, isolated, offline)...\n');
 const summary = await runReset();
 console.log('\nSetup complete. Data at demo/data/world.json.');
 console.log('Commands: npm run reset · npm run validate · npm test');

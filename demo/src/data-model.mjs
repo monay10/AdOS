@@ -1,91 +1,117 @@
-// Canonical entities for the NovaMak demo world. These are fixed (from the demo
-// docs); bulk instances are generated deterministically in seed.mjs.
+// Canonical entities for the AdOS demo world. The demo tenant is an advertising
+// agency ("Vega Reklam Ajansı") that runs AdOS to take client advertising
+// objectives through the human-approved campaign pipeline. These fixed entities
+// mirror the real product's domain model (PRODUCT_TRUTH.md §1):
+//   Workspace → Client → Brand → Product → Project → Mission → Approval
+//   → Asset (brief / creative set / campaign draft / report / executive report).
+// Bulk instances are generated deterministically in seed.mjs.
+//
+// IMPORTANT (aligned to PRODUCT_TRUTH.md): AdOS DRAFTS campaigns; it never
+// launches or optimizes live ads, has no document knowledge base, no cited
+// answers, no autonomous "Digital Employees", and no enforced RBAC. The demo
+// models only what the product actually does.
 
-export const SEED = 20260726;
+export const SEED = 20260727;
 
-export const SITES = [
-  { id: 'site-1', name: 'Plant 1 — İstanbul (Dudullu OSB)', type: 'plant', city: 'İstanbul', headcount: 900 },
-  { id: 'site-2', name: 'Plant 2 — Gebze', type: 'plant', city: 'Kocaeli', headcount: 520 },
-  { id: 'site-3', name: 'Plant 3 — Bursa', type: 'plant', city: 'Bursa', headcount: 330 },
-  { id: 'site-wh', name: 'Central Warehouse — Gebze', type: 'warehouse', city: 'Kocaeli', headcount: 70 },
-  { id: 'site-ank', name: 'Sales Office — Ankara', type: 'office', city: 'Ankara', headcount: 15 },
-  { id: 'site-izm', name: 'Sales Office — İzmir', type: 'office', city: 'İzmir', headcount: 15 },
+// ── The demo tenant: an advertising agency running AdOS ──
+export const WORKSPACE = {
+  id: 'ws-vega', name: 'Vega Reklam Ajansı', type: 'agency',
+  city: 'İstanbul', locale: 'tr',
+};
+
+// ── Clients the agency runs advertising for ──
+export const CLIENTS = [
+  { id: 'cl-novamak', name: 'NovaMak Endüstri', sector: 'manufacturing' },
+  { id: 'cl-derma', name: 'Derma Cosmetics', sector: 'beauty' },
+  { id: 'cl-fresh', name: 'Fresh Foods', sector: 'fmcg' },
+  { id: 'cl-fintr', name: 'FinTR Katılım', sector: 'finance' },
+  { id: 'cl-evim', name: 'Evim Home', sector: 'retail' },
+  { id: 'cl-getaway', name: 'Getaway Travel', sector: 'travel' },
 ];
 
-export const UNITS = [
-  { id: 'bu-machinery', name: 'Machinery Systems' },
-  { id: 'bu-components', name: 'Precision Components' },
-  { id: 'bu-aftermarket', name: 'Aftermarket & Service' },
-  { id: 'bu-engineering', name: 'Engineering & R&D' },
-];
+// ── Brands per client (voice, rules, banned words — brand/brand.ts:20-42) ──
+// [id, client_id, name, voice, banned_words]
+export const BRANDS = [
+  ['br-novamak-pro', 'cl-novamak', 'NovaMak Pro', 'professional, precise, industrial', ['ucuz', 'bedava', 'garanti']],
+  ['br-novamak-parts', 'cl-novamak', 'NovaMak Parts', 'technical, reliable, B2B', ['ucuz', 'kesin sonuç']],
+  ['br-derma-glow', 'cl-derma', 'Derma Glow', 'warm, confident, dermatological', ['mucize', 'kalıcı tedavi', 'şifa']],
+  ['br-derma-men', 'cl-derma', 'Derma Men', 'bold, direct, modern', ['mucize', 'anında']],
+  ['br-fresh-daily', 'cl-fresh', 'Fresh Daily', 'friendly, fresh, everyday', ['en iyi', 'birebir']],
+  ['br-fresh-kids', 'cl-fresh', 'Fresh Kids', 'playful, caring, wholesome', ['bağımlılık', 'sınırsız']],
+  ['br-fintr-invest', 'cl-fintr', 'FinTR Invest', 'trustworthy, clear, compliant', ['garanti getiri', 'risksiz', 'kesin kazanç']],
+  ['br-fintr-pay', 'cl-fintr', 'FinTR Pay', 'simple, secure, fast', ['risksiz', 'sınırsız kredi']],
+  ['br-evim-living', 'cl-evim', 'Evim Living', 'cozy, aspirational, accessible', ['en ucuz', 'tükeniyor']],
+  ['br-evim-garden', 'cl-evim', 'Evim Garden', 'natural, calm, seasonal', ['sınırsız', 'birebir']],
+  ['br-getaway-sun', 'cl-getaway', 'Getaway Sun', 'vivid, inviting, escape', ['garanti tatil', 'kesinlikle']],
+  ['br-getaway-city', 'cl-getaway', 'Getaway City', 'smart, curated, urban', ['en ucuz', 'birebir']],
+].map(([id, client_id, name, voice, banned_words]) => ({ id, client_id, name, voice, banned_words }));
 
-export const DEPARTMENTS = [
-  { id: 'dep-exec', name_tr: 'Yönetim', name_en: 'Executive' },
-  { id: 'dep-hr', name_tr: 'İnsan Kaynakları', name_en: 'HR' },
-  { id: 'dep-fin', name_tr: 'Finans ve Muhasebe', name_en: 'Finance' },
-  { id: 'dep-it', name_tr: 'Bilgi Teknolojileri', name_en: 'IT' },
-  { id: 'dep-ops', name_tr: 'Operasyonlar', name_en: 'Operations' },
-  { id: 'dep-mnt', name_tr: 'Bakım', name_en: 'Maintenance' },
-  { id: 'dep-qua', name_tr: 'Kalite', name_en: 'Quality' },
-  { id: 'dep-sales', name_tr: 'Satış', name_en: 'Sales' },
-  { id: 'dep-mkt', name_tr: 'Pazarlama', name_en: 'Marketing' },
-  { id: 'dep-proc', name_tr: 'Satın Alma', name_en: 'Procurement' },
-  { id: 'dep-eng', name_tr: 'Mühendislik', name_en: 'Engineering' },
-  { id: 'dep-prd', name_tr: 'Üretim', name_en: 'Production' },
-  { id: 'dep-hse', name_tr: 'İSG ve Çevre', name_en: 'HSE' },
-  { id: 'dep-sec', name_tr: 'Güvenlik', name_en: 'Security' },
-  { id: 'dep-wh', name_tr: 'Depo ve Lojistik', name_en: 'Warehouse' },
-  { id: 'dep-sup', name_tr: 'Müşteri Destek', name_en: 'Support' },
-];
+// ── Products per brand (carry pricing — product/product.ts:30) ──
+// [id, brand_id, name, price_try]
+export const PRODUCTS = [
+  ['pr-nm-hmc', 'br-novamak-pro', 'HMC-500 Machining Center', 2450000],
+  ['pr-nm-weld', 'br-novamak-pro', 'Robotic Welding Cell', 1780000],
+  ['pr-nm-spindle', 'br-novamak-parts', 'Precision Spindle Kit', 42000],
+  ['pr-nm-service', 'br-novamak-parts', 'Aftermarket Service Plan', 96000],
+  ['pr-dg-serum', 'br-derma-glow', 'Glow Repair Serum', 640],
+  ['pr-dg-cream', 'br-derma-glow', 'Barrier Day Cream', 520],
+  ['pr-dm-wash', 'br-derma-men', 'Charcoal Face Wash', 280],
+  ['pr-dm-balm', 'br-derma-men', 'Post-Shave Balm', 340],
+  ['pr-fd-yogurt', 'br-fresh-daily', 'Süzme Yoğurt 1kg', 78],
+  ['pr-fd-milk', 'br-fresh-daily', 'Günlük Süt 1L', 42],
+  ['pr-fk-juice', 'br-fresh-kids', 'Meyve Suyu 200ml', 24],
+  ['pr-fk-snack', 'br-fresh-kids', 'Tam Tahıl Atıştırmalık', 36],
+  ['pr-fi-fund', 'br-fintr-invest', 'Katılım Emeklilik Fonu', 0],
+  ['pr-fi-gold', 'br-fintr-invest', 'Altın Katılım Hesabı', 0],
+  ['pr-fp-wallet', 'br-fintr-pay', 'FinTR Pay Cüzdan', 0],
+  ['pr-fp-pos', 'br-fintr-pay', 'Esnaf POS Çözümü', 0],
+  ['pr-el-sofa', 'br-evim-living', 'Nordic 3+2 Koltuk Takımı', 34900],
+  ['pr-el-table', 'br-evim-living', 'Meşe Yemek Masası', 12900],
+  ['pr-eg-set', 'br-evim-garden', 'Bahçe Mobilya Seti', 18900],
+  ['pr-eg-grill', 'br-evim-garden', 'Mangal & Barbekü İstasyonu', 6400],
+  ['pr-gs-antalya', 'br-getaway-sun', 'Antalya Ultra Her Şey Dahil', 42000],
+  ['pr-gs-bodrum', 'br-getaway-sun', 'Bodrum Butik Tatil', 38000],
+  ['pr-gc-paris', 'br-getaway-city', 'Paris Şehir Kaçamağı', 54000],
+  ['pr-gc-rome', 'br-getaway-city', 'Roma Kültür Turu', 46000],
+].map(([id, brand_id, name, price_try]) => ({ id, brand_id, name, price_try }));
 
-// 42 users (id, name, dept, tier, site). Tiers: T0..T4, plus admin/audit overlays.
-export const EMPLOYEES = [
-  ['emp-01', 'Elif Demir', 'dep-exec', 'T0', 'site-1', 'General Manager'],
-  ['emp-02', 'Hakan Çelik', 'dep-ops', 'T1', 'site-1', 'Operations Director'],
-  ['emp-03', 'Kerem Yılmaz', 'dep-prd', 'T2', 'site-1', 'Production Manager'],
-  ['emp-04', 'Serkan Aydın', 'dep-prd', 'T3', 'site-1', 'Production Supervisor'],
-  ['emp-05', 'Emre Koç', 'dep-prd', 'T3', 'site-2', 'Production Supervisor'],
-  ['emp-06', 'Fatma Şen', 'dep-prd', 'T3', 'site-1', 'Production Planner'],
-  ['emp-07', 'Ali Vural', 'dep-prd', 'T4', 'site-1', 'CNC Operator / Team Lead'],
-  ['emp-08', 'Mustafa Doğan', 'dep-mnt', 'T2', 'site-1', 'Maintenance Manager'],
-  ['emp-09', 'Mehmet Aslan', 'dep-mnt', 'T3', 'site-1', 'Maintenance Engineer'],
-  ['emp-10', 'Okan Er', 'dep-mnt', 'T4', 'site-1', 'Maintenance Technician'],
-  ['emp-11', 'Zeynep Şahin', 'dep-qua', 'T2', 'site-1', 'Quality Manager'],
-  ['emp-12', 'Deniz Acar', 'dep-qua', 'T3', 'site-1', 'Quality Engineer'],
-  ['emp-13', 'Gökhan Uz', 'dep-qua', 'T4', 'site-2', 'Quality Inspector'],
-  ['emp-14', 'Barış Yıldız', 'dep-hse', 'T2', 'site-2', 'HSE Manager'],
-  ['emp-15', 'Selin Ak', 'dep-hse', 'T3', 'site-2', 'HSE Officer'],
-  ['emp-16', 'Ayşe Kaya', 'dep-hr', 'T1', 'site-1', 'HR Director'],
-  ['emp-17', 'Nalan Er', 'dep-hr', 'T3', 'site-1', 'HR Specialist (Recruitment)'],
-  ['emp-18', 'Tuğçe Al', 'dep-hr', 'T3', 'site-1', 'HR Specialist (Payroll)'],
-  ['emp-19', 'Canan Arslan', 'dep-fin', 'T1', 'site-1', 'Finance Director'],
-  ['emp-20', 'Ozan Kurt', 'dep-fin', 'T2', 'site-1', 'Accounting Manager'],
-  ['emp-21', 'Derya Kılıç', 'dep-fin', 'T3', 'site-1', 'Accountant'],
-  ['emp-22', 'Levent Bozkurt', 'dep-proc', 'T2', 'site-1', 'Procurement Manager'],
-  ['emp-23', 'Pelin Ay', 'dep-proc', 'T3', 'site-1', 'Buyer'],
-  ['emp-24', 'Burak Öztürk', 'dep-it', 'T2', 'site-1', 'IT Manager'],
-  ['emp-25', 'Cem Yalın', 'dep-it', 'T3', 'site-1', 'System Administrator'],
-  ['emp-26', 'Ece Nur', 'dep-it', 'T4', 'site-1', 'IT Support Specialist'],
-  ['emp-27', 'Tarık Güneş', 'dep-sec', 'T2', 'site-1', 'Security Manager'],
-  ['emp-28', 'Volkan Ateş', 'dep-sec', 'T4', 'site-2', 'Security Officer'],
-  ['emp-29', 'Onur Kaplan', 'dep-eng', 'T1', 'site-1', 'Engineering Director'],
-  ['emp-30', 'Sibel Demirtaş', 'dep-eng', 'T3', 'site-1', 'Design Engineer'],
-  ['emp-31', 'Kaan Yücel', 'dep-eng', 'T3', 'site-3', 'R&D Engineer'],
-  ['emp-32', 'Murat Şahin', 'dep-sales', 'T1', 'site-1', 'Commercial Director'],
-  ['emp-33', 'İpek Kara', 'dep-sales', 'T2', 'site-1', 'Sales Manager'],
-  ['emp-34', 'Berk Aydın', 'dep-sales', 'T3', 'site-ank', 'Sales Representative'],
-  ['emp-35', 'Ceren Işık', 'dep-sales', 'T3', 'site-izm', 'Export Sales Specialist'],
-  ['emp-36', 'Aslı Yıldırım', 'dep-mkt', 'T2', 'site-1', 'Marketing Manager'],
-  ['emp-37', 'Efe Demir', 'dep-mkt', 'T3', 'site-1', 'Marketing Specialist'],
-  ['emp-38', 'Gizem Ünal', 'dep-sup', 'T2', 'site-1', 'Support Manager'],
-  ['emp-39', 'Hüseyin Bal', 'dep-sup', 'T3', 'site-1', 'Support Specialist'],
-  ['emp-40', 'Serdar Kaya', 'dep-wh', 'T2', 'site-wh', 'Warehouse Manager'],
-  ['emp-41', 'Melis Tan', 'dep-wh', 'T3', 'site-wh', 'Logistics Coordinator'],
-  ['emp-42', 'Yusuf Er', 'dep-wh', 'T4', 'site-wh', 'Warehouse Operator / Team Lead'],
-].map(([id, name, department_id, tier, site_id, title]) => ({
-  id, name, title, department_id, site_id, permission_tier: tier,
-  email: `${slug(name)}@novamak.com.tr`, active: true, locale: 'tr',
+// ── Team members (roles are LABELS ONLY — RBAC is defined but not enforced;
+//    the demo does not simulate permission enforcement, only human approval). ──
+// [id, name, role, kind]  kind: 'internal' (agency) | 'client' (approver)
+export const TEAM = [
+  ['u-01', 'Elif Demir', 'Agency Director', 'internal'],
+  ['u-02', 'Hakan Çelik', 'Account Director', 'internal'],
+  ['u-03', 'Zeynep Şahin', 'Account Manager', 'internal'],
+  ['u-04', 'Kerem Yılmaz', 'Account Manager', 'internal'],
+  ['u-05', 'Aslı Yıldırım', 'Strategy Lead', 'internal'],
+  ['u-06', 'Efe Demir', 'Strategist', 'internal'],
+  ['u-07', 'Sibel Kaya', 'Creative Director', 'internal'],
+  ['u-08', 'Onur Kaplan', 'Art Director', 'internal'],
+  ['u-09', 'Deniz Acar', 'Copywriter', 'internal'],
+  ['u-10', 'Ceren Işık', 'Copywriter', 'internal'],
+  ['u-11', 'Murat Şahin', 'Media Planner', 'internal'],
+  ['u-12', 'İpek Kara', 'Media Planner', 'internal'],
+  ['u-13', 'Berk Aydın', 'Performance Analyst', 'internal'],
+  ['u-14', 'Gizem Ünal', 'Performance Analyst', 'internal'],
+  ['u-15', 'Serkan Aydın', 'Data Analyst', 'internal'],
+  ['u-16', 'Pelin Ay', 'Project Coordinator', 'internal'],
+  // Client-side approvers (sign off on their own brand's campaigns)
+  ['u-cl-novamak', 'Levent Bozkurt', 'Client Marketing Lead — NovaMak', 'client'],
+  ['u-cl-derma', 'Nalan Er', 'Client Marketing Lead — Derma', 'client'],
+  ['u-cl-fresh', 'Tuğçe Al', 'Client Marketing Lead — Fresh Foods', 'client'],
+  ['u-cl-fintr', 'Canan Arslan', 'Client Marketing Lead — FinTR', 'client'],
+  ['u-cl-evim', 'Ozan Kurt', 'Client Marketing Lead — Evim', 'client'],
+  ['u-cl-getaway', 'Derya Kılıç', 'Client Marketing Lead — Getaway', 'client'],
+].map(([id, name, role, kind]) => ({
+  id, name, role, kind,
+  email: `${slug(name)}@vega.ajans.tr`, active: true, locale: 'tr',
 }));
+
+// map each client to its client-side approver
+export const CLIENT_APPROVER = {
+  'cl-novamak': 'u-cl-novamak', 'cl-derma': 'u-cl-derma', 'cl-fresh': 'u-cl-fresh',
+  'cl-fintr': 'u-cl-fintr', 'cl-evim': 'u-cl-evim', 'cl-getaway': 'u-cl-getaway',
+};
 
 function slug(name) {
   return name.toLowerCase()
@@ -94,63 +120,51 @@ function slug(name) {
     .replace(/[^a-z ]/g, '').trim().replace(/ +/g, '.');
 }
 
-// Approval limits (₺) by tier — from KB-POL-004.
-export const APPROVAL_LIMITS = { T4: 0, T3: 5000, T2: 100000, T1: 500000, T0: Infinity };
+// ── The campaign pipeline: fixed, ordered, human-gated (mission.ts, routes.ts) ──
+// Each stage produces one artifact and is gated by a human approval before the
+// next stage may begin. Gates match the product: strategy_and_budget /
+// creative_assets / campaign_launch (routes.ts:743-753).
+export const PIPELINE_STAGES = [
+  { key: 'brief', artifact: 'MarketingBrief', gate: 'strategy_and_budget' },
+  { key: 'creative', artifact: 'CreativeSet', gate: 'creative_assets' },
+  { key: 'campaign_draft', artifact: 'CampaignDraft', gate: 'campaign_launch' },
+  { key: 'report', artifact: 'CampaignReport', gate: null },
+  { key: 'executive', artifact: 'ExecutiveReport', gate: null },
+];
 
-// 12 AI agents.
-export const AGENTS = [
-  'Knowledge', 'HR', 'Legal', 'Finance', 'Operations', 'Quality',
-  'Production', 'Maintenance', 'Document', 'Executive', 'Risk', 'Security',
-].map((n) => ({ id: `agent-${n.toLowerCase()}`, name: `${n} Assistant` }));
+// ── Advertising channels a campaign draft can allocate budget across.
+//    (AdOS drafts the split; a human exports it to run in their own ad platform —
+//    AdOS never pushes to these platforms. connector-hub is a stub.) ──
+export const CHANNELS = ['Meta', 'Google Ads', 'YouTube', 'TikTok', 'LinkedIn', 'Display'];
 
-// 25 workflow definitions (id, name, owner dept, sla days, assistant).
-export const WORKFLOWS = [
-  ['wf-01', 'Purchase Approval', 'dep-proc', 2, 'agent-finance'],
-  ['wf-02', 'Vacation / Leave', 'dep-hr', 1, 'agent-hr'],
-  ['wf-03', 'Expense', 'dep-fin', 5, 'agent-finance'],
-  ['wf-04', 'Recruitment', 'dep-hr', 10, 'agent-hr'],
-  ['wf-05', 'Asset Request', 'dep-wh', 3, 'agent-operations'],
-  ['wf-06', 'Incident', 'dep-hse', 5, 'agent-risk'],
-  ['wf-07', 'Maintenance', 'dep-mnt', 1, 'agent-maintenance'],
-  ['wf-08', 'Corrective Action', 'dep-qua', 30, 'agent-quality'],
-  ['wf-09', 'Customer Complaint', 'dep-sup', 5, 'agent-knowledge'],
-  ['wf-10', 'Supplier Evaluation', 'dep-proc', 7, 'agent-knowledge'],
-  ['wf-11', 'Risk Assessment', 'dep-hse', 14, 'agent-risk'],
-  ['wf-12', 'Contract Approval', 'dep-fin', 5, 'agent-legal'],
-  ['wf-13', 'Invoice', 'dep-fin', 3, 'agent-finance'],
-  ['wf-14', 'Document Approval', 'dep-qua', 5, 'agent-document'],
-  ['wf-15', 'Training', 'dep-hr', 7, 'agent-hr'],
-  ['wf-16', 'IT Request', 'dep-it', 2, 'agent-knowledge'],
-  ['wf-17', 'Password Reset', 'dep-it', 1, 'agent-knowledge'],
-  ['wf-18', 'Access Request', 'dep-it', 2, 'agent-security'],
-  ['wf-19', 'Visitor Management', 'dep-sec', 1, 'agent-security'],
-  ['wf-20', 'CAPA', 'dep-qua', 30, 'agent-quality'],
-  ['wf-21', 'Quality Inspection', 'dep-qua', 1, 'agent-quality'],
-  ['wf-22', 'Production Change', 'dep-prd', 3, 'agent-production'],
-  ['wf-23', 'Internal Audit', 'dep-qua', 30, 'agent-quality'],
-  ['wf-24', 'Management Approval', 'dep-exec', 5, 'agent-executive'],
-  ['wf-25', 'Emergency Process', 'dep-hse', 1, 'agent-risk'],
-].map(([id, name, owner_dept_id, sla_days, assistant_id]) => ({ id, name, owner_dept_id, sla_days, assistant_id }));
+// ── Mission objective templates (natural-language client objectives) ──
+export const OBJECTIVES = [
+  'yeni ürün lansmanı için farkındalık kampanyası',
+  'çeyrek sonu satış artışı için performans kampanyası',
+  'marka bilinirliğini yükselten sosyal medya kampanyası',
+  'potansiyel müşteri toplama (lead generation) kampanyası',
+  'sezonluk kampanya ve indirim dönemi tanıtımı',
+  'yeniden hedefleme (retargeting) ile dönüşüm kampanyası',
+  'B2B talep yaratma kampanyası',
+  'mağaza açılışı için yerel kampanya',
+];
 
-// Document categories with counts (reconciles to ~120).
-// count and default visibility per category; total sums to ~120.
-export const DOC_CATEGORIES = [
-  ['POL', 'Policies', 6, 'company', null],
-  ['PRC', 'Procedures', 7, 'company', null],
-  ['MAN', 'Manuals', 8, 'company', null],
-  ['WI', 'Work instructions', 8, 'dep', 'dep-prd'],
-  ['ORG', 'Organization', 4, 'company', null],
-  ['FRM', 'Forms', 7, 'company', null],
-  ['STD', 'Standards', 6, 'company', null],
-  ['MTG', 'Meeting notes', 6, 'restricted', 'executives'],
-  ['INC', 'Incident reports', 6, 'dep', 'dep-hse'],
-  ['MNT', 'Maintenance', 8, 'dep', 'dep-mnt'],
-  ['PUR', 'Purchasing', 6, 'dep', 'dep-proc'],
-  ['HR', 'HR', 7, 'company', null],
-  ['IT', 'IT', 6, 'dep', 'dep-it'],
-  ['SEC', 'Security', 6, 'restricted', 'security'],
-  ['QUA', 'Quality', 7, 'company', null],
-  ['PRD', 'Production', 7, 'dep', 'dep-prd'],
-  ['ENV', 'Environmental', 4, 'dep', 'dep-hse'],
-  ['EMG', 'Emergency', 5, 'company', null],
+// ── Company Brain seed facts (marketing-performance memory, not documents) ──
+// CompanyDNA is a single record; the rest are learned insights & patterns.
+export const COMPANY_DNA = {
+  id: 'dna-vega',
+  mission: 'Yerel ve çevrimdışı yapay zekâ ile insan onaylı reklam kampanyaları üretmek.',
+  positioning: 'Sovereign creative performance agency',
+  tone: 'confident, precise, honest',
+  north_star: 'ROAS-positive campaigns approved by humans',
+};
+
+// Winning-ad pattern library seeds (pattern-library.ts). [id, pattern, lift_pct]
+export const PATTERN_SEEDS = [
+  ['pat-ugc-hook', 'UGC-style opening hook in first 2 seconds', 18],
+  ['pat-price-anchor', 'Price anchoring against premium tier', 12],
+  ['pat-local-proof', 'Local social proof / Turkish testimonial', 22],
+  ['pat-scarcity-honest', 'Honest limited-time seasonal framing', 9],
+  ['pat-benefit-first', 'Benefit-first headline over feature list', 15],
+  ['pat-question-open', 'Question-based ad copy opening', 11],
 ];
