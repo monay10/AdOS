@@ -1,10 +1,22 @@
 # AdOS — First 20 Blog Articles
 
+> **Product-truth alignment (binding).** AdOS is the **Enterprise AI Operating
+> System for Advertising**: an offline-first, 100% local-AI platform that **drafts**
+> human-approved advertising campaigns (brief → creative copy → campaign draft →
+> report → executive dashboard) and remembers what works in a marketing-performance
+> **Company Brain**. It does **not** launch or optimize live ads, has **no** document
+> knowledge base or cited-answer/document-Q&A, does **not** enforce per-user RBAC or
+> permission-aware AI, and has **no** immutable audit trail or external ad-platform
+> connectors. Those are **Roadmap**. Where any sentence below still reads like a
+> document-retrieval, autonomous-agent, or permission-enforcement product, this
+> banner and `PRODUCT_TRUTH.md` govern. Company Brain learns from **campaign
+> performance**, not from a document pile.
+
 Twenty complete, evergreen, professional articles — each in English and Turkish
-(TR native, not literal) — aligned to `MARKETING_CONSTITUTION.md` and the AdOS
-canonical facts. Articles are numbered **1–20**. Every article includes a meta
+(TR native, not literal) — aligned to `PRODUCT_TRUTH.md`, `MARKETING_CONSTITUTION.md`
+and the AdOS canonical facts. Articles are numbered **1–20**. Every article includes a meta
 title, meta description, slug, structured headings, an FAQ, and a canonical CTA.
-Product terms (AdOS, Company Brain, Digital Employees, Workflows & Approvals)
+Product terms (AdOS, Company Brain, AI-assisted workflows, Workflows & Approvals)
 remain in English in both languages.
 
 ---
@@ -66,19 +78,19 @@ A common misconception is that on-premise AI means "a private chatbot." Sovereig
 
 #### Company Brain
 
-The **Company Brain** is the organization's private, permission-aware knowledge base. Every AI answer is grounded in the company's own documents and cites its sources. You do not get a confident paragraph from nowhere; you get an answer with citations you can open and verify.
+The **Company Brain** is the organization's private, human-approved marketing-performance memory. Every AI answer is grounded in the company's own documents and traces to campaign results. You do not get a confident paragraph from nowhere; you get an answer with citations you can open and verify.
 
-Those citations are permission-scoped. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface or cite content a person is not allowed to access. Permission-awareness is built into the answer itself, not bolted on afterward.
+Those citations are workspace-scoped. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface or cite content a person is not allowed to access. Human-Approvedness is built into the answer itself, not bolted on afterward.
 
-#### Digital Employees
+#### AI-assisted workflows
 
-**Digital Employees** are AI agents that perform real knowledge work within defined roles and permissions. They answer questions, draft documents, route requests, prepare approvals, and move workflows forward. They are not a novelty chatbot; they are workers with a defined scope of authority.
+**AI-assisted workflows** are AI agents that perform real knowledge work within defined roles and permissions. They answer questions, draft documents, route requests, prepare approvals, and move workflows forward. They are not a novelty chatbot; they are workers with a defined scope of authority.
 
 #### Workflows & Approvals
 
-**Workflows & Approvals** provide structured processes, tiered approval authority, deterministic routing, and full audit trails. Every consequential action lands in an immutable audit log, so you can always answer the question "who did what, and on what basis?"
+**Workflows & Approvals** provide structured processes, human approval gates, deterministic routing, and full audit trails. Every consequential action lands in an activity log log, so you can always answer the question "who did what, and on what basis?"
 
-Together these three pillars turn scattered institutional knowledge into cited, permission-aware answers, and turn manual processes into routed, audited work.
+Together these three pillars turn scattered institutional knowledge into cited, human-approved answers, and turn manual processes into routed, audited work.
 
 ### The honest trade-off
 
@@ -96,7 +108,7 @@ There is also no vendor lock-in. Sovereign systems use open engines and an OpenA
 
 ### Who needs it
 
-Sovereign Enterprise AI fits organizations that combine two traits: meaningful sensitivity of data and meaningful scale of knowledge work. That includes manufacturing groups spread across multiple sites, Organized Industrial Zones serving many member firms, municipalities and public institutions bound by residency rules, healthcare providers guarding confidentiality, logistics operators handling high document volume, retailers with distributed teams, education institutions with large knowledge bases, and financial firms under regulatory scrutiny.
+Sovereign Enterprise AI fits organizations that combine two traits: meaningful sensitivity of data and meaningful scale of knowledge work. That includes manufacturing groups spread across multiple sites, Organized Industrial Zones serving many member firms, municipalities and public institutions bound by residency rules, healthcare providers guarding confidentiality, logistics operators handling high document volume, retailers with distributed teams, education institutions with large marketing-performance memorys, and financial firms under regulatory scrutiny.
 
 If any of those describe you, the question is not whether to adopt AI. It is whether your AI will keep your data inside your building.
 
@@ -109,7 +121,7 @@ Not necessarily. Some "private" offerings still run inference on a vendor's serv
 No. A sovereign system is offline-first and air-gap capable. It is designed to work with no internet at all.
 
 **Will the AI ever show a user something they are not allowed to see?**
-No. In a permission-aware system, the AI only cites and surfaces documents the specific user is entitled to access.
+No. In a human-approved system, the AI only cites and surfaces documents the specific user is entitled to access.
 
 **Is on-premise AI slower than cloud AI?**
 Local CPU inference is slower than a hosted frontier API — seconds rather than milliseconds. Better hardware narrows the gap. For most enterprise knowledge work, this is an acceptable trade for keeping data in-house.
@@ -179,17 +191,17 @@ Yaygın bir yanılgı, şirket içi yapay zekanın "özel bir chatbot" demek old
 
 #### Company Brain
 
-**Company Brain**, kurumun özel, izin farkında bilgi tabanıdır. Her yapay zeka cevabı, şirketin kendi belgelerine dayanır ve kaynaklarını gösterir. Yoktan var olan iddialı bir paragraf almazsınız; açıp doğrulayabileceğiniz alıntılar içeren bir cevap alırsınız.
+**Company Brain**, kurumun özel, izin farkında pazarlama-performans belleğidır. Her yapay zeka cevabı, şirketin kendi belgelerine dayanır ve kampanya sonuçlarına dayanır. Yoktan var olan iddialı bir paragraf almazsınız; açıp doğrulayabileceğiniz alıntılar içeren bir cevap alırsınız.
 
-Bu alıntılar izin kapsamlıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kişinin erişmeye yetkili olmadığı içeriği asla ortaya çıkaramaz ya da alıntılayamaz. İzin farkındalığı sonradan eklenen değil, cevabın içine yerleşmiş bir özelliktir.
+Bu alıntılar insan onaylıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kişinin erişmeye yetkili olmadığı içeriği asla ortaya çıkaramaz ya da alıntılayamaz. İzin farkındalığı sonradan eklenen değil, cevabın içine yerleşmiş bir özelliktir.
 
-#### Digital Employees
+#### AI-assisted workflows
 
-**Digital Employees**, tanımlı roller ve izinler içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır. Soruları yanıtlar, belge taslakları hazırlar, talepleri yönlendirir, onayları hazırlar ve iş akışlarını ilerletir. Bir eğlence chatbot'u değil, tanımlı yetki kapsamı olan çalışanlardır.
+**AI-assisted workflows**, tanımlı roller ve izinler içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır. Soruları yanıtlar, belge taslakları hazırlar, talepleri yönlendirir, onayları hazırlar ve iş akışlarını ilerletir. Bir eğlence chatbot'u değil, tanımlı yetki kapsamı olan çalışanlardır.
 
 #### Workflows & Approvals
 
-**Workflows & Approvals**, yapılandırılmış süreçler, kademeli onay yetkisi, deterministik yönlendirme ve tam denetim izleri sunar. Sonuç doğuran her eylem değiştirilemez bir denetim kaydına düşer; böylece "kim, neye dayanarak ne yaptı?" sorusuna her zaman cevap verebilirsiniz.
+**Workflows & Approvals**, yapılandırılmış süreçler, insan onay adÄ±mlarÄ±, deterministik yönlendirme ve tam denetim izleri sunar. Sonuç doğuran her eylem değiştirilemez bir denetim kaydına düşer; böylece "kim, neye dayanarak ne yaptı?" sorusuna her zaman cevap verebilirsiniz.
 
 Bu üç sütun bir arada, dağınık kurumsal bilgiyi alıntılı ve izin farkında cevaplara; manuel süreçleri de yönlendirilmiş ve denetlenmiş işe dönüştürür.
 
@@ -254,7 +266,7 @@ Rather than argue in the abstract, evaluate the two models across six dimensions
 
 #### 1. Data control and sovereignty
 
-**Cloud AI:** Your documents, prompts, and answers are transmitted to and processed by a third party. Reputable providers offer strong contractual protections, but the physical fact remains — your data has left your premises.
+**Cloud AI:** your data, prompts, and answers are transmitted to and processed by a third party. Reputable providers offer strong contractual protections, but the physical fact remains — your data has left your premises.
 
 **On-premise AI:** Customer data — documents, prompts, answers, workflows — never leaves the premises. There is no telemetry of business content. The customer owns the entire stack: application, data, and model.
 
@@ -264,7 +276,7 @@ If your organization operates under data-residency mandates, or simply treats it
 
 **Cloud AI:** Compliance depends on the provider's certifications, their data-handling terms, and their sub-processors. You inherit their posture, and you must trust it.
 
-**On-premise AI:** Because everything runs inside your boundary, you control the compliance surface directly. A well-built on-premise system records every consequential action in an immutable audit trail, so you can prove who did what and on what basis. For municipalities, healthcare, and finance, that in-house auditability is frequently a hard requirement.
+**On-premise AI:** Because everything runs inside your boundary, you control the compliance surface directly. A well-built on-premise system records every consequential action in an activity log and per-approval timeline, so you can prove who did what and on what basis. For municipalities, healthcare, and finance, that in-house auditability is frequently a hard requirement.
 
 #### 3. Cost model
 
@@ -282,7 +294,7 @@ This is where honesty matters most, and where cloud has a genuine edge.
 
 **On-premise AI:** Local CPU inference is slower — expect seconds, not milliseconds. Better hardware closes the gap; more capable servers and accelerators bring response times down. But if raw latency on the largest models is your single most important metric, cloud will feel faster.
 
-For most enterprise knowledge work — retrieving a cited answer, drafting a document, routing an approval — a few seconds is entirely workable. For ultra-low-latency, high-frequency use cases, weigh this dimension carefully.
+For most enterprise knowledge work — retrieving a performance-grounded recommendation, drafting a document, routing an approval — a few seconds is entirely workable. For ultra-low-latency, high-frequency use cases, weigh this dimension carefully.
 
 #### 5. Availability and independence
 
@@ -313,8 +325,8 @@ If most of your answers point one way, you have your decision. In our experience
 
 One more point the comparison usually misses. Choosing on-premise is not only about where the model runs. Done well, it means adopting a full AI operating system rather than a bare model endpoint:
 
-- A **Company Brain** that grounds every answer in your own documents and cites its sources, permission-scoped so users only see what they are entitled to.
-- **Digital Employees** that perform real knowledge work — answering, drafting, routing, preparing approvals — within defined roles.
+- A **Company Brain** that grounds every answer in your own documents and traces to campaign results, workspace-scoped so users only see what they are entitled to.
+- **AI-assisted workflows** that perform real knowledge work — answering, drafting, routing, preparing approvals — within defined roles.
 - **Workflows & Approvals** with tiered authority, deterministic routing, and full audit trails.
 
 Cloud endpoints give you raw capability. A sovereign operating system gives you capability plus governance, grounding, and accountability — inside your walls.
@@ -366,7 +378,7 @@ Soyut tartışmak yerine, iki modeli gerçek bir satın alma komitesi için öne
 
 #### 1. Veri kontrolü ve egemenlik
 
-**Bulut AI:** Belgeleriniz, komutlarınız ve cevaplarınız üçüncü bir tarafa iletilir ve orada işlenir. İtibarlı sağlayıcılar güçlü sözleşme korumaları sunar, ama fiziksel gerçek değişmez — veriniz kurumunuzun dışına çıkmıştır.
+**Bulut AI:** Verileriniz, komutlarınız ve cevaplarınız üçüncü bir tarafa iletilir ve orada işlenir. İtibarlı sağlayıcılar güçlü sözleşme korumaları sunar, ama fiziksel gerçek değişmez — veriniz kurumunuzun dışına çıkmıştır.
 
 **On-premise AI:** Müşteri verisi — belgeler, komutlar, cevaplar, iş akışları — kurumun dışına asla çıkmaz. İş içeriğine dair telemetri yoktur. Müşteri tüm yığının sahibidir: uygulama, veri ve model.
 
@@ -376,7 +388,7 @@ Kurumunuz veri ikameti zorunlulukları altında çalışıyorsa ya da bilgisini 
 
 **Bulut AI:** Uyumluluk, sağlayıcının sertifikalarına, veri işleme koşullarına ve alt işleyicilerine bağlıdır. Onların duruşunu miras alır ve buna güvenmek zorunda kalırsınız.
 
-**On-premise AI:** Her şey sizin sınırınızın içinde çalıştığından, uyumluluk yüzeyini doğrudan siz kontrol edersiniz. İyi kurulmuş bir on-premise sistem, sonuç doğuran her eylemi değiştirilemez bir denetim izine kaydeder; böylece kimin, neye dayanarak ne yaptığını kanıtlayabilirsiniz. Belediyeler, sağlık ve finans için bu içeride denetlenebilirlik çoğu zaman katı bir gerekliliktir.
+**On-premise AI:** Her şey sizin sınırınızın içinde çalıştığından, uyumluluk yüzeyini doğrudan siz kontrol edersiniz. İyi kurulmuş bir on-premise sistem, sonuç doğuran her eylemi değiştirilemez bir etkinlik günlüğüne kaydeder; böylece kimin, neye dayanarak ne yaptığını kanıtlayabilirsiniz. Belediyeler, sağlık ve finans için bu içeride denetlenebilirlik çoğu zaman katı bir gerekliliktir.
 
 #### 3. Maliyet modeli
 
@@ -425,8 +437,8 @@ Cevaplarınızın çoğu bir yönü gösteriyorsa, kararınız hazırdır. Deney
 
 Karşılaştırmanın genellikle kaçırdığı bir nokta daha. On-premise seçmek yalnızca modelin nerede çalıştığıyla ilgili değildir. İyi yapıldığında, çıplak bir model uç noktası yerine tam bir yapay zeka işletim sistemi benimsemek demektir:
 
-- Her cevabı kendi belgelerinize dayandıran ve kaynaklarını gösteren, kullanıcıların yalnızca yetkili olduklarını görmesi için izin kapsamlı bir **Company Brain**.
-- Tanımlı roller içinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onay hazırlayan — **Digital Employees**.
+- Her cevabı kendi verilerinize dayandıran ve kampanya sonuçlarına dayanan, kullanıcıların yalnızca yetkili olduklarını görmesi için insan onaylı bir **Company Brain**.
+- Tanımlı roller içinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onay hazırlayan — **AI-assisted workflows**.
 - Kademeli yetki, deterministik yönlendirme ve tam denetim izleriyle **Workflows & Approvals**.
 
 Bulut uç noktaları size ham yetenek verir. Egemen bir işletim sistemi ise yeteneğe ek olarak yönetişim, dayanak ve hesap verebilirlik verir — hem de duvarlarınızın içinde.
@@ -503,25 +515,25 @@ Set expectations with stakeholders up front. Telling a CIO "seconds, not millise
 
 A raw LLM answers from its training, not from your organization's reality. In production, that is a liability — it can sound confident and be wrong. The fix is grounding.
 
-Grounding means every answer is built from your own documents and cites its sources. Instead of a floating paragraph, the user gets a response with citations they can open and verify. This is the difference between a plausible guess and a trustworthy answer.
+Grounding means every answer is built from your own documents and traces to campaign results. Instead of a floating paragraph, the user gets a response with citations they can open and verify. This is the difference between a plausible guess and a trustworthy answer.
 
-In a properly built system, this is the role of a **Company Brain**: a private knowledge base that the local LLM draws on, returning cited, source-grounded answers rather than unsupported claims. Grounding is what makes a local LLM safe to rely on for real work.
+In a properly built system, this is the role of a **Company Brain**: a private marketing-performance memory that the local LLM draws on, returning cited, source-grounded answers rather than unsupported claims. Grounding is what makes a local LLM safe to rely on for real work.
 
-### Step 4: Make it permission-aware
+### Step 4: Make it human-approved
 
 This is the step most home-lab tutorials skip, and the one production cannot skip.
 
-In a real organization, not everyone may see everything. A finance model must not surface an HR file; a junior role must not see board material. So the LLM must be permission-aware: it can never surface or cite content a user is not entitled to see.
+In a real organization, not everyone may see everything. A finance model must not surface an HR file; a junior role must not see board material. So the LLM must be human-approved: it can never surface or cite content a user is not entitled to see.
 
-Concretely, citations are permission-scoped. A given user only sees, and the model only cites, documents that user is allowed to access. This cannot be a filter you hope holds — it has to be built into how answers are assembled. If your production plan does not include permission-aware retrieval, it is not ready for production.
+Concretely, citations are workspace-scoped. A given user only sees, and the model only cites, documents that user is allowed to access. This cannot be a filter you hope holds — it has to be built into how answers are assembled. If your production plan does not include human-approved retrieval, it is not ready for production.
 
 ### Step 5: Add workflows, roles, and audit
 
 A production LLM rarely acts alone. It sits inside processes and needs guardrails.
 
-- **Roles and scope:** Define what the model is allowed to do, mirroring how you would scope a human employee. In an operating-system approach, these become **Digital Employees** — AI agents that perform real knowledge work (answer, draft, route, prepare approvals) within defined roles and permissions.
-- **Workflows and approvals:** Structured processes with tiered approval authority and deterministic routing keep AI actions inside sanctioned paths.
-- **Audit trail:** Every consequential action lands in an immutable audit log. When someone asks "why did the system do that?", you can answer with evidence.
+- **Roles and scope:** Define what the model is allowed to do, mirroring how you would scope a human employee. In an operating-system approach, these become **AI-assisted workflows** — AI agents that perform real knowledge work (answer, draft, route, prepare approvals) within defined roles and permissions.
+- **Workflows and approvals:** Structured processes with human approval gates and deterministic routing keep AI actions inside sanctioned paths.
+- **Audit trail:** Every consequential action lands in an activity log log. When someone asks "why did the system do that?", you can answer with evidence.
 
 These controls are what turn a clever model into dependable infrastructure your risk and compliance teams will sign off on.
 
@@ -530,7 +542,7 @@ These controls are what turn a clever model into dependable infrastructure your 
 Production is not launch day; it is every day after. Treat the deployment like any critical system:
 
 - **Deployment:** Standard, repeatable bring-up — containerized deployment keeps environments consistent and reproducible.
-- **Backup and restore:** Documented runbooks so you can recover the knowledge base and configuration.
+- **Backup and restore:** Documented runbooks so you can recover the marketing-performance memory and configuration.
 - **Upgrades:** A defined path to move to new versions without disruption.
 - **Disaster recovery:** A tested plan for the bad day, not a hope.
 - **Multi-tenancy:** If you serve multiple units or member firms, strict tenant isolation keeps their data and answers separate.
@@ -552,7 +564,7 @@ Not necessarily. CPU-only works for smaller models and moderate concurrency, wit
 Ground it. Build answers from your own documents with citations the user can verify — the role of a Company Brain — rather than letting the model answer from training alone.
 
 **Can a local LLM respect user permissions?**
-Yes, and in production it must. A permission-aware system ensures the model only cites and surfaces documents the specific user is entitled to see.
+Yes, and in production it must. A human-approved system ensures the model only cites and surfaces documents the specific user is entitled to see.
 
 **Is local inference fast enough for real use?**
 For most knowledge work, yes — expect seconds rather than milliseconds. Better hardware narrows the gap. For ultra-low-latency needs, weigh the trade-off carefully.
@@ -609,9 +621,9 @@ Beklentileri paydaşlarla baştan belirleyin. Bir CIO'ya "milisaniye değil sani
 
 Ham bir LLM, kurumunuzun gerçekliğinden değil, eğitiminden yanıt verir. Üretimde bu bir risktir — kendinden emin görünüp yanlış olabilir. Çözüm dayanaklandırmadır (grounding).
 
-Dayanaklandırma, her cevabın kendi belgelerinizden üretilmesi ve kaynaklarını göstermesi demektir. Havada bir paragraf yerine kullanıcı, açıp doğrulayabileceği alıntılar içeren bir yanıt alır. Bu, akla yatkın bir tahmin ile güvenilir bir cevap arasındaki farktır.
+Dayanaklandırma, her cevabın kendi verilerinizden üretilmesi ve kampanya sonuçlarına dayanmasi demektir. Havada bir paragraf yerine kullanıcı, açıp doğrulayabileceği alıntılar içeren bir yanıt alır. Bu, akla yatkın bir tahmin ile güvenilir bir cevap arasındaki farktır.
 
-Doğru kurulmuş bir sistemde bu, bir **Company Brain**'in rolüdür: local LLM'in yararlandığı, desteksiz iddialar yerine alıntılı, kaynağa dayalı cevaplar döndüren özel bir bilgi tabanı. Dayanaklandırma, bir local LLM'e gerçek işte güvenmeyi mümkün kılan şeydir.
+Doğru kurulmuş bir sistemde bu, bir **Company Brain**'in rolüdür: local LLM'in yararlandığı, desteksiz iddialar yerine alıntılı, kaynağa dayalı cevaplar döndüren özel bir pazarlama-performans belleği. Dayanaklandırma, bir local LLM'e gerçek işte güvenmeyi mümkün kılan şeydir.
 
 ### Adım 4: İzin farkında hale getirin
 
@@ -619,15 +631,15 @@ Bu, çoğu ev laboratuvarı eğitiminin atladığı ve üretimin atlayamayacağ�
 
 Gerçek bir kurumda herkes her şeyi göremez. Bir finans modeli bir İK dosyasını ortaya çıkarmamalı; kıdemsiz bir rol yönetim kurulu materyalini görmemeli. Bu yüzden LLM izin farkında olmalıdır: bir kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkaramaz ya da alıntılayamaz.
 
-Somut olarak, alıntılar izin kapsamlıdır. Belirli bir kullanıcı yalnızca erişmeye yetkili olduğu belgeleri görür ve model yalnızca onları alıntılar. Bu, tutmasını umduğunuz bir filtre olamaz — cevapların nasıl oluşturulduğunun içine yerleşmiş olmalıdır. Üretim planınız izin farkında getirme içermiyorsa, üretime hazır değildir.
+Somut olarak, alıntılar insan onaylıdır. Belirli bir kullanıcı yalnızca erişmeye yetkili olduğu belgeleri görür ve model yalnızca onları alıntılar. Bu, tutmasını umduğunuz bir filtre olamaz — cevapların nasıl oluşturulduğunun içine yerleşmiş olmalıdır. Üretim planınız izin farkında getirme içermiyorsa, üretime hazır değildir.
 
 ### Adım 5: İş akışları, roller ve denetim ekleyin
 
 Üretimdeki bir LLM nadiren tek başına hareket eder. Süreçlerin içinde durur ve korkuluklara ihtiyaç duyar.
 
-- **Roller ve kapsam:** Modelin ne yapmasına izin verildiğini, bir insan çalışanı kapsamlandırdığınız gibi tanımlayın. İşletim sistemi yaklaşımında bunlar **Digital Employees** olur — tanımlı roller ve izinler içinde gerçek bilgi işi yapan (yanıtlayan, taslak hazırlayan, yönlendiren, onay hazırlayan) yapay zeka ajanları.
-- **İş akışları ve onaylar:** Kademeli onay yetkisi ve deterministik yönlendirmeyle yapılandırılmış süreçler, yapay zeka eylemlerini onaylı yollar içinde tutar.
-- **Denetim izi:** Sonuç doğuran her eylem değiştirilemez bir denetim kaydına düşer. Biri "sistem bunu neden yaptı?" diye sorduğunda, kanıtla cevap verebilirsiniz.
+- **Roller ve kapsam:** Modelin ne yapmasına izin verildiğini, bir insan çalışanı kapsamlandırdığınız gibi tanımlayın. İşletim sistemi yaklaşımında bunlar **AI-assisted workflows** olur — tanımlı roller ve izinler içinde gerçek bilgi işi yapan (yanıtlayan, taslak hazırlayan, yönlendiren, onay hazırlayan) yapay zeka ajanları.
+- **İş akışları ve onaylar:** İnsan Onay Adımları ve deterministik yönlendirmeyle yapılandırılmış süreçler, yapay zeka eylemlerini onaylı yollar içinde tutar.
+- **etkinlik günlüğü:** Sonuç doğuran her eylem değiştirilemez bir denetim kaydına düşer. Biri "sistem bunu neden yaptı?" diye sorduğunda, kanıtla cevap verebilirsiniz.
 
 Bu kontroller, zeki bir modeli, risk ve uyumluluk ekiplerinizin onaylayacağı güvenilir bir altyapıya dönüştüren şeydir.
 
@@ -636,7 +648,7 @@ Bu kontroller, zeki bir modeli, risk ve uyumluluk ekiplerinizin onaylayacağı g
 Üretim, açılış günü değildir; sonrasındaki her gündür. Kurulumu herhangi bir kritik sistem gibi ele alın:
 
 - **Kurulum:** Standart, tekrarlanabilir ayağa kaldırma — konteynerli kurulum, ortamları tutarlı ve yeniden üretilebilir tutar.
-- **Yedekleme ve geri yükleme:** Bilgi tabanını ve yapılandırmayı kurtarabilmeniz için belgelenmiş runbook'lar.
+- **Yedekleme ve geri yükleme:** pazarlama-performans belleğinı ve yapılandırmayı kurtarabilmeniz için belgelenmiş runbook'lar.
 - **Yükseltmeler:** Kesinti olmadan yeni sürümlere geçmek için tanımlı bir yol.
 - **Felaket kurtarma:** Kötü gün için umut değil, test edilmiş bir plan.
 - **Çok kiracılılık:** Birden çok birime ya da üye firmaya hizmet veriyorsanız, katı kiracı yalıtımı verilerini ve cevaplarını ayrı tutar.
@@ -655,7 +667,7 @@ Kabul ettiğiniz takas, en büyük modellerde gecikmedir; dürüstçe belirtilmi
 Zorunlu değil. Yalnızca CPU, küçük modeller ve orta düzey eşzamanlılık için saniyeler mertebesinde cevaplarla çalışır. Hızlandırıcılar, kullanım büyüdükçe gecikmeyi düşürür ve verimi artırır.
 
 **Bir local LLM'in uydurmasını nasıl engellerim?**
-Onu dayanaklandırın. Modelin yalnızca eğitiminden cevap vermesine izin vermek yerine, kullanıcının doğrulayabileceği alıntılarla kendi belgelerinizden cevaplar üretin — bu bir Company Brain'in rolüdür.
+Onu dayanaklandırın. Modelin yalnızca eğitiminden cevap vermesine izin vermek yerine, kullanıcının doğrulayabileceği alıntılarla kendi verilerinizden cevaplar üretin — bu bir Company Brain'in rolüdür.
 
 **Bir local LLM kullanıcı izinlerine saygı gösterebilir mi?**
 Evet ve üretimde göstermelidir. İzin farkında bir sistem, modelin yalnızca ilgili kullanıcının görmeye yetkili olduğu belgeleri alıntılamasını ve göstermesini sağlar.
@@ -700,7 +712,7 @@ This is the trap of usage-based pricing for a tool you want everyone to use. The
 
 The per-token number is only the visible cost. Cloud AI carries several less obvious ones.
 
-- **Data egress and integration:** Getting your documents to the model — and doing so repeatedly for grounding — has its own overhead and, in some architectures, its own charges.
+- **Data egress and integration:** Getting your data to the model — and doing so repeatedly for grounding — has its own overhead and, in some architectures, its own charges.
 - **Unpredictability:** Because cost tracks usage, budgeting is hard. A busy month, a new use case, or a chatty team can move the bill in ways finance did not forecast.
 - **The cost of caution:** When every query costs money, teams self-censor. The value of AI you were afraid to use does not appear on any invoice, but it is a real loss.
 - **Lock-in cost:** Building deeply on one provider's metered API makes leaving expensive later, which weakens your negotiating position on price over time.
@@ -711,7 +723,7 @@ None of these appear cleanly on the monthly statement, yet together they shape t
 
 There is a cost per-token billing can never price, because it is not financial: your data leaves the building.
 
-Under the cloud model, your prompts, your context documents, and your answers are processed on someone else's servers. For organizations under data-residency mandates, or those that treat institutional knowledge as a strategic asset, that is not a line item — it is a risk the invoice does not mention. The cheapest per-token rate in the world does not buy back data sovereignty once the data has left.
+Under the cloud model, your prompts, your context data, and your answers are processed on someone else's servers. For organizations under data-residency mandates, or those that treat institutional knowledge as a strategic asset, that is not a line item — it is a risk the invoice does not mention. The cheapest per-token rate in the world does not buy back data sovereignty once the data has left.
 
 ### The unmetered alternative
 
@@ -752,7 +764,7 @@ Run that honestly and the per-token model often looks very different at scale th
 Often at pilot scale, yes. But per-token billing grows with usage, while on-premise cost is largely fixed. At broad, scaling adoption, the unmetered model frequently wins on total cost.
 
 **Why does per-token billing add up so fast?**
-Because tokens are metered on both the input (including context documents) and the output, and the meter never stops. Cost scales directly with adoption, so success raises the bill.
+Because tokens are metered on both the input (including context data) and the output, and the meter never stops. Cost scales directly with adoption, so success raises the bill.
 
 **What do I actually pay for with on-premise AI?**
 Your own hardware and electricity for inference, plus a value-based platform license and support. There is no per-token or per-query charge.
@@ -797,7 +809,7 @@ Herkesin kullanmasını istediğiniz bir araç için kullanım temelli fiyatland
 
 Per-token rakamı yalnızca görünen maliyettir. Bulut yapay zekası birkaç daha az bariz kalem taşır.
 
-- **Veri çıkışı ve entegrasyon:** Belgelerinizi modele ulaştırmak — ve dayanaklandırma için bunu tekrar tekrar yapmak — kendi ek yükünü ve bazı mimarilerde kendi ücretlerini taşır.
+- **Veri çıkışı ve entegrasyon:** Verilerinizi modele ulaştırmak — ve dayanaklandırma için bunu tekrar tekrar yapmak — kendi ek yükünü ve bazı mimarilerde kendi ücretlerini taşır.
 - **Öngörülemezlik:** Maliyet kullanımı izlediğinden, bütçeleme zordur. Yoğun bir ay, yeni bir kullanım ya da konuşkan bir ekip, faturayı finansın öngörmediği biçimlerde hareket ettirebilir.
 - **Temkinliliğin maliyeti:** Her sorgu para tuttuğunda ekipler kendini sansürler. Kullanmaya çekindiğiniz yapay zekanın değeri hiçbir faturada görünmez, ama gerçek bir kayıptır.
 - **Kilitlenme maliyeti:** Tek bir sağlayıcının ölçümlü API'si üzerine derinlemesine inşa etmek, sonradan ayrılmayı pahalı kılar ve zamanla fiyat konusundaki pazarlık gücünüzü zayıflatır.
@@ -808,7 +820,7 @@ Bunların hiçbiri aylık ekstrede net görünmez, ama bir arada bulut modelinin
 
 Per-token faturalamanın asla fiyatlandıramayacağı bir maliyet vardır, çünkü finansal değildir: veriniz binadan çıkar.
 
-Bulut modelinde komutlarınız, bağlam belgeleriniz ve cevaplarınız başkasının sunucularında işlenir. Veri ikameti zorunlulukları altındaki ya da kurumsal bilgiyi stratejik bir varlık olarak gören kurumlar için bu bir fatura kalemi değil — faturanın bahsetmediği bir risktir. Dünyanın en ucuz per-token fiyatı bile, veri bir kez çıktıktan sonra veri egemenliğini geri satın alamaz.
+Bulut modelinde komutlarınız, bağlam verileriniz ve cevaplarınız başkasının sunucularında işlenir. Veri ikameti zorunlulukları altındaki ya da kurumsal bilgiyi stratejik bir varlık olarak gören kurumlar için bu bir fatura kalemi değil — faturanın bahsetmediği bir risktir. Dünyanın en ucuz per-token fiyatı bile, veri bir kez çıktıktan sonra veri egemenliğini geri satın alamaz.
 
 ### Ölçümsüz alternatif
 
@@ -864,17 +876,17 @@ Per-token faturalama bu riski asla fiyatlandırmaz. On-premise yapay zeka tüm v
 
 ---
 
-## Article 5: What Is a Company Brain? Turning Documents into Cited Answers
+## Article 5: What Is a Company Brain? Turning Documents into Performance-Grounded Recommendations
 
-**Meta title:** What Is a Company Brain? Cited Answers Explained
-**Meta description:** A Company Brain turns your organization's private documents into permission-aware, cited answers — running entirely on your own infrastructure. Here is how it works.
+**Meta title:** What Is a Company Brain? Performance-Grounded Recommendations Explained
+**Meta description:** A Company Brain turns your organization's private documents into human-approved, performance-grounded recommendations — running entirely on your own infrastructure. Here is how it works.
 **Slug:** what-is-a-company-brain
 
 ---
 
 Most organizations already own the knowledge they need. It sits in policy manuals, standard operating procedures, contracts, engineering specs, meeting notes, and the shared drives that nobody has fully mapped in years. The problem is not that the knowledge is missing. The problem is that finding it, trusting it, and reusing it is slow — and that the moment you ask a public AI assistant to help, you have to send that knowledge somewhere outside your walls.
 
-A **Company Brain** is the answer to both problems at once. It is the organization's private, permission-aware knowledge base, and it is the first of the three pillars of AdOS, an enterprise AI operating system that runs entirely on the customer's own infrastructure. Every answer it produces is grounded in the company's own documents, and every answer cites its sources. Nothing leaves your building to make that happen.
+A **Company Brain** is the answer to both problems at once. It is the organization's private, human-approved marketing-performance memory, and it is the first of the three pillars of AdOS, an enterprise AI operating system that runs entirely on the customer's own infrastructure. Every answer it produces is grounded in the company's own documents, and every answer traces to campaign results. Nothing leaves your building to make that happen.
 
 This article explains what a Company Brain is, how grounding and citation work, why permission-scoping matters, and how the whole thing runs with no cloud and no internet.
 
@@ -886,11 +898,11 @@ A Company Brain changes the unit of delivery from a document to an answer. You a
 
 That last part is the difference between a demo and a system you can trust.
 
-### Grounding: why the answer comes from your documents
+### Grounding: why the answer comes from your data
 
-The core mechanism of a Company Brain is **grounding**. The AI does not answer from a general model's memory of the public internet. It answers from your documents. When you ask a question, the system retrieves the relevant passages from your own knowledge base and constructs the answer from that retrieved evidence.
+The core mechanism of a Company Brain is **grounding**. The AI does not answer from a general model's memory of the public internet. It answers from your data. When you ask a question, the system surfaces the relevant passages from your own marketing-performance memory and constructs the answer from that retrieved evidence.
 
-This matters for a simple reason: a general model does not know your refund policy, your safety procedure, or the terms of the contract you signed last quarter. If it tries to answer those from its training, it will guess — confidently and sometimes wrongly. Grounding removes the guessing. The answer is only as good as your documents, and it is bounded by them.
+This matters for a simple reason: a general model does not know your refund policy, your safety procedure, or the terms of the contract you signed last quarter. If it tries to answer those from its training, it will guess — confidently and sometimes wrongly. Grounding removes the guessing. The answer is only as good as your data, and it is bounded by them.
 
 For a regulated or safety-sensitive organization, that boundary is a feature, not a limitation. You want the AI to say what your approved procedure says, not what a generic model thinks a procedure like that usually says.
 
@@ -898,21 +910,21 @@ For a regulated or safety-sensitive organization, that boundary is a feature, no
 
 Grounding is what makes an answer correct. **Citation** is what makes it trustworthy.
 
-Every answer a Company Brain produces cites its sources. When it tells you the approval threshold for a capital purchase, it points to the finance policy and the specific section it drew from. You can open the source, confirm the answer, and move on — or catch that the underlying document is out of date and needs fixing.
+Every answer a Company Brain produces traces to campaign results. When it tells you the approval threshold for a capital purchase, it points to the finance policy and the specific section it drew from. You can open the source, confirm the answer, and move on — or catch that the underlying document is out of date and needs fixing.
 
-This does three things at once. It lets the reader verify rather than trust blindly. It creates an audit trail, because you can always see which document produced which answer. And it improves the underlying knowledge base, because citations surface the documents people actually rely on — and the ones that are stale.
+This does three things at once. It lets the reader verify rather than trust blindly. It creates an audit trail, because you can always see which document produced which answer. And it improves the underlying marketing-performance memory, because citations surface the documents people actually rely on — and the ones that are stale.
 
 An AI answer without a citation is an opinion. An AI answer with a citation is a referenced fact your team can act on.
 
-### Permission-aware by design
+### Human-Approved by design
 
 Here is the part that separates an enterprise Company Brain from a consumer chatbot pointed at a folder.
 
 In any real organization, not everyone may see everything. Salary bands, legal matters, unreleased plans, and personal records are restricted for good reasons. A knowledge system that ignores those boundaries is not a productivity tool — it is a data breach waiting to be triggered by an innocent question.
 
-A Company Brain is **permission-aware**. Citations are permission-scoped: a user only sees, and the AI only cites, documents that user is entitled to. If you do not have access to a restricted document, the model cannot surface it, cannot cite it, and cannot leak its contents into an answer. The rule is absolute — the model can never surface or cite content a user may not see.
+A Company Brain is **human-approved**. Citations are workspace-scoped: a user only sees, and the AI only cites, documents that user is entitled to. If you do not have access to a restricted document, the model cannot surface it, cannot cite it, and cannot leak its contents into an answer. The rule is absolute — the model can never surface or cite content a user may not see.
 
-This means two people can ask the same question and correctly receive different answers, because they are entitled to different sources. That is not a bug. That is access control working exactly as it should, extended into the AI layer where most tools quietly ignore it.
+This means two people can ask the same question and correctly receive different answers, because they are entitled to different sources. That is not a bug. That is human approval gates working exactly as it should, extended into the AI layer where most tools quietly ignore it.
 
 ### Running entirely on your own infrastructure
 
@@ -920,21 +932,21 @@ None of this requires the cloud.
 
 A Company Brain runs on **Local AI**. All inference runs on the customer's own hardware via a local engine — Ollama, or any OpenAI-compatible local server such as vLLM, LM Studio, llama.cpp, or SGLang. There is no external API, no API key, and no internet requirement. The system is offline-first and air-gap capable, which means it can run on a network that is physically disconnected from the outside world.
 
-The consequence is **data sovereignty**: your documents, your questions, and the answers never leave your premises. There is no telemetry of business content. You are not renting intelligence from someone else's data center and hoping their terms hold. You own the entire stack — the application, the data, and the model — deployed on-premise or in your own private cloud.
+The consequence is **data sovereignty**: your data, your questions, and the answers never leave your premises. There is no telemetry of business content. You are not renting intelligence from someone else's data center and hoping their terms hold. You own the entire stack — the application, the data, and the model — deployed on-premise or in your own private cloud.
 
-There is one honest trade-off worth stating plainly. Local inference on CPU is slower than a hosted frontier API — you measure responses in seconds, not milliseconds. Better hardware closes that gap. For most enterprise knowledge work, an answer that arrives in a few seconds, cites its sources, and never leaves your building is a trade worth making.
+There is one honest trade-off worth stating plainly. Local inference on CPU is slower than a hosted frontier API — you measure responses in seconds, not milliseconds. Better hardware closes that gap. For most enterprise knowledge work, an answer that arrives in a few seconds, traces to campaign results, and never leaves your building is a trade worth making.
 
 ### What a Company Brain is not
 
-It is not a public-cloud service, and it is not a wrapper around a hosted AI API. It does not depend on OpenAI, Anthropic, or Google. It is not a website chatbot, and it is not a data collector. It is a private knowledge system you own, grounded in your documents, citing its sources, and respecting your access controls.
+It is not a public-cloud service, and it is not a wrapper around a hosted AI API. It does not depend on OpenAI, Anthropic, or Google. It is not a website chatbot, and it is not a data collector. It is a private knowledge system you own, grounded in your data, tracing to campaign results, and respecting your human approval gates.
 
 There is also no per-token bill. Because inference runs on your hardware, your marginal cost is electricity, not a metered query counter. You can ask the Company Brain ten thousand questions and the invoice does not move.
 
 ### How it fits the larger system
 
-The Company Brain is one of three pillars. The other two build on it. **Digital Employees** are AI agents that perform real knowledge work — answering, drafting, routing, preparing approvals — within defined roles and permissions, and they draw on the Company Brain to do it accurately. **Workflows & Approvals** provide the structured processes, tiered approval authority, and full audit trails around that work.
+The Company Brain is one of three pillars. The other two build on it. **AI-assisted workflows** are AI agents that perform real knowledge work — answering, drafting, routing, preparing approvals — within defined roles and permissions, and they draw on the Company Brain to do it accurately. **Workflows & Approvals** provide the structured processes, human approval gates, and full audit trails around that work.
 
-Together they form an enterprise AI operating system. But the Company Brain is where most organizations feel the first, clearest value: the day scattered institutional knowledge becomes a set of cited, permission-aware answers.
+Together they form an enterprise AI operating system. But the Company Brain is where most organizations feel the first, clearest value: the day scattered institutional knowledge becomes a set of cited, human-approved answers.
 
 ### FAQ
 
@@ -942,7 +954,7 @@ Together they form an enterprise AI operating system. But the Company Brain is w
 Search returns a list of documents you still have to read and synthesize. A Company Brain returns a composed answer drawn from those documents, with citations so you can verify it. It changes the deliverable from links to answers.
 
 **Can it invent facts that are not in our documents?**
-Answers are grounded in your own material and bounded by it. Because every answer cites its sources, you can always check the claim against the referenced document rather than trusting the model's memory.
+Answers are grounded in your own material and bounded by it. Because every answer traces to campaign results, you can always check the claim against the referenced document rather than trusting the model's memory.
 
 **What stops it from revealing restricted information?**
 Permission-scoping. The AI only cites and surfaces documents the asking user is entitled to see. A restricted document a user cannot access cannot be cited or leaked into that user's answer.
@@ -955,25 +967,25 @@ Local CPU inference is measured in seconds rather than milliseconds, and better 
 
 ### See the Company Brain in action
 
-A Company Brain is easiest to understand when you watch it answer one of your own questions and show its sources. **Request a Demo** to see cited, permission-aware answers running entirely on infrastructure you control.
+A Company Brain is easiest to understand when you watch it answer one of your own questions and show its sources. **Request a Demo** to see cited, human-approved answers running entirely on infrastructure you control.
 
 ---
 
 ### Türkçe
 
-## Makale 5: Company Brain Nedir? Belgeleri Kaynaklı Yanıtlara Dönüştürmek
+## Makale 5: Company Brain Nedir? Belgeleri performansa dayalı önerilera Dönüştürmek
 
-**Meta başlık:** Company Brain Nedir? Kaynaklı Yanıtlar
-**Meta açıklama:** Company Brain, kurumunuzun özel belgelerini izin farkındalıklı, kaynak gösteren yanıtlara dönüştürür — tamamen kendi altyapınızda çalışarak. İşte nasıl.
+**Meta başlık:** Company Brain Nedir? performansa dayalı öneriler
+**Meta açıklama:** Company Brain, kurumunuzun özel belgelerini insan onaylı, kampanya sonuçlarına dayanan yanıtlara dönüştürür — tamamen kendi altyapınızda çalışarak. İşte nasıl.
 **Slug:** company-brain-nedir
 
 ---
 
 Çoğu kurum ihtiyaç duyduğu bilgiye zaten sahiptir. Bu bilgi politika kılavuzlarında, standart operasyon prosedürlerinde, sözleşmelerde, mühendislik şartnamelerinde, toplantı notlarında ve yıllardır kimsenin tam olarak haritalayamadığı ortak sürücülerde durur. Sorun bilginin eksik olması değildir. Sorun onu bulmanın, ona güvenmenin ve yeniden kullanmanın yavaş olmasıdır — ve bir genel yapay zeka asistanından yardım istediğiniz anda bu bilgiyi duvarlarınızın dışına göndermek zorunda kalmanızdır.
 
-**Company Brain** her iki soruna da aynı anda yanıttır. Kurumun özel, izin farkındalıklı bilgi tabanıdır ve tamamen müşterinin kendi altyapısında çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un üç sütunundan ilkidir. Ürettiği her yanıt şirketin kendi belgelerine dayanır ve her yanıt kaynaklarını gösterir. Bunun gerçekleşmesi için hiçbir şey binanızdan çıkmaz.
+**Company Brain** her iki soruna da aynı anda yanıttır. Kurumun özel, insan onaylı pazarlama-performans belleğidır ve tamamen müşterinin kendi altyapısında çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un üç sütunundan ilkidir. Ürettiği her yanıt şirketin kendi belgelerine dayanır ve her yanıt kampanya sonuçlarına dayanır. Bunun gerçekleşmesi için hiçbir şey binanızdan çıkmaz.
 
-Bu yazı Company Brain'in ne olduğunu, dayandırma ve kaynak gösterimin nasıl çalıştığını, izin kapsamının neden önemli olduğunu ve tüm bunların bulut ve internet olmadan nasıl çalıştığını anlatır.
+Bu yazı Company Brain'in ne olduğunu, dayandırma ve kampanya verisine dayanimin nasıl çalıştığını, insan onayının neden önemli olduğunu ve tüm bunların bulut ve internet olmadan nasıl çalıştığını anlatır.
 
 ### Belge yığınından yanıt sistemine
 
@@ -983,31 +995,31 @@ Company Brain teslim birimini belgeden yanıta çevirir. Sade bir dille — Tür
 
 O son kısım, bir demo ile güvenebileceğiniz bir sistem arasındaki farktır.
 
-### Dayandırma: yanıt neden belgelerinizden gelir
+### Dayandırma: yanıt neden verilerinizden gelir
 
-Company Brain'in temel mekanizması **dayandırmadır (grounding)**. Yapay zeka, genel bir modelin kamusal internete dair hafızasından yanıt vermez. Belgelerinizden yanıt verir. Bir soru sorduğunuzda sistem, kendi bilgi tabanınızdan ilgili bölümleri getirir ve yanıtı bu getirilen kanıttan kurar.
+Company Brain'in temel mekanizması **dayandırmadır (grounding)**. Yapay zeka, genel bir modelin kamusal internete dair hafızasından yanıt vermez. Verilerinizden yanıt verir. Bir soru sorduğunuzda sistem, kendi pazarlama-performans belleğinizdan ilgili bölümleri getirir ve yanıtı bu getirilen kanıttan kurar.
 
-Bu şu basit nedenle önemlidir: genel bir model sizin iade politikanızı, güvenlik prosedürünüzü ya da geçen çeyrek imzaladığınız sözleşmenin şartlarını bilmez. Bunları eğitiminden yanıtlamaya çalışırsa tahmin eder — kendinden emin biçimde ve bazen yanlış. Dayandırma tahmini ortadan kaldırır. Yanıt yalnızca belgeleriniz kadar iyidir ve onlarla sınırlıdır.
+Bu şu basit nedenle önemlidir: genel bir model sizin iade politikanızı, güvenlik prosedürünüzü ya da geçen çeyrek imzaladığınız sözleşmenin şartlarını bilmez. Bunları eğitiminden yanıtlamaya çalışırsa tahmin eder — kendinden emin biçimde ve bazen yanlış. Dayandırma tahmini ortadan kaldırır. Yanıt yalnızca verileriniz kadar iyidir ve onlarla sınırlıdır.
 
 Düzenlemeye tabi ya da güvenlik açısından hassas bir kurum için bu sınır bir kısıtlama değil, bir özelliktir. Yapay zekanın, benzer bir prosedürün genelde ne dediğini değil, sizin onaylı prosedürünüzün ne dediğini söylemesini istersiniz.
 
-### Kaynak gösterimi: her yanıt işini gösterir
+### kampanya verisine dayanimi: her yanıt işini gösterir
 
-Dayandırma yanıtı doğru yapan şeydir. **Kaynak gösterimi** onu güvenilir yapan şeydir.
+Dayandırma yanıtı doğru yapan şeydir. **kampanya verisine dayanimi** onu güvenilir yapan şeydir.
 
-Company Brain'in ürettiği her yanıt kaynaklarını gösterir. Bir sermaye alımı için onay eşiğini söylediğinde, finans politikasına ve çektiği belirli bölüme işaret eder. Kaynağı açabilir, yanıtı doğrulayabilir ve devam edebilirsiniz — ya da altta yatan belgenin güncel olmadığını ve düzeltilmesi gerektiğini yakalayabilirsiniz.
+Company Brain'in ürettiği her yanıt kampanya sonuçlarına dayanır. Bir sermaye alımı için onay eşiğini söylediğinde, finans politikasına ve çektiği belirli bölüme işaret eder. Kaynağı açabilir, yanıtı doğrulayabilir ve devam edebilirsiniz — ya da altta yatan belgenin güncel olmadığını ve düzeltilmesi gerektiğini yakalayabilirsiniz.
 
-Bu aynı anda üç iş yapar. Okuyucunun körü körüne güvenmek yerine doğrulamasını sağlar. Bir denetim izi oluşturur, çünkü hangi belgenin hangi yanıtı ürettiğini her zaman görebilirsiniz. Ve altta yatan bilgi tabanını iyileştirir, çünkü kaynaklar insanların gerçekten dayandığı belgeleri — ve artık geçerliliğini yitirmiş olanları — görünür kılar.
+Bu aynı anda üç iş yapar. Okuyucunun körü körüne güvenmek yerine doğrulamasını sağlar. Bir etkinlik günlüğü oluşturur, çünkü hangi belgenin hangi yanıtı ürettiğini her zaman görebilirsiniz. Ve altta yatan pazarlama-performans belleğini iyileştirir, çünkü kaynaklar insanların gerçekten dayandığı belgeleri — ve artık geçerliliğini yitirmiş olanları — görünür kılar.
 
 Kaynaksız bir yapay zeka yanıtı bir görüştür. Kaynaklı bir yapay zeka yanıtı, ekibinizin üzerine hareket edebileceği referanslı bir olgudur.
 
-### Tasarımı gereği izin farkındalıklı
+### Tasarımı gereği insan onaylı
 
 İşte bir kurumsal Company Brain'i, bir klasöre yönlendirilmiş tüketici sohbet robotundan ayıran kısım budur.
 
 Gerçek bir kurumda herkes her şeyi göremez. Maaş bantları, hukuki konular, yayımlanmamış planlar ve kişisel kayıtlar iyi nedenlerle kısıtlıdır. Bu sınırları yok sayan bir bilgi sistemi bir verimlilik aracı değil, masum bir soruyla tetiklenmeyi bekleyen bir veri ihlalidir.
 
-Company Brain **izin farkındalıklıdır**. Kaynaklar izin kapsamlıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Kısıtlı bir belgeye erişiminiz yoksa, model onu ortaya çıkaramaz, gösteremez ve içeriğini bir yanıta sızdıramaz. Kural mutlaktır — model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez.
+Company Brain **insan onaylıdır**. Kaynaklar insan onaylıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Kısıtlı bir belgeye erişiminiz yoksa, model onu ortaya çıkaramaz, gösteremez ve içeriğini bir yanıta sızdıramaz. Kural mutlaktır — model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez.
 
 Bu, iki kişinin aynı soruyu sorup doğru biçimde farklı yanıtlar alabileceği anlamına gelir, çünkü farklı kaynaklara yetkilidirler. Bu bir hata değildir. Bu, erişim denetiminin tam olması gerektiği gibi çalışması ve çoğu aracın sessizce yok saydığı yapay zeka katmanına taşınmasıdır.
 
@@ -1017,29 +1029,29 @@ Bunların hiçbiri bulut gerektirmez.
 
 Company Brain **Local AI** üzerinde çalışır. Tüm çıkarım müşterinin kendi donanımında yerel bir motor aracılığıyla çalışır — Ollama ya da vLLM, LM Studio, llama.cpp veya SGLang gibi herhangi bir OpenAI uyumlu yerel sunucu. Harici API yok, API anahtarı yok, internet gereksinimi yok. Sistem çevrimdışı öncelikli ve hava boşluğu (air-gap) uyumludur; yani dış dünyadan fiziksel olarak kopuk bir ağda çalışabilir.
 
-Sonuç **veri egemenliğidir**: belgeleriniz, sorularınız ve yanıtlar hiçbir zaman tesisinizden çıkmaz. İş içeriğine dair hiçbir telemetri yoktur. Zekayı başkasının veri merkezinden kiralamıyor ve şartlarının geçerli kalmasını ummuyorsunuz. Tüm yığına sahipsiniz — uygulama, veri ve model — kendi bünyenizde ya da kendi özel bulutunuzda dağıtılmış olarak.
+Sonuç **veri egemenliğidir**: verileriniz, sorularınız ve yanıtlar hiçbir zaman tesisinizden çıkmaz. İş içeriğine dair hiçbir telemetri yoktur. Zekayı başkasının veri merkezinden kiralamıyor ve şartlarının geçerli kalmasını ummuyorsunuz. Tüm yığına sahipsiniz — uygulama, veri ve model — kendi bünyenizde ya da kendi özel bulutunuzda dağıtılmış olarak.
 
-Açıkça belirtmeye değer dürüst bir ödünleşim var. CPU üzerinde yerel çıkarım, barındırılan bir sınır API'sinden daha yavaştır — yanıtları milisaniyelerle değil saniyelerle ölçersiniz. Daha iyi donanım bu farkı kapatır. Çoğu kurumsal bilgi işi için, birkaç saniyede gelen, kaynaklarını gösteren ve binanızdan hiç çıkmayan bir yanıt, yapılmaya değer bir takastır.
+Açıkça belirtmeye değer dürüst bir ödünleşim var. CPU üzerinde yerel çıkarım, barındırılan bir sınır API'sinden daha yavaştır — yanıtları milisaniyelerle değil saniyelerle ölçersiniz. Daha iyi donanım bu farkı kapatır. Çoğu kurumsal bilgi işi için, birkaç saniyede gelen, kampanya sonuçlarına dayanan ve binanızdan hiç çıkmayan bir yanıt, yapılmaya değer bir takastır.
 
 ### Company Brain ne değildir
 
-Bir genel bulut hizmeti değildir ve barındırılan bir yapay zeka API'sinin sarmalayıcısı değildir. OpenAI, Anthropic ya da Google'a bağlı değildir. Bir web sitesi sohbet robotu değildir ve bir veri toplayıcı değildir. Belgelerinize dayanan, kaynaklarını gösteren ve erişim denetimlerinize saygı gösteren, sahip olduğunuz özel bir bilgi sistemidir.
+Bir genel bulut hizmeti değildir ve barındırılan bir yapay zeka API'sinin sarmalayıcısı değildir. OpenAI, Anthropic ya da Google'a bağlı değildir. Bir web sitesi sohbet robotu değildir ve bir veri toplayıcı değildir. Verilerinize dayanan, kampanya sonuçlarına dayanan ve erişim denetimlerinize saygı gösteren, sahip olduğunuz özel bir bilgi sistemidir.
 
 Ayrıca token başına fatura da yoktur. Çıkarım donanımınızda çalıştığı için marjinal maliyetiniz elektriktir, sayaçlı bir sorgu sayacı değil. Company Brain'e on bin soru sorabilirsiniz ve fatura kıpırdamaz.
 
 ### Daha büyük sistemin içinde yeri
 
-Company Brain üç sütundan biridir. Diğer ikisi onun üzerine kurulur. **Digital Employees**, tanımlı roller ve izinler dahilinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onayları hazırlayan — yapay zeka ajanlarıdır ve bunu doğru yapmak için Company Brain'den yararlanırlar. **Workflows & Approvals**, bu işin çevresindeki yapılandırılmış süreçleri, kademeli onay yetkisini ve tam denetim izlerini sağlar.
+Company Brain üç sütundan biridir. Diğer ikisi onun üzerine kurulur. **AI-assisted workflows**, tanımlı roller ve izinler dahilinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onayları hazırlayan — yapay zeka ajanlarıdır ve bunu doğru yapmak için Company Brain'den yararlanırlar. **Workflows & Approvals**, bu işin çevresindeki yapılandırılmış süreçleri, insan onay adÄ±mlarÄ±ni ve tam denetim izlerini sağlar.
 
-Birlikte bir kurumsal yapay zeka işletim sistemi oluştururlar. Ama çoğu kurumun ilk, en net değeri hissettiği yer Company Brain'dir: dağınık kurumsal bilginin kaynaklı, izin farkındalıklı bir yanıt kümesine dönüştüğü gün.
+Birlikte bir kurumsal yapay zeka işletim sistemi oluştururlar. Ama çoğu kurumun ilk, en net değeri hissettiği yer Company Brain'dir: dağınık kurumsal bilginin kaynaklı, insan onaylı bir yanıt kümesine dönüştüğü gün.
 
 ### SSS
 
 **Company Brain kurumsal aramadan nasıl farklıdır?**
-Arama, hâlâ okuyup birleştirmeniz gereken bir belge listesi döndürür. Company Brain, o belgelerden çıkarılmış, doğrulayabilmeniz için kaynak gösteren derli toplu bir yanıt döndürür. Teslimatı bağlantılardan yanıtlara çevirir.
+Arama, hâlâ okuyup birleştirmeniz gereken bir belge listesi döndürür. Company Brain, o belgelerden çıkarılmış, doğrulayabilmeniz için kampanya sonuçlarına dayanan derli toplu bir yanıt döndürür. Teslimatı bağlantılardan yanıtlara çevirir.
 
 **Belgelerimizde olmayan olguları uydurabilir mi?**
-Yanıtlar kendi malzemenize dayanır ve onunla sınırlıdır. Her yanıt kaynaklarını gösterdiği için, iddiayı modelin hafızasına güvenmek yerine her zaman gösterilen belgeye karşı kontrol edebilirsiniz.
+Yanıtlar kendi malzemenize dayanır ve onunla sınırlıdır. Her yanıt kampanya sonuçlarına dayandiği için, iddiayı modelin hafızasına güvenmek yerine her zaman gösterilen belgeye karşı kontrol edebilirsiniz.
 
 **Kısıtlı bilgiyi açığa çıkarmasını ne engeller?**
 İzin kapsamı. Yapay zeka yalnızca soruyu soran kullanıcının görmeye yetkili olduğu belgeleri gösterir. Kullanıcının erişemediği kısıtlı bir belge, o kullanıcının yanıtına gösterilemez ya da sızdırılamaz.
@@ -1052,14 +1064,14 @@ Yerel CPU çıkarımı milisaniyelerle değil saniyelerle ölçülür ve daha iy
 
 ### Company Brain'i iş başında görün
 
-Company Brain'i anlamanın en kolay yolu, kendi sorularınızdan birini yanıtlamasını ve kaynaklarını göstermesini izlemektir. Kontrol ettiğiniz altyapıda tamamen çalışan, kaynaklı ve izin farkındalıklı yanıtları görmek için **Demo Talep Edin**.
+Company Brain'i anlamanın en kolay yolu, kendi sorularınızdan birini yanıtlamasını ve kampanya sonuçlarına dayanmasini izlemektir. Kontrol ettiğiniz altyapıda tamamen çalışan, kaynaklı ve insan onaylı yanıtları görmek için **Demo Talep Edin**.
 
 ---
 
 ## Article 6: Ending Knowledge Loss When Experts Leave
 
 **Meta title:** Ending Knowledge Loss When Experts Leave
-**Meta description:** When a key expert leaves, years of undocumented know-how walk out the door. A permission-aware Company Brain retains it as cited, on-prem answers. Here is how.
+**Meta description:** When a key expert leaves, years of undocumented know-how walk out the door. A human-approved Company Brain retains it as cited, on-prem answers. Here is how.
 **Slug:** ending-knowledge-loss-when-experts-leave
 
 ---
@@ -1068,7 +1080,7 @@ Every organization has people who are load-bearing. The plant engineer who knows
 
 When one of them retires, resigns, or moves on, the organization does not just lose a headcount. It loses years of judgment, context, and hard-won know-how that never made it into a document. New hires spend months rediscovering what was already known. Mistakes that were solved a decade ago come back. The cost is real, and it is mostly invisible until it hits.
 
-This article is about ending that pattern — not with more binders nobody reads, but with a **Company Brain**: a private, permission-aware knowledge base that turns institutional knowledge into cited answers and keeps it available after the expert has gone. It is one of the three pillars of AdOS, an enterprise AI operating system that runs entirely on your own infrastructure.
+This article is about ending that pattern — not with more binders nobody reads, but with a **Company Brain**: a private, human-approved marketing-performance memory that turns institutional knowledge into performance-grounded recommendations and keeps it available after the expert has gone. It is one of the three pillars of AdOS, an enterprise AI operating system that runs entirely on your own infrastructure.
 
 ### Why knowledge leaves even when documents stay
 
@@ -1078,7 +1090,7 @@ The critical knowledge is tacit. It lives in the gap between the official proced
 
 So the knowledge does not leave because it was never captured. It leaves because it was never usable. A document that cannot be found, trusted, or connected to a question is functionally the same as a document that does not exist.
 
-A Company Brain attacks the usability problem directly. It ingests the organization's own documents and makes them answerable in plain language. The know-how that was locked inside individual files — and individual heads — becomes something anyone with the right permissions can ask about and get a cited answer.
+A Company Brain attacks the usability problem directly. It ingests the organization's own documents and makes them answerable in plain language. The know-how that was locked inside individual files — and individual heads — becomes something anyone with the right permissions can ask about and get a performance-grounded recommendation.
 
 ### Capture the knowledge while the expert is still here
 
@@ -1086,7 +1098,7 @@ The most valuable time to build a Company Brain is before the expert leaves, not
 
 While the expert is still present, their documents, procedures, decisions, and written explanations can be seeded into the Company Brain and made retrievable. The goal is not to replace the person's judgment. It is to make sure the reasoning they have already recorded does not evaporate the day their account is deactivated.
 
-Because every answer the Company Brain gives is grounded in those documents and cites its sources, the knowledge does not just survive — it stays verifiable. A new engineer asking "why do we run this test twice on that component?" gets an answer drawn from the actual procedure, with the source attached, rather than a rumor passed down through three shift handovers.
+Because every answer the Company Brain gives is grounded in those documents and traces to campaign results, the knowledge does not just survive — it stays verifiable. A new engineer asking "why do we run this test twice on that component?" gets an answer drawn from the actual procedure, with the source attached, rather than a rumor passed down through three shift handovers.
 
 This reframes offboarding. Instead of a frantic knowledge-dump in someone's final two weeks, capturing knowledge becomes a continuous act: the documents people produce during normal work accumulate into an institutional memory that outlasts any individual.
 
@@ -1094,9 +1106,9 @@ This reframes offboarding. Instead of a frantic knowledge-dump in someone's fina
 
 The flip side of knowledge loss is onboarding cost. Every new hire pays a tax in ramp-up time, and every experienced colleague pays a tax in interruptions to answer the same questions again.
 
-A Company Brain lowers both. A new employee does not have to know who to ask or which folder to open. They ask the question and receive a cited answer drawn from the organization's own material — in Turkish or English, since the system is fully bilingual. The answer carries its sources, so the new hire learns not just the fact but where it comes from and how to verify it.
+A Company Brain lowers both. A new employee does not have to know who to ask or which folder to open. They ask the question and receive a performance-grounded recommendation drawn from the organization's own material — in Turkish or English, since the system is fully bilingual. The answer carries its sources, so the new hire learns not just the fact but where it comes from and how to verify it.
 
-The effect compounds. The expert is interrupted less. The new hire ramps faster. And the answers everyone relies on are consistent, because they come from the same grounded knowledge base rather than from whoever happened to be free that afternoon.
+The effect compounds. The expert is interrupted less. The new hire ramps faster. And the answers everyone relies on are consistent, because they come from the same grounded marketing-performance memory rather than from whoever happened to be free that afternoon.
 
 ### Retention without leakage
 
@@ -1104,9 +1116,9 @@ Here is where retention meets security, and where a serious tool separates itsel
 
 Retaining knowledge cannot mean flattening access. The departing expert may have seen sensitive contracts, restricted HR matters, or confidential plans. Preserving that knowledge in a way that lets anyone retrieve it would trade a knowledge problem for a data-leak problem.
 
-A Company Brain is **permission-aware**, so it does not make that trade. Citations are permission-scoped: a user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see. Retained knowledge stays behind the same access boundaries the original documents had. You keep the expertise available to the people entitled to it — and only to them.
+A Company Brain is **human-approved**, so it does not make that trade. Citations are workspace-scoped: a user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see. Retained knowledge stays behind the same access boundaries the original documents had. You keep the expertise available to the people entitled to it — and only to them.
 
-Every consequential action is captured in an immutable audit trail, so you can always see who accessed what. Retention, in other words, does not weaken governance. It strengthens it, because the knowledge is now inside a system that tracks and controls access rather than inside a departed employee's inbox.
+Every consequential action is captured in an activity log and per-approval timeline, so you can always see who accessed what. Retention, in other words, does not weaken governance. It strengthens it, because the knowledge is now inside a system that tracks and controls access rather than inside a departed employee's inbox.
 
 ### It stays on your premises
 
@@ -1120,7 +1132,7 @@ The honest trade-off applies here too. Local CPU inference answers in seconds ra
 
 The goal is not to make any individual expendable. Good people remain the heart of any organization. The goal is to make sure the organization does not forget what it already learned every time someone walks out the door.
 
-A Company Brain turns fragile, person-dependent knowledge into a durable, cited, permission-aware memory that runs entirely under your control. Paired with the other two pillars — **Digital Employees** that act on that knowledge and **Workflows & Approvals** that structure the work around it — it becomes an operating system for institutional memory, not just a filing cabinet.
+A Company Brain turns fragile, person-dependent knowledge into a durable, cited, human-approved memory that runs entirely under your control. Paired with the other two pillars — **AI-assisted workflows** that act on that knowledge and **Workflows & Approvals** that structure the work around it — it becomes an operating system for institutional memory, not just a filing cabinet.
 
 The expert who leaves takes their next chapter with them. With a Company Brain, they do not take the organization's memory too.
 
@@ -1133,7 +1145,7 @@ No. It preserves and makes searchable the knowledge experts have already recorde
 The Company Brain works from documents, so the highest-value move is to capture the expert's procedures, decisions, and explanations into it while they are still present. Knowledge that exists only in someone's head must first be recorded to be retained.
 
 **How does it prevent a departing employee's access from leaking?**
-Retained knowledge keeps the same permission boundaries as the original documents. The AI only cites and surfaces documents the asking user is entitled to see, and every access is recorded in an immutable audit trail.
+Retained knowledge keeps the same permission boundaries as the original documents. The AI only cites and surfaces documents the asking user is entitled to see, and every access is recorded in an activity log and per-approval timeline.
 
 **Does capturing this knowledge send it to the cloud?**
 No. Everything runs on Local AI on your own hardware, offline-first and air-gap capable. Your institutional knowledge never leaves your premises and there is no per-token bill.
@@ -1143,7 +1155,7 @@ As fast as they can ask a question. Answers are drawn from your own material and
 
 ### Retain what your experts know
 
-The best time to capture institutional knowledge is before it walks out the door. **Request a Demo** to see how a permission-aware Company Brain turns your experts' documents into cited answers that stay, running entirely on your own infrastructure.
+The best time to capture institutional knowledge is before it walks out the door. **Request a Demo** to see how a human-approved Company Brain turns your experts' documents into performance-grounded recommendations that stay, running entirely on your own infrastructure.
 
 ---
 
@@ -1152,7 +1164,7 @@ The best time to capture institutional knowledge is before it walks out the door
 ## Makale 6: Uzmanlar Ayrıldığında Bilgi Kaybını Sonlandırmak
 
 **Meta başlık:** Uzmanlar Ayrıldığında Bilgi Kaybını Sonlandırın
-**Meta açıklama:** Kilit bir uzman ayrıldığında yıllarca belgelenmemiş bilgi birikimi kapıdan çıkar. İzin farkındalıklı bir Company Brain bunu kaynaklı, yerel yanıtlar olarak korur. İşte nasıl.
+**Meta açıklama:** Kilit bir uzman ayrıldığında yıllarca belgelenmemiş bilgi birikimi kapıdan çıkar. İnsan Onaylı bir Company Brain bunu kaynaklı, yerel yanıtlar olarak korur. İşte nasıl.
 **Slug:** uzmanlar-ayrildiginda-bilgi-kaybi
 
 ---
@@ -1161,7 +1173,7 @@ Her kurumun taşıyıcı kişileri vardır. Üçüncü hattın neden öyle davra
 
 Biri emekli olduğunda, istifa ettiğinde ya da başka yere geçtiğinde kurum yalnızca bir kadro kaybetmez. Hiçbir belgeye geçmemiş yılların muhakemesini, bağlamını ve zor kazanılmış bilgi birikimini kaybeder. Yeni işe alınanlar zaten bilineni yeniden keşfetmek için aylar harcar. On yıl önce çözülmüş hatalar geri döner. Maliyet gerçektir ve gerçekleşene kadar çoğunlukla görünmezdir.
 
-Bu yazı o örüntüyü sonlandırmakla ilgilidir — kimsenin okumadığı daha fazla klasörle değil, bir **Company Brain** ile: kurumsal bilgiyi kaynaklı yanıtlara dönüştüren ve uzman ayrıldıktan sonra da erişilebilir tutan özel, izin farkındalıklı bir bilgi tabanı. Bu, tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un üç sütunundan biridir.
+Bu yazı o örüntüyü sonlandırmakla ilgilidir — kimsenin okumadığı daha fazla klasörle değil, bir **Company Brain** ile: kurumsal bilgiyi performansa dayalı önerilere dönüştüren ve uzman ayrıldıktan sonra da erişilebilir tutan özel, insan onaylı bir pazarlama-performans belleği. Bu, tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un üç sütunundan biridir.
 
 ### Belgeler kalsa bile bilgi neden ayrılır
 
@@ -1179,7 +1191,7 @@ Bir Company Brain oluşturmak için en değerli zaman, uzman ayrıldıktan sonra
 
 Uzman hâlâ mevcutken belgeleri, prosedürleri, kararları ve yazılı açıklamaları Company Brain'e aktarılıp getirilebilir hâle getirilebilir. Amaç kişinin muhakemesinin yerini almak değildir. Amaç, zaten kaydettiği gerekçenin, hesabı devre dışı bırakıldığı gün buharlaşmamasını sağlamaktır.
 
-Company Brain'in verdiği her yanıt o belgelere dayandığı ve kaynaklarını gösterdiği için, bilgi yalnızca hayatta kalmaz — doğrulanabilir kalır. "Bu bileşende bu testi neden iki kez yapıyoruz?" diye soran yeni bir mühendis, üç vardiya devrinden geçmiş bir söylenti yerine, kaynağı ekli olarak gerçek prosedürden çıkarılmış bir yanıt alır.
+Company Brain'in verdiği her yanıt o belgelere dayandığı ve kampanya sonuçlarına dayandiği için, bilgi yalnızca hayatta kalmaz — doğrulanabilir kalır. "Bu bileşende bu testi neden iki kez yapıyoruz?" diye soran yeni bir mühendis, üç vardiya devrinden geçmiş bir söylenti yerine, kaynağı ekli olarak gerçek prosedürden çıkarılmış bir yanıt alır.
 
 Bu, işten ayrılmayı yeniden çerçeveler. Birinin son iki haftasındaki telaşlı bir bilgi boşaltımı yerine, bilgiyi yakalamak sürekli bir eylem hâline gelir: insanların normal iş sırasında ürettiği belgeler, herhangi bir bireyden daha uzun ömürlü bir kurumsal hafızaya birikir.
 
@@ -1189,7 +1201,7 @@ Bilgi kaybının diğer yüzü işe alıştırma maliyetidir. Her yeni işe alı
 
 Company Brain her ikisini de düşürür. Yeni bir çalışan kime soracağını ya da hangi klasörü açacağını bilmek zorunda değildir. Soruyu sorar ve kurumun kendi malzemesinden çıkarılmış kaynaklı bir yanıt alır — sistem tamamen çift dilli olduğu için Türkçe ya da İngilizce. Yanıt kaynaklarını taşır, böylece yeni işe alınan yalnızca olguyu değil, nereden geldiğini ve nasıl doğrulanacağını da öğrenir.
 
-Etki katlanarak büyür. Uzman daha az kesilir. Yeni işe alınan daha hızlı uyum sağlar. Ve herkesin dayandığı yanıtlar tutarlıdır, çünkü o öğleden sonra kimin boş olduğundan değil, aynı dayandırılmış bilgi tabanından gelir.
+Etki katlanarak büyür. Uzman daha az kesilir. Yeni işe alınan daha hızlı uyum sağlar. Ve herkesin dayandığı yanıtlar tutarlıdır, çünkü o öğleden sonra kimin boş olduğundan değil, aynı dayandırılmış pazarlama-performans belleğinden gelir.
 
 ### Sızıntı olmadan koruma
 
@@ -1197,9 +1209,9 @@ Etki katlanarak büyür. Uzman daha az kesilir. Yeni işe alınan daha hızlı u
 
 Bilgiyi korumak, erişimi düzleştirmek anlamına gelemez. Ayrılan uzman hassas sözleşmeleri, kısıtlı İK konularını ya da gizli planları görmüş olabilir. Bu bilgiyi herkesin getirebileceği biçimde korumak, bir bilgi sorununu bir veri sızıntısı sorununa takas ederdi.
 
-Company Brain **izin farkındalıklıdır**, bu yüzden bu takası yapmaz. Kaynaklar izin kapsamlıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. Korunan bilgi, orijinal belgelerin sahip olduğu aynı erişim sınırlarının arkasında kalır. Uzmanlığı, ona yetkili kişiler için — ve yalnızca onlar için — erişilebilir tutarsınız.
+Company Brain **insan onaylıdır**, bu yüzden bu takası yapmaz. Kaynaklar insan onaylıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. Korunan bilgi, orijinal belgelerin sahip olduğu aynı erişim sınırlarının arkasında kalır. Uzmanlığı, ona yetkili kişiler için — ve yalnızca onlar için — erişilebilir tutarsınız.
 
-Her sonuçlu eylem, değişmez bir denetim izinde yakalanır, böylece kimin neye eriştiğini her zaman görebilirsiniz. Başka bir deyişle koruma, yönetişimi zayıflatmaz. Onu güçlendirir, çünkü bilgi artık ayrılan bir çalışanın gelen kutusunda değil, erişimi izleyen ve denetleyen bir sistemin içindedir.
+Her sonuçlu eylem, değişmez bir etkinlik günlüğünde yakalanır, böylece kimin neye eriştiğini her zaman görebilirsiniz. Başka bir deyişle koruma, yönetişimi zayıflatmaz. Onu güçlendirir, çünkü bilgi artık ayrılan bir çalışanın gelen kutusunda değil, erişimi izleyen ve denetleyen bir sistemin içindedir.
 
 ### Tesisinizde kalır
 
@@ -1213,7 +1225,7 @@ Dürüst ödünleşim burada da geçerlidir. Yerel CPU çıkarımı milisaniyele
 
 Amaç herhangi bir bireyi gereksiz kılmak değildir. İyi insanlar her kurumun kalbi olmaya devam eder. Amaç, biri kapıdan her çıktığında kurumun zaten öğrendiğini unutmamasını sağlamaktır.
 
-Company Brain kırılgan, kişiye bağımlı bilgiyi tamamen sizin denetiminizde çalışan kalıcı, kaynaklı, izin farkındalıklı bir hafızaya dönüştürür. Diğer iki sütunla — o bilgi üzerine hareket eden **Digital Employees** ve işi onun çevresinde yapılandıran **Workflows & Approvals** — birleştiğinde, yalnızca bir dosya dolabı değil, kurumsal hafıza için bir işletim sistemi olur.
+Company Brain kırılgan, kişiye bağımlı bilgiyi tamamen sizin denetiminizde çalışan kalıcı, kaynaklı, insan onaylı bir hafızaya dönüştürür. Diğer iki sütunla — o bilgi üzerine hareket eden **AI-assisted workflows** ve işi onun çevresinde yapılandıran **Workflows & Approvals** — birleştiğinde, yalnızca bir dosya dolabı değil, kurumsal hafıza için bir işletim sistemi olur.
 
 Ayrılan uzman kendi bir sonraki bölümünü yanında götürür. Bir Company Brain ile kurumun hafızasını da götürmez.
 
@@ -1226,7 +1238,7 @@ Hayır. Uzmanların belgelerde zaten kaydettiği bilgiyi korur ve aranabilir kı
 Company Brain belgelerden çalışır, bu yüzden en yüksek değerli hamle, uzmanın prosedürlerini, kararlarını ve açıklamalarını o hâlâ mevcutken içine yakalamaktır. Yalnızca birinin zihninde var olan bilgi, korunmak için önce kaydedilmelidir.
 
 **Ayrılan bir çalışanın erişiminin sızmasını nasıl önler?**
-Korunan bilgi, orijinal belgelerle aynı izin sınırlarını korur. Yapay zeka yalnızca soruyu soran kullanıcının görmeye yetkili olduğu belgeleri gösterir ve her erişim değişmez bir denetim izinde kaydedilir.
+Korunan bilgi, orijinal belgelerle aynı izin sınırlarını korur. Yapay zeka yalnızca soruyu soran kullanıcının görmeye yetkili olduğu belgeleri gösterir ve her erişim değişmez bir etkinlik günlüğünde kaydedilir.
 
 **Bu bilgiyi yakalamak onu buluta gönderir mi?**
 Hayır. Her şey kendi donanımınızda Local AI üzerinde, çevrimdışı öncelikli ve hava boşluğu uyumlu çalışır. Kurumsal bilginiz tesisinizden hiç çıkmaz ve token başına fatura yoktur.
@@ -1236,39 +1248,39 @@ Bir soru sorabildiği kadar hızlı. Yanıtlar kendi malzemenizden çıkarılır
 
 ### Uzmanlarınızın bildiğini koruyun
 
-Kurumsal bilgiyi yakalamak için en iyi zaman, o kapıdan çıkmadan öncedir. İzin farkındalıklı bir Company Brain'in uzmanlarınızın belgelerini kalan kaynaklı yanıtlara nasıl dönüştürdüğünü, tamamen kendi altyapınızda çalışarak görmek için **Demo Talep Edin**.
+Kurumsal bilgiyi yakalamak için en iyi zaman, o kapıdan çıkmadan öncedir. İnsan Onaylı bir Company Brain'in uzmanlarınızın belgelerini kalan performansa dayalı önerilere nasıl dönüştürdüğünü, tamamen kendi altyapınızda çalışarak görmek için **Demo Talep Edin**.
 
 ---
 
-## Article 7: Permission-Aware AI: Why the Model Must Respect Access Control
+## Article 7: Human-Approved AI: Why the Model Must Respect Human Approval Gates
 
-**Meta title:** Permission-Aware AI: The Model Must Respect Access
-**Meta description:** Most AI ignores who is allowed to see what. Permission-aware AI enforces access control at the model layer, so answers never leak restricted content. Here is why it matters.
-**Slug:** permission-aware-ai-access-control
+**Meta title:** Human-Approved AI: The Model Must Respect Access
+**Meta description:** Most AI ignores who is allowed to see what. Human-Approved AI enforces human approval gates at the model layer, so answers never leak restricted content. Here is why it matters.
+**Slug:** human-approved-ai-access-control
 
 ---
 
 Your organization already controls who can see what. Finance data, HR records, legal files, and unreleased plans sit behind permissions for good reasons. Those controls have been refined over years. Then a general AI assistant arrives, gets pointed at your content to "make it useful," and quietly ignores every one of them.
 
-This is the failure mode nobody demos. An AI that can read all your documents and answer questions about them is only safe if it also enforces who is allowed to see each document. Otherwise you have not built a productivity tool. You have built a way for any employee to extract restricted information by asking a well-phrased question.
+This is the failure mode nobody demos. An AI that can read all your data and draft from questions about them is only safe if it also enforces who is allowed to see each document. Otherwise you have not built a productivity tool. You have built a way for any employee to extract restricted information by asking a well-phrased question.
 
-**Permission-aware AI** is the correct answer, and it is a non-negotiable property of AdOS, an enterprise AI operating system that runs entirely on your own infrastructure. The principle is absolute: the model can never surface or cite content a user may not see. This article explains what that means, why enforcing it at the model layer is different from bolting it on afterward, and why it is a hard requirement for any serious enterprise deployment.
+**Human-Approved AI** is the correct answer, and it is a non-negotiable property of AdOS, an enterprise AI operating system that runs entirely on your own infrastructure. The principle is absolute: the model can never surface or cite content a user may not see. This article explains what that means, why enforcing it at the model layer is different from bolting it on afterward, and why it is a hard requirement for any serious enterprise deployment.
 
 ### The problem: AI collapses your access boundaries
 
-Access control works by keeping information compartmentalized. A junior analyst cannot open the executive compensation file. A contractor cannot read the confidential merger memo. These boundaries are the difference between an organization and a leak.
+human approval gates works by keeping information compartmentalized. A junior analyst cannot open the executive compensation file. A contractor cannot read the confidential merger memo. These boundaries are the difference between an organization and a leak.
 
-A naive AI system flattens them. If you index every document into a knowledge base and let the model answer freely, the model becomes a universal side channel. The restricted file is never "opened" in the traditional sense — but its contents flow into an answer for someone who was never entitled to them. The permission on the file is intact; the information behind it is gone.
+A naive AI system flattens them. If you index every document into a marketing-performance memory and let the model answer freely, the model becomes a universal side channel. The restricted file is never "opened" in the traditional sense — but its contents flow into an answer for someone who was never entitled to them. The permission on the file is intact; the information behind it is gone.
 
 Worse, this leakage is hard to detect. There is no obvious access-violation event, just a helpful answer that happened to draw on a document the asker should never have seen. In a regulated environment — finance, healthcare, the public sector — that is not an inconvenience. It is a reportable breach.
 
 ### The principle: enforce access at the model layer
 
-Permission-aware AI means the access controls that govern your documents also govern the AI's answers. In AdOS, this is built into the core of the Company Brain, the private, permission-aware knowledge base that grounds every answer.
+Human-Approved AI means the human approval gates that govern your data also govern the AI's answers. In AdOS, this is built into the core of the Company Brain, the private, human-approved marketing-performance memory that grounds every answer.
 
-The mechanism is permission-scoping of citations. Every AI answer is grounded in the company's own documents and cites its sources — and those citations are permission-scoped. A user only sees, and the AI only cites, documents that user is entitled to. If a document is outside your permissions, the model cannot retrieve it, cannot cite it, and cannot let its contents shape your answer.
+The mechanism is permission-scoping of citations. Every AI answer is grounded in the company's own documents and traces to campaign results — and those citations are workspace-scoped. A user only sees, and the AI only cites, documents that user is entitled to. If a document is outside your permissions, the model cannot retrieve it, cannot cite it, and cannot let its contents shape your answer.
 
-The consequence is precise: two users can ask the identical question and correctly receive different answers, because they are entitled to different sources. The system is not being inconsistent. It is being correct. Access control is finally extended into the AI layer, instead of stopping at the file system while the AI reads across everything.
+The consequence is precise: two users can ask the identical question and correctly receive different answers, because they are entitled to different sources. The system is not being inconsistent. It is being correct. human approval gates is finally extended into the AI layer, instead of stopping at the file system while the AI reads across everything.
 
 ### Why bolting it on afterward does not work
 
@@ -1276,88 +1288,88 @@ A common shortcut is to let the model see everything and then filter the output 
 
 That is an unwinnable game. Information can leak through a summary that names no document, through a number mentioned in passing, through an inference only possible if you had seen the restricted file. Post-hoc filtering has to anticipate every one of those paths. Permission-scoping at retrieval avoids the game entirely: the restricted content never reaches the model in the first place, so there is nothing to leak.
 
-This is why permission-awareness has to be a property of the architecture, not a feature added late. The model must be constrained by the user's entitlements at the moment it gathers evidence — not trusted to forget what it should not have seen.
+This is why human-approvedness has to be a property of the architecture, not a feature added late. The model must be constrained by the user's entitlements at the moment it gathers evidence — not trusted to forget what it should not have seen.
 
 ### Auditability: proving the boundary held
 
 Enforcing access is necessary. Proving you enforced it is what satisfies a CISO, an auditor, and a regulator.
 
-AdOS is auditable: every consequential action is recorded in an immutable audit trail. You can see which user asked what, which documents were cited, and that no answer drew on content beyond that user's entitlements. When a security review asks "can you prove the AI never leaked restricted data?", the answer is not a shrug. It is a record.
+AdOS is auditable: every consequential action is recorded in an activity log and per-approval timeline. You can see which user asked what, which documents were cited, and that no answer drew on content beyond that user's entitlements. When a security review asks "can you prove the AI never leaked restricted data?", the answer is not a shrug. It is a record.
 
-This turns permission-aware AI from a claim into something demonstrable. The audit trail is also why permission-awareness strengthens governance rather than complicating it: the AI layer becomes another controlled, logged surface, not a blind spot that reads everything and remembers nothing.
+This turns human-approved AI from a claim into something demonstrable. The audit trail is also why human-approvedness strengthens governance rather than complicating it: the AI layer becomes another controlled, logged surface, not a blind spot that reads everything and remembers nothing.
 
 ### Sovereignty makes the guarantee real
 
-Permission-awareness inside your walls only means something if the data actually stays inside your walls. A system that enforces access locally but ships your documents to an external cloud for processing has simply moved the exposure.
+Human-Approvedness inside your walls only means something if the data actually stays inside your walls. A system that enforces access locally but ships your data to an external cloud for processing has simply moved the exposure.
 
-AdOS runs on **Local AI**: all inference happens on your own hardware via a local engine such as Ollama or any OpenAI-compatible local server, with no external API, no keys, and no internet required. This delivers **data sovereignty** — your documents, prompts, and answers never leave your premises, with no telemetry of business content. The system is offline-first and air-gap capable, so it can run on a network physically disconnected from the outside world.
+AdOS runs on **Local AI**: all inference happens on your own hardware via a local engine such as Ollama or any OpenAI-compatible local server, with no external API, no keys, and no internet required. This delivers **data sovereignty** — your data, prompts, and answers never leave your premises, with no telemetry of business content. The system is offline-first and air-gap capable, so it can run on a network physically disconnected from the outside world.
 
-Permission-awareness and sovereignty reinforce each other. Access control decides who inside your organization may see what. Sovereignty guarantees none of it reaches anyone outside. Together they close both the internal and external leak paths that a cloud AI assistant leaves open.
+Human-Approvedness and sovereignty reinforce each other. human approval gates decides who inside your organization may see what. Sovereignty guarantees none of it reaches anyone outside. Together they close both the internal and external leak paths that a cloud AI assistant leaves open.
 
 ### Who this is for
 
-For a CISO, permission-aware AI is the difference between approving an AI project and blocking it. For a CIO, it means the AI layer inherits the access model you already govern, rather than forcing a parallel one. For regulated sectors — finance, healthcare, the public sector — it is often the precondition that makes enterprise AI deployable at all, because data-residency and confidentiality mandates leave no room for a system that reads across every boundary.
+For a CISO, human-approved AI is the difference between approving an AI project and blocking it. For a CIO, it means the AI layer inherits the access model you already govern, rather than forcing a parallel one. For regulated sectors — finance, healthcare, the public sector — it is often the precondition that makes enterprise AI deployable at all, because data-residency and confidentiality mandates leave no room for a system that reads across every boundary.
 
-It also matters for the two other pillars of AdOS. **Digital Employees** perform real knowledge work within defined roles and permissions, drawing on the permission-aware Company Brain, so an AI worker cannot act on information its role should not access. **Workflows & Approvals** add tiered authority and audit trails on top. The whole system assumes access control is real and enforces it end to end.
+It also matters for the two other pillars of AdOS. **AI-assisted workflows** perform real knowledge work within defined roles and permissions, drawing on the human-approved Company Brain, so an AI worker cannot act on information its role should not access. **Workflows & Approvals** add tiered authority and audit trails on top. The whole system assumes human approval gates is real and enforces it end to end.
 
 ### The bottom line
 
 An AI that ignores your permissions is not an asset. It is a liability wearing the costume of a productivity tool. The moment it can answer any question from any document, it can leak any restricted fact to anyone who asks cleverly.
 
-Permission-aware AI refuses that trade. The model respects access control because the model is bound by it — at retrieval, in every citation, and in an immutable audit trail that proves the boundary held. Grounded, cited, permission-scoped, and running entirely on your own infrastructure: that is what it takes to give an enterprise AI it can actually trust.
+Human-Approved AI refuses that trade. The model respects human approval gates because the model is bound by it — at retrieval, in every citation, and in an activity log and per-approval timeline that proves the boundary held. Grounded, cited, workspace-scoped, and running entirely on your own infrastructure: that is what it takes to give an enterprise AI it can actually trust.
 
 ### FAQ
 
-**What does permission-aware AI actually mean?**
-It means the AI enforces the same access controls that govern your documents. A user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see.
+**What does human-approved AI actually mean?**
+It means the AI enforces the same human approval gates that govern your data. A user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see.
 
 **Can two users get different answers to the same question?**
-Yes, and that is correct behavior. Because citations are permission-scoped, each user's answer is built only from the sources they are entitled to see, so answers legitimately differ by entitlement.
+Yes, and that is correct behavior. Because citations are workspace-scoped, each user's answer is built only from the sources they are entitled to see, so answers legitimately differ by entitlement.
 
 **Why not just filter the AI's output after it answers?**
 Because once restricted content enters an answer, it can leak through summaries, inferences, or passing details that post-hoc filtering cannot reliably catch. Permission-scoping at retrieval keeps restricted content out of the model entirely.
 
 **How can we prove the AI did not leak restricted data?**
-Every consequential action is recorded in an immutable audit trail. You can review which user asked what and which documents were cited, demonstrating that answers stayed within each user's entitlements.
+Every consequential action is recorded in an activity log and per-approval timeline. You can review which user asked what and which documents were cited, demonstrating that answers stayed within each user's entitlements.
 
-**Does permission-aware AI require the cloud?**
-No. AdOS runs on Local AI on your own hardware, offline-first and air-gap capable, delivering data sovereignty. Access control is enforced internally and no data leaves your premises externally.
+**Does human-approved AI require the cloud?**
+No. AdOS runs on Local AI on your own hardware, offline-first and air-gap capable, delivering data sovereignty. human approval gates is enforced internally and no data leaves your premises externally.
 
-### See permission-aware AI hold the line
+### See human-approved AI hold the line
 
-The clearest proof is watching the AI refuse to surface a restricted document to a user who should not see it. **Request a Demo** to see permission-aware, cited answers running entirely on your own infrastructure.
+The clearest proof is watching the AI refuse to surface a restricted document to a user who should not see it. **Request a Demo** to see human-approved, performance-grounded recommendations running entirely on your own infrastructure.
 
 ---
 
 ### Türkçe
 
-## Makale 7: İzin Farkındalıklı Yapay Zeka: Model Neden Erişim Denetimine Saygı Göstermelidir
+## Makale 7: İnsan Onaylı Yapay Zeka: Model Neden Erişim Denetimine Saygı Göstermelidir
 
-**Meta başlık:** İzin Farkındalıklı Yapay Zeka: Model Erişime Saygı Duymalı
-**Meta açıklama:** Çoğu yapay zeka, kimin neyi görebileceğini yok sayar. İzin farkındalıklı yapay zeka erişim denetimini model katmanında uygular, böylece yanıtlar kısıtlı içeriği asla sızdırmaz. İşte nedeni.
+**Meta başlık:** İnsan Onaylı Yapay Zeka: Model Erişime Saygı Duymalı
+**Meta açıklama:** Çoğu yapay zeka, kimin neyi görebileceğini yok sayar. İnsan Onaylı yapay zeka erişim denetimini model katmanında uygular, böylece yanıtlar kısıtlı içeriği asla sızdırmaz. İşte nedeni.
 **Slug:** izin-farkindalikli-yapay-zeka-erisim-denetimi
 
 ---
 
 Kurumunuz kimin neyi görebileceğini zaten denetliyor. Finans verileri, İK kayıtları, hukuk dosyaları ve yayımlanmamış planlar iyi nedenlerle izinlerin arkasında durur. Bu denetimler yıllar içinde inceltilmiştir. Sonra genel bir yapay zeka asistanı gelir, "yararlı olsun diye" içeriğinize yönlendirilir ve bunların her birini sessizce yok sayar.
 
-Bu, kimsenin demo yapmadığı arıza modudur. Tüm belgelerinizi okuyup onlar hakkında soruları yanıtlayabilen bir yapay zeka, yalnızca her belgeyi kimin görmeye yetkili olduğunu da uyguladığında güvenlidir. Aksi hâlde bir verimlilik aracı inşa etmediniz. Herhangi bir çalışanın iyi ifade edilmiş bir soru sorarak kısıtlı bilgiyi çıkarmasının bir yolunu inşa ettiniz.
+Bu, kimsenin demo yapmadığı arıza modudur. Tüm verilerinizi okuyup onlar hakkında soruları yanıtlayabilen bir yapay zeka, yalnızca her belgeyi kimin görmeye yetkili olduğunu da uyguladığında güvenlidir. Aksi hâlde bir verimlilik aracı inşa etmediniz. Herhangi bir çalışanın iyi ifade edilmiş bir soru sorarak kısıtlı bilgiyi çıkarmasının bir yolunu inşa ettiniz.
 
-**İzin farkındalıklı yapay zeka** doğru yanıttır ve tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un vazgeçilmez bir özelliğidir. İlke mutlaktır: model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. Bu yazı bunun ne anlama geldiğini, bunu model katmanında uygulamanın neden sonradan cıvatalamaktan farklı olduğunu ve neden ciddi her kurumsal dağıtım için katı bir gereksinim olduğunu anlatır.
+**İnsan Onaylı yapay zeka** doğru yanıttır ve tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'un vazgeçilmez bir özelliğidir. İlke mutlaktır: model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. Bu yazı bunun ne anlama geldiğini, bunu model katmanında uygulamanın neden sonradan cıvatalamaktan farklı olduğunu ve neden ciddi her kurumsal dağıtım için katı bir gereksinim olduğunu anlatır.
 
 ### Sorun: yapay zeka erişim sınırlarınızı çökertir
 
 Erişim denetimi bilgiyi bölmelere ayırarak çalışır. Bir kıdemsiz analist yönetici ücretlendirme dosyasını açamaz. Bir yüklenici gizli birleşme notunu okuyamaz. Bu sınırlar bir kurum ile bir sızıntı arasındaki farktır.
 
-Naif bir yapay zeka sistemi onları düzleştirir. Her belgeyi bir bilgi tabanına indeksler ve modelin serbestçe yanıtlamasına izin verirseniz, model evrensel bir yan kanal hâline gelir. Kısıtlı dosya geleneksel anlamda hiç "açılmaz" — ama içeriği, ona asla yetkili olmayan biri için bir yanıta akar. Dosyadaki izin bozulmamıştır; arkasındaki bilgi gitmiştir.
+Naif bir yapay zeka sistemi onları düzleştirir. Her belgeyi bir pazarlama-performans belleğine indeksler ve modelin serbestçe yanıtlamasına izin verirseniz, model evrensel bir yan kanal hâline gelir. Kısıtlı dosya geleneksel anlamda hiç "açılmaz" — ama içeriği, ona asla yetkili olmayan biri için bir yanıta akar. Dosyadaki izin bozulmamıştır; arkasındaki bilgi gitmiştir.
 
 Daha kötüsü, bu sızıntının tespiti zordur. Belirgin bir erişim ihlali olayı yoktur, yalnızca soruyu soranın asla görmemesi gereken bir belgeden yararlanmış olan yardımcı bir yanıt vardır. Düzenlemeye tabi bir ortamda — finans, sağlık, kamu sektörü — bu bir zahmet değildir. Bildirilmesi gereken bir ihlaldir.
 
 ### İlke: erişimi model katmanında uygulayın
 
-İzin farkındalıklı yapay zeka, belgelerinizi yöneten erişim denetimlerinin yapay zekanın yanıtlarını da yönetmesi demektir. AdOS'ta bu, her yanıtı dayandıran özel, izin farkındalıklı bilgi tabanı olan Company Brain'in çekirdeğine inşa edilmiştir.
+İnsan Onaylı yapay zeka, verilerinizi yöneten erişim denetimlerinin yapay zekanın yanıtlarını da yönetmesi demektir. AdOS'ta bu, her yanıtı dayandıran özel, insan onaylı pazarlama-performans belleği olan Company Brain'in çekirdeğine inşa edilmiştir.
 
-Mekanizma, kaynakların izin kapsamına alınmasıdır. Her yapay zeka yanıtı şirketin kendi belgelerine dayanır ve kaynaklarını gösterir — ve bu kaynaklar izin kapsamlıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Bir belge izinlerinizin dışındaysa, model onu getiremez, gösteremez ve içeriğinin yanıtınızı şekillendirmesine izin veremez.
+Mekanizma, kaynakların insan onayına alınmasıdır. Her yapay zeka yanıtı şirketin kendi belgelerine dayanır ve kampanya sonuçlarına dayanır — ve bu kaynaklar insan onaylıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Bir belge izinlerinizin dışındaysa, model onu getiremez, gösteremez ve içeriğinin yanıtınızı şekillendirmesine izin veremez.
 
 Sonuç kesindir: iki kullanıcı aynı soruyu sorup doğru biçimde farklı yanıtlar alabilir, çünkü farklı kaynaklara yetkilidirler. Sistem tutarsız değildir. Doğrudur. Erişim denetimi, yapay zeka her şeyi okurken dosya sisteminde durmak yerine, sonunda yapay zeka katmanına taşınmıştır.
 
@@ -1365,7 +1377,7 @@ Sonuç kesindir: iki kullanıcı aynı soruyu sorup doğru biçimde farklı yan�
 
 Yaygın bir kestirme yol, modelin her şeyi görmesine izin verip çıktıyı filtrelemektir — bir yanıt üretip ardından kullanıcının görmemesi gereken her şeyi silmeye çalışmak. Bu yapısal bir nedenle kırılgandır: kısıtlı içerik yanıta girdikten sonra, kaynağı doğrudan alıntılamayan yeniden ifadeler, özetler ve çıkarımlar dahil her olası sızıntıyı yakalamak için ikinci bir sisteme güveniyorsunuz.
 
-Bu kazanılamaz bir oyundur. Bilgi, hiçbir belgeyi adlandırmayan bir özetten, geçerken belirtilen bir sayıdan, yalnızca kısıtlı dosyayı görseydiniz mümkün olan bir çıkarımdan sızabilir. Olay sonrası filtreleme bu yolların her birini öngörmek zorundadır. Getirme aşamasında izin kapsamı oyunu tamamen önler: kısıtlı içerik en baştan modele ulaşmaz, bu yüzden sızacak bir şey yoktur.
+Bu kazanılamaz bir oyundur. Bilgi, hiçbir belgeyi adlandırmayan bir özetten, geçerken belirtilen bir sayıdan, yalnızca kısıtlı dosyayı görseydiniz mümkün olan bir çıkarımdan sızabilir. Olay sonrası filtreleme bu yolların her birini öngörmek zorundadır. Getirme aşamasında insan onayı oyunu tamamen önler: kısıtlı içerik en baştan modele ulaşmaz, bu yüzden sızacak bir şey yoktur.
 
 Bu yüzden izin farkındalığı mimarinin bir özelliği olmalıdır, sonradan eklenen bir işlev değil. Model, kanıt topladığı anda kullanıcının yetkileriyle kısıtlanmalıdır — görmemesi gerekeni unutacağına güvenilmemelidir.
 
@@ -1373,57 +1385,57 @@ Bu yüzden izin farkındalığı mimarinin bir özelliği olmalıdır, sonradan 
 
 Erişimi uygulamak gereklidir. Uyguladığınızı kanıtlamak, bir CISO'yu, bir denetçiyi ve bir düzenleyiciyi tatmin eden şeydir.
 
-AdOS denetlenebilirdir: her sonuçlu eylem değişmez bir denetim izinde kaydedilir. Hangi kullanıcının ne sorduğunu, hangi belgelerin gösterildiğini ve hiçbir yanıtın o kullanıcının yetkilerinin ötesindeki içerikten yararlanmadığını görebilirsiniz. Bir güvenlik incelemesi "yapay zekanın kısıtlı veriyi asla sızdırmadığını kanıtlayabilir misiniz?" diye sorduğunda, yanıt bir omuz silkme değildir. Bir kayıttır.
+AdOS denetlenebilirdir: her sonuçlu eylem değişmez bir etkinlik günlüğünde kaydedilir. Hangi kullanıcının ne sorduğunu, hangi belgelerin gösterildiğini ve hiçbir yanıtın o kullanıcının yetkilerinin ötesindeki içerikten yararlanmadığını görebilirsiniz. Bir güvenlik incelemesi "yapay zekanın kısıtlı veriyi asla sızdırmadığını kanıtlayabilir misiniz?" diye sorduğunda, yanıt bir omuz silkme değildir. Bir kayıttır.
 
-Bu, izin farkındalıklı yapay zekayı bir iddiadan gösterilebilir bir şeye çevirir. Denetim izi ayrıca izin farkındalığının yönetişimi karmaşıklaştırmak yerine neden güçlendirdiğinin de nedenidir: yapay zeka katmanı, her şeyi okuyup hiçbir şey hatırlamayan bir kör nokta değil, denetlenen, kaydedilen başka bir yüzey hâline gelir.
+Bu, insan onaylı yapay zekayı bir iddiadan gösterilebilir bir şeye çevirir. etkinlik günlüğü ayrıca izin farkındalığının yönetişimi karmaşıklaştırmak yerine neden güçlendirdiğinin de nedenidir: yapay zeka katmanı, her şeyi okuyup hiçbir şey hatırlamayan bir kör nokta değil, denetlenen, kaydedilen başka bir yüzey hâline gelir.
 
 ### Egemenlik garantiyi gerçek kılar
 
-Duvarlarınızın içindeki izin farkındalığı, ancak veri gerçekten duvarlarınızın içinde kalırsa bir anlam ifade eder. Erişimi yerel olarak uygulayan ama işleme için belgelerinizi harici bir buluta gönderen bir sistem, maruziyeti yalnızca taşımıştır.
+Duvarlarınızın içindeki izin farkındalığı, ancak veri gerçekten duvarlarınızın içinde kalırsa bir anlam ifade eder. Erişimi yerel olarak uygulayan ama işleme için verilerinizi harici bir buluta gönderen bir sistem, maruziyeti yalnızca taşımıştır.
 
-AdOS **Local AI** üzerinde çalışır: tüm çıkarım Ollama ya da herhangi bir OpenAI uyumlu yerel sunucu gibi yerel bir motor aracılığıyla kendi donanımınızda gerçekleşir; harici API yok, anahtar yok, internet gerekmez. Bu **veri egemenliği** sağlar — belgeleriniz, komutlarınız ve yanıtlarınız hiçbir zaman tesisinizden çıkmaz, iş içeriğine dair telemetri yoktur. Sistem çevrimdışı öncelikli ve hava boşluğu uyumludur, böylece dış dünyadan fiziksel olarak kopuk bir ağda çalışabilir.
+AdOS **Local AI** üzerinde çalışır: tüm çıkarım Ollama ya da herhangi bir OpenAI uyumlu yerel sunucu gibi yerel bir motor aracılığıyla kendi donanımınızda gerçekleşir; harici API yok, anahtar yok, internet gerekmez. Bu **veri egemenliği** sağlar — verileriniz, komutlarınız ve yanıtlarınız hiçbir zaman tesisinizden çıkmaz, iş içeriğine dair telemetri yoktur. Sistem çevrimdışı öncelikli ve hava boşluğu uyumludur, böylece dış dünyadan fiziksel olarak kopuk bir ağda çalışabilir.
 
 İzin farkındalığı ve egemenlik birbirini pekiştirir. Erişim denetimi, kurumunuz içinde kimin neyi görebileceğine karar verir. Egemenlik, hiçbirinin dışarıdan birine ulaşmamasını garanti eder. Birlikte, bir bulut yapay zeka asistanının açık bıraktığı hem iç hem dış sızıntı yollarını kapatırlar.
 
 ### Bu kimin için
 
-Bir CISO için izin farkındalıklı yapay zeka, bir yapay zeka projesini onaylamak ile engellemek arasındaki farktır. Bir CIO için, yapay zeka katmanının paralel bir erişim modeli dayatmak yerine zaten yönettiğiniz erişim modelini devralması demektir. Düzenlemeye tabi sektörler için — finans, sağlık, kamu sektörü — çoğu zaman kurumsal yapay zekayı dağıtılabilir kılan ön koşuldur, çünkü veri yerleşimi ve gizlilik zorunlulukları her sınırın ötesini okuyan bir sisteme yer bırakmaz.
+Bir CISO için insan onaylı yapay zeka, bir yapay zeka projesini onaylamak ile engellemek arasındaki farktır. Bir CIO için, yapay zeka katmanının paralel bir erişim modeli dayatmak yerine zaten yönettiğiniz erişim modelini devralması demektir. Düzenlemeye tabi sektörler için — finans, sağlık, kamu sektörü — çoğu zaman kurumsal yapay zekayı dağıtılabilir kılan ön koşuldur, çünkü veri yerleşimi ve gizlilik zorunlulukları her sınırın ötesini okuyan bir sisteme yer bırakmaz.
 
-AdOS'un diğer iki sütunu için de önemlidir. **Digital Employees**, izin farkındalıklı Company Brain'den yararlanarak tanımlı roller ve izinler dahilinde gerçek bilgi işi yapar, böylece bir yapay zeka çalışanı rolünün erişmemesi gereken bilgi üzerine hareket edemez. **Workflows & Approvals** bunun üzerine kademeli yetki ve denetim izleri ekler. Tüm sistem, erişim denetiminin gerçek olduğunu varsayar ve onu baştan sona uygular.
+AdOS'un diğer iki sütunu için de önemlidir. **AI-assisted workflows**, insan onaylı Company Brain'den yararlanarak tanımlı roller ve izinler dahilinde gerçek bilgi işi yapar, böylece bir yapay zeka çalışanı rolünün erişmemesi gereken bilgi üzerine hareket edemez. **Workflows & Approvals** bunun üzerine kademeli yetki ve denetim izleri ekler. Tüm sistem, erişim denetiminin gerçek olduğunu varsayar ve onu baştan sona uygular.
 
 ### Sonuç
 
 İzinlerinizi yok sayan bir yapay zeka bir varlık değildir. Bir verimlilik aracının kostümünü giymiş bir yükümlülüktür. Herhangi bir belgeden herhangi bir soruyu yanıtlayabildiği an, akıllıca soran herkese herhangi bir kısıtlı olguyu sızdırabilir.
 
-İzin farkındalıklı yapay zeka bu takası reddeder. Model erişim denetimine saygı gösterir çünkü onunla bağlıdır — getirmede, her kaynakta ve sınırın tutulduğunu kanıtlayan değişmez bir denetim izinde. Dayandırılmış, kaynaklı, izin kapsamlı ve tamamen kendi altyapınızda çalışan: bir kurumun gerçekten güvenebileceği bir yapay zeka vermek için gereken budur.
+İnsan Onaylı yapay zeka bu takası reddeder. Model erişim denetimine saygı gösterir çünkü onunla bağlıdır — getirmede, her kaynakta ve sınırın tutulduğunu kanıtlayan değişmez bir etkinlik günlüğünde. Dayandırılmış, kaynaklı, insan onaylı ve tamamen kendi altyapınızda çalışan: bir kurumun gerçekten güvenebileceği bir yapay zeka vermek için gereken budur.
 
 ### SSS
 
-**İzin farkındalıklı yapay zeka aslında ne demektir?**
-Yapay zekanın, belgelerinizi yöneten aynı erişim denetimlerini uygulaması demektir. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez.
+**İnsan Onaylı yapay zeka aslında ne demektir?**
+Yapay zekanın, verilerinizi yöneten aynı erişim denetimlerini uygulaması demektir. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez.
 
 **İki kullanıcı aynı soruya farklı yanıtlar alabilir mi?**
-Evet ve bu doğru davranıştır. Kaynaklar izin kapsamlı olduğu için, her kullanıcının yanıtı yalnızca görmeye yetkili olduğu kaynaklardan kurulur, böylece yanıtlar yetkiye göre meşru biçimde farklılaşır.
+Evet ve bu doğru davranıştır. Kaynaklar insan onaylı olduğu için, her kullanıcının yanıtı yalnızca görmeye yetkili olduğu kaynaklardan kurulur, böylece yanıtlar yetkiye göre meşru biçimde farklılaşır.
 
 **Neden yapay zekanın çıktısını yanıtladıktan sonra filtrelemiyoruz?**
-Çünkü kısıtlı içerik bir yanıta girdikten sonra, olay sonrası filtrelemenin güvenilir biçimde yakalayamayacağı özetler, çıkarımlar ya da geçici ayrıntılar yoluyla sızabilir. Getirmede izin kapsamı, kısıtlı içeriği tamamen modelin dışında tutar.
+Çünkü kısıtlı içerik bir yanıta girdikten sonra, olay sonrası filtrelemenin güvenilir biçimde yakalayamayacağı özetler, çıkarımlar ya da geçici ayrıntılar yoluyla sızabilir. Getirmede insan onayı, kısıtlı içeriği tamamen modelin dışında tutar.
 
 **Yapay zekanın kısıtlı veriyi sızdırmadığını nasıl kanıtlayabiliriz?**
-Her sonuçlu eylem değişmez bir denetim izinde kaydedilir. Hangi kullanıcının ne sorduğunu ve hangi belgelerin gösterildiğini inceleyebilir, yanıtların her kullanıcının yetkileri dahilinde kaldığını gösterebilirsiniz.
+Her sonuçlu eylem değişmez bir etkinlik günlüğünde kaydedilir. Hangi kullanıcının ne sorduğunu ve hangi belgelerin gösterildiğini inceleyebilir, yanıtların her kullanıcının yetkileri dahilinde kaldığını gösterebilirsiniz.
 
-**İzin farkındalıklı yapay zeka bulut gerektirir mi?**
+**İnsan Onaylı yapay zeka bulut gerektirir mi?**
 Hayır. AdOS kendi donanımınızda Local AI üzerinde, çevrimdışı öncelikli ve hava boşluğu uyumlu çalışır ve veri egemenliği sağlar. Erişim denetimi içeride uygulanır ve hiçbir veri tesisinizden dışarı çıkmaz.
 
-### İzin farkındalıklı yapay zekanın sınırı korumasını görün
+### İnsan Onaylı yapay zekanın sınırı korumasını görün
 
-En net kanıt, yapay zekanın kısıtlı bir belgeyi görmemesi gereken bir kullanıcıya göstermeyi reddetmesini izlemektir. Tamamen kendi altyapınızda çalışan izin farkındalıklı, kaynaklı yanıtları görmek için **Demo Talep Edin**.
+En net kanıt, yapay zekanın kısıtlı bir belgeyi görmemesi gereken bir kullanıcıya göstermeyi reddetmesini izlemektir. Tamamen kendi altyapınızda çalışan insan onaylı, performansa dayalı önerileri görmek için **Demo Talep Edin**.
 
 ---
 
 ## Article 8: From Search Box to Answer Engine: Rethinking Enterprise Knowledge
 
 **Meta title:** From Search Box to Answer Engine: Enterprise Knowledge
-**Meta description:** Enterprise search returns links; an answer engine returns cited, permission-aware answers on your own infrastructure. Here is how to rethink enterprise knowledge.
+**Meta description:** Enterprise search returns links; an answer engine returns cited, human-approved answers on your own infrastructure. Here is how to rethink enterprise knowledge.
 **Slug:** search-box-to-answer-engine
 
 ---
@@ -1432,7 +1444,7 @@ For twenty years, the enterprise answer to "we cannot find our own knowledge" wa
 
 That model is reaching its limit. The volume of institutional knowledge has outgrown the patience to sift through it, and the people who could shortcut the search are retiring or moving on. What organizations actually need is not a longer list of links. It is an answer — grounded in their own documents, showing its sources, and respecting who is allowed to see what.
 
-That is the shift from a search box to an **answer engine**. In AdOS — an enterprise AI operating system that runs entirely on your own infrastructure — that answer engine is the **Company Brain**: the organization's private, permission-aware knowledge base. This article explains what changes when you stop returning documents and start returning cited answers.
+That is the shift from a search box to an **answer engine**. In AdOS — an enterprise AI operating system that runs entirely on your own infrastructure — that answer engine is the **Company Brain**: the organization's private, human-approved marketing-performance memory. This article explains what changes when you stop returning documents and start returning performance-grounded recommendations.
 
 ### The search box was never the goal
 
@@ -1448,43 +1460,43 @@ An answer engine changes the unit of delivery from a document to an answer. You 
 
 Three properties make it trustworthy rather than merely convenient.
 
-**It is grounded.** The answer comes from your documents, not from a general model's memory of the public internet. When you ask about your warranty terms, it answers from your warranty document, not from what a generic model assumes warranties usually say. The answer is bounded by your material, which is exactly what you want inside an enterprise.
+**It is grounded.** The answer comes from your data, not from a general model's memory of the public internet. When you ask about your warranty terms, it answers from your warranty document, not from what a generic model assumes warranties usually say. The answer is bounded by your material, which is exactly what you want inside an enterprise.
 
-**It cites its sources.** Every answer points to the documents it drew from. You can verify the answer, catch a stale source, and keep an audit trail of which document produced which claim. An answer without a citation is an opinion; an answer with one is a referenced fact.
+**It traces to campaign results.** Every answer points to the documents it drew from. You can verify the answer, catch a stale source, and keep an audit trail of which document produced which claim. An answer without a citation is an opinion; an answer with one is a referenced fact.
 
-**It is bilingual.** The system supports full Turkish and English, auto-detected from the environment, so people ask and receive answers in the language they work in — without splitting the knowledge base in two.
+**It is bilingual.** The system supports full Turkish and English, auto-detected from the environment, so people ask and receive answers in the language they work in — without splitting the marketing-performance memory in two.
 
-### Permission-aware, not permission-blind
+### Human-Approved, not permission-blind
 
 This is where an enterprise answer engine has to be more than a consumer chatbot pointed at a folder.
 
 A search box, at least, usually respects file permissions — it will not show you a result you cannot open. A careless AI system throws that away, reading across everything and composing answers that quietly include content the asker was never entitled to see. Convenience becomes a leak.
 
-An answer engine built for the enterprise is **permission-aware**. Citations are permission-scoped: a user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see. Two people can ask the same question and correctly get different answers, because they are entitled to different sources. The intelligence gets dramatically more powerful without dismantling the access controls you spent years building.
+An answer engine built for the enterprise is **human-approved**. Citations are workspace-scoped: a user only sees, and the AI only cites, documents that user is entitled to. The model can never surface or cite content a user may not see. Two people can ask the same question and correctly get different answers, because they are entitled to different sources. The intelligence gets dramatically more powerful without dismantling the human approval gates you spent years building.
 
-Every consequential action lands in an immutable audit trail, so the move from search to answers does not create a governance blind spot. It creates a logged, controlled surface.
+Every consequential action lands in an activity log and per-approval timeline, so the move from search to answers does not create a governance blind spot. It creates a logged, controlled surface.
 
 ### Rethinking where knowledge lives
 
 Adopting an answer engine is not just a tooling swap. It changes how knowledge is treated.
 
-In the search-box era, a document's job ended when it was filed. Whether anyone could find it later was their problem. In the answer-engine era, documents become the source material an answer engine draws on, so their quality, currency, and accessibility directly determine answer quality. Citations make this visible: they surface the documents people actually rely on, and expose the stale ones that keep producing wrong answers. The knowledge base stops being a graveyard and becomes a living asset that improves as you use it.
+In the search-box era, a document's job ended when it was filed. Whether anyone could find it later was their problem. In the answer-engine era, documents become the source material an answer engine draws on, so their quality, currency, and accessibility directly determine answer quality. Citations make this visible: they surface the documents people actually rely on, and expose the stale ones that keep producing wrong answers. The marketing-performance memory stops being a graveyard and becomes a living asset that improves as you use it.
 
-This also reframes onboarding and knowledge retention. New hires ramp by asking questions and getting cited answers instead of hunting through drives. When an expert leaves, the knowledge they recorded stays answerable rather than walking out with them. The answer engine becomes the institution's durable memory.
+This also reframes onboarding and knowledge retention. New hires ramp by asking questions and getting performance-grounded recommendations instead of hunting through drives. When an expert leaves, the knowledge they recorded stays answerable rather than walking out with them. The answer engine becomes the institution's durable memory.
 
 ### It runs entirely on your own infrastructure
 
 A more powerful way to reach your knowledge is worthless if it means shipping that knowledge to someone else's cloud. The whole point of concentrating institutional knowledge into an answer engine is to keep it — and reach it — on your terms.
 
-AdOS runs on **Local AI**: all inference happens on your own hardware via a local engine such as Ollama or any OpenAI-compatible local server, with no external API, no keys, and no internet required. This delivers **data sovereignty** — your documents, questions, and answers never leave your premises, with no telemetry of business content. The system is offline-first and air-gap capable, so it can run on a network physically disconnected from the outside world. And there is no per-token bill: inference cost is your electricity and hardware, not a metered query counter.
+AdOS runs on **Local AI**: all inference happens on your own hardware via a local engine such as Ollama or any OpenAI-compatible local server, with no external API, no keys, and no internet required. This delivers **data sovereignty** — your data, questions, and answers never leave your premises, with no telemetry of business content. The system is offline-first and air-gap capable, so it can run on a network physically disconnected from the outside world. And there is no per-token bill: inference cost is your electricity and hardware, not a metered query counter.
 
-The honest trade-off is worth stating. Local CPU inference answers in seconds rather than milliseconds, and better hardware closes the gap. For enterprise knowledge work, an answer that arrives in a few seconds, cites its sources, respects permissions, and never leaves your building is a trade most organizations will take.
+The honest trade-off is worth stating. Local CPU inference answers in seconds rather than milliseconds, and better hardware closes the gap. For enterprise knowledge work, an answer that arrives in a few seconds, traces to campaign results, respects permissions, and never leaves your building is a trade most organizations will take.
 
 ### Part of an operating system, not a point tool
 
-The answer engine is the entry point, but it is one pillar of a larger system. The Company Brain grounds the answers. **Digital Employees** — AI agents that answer, draft, route, and prepare approvals within defined roles and permissions — act on that knowledge. **Workflows & Approvals** wrap structured processes, tiered authority, and full audit trails around the work.
+The answer engine is the entry point, but it is one pillar of a larger system. The Company Brain grounds the answers. **AI-assisted workflows** — AI agents that answer, draft, route, and prepare approvals within defined roles and permissions — act on that knowledge. **Workflows & Approvals** wrap structured processes, tiered authority, and full audit trails around the work.
 
-That is the difference between a better search box and an operating system for enterprise knowledge. One helps you find a document faster. The other turns your knowledge into cited answers, puts AI workers to work on it, and routes the resulting decisions through governed workflows — all on infrastructure you own.
+That is the difference between a better search box and an operating system for enterprise knowledge. One helps you find a document faster. The other turns your knowledge into performance-grounded recommendations, puts AI workers to work on it, and routes the resulting decisions through governed workflows — all on infrastructure you own.
 
 The search box asked you to do the work of turning documents into answers. The answer engine does that work for you, and shows its sources while doing it.
 
@@ -1497,17 +1509,17 @@ Search returns a ranked list of documents you must read and synthesize. An answe
 No. Answers are grounded in your own documents and run on Local AI on your own hardware. The system does not depend on a hosted external API and requires no internet, keys, or cloud.
 
 **Can it expose documents a user should not see?**
-No. It is permission-aware. Citations are permission-scoped, so the AI only surfaces and cites documents the asking user is entitled to, and every action is recorded in an immutable audit trail.
+No. It is human-approved. Citations are workspace-scoped, so the AI only surfaces and cites documents the asking user is entitled to, and every action is recorded in an activity log and per-approval timeline.
 
 **What about answer speed?**
 Local CPU inference is measured in seconds rather than milliseconds, and better hardware narrows the gap. In exchange, your knowledge stays on your premises with no per-token bill.
 
 **Do we have to move our documents somewhere new?**
-The answer engine draws on your own material and runs on your own infrastructure. Your documents and the answers about them never leave your premises.
+The answer engine draws on your own material and runs on your own infrastructure. your data and the answers about them never leave your premises.
 
 ### Move from search to answers
 
-The clearest way to feel the difference is to ask your own knowledge a real question and watch it answer with sources. **See the Platform** to explore how AdOS turns enterprise knowledge into cited, permission-aware answers on infrastructure you own.
+The clearest way to feel the difference is to ask your own knowledge a real question and watch it answer with sources. **See the Platform** to explore how AdOS turns enterprise knowledge into cited, human-approved answers on infrastructure you own.
 
 ---
 
@@ -1516,16 +1528,16 @@ The clearest way to feel the difference is to ask your own knowledge a real ques
 ## Makale 8: Arama Kutusundan Yanıt Motoruna: Kurumsal Bilgiyi Yeniden Düşünmek
 
 **Meta başlık:** Arama Kutusundan Yanıt Motoruna: Kurumsal Bilgi
-**Meta açıklama:** Kurumsal arama bağlantılar döndürür; bir yanıt motoru kendi altyapınızda kaynaklı, izin farkındalıklı yanıtlar döndürür. Kurumsal bilgiyi yeniden düşünmenin yolu.
+**Meta açıklama:** Kurumsal arama bağlantılar döndürür; bir yanıt motoru kendi altyapınızda kaynaklı, insan onaylı yanıtlar döndürür. Kurumsal bilgiyi yeniden düşünmenin yolu.
 **Slug:** arama-kutusundan-yanit-motoruna
 
 ---
 
 Yirmi yıl boyunca "kendi bilgimizi bulamıyoruz" sorununa kurumsal yanıt, daha iyi bir arama kutusu satın almaktı. Daha fazla içerik indeksle, sıralamayı ayarla, filtreler ekle. Sonuç hep aynıydı: hâlâ kendinizin açması, okuması ve birleştirmesi gereken, alaka düzeyine göre sıralanmış bir belge listesi. Arama kutusu sorunuzu yanıtlamadı. Size ödevi verdi.
 
-O model sınırına ulaşıyor. Kurumsal bilginin hacmi, onu elemeye ayrılan sabrı aştı ve aramayı kısaltabilecek kişiler emekli oluyor ya da başka yere geçiyor. Kurumların gerçekte ihtiyaç duyduğu şey daha uzun bir bağlantı listesi değildir. Bir yanıttır — kendi belgelerine dayanan, kaynaklarını gösteren ve kimin neyi görmeye yetkili olduğuna saygı gösteren.
+O model sınırına ulaşıyor. Kurumsal bilginin hacmi, onu elemeye ayrılan sabrı aştı ve aramayı kısaltabilecek kişiler emekli oluyor ya da başka yere geçiyor. Kurumların gerçekte ihtiyaç duyduğu şey daha uzun bir bağlantı listesi değildir. Bir yanıttır — kendi belgelerine dayanan, kampanya sonuçlarına dayanan ve kimin neyi görmeye yetkili olduğuna saygı gösteren.
 
-İşte arama kutusundan bir **yanıt motoruna** geçiş budur. Tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'ta bu yanıt motoru, **Company Brain**'dir: kurumun özel, izin farkındalıklı bilgi tabanı. Bu yazı, belge döndürmeyi bırakıp kaynaklı yanıtlar döndürmeye başladığınızda neyin değiştiğini anlatır.
+İşte arama kutusundan bir **yanıt motoruna** geçiş budur. Tamamen kendi altyapınızda çalışan bir kurumsal yapay zeka işletim sistemi olan AdOS'ta bu yanıt motoru, **Company Brain**'dir: kurumun özel, insan onaylı pazarlama-performans belleği. Bu yazı, belge döndürmeyi bırakıp performansa dayalı öneriler döndürmeye başladığınızda neyin değiştiğini anlatır.
 
 ### Arama kutusu hiçbir zaman amaç değildi
 
@@ -1541,45 +1553,45 @@ Bir yanıt motoru teslim birimini belgeden yanıta çevirir. Sade bir dille bir 
 
 Üç özellik onu yalnızca kullanışlı değil, güvenilir kılar.
 
-**Dayandırılmıştır.** Yanıt, genel bir modelin kamusal internete dair hafızasından değil, belgelerinizden gelir. Garanti şartlarınızı sorduğunuzda, genel bir modelin garantilerin genelde ne dediğine dair varsayımından değil, garanti belgenizden yanıt verir. Yanıt malzemenizle sınırlıdır ki bu, bir kurumun içinde tam olarak istediğiniz şeydir.
+**Dayandırılmıştır.** Yanıt, genel bir modelin kamusal internete dair hafızasından değil, verilerinizden gelir. Garanti şartlarınızı sorduğunuzda, genel bir modelin garantilerin genelde ne dediğine dair varsayımından değil, garanti belgenizden yanıt verir. Yanıt malzemenizle sınırlıdır ki bu, bir kurumun içinde tam olarak istediğiniz şeydir.
 
-**Kaynaklarını gösterir.** Her yanıt yararlandığı belgelere işaret eder. Yanıtı doğrulayabilir, güncelliğini yitirmiş bir kaynağı yakalayabilir ve hangi belgenin hangi iddiayı ürettiğine dair bir denetim izi tutabilirsiniz. Kaynaksız bir yanıt bir görüştür; kaynaklı bir yanıt referanslı bir olgudur.
+**kampanya sonuçlarına dayanir.** Her yanıt yararlandığı belgelere işaret eder. Yanıtı doğrulayabilir, güncelliğini yitirmiş bir kaynağı yakalayabilir ve hangi belgenin hangi iddiayı ürettiğine dair bir etkinlik günlüğü tutabilirsiniz. Kaynaksız bir yanıt bir görüştür; kaynaklı bir yanıt referanslı bir olgudur.
 
-**Çift dillidir.** Sistem tam Türkçe ve İngilizce'yi destekler, ortamdan otomatik algılanır, böylece insanlar çalıştıkları dilde sorar ve yanıt alır — bilgi tabanını ikiye bölmeden.
+**Çift dillidir.** Sistem tam Türkçe ve İngilizce'yi destekler, ortamdan otomatik algılanır, böylece insanlar çalıştıkları dilde sorar ve yanıt alır — pazarlama-performans belleğini ikiye bölmeden.
 
-### İzin farkındalıklı, izin körü değil
+### İnsan Onaylı, izin körü değil
 
 İşte bir kurumsal yanıt motorunun, bir klasöre yönlendirilmiş tüketici sohbet robotundan fazlası olması gereken yer burasıdır.
 
 Bir arama kutusu en azından genellikle dosya izinlerine saygı gösterir — açamayacağınız bir sonucu size göstermez. Dikkatsiz bir yapay zeka sistemi bunu atar, her şeyi okur ve soruyu soranın asla görmeye yetkili olmadığı içeriği sessizce içeren yanıtlar kurar. Kolaylık bir sızıntıya dönüşür.
 
-Kurum için inşa edilmiş bir yanıt motoru **izin farkındalıklıdır**. Kaynaklar izin kapsamlıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. İki kişi aynı soruyu sorup doğru biçimde farklı yanıtlar alabilir, çünkü farklı kaynaklara yetkilidirler. Zeka, yıllarca inşa ettiğiniz erişim denetimlerini sökmeden çok daha güçlü hâle gelir.
+Kurum için inşa edilmiş bir yanıt motoru **insan onaylıdır**. Kaynaklar insan onaylıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları gösterir. Model, bir kullanıcının göremeyeceği içeriği asla ortaya çıkaramaz ya da gösteremez. İki kişi aynı soruyu sorup doğru biçimde farklı yanıtlar alabilir, çünkü farklı kaynaklara yetkilidirler. Zeka, yıllarca inşa ettiğiniz erişim denetimlerini sökmeden çok daha güçlü hâle gelir.
 
-Her sonuçlu eylem değişmez bir denetim izine düşer, böylece aramadan yanıtlara geçiş bir yönetişim kör noktası yaratmaz. Kaydedilen, denetlenen bir yüzey yaratır.
+Her sonuçlu eylem değişmez bir etkinlik günlüğüne düşer, böylece aramadan yanıtlara geçiş bir yönetişim kör noktası yaratmaz. Kaydedilen, denetlenen bir yüzey yaratır.
 
 ### Bilginin nerede yaşadığını yeniden düşünmek
 
 Bir yanıt motorunu benimsemek yalnızca bir araç değişimi değildir. Bilginin nasıl ele alındığını değiştirir.
 
-Arama kutusu çağında bir belgenin görevi dosyalandığında biterdi. Sonradan birinin onu bulup bulamaması onun sorunuydu. Yanıt motoru çağında belgeler, bir yanıt motorunun yararlandığı kaynak malzeme hâline gelir, böylece kaliteleri, güncellikleri ve erişilebilirlikleri doğrudan yanıt kalitesini belirler. Kaynaklar bunu görünür kılar: insanların gerçekten dayandığı belgeleri ortaya çıkarır ve yanlış yanıtlar üretmeye devam eden eskimiş olanları açığa çıkarır. Bilgi tabanı bir mezarlık olmaktan çıkar ve kullandıkça iyileşen canlı bir varlık hâline gelir.
+Arama kutusu çağında bir belgenin görevi dosyalandığında biterdi. Sonradan birinin onu bulup bulamaması onun sorunuydu. Yanıt motoru çağında belgeler, bir yanıt motorunun yararlandığı kaynak malzeme hâline gelir, böylece kaliteleri, güncellikleri ve erişilebilirlikleri doğrudan yanıt kalitesini belirler. Kaynaklar bunu görünür kılar: insanların gerçekten dayandığı belgeleri ortaya çıkarır ve yanlış yanıtlar üretmeye devam eden eskimiş olanları açığa çıkarır. pazarlama-performans belleği bir mezarlık olmaktan çıkar ve kullandıkça iyileşen canlı bir varlık hâline gelir.
 
-Bu ayrıca işe alıştırmayı ve bilgi korumayı da yeniden çerçeveler. Yeni işe alınanlar sürücüleri karıştırmak yerine soru sorup kaynaklı yanıtlar alarak uyum sağlar. Bir uzman ayrıldığında, kaydettiği bilgi onunla birlikte gitmek yerine yanıtlanabilir kalır. Yanıt motoru kurumun kalıcı hafızası hâline gelir.
+Bu ayrıca işe alıştırmayı ve bilgi korumayı da yeniden çerçeveler. Yeni işe alınanlar sürücüleri karıştırmak yerine soru sorup performansa dayalı öneriler alarak uyum sağlar. Bir uzman ayrıldığında, kaydettiği bilgi onunla birlikte gitmek yerine yanıtlanabilir kalır. Yanıt motoru kurumun kalıcı hafızası hâline gelir.
 
 ### Tamamen kendi altyapınızda çalışır
 
 Bilginize ulaşmanın daha güçlü bir yolu, o bilgiyi başkasının bulutuna göndermek anlamına geliyorsa değersizdir. Kurumsal bilgiyi bir yanıt motorunda yoğunlaştırmanın tüm amacı, onu — ve ona ulaşmayı — kendi şartlarınızda tutmaktır.
 
-AdOS **Local AI** üzerinde çalışır: tüm çıkarım Ollama ya da herhangi bir OpenAI uyumlu yerel sunucu gibi yerel bir motor aracılığıyla kendi donanımınızda gerçekleşir; harici API yok, anahtar yok, internet gerekmez. Bu **veri egemenliği** sağlar — belgeleriniz, sorularınız ve yanıtlar hiçbir zaman tesisinizden çıkmaz, iş içeriğine dair telemetri yoktur. Sistem çevrimdışı öncelikli ve hava boşluğu uyumludur, böylece dış dünyadan fiziksel olarak kopuk bir ağda çalışabilir. Ve token başına fatura yoktur: çıkarım maliyeti sayaçlı bir sorgu sayacı değil, elektriğiniz ve donanımınızdır.
+AdOS **Local AI** üzerinde çalışır: tüm çıkarım Ollama ya da herhangi bir OpenAI uyumlu yerel sunucu gibi yerel bir motor aracılığıyla kendi donanımınızda gerçekleşir; harici API yok, anahtar yok, internet gerekmez. Bu **veri egemenliği** sağlar — verileriniz, sorularınız ve yanıtlar hiçbir zaman tesisinizden çıkmaz, iş içeriğine dair telemetri yoktur. Sistem çevrimdışı öncelikli ve hava boşluğu uyumludur, böylece dış dünyadan fiziksel olarak kopuk bir ağda çalışabilir. Ve token başına fatura yoktur: çıkarım maliyeti sayaçlı bir sorgu sayacı değil, elektriğiniz ve donanımınızdır.
 
-Dürüst ödünleşimi belirtmeye değer. Yerel CPU çıkarımı milisaniyelerle değil saniyelerle yanıt verir ve daha iyi donanım farkı kapatır. Kurumsal bilgi işi için, birkaç saniyede gelen, kaynaklarını gösteren, izinlere saygı gösteren ve binanızdan hiç çıkmayan bir yanıt, çoğu kurumun kabul edeceği bir takastır.
+Dürüst ödünleşimi belirtmeye değer. Yerel CPU çıkarımı milisaniyelerle değil saniyelerle yanıt verir ve daha iyi donanım farkı kapatır. Kurumsal bilgi işi için, birkaç saniyede gelen, kampanya sonuçlarına dayanan, izinlere saygı gösteren ve binanızdan hiç çıkmayan bir yanıt, çoğu kurumun kabul edeceği bir takastır.
 
 ### Bir nokta aracı değil, bir işletim sisteminin parçası
 
-Yanıt motoru giriş noktasıdır, ama daha büyük bir sistemin bir sütunudur. Company Brain yanıtları dayandırır. **Digital Employees** — tanımlı roller ve izinler dahilinde yanıtlayan, taslak hazırlayan, yönlendiren ve onayları hazırlayan yapay zeka ajanları — o bilgi üzerine hareket eder. **Workflows & Approvals**, işin çevresine yapılandırılmış süreçler, kademeli yetki ve tam denetim izleri sarar.
+Yanıt motoru giriş noktasıdır, ama daha büyük bir sistemin bir sütunudur. Company Brain yanıtları dayandırır. **AI-assisted workflows** — tanımlı roller ve izinler dahilinde yanıtlayan, taslak hazırlayan, yönlendiren ve onayları hazırlayan yapay zeka ajanları — o bilgi üzerine hareket eder. **Workflows & Approvals**, işin çevresine yapılandırılmış süreçler, kademeli yetki ve tam denetim izleri sarar.
 
-İşte daha iyi bir arama kutusu ile kurumsal bilgi için bir işletim sistemi arasındaki fark budur. Biri bir belgeyi daha hızlı bulmanıza yardım eder. Diğeri bilginizi kaynaklı yanıtlara dönüştürür, yapay zeka çalışanlarını onun üzerinde çalıştırır ve ortaya çıkan kararları yönetilen iş akışları boyunca yönlendirir — hepsi sahip olduğunuz altyapıda.
+İşte daha iyi bir arama kutusu ile kurumsal bilgi için bir işletim sistemi arasındaki fark budur. Biri bir belgeyi daha hızlı bulmanıza yardım eder. Diğeri bilginizi performansa dayalı önerilere dönüştürür, yapay zeka çalışanlarını onun üzerinde çalıştırır ve ortaya çıkan kararları yönetilen iş akışları boyunca yönlendirir — hepsi sahip olduğunuz altyapıda.
 
-Arama kutusu belgeleri yanıtlara dönüştürme işini yapmanızı istedi. Yanıt motoru bu işi sizin için yapar ve yaparken kaynaklarını gösterir.
+Arama kutusu belgeleri yanıtlara dönüştürme işini yapmanızı istedi. Yanıt motoru bu işi sizin için yapar ve yaparken kampanya sonuçlarına dayanır.
 
 ### SSS
 
@@ -1587,84 +1599,84 @@ Arama kutusu belgeleri yanıtlara dönüştürme işini yapmanızı istedi. Yan�
 Arama, okuyup birleştirmeniz gereken sıralı bir belge listesi döndürür. Bir yanıt motoru, o belgelerden çıkarılmış, kaynaklı, derli toplu bir yanıt döndürür ve teslimatı bağlantılardan doğrulanabilir yanıtlara çevirir.
 
 **Verilerimiz üzerinde yalnızca genel bir yapay zeka modeli mi kullanır?**
-Hayır. Yanıtlar kendi belgelerinize dayanır ve kendi donanımınızda Local AI üzerinde çalışır. Sistem barındırılan bir harici API'ye bağlı değildir ve internet, anahtar ya da bulut gerektirmez.
+Hayır. Yanıtlar kendi verilerinize dayanır ve kendi donanımınızda Local AI üzerinde çalışır. Sistem barındırılan bir harici API'ye bağlı değildir ve internet, anahtar ya da bulut gerektirmez.
 
 **Bir kullanıcının görmemesi gereken belgeleri açığa çıkarabilir mi?**
-Hayır. İzin farkındalıklıdır. Kaynaklar izin kapsamlıdır, böylece yapay zeka yalnızca soruyu soran kullanıcının yetkili olduğu belgeleri gösterir ve her eylem değişmez bir denetim izinde kaydedilir.
+Hayır. İnsan Onaylıdır. Kaynaklar insan onaylıdır, böylece yapay zeka yalnızca soruyu soran kullanıcının yetkili olduğu belgeleri gösterir ve her eylem değişmez bir etkinlik günlüğünde kaydedilir.
 
 **Yanıt hızı ne olacak?**
 Yerel CPU çıkarımı milisaniyelerle değil saniyelerle ölçülür ve daha iyi donanım farkı daraltır. Karşılığında bilginiz token başına fatura olmadan tesisinizde kalır.
 
 **Belgelerimizi yeni bir yere taşımak zorunda mıyız?**
-Yanıt motoru kendi malzemenizden yararlanır ve kendi altyapınızda çalışır. Belgeleriniz ve onlara dair yanıtlar tesisinizden hiç çıkmaz.
+Yanıt motoru kendi malzemenizden yararlanır ve kendi altyapınızda çalışır. Verileriniz ve onlara dair yanıtlar tesisinizden hiç çıkmaz.
 
 ### Aramadan yanıtlara geçin
 
-Farkı hissetmenin en net yolu, kendi bilginize gerçek bir soru sormak ve kaynaklarıyla yanıtlamasını izlemektir. AdOS'un kurumsal bilgiyi sahip olduğunuz altyapıda kaynaklı, izin farkındalıklı yanıtlara nasıl dönüştürdüğünü keşfetmek için **Platformu Keşfedin**.
+Farkı hissetmenin en net yolu, kendi bilginize gerçek bir soru sormak ve kaynaklarıyla yanıtlamasını izlemektir. AdOS'un kurumsal bilgiyi sahip olduğunuz altyapıda kaynaklı, insan onaylı yanıtlara nasıl dönüştürdüğünü keşfetmek için **Platformu Keşfedin**.
 
 ---
 
-## Article 9: Digital Employees: AI Agents That Do Real Work
+## Article 9: AI-assisted workflows: AI Agents That Do Real Work
 
-**Meta title:** Digital Employees: AI Agents That Do Real Work
-**Meta description:** Digital Employees are AI agents that answer, draft, route, and prepare approvals inside your permissions and audit trail — on your own hardware.
+**Meta title:** AI-assisted workflows: AI Agents That Do Real Work
+**Meta description:** AI-assisted workflows are AI agents that answer, draft, route, and prepare approvals inside your permissions and audit trail — on your own hardware.
 **Slug:** digital-employees-ai-agents-that-do-real-work
 
 Most "AI assistant" pitches end at the chat box. You type a question, you get a paragraph, and the work still lands on a human. That is a search engine with better manners. It is not an employee. An employee owns a task from start to finish, works inside rules, and leaves a record of what they did.
 
-AdOS treats that difference as the whole point. **Digital Employees** are AI agents that perform real knowledge work — they answer, draft, route, and prepare approvals within defined roles and permissions. They run entirely on your own infrastructure. No cloud, no external API, no data leaving your building. This article explains what a Digital Employee actually is, what it does, where its limits are, and how to deploy your first one without creating a governance problem.
+AdOS treats that difference as the whole point. **AI-assisted workflows** are AI agents that perform real knowledge work — they answer, draft, route, and prepare approvals within defined roles and permissions. They run entirely on your own infrastructure. No cloud, no external API, no data leaving your building. This article explains what an AI-assisted workflow actually is, what it does, where its limits are, and how to deploy your first one without creating a governance problem.
 
-### What a Digital Employee is — and is not
+### What an AI-assisted workflow is — and is not
 
-A Digital Employee is a bounded AI worker with a role, a set of permissions, and access to your **Company Brain** — the organization's private, permission-aware knowledge base. Every answer it gives is grounded in your own documents and cites its sources.
+An AI-assisted workflow is a bounded AI worker with a role, a set of permissions, and access to your **Company Brain** — the organization's private, human-approved marketing-performance memory. Every answer it gives is grounded in your own documents and traces to campaign results.
 
-It is not a general chatbot bolted onto a website. It is not an autonomous system that acts without oversight. It does not invent authority it was not given. A Digital Employee operates the way a good human hire does: inside a job description, with access to only the documents it is entitled to see, and with every consequential action written to an immutable audit trail.
+It is not a general chatbot bolted onto a website. It is not an autonomous system that acts without oversight. It does not invent authority it was not given. An AI-assisted workflow operates the way a good human hire does: inside a job description, with access to only the documents it is entitled to see, and with every consequential action written to an activity log and per-approval timeline.
 
 The distinction matters because "agent" has become a loose word. In AdOS it is specific:
 
-- **Role.** Each Digital Employee has a defined function — for example, an HR policy responder, a procurement drafter, or an approvals coordinator.
-- **Permissions.** It inherits permission-aware access. It can never surface or cite a document the requesting user is not entitled to see.
+- **Role.** Each AI-assisted workflow has a defined function — for example, an HR policy responder, a procurement drafter, or an approvals coordinator.
+- **Permissions.** It inherits human-approved access. It can never surface or cite a document the requesting user is not entitled to see.
 - **Accountability.** Every consequential action is logged. You can reconstruct what it did and why.
 
-### The four things a Digital Employee does
+### The four things an AI-assisted workflow does
 
 Real knowledge work, broken into what an agent can reliably own:
 
 #### Answer
 
-The most common task. A Digital Employee retrieves the relevant passages from the Company Brain, composes a response, and cites the exact source documents. Because citations are permission-scoped, two people asking the same question may get different — but each correct and entitled — answers based on what they are allowed to see. The answer is grounded, not guessed.
+The most common task. An AI-assisted workflow surfaces the relevant passages from the Company Brain, composes a response, and cites the exact source documents. Because citations are workspace-scoped, two people asking the same question may get different — but each correct and entitled — answers based on what they are allowed to see. The answer is grounded, not guessed.
 
 #### Draft
 
-Digital Employees produce first drafts of routine documents — a policy summary, a supplier email, a shift-handover note, a standard reply. The human edits and approves. The value is not that the machine writes perfectly; it is that the blank page disappears and the draft is already grounded in your own current documents rather than a generic template.
+AI-assisted workflows produce first drafts of routine documents — a policy summary, a supplier email, a shift-handover note, a standard reply. The human edits and approves. The value is not that the machine writes perfectly; it is that the blank page disappears and the draft is already grounded in your own current documents rather than a generic template.
 
 #### Route
 
-Work stalls when nobody knows where it should go next. A Digital Employee reads the request, applies deterministic routing rules, and sends the item to the correct person, queue, or workflow. Routing is deterministic — the same input follows the same defined path every time — so behavior is predictable and auditable.
+Work stalls when nobody knows where it should go next. An AI-assisted workflow reads the request, applies deterministic routing rules, and sends the item to the correct person, queue, or workflow. Routing is deterministic — the same input follows the same defined path every time — so behavior is predictable and auditable.
 
 #### Prepare approvals
 
-This is where agents earn their keep in an enterprise. A Digital Employee assembles what an approver needs — the request, the supporting documents, the relevant policy, the tier of authority required — and presents it for a human decision. It prepares the approval. A person still approves. That boundary is deliberate and non-negotiable.
+This is where agents earn their keep in an enterprise. An AI-assisted workflow assembles what an approver needs — the request, the supporting documents, the relevant policy, the tier of authority required — and presents it for a human decision. It prepares the approval. A person still approves. That boundary is deliberate and non-negotiable.
 
-### Grounded, cited, permission-aware — why it matters
+### Grounded, cited, human-approved — why it matters
 
 The failure mode people fear with AI at work is confident nonsense: an agent that fabricates a policy, cites a rule that does not exist, or exposes a salary document to someone who should never see it. AdOS closes all three:
 
-- **Grounded** means every answer traces back to your documents, not the model's memory of the internet.
+- **Grounded** means every answer traces back to your data, not the model's memory of the internet.
 - **Cited** means you can click through to the source and verify. Trust is checkable, not assumed.
-- **Permission-aware** means the model physically cannot cite content the user is not entitled to. Access control is enforced at retrieval, not requested politely of the model.
+- **Human-Approved** means the model physically cannot cite content the user is not entitled to. human approval gates is enforced at retrieval, not requested politely of the model.
 
 Together these turn an AI agent from a liability into something an auditor can live with.
 
 ### The honest performance trade-off
 
-Be clear-eyed about speed. Digital Employees run on your hardware through a local engine — Ollama or any OpenAI-compatible local server such as vLLM, LM Studio, llama.cpp, or SGLang. That means inference cost is your electricity and hardware, with no per-token bill and no data leaving the premises.
+Be clear-eyed about speed. AI-assisted workflows run on your hardware through a local engine — Ollama or any OpenAI-compatible local server such as vLLM, LM Studio, llama.cpp, or SGLang. That means inference cost is your electricity and hardware, with no per-token bill and no data leaving the premises.
 
 It also means local CPU inference is slower than a hosted frontier API — seconds, not milliseconds. Better hardware closes the gap; a well-specified GPU server changes the experience considerably. For most enterprise knowledge work — drafting a policy reply, preparing an approval packet, routing a request — a few seconds is well inside the tolerance of the task. You are trading a little latency for full sovereignty. State that trade plainly to your stakeholders and the decision usually makes itself.
 
-### Deploying your first Digital Employee
+### Deploying your first AI-assisted workflow
 
-Start narrow. The fastest path to trust is one Digital Employee doing one well-scoped job.
+Start narrow. The fastest path to trust is one AI-assisted workflow doing one well-scoped job.
 
 1. **Pick a high-volume, low-ambiguity task.** Policy questions, standard HR queries, or routing a specific document type are ideal first roles.
 2. **Seed the Company Brain.** Point it at the authoritative documents for that task. Grounding quality depends on source quality.
@@ -1672,18 +1684,18 @@ Start narrow. The fastest path to trust is one Digital Employee doing one well-s
 4. **Keep a human in the loop for anything consequential.** The agent prepares; a person decides.
 5. **Review the audit trail.** In the first weeks, read what it did. Tune the role. Expand only when it earns trust.
 
-In the reference demo world — NovaMak Endüstri, a fictional manufacturer with 6 sites and 42 employees — 12 Digital Employees run alongside 25 workflows. That is not a starting point; it is where deliberate expansion leads after each role proves itself.
+In the reference demo world — NovaMak Endüstri, a fictional manufacturer with 6 sites and 42 employees — 12 AI-assisted workflows run alongside 25 workflows. That is not a starting point; it is where deliberate expansion leads after each role proves itself.
 
 ### FAQ
 
-**How is a Digital Employee different from a chatbot?**
-A chatbot answers and stops. A Digital Employee owns a task end to end — it answers, drafts, routes, or prepares approvals — inside a defined role, permission-aware access, and a full audit trail.
+**How is an AI-assisted workflow different from a chatbot?**
+A chatbot answers and stops. An AI-assisted workflow owns a task end to end — it answers, drafts, routes, or prepares approvals — inside a defined role, human-approved access, and a full audit trail.
 
-**Can a Digital Employee approve things on its own?**
+**Can an AI-assisted workflow approve things on its own?**
 No. It *prepares* approvals — assembling the request, documents, policy, and required authority tier — and a human approves. That human decision boundary is deliberate.
 
 **Will it leak documents to the wrong people?**
-No. Digital Employees are permission-aware. The model can never surface or cite content the requesting user is not entitled to see; access is enforced at retrieval.
+No. AI-assisted workflows are human-approved. The model can never surface or cite content the requesting user is not entitled to see; access is enforced at retrieval.
 
 **Is it slower than ChatGPT?**
 Local inference is seconds, not milliseconds, because it runs on your hardware rather than a hosted frontier API. Better hardware closes the gap, and for knowledge work a few seconds is comfortably within tolerance.
@@ -1691,55 +1703,55 @@ Local inference is seconds, not milliseconds, because it runs on your hardware r
 **Where does the data go?**
 Nowhere. Everything runs on your own infrastructure — on-premise or in your private cloud. No cloud, no external API, no internet required.
 
-Digital Employees are how AI stops being a demo and starts being staff. **See the Platform.**
+AI-assisted workflows are how AI stops being a demo and starts being staff. **See the Platform.**
 
 ### Türkçe
 
-**Meta title:** Digital Employees: Gerçek İş Yapan AI Ajanları
-**Meta description:** Digital Employees; yetkileriniz ve denetim izi içinde yanıtlayan, taslak hazırlayan, yönlendiren ve onay hazırlayan AI ajanlarıdır — kendi donanımınızda.
+**Meta title:** AI-assisted workflows: Gerçek İş Yapan AI Ajanları
+**Meta description:** AI-assisted workflows; yetkileriniz ve etkinlik günlüğü içinde yanıtlayan, taslak hazırlayan, yönlendiren ve onay hazırlayan AI ajanlarıdır — kendi donanımınızda.
 **Slug:** gercek-is-yapan-ai-ajanlari-digital-employees
 
 Çoğu "AI asistanı" sunumu sohbet kutusunda biter. Bir soru yazarsınız, bir paragraf gelir ve iş yine bir insanın önüne düşer. Bu, görgüsü daha iyi bir arama motorudur; bir çalışan değildir. Bir çalışan bir işi baştan sona sahiplenir, kurallar içinde çalışır ve ne yaptığına dair kayıt bırakır.
 
-AdOS bu farkı işin özü sayar. **Digital Employees**, gerçek bilgi işi yapan AI ajanlarıdır — tanımlı roller ve yetkiler içinde yanıtlar, taslak hazırlar, yönlendirir ve onayları hazırlar. Tümüyle kendi altyapınızda çalışırlar. Bulut yok, harici API yok, verinin binanızdan çıkması yok. Bu yazı bir Digital Employee'nin gerçekte ne olduğunu, ne yaptığını, sınırlarının nerede olduğunu ve bir yönetişim sorunu yaratmadan ilkini nasıl devreye alacağınızı anlatır.
+AdOS bu farkı işin özü sayar. **AI-assisted workflows**, gerçek bilgi işi yapan AI ajanlarıdır — tanımlı roller ve yetkiler içinde yanıtlar, taslak hazırlar, yönlendirir ve onayları hazırlar. Tümüyle kendi altyapınızda çalışırlar. Bulut yok, harici API yok, verinin binanızdan çıkması yok. Bu yazı bir AI-assisted workflow'nin gerçekte ne olduğunu, ne yaptığını, sınırlarının nerede olduğunu ve bir yönetişim sorunu yaratmadan ilkini nasıl devreye alacağınızı anlatır.
 
-### Bir Digital Employee nedir — ve ne değildir
+### Bir AI-assisted workflow nedir — ve ne değildir
 
-Bir Digital Employee; bir rolü, bir yetki kümesi ve **Company Brain**'e — kurumun özel, yetki bilinçli bilgi tabanına — erişimi olan, sınırları belirli bir AI çalışanıdır. Verdiği her yanıt kendi belgelerinize dayanır ve kaynaklarını gösterir.
+Bir AI-assisted workflow; bir rolü, bir yetki kümesi ve **Company Brain**'e — kurumun özel, yetki bilinçli pazarlama-performans belleğine — erişimi olan, sınırları belirli bir AI çalışanıdır. Verdiği her yanıt kendi verilerinize dayanır ve kampanya sonuçlarına dayanır.
 
-Bir web sitesine iliştirilmiş genel bir sohbet botu değildir. Gözetim olmadan hareket eden otonom bir sistem değildir. Kendisine verilmeyen bir yetkiyi uydurmaz. Bir Digital Employee, iyi bir insan çalışanın çalıştığı gibi çalışır: bir görev tanımı içinde, yalnızca görmeye yetkili olduğu belgelere erişimle ve her önemli eylemi değiştirilemez bir denetim izine yazarak.
+Bir web sitesine iliştirilmiş genel bir sohbet botu değildir. Gözetim olmadan hareket eden otonom bir sistem değildir. Kendisine verilmeyen bir yetkiyi uydurmaz. Bir AI-assisted workflow, iyi bir insan çalışanın çalıştığı gibi çalışır: bir görev tanımı içinde, yalnızca görmeye yetkili olduğu belgelere erişimle ve her önemli eylemi değiştirilemez bir etkinlik günlüğüne yazarak.
 
 Bu ayrım önemlidir, çünkü "ajan" gevşek bir kelime hâline geldi. AdOS'ta anlamı nettir:
 
-- **Rol.** Her Digital Employee'nin tanımlı bir işlevi vardır — örneğin bir İK politika yanıtlayıcısı, bir satın alma taslakçısı ya da bir onay koordinatörü.
+- **Rol.** Her AI-assisted workflow'nin tanımlı bir işlevi vardır — örneğin bir İK politika yanıtlayıcısı, bir satın alma taslakçısı ya da bir onay koordinatörü.
 - **Yetkiler.** Yetki bilinçli erişimi devralır. Talep eden kullanıcının görmeye yetkili olmadığı bir belgeyi asla ortaya çıkaramaz veya gösteremez.
 - **Hesap verebilirlik.** Her önemli eylem kaydedilir. Ne yaptığını ve neden yaptığını yeniden kurabilirsiniz.
 
-### Bir Digital Employee'nin yaptığı dört şey
+### Bir AI-assisted workflow'nin yaptığı dört şey
 
 Gerçek bilgi işi, bir ajanın güvenilir biçimde sahiplenebileceği parçalara ayrılmış hâliyle:
 
 #### Yanıtlamak
 
-En yaygın görev. Bir Digital Employee, Company Brain'den ilgili bölümleri getirir, bir yanıt oluşturur ve tam kaynak belgelerini gösterir. Alıntılar yetki kapsamlı olduğundan, aynı soruyu soran iki kişi — her biri doğru ve yetkili olmak üzere — görmeye izinli oldukları içeriğe göre farklı yanıtlar alabilir. Yanıt tahmin edilmez; dayanaklandırılır.
+En yaygın görev. Bir AI-assisted workflow, Company Brain'den ilgili bölümleri getirir, bir yanıt oluşturur ve tam kaynak belgelerini gösterir. Alıntılar yetki kapsamlı olduğundan, aynı soruyu soran iki kişi — her biri doğru ve yetkili olmak üzere — görmeye izinli oldukları içeriğe göre farklı yanıtlar alabilir. Yanıt tahmin edilmez; dayanaklandırılır.
 
 #### Taslak hazırlamak
 
-Digital Employees, rutin belgelerin ilk taslaklarını üretir — bir politika özeti, bir tedarikçi e-postası, bir vardiya devir notu, standart bir yanıt. İnsan düzenler ve onaylar. Değer, makinenin kusursuz yazması değildir; boş sayfanın ortadan kalkması ve taslağın genel bir şablon yerine sizin güncel belgelerinize dayanıyor olmasıdır.
+AI-assisted workflows, rutin belgelerin ilk taslaklarını üretir — bir politika özeti, bir tedarikçi e-postası, bir vardiya devir notu, standart bir yanıt. İnsan düzenler ve onaylar. Değer, makinenin kusursuz yazması değildir; boş sayfanın ortadan kalkması ve taslağın genel bir şablon yerine sizin güncel verilerinize dayanıyor olmasıdır.
 
 #### Yönlendirmek
 
-İş, bir sonraki adımın nereye gideceğini kimse bilmediğinde tıkanır. Bir Digital Employee talebi okur, deterministik yönlendirme kurallarını uygular ve öğeyi doğru kişiye, kuyruğa ya da iş akışına gönderir. Yönlendirme deterministiktir — aynı girdi her seferinde aynı tanımlı yolu izler — böylece davranış öngörülebilir ve denetlenebilirdir.
+İş, bir sonraki adımın nereye gideceğini kimse bilmediğinde tıkanır. Bir AI-assisted workflow talebi okur, deterministik yönlendirme kurallarını uygular ve öğeyi doğru kişiye, kuyruğa ya da iş akışına gönderir. Yönlendirme deterministiktir — aynı girdi her seferinde aynı tanımlı yolu izler — böylece davranış öngörülebilir ve denetlenebilirdir.
 
 #### Onayları hazırlamak
 
-Ajanların bir kurumda ekmeğini çıkardığı yer burasıdır. Bir Digital Employee, bir onaylayıcının ihtiyaç duyduğu her şeyi bir araya getirir — talep, destekleyici belgeler, ilgili politika, gereken yetki kademesi — ve insan kararı için sunar. Onayı hazırlar. Kararı yine bir insan verir. Bu sınır bilinçlidir ve pazarlık konusu değildir.
+Ajanların bir kurumda ekmeğini çıkardığı yer burasıdır. Bir AI-assisted workflow, bir onaylayıcının ihtiyaç duyduğu her şeyi bir araya getirir — talep, destekleyici belgeler, ilgili politika, gereken yetki kademesi — ve insan kararı için sunar. Onayı hazırlar. Kararı yine bir insan verir. Bu sınır bilinçlidir ve pazarlık konusu değildir.
 
 ### Dayanaklı, alıntılı, yetki bilinçli — neden önemli
 
 İnsanların işte AI'dan korktuğu senaryo, kendinden emin saçmalıktır: var olmayan bir politikayı uyduran, olmayan bir kuralı gösteren ya da bir maaş belgesini görmemesi gereken birine açan bir ajan. AdOS bu üçünü de kapatır:
 
-- **Dayanaklı**, her yanıtın modelin internet hafızasına değil, sizin belgelerinize izlenmesi demektir.
+- **Dayanaklı**, her yanıtın modelin internet hafızasına değil, sizin verilerinize izlenmesi demektir.
 - **Alıntılı**, kaynağa tıklayıp doğrulayabilmeniz demektir. Güven varsayılmaz, denetlenir.
 - **Yetki bilinçli**, modelin kullanıcının yetkili olmadığı içeriği fiziksel olarak gösterememesi demektir. Erişim kontrolü modelden kibarca rica edilmez; getirme anında uygulanır.
 
@@ -1747,32 +1759,32 @@ Bu üçü birlikte, bir AI ajanını bir riskten, bir denetçinin kabul edebilec
 
 ### Dürüst performans dengesi
 
-Hız konusunda açık olun. Digital Employees, kendi donanımınızda yerel bir motor üzerinden çalışır — Ollama ya da vLLM, LM Studio, llama.cpp veya SGLang gibi OpenAI uyumlu herhangi bir yerel sunucu. Bu, çıkarım maliyetinin elektriğiniz ve donanımınız olması, token başına faturanın ve verinin dışarı çıkmasının olmaması demektir.
+Hız konusunda açık olun. AI-assisted workflows, kendi donanımınızda yerel bir motor üzerinden çalışır — Ollama ya da vLLM, LM Studio, llama.cpp veya SGLang gibi OpenAI uyumlu herhangi bir yerel sunucu. Bu, çıkarım maliyetinin elektriğiniz ve donanımınız olması, token başına faturanın ve verinin dışarı çıkmasının olmaması demektir.
 
 Aynı zamanda yerel CPU çıkarımının barındırılan bir sınır API'den daha yavaş olması demektir — milisaniyeler değil, saniyeler. Daha iyi donanım aradaki farkı kapatır; iyi belirlenmiş bir GPU sunucusu deneyimi belirgin biçimde değiştirir. Çoğu kurumsal bilgi işi için — bir politika yanıtı yazmak, bir onay paketi hazırlamak, bir talebi yönlendirmek — birkaç saniye görevin toleransının rahatça içindedir. Biraz gecikmeyi tam egemenlikle takas edersiniz. Bu takası paydaşlarınıza açıkça söyleyin; karar çoğu zaman kendiliğinden verilir.
 
-### İlk Digital Employee'nizi devreye almak
+### İlk AI-assisted workflow'nizi devreye almak
 
-Dar başlayın. Güvene en hızlı yol, iyi kapsamlanmış tek bir işi yapan tek bir Digital Employee'dir.
+Dar başlayın. Güvene en hızlı yol, iyi kapsamlanmış tek bir işi yapan tek bir AI-assisted workflow'dir.
 
 1. **Yüksek hacimli, düşük belirsizlikli bir görev seçin.** Politika soruları, standart İK talepleri ya da belirli bir belge türünü yönlendirmek ideal ilk rollerdir.
 2. **Company Brain'i besleyin.** Onu bu görevin yetkili belgelerine yöneltin. Dayanağın kalitesi kaynağın kalitesine bağlıdır.
 3. **Rolü ve yetkileri belirleyin.** Ajanın tam olarak neyi görebileceğini ve yapabileceğini tanımlayın. Dar, geniş olandan iyidir.
 4. **Önemli her şeyde insanı döngüde tutun.** Ajan hazırlar; kararı bir insan verir.
-5. **Denetim izini inceleyin.** İlk haftalarda ne yaptığını okuyun. Rolü ayarlayın. Yalnızca güven kazandıkça genişletin.
+5. **etkinlik günlüğüni inceleyin.** İlk haftalarda ne yaptığını okuyun. Rolü ayarlayın. Yalnızca güven kazandıkça genişletin.
 
-Referans demo dünyasında — 6 sahası ve 42 çalışanı olan kurgusal üretici NovaMak Endüstri — 25 iş akışının yanında 12 Digital Employee çalışır. Bu bir başlangıç noktası değildir; her rol kendini kanıtladıktan sonra bilinçli genişlemenin vardığı yerdir.
+Referans demo dünyasında — 6 sahası ve 42 çalışanı olan kurgusal üretici NovaMak Endüstri — 25 iş akışının yanında 12 AI-assisted workflow çalışır. Bu bir başlangıç noktası değildir; her rol kendini kanıtladıktan sonra bilinçli genişlemenin vardığı yerdir.
 
 ### SSS
 
-**Bir Digital Employee bir sohbet botundan nasıl farklıdır?**
-Bir sohbet botu yanıtlar ve durur. Bir Digital Employee bir görevi baştan sona sahiplenir — yanıtlar, taslak hazırlar, yönlendirir ya da onayları hazırlar — tanımlı bir rol, yetki bilinçli erişim ve tam bir denetim izi içinde.
+**Bir AI-assisted workflow bir sohbet botundan nasıl farklıdır?**
+Bir sohbet botu yanıtlar ve durur. Bir AI-assisted workflow bir görevi baştan sona sahiplenir — yanıtlar, taslak hazırlar, yönlendirir ya da onayları hazırlar — tanımlı bir rol, yetki bilinçli erişim ve tam bir etkinlik günlüğü içinde.
 
-**Bir Digital Employee tek başına onay verebilir mi?**
+**Bir AI-assisted workflow tek başına onay verebilir mi?**
 Hayır. Onayları *hazırlar* — talebi, belgeleri, politikayı ve gereken yetki kademesini bir araya getirir — ve bir insan onaylar. Bu insan karar sınırı bilinçlidir.
 
 **Belgeleri yanlış kişilere sızdırır mı?**
-Hayır. Digital Employees yetki bilinçlidir. Model, talep eden kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkaramaz veya gösteremez; erişim getirme anında uygulanır.
+Hayır. AI-assisted workflows yetki bilinçlidir. Model, talep eden kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkaramaz veya gösteremez; erişim getirme anında uygulanır.
 
 **ChatGPT'den yavaş mı?**
 Yerel çıkarım milisaniyeler değil saniyelerdir, çünkü barındırılan bir sınır API yerine sizin donanımınızda çalışır. Daha iyi donanım farkı kapatır ve bilgi işi için birkaç saniye rahatça tolerans içindedir.
@@ -1780,14 +1792,14 @@ Yerel çıkarım milisaniyeler değil saniyelerdir, çünkü barındırılan bir
 **Veri nereye gidiyor?**
 Hiçbir yere. Her şey kendi altyapınızda çalışır — on-premise ya da özel bulutunuzda. Bulut yok, harici API yok, internet gerekmez.
 
-Digital Employees, AI'nın bir demo olmaktan çıkıp kadro olmaya başladığı noktadır. **Platformu Keşfedin.**
+AI-assisted workflows, AI'nın bir demo olmaktan çıkıp kadro olmaya başladığı noktadır. **Platformu Keşfedin.**
 
 ---
 
 ## Article 10: Automating Approvals Without Losing Control
 
 **Meta title:** Automating Approvals Without Losing Control
-**Meta description:** Automate approval routing with tiered authority, deterministic paths, and immutable audit trails — speed without surrendering oversight, on your own infrastructure.
+**Meta description:** Automate approval routing with tiered authority, deterministic paths, and activity log and per-approval timelines — speed without surrendering oversight, on your own infrastructure.
 **Slug:** automating-approvals-without-losing-control
 
 Every organization has an approvals problem, and it usually hides in plain sight. A purchase order sits in an inbox for three days. A leave request bounces between two managers who each think the other owns it. A contract clears the wrong signatory because nobody checked the authority tier. None of this is a technology failure. It is a routing and accountability failure — and it is exactly the kind of problem automation should solve, if it can be done without handing away control.
@@ -1807,13 +1819,13 @@ Automation that only makes the "yes" faster misses the point. The goal is to rem
 
 ### The principle: automate the movement, not the judgment
 
-This is the line AdOS draws deliberately. A Digital Employee *prepares* an approval — it assembles the request, the supporting documents, the relevant policy, and the required tier of authority, then presents it for a human decision. The person still approves. The machine handles the movement of work; the human handles the judgment.
+This is the line AdOS draws deliberately. An AI-assisted workflow *prepares* an approval — it assembles the request, the supporting documents, the relevant policy, and the required tier of authority, then presents it for a human decision. The person still approves. The machine handles the movement of work; the human handles the judgment.
 
 That boundary is what lets you automate aggressively without losing control. You are speeding up everything around the decision — the routing, the packet assembly, the record-keeping — while leaving the decision itself with an accountable human. Speed and oversight stop being a trade-off.
 
 ### The three mechanisms that keep you in control
 
-#### Tiered approval authority
+#### Human Approval Gates
 
 Not every approval is equal, and your automation should not pretend otherwise. AdOS supports tiered authority: different thresholds and action types route to different levels of approver. A small routine request may need one sign-off; a large or sensitive one escalates to a higher tier. The tiers are defined by you, enforced by the system, and visible in the record. Authority is never assumed by the machine — it is applied according to your rules.
 
@@ -1821,13 +1833,13 @@ Not every approval is equal, and your automation should not pretend otherwise. A
 
 Predictability is a feature, not a limitation. AdOS routing is deterministic: the same input follows the same defined path every time. This is the opposite of an opaque model deciding case-by-case where something should go. Because routing is deterministic, you can test it, document it, and trust it — and an auditor can confirm that a given request went where policy said it should. No surprises, no drift.
 
-#### Immutable audit trails
+#### Activity Log and Per-Approval Timelines
 
-Every consequential action lands in an immutable audit trail. Who submitted, when it routed, which tier it hit, who approved, on what basis — all recorded and unalterable. This is what turns "we automated approvals" from a risk into a control improvement. When a regulator, an internal auditor, or a board member asks what happened, you have a complete and tamper-evident answer.
+Every consequential action lands in an activity log and per-approval timeline. Who submitted, when it routed, which tier it hit, who approved, on what basis — all recorded and unalterable. This is what turns "we automated approvals" from a risk into a control improvement. When a regulator, an internal auditor, or a board member asks what happened, you have a complete and tamper-evident answer.
 
-### Permission-aware from end to end
+### Human-Approved from end to end
 
-Approvals touch sensitive material — salaries, contracts, supplier terms, personal data. AdOS is permission-aware throughout. A Digital Employee assembling an approval packet can only surface documents the relevant parties are entitled to see. The model can never cite or expose content outside a user's permissions. So the acceleration never comes at the cost of a leak, and access control is enforced at retrieval rather than left to policy hope.
+Approvals touch sensitive material — salaries, contracts, supplier terms, personal data. AdOS is human-approved throughout. An AI-assisted workflow assembling an approval packet can only surface documents the relevant parties are entitled to see. The model can never cite or expose content outside a user's permissions. So the acceleration never comes at the cost of a leak, and human approval gates is enforced at retrieval rather than left to policy hope.
 
 ### Why on-premise matters for approvals specifically
 
@@ -1840,7 +1852,7 @@ AdOS runs entirely on your own hardware. Approval requests, supporting documents
 1. **Map one approval flow end to end.** Pick a common, well-understood one — say, purchase requests under a threshold.
 2. **Define the tiers.** Write down which amounts and actions escalate to which authority level. Make ambiguity explicit and resolve it.
 3. **Set deterministic routing rules.** Same input, same path. Test the paths before you trust them.
-4. **Let a Digital Employee prepare the packet.** Request, documents, policy, required tier — assembled and presented. Humans decide.
+4. **Let an AI-assisted workflow prepare the packet.** Request, documents, policy, required tier — assembled and presented. Humans decide.
 5. **Audit from day one.** Read the trail. Confirm requests went where policy dictated. Tune, then expand to the next flow.
 
 In the reference demo world, NovaMak runs 25 workflows across 6 sites — a deterministic, internally consistent picture of what mature Workflows & Approvals look like once each flow has been mapped, tiered, and proven.
@@ -1851,23 +1863,23 @@ In the reference demo world, NovaMak runs 25 workflows across 6 sites — a dete
 No. The system automates routing and packet preparation; a human with the right authority tier makes the decision. AdOS automates the movement of work, not the judgment.
 
 **How do I know a request went to the right place?**
-Routing is deterministic — the same input follows the same defined path every time — and the immutable audit trail records exactly where each request went and who acted on it.
+Routing is deterministic — the same input follows the same defined path every time — and the activity log and per-approval timeline records exactly where each request went and who acted on it.
 
 **Can it enforce different approval levels for different amounts?**
-Yes. Tiered approval authority routes requests to the appropriate level based on rules you define; the system enforces them and records which tier applied.
+Yes. Human Approval Gates routes requests to the appropriate level based on rules you define; the system enforces them and records which tier applied.
 
 **Is our approval data sent anywhere?**
 No. Everything runs on your own infrastructure — on-premise or private cloud, offline-capable. Approval requests, documents, and trails never leave the building.
 
 **What happens when an auditor asks who approved something?**
-You show the immutable audit trail: submitter, routing, tier, approver, timing, and basis — complete and tamper-evident.
+You show the activity log and per-approval timeline: submitter, routing, tier, approver, timing, and basis — complete and tamper-evident.
 
 Automate the movement, keep the judgment, prove every step. **See the Platform.**
 
 ### Türkçe
 
 **Meta title:** Kontrolü Kaybetmeden Onayları Otomatikleştirmek
-**Meta description:** Onay yönlendirmesini kademeli yetki, deterministik yollar ve değiştirilemez denetim izleriyle otomatikleştirin — gözetimi bırakmadan hız, kendi altyapınızda.
+**Meta description:** Onay yönlendirmesini kademeli yetki, deterministik yollar ve etkinlik günlüğü izleriyle otomatikleştirin — gözetimi bırakmadan hız, kendi altyapınızda.
 **Slug:** kontrolu-kaybetmeden-onaylari-otomatiklestirmek
 
 Her kurumun bir onay sorunu vardır ve bu sorun genellikle göz önünde saklanır. Bir satın alma emri üç gün bir gelen kutusunda bekler. Bir izin talebi, her biri diğerinin sahiplendiğini sanan iki yönetici arasında gidip gelir. Bir sözleşme, kimse yetki kademesini kontrol etmediği için yanlış imza yetkilisinden geçer. Bunların hiçbiri bir teknoloji arızası değildir. Bir yönlendirme ve hesap verebilirlik arızasıdır — ve tam da otomasyonun çözmesi gereken türden bir sorundur, yeter ki kontrol elden verilmeden yapılabilsin.
@@ -1887,13 +1899,13 @@ Yalnızca "evet"i hızlandıran otomasyon konuyu kaçırır. Amaç gecikmeyi, ba
 
 ### İlke: hareketi otomatikleştir, muhakemeyi değil
 
-AdOS'un bilinçle çizdiği çizgi budur. Bir Digital Employee bir onayı *hazırlar* — talebi, destekleyici belgeleri, ilgili politikayı ve gereken yetki kademesini bir araya getirir, sonra insan kararı için sunar. Kararı yine bir insan verir. Makine işin hareketini yönetir; insan muhakemeyi.
+AdOS'un bilinçle çizdiği çizgi budur. Bir AI-assisted workflow bir onayı *hazırlar* — talebi, destekleyici belgeleri, ilgili politikayı ve gereken yetki kademesini bir araya getirir, sonra insan kararı için sunar. Kararı yine bir insan verir. Makine işin hareketini yönetir; insan muhakemeyi.
 
 Bu sınır, kontrolü kaybetmeden agresif biçimde otomatikleştirmenizi sağlayan şeydir. Kararın etrafındaki her şeyi hızlandırırsınız — yönlendirmeyi, paket hazırlığını, kayıt tutmayı — kararın kendisini ise hesap verebilir bir insana bırakırsınız. Hız ve gözetim bir takas olmaktan çıkar.
 
 ### Sizi kontrolde tutan üç mekanizma
 
-#### Kademeli onay yetkisi
+#### İnsan Onay Adımları
 
 Her onay eşit değildir ve otomasyonunuz öyleymiş gibi davranmamalıdır. AdOS kademeli yetkiyi destekler: farklı eşikler ve eylem türleri farklı onaylayıcı seviyelerine yönlendirilir. Küçük rutin bir talep bir imza gerektirebilir; büyük ya da hassas bir talep daha yüksek bir kademeye tırmanır. Kademeleri siz tanımlarsınız, sistem uygular ve kayıtta görünür. Yetki makine tarafından asla varsayılmaz — sizin kurallarınıza göre uygulanır.
 
@@ -1901,13 +1913,13 @@ Her onay eşit değildir ve otomasyonunuz öyleymiş gibi davranmamalıdır. AdO
 
 Öngörülebilirlik bir kısıt değil, bir özelliktir. AdOS yönlendirmesi deterministiktir: aynı girdi her seferinde aynı tanımlı yolu izler. Bu, bir şeyin nereye gitmesi gerektiğine vaka bazında karar veren opak bir modelin tam tersidir. Yönlendirme deterministik olduğu için onu test edebilir, belgeleyebilir ve güvenebilirsiniz — ve bir denetçi, belirli bir talebin politikanın söylediği yere gittiğini doğrulayabilir. Sürpriz yok, kayma yok.
 
-#### Değiştirilemez denetim izleri
+#### Etkinlik günlüğü ve onay zaman çizelgesi
 
-Her önemli eylem değiştirilemez bir denetim izine düşer. Kim gönderdi, ne zaman yönlendirildi, hangi kademeye ulaştı, kim hangi temelle onayladı — hepsi kayıtlı ve değiştirilemez. "Onayları otomatikleştirdik"i bir riskten bir kontrol iyileştirmesine çeviren şey budur. Bir düzenleyici, bir iç denetçi ya da bir yönetim kurulu üyesi ne olduğunu sorduğunda, elinizde eksiksiz ve kurcalama belirtili bir yanıt olur.
+Her önemli eylem değiştirilemez bir etkinlik günlüğüne düşer. Kim gönderdi, ne zaman yönlendirildi, hangi kademeye ulaştı, kim hangi temelle onayladı — hepsi kayıtlı ve değiştirilemez. "Onayları otomatikleştirdik"i bir riskten bir kontrol iyileştirmesine çeviren şey budur. Bir düzenleyici, bir iç denetçi ya da bir yönetim kurulu üyesi ne olduğunu sorduğunda, elinizde eksiksiz ve kurcalama belirtili bir yanıt olur.
 
 ### Baştan sona yetki bilinçli
 
-Onaylar hassas materyale dokunur — maaşlar, sözleşmeler, tedarikçi koşulları, kişisel veriler. AdOS baştan sona yetki bilinçlidir. Bir onay paketi hazırlayan bir Digital Employee, yalnızca ilgili tarafların görmeye yetkili olduğu belgeleri ortaya çıkarabilir. Model, bir kullanıcının yetkilerinin dışındaki içeriği asla gösteremez veya açığa çıkaramaz. Böylece hızlanma asla bir sızıntı pahasına gelmez ve erişim kontrolü politika umuduna bırakılmaz; getirme anında uygulanır.
+Onaylar hassas materyale dokunur — maaşlar, sözleşmeler, tedarikçi koşulları, kişisel veriler. AdOS baştan sona yetki bilinçlidir. Bir onay paketi hazırlayan bir AI-assisted workflow, yalnızca ilgili tarafların görmeye yetkili olduğu belgeleri ortaya çıkarabilir. Model, bir kullanıcının yetkilerinin dışındaki içeriği asla gösteremez veya açığa çıkaramaz. Böylece hızlanma asla bir sızıntı pahasına gelmez ve erişim kontrolü politika umuduna bırakılmaz; getirme anında uygulanır.
 
 ### On-premise onaylar için neden özellikle önemli
 
@@ -1920,7 +1932,7 @@ AdOS tümüyle kendi donanımınızda çalışır. Onay talepleri, destekleyici 
 1. **Bir onay akışını baştan sona haritalayın.** Yaygın ve iyi anlaşılmış birini seçin — örneğin bir eşiğin altındaki satın alma talepleri.
 2. **Kademeleri tanımlayın.** Hangi tutar ve eylemlerin hangi yetki seviyesine tırmandığını yazın. Belirsizliği açığa çıkarın ve çözün.
 3. **Deterministik yönlendirme kuralları belirleyin.** Aynı girdi, aynı yol. Güvenmeden önce yolları test edin.
-4. **Bir Digital Employee'nin paketi hazırlamasına izin verin.** Talep, belgeler, politika, gereken kademe — bir araya getirilip sunulur. Kararı insanlar verir.
+4. **Bir AI-assisted workflow'nin paketi hazırlamasına izin verin.** Talep, belgeler, politika, gereken kademe — bir araya getirilip sunulur. Kararı insanlar verir.
 5. **İlk günden denetleyin.** İzi okuyun. Taleplerin politikanın belirttiği yere gittiğini doğrulayın. Ayarlayın, sonra bir sonraki akışa genişletin.
 
 Referans demo dünyasında NovaMak, 6 saha genelinde 25 iş akışı çalıştırır — her akış haritalandığında, kademelendiğinde ve kanıtlandığında olgun Workflows & Approvals'ın nasıl göründüğünün deterministik, kendi içinde tutarlı bir resmidir.
@@ -1931,16 +1943,16 @@ Referans demo dünyasında NovaMak, 6 saha genelinde 25 iş akışı çalıştı
 Hayır. Sistem yönlendirmeyi ve paket hazırlığını otomatikleştirir; doğru yetki kademesindeki bir insan kararı verir. AdOS işin hareketini otomatikleştirir, muhakemeyi değil.
 
 **Bir talebin doğru yere gittiğini nasıl bilirim?**
-Yönlendirme deterministiktir — aynı girdi her seferinde aynı tanımlı yolu izler — ve değiştirilemez denetim izi, her talebin tam olarak nereye gittiğini ve kimin işlem yaptığını kaydeder.
+Yönlendirme deterministiktir — aynı girdi her seferinde aynı tanımlı yolu izler — ve değiştirilemez etkinlik günlüğü, her talebin tam olarak nereye gittiğini ve kimin işlem yaptığını kaydeder.
 
 **Farklı tutarlar için farklı onay seviyelerini uygulayabilir mi?**
-Evet. Kademeli onay yetkisi, talepleri sizin tanımladığınız kurallara göre uygun seviyeye yönlendirir; sistem bunları uygular ve hangi kademenin geçerli olduğunu kaydeder.
+Evet. İnsan Onay Adımları, talepleri sizin tanımladığınız kurallara göre uygun seviyeye yönlendirir; sistem bunları uygular ve hangi kademenin geçerli olduğunu kaydeder.
 
 **Onay verimiz bir yere gönderiliyor mu?**
 Hayır. Her şey kendi altyapınızda çalışır — on-premise ya da özel bulut, çevrimdışı çalışabilir. Onay talepleri, belgeler ve izler binadan asla çıkmaz.
 
 **Bir denetçi bir şeyi kimin onayladığını sorduğunda ne olur?**
-Değiştirilemez denetim izini gösterirsiniz: gönderen, yönlendirme, kademe, onaylayan, zamanlama ve temel — eksiksiz ve kurcalama belirtili.
+Değiştirilemez etkinlik günlüğüni gösterirsiniz: gönderen, yönlendirme, kademe, onaylayan, zamanlama ve temel — eksiksiz ve kurcalama belirtili.
 
 Hareketi otomatikleştirin, muhakemeyi koruyun, her adımı kanıtlayın. **Platformu Keşfedin.**
 
@@ -1949,7 +1961,7 @@ Hareketi otomatikleştirin, muhakemeyi koruyun, her adımı kanıtlayın. **Plat
 ## Article 11: Digital Transformation That Respects Data Sovereignty
 
 **Meta title:** Digital Transformation That Respects Data Sovereignty
-**Meta description:** Modernize with enterprise AI without sending data to someone else's cloud. On-premise, offline-capable, permission-aware — transformation on your own terms.
+**Meta description:** Modernize with enterprise AI without sending data to someone else's cloud. On-premise, offline-capable, human-approved — transformation on your own terms.
 **Slug:** digital-transformation-respects-data-sovereignty
 
 For a decade, "digital transformation" and "move it to the cloud" were treated as the same sentence. Modernize meant externalize: put your data, your workloads, and increasingly your AI on infrastructure someone else owns. For many organizations that trade was acceptable. For a growing number — public institutions, healthcare, finance, manufacturers with proprietary process knowledge — it never was, and now it is becoming untenable. The question they are all asking is the same: can we transform with AI without giving up sovereignty over our own data?
@@ -1960,7 +1972,7 @@ The answer is yes, and it does not require choosing between being modern and bei
 
 Data sovereignty is the principle that your data — and the decisions about where it lives, who can touch it, and under whose laws it falls — stays under your control. In practice it means:
 
-- Your documents, prompts, answers, and workflows never leave your premises.
+- your data, prompts, answers, and workflows never leave your premises.
 - No third party processes your business content as a condition of using the software.
 - You are not subject to another jurisdiction's access to your data by virtue of where a vendor stores it.
 - There is no telemetry of your business content leaving the building.
@@ -1988,7 +2000,7 @@ AdOS is an enterprise AI operating system that runs 100% on your own infrastruct
 - **On-premise or private cloud.** Deploy on-premise or in your own private cloud/VPC. You own the entire stack — application, data, and model.
 - **Offline-capable and air-gap ready.** It works with no internet at all, which is both a security posture and a resilience guarantee.
 
-You get the transformation — cited answers, AI workers, automated workflows — without the externalization. That is the whole proposition.
+You get the transformation — performance-grounded recommendations, AI workers, automated workflows — without the externalization. That is the whole proposition.
 
 ### The three pillars of a sovereign AI operating system
 
@@ -1996,15 +2008,15 @@ Transformation is not one feature; it is an operating system for how the organiz
 
 #### Company Brain
 
-Your organization's private, permission-aware knowledge base. Scattered institutional knowledge becomes cited, grounded answers — every response tied to your own source documents, and citations scoped to what each user is permitted to see. This is how transformation captures tacit knowledge instead of losing it when people leave.
+Your organization's private, human-approved marketing-performance memory. Scattered institutional knowledge becomes cited, grounded answers — every response tied to your own source documents, and citations scoped to what each user is permitted to see. This is how transformation captures tacit knowledge instead of losing it when people leave.
 
-#### Digital Employees
+#### AI-assisted workflows
 
 AI agents that perform real knowledge work — answering, drafting, routing, and preparing approvals within defined roles and permissions. This is where capability becomes capacity: the organization does more without the linear headcount cost.
 
 #### Workflows & Approvals
 
-Structured processes with tiered approval authority, deterministic routing, and full audit trails. Transformation is not just faster answers; it is faster, accountable *processes* — the connective tissue of how work actually moves.
+Structured processes with human approval gates, deterministic routing, and full audit trails. Transformation is not just faster answers; it is faster, accountable *processes* — the connective tissue of how work actually moves.
 
 Sovereign, capable, accountable — in that order.
 
@@ -2021,18 +2033,18 @@ Sovereignty has one real cost, and it is worth stating plainly. Local CPU infere
 ### How to start
 
 1. **Classify your data.** Identify what cannot leave your premises. That set defines why on-premise is required, not optional.
-2. **Pick a first domain.** A knowledge-heavy area — HR policy, quality documentation, procurement — where cited answers deliver immediate value.
+2. **Pick a first domain.** A knowledge-heavy area — HR policy, quality documentation, procurement — where performance-grounded recommendations deliver immediate value.
 3. **Deploy on your hardware.** Standard Docker, one-command bring-up, with documented backup, restore, upgrade, and disaster-recovery runbooks.
-4. **Seed the Company Brain and add a Digital Employee.** Prove value on one domain before expanding.
-5. **Measure and expand.** Track time-to-first-cited-answer and adoption. Scale to more domains, more Digital Employees, more workflows.
+4. **Seed the Company Brain and add an AI-assisted workflow.** Prove value on one domain before expanding.
+5. **Measure and expand.** Track time-to-first-cited-answer and adoption. Scale to more domains, more AI-assisted workflows, more workflows.
 
 ### FAQ
 
 **Does sovereign AI mean giving up capability?**
-No. You get cited answers, Digital Employees, and automated workflows — the same categories of capability — while your data stays on your infrastructure. The only trade-off is inference speed, which better hardware closes.
+No. You get performance-grounded recommendations, AI-assisted workflows, and automated workflows — the same categories of capability — while your data stays on your infrastructure. The only trade-off is inference speed, which better hardware closes.
 
 **Is my data used to train anyone's model?**
-No. Your documents, prompts, answers, and workflows never leave your premises, and there is no telemetry of business content. Nothing is sent out to train external models.
+No. your data, prompts, answers, and workflows never leave your premises, and there is no telemetry of business content. Nothing is sent out to train external models.
 
 **Can it really run with no internet?**
 Yes. AdOS is offline-capable and air-gap ready. All inference runs locally; no cloud, external API, or internet connection is required.
@@ -2041,7 +2053,7 @@ Yes. AdOS is offline-capable and air-gap ready. All inference runs locally; no c
 There is no per-token or per-query billing — inference cost is your own hardware and electricity. Open engines and exportable data mean no vendor lock-in, so cost does not scale punitively with usage.
 
 **Is this just an on-prem chatbot?**
-No. AdOS is a full enterprise AI operating system with three pillars — Company Brain, Digital Employees, and Workflows & Approvals — not a single chat interface.
+No. AdOS is a full enterprise AI operating system with three pillars — Company Brain, AI-assisted workflows, and Workflows & Approvals — not a single chat interface.
 
 Transform on your own terms, with your data inside your walls. **See the Platform.**
 
@@ -2059,7 +2071,7 @@ Yanıt evet ve bu, modern olmakla kontrolde olmak arasında seçim yapmayı gere
 
 Veri egemenliği; verinizin — ve nerede yaşadığına, kimin dokunabileceğine ve hangi yasalara tabi olduğuna dair kararların — sizin kontrolünüzde kalması ilkesidir. Uygulamada şu demektir:
 
-- Belgeleriniz, istemleriniz, yanıtlarınız ve iş akışlarınız binanızdan asla çıkmaz.
+- Verileriniz, istemleriniz, yanıtlarınız ve iş akışlarınız binanızdan asla çıkmaz.
 - Yazılımı kullanmanın bir koşulu olarak hiçbir üçüncü taraf iş içeriğinizi işlemez.
 - Bir tedarikçinin verinizi nerede sakladığı nedeniyle başka bir yargı bölgesinin verinize erişimine tabi olmazsınız.
 - İş içeriğinizin binadan ayrılan hiçbir telemetrisi yoktur.
@@ -2095,15 +2107,15 @@ Dönüşüm tek bir özellik değildir; kurumun AI'yı nasıl kullandığına da
 
 #### Company Brain
 
-Kurumunuzun özel, yetki bilinçli bilgi tabanı. Dağınık kurumsal bilgi, alıntılı ve dayanaklı yanıtlara dönüşür — her yanıt kendi kaynak belgelerinize bağlıdır ve alıntılar her kullanıcının görmeye izinli olduğuyla sınırlıdır. Dönüşümün, insanlar ayrıldığında bilgiyi kaybetmek yerine örtük bilgiyi yakalaması böyle olur.
+Kurumunuzun özel, yetki bilinçli pazarlama-performans belleği. Dağınık kurumsal bilgi, alıntılı ve dayanaklı yanıtlara dönüşür — her yanıt kendi kaynak verilerinize bağlıdır ve alıntılar her kullanıcının görmeye izinli olduğuyla sınırlıdır. Dönüşümün, insanlar ayrıldığında bilgiyi kaybetmek yerine örtük bilgiyi yakalaması böyle olur.
 
-#### Digital Employees
+#### AI-assisted workflows
 
 Gerçek bilgi işi yapan AI ajanları — tanımlı roller ve yetkiler içinde yanıtlayan, taslak hazırlayan, yönlendiren ve onayları hazırlayan. Yeteneğin kapasiteye dönüştüğü yer burasıdır: kurum, doğrusal personel maliyeti olmadan daha fazlasını yapar.
 
 #### Workflows & Approvals
 
-Kademeli onay yetkisi, deterministik yönlendirme ve tam denetim izleriyle yapılandırılmış süreçler. Dönüşüm yalnızca daha hızlı yanıt değildir; daha hızlı, hesap verebilir *süreçler*dir — işin gerçekte nasıl aktığının bağ dokusudur.
+İnsan Onay Adımları, deterministik yönlendirme ve tam denetim izleriyle yapılandırılmış süreçler. Dönüşüm yalnızca daha hızlı yanıt değildir; daha hızlı, hesap verebilir *süreçler*dir — işin gerçekte nasıl aktığının bağ dokusudur.
 
 Egemen, yetenekli, hesap verebilir — bu sırayla.
 
@@ -2122,16 +2134,16 @@ Egemenliğin bir gerçek maliyeti vardır ve bunu açıkça söylemek gerekir. Y
 1. **Verinizi sınıflandırın.** Binanızdan çıkamayacak olanı belirleyin. Bu küme, on-premise'in neden isteğe bağlı değil zorunlu olduğunu tanımlar.
 2. **İlk bir alan seçin.** Alıntılı yanıtların hemen değer verdiği bilgi yoğun bir alan — İK politikası, kalite dokümantasyonu, satın alma.
 3. **Kendi donanımınıza kurun.** Standart Docker, tek komutla ayağa kaldırma; belgelenmiş yedekleme, geri yükleme, yükseltme ve felaket kurtarma kılavuzlarıyla.
-4. **Company Brain'i besleyin ve bir Digital Employee ekleyin.** Genişletmeden önce tek bir alanda değeri kanıtlayın.
-5. **Ölçün ve genişletin.** İlk alıntılı yanıta kadar geçen süreyi ve benimsemeyi izleyin. Daha çok alana, daha çok Digital Employee'ye, daha çok iş akışına ölçekleyin.
+4. **Company Brain'i besleyin ve bir AI-assisted workflow ekleyin.** Genişletmeden önce tek bir alanda değeri kanıtlayın.
+5. **Ölçün ve genişletin.** İlk alıntılı yanıta kadar geçen süreyi ve benimsemeyi izleyin. Daha çok alana, daha çok AI-assisted workflow'ye, daha çok iş akışına ölçekleyin.
 
 ### SSS
 
 **Egemen AI, yetenekten vazgeçmek mi demek?**
-Hayır. Alıntılı yanıtlar, Digital Employees ve otomatik iş akışları alırsınız — aynı yetenek kategorileri — verileriniz altyapınızda kalırken. Tek takas, daha iyi donanımın kapattığı çıkarım hızıdır.
+Hayır. Alıntılı yanıtlar, AI-assisted workflows ve otomatik iş akışları alırsınız — aynı yetenek kategorileri — verileriniz altyapınızda kalırken. Tek takas, daha iyi donanımın kapattığı çıkarım hızıdır.
 
 **Verim birinin modelini eğitmek için kullanılıyor mu?**
-Hayır. Belgeleriniz, istemleriniz, yanıtlarınız ve iş akışlarınız binanızdan asla çıkmaz ve iş içeriğinin telemetrisi yoktur. Harici modelleri eğitmek için hiçbir şey dışarı gönderilmez.
+Hayır. Verileriniz, istemleriniz, yanıtlarınız ve iş akışlarınız binanızdan asla çıkmaz ve iş içeriğinin telemetrisi yoktur. Harici modelleri eğitmek için hiçbir şey dışarı gönderilmez.
 
 **Gerçekten internetsiz çalışabilir mi?**
 Evet. AdOS çevrimdışı çalışabilir ve air-gap'e hazırdır. Tüm çıkarım yerel çalışır; bulut, harici API ya da internet bağlantısı gerekmez.
@@ -2140,7 +2152,7 @@ Evet. AdOS çevrimdışı çalışabilir ve air-gap'e hazırdır. Tüm çıkarı
 Token başına ya da sorgu başına faturalandırma yoktur — çıkarım maliyeti kendi donanımınız ve elektriğinizdir. Açık motorlar ve dışa aktarılabilir veri tedarikçi kilidi olmaması demektir; böylece maliyet kullanımla cezalandırıcı biçimde ölçeklenmez.
 
 **Bu sadece on-prem bir sohbet botu mu?**
-Hayır. AdOS üç sütunlu tam bir kurumsal AI işletim sistemidir — Company Brain, Digital Employees ve Workflows & Approvals — tek bir sohbet arayüzü değil.
+Hayır. AdOS üç sütunlu tam bir kurumsal AI işletim sistemidir — Company Brain, AI-assisted workflows ve Workflows & Approvals — tek bir sohbet arayüzü değil.
 
 Kendi koşullarınızda, veriniz duvarlarınızın içinde dönüşün. **Platformu Keşfedin.**
 
@@ -2181,7 +2193,7 @@ A narrow, real pilot beats a broad, shallow one every time. You are proving a me
 
 Write the acceptance criteria down first, and make them objective. Vague pilots produce vague verdicts. Good criteria are measurable:
 
-- **Time-to-first-cited-answer** — how quickly a user gets a grounded, cited answer versus the current manual process.
+- **Time-to-first-cited-answer** — how quickly a user gets a grounded, performance-grounded recommendation versus the current manual process.
 - **Answer quality** — are responses grounded in the right source documents, with correct citations?
 - **Permission correctness** — does the system correctly refuse to surface documents a user is not entitled to see?
 - **Approval cycle time** — for a workflow pilot, how much faster does a prepared approval move?
@@ -2207,25 +2219,25 @@ Deployment is deliberately undramatic. AdOS uses standard Docker with a one-comm
 
 1. **Stand up AdOS** on the pilot hardware, on-premise or in your private cloud/VPC.
 2. **Seed the Company Brain** with the authoritative documents for your chosen domain. Grounding quality depends on source quality — curate, do not dump.
-3. **Configure permissions** to mirror real access rules, so you can test permission-awareness honestly.
-4. **Add one Digital Employee** scoped to the domain's most common task.
+3. **Configure permissions** to mirror real access rules, so you can test human-approvedness honestly.
+4. **Add one AI-assisted workflow** scoped to the domain's most common task.
 5. **Keep it offline if you can.** Running the pilot air-gapped is itself a proof moment — it demonstrates that no internet is required.
 
 ### Step 5 — Run, measure, and use the proof moments
 
 Give it a defined window — a few weeks is usually enough for a narrow domain — and measure against your criteria. During the pilot, deliberately exercise the moments that prove the architecture:
 
-- **Ask for a cited answer** and verify the citation traces to the correct source document.
+- **Ask for a performance-grounded recommendation** and verify the citation traces to the correct source document.
 - **Test a restricted document** — confirm the system will not surface content the test user is not entitled to see.
-- **Run a tiered approval** — submit a request and watch it route deterministically to the right authority level.
-- **Give a Digital Employee a real task** and review what it produced and logged.
+- **Run a human approval gate** — submit a request and watch it route deterministically to the right authority level.
+- **Give an AI-assisted workflow a real task** and review what it produced and logged.
 - **Pull the cable** — disconnect from the internet and confirm it keeps working. This is the sovereignty claim, demonstrated rather than asserted.
 
 Each of these maps directly to a criterion, and together they answer the CISO's and CTO's hardest questions with evidence.
 
 ### Step 6 — Decide, then expand
 
-At the end of the window, compare results to the criteria you wrote in Step 2. Because everything ran on your hardware with your data, the verdict is grounded in your reality, not a vendor's demo. If it passes, expand deliberately — more domains, more Digital Employees, more workflows — one proven step at a time. The reference demo world, NovaMak, runs 12 Digital Employees and 25 workflows across 6 sites; that maturity is where disciplined expansion leads, not where you begin.
+At the end of the window, compare results to the criteria you wrote in Step 2. Because everything ran on your hardware with your data, the verdict is grounded in your reality, not a vendor's demo. If it passes, expand deliberately — more domains, more AI-assisted workflows, more workflows — one proven step at a time. The reference demo world, NovaMak, runs 12 AI-assisted workflows and 25 workflows across 6 sites; that maturity is where disciplined expansion leads, not where you begin.
 
 If it does not pass, you exit cleanly. No data left the building, there is no metered contract to unwind, and your data is exportable. That clean-exit property is precisely why an on-premise pilot is the low-risk way to evaluate enterprise AI.
 
@@ -2310,7 +2322,7 @@ Kurulum bilinçli olarak dramatik değildir. AdOS, tek komutla ayağa kaldırıl
 1. **AdOS'u ayağa kaldırın** — pilot donanımında, on-premise ya da özel bulutunuzda/VPC'nizde.
 2. **Company Brain'i besleyin** — seçtiğiniz alanın yetkili belgeleriyle. Dayanağın kalitesi kaynağın kalitesine bağlıdır — özenle seçin, boşaltmayın.
 3. **Yetkileri yapılandırın** — gerçek erişim kurallarını yansıtacak biçimde, böylece yetki bilincini dürüstçe test edebilirsiniz.
-4. **Bir Digital Employee ekleyin** — alanın en yaygın görevine kapsamlanmış.
+4. **Bir AI-assisted workflow ekleyin** — alanın en yaygın görevine kapsamlanmış.
 5. **Yapabiliyorsanız çevrimdışı tutun.** Pilotu air-gap'li yürütmek başlı başına bir kanıt anıdır — internetin gerekmediğini gösterir.
 
 ### Adım 5 — Yürütün, ölçün ve kanıt anlarını kullanın
@@ -2320,14 +2332,14 @@ Ona tanımlı bir pencere verin — dar bir alan için birkaç hafta genellikle 
 - **Alıntılı bir yanıt isteyin** ve alıntının doğru kaynak belgesine izlendiğini doğrulayın.
 - **Kısıtlı bir belgeyi test edin** — sistemin, test kullanıcısının görmeye yetkili olmadığı içeriği göstermeyeceğini doğrulayın.
 - **Kademeli bir onay yürütün** — bir talep gönderin ve doğru yetki seviyesine deterministik olarak yönlendiğini izleyin.
-- **Bir Digital Employee'ye gerçek bir görev verin** ve ne ürettiğini ve kaydettiğini inceleyin.
+- **Bir AI-assisted workflow'ye gerçek bir görev verin** ve ne ürettiğini ve kaydettiğini inceleyin.
 - **Kabloyu çekin** — internetten bağlantıyı kesin ve çalışmaya devam ettiğini doğrulayın. Bu, iddia edilen değil, gösterilen egemenlik iddiasıdır.
 
 Bunların her biri doğrudan bir ölçüte karşılık gelir ve birlikte, CISO ve CTO'nun en zor sorularını kanıtla yanıtlar.
 
 ### Adım 6 — Karar verin, sonra genişletin
 
-Pencerenin sonunda sonuçları Adım 2'de yazdığınız ölçütlerle karşılaştırın. Her şey sizin donanımınızda, sizin verinizle çalıştığından, karar bir tedarikçinin demosuna değil sizin gerçekliğinize dayanır. Geçerse, bilinçle genişletin — daha çok alan, daha çok Digital Employee, daha çok iş akışı — bir seferde bir kanıtlanmış adım. Referans demo dünyası NovaMak, 6 saha genelinde 12 Digital Employee ve 25 iş akışı çalıştırır; o olgunluk, başladığınız yer değil, disiplinli genişlemenin vardığı yerdir.
+Pencerenin sonunda sonuçları Adım 2'de yazdığınız ölçütlerle karşılaştırın. Her şey sizin donanımınızda, sizin verinizle çalıştığından, karar bir tedarikçinin demosuna değil sizin gerçekliğinize dayanır. Geçerse, bilinçle genişletin — daha çok alan, daha çok AI-assisted workflow, daha çok iş akışı — bir seferde bir kanıtlanmış adım. Referans demo dünyası NovaMak, 6 saha genelinde 12 AI-assisted workflow ve 25 iş akışı çalıştırır; o olgunluk, başladığınız yer değil, disiplinli genişlemenin vardığı yerdir.
 
 Geçmezse, temiz çıkarsınız. Veri binadan çıkmadı, çözülecek sayaçlı bir sözleşme yok ve veriniz dışa aktarılabilir. Bu temiz çıkış özelliği, tam olarak bir on-premise pilotun kurumsal AI'yı değerlendirmenin düşük riskli yolu olmasının nedenidir.
 
@@ -2390,17 +2402,17 @@ An air-gapped deployment is more than a model on a laptop. To do real work, the 
 
 This is the runtime that loads the model and produces answers. Because AdOS uses open, OpenAI-compatible engines, you are never locked into a single vendor's runtime. If a better local engine appears, you can move to it.
 
-#### A grounded knowledge base
+#### A grounded marketing-performance memory
 
-An AI that answers from memory alone will invent things. An enterprise system must answer from your documents. In AdOS this is the **Company Brain** — the organization's private, permission-aware knowledge base. Every answer is grounded in the company's own documents and cites its sources. The knowledge lives on your storage, indexed on your hardware, never uploaded anywhere.
+An AI that answers from memory alone will invent things. An enterprise system must answer from your data. In AdOS this is the **Company Brain** — the organization's private, human-approved marketing-performance memory. Every answer is grounded in the company's own documents and traces to campaign results. The knowledge lives on your storage, indexed on your hardware, never uploaded anywhere.
 
-#### Permission-aware retrieval
+#### Human-Approved retrieval
 
-Air-gapping keeps data inside the building. It does not, by itself, keep the right data in front of the right people. AdOS is permission-aware: the model can never surface or cite content a user is not entitled to see. Citations are permission-scoped, so a user only sees, and the AI only cites, documents that user may access.
+Air-gapping keeps data inside the building. It does not, by itself, keep the right data in front of the right people. AdOS is human-approved: the model can never surface or cite content a user is not entitled to see. Citations are workspace-scoped, so a user only sees, and the AI only cites, documents that user may access.
 
 #### An audit trail
 
-Because there is no external log of what happened, an air-gapped system must keep its own record. In AdOS, every consequential action is written to an immutable audit trail, held locally, for your compliance and security teams.
+Because there is no external log of what happened, an air-gapped system must keep its own record. In AdOS, every consequential action is written to an activity log and per-approval timeline, held locally, for your compliance and security teams.
 
 ### Air-gapped versus offline versus on-premise
 
@@ -2495,17 +2507,17 @@ Air-gapped bir kurulum, bir dizüstü bilgisayardaki bir modelden fazlasıdır. 
 
 Bu, modeli yükleyen ve yanıtları üreten çalışma zamanıdır. AdOS açık, OpenAI uyumlu motorlar kullandığı için tek bir tedarikçinin çalışma zamanına asla kilitlenmezsiniz. Daha iyi bir yerel motor çıkarsa ona geçebilirsiniz.
 
-#### Temellendirilmiş bilgi tabanı
+#### Temellendirilmiş pazarlama-performans belleği
 
-Yalnızca hafızasından yanıt veren bir yapay zeka uydurur. Kurumsal bir sistem, belgelerinizden yanıt vermelidir. AdOS'ta bu **Company Brain**'dir: kurumun özel, izin farkındalıklı bilgi tabanı. Her yanıt şirketin kendi belgelerine dayanır ve kaynaklarını gösterir. Bilgi sizin depolamanızda yaşar, sizin donanımınızda indekslenir ve hiçbir yere yüklenmez.
+Yalnızca hafızasından yanıt veren bir yapay zeka uydurur. Kurumsal bir sistem, verilerinizden yanıt vermelidir. AdOS'ta bu **Company Brain**'dir: kurumun özel, insan onaylı pazarlama-performans belleği. Her yanıt şirketin kendi belgelerine dayanır ve kampanya sonuçlarına dayanır. Bilgi sizin depolamanızda yaşar, sizin donanımınızda indekslenir ve hiçbir yere yüklenmez.
 
-#### İzin farkındalıklı erişim
+#### İnsan Onaylı erişim
 
-Air-gapping veriyi binanın içinde tutar. Ancak tek başına, doğru veriyi doğru kişilerin önünde tutmaz. AdOS izin farkındalıklıdır: model, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar izin kapsamlıdır; kullanıcı yalnızca erişebildiği belgeleri görür ve yapay zeka yalnızca onları alıntılar.
+Air-gapping veriyi binanın içinde tutar. Ancak tek başına, doğru veriyi doğru kişilerin önünde tutmaz. AdOS insan onaylıdır: model, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar insan onaylıdır; kullanıcı yalnızca erişebildiği belgeleri görür ve yapay zeka yalnızca onları alıntılar.
 
-#### Denetim izi
+#### etkinlik günlüğü
 
-Ne olduğuna dair harici bir kayıt olmadığından, air-gapped bir sistem kendi kaydını tutmalıdır. AdOS'ta her önemli eylem, uyumluluk ve güvenlik ekipleriniz için yerelde tutulan değiştirilemez bir denetim izine yazılır.
+Ne olduğuna dair harici bir kayıt olmadığından, air-gapped bir sistem kendi kaydını tutmalıdır. AdOS'ta her önemli eylem, uyumluluk ve güvenlik ekipleriniz için yerelde tutulan değiştirilemez bir etkinlik günlüğüne yazılır.
 
 ### Air-gapped, çevrimdışı ve on-premise farkı
 
@@ -2588,13 +2600,13 @@ AdOS is built to that standard. Customer data — documents, prompts, answers, w
 
 ### Why AI changes the sovereignty equation
 
-Traditional software processes your data and stores results. AI does something more intimate: it reads your documents, reasons over them, and generates new content grounded in them. That raises sovereignty concerns that ordinary applications never did.
+Traditional software processes your data and stores results. AI does something more intimate: it reads your data, reasons over them, and generates new content grounded in them. That raises sovereignty concerns that ordinary applications never did.
 
 #### Your knowledge becomes the input
 
 To answer usefully, an enterprise AI must read your contracts, policies, records, and correspondence. With cloud AI, that means your most sensitive knowledge travels to infrastructure you do not own to be processed by systems you cannot inspect. Even with contractual assurances, the data has left the building.
 
-AdOS inverts this. The AI comes to your data, not the other way around. The **Company Brain** — your private, permission-aware knowledge base — is indexed and stored on your infrastructure, and every AI answer is grounded in your own documents and cites its sources. The knowledge never has to leave to be useful.
+AdOS inverts this. The AI comes to your data, not the other way around. The **Company Brain** — your private, human-approved marketing-performance memory — is indexed and stored on your infrastructure, and every AI answer is grounded in your own documents and traces to campaign results. The knowledge never has to leave to be useful.
 
 #### Prompts and answers are data too
 
@@ -2618,7 +2630,7 @@ Your data is processed where it lives, by systems you control. Because AdOS infe
 
 #### Access sovereignty
 
-Only the right people, and the right AI, can reach any given piece of data. AdOS is permission-aware: the model can never surface or cite content a user is not entitled to see. Citations are permission-scoped, so an answer respects the same access rules as the underlying documents. In a multi-tenant deployment, strict tenant isolation keeps organizations separate.
+Only the right people, and the right AI, can reach any given piece of data. AdOS is human-approved: the model can never surface or cite content a user is not entitled to see. Citations are workspace-scoped, so an answer respects the same access rules as the underlying documents. In a multi-tenant deployment, strict tenant isolation keeps organizations separate.
 
 #### Operational sovereignty
 
@@ -2638,7 +2650,7 @@ Sovereignty is about control, of which residency is one component. An on-premise
 
 The pattern is consistent across regulated and sensitive sectors.
 
-**Municipalities and public institutions** frequently face data-residency mandates that cloud AI cannot meet. **Healthcare** must protect patient confidentiality with strict access control. **Finance** faces regulatory residency, auditability, and a zero-leakage bar. **Manufacturing** and **Organized Industrial Zones (OSB)** hold decades of proprietary process knowledge that must not escape. For all of them, sovereignty is not a feature request. It is a condition of doing business with AI at all.
+**Municipalities and public institutions** frequently face data-residency mandates that cloud AI cannot meet. **Healthcare** must protect patient confidentiality with strict human approval gates. **Finance** faces regulatory residency, auditability, and a zero-leakage bar. **Manufacturing** and **Organized Industrial Zones (OSB)** hold decades of proprietary process knowledge that must not escape. For all of them, sovereignty is not a feature request. It is a condition of doing business with AI at all.
 
 ### What sovereign AI is not
 
@@ -2689,13 +2701,13 @@ AdOS bu standarda göre kuruludur. Müşteri verisi — belgeler, istekler, yan�
 
 ### Yapay zeka egemenlik denklemini neden değiştirir
 
-Geleneksel yazılım verinizi işler ve sonuçları saklar. Yapay zeka daha içli dışlı bir şey yapar: belgelerinizi okur, üzerlerinde akıl yürütür ve onlara dayanan yeni içerik üretir. Bu, sıradan uygulamaların hiç yaratmadığı egemenlik kaygıları doğurur.
+Geleneksel yazılım verinizi işler ve sonuçları saklar. Yapay zeka daha içli dışlı bir şey yapar: verilerinizi okur, üzerlerinde akıl yürütür ve onlara dayanan yeni içerik üretir. Bu, sıradan uygulamaların hiç yaratmadığı egemenlik kaygıları doğurur.
 
 #### Bilginiz girdiye dönüşür
 
 Faydalı yanıt vermek için kurumsal bir yapay zeka sözleşmelerinizi, politikalarınızı, kayıtlarınızı ve yazışmalarınızı okumalıdır. Bulut yapay zekada bu, en hassas bilginizin sahip olmadığınız altyapıya gidip inceleyemediğiniz sistemlerce işlenmesi demektir. Sözleşmeye dayalı güvenceler olsa bile veri binadan çıkmıştır.
 
-AdOS bunu tersine çevirir. Yapay zeka verinize gelir, tersi olmaz. **Company Brain** — özel, izin farkındalıklı bilgi tabanınız — altyapınızda indekslenir ve saklanır; her yapay zeka yanıtı kendi belgelerinize dayanır ve kaynaklarını gösterir. Bilginin faydalı olması için hiçbir yere gitmesi gerekmez.
+AdOS bunu tersine çevirir. Yapay zeka verinize gelir, tersi olmaz. **Company Brain** — özel, insan onaylı pazarlama-performans belleğiniz — altyapınızda indekslenir ve saklanır; her yapay zeka yanıtı kendi verilerinize dayanır ve kampanya sonuçlarına dayanır. Bilginin faydalı olması için hiçbir yere gitmesi gerekmez.
 
 #### İstekler ve yanıtlar da veridir
 
@@ -2719,7 +2731,7 @@ Veriniz, kontrol ettiğiniz sistemlerce, yaşadığı yerde işlenir. AdOS çık
 
 #### Erişim egemenliği
 
-Herhangi bir veri parçasına yalnızca doğru kişiler ve doğru yapay zeka ulaşabilir. AdOS izin farkındalıklıdır: model, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar izin kapsamlıdır; bir yanıt, altındaki belgelerle aynı erişim kurallarına uyar. Çok kiracılı bir kurulumda katı kiracı izolasyonu kurumları ayrı tutar.
+Herhangi bir veri parçasına yalnızca doğru kişiler ve doğru yapay zeka ulaşabilir. AdOS insan onaylıdır: model, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar insan onaylıdır; bir yanıt, altındaki belgelerle aynı erişim kurallarına uyar. Çok kiracılı bir kurulumda katı kiracı izolasyonu kurumları ayrı tutar.
 
 #### Operasyonel egemenlik
 
@@ -2771,7 +2783,7 @@ Verinizin her katmanını kendi altyapınızda egemen tutmayı AdOS'un nasıl sa
 ## Article 15: Designing an On-Prem Enterprise AI Architecture
 
 **Meta title:** Designing an On-Prem Enterprise AI Architecture
-**Meta description:** A practical guide to designing an on-premise enterprise AI architecture — local inference, grounded knowledge, permission-aware access, and full audit trails.
+**Meta description:** A practical guide to designing an on-premise enterprise AI architecture — local inference, grounded knowledge, human-approved access, and full audit trails.
 **Slug:** on-prem-enterprise-ai-architecture
 
 Deciding to keep AI on-premise is the easy part. Designing the architecture that makes it real — capable, secure, and operable by your own team — is the work. An on-prem enterprise AI system is not a single model behind an API. It is a layered architecture in which inference, knowledge, permissions, workflow, and audit all live inside your boundary and reinforce one another.
@@ -2786,7 +2798,7 @@ Before the components, the principles. A sound on-prem AI architecture holds to 
 
 **Grounded, not guessing.** Answers are grounded in the organization's own documents and cite their sources, rather than being generated from a model's general memory.
 
-**Permission-aware by construction.** Access control is not a filter added at the end. The AI can never surface or cite content a user is not entitled to see.
+**Human-Approved by construction.** human approval gates is not a filter added at the end. The AI can never surface or cite content a user is not entitled to see.
 
 **Auditable by default.** Every consequential action is recorded in an immutable trail.
 
@@ -2812,7 +2824,7 @@ The OpenAI-compatible interface is a deliberate architectural choice. It means t
 
 ### Layer 3: The knowledge layer — Company Brain
 
-A model alone will confabulate. The knowledge layer grounds it. In AdOS this is the **Company Brain** — the organization's private, permission-aware knowledge base. Your documents are ingested, indexed, and stored on your infrastructure. When a user asks a question, the system retrieves relevant passages and the model answers from them, citing its sources.
+A model alone will confabulate. The knowledge layer grounds it. In AdOS this is the **Company Brain** — the organization's private, human-approved marketing-performance memory. your data are ingested, indexed, and stored on your infrastructure. When a user asks a question, the system surfaces relevant passages and the model answers from them, tracing to campaign results.
 
 Two properties define this layer:
 
@@ -2820,31 +2832,31 @@ Two properties define this layer:
 
 **Locality.** The knowledge never leaves. Indexing and retrieval happen on your hardware, so the most sensitive material an organization owns stays inside the boundary even as the AI reasons over it.
 
-### Layer 4: Permission-aware access control
+### Layer 4: Human-Approved human approval gates
 
 This is the layer most often underestimated, and the one that separates an enterprise system from a toy. Grounding an answer in company documents is dangerous if the system ignores who is allowed to read those documents.
 
-AdOS builds permissions into retrieval itself. The AI can never surface or cite content a user is not entitled to see. Citations are permission-scoped: a user only sees, and the AI only cites, documents that user may access. Ask about a restricted topic without clearance, and the system does not produce a redacted answer — it produces an answer built only from what you are permitted to see, as if the restricted material were not there.
+AdOS builds permissions into retrieval itself. The AI can never surface or cite content a user is not entitled to see. Citations are workspace-scoped: a user only sees, and the AI only cites, documents that user may access. Ask about a restricted topic without clearance, and the system does not produce a redacted answer — it produces an answer built only from what you are permitted to see, as if the restricted material were not there.
 
-For deployments serving multiple organizations, strict tenant isolation keeps each tenant's data and answers fully separate. Access control and multi-tenancy are architectural foundations here, not features layered on afterward.
+For deployments serving multiple organizations, strict tenant isolation keeps each tenant's data and answers fully separate. human approval gates and multi-tenancy are architectural foundations here, not features layered on afterward.
 
-### Layer 5: Digital Employees and workflow
+### Layer 5: AI-assisted workflows and workflow
 
 Answers are useful; action is transformative. On top of knowledge and permissions sits the work layer.
 
-**Digital Employees** are AI agents that perform real knowledge work — they answer, draft, route, and prepare approvals — within defined roles and permissions. Because they inherit the permission model, a Digital Employee can only act on and cite what its role is entitled to.
+**AI-assisted workflows** are AI agents that perform real knowledge work — they answer, draft, route, and prepare approvals — within defined roles and permissions. Because they inherit the permission model, an AI-assisted workflow can only act on and cite what its role is entitled to.
 
-**Workflows & Approvals** provide the structure: defined processes, tiered approval authority, deterministic routing, and full audit trails. Deterministic routing is a specific design commitment — approvals and hand-offs follow defined rules, not probabilistic guesses, so the same conditions always produce the same path. In a process that governs money or compliance, predictability is a feature.
+**Workflows & Approvals** provide the structure: defined processes, human approval gates, deterministic routing, and full audit trails. Deterministic routing is a specific design commitment — approvals and hand-offs follow defined rules, not probabilistic guesses, so the same conditions always produce the same path. In a process that governs money or compliance, predictability is a feature.
 
 ### Layer 6: Audit and accountability
 
-The final layer records everything. Every consequential action is written to an immutable audit trail. This is not an add-on; in an on-prem system it is the primary accountability mechanism, because there is no external provider log to fall back on.
+The final layer records everything. Every consequential action is written to an activity log and per-approval timeline. This is not an add-on; in an on-prem system it is the primary accountability mechanism, because there is no external provider log to fall back on.
 
-The audit layer serves security and compliance directly: who asked what, which sources an answer cited, who approved which step, and what each Digital Employee did. Because the trail is immutable and local, it is both trustworthy and sovereign.
+The audit layer serves security and compliance directly: who asked what, which sources an answer cited, who approved which step, and what each AI-assisted workflow did. Because the trail is immutable and local, it is both trustworthy and sovereign.
 
 ### How the layers reinforce one another
 
-The strength of the architecture is in the interlock. Local inference keeps computation inside the boundary. The knowledge layer keeps answers grounded and local. Permission-awareness ensures the grounding never crosses access lines. Workflows turn permitted answers into governed action. Audit records all of it. Remove any layer and the system weakens: a model without grounding hallucinates; grounding without permissions leaks; workflow without audit is unaccountable.
+The strength of the architecture is in the interlock. Local inference keeps computation inside the boundary. The knowledge layer keeps answers grounded and local. Human-Approvedness ensures the grounding never crosses access lines. Workflows turn permitted answers into governed action. Audit records all of it. Remove any layer and the system weakens: a model without grounding hallucinates; grounding without permissions leaks; workflow without audit is unaccountable.
 
 ### What this architecture deliberately is not
 
@@ -2862,7 +2874,7 @@ AdOS deploys with standard Docker and a one-command bring-up, and ships document
 Yes. The inference layer uses an OpenAI-compatible interface and open engines, so models and engines are swappable without re-architecting the layers above. That is how the design avoids vendor lock-in.
 
 **How does the architecture prevent data leaks between users?**
-Permission-awareness is built into retrieval, so the AI can never surface or cite content a user is not entitled to see, and multi-tenant deployments enforce strict tenant isolation.
+Human-Approvedness is built into retrieval, so the AI can never surface or cite content a user is not entitled to see, and multi-tenant deployments enforce strict tenant isolation.
 
 **Where do audit records live?**
 On your infrastructure, in an immutable local trail. There is no external logging service; accountability stays inside your boundary along with everything else.
@@ -2874,7 +2886,7 @@ A good on-prem AI architecture is not one clever component. It is layers that ea
 ### Türkçe
 
 **Meta title:** On-Prem Kurumsal Yapay Zeka Mimarisi Tasarlamak
-**Meta description:** On-premise kurumsal yapay zeka mimarisi tasarlamaya yönelik pratik bir rehber — yerel çıkarım, temellendirilmiş bilgi, izin farkındalıklı erişim ve tam denetim izleri.
+**Meta description:** On-premise kurumsal yapay zeka mimarisi tasarlamaya yönelik pratik bir rehber — yerel çıkarım, temellendirilmiş bilgi, insan onaylı erişim ve tam denetim izleri.
 **Slug:** on-prem-kurumsal-yapay-zeka-mimarisi
 
 Yapay zekayı on-premise tutmaya karar vermek kolay kısımdır. Bunu gerçek kılan mimariyi — yetenekli, güvenli ve kendi ekibinizce işletilebilir — tasarlamak ise asıl iştir. On-prem bir kurumsal yapay zeka sistemi, bir API'nin arkasındaki tek bir model değildir. Çıkarımın, bilginin, izinlerin, iş akışının ve denetimin hepsinin sınırınızın içinde yaşadığı ve birbirini güçlendirdiği katmanlı bir mimaridir.
@@ -2887,9 +2899,9 @@ Bileşenlerden önce ilkeler gelir. Sağlam bir on-prem yapay zeka mimarisi birk
 
 **Her şey sınırın içinde.** Uygulama, veri ve model, müşterinin sahip olduğu altyapıda çalışır — on-premise ya da müşterinin özel bulutu veya VPC'si. Hiçbir şey harici bir hizmeti çağırmaz.
 
-**Temellendirilmiş, tahmin değil.** Yanıtlar, bir modelin genel hafızasından üretilmek yerine kurumun kendi belgelerine dayanır ve kaynaklarını gösterir.
+**Temellendirilmiş, tahmin değil.** Yanıtlar, bir modelin genel hafızasından üretilmek yerine kurumun kendi belgelerine dayanır ve kampanya sonuçlarına dayanır.
 
-**Yapısı gereği izin farkındalıklı.** Erişim kontrolü sona eklenen bir filtre değildir. Yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz.
+**Yapısı gereği insan onaylı.** Erişim kontrolü sona eklenen bir filtre değildir. Yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz.
 
 **Varsayılan olarak denetlenebilir.** Her önemli eylem değiştirilemez bir izde kayıt altına alınır.
 
@@ -2915,7 +2927,7 @@ OpenAI uyumlu arayüz bilinçli bir mimari tercihtir. Model katmanının değiş
 
 ### Katman 3: Bilgi katmanı — Company Brain
 
-Model tek başına uydurur. Bilgi katmanı onu temellendirir. AdOS'ta bu **Company Brain**'dir — kurumun özel, izin farkındalıklı bilgi tabanı. Belgeleriniz alınır, indekslenir ve altyapınızda saklanır. Bir kullanıcı soru sorduğunda sistem ilgili pasajları getirir ve model bunlardan, kaynaklarını göstererek yanıtlar.
+Model tek başına uydurur. Bilgi katmanı onu temellendirir. AdOS'ta bu **Company Brain**'dir — kurumun özel, insan onaylı pazarlama-performans belleği. Verileriniz alınır, indekslenir ve altyapınızda saklanır. Bir kullanıcı soru sorduğunda sistem ilgili pasajları getirir ve model bunlardan, kampanya sonuçlarına dayanarak yanıtlar.
 
 Bu katmanı iki özellik tanımlar:
 
@@ -2923,27 +2935,27 @@ Bu katmanı iki özellik tanımlar:
 
 **Yerellik.** Bilgi asla çıkmaz. İndeksleme ve erişim donanımınızda gerçekleşir; böylece kurumun sahip olduğu en hassas malzeme, yapay zeka üzerinde akıl yürütürken bile sınırın içinde kalır.
 
-### Katman 4: İzin farkındalıklı erişim kontrolü
+### Katman 4: İnsan Onaylı erişim kontrolü
 
 Bu, en çok hafife alınan ve kurumsal bir sistemi oyuncaktan ayıran katmandır. Bir yanıtı şirket belgelerine dayandırmak, sistem bu belgeleri kimin okuyabileceğini görmezden gelirse tehlikelidir.
 
-AdOS izinleri erişimin kendisine yerleştirir. Yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar izin kapsamlıdır: kullanıcı yalnızca erişebildiği belgeleri görür ve yapay zeka yalnızca onları alıntılar. Yetkiniz olmadan kısıtlı bir konuyu sorduğunuzda sistem sansürlü bir yanıt üretmez — yalnızca görmenize izin verilenden oluşturulmuş bir yanıt üretir, sanki kısıtlı malzeme orada yokmuş gibi.
+AdOS izinleri erişimin kendisine yerleştirir. Yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz. Alıntılar insan onaylıdır: kullanıcı yalnızca erişebildiği belgeleri görür ve yapay zeka yalnızca onları alıntılar. Yetkiniz olmadan kısıtlı bir konuyu sorduğunuzda sistem sansürlü bir yanıt üretmez — yalnızca görmenize izin verilenden oluşturulmuş bir yanıt üretir, sanki kısıtlı malzeme orada yokmuş gibi.
 
 Birden çok kuruma hizmet veren kurulumlarda katı kiracı izolasyonu, her kiracının verisini ve yanıtlarını tümüyle ayrı tutar. Erişim kontrolü ve çok kiracılılık burada sonradan eklenen özellikler değil, mimari temellerdir.
 
-### Katman 5: Digital Employees ve iş akışı
+### Katman 5: AI-assisted workflows ve iş akışı
 
 Yanıtlar faydalıdır; eylem dönüştürücüdür. Bilgi ve izinlerin üzerinde iş katmanı bulunur.
 
-**Digital Employees**, gerçek bilgi işi yapan yapay zeka ajanlarıdır — tanımlı roller ve izinler dahilinde yanıtlar, taslak hazırlar, yönlendirir ve onaylar hazırlarlar. İzin modelini miras aldıkları için bir Digital Employee yalnızca rolünün yetkili olduğu şey üzerinde işlem yapabilir ve onu alıntılayabilir.
+**AI-assisted workflows**, gerçek bilgi işi yapan yapay zeka ajanlarıdır — tanımlı roller ve izinler dahilinde yanıtlar, taslak hazırlar, yönlendirir ve onaylar hazırlarlar. İzin modelini miras aldıkları için bir AI-assisted workflow yalnızca rolünün yetkili olduğu şey üzerinde işlem yapabilir ve onu alıntılayabilir.
 
-**Workflows & Approvals** yapıyı sağlar: tanımlı süreçler, kademeli onay yetkisi, deterministik yönlendirme ve tam denetim izleri. Deterministik yönlendirme özel bir tasarım taahhüdüdür — onaylar ve devirler olasılıksal tahminleri değil tanımlı kuralları izler; böylece aynı koşullar her zaman aynı yolu üretir. Parayı veya uyumluluğu yöneten bir süreçte öngörülebilirlik bir özelliktir.
+**Workflows & Approvals** yapıyı sağlar: tanımlı süreçler, insan onay adÄ±mlarÄ±, deterministik yönlendirme ve tam denetim izleri. Deterministik yönlendirme özel bir tasarım taahhüdüdür — onaylar ve devirler olasılıksal tahminleri değil tanımlı kuralları izler; böylece aynı koşullar her zaman aynı yolu üretir. Parayı veya uyumluluğu yöneten bir süreçte öngörülebilirlik bir özelliktir.
 
 ### Katman 6: Denetim ve hesap verebilirlik
 
-Son katman her şeyi kaydeder. Her önemli eylem değiştirilemez bir denetim izine yazılır. Bu bir eklenti değildir; on-prem bir sistemde birincil hesap verebilirlik mekanizmasıdır, çünkü geri dönülecek harici bir sağlayıcı kaydı yoktur.
+Son katman her şeyi kaydeder. Her önemli eylem değiştirilemez bir etkinlik günlüğüne yazılır. Bu bir eklenti değildir; on-prem bir sistemde birincil hesap verebilirlik mekanizmasıdır, çünkü geri dönülecek harici bir sağlayıcı kaydı yoktur.
 
-Denetim katmanı güvenlik ve uyumluluğa doğrudan hizmet eder: kim neyi sordu, bir yanıt hangi kaynakları alıntıladı, hangi adımı kim onayladı ve her Digital Employee ne yaptı. İz değiştirilemez ve yerel olduğu için hem güvenilir hem de egemendir.
+Denetim katmanı güvenlik ve uyumluluğa doğrudan hizmet eder: kim neyi sordu, bir yanıt hangi kaynakları alıntıladı, hangi adımı kim onayladı ve her AI-assisted workflow ne yaptı. İz değiştirilemez ve yerel olduğu için hem güvenilir hem de egemendir.
 
 ### Katmanlar birbirini nasıl güçlendirir
 
@@ -2979,7 +2991,7 @@ Bu katmanları tek bir egemen, on-premise kurumsal yapay zeka işletim sistemind
 ## Article 16: Audit Trails and Accountable AI
 
 **Meta title:** Audit Trails and Accountable AI Explained
-**Meta description:** Why audit trails make AI accountable — how immutable logs, cited answers, and permission-aware records let enterprises trust and prove what their AI did.
+**Meta description:** Why audit trails make AI accountable — how immutable logs, performance-grounded recommendations, and human-approved records let enterprises trust and prove what their AI did.
 **Slug:** audit-trails-accountable-ai
 
 Capability without accountability is a liability. An AI system that produces answers, moves approvals, and takes action on behalf of an organization must also be able to answer a harder question: what exactly did you do, and can you prove it? For consumer AI, the answer is often a shrug. For enterprise AI operating on regulated data and real business processes, "we think it worked" is not good enough. Accountability has to be built in.
@@ -2995,29 +3007,29 @@ Accountability is a specific, testable property, not a sentiment. An accountable
 - **Who authorized it?** Which person or role approved a consequential step.
 - **Can you prove it later?** Is the record trustworthy and tamper-resistant.
 
-Marketing language cannot satisfy these. Only architecture can. AdOS is designed so that every consequential action is recorded in an immutable audit trail — the foundation on which the other answers rest.
+Marketing language cannot satisfy these. Only architecture can. AdOS is designed so that every consequential action is recorded in an activity log and per-approval timeline — the foundation on which the other answers rest.
 
 ### The audit trail: memory you can trust
 
 An audit trail is a chronological record of events that cannot be quietly altered. The word "immutable" is doing real work here. A log you can edit is a log you cannot trust, because the most important entry — the one someone wants to hide — is the one most likely to be changed. An immutable trail means the record of what happened is preserved as it happened.
 
-In AdOS, every consequential action goes into that immutable trail: questions asked, sources cited, approvals granted, workflow steps taken, and the tasks Digital Employees perform. For security and compliance teams, this converts "the AI did something" into "here is precisely what the AI did, when, and on whose authority."
+In AdOS, every consequential action goes into that immutable trail: questions asked, sources cited, approvals granted, workflow steps taken, and the tasks AI-assisted workflows perform. For security and compliance teams, this converts "the AI did something" into "here is precisely what the AI did, when, and on whose authority."
 
 ### Accountability is more than logging
 
 A raw log is necessary but not sufficient. True accountability comes from combining the audit trail with three other properties of the system.
 
-#### Cited answers make reasoning inspectable
+#### Performance-Grounded Recommendations make reasoning inspectable
 
-Most AI is a black box: an answer appears, and you take it on faith. AdOS grounds every answer in the organization's own documents and cites its sources. That citation is an accountability instrument. It lets a user, an auditor, or a regulator trace an answer back to the exact document it came from and judge it for themselves. An answer you can verify is an answer you can be accountable for; an uncited answer is a guess wearing a suit.
+Most AI is a black box: an answer appears, and you take it on faith. AdOS grounds every answer in the organization's own documents and traces to campaign results. That citation is an accountability instrument. It lets a user, an auditor, or a regulator trace an answer back to the exact document it came from and judge it for themselves. An answer you can verify is an answer you can be accountable for; an unperformance-grounded recommendation is a guess wearing a suit.
 
-#### Permission-aware records respect access lines
+#### Human-Approved records respect access lines
 
-Accountability must not become a backdoor. An audit trail that exposed restricted content to anyone reviewing it would trade one leak for another. AdOS is permission-aware throughout: the AI can never surface or cite content a user is not entitled to see, and citations are permission-scoped. Accountability and confidentiality hold at the same time.
+Accountability must not become a backdoor. An audit trail that exposed restricted content to anyone reviewing it would trade one leak for another. AdOS is human-approved throughout: the AI can never surface or cite content a user is not entitled to see, and citations are workspace-scoped. Accountability and confidentiality hold at the same time.
 
 #### Deterministic workflows make outcomes explainable
 
-When an approval routes one way and not another, you should be able to say why. AdOS Workflows & Approvals use deterministic routing with tiered approval authority. Deterministic means the same conditions always produce the same path — so the audit trail does not just record what happened, it records something that follows explainable rules. A probabilistic process can be logged but never fully explained; a deterministic one can be both.
+When an approval routes one way and not another, you should be able to say why. AdOS Workflows & Approvals use deterministic routing with human approval gates. Deterministic means the same conditions always produce the same path — so the audit trail does not just record what happened, it records something that follows explainable rules. A probabilistic process can be logged but never fully explained; a deterministic one can be both.
 
 ### Why on-premise strengthens accountability
 
@@ -3029,7 +3041,7 @@ AdOS keeps the trail where the rest of the system lives: inside your boundary. B
 
 Different members of the buying committee value accountability for different reasons, and the audit trail serves all of them.
 
-**CISO and security** need to prove no data leaked and to reconstruct any incident precisely. The immutable, permission-aware trail is their evidence.
+**CISO and security** need to prove no data leaked and to reconstruct any incident precisely. The immutable, human-approved trail is their evidence.
 
 **Compliance and finance** need to show that approvals followed authorized, tiered rules — exactly what deterministic Workflows & Approvals plus an audit trail provide.
 
@@ -3041,7 +3053,7 @@ For finance, healthcare, municipalities, and public institutions, this is not op
 
 ### Accountability as a foundation for trust
 
-There is a strategic point underneath the mechanics. Organizations hesitate to give AI real responsibility because they fear losing track of what it does. Accountability removes that fear. When every consequential action is recorded immutably, every answer is cited and verifiable, and every record respects permissions, an organization can extend genuine responsibility to AI — deploy Digital Employees, automate approvals — without flying blind. Accountability is what makes capability safe to use.
+There is a strategic point underneath the mechanics. Organizations hesitate to give AI real responsibility because they fear losing track of what it does. Accountability removes that fear. When every consequential action is recorded immutably, every answer is cited and verifiable, and every record respects permissions, an organization can extend genuine responsibility to AI — deploy AI-assisted workflows, automate approvals — without flying blind. Accountability is what makes capability safe to use.
 
 This is why accountability sits among the three headline pillars of AdOS: Sovereign, Capable, and Accountable. The first keeps your data yours. The second does real work. The third lets you trust and prove all of it.
 
@@ -3052,33 +3064,33 @@ It is not a system that asks for blind faith in its outputs. It is not a black b
 ### FAQ
 
 **What is an AI audit trail?**
-A chronological, immutable record of every consequential action the system takes — questions asked, sources cited, approvals granted, workflow steps, and Digital Employee tasks. In AdOS it is held locally, inside your boundary.
+A chronological, immutable record of every consequential action the system takes — questions asked, sources cited, approvals granted, workflow steps, and AI-assisted workflow tasks. In AdOS it is held locally, inside your boundary.
 
 **Why does the audit trail need to be immutable?**
 Because a log that can be edited cannot be trusted; the entry someone most wants to hide is the one most at risk of being altered. Immutability preserves the record as events actually happened, which is what makes it usable as evidence.
 
-**How do cited answers support accountability?**
-Every AdOS answer is grounded in your documents and cites its sources, so anyone can trace it back to the exact source and verify it. A verifiable answer is one you can stand behind; an uncited one cannot be checked.
+**How do performance-grounded recommendations support accountability?**
+Every AdOS answer is grounded in your data and traces to campaign results, so anyone can trace it back to the exact source and verify it. A verifiable answer is one you can stand behind; an uncited one cannot be checked.
 
 **Does the audit trail expose restricted information?**
-No. AdOS is permission-aware throughout, and citations are permission-scoped, so the AI never surfaces content a user is not entitled to see. Accountability and confidentiality hold together.
+No. AdOS is human-approved throughout, and citations are workspace-scoped, so the AI never surfaces content a user is not entitled to see. Accountability and confidentiality hold together.
 
 **Is on-premise better for auditability than cloud AI?**
 Yes, in an important way: the trail lives inside your boundary, under your control, and works with no internet. You are not trusting a provider's log about your own operations, and the record cannot be governed by someone else's retention or access policy.
 
-Accountable AI is not a feature you bolt on after the fact. It is a property you design in — an immutable trail, cited answers, permission-aware records, and deterministic processes — so that capability comes with proof.
+Accountable AI is not a feature you bolt on after the fact. It is a property you design in — an immutable trail, performance-grounded recommendations, human-approved records, and deterministic processes — so that capability comes with proof.
 
-**Read the Guide** to see how AdOS makes enterprise AI accountable, with immutable audit trails held entirely on your own infrastructure.
+**Read the Guide** to see how AdOS makes enterprise AI accountable, with activity log and per-approval timelines held entirely on your own infrastructure.
 
 ### Türkçe
 
 **Meta title:** Denetim İzleri ve Hesap Verebilir Yapay Zeka
-**Meta description:** Denetim izlerinin yapay zekayı neden hesap verebilir kıldığı — değiştirilemez günlükler, alıntılı yanıtlar ve izin farkındalıklı kayıtlar kurumların yapay zekaya güvenmesini ve kanıtlamasını nasıl sağlar.
+**Meta description:** Denetim izlerinin yapay zekayı neden hesap verebilir kıldığı — değiştirilemez günlükler, alıntılı yanıtlar ve insan onaylı kayıtlar kurumların yapay zekaya güvenmesini ve kanıtlamasını nasıl sağlar.
 **Slug:** denetim-izleri-hesap-verebilir-yapay-zeka
 
 Hesap verebilirlik olmadan yetenek bir yükümlülüktür. Yanıtlar üreten, onayları hareket ettiren ve bir kurum adına eylemde bulunan bir yapay zeka sistemi, daha zor bir soruyu da yanıtlayabilmelidir: tam olarak ne yaptın ve bunu kanıtlayabilir misin? Tüketici yapay zekası için yanıt çoğu zaman bir omuz silkmedir. Düzenlemeye tabi veriler ve gerçek iş süreçleri üzerinde çalışan kurumsal yapay zeka için "sanırız işe yaradı" yeterli değildir. Hesap verebilirlik en baştan inşa edilmelidir.
 
-Bu rehber, yapay zekayı neyin hesap verebilir kıldığını, denetim izinin bunu sağlayan mekanizma olduğunu ve hesap verebilirliğin egemenlik ve güvenle nasıl bağlandığını açıklıyor.
+Bu rehber, yapay zekayı neyin hesap verebilir kıldığını, etkinlik günlüğünin bunu sağlayan mekanizma olduğunu ve hesap verebilirliğin egemenlik ve güvenle nasıl bağlandığını açıklıyor.
 
 ### Hesap verebilir yapay zeka gerçekte neyi gerektirir
 
@@ -3089,43 +3101,43 @@ Hesap verebilirlik bir his değil, belirli ve test edilebilir bir özelliktir. H
 - **Kim yetki verdi?** Önemli bir adımı hangi kişi ya da rol onayladı.
 - **Sonradan kanıtlayabilir misin?** Kayıt güvenilir ve kurcalamaya dirençli mi.
 
-Pazarlama dili bunları karşılayamaz. Yalnızca mimari karşılayabilir. AdOS öyle tasarlanmıştır ki her önemli eylem değiştirilemez bir denetim izine kaydedilir — diğer yanıtların üzerine oturduğu temel.
+Pazarlama dili bunları karşılayamaz. Yalnızca mimari karşılayabilir. AdOS öyle tasarlanmıştır ki her önemli eylem değiştirilemez bir etkinlik günlüğüne kaydedilir — diğer yanıtların üzerine oturduğu temel.
 
-### Denetim izi: güvenebileceğiniz hafıza
+### etkinlik günlüğü: güvenebileceğiniz hafıza
 
-Denetim izi, sessizce değiştirilemeyen kronolojik bir olay kaydıdır. "Değiştirilemez" sözcüğü burada gerçek bir iş yapar. Düzenleyebildiğiniz bir günlük, güvenemeyeceğiniz bir günlüktür; çünkü en önemli kayıt — birinin gizlemek istediği — değiştirilme olasılığı en yüksek olandır. Değiştirilemez bir iz, ne olduysa onun olduğu gibi korunması demektir.
+etkinlik günlüğü, sessizce değiştirilemeyen kronolojik bir olay kaydıdır. "Değiştirilemez" sözcüğü burada gerçek bir iş yapar. Düzenleyebildiğiniz bir günlük, güvenemeyeceğiniz bir günlüktür; çünkü en önemli kayıt — birinin gizlemek istediği — değiştirilme olasılığı en yüksek olandır. Değiştirilemez bir iz, ne olduysa onun olduğu gibi korunması demektir.
 
-AdOS'ta her önemli eylem o değiştirilemez ize girer: sorulan sorular, alıntılanan kaynaklar, verilen onaylar, atılan iş akışı adımları ve Digital Employees'in yaptığı görevler. Güvenlik ve uyumluluk ekipleri için bu, "yapay zeka bir şey yaptı"yı "yapay zekanın tam olarak ne yaptığı, ne zaman ve kimin yetkisiyle" hâline dönüştürür.
+AdOS'ta her önemli eylem o değiştirilemez ize girer: sorulan sorular, alıntılanan kaynaklar, verilen onaylar, atılan iş akışı adımları ve AI-assisted workflows'in yaptığı görevler. Güvenlik ve uyumluluk ekipleri için bu, "yapay zeka bir şey yaptı"yı "yapay zekanın tam olarak ne yaptığı, ne zaman ve kimin yetkisiyle" hâline dönüştürür.
 
 ### Hesap verebilirlik günlüklemenin ötesindedir
 
-Ham bir günlük gereklidir ama yeterli değildir. Gerçek hesap verebilirlik, denetim izini sistemin üç başka özelliğiyle birleştirmekten doğar.
+Ham bir günlük gereklidir ama yeterli değildir. Gerçek hesap verebilirlik, etkinlik günlüğüni sistemin üç başka özelliğiyle birleştirmekten doğar.
 
 #### Alıntılı yanıtlar akıl yürütmeyi denetlenebilir kılar
 
-Çoğu yapay zeka bir kara kutudur: bir yanıt belirir ve ona inanırsınız. AdOS her yanıtı kurumun kendi belgelerine dayandırır ve kaynaklarını gösterir. Bu alıntı bir hesap verebilirlik aracıdır. Bir kullanıcının, denetçinin veya düzenleyicinin bir yanıtı geldiği tam belgeye kadar izlemesini ve kendisi için değerlendirmesini sağlar. Doğrulayabildiğiniz bir yanıt, hesabını verebileceğiniz bir yanıttır; alıntısız bir yanıt, takım elbise giymiş bir tahmindir.
+Çoğu yapay zeka bir kara kutudur: bir yanıt belirir ve ona inanırsınız. AdOS her yanıtı kurumun kendi belgelerine dayandırır ve kampanya sonuçlarına dayanır. Bu alıntı bir hesap verebilirlik aracıdır. Bir kullanıcının, denetçinin veya düzenleyicinin bir yanıtı geldiği tam belgeye kadar izlemesini ve kendisi için değerlendirmesini sağlar. Doğrulayabildiğiniz bir yanıt, hesabını verebileceğiniz bir yanıttır; alıntısız bir yanıt, takım elbise giymiş bir tahmindir.
 
-#### İzin farkındalıklı kayıtlar erişim çizgilerine saygı gösterir
+#### İnsan Onaylı kayıtlar erişim çizgilerine saygı gösterir
 
-Hesap verebilirlik bir arka kapıya dönüşmemelidir. Kısıtlı içeriği inceleyen herkese açan bir denetim izi, bir sızıntıyı başkasıyla takas ederdi. AdOS baştan sona izin farkındalıklıdır: yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz ve alıntılar izin kapsamlıdır. Hesap verebilirlik ve gizlilik aynı anda geçerlidir.
+Hesap verebilirlik bir arka kapıya dönüşmemelidir. Kısıtlı içeriği inceleyen herkese açan bir etkinlik günlüğü, bir sızıntıyı başkasıyla takas ederdi. AdOS baştan sona insan onaylıdır: yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkaramaz veya alıntılayamaz ve alıntılar insan onaylıdır. Hesap verebilirlik ve gizlilik aynı anda geçerlidir.
 
 #### Deterministik iş akışları sonuçları açıklanabilir kılar
 
-Bir onay bir yöne gidip diğerine gitmediğinde, nedenini söyleyebilmelisiniz. AdOS Workflows & Approvals, kademeli onay yetkisiyle deterministik yönlendirme kullanır. Deterministik, aynı koşulların her zaman aynı yolu üretmesi demektir — böylece denetim izi yalnızca ne olduğunu kaydetmez, açıklanabilir kuralları izleyen bir şeyi kaydeder. Olasılıksal bir süreç günlüklenebilir ama tam açıklanamaz; deterministik olan her ikisi de olabilir.
+Bir onay bir yöne gidip diğerine gitmediğinde, nedenini söyleyebilmelisiniz. AdOS Workflows & Approvals, insan onay adÄ±mlarÄ±yle deterministik yönlendirme kullanır. Deterministik, aynı koşulların her zaman aynı yolu üretmesi demektir — böylece etkinlik günlüğü yalnızca ne olduğunu kaydetmez, açıklanabilir kuralları izleyen bir şeyi kaydeder. Olasılıksal bir süreç günlüklenebilir ama tam açıklanamaz; deterministik olan her ikisi de olabilir.
 
 ### On-premise hesap verebilirliği neden güçlendirir
 
-Denetim izinin nerede yaşadığı, ne kadar değerli olduğunu değiştirir. Bir bulut yapay zeka hizmetinde ne olduğunun kaydı sağlayıcıda durur; onların saklama politikalarına, erişimine ve kontrolüne tabidir. Kendi operasyonlarınıza dair başkasının günlüğüne güveniyorsunuz demektir.
+etkinlik günlüğünin nerede yaşadığı, ne kadar değerli olduğunu değiştirir. Bir bulut yapay zeka hizmetinde ne olduğunun kaydı sağlayıcıda durur; onların saklama politikalarına, erişimine ve kontrolüne tabidir. Kendi operasyonlarınıza dair başkasının günlüğüne güveniyorsunuz demektir.
 
-AdOS izi, sistemin geri kalanının yaşadığı yerde tutar: sınırınızın içinde. AdOS tamamen müşterinin kendi altyapısında, bulut ve harici API olmadan çalıştığından denetim izi sizindir — yerelde tutulur, kontrolünüzdedir ve hiç internet olmadan bile erişilebilir. Egemenlik ve hesap verebilirlik birbirini güçlendirir: tutmadığınız kayıtlardan tam hesap veremezsiniz ve olay kaydınız başkasının bulutunda yaşıyorsa tam egemen olamazsınız.
+AdOS izi, sistemin geri kalanının yaşadığı yerde tutar: sınırınızın içinde. AdOS tamamen müşterinin kendi altyapısında, bulut ve harici API olmadan çalıştığından etkinlik günlüğü sizindir — yerelde tutulur, kontrolünüzdedir ve hiç internet olmadan bile erişilebilir. Egemenlik ve hesap verebilirlik birbirini güçlendirir: tutmadığınız kayıtlardan tam hesap veremezsiniz ve olay kaydınız başkasının bulutunda yaşıyorsa tam egemen olamazsınız.
 
 ### Hesap verebilir yapay zeka kime hizmet eder
 
-Satın alma komitesinin farklı üyeleri hesap verebilirliğe farklı nedenlerle değer verir ve denetim izi hepsine hizmet eder.
+Satın alma komitesinin farklı üyeleri hesap verebilirliğe farklı nedenlerle değer verir ve etkinlik günlüğü hepsine hizmet eder.
 
-**CISO ve güvenlik**, hiçbir verinin sızmadığını kanıtlamalı ve herhangi bir olayı tam olarak yeniden kurabilmelidir. Değiştirilemez, izin farkındalıklı iz onların kanıtıdır.
+**CISO ve güvenlik**, hiçbir verinin sızmadığını kanıtlamalı ve herhangi bir olayı tam olarak yeniden kurabilmelidir. Değiştirilemez, insan onaylı iz onların kanıtıdır.
 
-**Uyumluluk ve finans**, onayların yetkilendirilmiş, kademeli kuralları izlediğini göstermelidir — tam da deterministik Workflows & Approvals artı bir denetim izinin sağladığı şey.
+**Uyumluluk ve finans**, onayların yetkilendirilmiş, kademeli kuralları izlediğini göstermelidir — tam da deterministik Workflows & Approvals artı bir etkinlik günlüğünin sağladığı şey.
 
 **Operasyon**, bir sürecin gitmesi gereken yeri değil, gerçekte nereye gittiğini görmelidir.
 
@@ -3135,41 +3147,41 @@ Finans, sağlık, belediyeler ve kamu kurumları için bu isteğe bağlı bir ci
 
 ### Güvenin temeli olarak hesap verebilirlik
 
-Mekaniğin altında stratejik bir nokta var. Kurumlar yapay zekaya gerçek sorumluluk vermekten çekinir, çünkü ne yaptığının izini kaybetmekten korkarlar. Hesap verebilirlik bu korkuyu ortadan kaldırır. Her önemli eylem değiştirilemez biçimde kaydedildiğinde, her yanıt alıntılı ve doğrulanabilir olduğunda ve her kayıt izinlere saygı gösterdiğinde, bir kurum yapay zekaya gerçek sorumluluk verebilir — Digital Employees dağıtabilir, onayları otomatikleştirebilir — körü körüne değil. Hesap verebilirlik, yeteneği kullanmayı güvenli kılan şeydir.
+Mekaniğin altında stratejik bir nokta var. Kurumlar yapay zekaya gerçek sorumluluk vermekten çekinir, çünkü ne yaptığının izini kaybetmekten korkarlar. Hesap verebilirlik bu korkuyu ortadan kaldırır. Her önemli eylem değiştirilemez biçimde kaydedildiğinde, her yanıt alıntılı ve doğrulanabilir olduğunda ve her kayıt izinlere saygı gösterdiğinde, bir kurum yapay zekaya gerçek sorumluluk verebilir — AI-assisted workflows dağıtabilir, onayları otomatikleştirebilir — körü körüne değil. Hesap verebilirlik, yeteneği kullanmayı güvenli kılan şeydir.
 
 Bu yüzden hesap verebilirlik, AdOS'un üç ana sütunu arasında yer alır: Sovereign, Capable ve Accountable. İlki verinizi sizin tutar. İkincisi gerçek iş yapar. Üçüncüsü, hepsine güvenmenizi ve kanıtlamanızı sağlar.
 
 ### Hesap verebilir yapay zeka ne değildir
 
-Çıktılarına körü körüne inanılmasını isteyen bir sistem değildir. Kaynaklarını gösteremeyen bir kara kutu değildir. Kayıtlarınızı başkasının politikası altında tutan bir bulut hizmeti değildir. Ve bir veri toplayıcı değildir; denetim izi size hizmet etmek için vardır, hasat edilmek için değil.
+Çıktılarına körü körüne inanılmasını isteyen bir sistem değildir. kampanya sonuçlarına dayanemeyen bir kara kutu değildir. Kayıtlarınızı başkasının politikası altında tutan bir bulut hizmeti değildir. Ve bir veri toplayıcı değildir; etkinlik günlüğü size hizmet etmek için vardır, hasat edilmek için değil.
 
 ### SSS
 
-**Yapay zeka denetim izi nedir?**
-Sistemin yaptığı her önemli eylemin kronolojik, değiştirilemez kaydı — sorulan sorular, alıntılanan kaynaklar, verilen onaylar, iş akışı adımları ve Digital Employee görevleri. AdOS'ta yerelde, sınırınızın içinde tutulur.
+**Yapay zeka etkinlik günlüğü nedir?**
+Sistemin yaptığı her önemli eylemin kronolojik, değiştirilemez kaydı — sorulan sorular, alıntılanan kaynaklar, verilen onaylar, iş akışı adımları ve AI-assisted workflow görevleri. AdOS'ta yerelde, sınırınızın içinde tutulur.
 
-**Denetim izinin neden değiştirilemez olması gerekir?**
+**etkinlik günlüğünin neden değiştirilemez olması gerekir?**
 Çünkü düzenlenebilen bir günlüğe güvenilemez; birinin en çok gizlemek istediği kayıt, değiştirilme riski en yüksek olandır. Değiştirilemezlik, kaydı olaylar gerçekte nasıl olduysa öyle korur; onu kanıt olarak kullanılabilir kılan da budur.
 
 **Alıntılı yanıtlar hesap verebilirliği nasıl destekler?**
-Her AdOS yanıtı belgelerinize dayanır ve kaynaklarını gösterir; böylece herkes onu tam kaynağa kadar izleyip doğrulayabilir. Doğrulanabilir bir yanıt arkasında durabileceğiniz yanıttır; alıntısız olanı denetlenemez.
+Her AdOS yanıtı verilerinize dayanır ve kampanya sonuçlarına dayanır; böylece herkes onu tam kaynağa kadar izleyip doğrulayabilir. Doğrulanabilir bir yanıt arkasında durabileceğiniz yanıttır; alıntısız olanı denetlenemez.
 
-**Denetim izi kısıtlı bilgiyi açığa çıkarır mı?**
-Hayır. AdOS baştan sona izin farkındalıklıdır ve alıntılar izin kapsamlıdır; böylece yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkarmaz. Hesap verebilirlik ve gizlilik birlikte geçerlidir.
+**etkinlik günlüğü kısıtlı bilgiyi açığa çıkarır mı?**
+Hayır. AdOS baştan sona insan onaylıdır ve alıntılar insan onaylıdır; böylece yapay zeka, bir kullanıcının görme yetkisi olmayan içeriği asla yüzeye çıkarmaz. Hesap verebilirlik ve gizlilik birlikte geçerlidir.
 
 **Denetlenebilirlik için on-premise, bulut yapay zekadan daha mı iyi?**
 Evet, önemli bir açıdan: iz sınırınızın içinde, kontrolünüzde yaşar ve internet olmadan çalışır. Kendi operasyonlarınıza dair bir sağlayıcının günlüğüne güvenmezsiniz ve kayıt başkasının saklama veya erişim politikasına tabi olamaz.
 
-Hesap verebilir yapay zeka sonradan takılan bir özellik değildir. Tasarımına yerleştirdiğiniz bir özelliktir — değiştirilemez bir iz, alıntılı yanıtlar, izin farkındalıklı kayıtlar ve deterministik süreçler — böylece yetenek kanıtla birlikte gelir.
+Hesap verebilir yapay zeka sonradan takılan bir özellik değildir. Tasarımına yerleştirdiğiniz bir özelliktir — değiştirilemez bir iz, alıntılı yanıtlar, insan onaylı kayıtlar ve deterministik süreçler — böylece yetenek kanıtla birlikte gelir.
 
-AdOS'un kurumsal yapay zekayı, tamamen kendi altyapınızda tutulan değiştirilemez denetim izleriyle nasıl hesap verebilir kıldığını görmek için **Rehberi Okuyun**.
+AdOS'un kurumsal yapay zekayı, tamamen kendi altyapınızda tutulan etkinlik günlüğü izleriyle nasıl hesap verebilir kıldığını görmek için **Rehberi Okuyun**.
 
 ---
 
 ## Article 17: AI for Manufacturing: Capturing Tacit Process Knowledge
 
 **Meta title:** AI for Manufacturing: Capture Tacit Process Knowledge
-**Meta description:** How on-premise, sovereign AI turns undocumented shop-floor know-how into cited, permission-aware answers across every plant — without your data leaving the building.
+**Meta description:** How on-premise, sovereign AI turns undocumented shop-floor know-how into cited, human-approved answers across every plant — without your data leaving the building.
 **Slug:** ai-manufacturing-tacit-process-knowledge
 
 ---
@@ -3190,17 +3202,17 @@ The result is predictable. New hires take longer to reach competence. The same d
 
 Capturing tacit knowledge does not mean forcing every operator to write a manual. That has been tried for forty years and it does not scale. It means building a system that lets knowledge be recorded in the flow of work, then retrieved instantly by anyone entitled to see it, in their own language, with a clear pointer back to the source.
 
-This is exactly what a **Company Brain** does. The Company Brain is AdOS's private, permission-aware knowledge base. It ingests your existing documents — SOPs, quality records, maintenance logs, engineering change notes, shift handovers — and makes them answerable. When a technician asks a question, the AI responds with an answer grounded in your own documents, and it **cites its sources**. The technician does not get a plausible-sounding guess. They get the actual procedure, the actual revision, the actual reason.
+This is exactly what a **Company Brain** does. The Company Brain is AdOS's private, human-approved marketing-performance memory. It ingests your existing documents — SOPs, quality records, maintenance logs, engineering change notes, shift handovers — and makes them answerable. When a technician asks a question, the AI responds with an answer grounded in your own documents, and it **traces to campaign results**. The technician does not get a plausible-sounding guess. They get the actual procedure, the actual revision, the actual reason.
 
-Two properties make this trustworthy on a factory floor. First, the answer is grounded: it is drawn from your documents, not from a general model's assumptions about how presses or CNC machines "usually" work. Second, the citation is **permission-scoped**. A user only sees, and the AI only cites, documents that user is entitled to. A contractor on one line cannot pull proprietary process settings from another business unit. Knowledge becomes shareable without becoming exposed.
+Two properties make this trustworthy on a factory floor. First, the answer is grounded: it is drawn from your data, not from a general model's assumptions about how presses or CNC machines "usually" work. Second, the citation is **workspace-scoped**. A user only sees, and the AI only cites, documents that user is entitled to. A contractor on one line cannot pull proprietary process settings from another business unit. Knowledge becomes shareable without becoming exposed.
 
-### Digital Employees: turning answers into work
+### AI-assisted workflows: turning answers into work
 
 Answering questions is the first step. The larger opportunity is having AI do the routine knowledge work that surrounds production.
 
-AdOS **Digital Employees** are AI agents that perform real work within defined roles and permissions. On the shop floor and in the offices around it, that looks concrete. A maintenance Digital Employee can read a fault description, retrieve the matching troubleshooting history, draft the intervention steps, and prepare the parts request for approval. A quality Digital Employee can take a nonconformance report, find every related prior case, and summarize the corrective actions that worked. A shift-handover Digital Employee can assemble the end-of-shift summary from the day's logs so the incoming lead starts informed.
+AdOS **AI-assisted workflows** are AI agents that perform real work within defined roles and permissions. On the shop floor and in the offices around it, that looks concrete. A maintenance AI-assisted workflow can read a fault description, retrieve the matching troubleshooting history, draft the intervention steps, and prepare the parts request for approval. A quality AI-assisted workflow can take a nonconformance report, find every related prior case, and summarize the corrective actions that worked. A shift-handover AI-assisted workflow can assemble the end-of-shift summary from the day's logs so the incoming lead starts informed.
 
-Each of these agents works inside the same permission model as the Company Brain. A Digital Employee never surfaces content the requesting user is not allowed to see. And every consequential action it takes is written to an immutable audit trail, so you always know what was done, by which agent, on whose authority.
+Each of these agents works inside the same permission model as the Company Brain. An AI-assisted workflow never surfaces content the requesting user is not allowed to see. And every consequential action it takes is written to an activity log and per-approval timeline, so you always know what was done, by which agent, on whose authority.
 
 ### Workflows and approvals that do not stall
 
@@ -3212,13 +3224,13 @@ AdOS **Workflows & Approvals** make these processes structured and deterministic
 
 Consider NovaMak Endüstri A.S., a fictional manufacturer used throughout AdOS materials to show how the pieces fit. NovaMak runs six sites, four business units, and sixteen departments. Before AdOS, each site solved recurring problems in isolation and lost roughly a shift of productivity every time a senior technician was unavailable.
 
-In this illustrative scenario, NovaMak seeds its Company Brain with existing SOPs, maintenance logs, and quality records, then deploys twelve Digital Employees across maintenance, quality, and production planning, governed by twenty-five workflows. A new technician at Site 4 asks how to resolve a recurring alignment fault. The Company Brain answers with the exact corrective procedure — cited to the maintenance record where it was first solved at Site 2 — and the technician resolves it in minutes instead of waiting for the one person who remembered. This example is fictional and illustrative, but the mechanism is real: the knowledge was already in the building; AdOS made it findable and safe to share.
+In this illustrative scenario, NovaMak seeds its Company Brain with existing SOPs, maintenance logs, and quality records, then deploys twelve AI-assisted workflows across maintenance, quality, and production planning, governed by twenty-five workflows. A new technician at Site 4 asks how to resolve a recurring alignment fault. The Company Brain answers with the exact corrective procedure — cited to the maintenance record where it was first solved at Site 2 — and the technician resolves it in minutes instead of waiting for the one person who remembered. This example is fictional and illustrative, but the mechanism is real: the knowledge was already in the building; AdOS made it findable and safe to share.
 
 ### Why this has to run on your own infrastructure
 
 Process knowledge is competitive knowledge. Your parameters, your tolerances, your hard-won fixes are the difference between your margins and a competitor's. Sending that data to an external AI cloud to make it searchable is a trade most manufacturers should not accept.
 
-AdOS is built so that trade never appears. All inference runs on your own hardware through a **local AI** engine — Ollama, or any OpenAI-compatible local server such as vLLM or llama.cpp. There is no cloud, no external API, no API keys, and no internet requirement. Your documents, prompts, and answers **never leave your premises**. The system is offline-first and air-gap capable, which matters for plants on isolated networks. There is no per-token billing; your inference cost is your own electricity and hardware. And because AdOS uses open engines and an OpenAI-compatible interface, there is no vendor lock-in — your data stays portable and exportable.
+AdOS is built so that trade never appears. All inference runs on your own hardware through a **local AI** engine — Ollama, or any OpenAI-compatible local server such as vLLM or llama.cpp. There is no cloud, no external API, no API keys, and no internet requirement. your data, prompts, and answers **never leave your premises**. The system is offline-first and air-gap capable, which matters for plants on isolated networks. There is no per-token billing; your inference cost is your own electricity and hardware. And because AdOS uses open engines and an OpenAI-compatible interface, there is no vendor lock-in — your data stays portable and exportable.
 
 One honest trade-off: local CPU inference is slower than a hosted frontier API. Answers come back in seconds, not milliseconds. Better hardware closes that gap. For capturing and retrieving process knowledge, seconds is the correct unit — and the sovereignty is worth it.
 
@@ -3228,7 +3240,7 @@ One honest trade-off: local CPU inference is slower than a hosted frontier API. 
 No. AdOS runs entirely on your own infrastructure and is air-gap capable. It works with no internet connection at all, which suits isolated plant networks.
 
 **Will the AI expose confidential process settings to the wrong people?**
-No. The Company Brain is permission-aware. A user only sees, and the AI only cites, documents that user is entitled to see. Content from one business unit cannot leak to another.
+No. The Company Brain is human-approved. A user only sees, and the AI only cites, documents that user is entitled to see. Content from one business unit cannot leak to another.
 
 **Do we have to write new documentation before we start?**
 No. AdOS ingests your existing SOPs, logs, and records. Capture continues in the flow of work rather than as a separate documentation project.
@@ -3248,7 +3260,7 @@ Capturing tacit knowledge is not a documentation project. It is an infrastructur
 ## Makale 17: Üretimde Yapay Zeka: Örtük Süreç Bilgisini Kayıt Altına Almak
 
 **Meta başlık:** Üretimde Yapay Zeka: Örtük Süreç Bilgisi
-**Meta açıklama:** Şirket içinde çalışan, egemen yapay zeka ile belgesiz saha bilgisini her tesiste kaynak gösteren, yetki farkındalıklı yanıtlara dönüştürün — verileriniz binanızdan çıkmadan.
+**Meta açıklama:** Şirket içinde çalışan, egemen yapay zeka ile belgesiz saha bilgisini her tesiste kampanya sonuçlarına dayanan, yetki farkındalıklı yanıtlara dönüştürün — verileriniz binanızdan çıkmadan.
 **Slug:** uretimde-yapay-zeka-ortuk-surec-bilgisi
 
 ---
@@ -3269,35 +3281,35 @@ Sonuç öngörülebilirdir. Yeni işe alınanlar yetkinliğe daha geç ulaşır.
 
 Örtük bilgiyi kayıt altına almak, her operatörü el kitabı yazmaya zorlamak demek değildir. Bu kırk yıldır denendi ve ölçeklenmiyor. Kastedilen şey, bilginin iş akışının içinde kaydedilmesine, ardından yetkili herkes tarafından anında, kendi dilinde ve kaynağına net bir bağlantıyla geri getirilmesine olanak tanıyan bir sistem kurmaktır.
 
-**Company Brain** tam da bunu yapar. Company Brain, AdOS'un özel, yetki farkındalıklı bilgi tabanıdır. Mevcut belgelerinizi — SOP'ler, kalite kayıtları, bakım günlükleri, mühendislik değişiklik notları, vardiya devir teslimleri — alır ve yanıtlanabilir hale getirir. Bir teknisyen soru sorduğunda yapay zeka, kendi belgelerinize dayanan bir yanıt verir ve **kaynaklarını gösterir**. Teknisyen makul görünen bir tahmin almaz. Gerçek prosedürü, gerçek revizyonu, gerçek gerekçeyi alır.
+**Company Brain** tam da bunu yapar. Company Brain, AdOS'un özel, yetki farkındalıklı pazarlama-performans belleğidır. Mevcut verilerinizi — SOP'ler, kalite kayıtları, bakım günlükleri, mühendislik değişiklik notları, vardiya devir teslimleri — alır ve yanıtlanabilir hale getirir. Bir teknisyen soru sorduğunda yapay zeka, kendi verilerinize dayanan bir yanıt verir ve **kampanya sonuçlarına dayanır**. Teknisyen makul görünen bir tahmin almaz. Gerçek prosedürü, gerçek revizyonu, gerçek gerekçeyi alır.
 
-İki özellik bunu fabrika sahasında güvenilir kılar. Birincisi, yanıt temellendirilmiştir: preslerin ya da CNC tezgahlarının "genelde" nasıl çalıştığına dair genel bir modelin varsayımlarından değil, sizin belgelerinizden alınır. İkincisi, kaynak gösterimi **yetki kapsamlıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Bir hatta çalışan taşeron, başka bir iş biriminin özel süreç ayarlarını çekemez. Bilgi, ifşa olmadan paylaşılabilir hale gelir.
+İki özellik bunu fabrika sahasında güvenilir kılar. Birincisi, yanıt temellendirilmiştir: preslerin ya da CNC tezgahlarının "genelde" nasıl çalıştığına dair genel bir modelin varsayımlarından değil, sizin verilerinizden alınır. İkincisi, kampanya verisine dayanimi **yetki kapsamlıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Bir hatta çalışan taşeron, başka bir iş biriminin özel süreç ayarlarını çekemez. Bilgi, ifşa olmadan paylaşılabilir hale gelir.
 
-### Digital Employees: yanıtları işe dönüştürmek
+### AI-assisted workflows: yanıtları işe dönüştürmek
 
 Soruları yanıtlamak ilk adımdır. Daha büyük fırsat, üretimi çevreleyen rutin bilgi işini yapay zekaya yaptırmaktır.
 
-AdOS **Digital Employees**, tanımlı roller ve yetkiler içinde gerçek iş yapan yapay zeka ajanlarıdır. Saha ve çevresindeki ofislerde bu somut görünür. Bir bakım Digital Employee, bir arıza tanımını okuyabilir, eşleşen arıza giderme geçmişini getirebilir, müdahale adımlarını taslak haline getirebilir ve parça talebini onaya hazırlayabilir. Bir kalite Digital Employee, bir uygunsuzluk raporunu alıp ilgili tüm önceki vakaları bulabilir ve işe yarayan düzeltici faaliyetleri özetleyebilir. Bir vardiya devir Digital Employee, günün günlüklerinden vardiya sonu özetini derleyip gelen liderin bilgili başlamasını sağlayabilir.
+AdOS **AI-assisted workflows**, tanımlı roller ve yetkiler içinde gerçek iş yapan yapay zeka ajanlarıdır. Saha ve çevresindeki ofislerde bu somut görünür. Bir bakım AI-assisted workflow, bir arıza tanımını okuyabilir, eşleşen arıza giderme geçmişini getirebilir, müdahale adımlarını taslak haline getirebilir ve parça talebini onaya hazırlayabilir. Bir kalite AI-assisted workflow, bir uygunsuzluk raporunu alıp ilgili tüm önceki vakaları bulabilir ve işe yarayan düzeltici faaliyetleri özetleyebilir. Bir vardiya devir AI-assisted workflow, günün günlüklerinden vardiya sonu özetini derleyip gelen liderin bilgili başlamasını sağlayabilir.
 
-Bu ajanların her biri, Company Brain ile aynı yetki modeli içinde çalışır. Bir Digital Employee, talebi yapan kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkarmaz. Ve yaptığı her önemli işlem, değiştirilemez bir denetim izine yazılır; böylece neyin, hangi ajan tarafından, kimin yetkisiyle yapıldığını her zaman bilirsiniz.
+Bu ajanların her biri, Company Brain ile aynı yetki modeli içinde çalışır. Bir AI-assisted workflow, talebi yapan kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkarmaz. Ve yaptığı her önemli işlem, değiştirilemez bir etkinlik günlüğüne yazılır; böylece neyin, hangi ajan tarafından, kimin yetkisiyle yapıldığını her zaman bilirsiniz.
 
 ### Tıkanmayan Workflows & Approvals
 
 Bilgi ve eylemin yine de yönetişime ihtiyacı vardır. Bir parça talebi, bir mühendislik değişikliği, spesifikasyondan bir sapma — bunlar doğru kişinin doğru yetki seviyesinde onaylamasını gerektirir. Birçok tesiste bu onay, bir hat beklerken okunmadan duran bir e-postadır.
 
-AdOS **Workflows & Approvals** bu süreçleri yapılandırılmış ve belirlenimci kılar. Yönlendirme tanımlıdır, onay yetkisi kademelidir ve zincirin tamamı denetlenir. Bir sapma talebi otomatik olarak doğru mühendise gider, tıkanırsa yükseltilir ve kimin neyi ne zaman kararlaştırdığına dair eksiksiz bir kayıt bırakır. Company Brain'de kayıt altına alınan bilgi bu kararları besler: onaylayan kişi, yalıtılmış bir talep değil, kaynak gösterilmiş bağlamı görür.
+AdOS **Workflows & Approvals** bu süreçleri yapılandırılmış ve belirlenimci kılar. Yönlendirme tanımlıdır, onay yetkisi kademelidir ve zincirin tamamı denetlenir. Bir sapma talebi otomatik olarak doğru mühendise gider, tıkanırsa yükseltilir ve kimin neyi ne zaman kararlaştırdığına dair eksiksiz bir kayıt bırakır. Company Brain'de kayıt altına alınan bilgi bu kararları besler: onaylayan kişi, yalıtılmış bir talep değil, kampanya verisine dayanilmiş bağlamı görür.
 
 ### Örnek bir tablo: NovaMak Endüstri
 
 Parçaların nasıl bir araya geldiğini göstermek için AdOS materyallerinde kullanılan kurgusal bir üretici olan NovaMak Endüstri A.S.'yi ele alalım. NovaMak altı tesis, dört iş birimi ve on altı departmanla çalışır. AdOS'tan önce her tesis, tekrar eden sorunları izole biçimde çözüyor ve kıdemli bir teknisyen müsait olmadığında her seferinde yaklaşık bir vardiyalık verim kaybediyordu.
 
-Bu örnek senaryoda NovaMak, Company Brain'ini mevcut SOP'ler, bakım günlükleri ve kalite kayıtlarıyla besliyor, ardından bakım, kalite ve üretim planlamada yirmi beş iş akışıyla yönetilen on iki Digital Employee devreye alıyor. Tesis 4'teki yeni bir teknisyen, tekrar eden bir hizalama arızasını nasıl çözeceğini soruyor. Company Brain, tam düzeltici prosedürle yanıt veriyor — arızanın ilk kez Tesis 2'de çözüldüğü bakım kaydına kaynak göstererek — ve teknisyen bunu hatırlayan tek kişiyi beklemek yerine dakikalar içinde çözüyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizma gerçektir: bilgi zaten binadaydı; AdOS onu bulunabilir ve güvenle paylaşılabilir hale getirdi.
+Bu örnek senaryoda NovaMak, Company Brain'ini mevcut SOP'ler, bakım günlükleri ve kalite kayıtlarıyla besliyor, ardından bakım, kalite ve üretim planlamada yirmi beş iş akışıyla yönetilen on iki AI-assisted workflow devreye alıyor. Tesis 4'teki yeni bir teknisyen, tekrar eden bir hizalama arızasını nasıl çözeceğini soruyor. Company Brain, tam düzeltici prosedürle yanıt veriyor — arızanın ilk kez Tesis 2'de çözüldüğü bakım kaydına kampanya verisine dayanarak — ve teknisyen bunu hatırlayan tek kişiyi beklemek yerine dakikalar içinde çözüyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizma gerçektir: bilgi zaten binadaydı; AdOS onu bulunabilir ve güvenle paylaşılabilir hale getirdi.
 
 ### Bunun neden kendi altyapınızda çalışması gerekir
 
 Süreç bilgisi rekabet bilgisidir. Parametreleriniz, toleranslarınız, zorlukla kazanılmış çözümleriniz sizin kâr marjınız ile bir rakibinizinki arasındaki farktır. Bu veriyi aranabilir kılmak için dışarıdaki bir yapay zeka bulutuna göndermek, çoğu üreticinin kabul etmemesi gereken bir takastır.
 
-AdOS, bu takasın hiç ortaya çıkmayacağı şekilde kuruludur. Tüm çıkarım kendi donanımınızda, bir **local AI** motoru üzerinden çalışır — Ollama ya da vLLM veya llama.cpp gibi OpenAI uyumlu herhangi bir yerel sunucu. Bulut yok, harici API yok, API anahtarı yok, internet zorunluluğu yok. Belgeleriniz, komutlarınız ve yanıtlarınız **binanızdan çıkmaz**. Sistem çevrimdışı öncelikli ve air-gap yeteneklidir; bu da izole ağlardaki tesisler için önemlidir. Token başına faturalandırma yoktur; çıkarım maliyetiniz kendi elektriğiniz ve donanımınızdır. Ve AdOS açık motorlar ile OpenAI uyumlu bir arayüz kullandığı için tedarikçi bağımlılığı yoktur — verileriniz taşınabilir ve dışa aktarılabilir kalır.
+AdOS, bu takasın hiç ortaya çıkmayacağı şekilde kuruludur. Tüm çıkarım kendi donanımınızda, bir **local AI** motoru üzerinden çalışır — Ollama ya da vLLM veya llama.cpp gibi OpenAI uyumlu herhangi bir yerel sunucu. Bulut yok, harici API yok, API anahtarı yok, internet zorunluluğu yok. Verileriniz, komutlarınız ve yanıtlarınız **binanızdan çıkmaz**. Sistem çevrimdışı öncelikli ve air-gap yeteneklidir; bu da izole ağlardaki tesisler için önemlidir. Token başına faturalandırma yoktur; çıkarım maliyetiniz kendi elektriğiniz ve donanımınızdır. Ve AdOS açık motorlar ile OpenAI uyumlu bir arayüz kullandığı için tedarikçi bağımlılığı yoktur — verileriniz taşınabilir ve dışa aktarılabilir kalır.
 
 Dürüst bir takas: yerel CPU çıkarımı, barındırılan bir sınır API'sinden daha yavaştır. Yanıtlar milisaniyelerle değil, saniyelerle gelir. Daha iyi donanım bu farkı kapatır. Süreç bilgisini kayıt altına almak ve geri getirmek için saniye doğru birimdir — ve egemenlik buna değer.
 
@@ -3307,13 +3319,13 @@ Dürüst bir takas: yerel CPU çıkarımı, barındırılan bir sınır API'sind
 Hayır. AdOS tamamen kendi altyapınızda çalışır ve air-gap yeteneklidir. Hiç internet bağlantısı olmadan çalışır; bu da izole tesis ağlarına uygundur.
 
 **Yapay zeka gizli süreç ayarlarını yanlış kişilere gösterir mi?**
-Hayır. Company Brain yetki farkındalıklıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Bir iş biriminden içerik başka birine sızamaz.
+Hayır. Company Brain yetki farkındalıklıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Bir iş biriminden içerik başka birine sızamaz.
 
 **Başlamadan önce yeni belgeler yazmamız gerekir mi?**
 Hayır. AdOS mevcut SOP'lerinizi, günlüklerinizi ve kayıtlarınızı alır. Kayıt, ayrı bir belgeleme projesi olarak değil, iş akışının içinde sürer.
 
 **Bu bir bulut yapay zeka asistanından nasıl farklı?**
-Bulut asistanı verilerinizi dışarı gönderir ve kullanımı ölçer. AdOS her şeyi kendi donanımınızda tutar, her yanıtı kaynak gösterir ve token başına faturalandırma yapmaz.
+Bulut asistanı verilerinizi dışarı gönderir ve kullanımı ölçer. AdOS her şeyi kendi donanımınızda tutar, her yanıtı kampanya verisine dayanır ve token başına faturalandırma yapmaz.
 
 **Aynı anda birden fazla tesiste çalışabilir mi?**
 Evet. AdOS, katı yalıtımla çok kiracılıdır; böylece çok tesisli bir grup, uygun yerlerde bilgi paylaşırken her birimin verisini ayrı tutabilir.
@@ -3325,7 +3337,7 @@ Evet. AdOS, katı yalıtımla çok kiracılıdır; böylece çok tesisli bir gru
 ## Article 18: Sovereign AI for Organized Industrial Zones (OSB)
 
 **Meta title:** Sovereign AI for Organized Industrial Zones (OSB)
-**Meta description:** How an OSB can offer shared, on-premise AI services to member firms — Company Brain, Digital Employees, Workflows — with strict tenant isolation and zero data leaving the zone.
+**Meta description:** How an OSB can offer shared, on-premise AI services to member firms — Company Brain, AI-assisted workflows, Workflows — with strict tenant isolation and zero data leaving the zone.
 **Slug:** sovereign-ai-organized-industrial-zones-osb
 
 ---
@@ -3348,23 +3360,23 @@ A shared AI service only works if members trust it. A member firm's process data
 
 This is where AdOS fits the OSB model precisely. AdOS runs **entirely on the customer's own infrastructure** — in this case the zone's own servers. All inference is **local AI**: it runs on the zone's hardware through a local engine such as Ollama or an OpenAI-compatible server, with no cloud, no external API, no keys, and no internet requirement. Member data — documents, prompts, answers, workflows — **never leaves the premises**. Nothing about a member's business is sent anywhere. The service is offline-first and, where a zone requires it, air-gap capable.
 
-Crucially, AdOS is **multi-tenant with strict tenant isolation**. Each member firm is a separate tenant. Firm A's Company Brain cannot see, cite, or leak into Firm B's. The **permission-aware** design means the AI can never surface content a user is not entitled to see — and that boundary holds not only within a firm but between firms sharing the same zone deployment. This is the property that makes shared AI safe to offer.
+Crucially, AdOS is **multi-tenant with strict tenant isolation**. Each member firm is a separate tenant. Firm A's Company Brain cannot see, cite, or leak into Firm B's. The **human-approved** design means the AI can never surface content a user is not entitled to see — and that boundary holds not only within a firm but between firms sharing the same zone deployment. This is the property that makes shared AI safe to offer.
 
 ### What each member firm gets
 
 A member firm on the zone's AdOS deployment gets the full operating system, scoped to itself.
 
-It gets a **Company Brain**: a private, permission-aware knowledge base built from that firm's own documents. Every answer is grounded in the firm's material and **cites its sources**, and citations respect the firm's internal permissions. A member can turn its scattered SOPs, quality records, and handbooks into instant, reliable, cited answers without hiring a data team.
+It gets a **Company Brain**: a private, human-approved marketing-performance memory built from that firm's own documents. Every answer is grounded in the firm's material and **traces to campaign results**, and citations respect the firm's internal permissions. A member can turn its scattered SOPs, quality records, and handbooks into instant, reliable, performance-grounded recommendations without hiring a data team.
 
-It gets **Digital Employees**: AI agents that do real knowledge work — answering, drafting, routing, preparing approvals — within roles and permissions the firm defines. A small manufacturer that could never justify building AI agents alone can deploy them as part of the shared service.
+It gets **AI-assisted workflows**: AI agents that do real knowledge work — answering, drafting, routing, preparing approvals — within roles and permissions the firm defines. A small manufacturer that could never justify building AI agents alone can deploy them as part of the shared service.
 
-It gets **Workflows & Approvals**: structured processes with tiered approval authority, deterministic routing, and full audit trails. Purchase approvals, deviation requests, document sign-offs — governed and recorded.
+It gets **Workflows & Approvals**: structured processes with human approval gates, deterministic routing, and full audit trails. Purchase approvals, deviation requests, document sign-offs — governed and recorded.
 
 And it gets all of this in **both Turkish and English**, auto-detected from the environment, which matters for zones with mixed workforces and international partners.
 
 ### The role of the zone management
 
-The OSB's central IT or shared-services team operates the platform, not each member's AI. That distinction keeps the operating burden low. AdOS deploys with standard Docker and a one-command bring-up, and ships documented backup, restore, upgrade, and disaster-recovery runbooks. A small zone team can run the platform; each member manages its own tenant, its own documents, and its own Digital Employees within the isolation boundary.
+The OSB's central IT or shared-services team operates the platform, not each member's AI. That distinction keeps the operating burden low. AdOS deploys with standard Docker and a one-command bring-up, and ships documented backup, restore, upgrade, and disaster-recovery runbooks. A small zone team can run the platform; each member manages its own tenant, its own documents, and its own AI-assisted workflows within the isolation boundary.
 
 Because AdOS has **no per-token billing**, the zone's cost is predictable: hardware and electricity, not a metered cloud invoice that grows with every member query. The zone can offer members a clean, value-based service — a per-firm or per-seat band — without exposure to runaway usage costs. And because AdOS has **no vendor lock-in** — open engines, an OpenAI-compatible interface, portable and exportable data — the zone is never trapped with one supplier.
 
@@ -3372,18 +3384,18 @@ Because AdOS has **no per-token billing**, the zone's cost is predictable: hardw
 
 Imagine a zone with forty member firms, most of them manufacturers of between fifty and five hundred employees. Today each firm handles its own knowledge in scattered files and the heads of its veterans. The zone stands up an AdOS deployment on its own servers. Firms opt in as tenants. A metal-forming member seeds its Company Brain with its work instructions and quality records; a plastics member does the same with its own. Neither can see the other's data. Each member's new hires reach competence faster, each resolves recurring faults from its own cited history, and the zone bills a predictable per-firm fee.
 
-This scenario is illustrative and fictional, but every mechanism in it is real to AdOS: multi-tenant isolation, permission-aware citations, local inference, no data leaving the zone.
+This scenario is illustrative and fictional, but every mechanism in it is real to AdOS: multi-tenant isolation, human-approved citations, local inference, no data leaving the zone.
 
 ### FAQ
 
 **Can one member firm see another member's documents or answers?**
-No. AdOS is multi-tenant with strict tenant isolation, and it is permission-aware. Each firm is a separate tenant; one member cannot see, cite, or leak into another's Company Brain.
+No. AdOS is multi-tenant with strict tenant isolation, and it is human-approved. Each firm is a separate tenant; one member cannot see, cite, or leak into another's Company Brain.
 
 **Does the zone need internet for the AI to work?**
 No. AdOS runs on the zone's own hardware with local AI. It requires no cloud, no external API, and no internet, and it is air-gap capable.
 
 **Who operates the platform — the zone or each firm?**
-The zone's central team operates the shared platform with standard Docker and documented runbooks. Each member manages its own tenant, documents, and Digital Employees inside the isolation boundary.
+The zone's central team operates the shared platform with standard Docker and documented runbooks. Each member manages its own tenant, documents, and AI-assisted workflows inside the isolation boundary.
 
 **How is the cost structured?**
 AdOS has no per-token billing. The zone's cost is hardware and electricity, and it can offer members a value-based per-firm or per-seat service without metered usage risk.
@@ -3400,7 +3412,7 @@ A zone already shares power, water, and security. Sovereign AI is the next share
 ## Makale 18: Organize Sanayi Bölgeleri (OSB) için Egemen Yapay Zeka
 
 **Meta başlık:** OSB'ler için Egemen Yapay Zeka
-**Meta açıklama:** Bir OSB'nin üye firmalara nasıl paylaşımlı, şirket içinde çalışan yapay zeka hizmetleri sunabileceği — Company Brain, Digital Employees, Workflows — katı kiracı yalıtımıyla ve hiçbir veri bölgeden çıkmadan.
+**Meta açıklama:** Bir OSB'nin üye firmalara nasıl paylaşımlı, şirket içinde çalışan yapay zeka hizmetleri sunabileceği — Company Brain, AI-assisted workflows, Workflows — katı kiracı yalıtımıyla ve hiçbir veri bölgeden çıkmadan.
 **Slug:** osb-icin-egemen-yapay-zeka
 
 ---
@@ -3423,42 +3435,42 @@ Paylaşımlı bir yapay zeka hizmeti ancak üyeler ona güvenirse işler. Bir ü
 
 AdOS tam da burada OSB modeline birebir oturur. AdOS **tamamen müşterinin kendi altyapısında** çalışır — bu durumda bölgenin kendi sunucularında. Tüm çıkarım **local AI**'dır: bölgenin donanımında, Ollama ya da OpenAI uyumlu bir sunucu gibi bir yerel motor üzerinden çalışır; bulut yok, harici API yok, anahtar yok, internet zorunluluğu yok. Üye verisi — belgeler, komutlar, yanıtlar, iş akışları — **binadan çıkmaz**. Bir üyenin işine dair hiçbir şey hiçbir yere gönderilmez. Hizmet çevrimdışı önceliklidir ve bir bölge gerektirdiğinde air-gap yeteneklidir.
 
-En kritik nokta, AdOS'un **katı kiracı yalıtımıyla çok kiracılı** olmasıdır. Her üye firma ayrı bir kiracıdır. A Firması'nın Company Brain'i, B Firması'nınkini göremez, kaynak gösteremez ya da ona sızamaz. **Yetki farkındalıklı** tasarım, yapay zekanın bir kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkaramayacağı anlamına gelir — ve bu sınır yalnızca bir firma içinde değil, aynı bölge kurulumunu paylaşan firmalar arasında da geçerlidir. Paylaşımlı yapay zekayı sunmayı güvenli kılan özellik budur.
+En kritik nokta, AdOS'un **katı kiracı yalıtımıyla çok kiracılı** olmasıdır. Her üye firma ayrı bir kiracıdır. A Firması'nın Company Brain'i, B Firması'nınkini göremez, kampanya verisine dayanemez ya da ona sızamaz. **Yetki farkındalıklı** tasarım, yapay zekanın bir kullanıcının görmeye yetkili olmadığı içeriği asla ortaya çıkaramayacağı anlamına gelir — ve bu sınır yalnızca bir firma içinde değil, aynı bölge kurulumunu paylaşan firmalar arasında da geçerlidir. Paylaşımlı yapay zekayı sunmayı güvenli kılan özellik budur.
 
 ### Her üye firma ne elde eder
 
 Bölgenin AdOS kurulumundaki bir üye firma, kendine kapsamlandırılmış olarak işletim sisteminin tamamını elde eder.
 
-Bir **Company Brain** elde eder: o firmanın kendi belgelerinden oluşturulan özel, yetki farkındalıklı bir bilgi tabanı. Her yanıt firmanın materyaline dayanır ve **kaynaklarını gösterir**; kaynak gösterimleri firmanın iç yetkilerine saygı gösterir. Bir üye, dağınık SOP'lerini, kalite kayıtlarını ve el kitaplarını bir veri ekibi işe almadan anında, güvenilir ve kaynak gösterilen yanıtlara dönüştürebilir.
+Bir **Company Brain** elde eder: o firmanın kendi belgelerinden oluşturulan özel, yetki farkındalıklı bir pazarlama-performans belleği. Her yanıt firmanın materyaline dayanır ve **kampanya sonuçlarına dayanır**; kampanya verisine dayanimleri firmanın iç yetkilerine saygı gösterir. Bir üye, dağınık SOP'lerini, kalite kayıtlarını ve el kitaplarını bir veri ekibi işe almadan anında, güvenilir ve kampanya verisine dayanilen yanıtlara dönüştürebilir.
 
-**Digital Employees** elde eder: firmanın tanımladığı roller ve yetkiler içinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onaylara hazırlayan — yapay zeka ajanları. Tek başına yapay zeka ajanları kurmayı asla gerekçelendiremeyecek küçük bir üretici, bunları paylaşımlı hizmetin bir parçası olarak devreye alabilir.
+**AI-assisted workflows** elde eder: firmanın tanımladığı roller ve yetkiler içinde gerçek bilgi işi yapan — yanıtlayan, taslak hazırlayan, yönlendiren, onaylara hazırlayan — yapay zeka ajanları. Tek başına yapay zeka ajanları kurmayı asla gerekçelendiremeyecek küçük bir üretici, bunları paylaşımlı hizmetin bir parçası olarak devreye alabilir.
 
-**Workflows & Approvals** elde eder: kademeli onay yetkisi, belirlenimci yönlendirme ve eksiksiz denetim izleriyle yapılandırılmış süreçler. Satın alma onayları, sapma talepleri, belge imzaları — yönetilir ve kaydedilir.
+**Workflows & Approvals** elde eder: insan onay adÄ±mlarÄ±, belirlenimci yönlendirme ve eksiksiz denetim izleriyle yapılandırılmış süreçler. Satın alma onayları, sapma talepleri, belge imzaları — yönetilir ve kaydedilir.
 
 Ve bütün bunları, ortamdan otomatik algılanan **hem Türkçe hem İngilizce** elde eder; bu da karma iş gücü ve uluslararası ortakları olan bölgeler için önemlidir.
 
 ### Bölge yönetiminin rolü
 
-OSB'nin merkezi BT ya da paylaşımlı hizmetler ekibi, her üyenin yapay zekasını değil, platformu işletir. Bu ayrım işletim yükünü düşük tutar. AdOS standart Docker ve tek komutla ayağa kalkma ile kurulur ve belgelenmiş yedekleme, geri yükleme, yükseltme ve felaket kurtarma kılavuzlarıyla gelir. Küçük bir bölge ekibi platformu işletebilir; her üye, yalıtım sınırı içinde kendi kiracısını, kendi belgelerini ve kendi Digital Employees'ini yönetir.
+OSB'nin merkezi BT ya da paylaşımlı hizmetler ekibi, her üyenin yapay zekasını değil, platformu işletir. Bu ayrım işletim yükünü düşük tutar. AdOS standart Docker ve tek komutla ayağa kalkma ile kurulur ve belgelenmiş yedekleme, geri yükleme, yükseltme ve felaket kurtarma kılavuzlarıyla gelir. Küçük bir bölge ekibi platformu işletebilir; her üye, yalıtım sınırı içinde kendi kiracısını, kendi belgelerini ve kendi AI-assisted workflows'ini yönetir.
 
 AdOS'ta **token başına faturalandırma olmadığı** için bölgenin maliyeti öngörülebilirdir: donanım ve elektrik, her üye sorgusuyla büyüyen ölçümlü bir bulut faturası değil. Bölge, üyelere temiz, değere dayalı bir hizmet — firma başına ya da koltuk başına bir dilim — sunabilir; kontrolden çıkan kullanım maliyetlerine maruz kalmadan. Ve AdOS'ta **tedarikçi bağımlılığı olmadığı** için — açık motorlar, OpenAI uyumlu arayüz, taşınabilir ve dışa aktarılabilir veri — bölge tek bir tedarikçiye asla mahkum olmaz.
 
 ### Örnek bir tablo
 
-Çoğu elli ile beş yüz çalışan arasında üretici olan kırk üye firmalı bir bölge hayal edin. Bugün her firma kendi bilgisini dağınık dosyalarda ve deneyimli çalışanlarının kafasında yönetiyor. Bölge, kendi sunucularında bir AdOS kurulumu ayağa kaldırıyor. Firmalar kiracı olarak katılıyor. Bir metal şekillendirme üyesi, Company Brain'ini iş talimatları ve kalite kayıtlarıyla besliyor; bir plastik üyesi aynısını kendi verisiyle yapıyor. Hiçbiri diğerinin verisini göremiyor. Her üyenin yeni işe alınanları daha hızlı yetkinleşiyor, her biri tekrar eden arızaları kendi kaynak gösterilmiş geçmişinden çözüyor ve bölge öngörülebilir bir firma başına ücret fatura ediyor.
+Çoğu elli ile beş yüz çalışan arasında üretici olan kırk üye firmalı bir bölge hayal edin. Bugün her firma kendi bilgisini dağınık dosyalarda ve deneyimli çalışanlarının kafasında yönetiyor. Bölge, kendi sunucularında bir AdOS kurulumu ayağa kaldırıyor. Firmalar kiracı olarak katılıyor. Bir metal şekillendirme üyesi, Company Brain'ini iş talimatları ve kalite kayıtlarıyla besliyor; bir plastik üyesi aynısını kendi verisiyle yapıyor. Hiçbiri diğerinin verisini göremiyor. Her üyenin yeni işe alınanları daha hızlı yetkinleşiyor, her biri tekrar eden arızaları kendi kampanya verisine dayanilmiş geçmişinden çözüyor ve bölge öngörülebilir bir firma başına ücret fatura ediyor.
 
-Bu senaryo açıklayıcı ve kurgusaldır, ama içindeki her mekanizma AdOS için gerçektir: çok kiracılı yalıtım, yetki farkındalıklı kaynak gösterimi, yerel çıkarım, bölgeden çıkmayan veri.
+Bu senaryo açıklayıcı ve kurgusaldır, ama içindeki her mekanizma AdOS için gerçektir: çok kiracılı yalıtım, yetki farkındalıklı kampanya verisine dayanimi, yerel çıkarım, bölgeden çıkmayan veri.
 
 ### Sıkça Sorulan Sorular
 
 **Bir üye firma başka bir üyenin belgelerini ya da yanıtlarını görebilir mi?**
-Hayır. AdOS katı kiracı yalıtımıyla çok kiracılıdır ve yetki farkındalıklıdır. Her firma ayrı bir kiracıdır; bir üye diğerinin Company Brain'ini göremez, kaynak gösteremez ya da ona sızamaz.
+Hayır. AdOS katı kiracı yalıtımıyla çok kiracılıdır ve yetki farkındalıklıdır. Her firma ayrı bir kiracıdır; bir üye diğerinin Company Brain'ini göremez, kampanya verisine dayanemez ya da ona sızamaz.
 
 **Yapay zekanın çalışması için bölgenin internete ihtiyacı var mı?**
 Hayır. AdOS bölgenin kendi donanımında local AI ile çalışır. Bulut, harici API ve internet gerektirmez ve air-gap yeteneklidir.
 
 **Platformu kim işletir — bölge mi yoksa her firma mı?**
-Bölgenin merkezi ekibi paylaşımlı platformu standart Docker ve belgelenmiş kılavuzlarla işletir. Her üye, yalıtım sınırı içinde kendi kiracısını, belgelerini ve Digital Employees'ini yönetir.
+Bölgenin merkezi ekibi paylaşımlı platformu standart Docker ve belgelenmiş kılavuzlarla işletir. Her üye, yalıtım sınırı içinde kendi kiracısını, belgelerini ve AI-assisted workflows'ini yönetir.
 
 **Maliyet nasıl yapılandırılır?**
 AdOS'ta token başına faturalandırma yoktur. Bölgenin maliyeti donanım ve elektriktir ve bölge, ölçümlü kullanım riski olmadan üyelere değere dayalı firma başına ya da koltuk başına bir hizmet sunabilir.
@@ -3473,7 +3485,7 @@ Bir bölge zaten enerji, su ve güvenliği paylaşır. Egemen yapay zeka bir son
 ## Article 19: On-Prem AI for the Public Sector and Municipalities
 
 **Meta title:** On-Prem AI for Public Sector & Municipalities
-**Meta description:** Why municipalities and public institutions need on-premise, sovereign AI — cited answers, permission-aware access, full audit trails, and citizen data that never leaves the building.
+**Meta description:** Why municipalities and public institutions need on-premise, sovereign AI — performance-grounded recommendations, human-approved access, full audit trails, and citizen data that never leaves the building.
 **Slug:** on-prem-ai-public-sector-municipalities
 
 ---
@@ -3494,19 +3506,19 @@ AdOS is also offline-first and air-gap capable, which matters for secure governm
 
 Sovereignty is the entry ticket, but public bodies need the AI to actually help. AdOS provides three capabilities that map directly onto public-sector work.
 
-The **Company Brain** is the institution's private, permission-aware knowledge base. Regulations, procedures, prior decisions, and internal manuals become answerable. When a caseworker asks how to handle a specific type of application, the AI answers from the institution's own documents and **cites its sources** — pointing to the actual regulation or procedure, not a generic paraphrase. For public administration, where consistency and defensibility of decisions matter enormously, a cited answer is far more than a convenience. It is a record of why a decision was made the way it was.
+The **Company Brain** is the institution's private, human-approved marketing-performance memory. Regulations, procedures, prior decisions, and internal manuals become answerable. When a caseworker asks how to handle a specific type of application, the AI answers from the institution's own documents and **traces to campaign results** — pointing to the actual regulation or procedure, not a generic paraphrase. For public administration, where consistency and defensibility of decisions matter enormously, a performance-grounded recommendation is far more than a convenience. It is a record of why a decision was made the way it was.
 
-**Digital Employees** are AI agents that perform real administrative work within defined roles and permissions — answering routine queries, drafting standard correspondence, routing applications, and preparing approvals. In an environment under headcount pressure, they absorb repetitive knowledge work so staff can focus on judgment and citizen contact.
+**AI-assisted workflows** are AI agents that perform real administrative work within defined roles and permissions — answering routine queries, drafting standard correspondence, routing applications, and preparing approvals. In an environment under headcount pressure, they absorb repetitive knowledge work so staff can focus on judgment and citizen contact.
 
-**Workflows & Approvals** bring structure to processes that are, by their nature, governed. Permits, expenditures, and formal decisions require tiered approval authority and deterministic routing. AdOS makes each step explicit and records it. Applications do not sit in an inbox; they move through a defined chain, escalate when they stall, and leave a complete trail.
+**Workflows & Approvals** bring structure to processes that are, by their nature, governed. Permits, expenditures, and formal decisions require human approval gates and deterministic routing. AdOS makes each step explicit and records it. Applications do not sit in an inbox; they move through a defined chain, escalate when they stall, and leave a complete trail.
 
-### Permission-aware access and the audit trail
+### Human-Approved access and the audit trail
 
-Two properties make AdOS particularly suited to the public sector: permission-aware AI and immutable auditing.
+Two properties make AdOS particularly suited to the public sector: human-approved AI and activity loging.
 
-AdOS is **permission-aware** at its core. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface content outside a user's authorization. In an institution where different departments hold data at different sensitivity levels, and where access is legally scoped, this is essential. A staff member handling permits does not gain a back door into social-services files because they asked the AI a question.
+AdOS is **human-approved** at its core. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface content outside a user's authorization. In an institution where different departments hold data at different sensitivity levels, and where access is legally scoped, this is essential. A staff member handling permits does not gain a back door into social-services files because they asked the AI a question.
 
-And every consequential action is written to an **immutable audit trail**. Who asked what, who approved what, which Digital Employee performed which task, on whose authority — all recorded and unalterable. For public bodies subject to oversight, audit, and freedom-of-information obligations, this turns AI from an accountability risk into an accountability asset. You can always show exactly what happened.
+And every consequential action is written to an **activity log and per-approval timeline**. Who asked what, who approved what, which AI-assisted workflow performed which task, on whose authority — all recorded and unalterable. For public bodies subject to oversight, audit, and freedom-of-information obligations, this turns AI from an accountability risk into an accountability asset. You can always show exactly what happened.
 
 ### Bilingual, ownable, and predictable to run
 
@@ -3520,7 +3532,7 @@ One honest note on performance: local inference on modest hardware returns answe
 
 ### An illustrative picture
 
-Imagine a mid-sized municipality with several directorates and thousands of documents governing permits, procurement, and citizen services. Today a caseworker answering a zoning question searches through folders and, when unsure, waits for a colleague. In this illustrative scenario, the municipality deploys AdOS on its own servers. It seeds the Company Brain with its regulations and procedures. A caseworker now asks a plain-language question and receives an answer cited to the exact regulation — while the AI, being permission-aware, never surfaces the citizen files that worker is not entitled to. Every decision leaves an audit record. This example is fictional and illustrative, but the mechanisms — local inference, cited answers, permission-aware access, immutable audit — are exactly how AdOS works.
+Imagine a mid-sized municipality with several directorates and thousands of documents governing permits, procurement, and citizen services. Today a caseworker answering a zoning question searches through folders and, when unsure, waits for a colleague. In this illustrative scenario, the municipality deploys AdOS on its own servers. It seeds the Company Brain with its regulations and procedures. A caseworker now asks a plain-language question and receives an answer cited to the exact regulation — while the AI, being human-approved, never surfaces the citizen files that worker is not entitled to. Every decision leaves an audit record. This example is fictional and illustrative, but the mechanisms — local inference, performance-grounded recommendations, human-approved access, activity log — are exactly how AdOS works.
 
 ### FAQ
 
@@ -3531,10 +3543,10 @@ AdOS runs 100% on the institution's own infrastructure. Data never leaves the pr
 Yes. AdOS is offline-first and air-gap capable. It requires no internet, no cloud, and no external API keys.
 
 **How does AdOS prevent unauthorized access to sensitive files?**
-AdOS is permission-aware. A user only sees, and the AI only cites, documents that user is entitled to see. The model cannot surface content outside a user's authorization.
+AdOS is human-approved. A user only sees, and the AI only cites, documents that user is entitled to see. The model cannot surface content outside a user's authorization.
 
 **Is there an audit trail for oversight and accountability?**
-Yes. Every consequential action is written to an immutable audit trail — who asked, who approved, which Digital Employee acted, and on whose authority.
+Yes. Every consequential action is written to an activity log and per-approval timeline — who asked, who approved, which AI-assisted workflow acted, and on whose authority.
 
 **Is it available in Turkish?**
 Yes. AdOS is fully bilingual TR/EN, auto-detected from the environment, with native Turkish support.
@@ -3548,7 +3560,7 @@ For the public sector, on-premise is not a preference — it is the requirement.
 ## Makale 19: Kamu Sektörü ve Belediyeler için Şirket İçi Yapay Zeka
 
 **Meta başlık:** Kamu ve Belediyeler için Şirket İçi Yapay Zeka
-**Meta açıklama:** Belediyeler ve kamu kurumları neden şirket içinde çalışan, egemen yapay zekaya ihtiyaç duyar — kaynak gösterilen yanıtlar, yetki farkındalıklı erişim, tam denetim izi ve binadan çıkmayan vatandaş verisi.
+**Meta açıklama:** Belediyeler ve kamu kurumları neden şirket içinde çalışan, egemen yapay zekaya ihtiyaç duyar — kampanya verisine dayanilen yanıtlar, yetki farkındalıklı erişim, tam etkinlik günlüğü ve binadan çıkmayan vatandaş verisi.
 **Slug:** kamu-belediyeler-icin-sirket-ici-yapay-zeka
 
 ---
@@ -3569,19 +3581,19 @@ AdOS ayrıca çevrimdışı öncelikli ve air-gap yeteneklidir; bu da kamu inter
 
 Egemenlik giriş biletidir, ama kamu kurumlarının yapay zekanın gerçekten yardımcı olmasına ihtiyacı vardır. AdOS, kamu işine doğrudan oturan üç yetenek sunar.
 
-**Company Brain**, kurumun özel, yetki farkındalıklı bilgi tabanıdır. Mevzuat, prosedürler, önceki kararlar ve iç el kitapları yanıtlanabilir hale gelir. Bir memur belirli bir başvuru türünün nasıl ele alınacağını sorduğunda, yapay zeka kurumun kendi belgelerinden yanıt verir ve **kaynaklarını gösterir** — genel bir açıklama değil, gerçek mevzuat ya da prosedürü işaret ederek. Kararların tutarlılığı ve savunulabilirliğinin muazzam önem taşıdığı kamu yönetiminde, kaynak gösterilen bir yanıt bir kolaylıktan çok daha fazlasıdır. Bir kararın neden o şekilde verildiğinin kaydıdır.
+**Company Brain**, kurumun özel, yetki farkındalıklı pazarlama-performans belleğidır. Mevzuat, prosedürler, önceki kararlar ve iç el kitapları yanıtlanabilir hale gelir. Bir memur belirli bir başvuru türünün nasıl ele alınacağını sorduğunda, yapay zeka kurumun kendi belgelerinden yanıt verir ve **kampanya sonuçlarına dayanır** — genel bir açıklama değil, gerçek mevzuat ya da prosedürü işaret ederek. Kararların tutarlılığı ve savunulabilirliğinin muazzam önem taşıdığı kamu yönetiminde, kampanya verisine dayanilen bir yanıt bir kolaylıktan çok daha fazlasıdır. Bir kararın neden o şekilde verildiğinin kaydıdır.
 
-**Digital Employees**, tanımlı roller ve yetkiler içinde gerçek idari iş yapan yapay zeka ajanlarıdır — rutin sorguları yanıtlar, standart yazışmaları taslak haline getirir, başvuruları yönlendirir ve onaylara hazırlar. Personel baskısı altındaki bir ortamda, tekrar eden bilgi işini üstlenirler; böylece personel muhakeme ve vatandaş temasına odaklanabilir.
+**AI-assisted workflows**, tanımlı roller ve yetkiler içinde gerçek idari iş yapan yapay zeka ajanlarıdır — rutin sorguları yanıtlar, standart yazışmaları taslak haline getirir, başvuruları yönlendirir ve onaylara hazırlar. Personel baskısı altındaki bir ortamda, tekrar eden bilgi işini üstlenirler; böylece personel muhakeme ve vatandaş temasına odaklanabilir.
 
-**Workflows & Approvals**, doğası gereği yönetilen süreçlere yapı kazandırır. Ruhsatlar, harcamalar ve resmi kararlar kademeli onay yetkisi ve belirlenimci yönlendirme gerektirir. AdOS her adımı açık hale getirir ve kaydeder. Başvurular bir gelen kutusunda beklemez; tanımlı bir zincirden geçer, tıkandığında yükseltilir ve eksiksiz bir iz bırakır.
+**Workflows & Approvals**, doğası gereği yönetilen süreçlere yapı kazandırır. Ruhsatlar, harcamalar ve resmi kararlar insan onay adÄ±mlarÄ± ve belirlenimci yönlendirme gerektirir. AdOS her adımı açık hale getirir ve kaydeder. Başvurular bir gelen kutusunda beklemez; tanımlı bir zincirden geçer, tıkandığında yükseltilir ve eksiksiz bir iz bırakır.
 
-### Yetki farkındalıklı erişim ve denetim izi
+### Yetki farkındalıklı erişim ve etkinlik günlüğü
 
-İki özellik AdOS'u kamu sektörüne özellikle uygun kılar: yetki farkındalıklı yapay zeka ve değiştirilemez denetim.
+İki özellik AdOS'u kamu sektörüne özellikle uygun kılar: yetki farkındalıklı yapay zeka ve etkinlik günlüğü.
 
-AdOS özünde **yetki farkındalıklıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Model, bir kullanıcının yetkisinin dışındaki içeriği asla ortaya çıkaramaz. Farklı departmanların farklı hassasiyet seviyelerinde veri tuttuğu ve erişimin yasal olarak kapsamlandırıldığı bir kurumda bu esastır. Ruhsatlarla ilgilenen bir personel, yapay zekaya bir soru sorduğu için sosyal hizmet dosyalarına arka kapıdan giriş elde etmez.
+AdOS özünde **yetki farkındalıklıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Model, bir kullanıcının yetkisinin dışındaki içeriği asla ortaya çıkaramaz. Farklı departmanların farklı hassasiyet seviyelerinde veri tuttuğu ve erişimin yasal olarak kapsamlandırıldığı bir kurumda bu esastır. Ruhsatlarla ilgilenen bir personel, yapay zekaya bir soru sorduğu için sosyal hizmet dosyalarına arka kapıdan giriş elde etmez.
 
-Ve her önemli işlem bir **değiştirilemez denetim izine** yazılır. Kimin ne sorduğu, kimin neyi onayladığı, hangi Digital Employee'nin hangi işi kimin yetkisiyle yaptığı — hepsi kaydedilir ve değiştirilemez. Denetime, teftişe ve bilgi edinme yükümlülüklerine tabi kamu kurumları için bu, yapay zekayı bir hesap verebilirlik riskinden bir hesap verebilirlik varlığına dönüştürür. Ne olduğunu her zaman tam olarak gösterebilirsiniz.
+Ve her önemli işlem bir **değiştirilemez etkinlik günlüğüne** yazılır. Kimin ne sorduğu, kimin neyi onayladığı, hangi AI-assisted workflow'nin hangi işi kimin yetkisiyle yaptığı — hepsi kaydedilir ve değiştirilemez. Denetime, teftişe ve bilgi edinme yükümlülüklerine tabi kamu kurumları için bu, yapay zekayı bir hesap verebilirlik riskinden bir hesap verebilirlik varlığına dönüştürür. Ne olduğunu her zaman tam olarak gösterebilirsiniz.
 
 ### İki dilli, sahiplenilebilir ve öngörülebilir işletim
 
@@ -3595,7 +3607,7 @@ Performans üzerine dürüst bir not: mütevazı donanımda yerel çıkarım, ya
 
 ### Örnek bir tablo
 
-Birkaç müdürlüğü ve ruhsatları, satın almayı ve vatandaş hizmetlerini yöneten binlerce belgesi olan orta ölçekli bir belediye hayal edin. Bugün bir imar sorusunu yanıtlayan bir memur klasörleri arıyor ve emin olmadığında bir meslektaşını bekliyor. Bu örnek senaryoda belediye, AdOS'u kendi sunucularına kuruyor. Company Brain'i mevzuatı ve prosedürleriyle besliyor. Bir memur artık sade bir dille soru soruyor ve tam mevzuata kaynak gösterilen bir yanıt alıyor — yapay zeka, yetki farkındalıklı olduğu için, o memurun yetkili olmadığı vatandaş dosyalarını asla ortaya çıkarmıyor. Her karar bir denetim kaydı bırakıyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizmalar — yerel çıkarım, kaynak gösterilen yanıtlar, yetki farkındalıklı erişim, değiştirilemez denetim — AdOS'un tam olarak çalışma biçimidir.
+Birkaç müdürlüğü ve ruhsatları, satın almayı ve vatandaş hizmetlerini yöneten binlerce belgesi olan orta ölçekli bir belediye hayal edin. Bugün bir imar sorusunu yanıtlayan bir memur klasörleri arıyor ve emin olmadığında bir meslektaşını bekliyor. Bu örnek senaryoda belediye, AdOS'u kendi sunucularına kuruyor. Company Brain'i mevzuatı ve prosedürleriyle besliyor. Bir memur artık sade bir dille soru soruyor ve tam mevzuata kampanya verisine dayanilen bir yanıt alıyor — yapay zeka, yetki farkındalıklı olduğu için, o memurun yetkili olmadığı vatandaş dosyalarını asla ortaya çıkarmıyor. Her karar bir denetim kaydı bırakıyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizmalar — yerel çıkarım, kampanya verisine dayanilen yanıtlar, yetki farkındalıklı erişim, etkinlik günlüğü — AdOS'un tam olarak çalışma biçimidir.
 
 ### Sıkça Sorulan Sorular
 
@@ -3606,10 +3618,10 @@ AdOS kurumun kendi altyapısında %100 çalışır. Veri binadan çıkmaz, haric
 Evet. AdOS çevrimdışı öncelikli ve air-gap yeteneklidir. İnternet, bulut ve harici API anahtarı gerektirmez.
 
 **AdOS hassas dosyalara yetkisiz erişimi nasıl önler?**
-AdOS yetki farkındalıklıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Model, bir kullanıcının yetkisi dışındaki içeriği ortaya çıkaramaz.
+AdOS yetki farkındalıklıdır. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Model, bir kullanıcının yetkisi dışındaki içeriği ortaya çıkaramaz.
 
-**Teftiş ve hesap verebilirlik için bir denetim izi var mı?**
-Evet. Her önemli işlem değiştirilemez bir denetim izine yazılır — kimin sorduğu, kimin onayladığı, hangi Digital Employee'nin ve kimin yetkisiyle işlem yaptığı.
+**Teftiş ve hesap verebilirlik için bir etkinlik günlüğü var mı?**
+Evet. Her önemli işlem değiştirilemez bir etkinlik günlüğüne yazılır — kimin sorduğu, kimin onayladığı, hangi AI-assisted workflow'nin ve kimin yetkisiyle işlem yaptığı.
 
 **Türkçe olarak mevcut mu?**
 Evet. AdOS, ortamdan otomatik algılanan, yerel Türkçe desteğiyle tam iki dilli TR/EN'dir.
@@ -3621,7 +3633,7 @@ Kamu sektörü için şirket içi olmak bir tercih değil, gerekliliktir. AdOS b
 ## Article 20: AI in Healthcare Without Compromising Patient Confidentiality
 
 **Meta title:** AI in Healthcare Without Compromising Patient Data
-**Meta description:** How healthcare organizations can use AI on patient data safely — on-premise, permission-aware, cited, and fully audited, with no patient information ever leaving the building.
+**Meta description:** How healthcare organizations can use AI on patient data safely — on-premise, human-approved, cited, and fully audited, with no patient information ever leaving the building.
 **Slug:** ai-healthcare-patient-confidentiality
 
 ---
@@ -3638,31 +3650,31 @@ That is precisely the problem with cloud AI. To use it, you send that informatio
 
 This is the foundation of AdOS. AdOS runs **entirely on the customer's own infrastructure**. All inference is **local AI**, executed on the organization's own hardware through a local engine — Ollama or any OpenAI-compatible local server such as vLLM or llama.cpp. There is **no cloud, no external API, no API keys, and no internet requirement**. Patient data — records, queries, answers — **never leaves the premises**, and there is no telemetry of clinical or business content. AdOS is offline-first and air-gap capable, so it can run on a hospital network that is fully isolated from the public internet. Confidentiality is not promised by policy; it is enforced by architecture.
 
-### Permission-aware AI: the right person, the right record
+### Human-Approved AI: the right person, the right record
 
 Confidentiality in healthcare is not only about keeping data inside the building. It is about ensuring that within the building, only the right people see the right records. A pharmacist, a ward nurse, an administrator, and a billing clerk have different, legitimate, and different-shaped access rights. An AI that flattened those distinctions would be a liability even on-premise.
 
-AdOS is **permission-aware** at its core. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface or cite content a user is not authorized to access. When a staff member asks a question, the answer is drawn only from material within that person's permissions. This means AI can be deployed across a clinical organization without becoming a route around its access controls. The confidentiality boundary that already governs who may see which record is the same boundary the AI respects.
+AdOS is **human-approved** at its core. A user only sees, and the AI only cites, documents that user is entitled to see. The model can never surface or cite content a user is not authorized to access. When a staff member asks a question, the answer is drawn only from material within that person's permissions. This means AI can be deployed across a clinical organization without becoming a route around its human approval gates. The confidentiality boundary that already governs who may see which record is the same boundary the AI respects.
 
-### Grounded, cited answers for clinical trust
+### Grounded, performance-grounded recommendations for clinical trust
 
 In healthcare, an answer without a source is not just unhelpful — it can be dangerous. A model that produces a confident but unsupported statement about a dosage or a protocol is a risk, not a tool.
 
-The **Company Brain** is designed to prevent exactly this. It is the organization's private, permission-aware knowledge base, built from its own clinical guidelines, protocols, and procedures. Every answer is **grounded** in those documents and **cites its sources**. When a clinician asks about a protocol, the AI does not improvise — it returns the answer with a pointer to the actual guideline it came from. The clinician can verify the source before acting. This is the difference between an AI that guesses plausibly and one that retrieves reliably. For clinical and administrative decisions alike, a cited answer is one you can stand behind.
+The **Company Brain** is designed to prevent exactly this. It is the organization's private, human-approved marketing-performance memory, built from its own clinical guidelines, protocols, and procedures. Every answer is **grounded** in those documents and **traces to campaign results**. When a clinician asks about a protocol, the AI does not improvise — it returns the answer with a pointer to the actual guideline it came from. The clinician can verify the source before acting. This is the difference between an AI that guesses plausibly and one that surfaces reliably. For clinical and administrative decisions alike, a performance-grounded recommendation is one you can stand behind.
 
-### Digital Employees and workflows for the administrative load
+### AI-assisted workflows and workflows for the administrative load
 
 Much of the burden in healthcare is administrative, and much of it is knowledge work that AI can carry.
 
-AdOS **Digital Employees** are AI agents that perform real work within defined roles and permissions — answering routine queries, drafting standard documentation, routing requests, and preparing approvals. Applied to healthcare administration, they absorb the repetitive load — retrieving the relevant procedure, assembling a standard summary, moving a request to the right desk — so clinical and administrative staff spend more time on patients and judgment. Each Digital Employee operates inside the same permission model, so it never handles data outside its authorized scope.
+AdOS **AI-assisted workflows** are AI agents that perform real work within defined roles and permissions — answering routine queries, drafting standard documentation, routing requests, and preparing approvals. Applied to healthcare administration, they absorb the repetitive load — retrieving the relevant procedure, assembling a standard summary, moving a request to the right desk — so clinical and administrative staff spend more time on patients and judgment. Each AI-assisted workflow operates inside the same permission model, so it never handles data outside its authorized scope.
 
 **Workflows & Approvals** bring order to the many processes that require sign-off: procurement, formulary changes, policy exceptions, access requests. Routing is deterministic, approval authority is tiered, and every step is recorded. Nothing depends on an email being noticed.
 
 ### The audit trail: confidentiality you can prove
 
-Confidentiality obligations are not satisfied by good intentions; they must be demonstrable. AdOS writes every consequential action to an **immutable audit trail**. Who asked what, who approved what, which Digital Employee performed which task, on whose authority — all recorded and unalterable.
+Confidentiality obligations are not satisfied by good intentions; they must be demonstrable. AdOS writes every consequential action to an **activity log and per-approval timeline**. Who asked what, who approved what, which AI-assisted workflow performed which task, on whose authority — all recorded and unalterable.
 
-For a healthcare organization, this converts AI from a confidentiality risk into a confidentiality asset. If a question arises about who accessed what, the record exists and cannot be quietly changed. Combined with permission-aware access and on-premise data, the audit trail lets an organization not only protect patient data but prove that it did.
+For a healthcare organization, this converts AI from a confidentiality risk into a confidentiality asset. If a question arises about who accessed what, the record exists and cannot be quietly changed. Combined with human-approved access and on-premise data, the audit trail lets an organization not only protect patient data but prove that it did.
 
 ### Ownable, bilingual, and predictable
 
@@ -3672,7 +3684,7 @@ One honest trade-off: local inference returns answers in seconds, not millisecon
 
 ### An illustrative picture
 
-Imagine a hospital group with several facilities and thousands of clinical and administrative documents. Today a nurse checking a medication protocol searches a shared drive and, when unsure, pages a colleague. In this illustrative scenario, the group deploys AdOS on its own servers, fully offline. It seeds the Company Brain with its protocols and guidelines. A nurse now asks a plain-language question and receives an answer cited to the exact protocol — while the AI, being permission-aware, never surfaces patient records the nurse is not entitled to. Every access is logged in the audit trail. This example is fictional and illustrative, but the mechanisms — on-premise local inference, permission-aware citations, immutable audit — are exactly how AdOS works.
+Imagine a hospital group with several facilities and thousands of clinical and administrative documents. Today a nurse checking a medication protocol searches a shared drive and, when unsure, pages a colleague. In this illustrative scenario, the group deploys AdOS on its own servers, fully offline. It seeds the Company Brain with its protocols and guidelines. A nurse now asks a plain-language question and receives an answer cited to the exact protocol — while the AI, being human-approved, never surfaces patient records the nurse is not entitled to. Every access is logged in the audit trail. This example is fictional and illustrative, but the mechanisms — on-premise local inference, human-approved citations, activity log — are exactly how AdOS works.
 
 ### FAQ
 
@@ -3680,13 +3692,13 @@ Imagine a hospital group with several facilities and thousands of clinical and a
 No. AdOS runs entirely on the organization's own infrastructure. Patient data never leaves the premises, there is no external API, no telemetry of content, and it is air-gap capable.
 
 **Can staff use the AI to reach records they are not authorized to see?**
-No. AdOS is permission-aware. A user only sees, and the AI only cites, documents that user is entitled to access. The AI cannot surface content outside a user's authorization.
+No. AdOS is human-approved. A user only sees, and the AI only cites, documents that user is entitled to access. The AI cannot surface content outside a user's authorization.
 
 **How do we trust the AI's clinical answers?**
-Every answer from the Company Brain is grounded in your own documents and cites its sources, pointing to the actual guideline or protocol so staff can verify before acting.
+Every answer from the Company Brain is grounded in your own documents and traces to campaign results, pointing to the actual guideline or protocol so staff can verify before acting.
 
 **Is there a record of who accessed what?**
-Yes. Every consequential action is written to an immutable audit trail, letting the organization demonstrate compliance, not just claim it.
+Yes. Every consequential action is written to an activity log and per-approval timeline, letting the organization demonstrate compliance, not just claim it.
 
 **Does it work offline and in Turkish?**
 Yes. AdOS is offline-first and air-gap capable, requiring no internet, and is fully bilingual TR/EN with native Turkish support.
@@ -3700,7 +3712,7 @@ In healthcare, confidentiality is not negotiable — and neither is the architec
 ## Makale 20: Hasta Gizliliğinden Ödün Vermeden Sağlıkta Yapay Zeka
 
 **Meta başlık:** Hasta Gizliliği Korunarak Sağlıkta Yapay Zeka
-**Meta açıklama:** Sağlık kuruluşları hasta verisinde yapay zekayı nasıl güvenle kullanabilir — şirket içi, yetki farkındalıklı, kaynak gösterilen ve tam denetlenen, hiçbir hasta bilgisi binadan çıkmadan.
+**Meta açıklama:** Sağlık kuruluşları hasta verisinde yapay zekayı nasıl güvenle kullanabilir — şirket içi, yetki farkındalıklı, kampanya verisine dayanilen ve tam denetlenen, hiçbir hasta bilgisi binadan çıkmadan.
 **Slug:** hasta-gizliligi-korunarak-saglikta-yapay-zeka
 
 ---
@@ -3721,27 +3733,27 @@ AdOS'un temeli budur. AdOS **tamamen müşterinin kendi altyapısında** çalı�
 
 Sağlıkta gizlilik yalnızca veriyi bina içinde tutmakla ilgili değildir. Bina içinde de yalnızca doğru kişilerin doğru kayıtları görmesini sağlamakla ilgilidir. Bir eczacı, bir servis hemşiresi, bir idareci ve bir fatura görevlisinin farklı, meşru ve farklı biçimli erişim hakları vardır. Bu ayrımları düzleştiren bir yapay zeka, şirket içinde bile bir risk olurdu.
 
-AdOS özünde **yetki farkındalıklıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Model, bir kullanıcının erişmeye yetkili olmadığı içeriği asla ortaya çıkaramaz ya da kaynak gösteremez. Bir personel soru sorduğunda, yanıt yalnızca o kişinin yetkileri içindeki materyalden alınır. Bu, yapay zekanın bir klinik kuruluş genelinde, erişim kontrollerini aşan bir yol haline gelmeden devreye alınabileceği anlamına gelir. Hangi kaydı kimin görebileceğini zaten yöneten gizlilik sınırı, yapay zekanın da saygı gösterdiği sınırdır.
+AdOS özünde **yetki farkındalıklıdır**. Bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Model, bir kullanıcının erişmeye yetkili olmadığı içeriği asla ortaya çıkaramaz ya da kampanya verisine dayanemez. Bir personel soru sorduğunda, yanıt yalnızca o kişinin yetkileri içindeki materyalden alınır. Bu, yapay zekanın bir klinik kuruluş genelinde, erişim kontrollerini aşan bir yol haline gelmeden devreye alınabileceği anlamına gelir. Hangi kaydı kimin görebileceğini zaten yöneten gizlilik sınırı, yapay zekanın da saygı gösterdiği sınırdır.
 
-### Klinik güven için temellendirilmiş, kaynak gösterilen yanıtlar
+### Klinik güven için temellendirilmiş, kampanya verisine dayanilen yanıtlar
 
 Sağlıkta kaynaksız bir yanıt yalnızca yararsız değildir — tehlikeli olabilir. Bir doz ya da protokol hakkında kendinden emin ama desteksiz bir ifade üreten bir model bir araç değil, bir risktir.
 
-**Company Brain** tam olarak bunu önlemek için tasarlanmıştır. Kuruluşun özel, yetki farkındalıklı bilgi tabanıdır; kendi klinik kılavuzları, protokolleri ve prosedürlerinden oluşturulur. Her yanıt bu belgelerde **temellendirilir** ve **kaynaklarını gösterir**. Bir klinisyen bir protokol hakkında soru sorduğunda, yapay zeka doğaçlama yapmaz — yanıtı, geldiği gerçek kılavuza bir işaretle döndürür. Klinisyen, harekete geçmeden önce kaynağı doğrulayabilir. Makul biçimde tahmin eden bir yapay zeka ile güvenilir biçimde getiren bir yapay zeka arasındaki fark budur. Hem klinik hem idari kararlar için, kaynak gösterilen bir yanıt arkasında durabileceğiniz bir yanıttır.
+**Company Brain** tam olarak bunu önlemek için tasarlanmıştır. Kuruluşun özel, yetki farkındalıklı pazarlama-performans belleğidır; kendi klinik kılavuzları, protokolleri ve prosedürlerinden oluşturulur. Her yanıt bu belgelerde **temellendirilir** ve **kampanya sonuçlarına dayanır**. Bir klinisyen bir protokol hakkında soru sorduğunda, yapay zeka doğaçlama yapmaz — yanıtı, geldiği gerçek kılavuza bir işaretle döndürür. Klinisyen, harekete geçmeden önce kaynağı doğrulayabilir. Makul biçimde tahmin eden bir yapay zeka ile güvenilir biçimde getiren bir yapay zeka arasındaki fark budur. Hem klinik hem idari kararlar için, kampanya verisine dayanilen bir yanıt arkasında durabileceğiniz bir yanıttır.
 
-### İdari yük için Digital Employees ve iş akışları
+### İdari yük için AI-assisted workflows ve iş akışları
 
 Sağlıktaki yükün çoğu idaridir ve çoğu, yapay zekanın taşıyabileceği bilgi işidir.
 
-AdOS **Digital Employees**, tanımlı roller ve yetkiler içinde gerçek iş yapan yapay zeka ajanlarıdır — rutin sorguları yanıtlar, standart belgeleri taslak haline getirir, talepleri yönlendirir ve onaylara hazırlar. Sağlık idaresine uygulandığında tekrar eden yükü üstlenirler — ilgili prosedürü getirmek, standart bir özet derlemek, bir talebi doğru masaya taşımak — böylece klinik ve idari personel daha fazla zamanı hastalara ve muhakemeye ayırır. Her Digital Employee aynı yetki modeli içinde çalışır; böylece yetkili kapsamının dışındaki veriyi asla işlemez.
+AdOS **AI-assisted workflows**, tanımlı roller ve yetkiler içinde gerçek iş yapan yapay zeka ajanlarıdır — rutin sorguları yanıtlar, standart belgeleri taslak haline getirir, talepleri yönlendirir ve onaylara hazırlar. Sağlık idaresine uygulandığında tekrar eden yükü üstlenirler — ilgili prosedürü getirmek, standart bir özet derlemek, bir talebi doğru masaya taşımak — böylece klinik ve idari personel daha fazla zamanı hastalara ve muhakemeye ayırır. Her AI-assisted workflow aynı yetki modeli içinde çalışır; böylece yetkili kapsamının dışındaki veriyi asla işlemez.
 
 **Workflows & Approvals**, imza gerektiren birçok sürece düzen getirir: satın alma, formüler değişiklikleri, politika istisnaları, erişim talepleri. Yönlendirme belirlenimcidir, onay yetkisi kademelidir ve her adım kaydedilir. Hiçbir şey bir e-postanın fark edilmesine bağlı değildir.
 
-### Denetim izi: kanıtlayabileceğiniz gizlilik
+### etkinlik günlüğü: kanıtlayabileceğiniz gizlilik
 
-Gizlilik yükümlülükleri iyi niyetle karşılanmaz; gösterilebilir olmalıdır. AdOS her önemli işlemi bir **değiştirilemez denetim izine** yazar. Kimin ne sorduğu, kimin neyi onayladığı, hangi Digital Employee'nin hangi işi kimin yetkisiyle yaptığı — hepsi kaydedilir ve değiştirilemez.
+Gizlilik yükümlülükleri iyi niyetle karşılanmaz; gösterilebilir olmalıdır. AdOS her önemli işlemi bir **değiştirilemez etkinlik günlüğüne** yazar. Kimin ne sorduğu, kimin neyi onayladığı, hangi AI-assisted workflow'nin hangi işi kimin yetkisiyle yaptığı — hepsi kaydedilir ve değiştirilemez.
 
-Bir sağlık kuruluşu için bu, yapay zekayı bir gizlilik riskinden bir gizlilik varlığına dönüştürür. Kimin neye eriştiği konusunda bir soru ortaya çıkarsa, kayıt vardır ve sessizce değiştirilemez. Yetki farkındalıklı erişim ve şirket içi veriyle birleştiğinde denetim izi, bir kuruluşun yalnızca hasta verisini korumasına değil, koruduğunu kanıtlamasına da olanak tanır.
+Bir sağlık kuruluşu için bu, yapay zekayı bir gizlilik riskinden bir gizlilik varlığına dönüştürür. Kimin neye eriştiği konusunda bir soru ortaya çıkarsa, kayıt vardır ve sessizce değiştirilemez. Yetki farkındalıklı erişim ve şirket içi veriyle birleştiğinde etkinlik günlüğü, bir kuruluşun yalnızca hasta verisini korumasına değil, koruduğunu kanıtlamasına da olanak tanır.
 
 ### Sahiplenilebilir, iki dilli ve öngörülebilir
 
@@ -3751,7 +3763,7 @@ Dürüst bir takas: yerel çıkarım yanıtları milisaniyelerle değil saniyele
 
 ### Örnek bir tablo
 
-Birkaç tesisi ve binlerce klinik ve idari belgesi olan bir hastane grubu hayal edin. Bugün bir ilaç protokolünü kontrol eden bir hemşire paylaşımlı bir sürücüde arıyor ve emin olmadığında bir meslektaşını çağırıyor. Bu örnek senaryoda grup, AdOS'u kendi sunucularına tamamen çevrimdışı kuruyor. Company Brain'i protokolleri ve kılavuzlarıyla besliyor. Bir hemşire artık sade bir dille soru soruyor ve tam protokole kaynak gösterilen bir yanıt alıyor — yapay zeka, yetki farkındalıklı olduğu için, hemşirenin yetkili olmadığı hasta kayıtlarını asla ortaya çıkarmıyor. Her erişim denetim izine kaydediliyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizmalar — şirket içi yerel çıkarım, yetki farkındalıklı kaynak gösterimi, değiştirilemez denetim — AdOS'un tam olarak çalışma biçimidir.
+Birkaç tesisi ve binlerce klinik ve idari belgesi olan bir hastane grubu hayal edin. Bugün bir ilaç protokolünü kontrol eden bir hemşire paylaşımlı bir sürücüde arıyor ve emin olmadığında bir meslektaşını çağırıyor. Bu örnek senaryoda grup, AdOS'u kendi sunucularına tamamen çevrimdışı kuruyor. Company Brain'i protokolleri ve kılavuzlarıyla besliyor. Bir hemşire artık sade bir dille soru soruyor ve tam protokole kampanya verisine dayanilen bir yanıt alıyor — yapay zeka, yetki farkındalıklı olduğu için, hemşirenin yetkili olmadığı hasta kayıtlarını asla ortaya çıkarmıyor. Her erişim etkinlik günlüğüne kaydediliyor. Bu örnek kurgusal ve açıklayıcıdır, ama mekanizmalar — şirket içi yerel çıkarım, yetki farkındalıklı kampanya verisine dayanimi, etkinlik günlüğü — AdOS'un tam olarak çalışma biçimidir.
 
 ### Sıkça Sorulan Sorular
 
@@ -3759,13 +3771,13 @@ Birkaç tesisi ve binlerce klinik ve idari belgesi olan bir hastane grubu hayal 
 Hayır. AdOS tamamen kuruluşun kendi altyapısında çalışır. Hasta verisi binadan çıkmaz, harici API yoktur, içerik telemetrisi yoktur ve air-gap yeteneklidir.
 
 **Personel, görmeye yetkili olmadığı kayıtlara ulaşmak için yapay zekayı kullanabilir mi?**
-Hayır. AdOS yetki farkındalıklıdır. Bir kullanıcı yalnızca erişmeye yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kaynak gösterir. Yapay zeka, bir kullanıcının yetkisi dışındaki içeriği ortaya çıkaramaz.
+Hayır. AdOS yetki farkındalıklıdır. Bir kullanıcı yalnızca erişmeye yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları kampanya verisine dayanır. Yapay zeka, bir kullanıcının yetkisi dışındaki içeriği ortaya çıkaramaz.
 
 **Yapay zekanın klinik yanıtlarına nasıl güveniriz?**
-Company Brain'den gelen her yanıt kendi belgelerinizde temellendirilir ve kaynaklarını gösterir; gerçek kılavuz ya da protokolü işaret eder, böylece personel harekete geçmeden önce doğrulayabilir.
+Company Brain'den gelen her yanıt kendi verilerinizde temellendirilir ve kampanya sonuçlarına dayanır; gerçek kılavuz ya da protokolü işaret eder, böylece personel harekete geçmeden önce doğrulayabilir.
 
 **Kimin neye eriştiğine dair bir kayıt var mı?**
-Evet. Her önemli işlem değiştirilemez bir denetim izine yazılır; böylece kuruluş uyumu yalnızca iddia etmez, gösterir.
+Evet. Her önemli işlem değiştirilemez bir etkinlik günlüğüne yazılır; böylece kuruluş uyumu yalnızca iddia etmez, gösterir.
 
 **Çevrimdışı ve Türkçe çalışır mı?**
 Evet. AdOS çevrimdışı öncelikli ve air-gap yeteneklidir, internet gerektirmez ve yerel Türkçe desteğiyle tam iki dilli TR/EN'dir.

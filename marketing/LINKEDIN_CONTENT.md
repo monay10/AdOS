@@ -1,8 +1,18 @@
 # AdOS — LinkedIn Content Engine (One Year · 156 Posts)
 
+> **Product-truth alignment (binding).** AdOS is the **Enterprise AI Operating
+> System for Advertising**: an offline-first, 100% local-AI platform that **drafts**
+> human-approved advertising campaigns and remembers what works in a
+> marketing-performance **Company Brain**. It does **not** launch or optimize live
+> ads, has **no** document knowledge base / cited answers, does **not** enforce
+> per-user RBAC or permission-aware AI, and has **no** immutable audit trail or
+> external connectors — those are **Roadmap**. Where any post still reads like a
+> document-retrieval, autonomous-agent, or permission-enforcement product, this
+> banner and `PRODUCT_TRUTH.md` govern.
+
 A full year of LinkedIn content: **three posts per week for 52 weeks (156 posts)**,
-each in English and Turkish, aligned to `MARKETING_CONSTITUTION.md` and the AdOS
-canonical facts. Every post carries a Hook, Body, CTA (canonical labels), Hashtags,
+each in English and Turkish, aligned to `PRODUCT_TRUTH.md`, `MARKETING_CONSTITUTION.md`
+and the AdOS canonical facts. Every post carries a Hook, Body, CTA (canonical labels), Hashtags,
 and Image / Carousel / Video suggestions. Categories rotate across Educational,
 Industry insight, Product, Behind the scenes, Customer story (illustrative),
 Founder perspective, AI, Knowledge, Enterprise, and Security. Product terms remain
@@ -13,7 +23,7 @@ in English in both languages.
 
 **EN**
 Hook: Your AI doesn't need the cloud. It needs your building.
-Body: Most enterprise AI works by sending your documents to someone else's servers. There's another way. AdOS runs entirely on your own infrastructure — the model, the data, the workflows, all inside your walls. Inference happens on your hardware through a local engine like Ollama or any OpenAI-compatible server. No external API. No API keys. No internet required. The trade-off is honest: local CPU inference answers in seconds, not milliseconds, and better hardware closes the gap. What you get back is control. Your knowledge stays yours, and no byte of business data leaves the premises.
+Body: Most enterprise AI works by sending your data to someone else's servers. There's another way. AdOS runs entirely on your own infrastructure — the model, the data, the workflows, all inside your walls. Inference happens on your hardware through a local engine like Ollama or any OpenAI-compatible server. No external API. No API keys. No internet required. The trade-off is honest: local CPU inference answers in seconds, not milliseconds, and better hardware closes the gap. What you get back is control. Your knowledge stays yours, and no byte of business data leaves the premises.
 CTA: Read the Guide
 Hashtags: #OnPremAI #DataSovereignty #EnterpriseAI #LocalLLM #AdOS
 Image suggestion: Abstract diagram of a building outline with data flows contained inside its walls, dark-first palette, single accent.
@@ -22,7 +32,7 @@ Video suggestion: 30s screen capture of a query answered with no network connect
 
 **TR**
 Hook: Yapay zekanızın buluta değil, binanıza ihtiyacı var.
-Body: Çoğu kurumsal yapay zeka, belgelerinizi başkasının sunucularına göndererek çalışır. Başka bir yol var. AdOS tamamen kendi altyapınızda çalışır — model, veri ve iş akışları, hepsi duvarlarınızın içinde. Çıkarım, Ollama veya OpenAI uyumlu herhangi bir yerel motor üzerinden kendi donanımınızda gerçekleşir. Harici API yok. API anahtarı yok. İnternet gerekmiyor. Ödünleşim dürüst: yerel CPU çıkarımı milisaniyede değil, saniyede yanıt verir; daha iyi donanım aradaki farkı kapatır. Karşılığında kontrolü siz alırsınız. Bilginiz sizde kalır ve hiçbir iş verisi binanızdan çıkmaz.
+Body: Çoğu kurumsal yapay zeka, verilerinizi başkasının sunucularına göndererek çalışır. Başka bir yol var. AdOS tamamen kendi altyapınızda çalışır — model, veri ve iş akışları, hepsi duvarlarınızın içinde. Çıkarım, Ollama veya OpenAI uyumlu herhangi bir yerel motor üzerinden kendi donanımınızda gerçekleşir. Harici API yok. API anahtarı yok. İnternet gerekmiyor. Ödünleşim dürüst: yerel CPU çıkarımı milisaniyede değil, saniyede yanıt verir; daha iyi donanım aradaki farkı kapatır. Karşılığında kontrolü siz alırsınız. Bilginiz sizde kalır ve hiçbir iş verisi binanızdan çıkmaz.
 CTA: Rehberi Okuyun
 Hashtags: #OnPremAI #VeriEgemenliği #KurumsalYapayZeka #LocalLLM #AdOS
 Image suggestion: Bir bina silüetinin içinde tutulan veri akışlarını gösteren soyut diyagram, koyu tema, tek vurgu rengi.
@@ -56,22 +66,22 @@ Video suggestion: 45 sn konuşan kişi: "Her yönetim kurulunun artık sorduğu 
 ## Week 1 · Post 3 (Product)
 
 **EN**
-Hook: Every answer AdOS gives comes with its receipts.
-Body: The Company Brain is your organization's private, permission-aware knowledge base. Ask it a question and it answers from your own documents — and it cites the sources. Not a plausible paragraph you have to trust, but grounded text with pointers back to where it came from. The citations are permission-scoped: a user only sees, and the AI only ever cites, documents that user is actually entitled to. So the model can't surface a restricted file by summarizing it. That's the difference between a chatbot and an operating system: the answer is grounded, cited, and safe to act on.
+Hook: Every campaign AdOS drafts is grounded in what already worked for you.
+Body: The Company Brain is your organization's private marketing-performance memory. Ask it what to run and it draws on your own campaign history — which creatives, channels, and budgets actually delivered. Not a plausible guess you have to trust, but recommendations grounded in your real results: ROAS, CTR, and CPA across the campaigns you've already run. It surfaces winning-ad patterns and the lessons of past campaigns, so every draft starts from evidence instead of a blank page. And every stage is human-approved before anything moves. That's the difference between a chatbot and an operating system: the recommendation is grounded, measurable, and safe to act on.
 CTA: See the Platform
-Hashtags: #CompanyBrain #KnowledgeManagement #RAG #PermissionAware #AdOS
-Image suggestion: A single answer card with inline citation chips linking to source documents, clean UI mock.
-Carousel suggestion: 4 slides — ask → grounded answer → citations → permission-scoped (restricted doc stays hidden).
-Video suggestion: 40s product walkthrough: type a question, watch the cited answer render with source links.
+Hashtags: #CompanyBrain #MarketingPerformance #CampaignAI #HumanInTheLoop #AdOS
+Image suggestion: A single recommendation card showing ROAS and CTR from past campaigns feeding a new draft, clean UI mock.
+Carousel suggestion: 4 slides — ask what to run → performance-grounded recommendation → winning-ad patterns → human-approved before launch.
+Video suggestion: 40s product walkthrough: ask what to run, watch the draft build from your past-campaign metrics.
 
 **TR**
-Hook: AdOS'un verdiği her yanıt, kanıtıyla birlikte gelir.
-Body: Company Brain, kurumunuzun özel, yetki farkındalıklı bilgi tabanıdır. Bir soru sorun, kendi belgelerinizden yanıtlasın — ve kaynakları göstersin. Güvenmek zorunda olduğunuz makul bir paragraf değil; nereden geldiğini işaret eden, temellendirilmiş bir metin. Alıntılar yetki kapsamlıdır: bir kullanıcı yalnızca yetkili olduğu belgeleri görür ve yapay zeka yalnızca onları alıntılar. Yani model, kısıtlı bir dosyayı özetleyerek açığa çıkaramaz. Bir chatbot ile bir işletim sistemi arasındaki fark budur: yanıt temellendirilmiş, alıntılı ve üzerine hareket edilebilir.
+Hook: AdOS'un hazırladığı her kampanya, sizde işe yaramış olana dayanır.
+Body: Company Brain, kurumunuzun özel pazarlama-performansı hafızasıdır. Ne yayınlayacağınızı sorun; kendi kampanya geçmişinizden yanıtlasın — hangi kreatiflerin, kanalların ve bütçelerin gerçekten sonuç verdiğini. Güvenmek zorunda olduğunuz bir tahmin değil; gerçek sonuçlarınıza dayalı öneriler: daha önce yürüttüğünüz kampanyalardaki ROAS, CTR ve CPA. Kazanan reklam kalıplarını ve geçmiş kampanyaların derslerini yüzeye çıkarır; böylece her taslak boş sayfadan değil, kanıttan başlar. Ve hiçbir şey ilerlemeden önce her aşama insan onayından geçer. Bir chatbot ile bir işletim sistemi arasındaki fark budur: öneri temellendirilmiş, ölçülebilir ve üzerine hareket edilebilir.
 CTA: Platformu Keşfedin
-Hashtags: #CompanyBrain #BilgiYönetimi #RAG #YetkiFarkındalıklı #AdOS
-Image suggestion: Kaynak belgelere bağlanan satır içi alıntı etiketleriyle tek bir yanıt kartı, temiz arayüz.
-Carousel suggestion: 4 slayt — sor → temellendirilmiş yanıt → alıntılar → yetki kapsamlı (kısıtlı belge gizli kalır).
-Video suggestion: 40 sn ürün turu: soru yaz, alıntılı yanıtın kaynak bağlantılarıyla oluşmasını izle.
+Hashtags: #CompanyBrain #PazarlamaPerformansı #CampaignAI #İnsanKontrolünde #AdOS
+Image suggestion: Geçmiş kampanyaların ROAS ve CTR değerlerini yeni bir taslağa besleyen tek bir öneri kartı, temiz arayüz.
+Carousel suggestion: 4 slayt — ne yayınlayacağını sor → performansa dayalı öneri → kazanan reklam kalıpları → yayından önce insan onayı.
+Video suggestion: 40 sn ürün turu: ne yayınlayacağını sor, taslağın geçmiş kampanya metriklerinden oluşmasını izle.
 
 ---
 
@@ -79,18 +89,18 @@ Video suggestion: 40 sn ürün turu: soru yaz, alıntılı yanıtın kaynak bağ
 
 **EN**
 Hook: We built our whole demo world before we wrote a line of marketing.
-Body: Meet NovaMak Endüstri A.Ş. — a fictional manufacturer we invented to test AdOS honestly. Six sites, four business units, 42 employees, 16 departments, 12 Digital Employees, 25 workflows. It's deterministic and internally consistent, which means every demo tells the same true story every time. Why go this far for something imaginary? Because we refuse to demo on cherry-picked happy paths. If the approval routing breaks, or a citation points at the wrong doc, NovaMak exposes it before a customer ever would. Building a believable fake world is how we keep the real product honest.
+Body: Meet NovaMak Endüstri A.Ş. — a fictional manufacturer we invented to test AdOS honestly. Six sites, four business units, 42 employees, 16 departments, three brands, 25 campaign workflows. It's deterministic and internally consistent, which means every demo tells the same true story every time. Why go this far for something imaginary? Because we refuse to demo on cherry-picked happy paths. If the approval routing breaks, or a campaign draft pulls the wrong budget split, NovaMak exposes it before a customer ever would. Building a believable fake world is how we keep the real product honest.
 CTA: Request a Demo
-Hashtags: #BuildInPublic #ProductDemo #EnterpriseAI #DigitalEmployees #AdOS
+Hashtags: #BuildInPublic #ProductDemo #EnterpriseAI #MarketingAI #AdOS
 Image suggestion: Org-chart style map of NovaMak — 6 sites, 4 units — in clean vector, clearly labeled "illustrative."
 Carousel suggestion: 5 slides touring NovaMak's structure and the 25 workflows, each marked fictional.
 Video suggestion: 60s screen-recorded tour of the NovaMak demo environment.
 
 **TR**
 Hook: Bir satır pazarlama yazmadan önce tüm demo dünyamızı kurduk.
-Body: NovaMak Endüstri A.Ş. ile tanışın — AdOS'u dürüstçe test etmek için icat ettiğimiz kurgusal bir üretici. Altı saha, dört iş birimi, 42 çalışan, 16 departman, 12 Digital Employees, 25 iş akışı. Deterministik ve kendi içinde tutarlı; yani her demo, her seferinde aynı doğru hikâyeyi anlatır. Hayali bir şey için neden bu kadar uğraş? Çünkü seçilmiş güzel senaryolar üzerinden demo yapmayı reddediyoruz. Onay yönlendirmesi bozulursa ya da bir alıntı yanlış belgeyi gösterirse, NovaMak bunu bir müşteriden önce ortaya çıkarır. İnandırıcı bir kurgu dünya kurmak, gerçek ürünü dürüst tutma yöntemimizdir.
+Body: NovaMak Endüstri A.Ş. ile tanışın — AdOS'u dürüstçe test etmek için icat ettiğimiz kurgusal bir üretici. Altı saha, dört iş birimi, 42 çalışan, 16 departman, üç marka, 25 kampanya iş akışı. Deterministik ve kendi içinde tutarlı; yani her demo, her seferinde aynı doğru hikâyeyi anlatır. Hayali bir şey için neden bu kadar uğraş? Çünkü seçilmiş güzel senaryolar üzerinden demo yapmayı reddediyoruz. Onay yönlendirmesi bozulursa ya da bir kampanya taslağı yanlış bütçe dağılımını çekerse, NovaMak bunu bir müşteriden önce ortaya çıkarır. İnandırıcı bir kurgu dünya kurmak, gerçek ürünü dürüst tutma yöntemimizdir.
 CTA: Demo Talep Edin
-Hashtags: #AçıkGeliştirme #ÜrünDemosu #KurumsalYapayZeka #DigitalEmployees #AdOS
+Hashtags: #AçıkGeliştirme #ÜrünDemosu #KurumsalYapayZeka #MarketingAI #AdOS
 Image suggestion: NovaMak'ın organizasyon haritası — 6 saha, 4 birim — temiz vektör, açıkça "illüstratif" etiketli.
 Carousel suggestion: 5 slayt: NovaMak'ın yapısı ve 25 iş akışı turu, her biri kurgusal işaretli.
 Video suggestion: 60 sn ekran kaydı: NovaMak demo ortamının turu.
@@ -101,21 +111,21 @@ Video suggestion: 60 sn ekran kaydı: NovaMak demo ortamının turu.
 
 **EN**
 Hook: An illustrative story: the new hire who never had to interrupt anyone.
-Body: This is a fictional scenario in our NovaMak demo world — no real customer. A new maintenance engineer joins across one of NovaMak's six sites. On day one, instead of pinging five colleagues, they ask the Company Brain how a specific line changeover works. The answer comes back grounded in NovaMak's own SOPs, with citations to the exact procedure documents — and only the ones this engineer is permitted to see. Tacit knowledge that used to live in three people's heads is now retrievable and cited. The point of the illustration: on-prem AI can turn scattered institutional knowledge into fast, sourced answers, without that knowledge ever leaving the building.
+Body: This is a fictional scenario in our NovaMak demo world — no real customer. A new marketing manager joins to run campaigns for one of NovaMak's product lines. On day one, instead of pinging five colleagues, they ask the Company Brain what worked last time — which creatives, channels, and budgets drove the best ROAS for this product. The answer comes back grounded in NovaMak's own campaign history, drawing on the results this manager is set up to see. Hard-won marketing lessons that used to live in three people's heads are now retrievable. The point of the illustration: on-prem AI can turn scattered campaign know-how into fast, evidence-based recommendations, without that data ever leaving the building.
 CTA: Request a Demo
-Hashtags: #Manufacturing #KnowledgeRetention #Onboarding #CompanyBrain #AdOS
-Image suggestion: Split scene — old way (person interrupting a busy team) vs new way (cited answer on screen), labeled "illustrative."
+Hashtags: #Manufacturing #MarketingPerformance #Onboarding #CompanyBrain #AdOS
+Image suggestion: Split scene — old way (person interrupting a busy team) vs new way (a ROAS-ranked recommendation on screen), labeled "illustrative."
 Carousel suggestion: 5 slides walking the fictional onboarding journey, watermarked "illustrative scenario."
-Video suggestion: 45s dramatized demo (clearly fictional) of the new-hire query and cited response.
+Video suggestion: 45s dramatized demo (clearly fictional) of the new-hire query and evidence-based recommendation.
 
 **TR**
 Hook: İllüstratif bir hikâye: kimseyi rahatsız etmek zorunda kalmayan yeni çalışan.
-Body: Bu, NovaMak demo dünyamızda kurgusal bir senaryodur — gerçek müşteri yok. NovaMak'ın altı sahasından birine yeni bir bakım mühendisi katılır. İlk gün, beş meslektaşını rahatsız etmek yerine, belirli bir hat değişiminin nasıl yapıldığını Company Brain'e sorar. Yanıt, NovaMak'ın kendi prosedürlerine dayalı ve tam ilgili belgelere alıntılı gelir — yalnızca bu mühendisin görmeye yetkili olduğu belgelere. Eskiden üç kişinin aklında olan örtük bilgi artık erişilebilir ve alıntılı. İllüstrasyonun amacı: yerinde yapay zeka, dağınık kurumsal bilgiyi hızlı ve kaynaklı yanıtlara dönüştürebilir — hem de bu bilgi binadan hiç çıkmadan.
+Body: Bu, NovaMak demo dünyamızda kurgusal bir senaryodur — gerçek müşteri yok. NovaMak'ın ürün hatlarından biri için kampanya yürütecek yeni bir pazarlama müdürü katılır. İlk gün, beş meslektaşını rahatsız etmek yerine, geçen sefer neyin işe yaradığını Company Brain'e sorar — bu ürün için hangi kreatiflerin, kanalların ve bütçelerin en iyi ROAS'ı getirdiğini. Yanıt, NovaMak'ın kendi kampanya geçmişine dayalı gelir — bu müdürün görecek şekilde tanımlandığı sonuçlardan. Eskiden üç kişinin aklında olan zorlu pazarlama dersleri artık erişilebilir. İllüstrasyonun amacı: yerinde yapay zeka, dağınık kampanya birikimini hızlı, kanıta dayalı önerilere dönüştürebilir — hem de bu veri binadan hiç çıkmadan.
 CTA: Demo Talep Edin
-Hashtags: #Üretim #BilgiSürekliliği #İşeAlım #CompanyBrain #AdOS
-Image suggestion: İkiye bölünmüş sahne — eski yol (meşgul ekibi rahatsız eden kişi) vs yeni yol (ekranda alıntılı yanıt), "illüstratif" etiketli.
+Hashtags: #Üretim #PazarlamaPerformansı #İşeAlım #CompanyBrain #AdOS
+Image suggestion: İkiye bölünmüş sahne — eski yol (meşgul ekibi rahatsız eden kişi) vs yeni yol (ekranda ROAS'a göre sıralı bir öneri), "illüstratif" etiketli.
 Carousel suggestion: 5 slayt: kurgusal işe alışma yolculuğu, "illüstratif senaryo" filigranlı.
-Video suggestion: 45 sn canlandırılmış demo (açıkça kurgusal): yeni çalışan sorusu ve alıntılı yanıt.
+Video suggestion: 45 sn canlandırılmış demo (açıkça kurgusal): yeni çalışan sorusu ve kanıta dayalı öneri.
 
 ---
 
@@ -167,16 +177,16 @@ Video suggestion: 40 sn demo: uygulamada değişiklik olmadan alttaki yerel moto
 
 **EN**
 Hook: The most expensive thing your company forgets is how it works.
-Body: Institutional knowledge walks out the door with every retirement and every resignation. Most of it was never written down — it lived in habits, in "ask Ayşe," in a folder nobody else can find. AdOS turns that scatter into a Company Brain: a private, permission-aware knowledge base that answers questions from your own documents and cites where each answer came from. Knowledge stops being tribal and becomes retrievable. And because it's on-premise, the more you feed it, the more your institution remembers — without any of that memory leaving the building. Retaining what you know is cheaper than relearning it.
+Body: Institutional knowledge walks out the door with every retirement and every resignation. Most of it was never written down — it lived in habits, in "ask Ayşe," in a folder nobody else can find. AdOS turns that scatter into a Company Brain: a private, human-approved marketing-performance memory that answers questions from your own documents and cites where each answer came from. Knowledge stops being tribal and becomes retrievable. And because it's on-premise, the more you feed it, the more your institution remembers — without any of that memory leaving the building. Retaining what you know is cheaper than relearning it.
 CTA: See the Platform
 Hashtags: #KnowledgeManagement #KnowledgeRetention #CompanyBrain #HR #AdOS
-Image suggestion: Illustration of scattered documents converging into a single grounded, cited answer.
+Image suggestion: Illustration of scattered documents converging into a single grounded, performance-grounded recommendation.
 Carousel suggestion: 5 slides — where knowledge hides, why it leaves, what it costs, Company Brain, cited retrieval.
 Video suggestion: 45s explainer animation: tacit knowledge becoming a searchable, cited Company Brain.
 
 **TR**
 Hook: Şirketinizin unuttuğu en pahalı şey, nasıl çalıştığıdır.
-Body: Kurumsal bilgi, her emeklilik ve her istifayla kapıdan çıkar. Çoğu hiç yazılmadı — alışkanlıklarda, "Ayşe'ye sor"da, kimsenin bulamadığı bir klasörde yaşadı. AdOS bu dağınıklığı bir Company Brain'e dönüştürür: kendi belgelerinizden yanıt veren ve her yanıtın nereden geldiğini gösteren özel, yetki farkındalıklı bir bilgi tabanı. Bilgi kabilesel olmaktan çıkar, erişilebilir hâle gelir. Yerinde çalıştığı için, onu ne kadar beslerseniz kurumunuz o kadar çok hatırlar — hem de bu hafızanın hiçbiri binadan çıkmadan. Bildiğinizi elde tutmak, yeniden öğrenmekten ucuzdur.
+Body: Kurumsal bilgi, her emeklilik ve her istifayla kapıdan çıkar. Çoğu hiç yazılmadı — alışkanlıklarda, "Ayşe'ye sor"da, kimsenin bulamadığı bir klasörde yaşadı. AdOS bu dağınıklığı bir Company Brain'e dönüştürür: kendi verilerinizden yanıt veren ve her yanıtın nereden geldiğini gösteren özel, yetki farkındalıklı bir pazarlama-performans belleği. Bilgi kabilesel olmaktan çıkar, erişilebilir hâle gelir. Yerinde çalıştığı için, onu ne kadar beslerseniz kurumunuz o kadar çok hatırlar — hem de bu hafızanın hiçbiri binadan çıkmadan. Bildiğinizi elde tutmak, yeniden öğrenmekten ucuzdur.
 CTA: Platformu Keşfedin
 Hashtags: #BilgiYönetimi #BilgiSürekliliği #CompanyBrain #İnsanKaynakları #AdOS
 Image suggestion: Dağınık belgelerin tek bir temellendirilmiş, alıntılı yanıta yakınsadığı illüstrasyon.
@@ -189,21 +199,21 @@ Video suggestion: 45 sn açıklayıcı animasyon: örtük bilginin aranabilir, a
 
 **EN**
 Hook: A chatbot answers. An operating system runs your organization.
-Body: There's a category gap people keep collapsing. A chatbot on a website gives you a reply. AdOS is an enterprise AI operating system — three parts working together. Company Brain holds your knowledge and answers with citations. Digital Employees are AI agents that do real knowledge work inside defined roles: draft, route, prepare approvals, move a workflow forward. Workflows & Approvals give you structured processes, tiered approval authority, deterministic routing, and a full audit trail. That's not a smarter reply box — it's operational capacity that respects permissions and records every consequential action. Buy the operating system, not the toy.
+Body: There's a category gap people keep collapsing. A chatbot on a website gives you a reply. AdOS is an enterprise AI operating system — three parts working together. Company Brain holds your knowledge and answers with citations. AI-assisted workflows are AI agents that do real knowledge work inside defined roles: draft, route, prepare approvals, move a workflow forward. Workflows & Approvals give you structured processes, human approval gates, deterministic routing, and a full audit trail. That's not a smarter reply box — it's operational capacity that respects permissions and records every consequential action. Buy the operating system, not the toy.
 CTA: See the Platform
-Hashtags: #EnterpriseAI #DigitalEmployees #Workflows #OperatingSystem #AdOS
-Image suggestion: Three-pillar diagram — Company Brain, Digital Employees, Workflows & Approvals — connected as one system.
+Hashtags: #EnterpriseAI #MarketingAI #Workflows #OperatingSystem #AdOS
+Image suggestion: Three-pillar diagram — Company Brain, AI-assisted workflows, Workflows & Approvals — connected as one system.
 Carousel suggestion: 4 slides, one per pillar plus a closing "why it's an OS, not a chatbot."
-Video suggestion: 50s walkthrough showing a task moving from question to Digital Employee to approval.
+Video suggestion: 50s walkthrough showing a task moving from question to AI-assisted workflow to approval.
 
 **TR**
 Hook: Bir chatbot yanıt verir. Bir işletim sistemi kurumunuzu çalıştırır.
-Body: İnsanların sürekli birbirine karıştırdığı bir kategori farkı var. Bir web sitesindeki chatbot size bir cevap verir. AdOS ise kurumsal bir yapay zeka işletim sistemidir — birlikte çalışan üç parça. Company Brain bilginizi tutar ve alıntılarla yanıtlar. Digital Employees, tanımlı roller içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır: taslak hazırlar, yönlendirir, onayları hazırlar, iş akışını ilerletir. Workflows & Approvals size yapılandırılmış süreçler, kademeli onay yetkisi, deterministik yönlendirme ve tam denetim kaydı sunar. Bu daha akıllı bir cevap kutusu değil — yetkilere saygı gösteren ve her önemli eylemi kaydeden operasyonel kapasitedir. Oyuncağı değil, işletim sistemini alın.
+Body: İnsanların sürekli birbirine karıştırdığı bir kategori farkı var. Bir web sitesindeki chatbot size bir cevap verir. AdOS ise kurumsal bir yapay zeka işletim sistemidir — birlikte çalışan üç parça. Company Brain bilginizi tutar ve alıntılarla yanıtlar. AI-assisted workflows, tanımlı roller içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır: taslak hazırlar, yönlendirir, onayları hazırlar, iş akışını ilerletir. Workflows & Approvals size yapılandırılmış süreçler, insan onay adÄ±mlarÄ±, deterministik yönlendirme ve tam denetim kaydı sunar. Bu daha akıllı bir cevap kutusu değil — yetkilere saygı gösteren ve her önemli eylemi kaydeden operasyonel kapasitedir. Oyuncağı değil, işletim sistemini alın.
 CTA: Platformu Keşfedin
-Hashtags: #KurumsalYapayZeka #DigitalEmployees #İşAkışları #İşletimSistemi #AdOS
-Image suggestion: Üç sütun diyagramı — Company Brain, Digital Employees, Workflows & Approvals — tek sistem olarak bağlı.
+Hashtags: #KurumsalYapayZeka #MarketingAI #İşAkışları #İşletimSistemi #AdOS
+Image suggestion: Üç sütun diyagramı — Company Brain, AI-assisted workflows, Workflows & Approvals — tek sistem olarak bağlı.
 Carousel suggestion: 4 slayt: her sütun için biri, artı kapanış "neden chatbot değil, bir OS."
-Video suggestion: 50 sn tur: bir görevin sorudan Digital Employee'ye, oradan onaya geçişi.
+Video suggestion: 50 sn tur: bir görevin sorudan AI-assisted workflow'ye, oradan onaya geçişi.
 
 ---
 
@@ -211,11 +221,11 @@ Video suggestion: 50 sn tur: bir görevin sorudan Digital Employee'ye, oradan on
 
 **EN**
 Hook: The safest place for your data is the place you already control.
-Body: Security teams don't lose sleep over models. They lose sleep over data leaving. AdOS removes the exit entirely: customer data — documents, prompts, answers, workflows — never leaves the premises, and there's no telemetry of business content. It deploys on-premise or in your private cloud, offline-first and air-gap capable. The AI is permission-aware, so the model can never surface or cite content a user isn't allowed to see. Every consequential action lands in an immutable audit trail. Multi-tenant isolation is strict. For a CISO, the pitch is short: nothing to intercept in transit, because nothing goes anywhere.
+Body: Security teams don't lose sleep over models. They lose sleep over data leaving. AdOS removes the exit entirely: customer data — documents, prompts, answers, workflows — never leaves the premises, and there's no telemetry of business content. It deploys on-premise or in your private cloud, offline-first and air-gap capable. The AI is human-approved, so the model can never surface or cite content a user isn't allowed to see. Every consequential action lands in an activity log and per-approval timeline. Multi-tenant isolation is strict. For a CISO, the pitch is short: nothing to intercept in transit, because nothing goes anywhere.
 CTA: Talk to Sales
 Hashtags: #CISO #DataSovereignty #AirGap #ZeroLeakage #AdOS
 Image suggestion: A sealed boundary line around a building with a struck-through outbound arrow.
-Carousel suggestion: 6 slides — no data egress, no telemetry, air-gap capable, permission-aware, immutable audit, tenant isolation.
+Carousel suggestion: 6 slides — no data egress, no telemetry, air-gap capable, human-approved, activity log, tenant isolation.
 Video suggestion: 30s "pull the cable" demo: unplug the network, the system keeps answering.
 
 **TR**
@@ -224,7 +234,7 @@ Body: Güvenlik ekipleri modeller yüzünden uykusuz kalmaz. Verinin dışarı �
 CTA: Satışla Görüşün
 Hashtags: #CISO #VeriEgemenliği #AirGap #SıfırSızıntı #AdOS
 Image suggestion: Bina etrafında mühürlü bir sınır çizgisi ve üzeri çizili dışa giden ok.
-Carousel suggestion: 6 slayt — veri çıkışı yok, telemetri yok, air-gap uyumlu, yetki farkındalıklı, değiştirilemez denetim, kiracı izolasyonu.
+Carousel suggestion: 6 slayt — veri çıkışı yok, telemetri yok, air-gap uyumlu, yetki farkındalıklı, etkinlik günlüğü, kiracı izolasyonu.
 Video suggestion: 30 sn "kabloyu çek" demosu: ağı çıkar, sistem yanıt vermeye devam eder.
 
 ---
@@ -276,22 +286,22 @@ Video suggestion: 40 sn açıklayıcı: yükselen token sayacı ile sabit yerel 
 ## Week 5 · Post 13 (Product)
 
 **EN**
-Hook: Digital Employees don't replace people. They stop stealing their afternoons.
-Body: A Digital Employee in AdOS is an AI agent that performs real knowledge work inside a defined role and permission set. It answers routine questions from the Company Brain, drafts documents, routes requests to the right desk, and prepares approvals for a human to sign off. It doesn't act outside its role, and every consequential action it takes is written to an audit trail. Think of it as capacity, not headcount replacement: the repetitive knowledge work that eats an expert's day gets handled, so the expert spends the day on judgment. Defined roles, real permissions, full accountability.
+Hook: AI-assisted workflows don't replace people. They stop stealing their afternoons.
+Body: An AI-assisted workflow in AdOS is an AI agent that performs real knowledge work inside a defined role and permission set. It answers routine questions from the Company Brain, drafts documents, routes requests to the right desk, and prepares approvals for a human to sign off. It doesn't act outside its role, and every consequential action it takes is written to an audit trail. Think of it as capacity, not headcount replacement: the repetitive knowledge work that eats an expert's day gets handled, so the expert spends the day on judgment. Defined roles, real permissions, full accountability.
 CTA: See the Platform
-Hashtags: #DigitalEmployees #Automation #Productivity #EnterpriseAI #AdOS
-Image suggestion: A role card for a Digital Employee showing its permissions, tasks, and audit toggle.
-Carousel suggestion: 5 slides — what a Digital Employee is, its role/permissions, what it does, what it can't do, the audit trail.
-Video suggestion: 50s demo of a Digital Employee drafting and routing a request, then logging the action.
+Hashtags: #MarketingAI #Automation #Productivity #EnterpriseAI #AdOS
+Image suggestion: A role card for an AI-assisted workflow showing its permissions, tasks, and audit toggle.
+Carousel suggestion: 5 slides — what an AI-assisted workflow is, its role/permissions, what it does, what it can't do, the audit trail.
+Video suggestion: 50s demo of an AI-assisted workflow drafting and routing a request, then logging the action.
 
 **TR**
-Hook: Digital Employees insanların yerini almaz. Öğleden sonralarını çalmayı bırakır.
-Body: AdOS'ta bir Digital Employee, tanımlı bir rol ve yetki kümesi içinde gerçek bilgi işi yapan bir yapay zeka ajanıdır. Company Brain'den rutin soruları yanıtlar, belge taslakları hazırlar, talepleri doğru masaya yönlendirir ve bir insanın onaylaması için onayları hazırlar. Rolünün dışında hareket etmez ve yaptığı her önemli eylem denetim kaydına yazılır. Bunu kadro yerine kapasite olarak düşünün: bir uzmanın gününü yiyen tekrarlı bilgi işi hallolur, böylece uzman günü muhakemeye ayırır. Tanımlı roller, gerçek yetkiler, tam hesap verebilirlik.
+Hook: AI-assisted workflows insanların yerini almaz. Öğleden sonralarını çalmayı bırakır.
+Body: AdOS'ta bir AI-assisted workflow, tanımlı bir rol ve yetki kümesi içinde gerçek bilgi işi yapan bir yapay zeka ajanıdır. Company Brain'den rutin soruları yanıtlar, belge taslakları hazırlar, talepleri doğru masaya yönlendirir ve bir insanın onaylaması için onayları hazırlar. Rolünün dışında hareket etmez ve yaptığı her önemli eylem denetim kaydına yazılır. Bunu kadro yerine kapasite olarak düşünün: bir uzmanın gününü yiyen tekrarlı bilgi işi hallolur, böylece uzman günü muhakemeye ayırır. Tanımlı roller, gerçek yetkiler, tam hesap verebilirlik.
 CTA: Platformu Keşfedin
-Hashtags: #DigitalEmployees #Otomasyon #Verimlilik #KurumsalYapayZeka #AdOS
-Image suggestion: Bir Digital Employee'nin yetkilerini, görevlerini ve denetim anahtarını gösteren rol kartı.
-Carousel suggestion: 5 slayt — Digital Employee nedir, rolü/yetkileri, ne yapar, ne yapamaz, denetim kaydı.
-Video suggestion: 50 sn demo: bir Digital Employee'nin bir talebi taslaklaması, yönlendirmesi ve eylemi kaydetmesi.
+Hashtags: #MarketingAI #Otomasyon #Verimlilik #KurumsalYapayZeka #AdOS
+Image suggestion: Bir AI-assisted workflow'nin yetkilerini, görevlerini ve denetim anahtarını gösteren rol kartı.
+Carousel suggestion: 5 slayt — AI-assisted workflow nedir, rolü/yetkileri, ne yapar, ne yapamaz, denetim kaydı.
+Video suggestion: 50 sn demo: bir AI-assisted workflow'nin bir talebi taslaklaması, yönlendirmesi ve eylemi kaydetmesi.
 
 ---
 
@@ -321,19 +331,19 @@ Video suggestion: 45 sn ekran turu: belgelenmiş bir geri yükleme prosedürün�
 
 **EN**
 Hook: An illustrative approval that used to sit in an inbox for a week.
-Body: Fictional scenario, NovaMak demo world — no real customer. A purchase request at one of NovaMak's four business units needs sign-off above a threshold. In the old telling, it waits in an inbox while the approver is on-site elsewhere. In AdOS, Workflows & Approvals route it deterministically to the right tier of authority, a Digital Employee assembles the supporting context from the Company Brain, and the approver acts from a complete, cited summary. The whole path is recorded in an immutable audit trail. The illustration's point: structured routing plus prepared context turns a week of waiting into a decision made with everything on the table.
+Body: Fictional scenario, NovaMak demo world — no real customer. A purchase request at one of NovaMak's four business units needs sign-off above a threshold. In the old telling, it waits in an inbox while the approver is on-site elsewhere. In AdOS, Workflows & Approvals route it deterministically to the right tier of authority, an AI-assisted workflow assembles the supporting context from the Company Brain, and the approver acts from a complete, cited summary. The whole path is recorded in an activity log and per-approval timeline. The illustration's point: structured routing plus prepared context turns a week of waiting into a decision made with everything on the table.
 CTA: Request a Demo
 Hashtags: #Workflows #Approvals #Manufacturing #ProcessAutomation #AdOS
-Image suggestion: A flow line from request → tiered approval → audit stamp, labeled "illustrative."
+Image suggestion: A flow line from request → human approval gate → audit stamp, labeled "illustrative."
 Carousel suggestion: 5 slides walking the fictional approval from stuck to signed, watermarked illustrative.
 Video suggestion: 50s dramatized demo (fictional) of the routed, prepared, audited approval.
 
 **TR**
 Hook: Eskiden bir hafta gelen kutusunda bekleyen illüstratif bir onay.
-Body: Kurgusal senaryo, NovaMak demo dünyası — gerçek müşteri yok. NovaMak'ın dört iş biriminden birinde bir satın alma talebi, eşiğin üzerinde onay gerektirir. Eski anlatımda, onaylayan başka bir sahadayken gelen kutusunda bekler. AdOS'ta Workflows & Approvals bunu doğru yetki kademesine deterministik olarak yönlendirir, bir Digital Employee destekleyici bağlamı Company Brain'den derler ve onaylayan, eksiksiz ve alıntılı bir özetten hareket eder. Tüm yol değiştirilemez bir denetim kaydına işlenir. İllüstrasyonun amacı: yapılandırılmış yönlendirme artı hazırlanmış bağlam, bir haftalık beklemeyi her şeyin masada olduğu bir karara dönüştürür.
+Body: Kurgusal senaryo, NovaMak demo dünyası — gerçek müşteri yok. NovaMak'ın dört iş biriminden birinde bir satın alma talebi, eşiğin üzerinde onay gerektirir. Eski anlatımda, onaylayan başka bir sahadayken gelen kutusunda bekler. AdOS'ta Workflows & Approvals bunu doğru yetki kademesine deterministik olarak yönlendirir, bir AI-assisted workflow destekleyici bağlamı Company Brain'den derler ve onaylayan, eksiksiz ve alıntılı bir özetten hareket eder. Tüm yol değiştirilemez bir denetim kaydına işlenir. İllüstrasyonun amacı: yapılandırılmış yönlendirme artı hazırlanmış bağlam, bir haftalık beklemeyi her şeyin masada olduğu bir karara dönüştürür.
 CTA: Demo Talep Edin
 Hashtags: #İşAkışları #Onaylar #Üretim #SüreçOtomasyonu #AdOS
-Image suggestion: Talep → kademeli onay → denetim damgası akış çizgisi, "illüstratif" etiketli.
+Image suggestion: Talep → insan onay adÄ±mÄ± → denetim damgası akış çizgisi, "illüstratif" etiketli.
 Carousel suggestion: 5 slayt: kurgusal onayın takılmaktan imzalıya yolculuğu, illüstratif filigranlı.
 Video suggestion: 50 sn canlandırılmış demo (kurgusal): yönlendirilmiş, hazırlanmış, denetlenmiş onay.
 
@@ -365,18 +375,18 @@ Video suggestion: 60 sn kurucu, kameraya: her şeyden önce hız ödünleşimini
 
 **EN**
 Hook: A model that can't check a fact will confidently invent one.
-Body: Ungrounded AI generates fluent text whether or not it's true — that's the failure mode enterprises can't accept. AdOS handles it structurally. The Company Brain grounds every answer in your own documents and returns citations you can open and verify. If the source isn't there, the answer isn't asserted as fact. And grounding is permission-aware: the model can only draw on, and only cite, documents the asking user is entitled to see. So you don't get confident fiction, and you don't get accidental disclosure. In an enterprise, an AI answer you can't trace is an answer you can't use. Traceable is the requirement, not the bonus.
+Body: Ungrounded AI generates fluent text whether or not it's true — that's the failure mode enterprises can't accept. AdOS handles it structurally. The Company Brain grounds every answer in your own documents and returns citations you can open and verify. If the source isn't there, the answer isn't asserted as fact. And grounding is human-approved: the model can only draw on, and only cite, documents the asking user is entitled to see. So you don't get confident fiction, and you don't get accidental disclosure. In an enterprise, an AI answer you can't trace is an answer you can't use. Traceable is the requirement, not the bonus.
 CTA: See the Platform
-Hashtags: #GroundedAI #RAG #Citations #TrustworthyAI #AdOS
+Hashtags: #GroundedAI #CampaignAI #Citations #TrustworthyAI #AdOS
 Image suggestion: Split panel — ungrounded "confident guess" vs grounded answer with open citation.
-Carousel suggestion: 5 slides — the hallucination problem, grounding, citations, permission-aware grounding, why traceable matters.
+Carousel suggestion: 5 slides — the hallucination problem, grounding, citations, human-approved grounding, why traceable matters.
 Video suggestion: 40s demo opening a citation to verify an answer against the source doc.
 
 **TR**
 Hook: Bir gerçeği doğrulayamayan model, kendinden emin bir şekilde uydurur.
-Body: Temellendirilmemiş yapay zeka, doğru olsun olmasın akıcı metin üretir — kurumların kabul edemeyeceği hata biçimi budur. AdOS bunu yapısal olarak ele alır. Company Brain her yanıtı kendi belgelerinize dayandırır ve açıp doğrulayabileceğiniz alıntılar döndürür. Kaynak yoksa, yanıt bir gerçek olarak ileri sürülmez. Ve temellendirme yetki farkındalıklıdır: model yalnızca soran kullanıcının görmeye yetkili olduğu belgelerden yararlanır ve yalnızca onları alıntılar. Yani ne kendinden emin kurmaca alırsınız, ne de kazara ifşa. Bir kurumda izini süremediğiniz bir yapay zeka yanıtı, kullanamayacağınız bir yanıttır. İzlenebilirlik bir bonus değil, bir gerekliliktir.
+Body: Temellendirilmemiş yapay zeka, doğru olsun olmasın akıcı metin üretir — kurumların kabul edemeyeceği hata biçimi budur. AdOS bunu yapısal olarak ele alır. Company Brain her yanıtı kendi verilerinize dayandırır ve açıp doğrulayabileceğiniz alıntılar döndürür. Kaynak yoksa, yanıt bir gerçek olarak ileri sürülmez. Ve temellendirme yetki farkındalıklıdır: model yalnızca soran kullanıcının görmeye yetkili olduğu belgelerden yararlanır ve yalnızca onları alıntılar. Yani ne kendinden emin kurmaca alırsınız, ne de kazara ifşa. Bir kurumda izini süremediğiniz bir yapay zeka yanıtı, kullanamayacağınız bir yanıttır. İzlenebilirlik bir bonus değil, bir gerekliliktir.
 CTA: Platformu Keşfedin
-Hashtags: #TemellendirilmişYapayZeka #RAG #Alıntılar #GüvenilirYapayZeka #AdOS
+Hashtags: #TemellendirilmişYapayZeka #CampaignAI #Alıntılar #GüvenilirYapayZeka #AdOS
 Image suggestion: İkiye bölünmüş panel — temellendirilmemiş "kendinden emin tahmin" vs açık alıntılı temellendirilmiş yanıt.
 Carousel suggestion: 5 slayt — halüsinasyon sorunu, temellendirme, alıntılar, yetki farkındalıklı temellendirme, izlenebilirlik neden önemli.
 Video suggestion: 40 sn demo: bir yanıtı kaynak belgeye karşı doğrulamak için alıntı açma.
@@ -387,16 +397,16 @@ Video suggestion: 40 sn demo: bir yanıtı kaynak belgeye karşı doğrulamak i�
 
 **EN**
 Hook: Six sites, one memory.
-Body: When an organization runs across multiple sites and units, knowledge fragments by location. The Ankara plant solves a problem the Bursa plant will hit next quarter, and nobody connects the two. A Company Brain that lives on your own infrastructure changes that: every site feeds one permission-aware knowledge base, and any authorized person gets cited answers drawn from the whole organization — not just their building. Permission scoping means shared memory never means shared secrets; people see only what they're entitled to. Multi-site companies don't lack knowledge. They lack a shared, sovereign place to keep it. That's what the Company Brain is.
+Body: When an organization runs across multiple sites and units, knowledge fragments by location. The Ankara plant solves a problem the Bursa plant will hit next quarter, and nobody connects the two. A Company Brain that lives on your own infrastructure changes that: every site feeds one human-approved marketing-performance memory, and any authorized person gets performance-grounded recommendations drawn from the whole organization — not just their building. Permission scoping means shared memory never means shared secrets; people see only what they're entitled to. Multi-site companies don't lack knowledge. They lack a shared, sovereign place to keep it. That's what the Company Brain is.
 CTA: See the Platform
 Hashtags: #KnowledgeManagement #MultiSite #CompanyBrain #Manufacturing #AdOS
 Image suggestion: Several building icons linked to one central grounded-answer node, permission locks on the links.
 Carousel suggestion: 5 slides — fragmented site knowledge, the cost, one Company Brain, permission scoping, shared not leaked.
-Video suggestion: 45s animation of insights from multiple sites converging into one cited answer.
+Video suggestion: 45s animation of insights from multiple sites converging into one performance-grounded recommendation.
 
 **TR**
 Hook: Altı saha, tek hafıza.
-Body: Bir kurum birden çok saha ve birimde çalıştığında, bilgi konuma göre parçalanır. Ankara fabrikası bir sorunu çözer, Bursa fabrikası aynısını gelecek çeyrek yaşar ve kimse ikisini birbirine bağlamaz. Kendi altyapınızda yaşayan bir Company Brain bunu değiştirir: her saha tek bir yetki farkındalıklı bilgi tabanını besler ve yetkili herkes yalnızca kendi binasından değil, tüm kurumdan derlenen alıntılı yanıtlar alır. Yetki kapsamlama, paylaşılan hafızanın asla paylaşılan sırlar anlamına gelmemesini sağlar; herkes yalnızca yetkili olduğunu görür. Çok sahalı şirketler bilgiden yoksun değildir. Onu tutacak paylaşılan, egemen bir yerden yoksundur. Company Brain işte budur.
+Body: Bir kurum birden çok saha ve birimde çalıştığında, bilgi konuma göre parçalanır. Ankara fabrikası bir sorunu çözer, Bursa fabrikası aynısını gelecek çeyrek yaşar ve kimse ikisini birbirine bağlamaz. Kendi altyapınızda yaşayan bir Company Brain bunu değiştirir: her saha tek bir yetki farkındalıklı pazarlama-performans belleğini besler ve yetkili herkes yalnızca kendi binasından değil, tüm kurumdan derlenen alıntılı yanıtlar alır. Yetki kapsamlama, paylaşılan hafızanın asla paylaşılan sırlar anlamına gelmemesini sağlar; herkes yalnızca yetkili olduğunu görür. Çok sahalı şirketler bilgiden yoksun değildir. Onu tutacak paylaşılan, egemen bir yerden yoksundur. Company Brain işte budur.
 CTA: Platformu Keşfedin
 Hashtags: #BilgiYönetimi #ÇokSahalı #CompanyBrain #Üretim #AdOS
 Image suggestion: Merkezî bir temellendirilmiş-yanıt düğümüne bağlı birkaç bina ikonu, bağlantılarda yetki kilitleri.
@@ -409,7 +419,7 @@ Video suggestion: 45 sn animasyon: birden çok sahadan içgörülerin tek bir al
 
 **EN**
 Hook: The buying committee for sovereign AI has eight seats. We built for all of them.
-Body: Enterprise AI is never one person's decision. The CEO wants strategy and ROI. The CIO weighs TCO and supportability. The CTO scrutinizes architecture and model choice. The CISO asks about data leakage and audit. HR cares about adoption and knowledge retention. Operations wants faster approvals. IT/BT owns day-2. Finance watches cost. AdOS answers each: sovereign by architecture, cited and permission-aware for security, value-based pricing with no per-token meter for finance, Docker deploy with runbooks for IT, knowledge retention for HR. One platform, one truth, eight different reasons to say yes. Sovereignty is the frame the whole committee can stand inside.
+Body: Enterprise AI is never one person's decision. The CEO wants strategy and ROI. The CIO weighs TCO and supportability. The CTO scrutinizes architecture and model choice. The CISO asks about data leakage and audit. HR cares about adoption and knowledge retention. Operations wants faster approvals. IT/BT owns day-2. Finance watches cost. AdOS answers each: sovereign by architecture, cited and human-approved for security, value-based pricing with no per-token meter for finance, Docker deploy with runbooks for IT, knowledge retention for HR. One platform, one truth, eight different reasons to say yes. Sovereignty is the frame the whole committee can stand inside.
 CTA: Request a Demo
 Hashtags: #EnterpriseAI #BuyingCommittee #CIO #CISO #AdOS
 Image suggestion: A round table with eight labeled seats, each connected to an AdOS value.
@@ -430,19 +440,19 @@ Video suggestion: 60 sn açıklayıcı: her paydaşın sorusunu bir AdOS yetene�
 ## Week 7 · Post 20 (Security)
 
 **EN**
-Hook: "Permission-aware" isn't a setting. It's the floor the whole system stands on.
-Body: Access control that stops at the document but not the AI is a leak waiting to happen — the model summarizes the restricted file and hands the summary to someone who was never allowed to see it. AdOS closes that gap by design. The AI is permission-aware end to end: it can never surface or cite content a given user isn't entitled to. Citations are permission-scoped, so even the sources shown respect the user's rights. Combine that with strict multi-tenant isolation and an immutable audit trail, and access control holds at every layer — retrieval, answer, and citation. In security, the AI has to obey the same rules as the filing cabinet.
+Hook: "Human-Approved" isn't a setting. It's the floor the whole system stands on.
+Body: human approval gates that stops at the document but not the AI is a leak waiting to happen — the model summarizes the restricted file and hands the summary to someone who was never allowed to see it. AdOS closes that gap by design. The AI is human-approved end to end: it can never surface or cite content a given user isn't entitled to. Citations are workspace-scoped, so even the sources shown respect the user's rights. Combine that with strict multi-tenant isolation and an activity log and per-approval timeline, and human approval gates holds at every layer — retrieval, answer, and citation. In security, the AI has to obey the same rules as the filing cabinet.
 CTA: Talk to Sales
-Hashtags: #RBAC #DataSecurity #PermissionAware #CISO #AdOS
+Hashtags: #GovernedAI #DataSecurity #HumanInTheLoop #CISO #AdOS
 Image suggestion: Layered locks — document, retrieval, answer, citation — all keyed to one user identity.
-Carousel suggestion: 5 slides — the leak scenario, permission-aware AI, scoped citations, tenant isolation, audit trail.
+Carousel suggestion: 5 slides — the leak scenario, human-approved AI, scoped citations, tenant isolation, audit trail.
 Video suggestion: 40s demo: two users, same question, different permitted answers — restricted content stays hidden.
 
 **TR**
 Hook: "Yetki farkındalıklı" bir ayar değil. Tüm sistemin üzerinde durduğu zemindir.
 Body: Belgede duran ama yapay zekada durmayan erişim kontrolü, olmayı bekleyen bir sızıntıdır — model kısıtlı dosyayı özetler ve özeti onu görmeye asla yetkili olmayan birine verir. AdOS bu boşluğu tasarım gereği kapatır. Yapay zeka baştan sona yetki farkındalıklıdır: belirli bir kullanıcının yetkili olmadığı içeriği asla açığa çıkaramaz veya alıntılayamaz. Alıntılar yetki kapsamlıdır; gösterilen kaynaklar bile kullanıcının haklarına saygı gösterir. Bunu katı çok kiracılı izolasyon ve değiştirilemez bir denetim kaydıyla birleştirin; erişim kontrolü her katmanda tutar — erişim, yanıt ve alıntı. Güvenlikte yapay zeka, dosya dolabıyla aynı kurallara uymak zorundadır.
 CTA: Satışla Görüşün
-Hashtags: #RBAC #VeriGüvenliği #YetkiFarkındalıklı #CISO #AdOS
+Hashtags: #GovernedAI #VeriGüvenliği #İnsanKontrolünde #CISO #AdOS
 Image suggestion: Katmanlı kilitler — belge, erişim, yanıt, alıntı — hepsi tek kullanıcı kimliğine anahtarlı.
 Carousel suggestion: 5 slayt — sızıntı senaryosu, yetki farkındalıklı yapay zeka, kapsamlı alıntılar, kiracı izolasyonu, denetim kaydı.
 Video suggestion: 40 sn demo: iki kullanıcı, aynı soru, farklı izinli yanıtlar — kısıtlı içerik gizli kalır.
@@ -497,21 +507,21 @@ Video suggestion: 45 sn iki dilli açıklayıcı: aynı ekranlarda TR/EN arayüz
 
 **EN**
 Hook: Three pillars, one system. Here's how they actually connect.
-Body: People ask what makes AdOS an operating system rather than three separate tools. It's the loop. The Company Brain holds cited, permission-aware knowledge. Digital Employees draw on that knowledge to do real work — draft, route, prepare. Workflows & Approvals give that work structure: tiered authority, deterministic routing, immutable audit. A question becomes a grounded answer, becomes a drafted action, becomes a routed approval, becomes an auditable record — inside one boundary, on your infrastructure. Each pillar is useful alone; together they're operational capacity. That's the difference between features and a system: the pillars hand work to each other, and none of it leaves your building.
+Body: People ask what makes AdOS an operating system rather than three separate tools. It's the loop. The Company Brain holds cited, human-approved knowledge. AI-assisted workflows draw on that knowledge to do real work — draft, route, prepare. Workflows & Approvals give that work structure: tiered authority, deterministic routing, activity log. A question becomes a grounded answer, becomes a drafted action, becomes a routed approval, becomes an auditable record — inside one boundary, on your infrastructure. Each pillar is useful alone; together they're operational capacity. That's the difference between features and a system: the pillars hand work to each other, and none of it leaves your building.
 CTA: See the Platform
-Hashtags: #EnterpriseAI #CompanyBrain #DigitalEmployees #Workflows #AdOS
+Hashtags: #EnterpriseAI #CompanyBrain #MarketingAI #Workflows #AdOS
 Image suggestion: Circular loop diagram connecting the three pillars, all inside a boundary line.
 Carousel suggestion: 4 slides — the three pillars, the loop between them, one boundary, why that makes it an OS.
-Video suggestion: 55s end-to-end demo: question → answer → Digital Employee action → routed approval → audit entry.
+Video suggestion: 55s end-to-end demo: question → answer → AI-assisted workflow action → routed approval → audit entry.
 
 **TR**
 Hook: Üç sütun, tek sistem. İşte gerçekte nasıl bağlanıyorlar.
-Body: İnsanlar AdOS'u üç ayrı araç yerine bir işletim sistemi yapanın ne olduğunu soruyor. Cevap döngü. Company Brain alıntılı, yetki farkındalıklı bilgiyi tutar. Digital Employees bu bilgiden yararlanarak gerçek iş yapar — taslak, yönlendirme, hazırlık. Workflows & Approvals bu işe yapı verir: kademeli yetki, deterministik yönlendirme, değiştirilemez denetim. Bir soru temellendirilmiş bir yanıta, taslak bir eyleme, yönlendirilmiş bir onaya, denetlenebilir bir kayda dönüşür — tek bir sınır içinde, kendi altyapınızda. Her sütun tek başına faydalıdır; birlikte operasyonel kapasitedir. Özellikler ile sistem arasındaki fark budur: sütunlar işi birbirine devreder ve hiçbiri binanızdan çıkmaz.
+Body: İnsanlar AdOS'u üç ayrı araç yerine bir işletim sistemi yapanın ne olduğunu soruyor. Cevap döngü. Company Brain alıntılı, yetki farkındalıklı bilgiyi tutar. AI-assisted workflows bu bilgiden yararlanarak gerçek iş yapar — taslak, yönlendirme, hazırlık. Workflows & Approvals bu işe yapı verir: kademeli yetki, deterministik yönlendirme, etkinlik günlüğü. Bir soru temellendirilmiş bir yanıta, taslak bir eyleme, yönlendirilmiş bir onaya, denetlenebilir bir kayda dönüşür — tek bir sınır içinde, kendi altyapınızda. Her sütun tek başına faydalıdır; birlikte operasyonel kapasitedir. Özellikler ile sistem arasındaki fark budur: sütunlar işi birbirine devreder ve hiçbiri binanızdan çıkmaz.
 CTA: Platformu Keşfedin
-Hashtags: #KurumsalYapayZeka #CompanyBrain #DigitalEmployees #İşAkışları #AdOS
+Hashtags: #KurumsalYapayZeka #CompanyBrain #MarketingAI #İşAkışları #AdOS
 Image suggestion: Üç sütunu birbirine bağlayan dairesel döngü diyagramı, hepsi bir sınır çizgisi içinde.
 Carousel suggestion: 4 slayt — üç sütun, aralarındaki döngü, tek sınır, bu neden bir OS yapar.
-Video suggestion: 55 sn uçtan uca demo: soru → yanıt → Digital Employee eylemi → yönlendirilmiş onay → denetim kaydı.
+Video suggestion: 55 sn uçtan uca demo: soru → yanıt → AI-assisted workflow eylemi → yönlendirilmiş onay → denetim kaydı.
 
 ---
 
@@ -541,21 +551,21 @@ Video suggestion: 40 sn perde arkası: bir iddianın yayından önce kanonik bri
 
 **EN**
 Hook: An illustrative help desk that stopped answering the same question 40 times a week.
-Body: Fictional scenario in the NovaMak demo world — no real customer. NovaMak's internal IT desk kept fielding the same policy and procedure questions across 16 departments. In the illustration, a Digital Employee now handles the routine ones: it answers from the Company Brain with citations to the exact policy, and only surfaces what the asker is permitted to see. Anything ambiguous or sensitive routes to a human. The repetitive volume drops; the desk spends its time on real problems. The point of the fiction: a Digital Employee is capacity for the boring, high-frequency work — grounded, cited, permission-aware — so people handle the work that needs judgment.
+Body: Fictional scenario in the NovaMak demo world — no real customer. NovaMak's internal IT desk kept fielding the same policy and procedure questions across 16 departments. In the illustration, an AI-assisted workflow now handles the routine ones: it answers from the Company Brain with citations to the exact policy, and only surfaces what the asker is permitted to see. Anything ambiguous or sensitive routes to a human. The repetitive volume drops; the desk spends its time on real problems. The point of the fiction: an AI-assisted workflow is capacity for the boring, high-frequency work — grounded, cited, human-approved — so people handle the work that needs judgment.
 CTA: Request a Demo
-Hashtags: #DigitalEmployees #ITSupport #Productivity #CompanyBrain #AdOS
-Image suggestion: A queue of repeated questions collapsing into one Digital Employee card, labeled "illustrative."
-Carousel suggestion: 5 slides — the repetitive-question problem, Digital Employee triage, cited answers, human escalation, the reclaimed time. Watermarked illustrative.
-Video suggestion: 45s dramatized demo (fictional) of a Digital Employee resolving routine tickets with citations.
+Hashtags: #MarketingAI #ITSupport #Productivity #CompanyBrain #AdOS
+Image suggestion: A queue of repeated questions collapsing into one AI-assisted workflow card, labeled "illustrative."
+Carousel suggestion: 5 slides — the repetitive-question problem, AI-assisted workflow triage, performance-grounded recommendations, human escalation, the reclaimed time. Watermarked illustrative.
+Video suggestion: 45s dramatized demo (fictional) of an AI-assisted workflow resolving routine tickets with citations.
 
 **TR**
 Hook: Aynı soruyu haftada 40 kez yanıtlamayı bırakan illüstratif bir yardım masası.
-Body: NovaMak demo dünyasında kurgusal senaryo — gerçek müşteri yok. NovaMak'ın iç IT masası, 16 departman genelinde aynı politika ve prosedür sorularını yanıtlayıp duruyordu. İllüstrasyonda artık rutin olanları bir Digital Employee ele alıyor: Company Brain'den tam ilgili politikaya alıntıyla yanıt veriyor ve yalnızca soranın görmeye yetkili olduğunu açığa çıkarıyor. Belirsiz ya da hassas her şey bir insana yönleniyor. Tekrarlı hacim düşüyor; masa zamanını gerçek sorunlara ayırıyor. Kurgunun amacı: bir Digital Employee sıkıcı, yüksek frekanslı iş için kapasitedir — temellendirilmiş, alıntılı, yetki farkındalıklı — böylece insanlar muhakeme gerektiren işi yapar.
+Body: NovaMak demo dünyasında kurgusal senaryo — gerçek müşteri yok. NovaMak'ın iç IT masası, 16 departman genelinde aynı politika ve prosedür sorularını yanıtlayıp duruyordu. İllüstrasyonda artık rutin olanları bir AI-assisted workflow ele alıyor: Company Brain'den tam ilgili politikaya alıntıyla yanıt veriyor ve yalnızca soranın görmeye yetkili olduğunu açığa çıkarıyor. Belirsiz ya da hassas her şey bir insana yönleniyor. Tekrarlı hacim düşüyor; masa zamanını gerçek sorunlara ayırıyor. Kurgunun amacı: bir AI-assisted workflow sıkıcı, yüksek frekanslı iş için kapasitedir — temellendirilmiş, alıntılı, yetki farkındalıklı — böylece insanlar muhakeme gerektiren işi yapar.
 CTA: Demo Talep Edin
-Hashtags: #DigitalEmployees #ITDestek #Verimlilik #CompanyBrain #AdOS
-Image suggestion: Tekrarlanan soruların tek bir Digital Employee kartına indirgendiği bir kuyruk, "illüstratif" etiketli.
-Carousel suggestion: 5 slayt — tekrarlı soru sorunu, Digital Employee triyajı, alıntılı yanıtlar, insana yükseltme, geri kazanılan zaman. İllüstratif filigranlı.
-Video suggestion: 45 sn canlandırılmış demo (kurgusal): bir Digital Employee'nin rutin talepleri alıntılarla çözmesi.
+Hashtags: #MarketingAI #ITDestek #Verimlilik #CompanyBrain #AdOS
+Image suggestion: Tekrarlanan soruların tek bir AI-assisted workflow kartına indirgendiği bir kuyruk, "illüstratif" etiketli.
+Carousel suggestion: 5 slayt — tekrarlı soru sorunu, AI-assisted workflow triyajı, alıntılı yanıtlar, insana yükseltme, geri kazanılan zaman. İllüstratif filigranlı.
+Video suggestion: 45 sn canlandırılmış demo (kurgusal): bir AI-assisted workflow'nin rutin talepleri alıntılarla çözmesi.
 
 ---
 
@@ -607,16 +617,16 @@ Video suggestion: 40 sn demo: sıfır uygulama değişikliğiyle yerel motoru de
 
 **EN**
 Hook: Search finds documents. Your team needs answers.
-Body: Traditional enterprise search hands you a list of ten files and wishes you luck. Someone still has to open them, read them, and stitch the answer together. The Company Brain does the last mile: it reads your own documents and returns a direct, grounded answer with citations to the exact sources — so you can trust it and verify it in one step. It's permission-aware, so the answer only draws on what you're allowed to see. And it runs on your infrastructure, so the knowledge never leaves. The upgrade isn't better search; it's the end of manual synthesis. Ask a question, get an answer you can act on.
+Body: Traditional enterprise search hands you a list of ten files and wishes you luck. Someone still has to open them, read them, and stitch the answer together. The Company Brain does the last mile: it reads your own documents and returns a direct, grounded answer with citations to the exact sources — so you can trust it and verify it in one step. It's human-approved, so the answer only draws on what you're allowed to see. And it runs on your infrastructure, so the knowledge never leaves. The upgrade isn't better search; it's the end of manual synthesis. Ask a question, get an answer you can act on.
 CTA: See the Platform
 Hashtags: #KnowledgeManagement #EnterpriseSearch #CompanyBrain #Productivity #AdOS
-Image suggestion: A list of ten search results collapsing into one cited answer.
-Carousel suggestion: 5 slides — search vs answer, the manual synthesis tax, grounded answers, citations, permission-aware.
+Image suggestion: A list of ten search results collapsing into one performance-grounded recommendation.
+Carousel suggestion: 5 slides — search vs answer, the manual synthesis tax, grounded answers, citations, human-approved.
 Video suggestion: 40s side-by-side: keyword search results vs a single cited Company Brain answer.
 
 **TR**
 Hook: Arama belgeleri bulur. Ekibinizin yanıtlara ihtiyacı var.
-Body: Geleneksel kurumsal arama size on dosyalık bir liste verir ve bol şans diler. Birinin hâlâ onları açması, okuması ve yanıtı birleştirmesi gerekir. Company Brain son adımı yapar: kendi belgelerinizi okur ve tam kaynaklara alıntılı, doğrudan, temellendirilmiş bir yanıt döndürür — böylece tek adımda hem güvenir hem doğrularsınız. Yetki farkındalıklıdır; yanıt yalnızca görmeye yetkili olduğunuzdan yararlanır. Ve altyapınızda çalışır; bilgi asla dışarı çıkmaz. Yükseltme daha iyi arama değil; manuel sentezin sonu. Bir soru sorun, üzerine hareket edebileceğiniz bir yanıt alın.
+Body: Geleneksel kurumsal arama size on dosyalık bir liste verir ve bol şans diler. Birinin hâlâ onları açması, okuması ve yanıtı birleştirmesi gerekir. Company Brain son adımı yapar: kendi verilerinizi okur ve tam kaynaklara alıntılı, doğrudan, temellendirilmiş bir yanıt döndürür — böylece tek adımda hem güvenir hem doğrularsınız. Yetki farkındalıklıdır; yanıt yalnızca görmeye yetkili olduğunuzdan yararlanır. Ve altyapınızda çalışır; bilgi asla dışarı çıkmaz. Yükseltme daha iyi arama değil; manuel sentezin sonu. Bir soru sorun, üzerine hareket edebileceğiniz bir yanıt alın.
 CTA: Platformu Keşfedin
 Hashtags: #BilgiYönetimi #KurumsalArama #CompanyBrain #Verimlilik #AdOS
 Image suggestion: On arama sonucundan oluşan bir listenin tek bir alıntılı yanıta indirgenmesi.
@@ -651,20 +661,20 @@ Video suggestion: 45 sn açıklayıcı: kiralanan bulut zekası ile sahip olunan
 
 **EN**
 Hook: If you can't audit it, you can't defend it.
-Body: When something goes wrong, "the AI decided" is not an answer a regulator or a board will accept. AdOS writes every consequential action to an immutable audit trail — who asked, what the Digital Employee did, which approval routed where, and when. Nothing consequential happens without a record. Pair that with permission-aware answers and permission-scoped citations, and you can reconstruct exactly what the system saw and did, after the fact. For regulated finance, healthcare, and public institutions, auditability isn't a nice-to-have; it's how you pass inspection and assign accountability. Sovereign means you hold the data and the record of what was done with it.
+Body: When something goes wrong, "the AI decided" is not an answer a regulator or a board will accept. AdOS writes every consequential action to an activity log and per-approval timeline — who asked, what the AI-assisted workflow did, which approval routed where, and when. Nothing consequential happens without a record. Pair that with human-approved answers and workspace-scoped citations, and you can reconstruct exactly what the system saw and did, after the fact. For regulated finance, healthcare, and public institutions, auditability isn't a nice-to-have; it's how you pass inspection and assign accountability. Sovereign means you hold the data and the record of what was done with it.
 CTA: Talk to Sales
 Hashtags: #Auditability #Compliance #CISO #Governance #AdOS
 Image suggestion: An immutable ledger line of timestamped actions, tamper-evident styling.
-Carousel suggestion: 5 slides — "the AI decided" is not an answer, immutable audit, what's recorded, reconstruct after the fact, pass inspection.
+Carousel suggestion: 5 slides — "the AI decided" is not an answer, activity log, what's recorded, reconstruct after the fact, pass inspection.
 Video suggestion: 40s demo scrolling an audit trail from question to approved action.
 
 **TR**
 Hook: Denetleyemiyorsanız, savunamazsınız.
-Body: Bir şey ters gittiğinde, "yapay zeka karar verdi" bir düzenleyicinin ya da yönetim kurulunun kabul edeceği bir yanıt değildir. AdOS her önemli eylemi değiştirilemez bir denetim kaydına yazar — kim sordu, Digital Employee ne yaptı, hangi onay nereye yönlendi ve ne zaman. Önemli hiçbir şey kayıt olmadan gerçekleşmez. Bunu yetki farkındalıklı yanıtlar ve yetki kapsamlı alıntılarla birleştirin; sistemin tam olarak ne gördüğünü ve ne yaptığını sonradan yeniden kurabilirsiniz. Regüle finans, sağlık ve kamu kurumları için denetlenebilirlik iyi olsa güzel değildir; denetimden geçme ve hesap verebilirlik atama yöntemidir. Egemenlik, veriyi ve onunla ne yapıldığının kaydını sizin tutmanız demektir.
+Body: Bir şey ters gittiğinde, "yapay zeka karar verdi" bir düzenleyicinin ya da yönetim kurulunun kabul edeceği bir yanıt değildir. AdOS her önemli eylemi değiştirilemez bir denetim kaydına yazar — kim sordu, AI-assisted workflow ne yaptı, hangi onay nereye yönlendi ve ne zaman. Önemli hiçbir şey kayıt olmadan gerçekleşmez. Bunu yetki farkındalıklı yanıtlar ve yetki kapsamlı alıntılarla birleştirin; sistemin tam olarak ne gördüğünü ve ne yaptığını sonradan yeniden kurabilirsiniz. Regüle finans, sağlık ve kamu kurumları için denetlenebilirlik iyi olsa güzel değildir; denetimden geçme ve hesap verebilirlik atama yöntemidir. Egemenlik, veriyi ve onunla ne yapıldığının kaydını sizin tutmanız demektir.
 CTA: Satışla Görüşün
 Hashtags: #Denetlenebilirlik #Uyumluluk #CISO #Yönetişim #AdOS
 Image suggestion: Zaman damgalı eylemlerden oluşan değiştirilemez bir defter satırı, kurcalamaya karşı stil.
-Carousel suggestion: 5 slayt — "yapay zeka karar verdi" bir yanıt değil, değiştirilemez denetim, ne kaydedilir, sonradan yeniden kurma, denetimden geçme.
+Carousel suggestion: 5 slayt — "yapay zeka karar verdi" bir yanıt değil, etkinlik günlüğü, ne kaydedilir, sonradan yeniden kurma, denetimden geçme.
 Video suggestion: 40 sn demo: sorudan onaylı eyleme kadar bir denetim kaydında gezinme.
 
 ---
@@ -673,7 +683,7 @@ Video suggestion: 40 sn demo: sorudan onaylı eyleme kadar bir denetim kaydında
 
 **EN**
 Hook: "The cloud" is just someone else's computer. For your data, that matters.
-Body: It's an old joke with a serious edge: when you use cloud AI, your documents are processed on hardware you don't control, in a location you don't own, under terms you didn't write. For a lot of institutions, that's fine. For those under data-residency mandates, it's disqualifying. On-premise means the opposite: the computer is yours, the location is your building, the terms are your policy. AdOS runs there — local inference, no external API, no data leaving. The lesson isn't that cloud is bad; it's that "where does it run" is a real decision with real consequences. Choose it deliberately, not by default.
+Body: It's an old joke with a serious edge: when you use cloud AI, your data are processed on hardware you don't control, in a location you don't own, under terms you didn't write. For a lot of institutions, that's fine. For those under data-residency mandates, it's disqualifying. On-premise means the opposite: the computer is yours, the location is your building, the terms are your policy. AdOS runs there — local inference, no external API, no data leaving. The lesson isn't that cloud is bad; it's that "where does it run" is a real decision with real consequences. Choose it deliberately, not by default.
 CTA: Read the Guide
 Hashtags: #CloudVsOnPrem #DataSovereignty #OnPremAI #ITStrategy #AdOS
 Image suggestion: Two computers side by side — "someone else's" (grey, distant) vs "yours" (in-building, accented).
@@ -682,7 +692,7 @@ Video suggestion: 45s explainer contrasting where a query is processed in cloud 
 
 **TR**
 Hook: "Bulut" başkasının bilgisayarından ibarettir. Verileriniz için bu önemlidir.
-Body: Ciddi bir yanı olan eski bir şaka: bulut yapay zeka kullandığınızda belgeleriniz kontrol etmediğiniz donanımda, sahip olmadığınız bir konumda, yazmadığınız koşullar altında işlenir. Birçok kurum için bu sorun değil. Veri ikametgahı zorunluluğu altındakiler için ise eleyici. Yerinde bunun tam tersidir: bilgisayar sizin, konum binanız, koşullar politikanız. AdOS orada çalışır — yerel çıkarım, harici API yok, veri dışarı çıkmıyor. Ders bulutun kötü olduğu değil; "nerede çalışıyor" gerçek sonuçları olan gerçek bir karar olduğudur. Onu varsayılan olarak değil, bilinçli seçin.
+Body: Ciddi bir yanı olan eski bir şaka: bulut yapay zeka kullandığınızda verileriniz kontrol etmediğiniz donanımda, sahip olmadığınız bir konumda, yazmadığınız koşullar altında işlenir. Birçok kurum için bu sorun değil. Veri ikametgahı zorunluluğu altındakiler için ise eleyici. Yerinde bunun tam tersidir: bilgisayar sizin, konum binanız, koşullar politikanız. AdOS orada çalışır — yerel çıkarım, harici API yok, veri dışarı çıkmıyor. Ders bulutun kötü olduğu değil; "nerede çalışıyor" gerçek sonuçları olan gerçek bir karar olduğudur. Onu varsayılan olarak değil, bilinçli seçin.
 CTA: Rehberi Okuyun
 Hashtags: #BulutVsYerinde #VeriEgemenliği #OnPremAI #ITStratejisi #AdOS
 Image suggestion: Yan yana iki bilgisayar — "başkasının" (gri, uzak) vs "sizinki" (bina içi, vurgulu).
@@ -695,7 +705,7 @@ Video suggestion: 45 sn açıklayıcı: bir sorgunun bulutta vs yerinde nerede i
 
 **EN**
 Hook: The point tool era of enterprise AI is ending.
-Body: The first wave was point tools — a chatbot here, a summarizer there, each a separate login, each sending data somewhere. It got organizations to "we tried AI," not "AI runs our operation." The next wave is the operating system: knowledge, workers, and processes on one platform, under one permission model, with one audit trail. AdOS is built for that shift — Company Brain, Digital Employees, and Workflows & Approvals as a single system, on your own infrastructure. Point tools proved appetite. An operating system delivers operational change. The question is moving from "do we have an AI tool" to "does AI actually run inside our organization, on our terms."
+Body: The first wave was point tools — a chatbot here, a summarizer there, each a separate login, each sending data somewhere. It got organizations to "we tried AI," not "AI runs our operation." The next wave is the operating system: knowledge, workers, and processes on one platform, under one permission model, with one audit trail. AdOS is built for that shift — Company Brain, AI-assisted workflows, and Workflows & Approvals as a single system, on your own infrastructure. Point tools proved appetite. An operating system delivers operational change. The question is moving from "do we have an AI tool" to "does AI actually run inside our organization, on our terms."
 CTA: See the Platform
 Hashtags: #EnterpriseAI #DigitalTransformation #OperatingSystem #CIO #AdOS
 Image suggestion: Scattered disconnected tool icons resolving into one unified platform boundary.
@@ -704,7 +714,7 @@ Video suggestion: 50s explainer animating fragmented tools consolidating into on
 
 **TR**
 Hook: Kurumsal yapay zekanın nokta araç dönemi bitiyor.
-Body: İlk dalga nokta araçlardı — şurada bir chatbot, burada bir özetleyici; her biri ayrı bir giriş, her biri veriyi bir yere gönderiyordu. Bu kurumları "yapay zekayı denedik"e getirdi, "yapay zeka operasyonumuzu yürütüyor"a değil. Sonraki dalga işletim sistemi: bilgi, çalışanlar ve süreçler tek bir platformda, tek bir yetki modeli altında, tek bir denetim kaydıyla. AdOS bu dönüşüm için kuruldu — Company Brain, Digital Employees ve Workflows & Approvals tek bir sistem olarak, kendi altyapınızda. Nokta araçlar iştahı kanıtladı. Bir işletim sistemi operasyonel değişimi sunar. Soru "bir yapay zeka aracımız var mı"dan "yapay zeka gerçekten kurumumuzun içinde, bizim koşullarımızda çalışıyor mu"ya geçiyor.
+Body: İlk dalga nokta araçlardı — şurada bir chatbot, burada bir özetleyici; her biri ayrı bir giriş, her biri veriyi bir yere gönderiyordu. Bu kurumları "yapay zekayı denedik"e getirdi, "yapay zeka operasyonumuzu yürütüyor"a değil. Sonraki dalga işletim sistemi: bilgi, çalışanlar ve süreçler tek bir platformda, tek bir yetki modeli altında, tek bir denetim kaydıyla. AdOS bu dönüşüm için kuruldu — Company Brain, AI-assisted workflows ve Workflows & Approvals tek bir sistem olarak, kendi altyapınızda. Nokta araçlar iştahı kanıtladı. Bir işletim sistemi operasyonel değişimi sunar. Soru "bir yapay zeka aracımız var mı"dan "yapay zeka gerçekten kurumumuzun içinde, bizim koşullarımızda çalışıyor mu"ya geçiyor.
 CTA: Platformu Keşfedin
 Hashtags: #KurumsalYapayZeka #DijitalDönüşüm #İşletimSistemi #CIO #AdOS
 Image suggestion: Dağınık, bağlantısız araç ikonlarının tek bir birleşik platform sınırına dönüşmesi.
@@ -739,7 +749,7 @@ Video suggestion: 50 sn tur: ayağa kaldırma komutundan belgelenmiş bir yedekl
 
 **EN**
 Hook: Two languages, one truth. We check every claim twice.
-Body: AdOS ships bilingual — full Turkish and English UI, auto-detected from the environment. But bilingual isn't just translation; it's a discipline. Our rule: no claim or number exists in one language only. Turkish copy is native and idiomatic, never a literal port of English, and both versions carry identical facts. A native Turkish reviewer signs off the TR, a native English reviewer signs off the EN, and someone verifies parity of every claim across both. Product names — AdOS, Company Brain, Digital Employees — stay English in both. It's slower than machine-translating and shipping. It's also the only way a bilingual promise stays honest in both languages.
+Body: AdOS ships bilingual — full Turkish and English UI, auto-detected from the environment. But bilingual isn't just translation; it's a discipline. Our rule: no claim or number exists in one language only. Turkish copy is native and idiomatic, never a literal port of English, and both versions carry identical facts. A native Turkish reviewer signs off the TR, a native English reviewer signs off the EN, and someone verifies parity of every claim across both. Product names — AdOS, Company Brain, AI-assisted workflows — stay English in both. It's slower than machine-translating and shipping. It's also the only way a bilingual promise stays honest in both languages.
 CTA: Read the Guide
 Hashtags: #Localization #Bilingual #ContentOps #TRandEN #AdOS
 Image suggestion: Two mirrored copy blocks (TR/EN) with a parity checkmark linking matching claims.
@@ -748,7 +758,7 @@ Video suggestion: 40s screen tour toggling the same UI between Turkish and Engli
 
 **TR**
 Hook: İki dil, tek gerçek. Her iddiayı iki kez kontrol ediyoruz.
-Body: AdOS iki dilli gelir — ortamdan otomatik algılanan tam Türkçe ve İngilizce arayüz. Ama iki dillilik yalnızca çeviri değil; bir disiplindir. Kuralımız: hiçbir iddia ya da sayı yalnızca tek dilde var olmaz. Türkçe metin yerel ve deyimseldir, asla İngilizcenin birebir aktarımı değildir; her iki sürüm de aynı gerçekleri taşır. Türkçeyi anadili Türkçe olan bir kişi, İngilizceyi anadili İngilizce olan bir kişi onaylar ve biri her iddianın iki dildeki eşitliğini doğrular. Ürün adları — AdOS, Company Brain, Digital Employees — ikisinde de İngilizce kalır. Makine çevirisi yapıp yayımlamaktan yavaştır. Aynı zamanda iki dilli bir sözün her iki dilde dürüst kalmasının tek yoludur.
+Body: AdOS iki dilli gelir — ortamdan otomatik algılanan tam Türkçe ve İngilizce arayüz. Ama iki dillilik yalnızca çeviri değil; bir disiplindir. Kuralımız: hiçbir iddia ya da sayı yalnızca tek dilde var olmaz. Türkçe metin yerel ve deyimseldir, asla İngilizcenin birebir aktarımı değildir; her iki sürüm de aynı gerçekleri taşır. Türkçeyi anadili Türkçe olan bir kişi, İngilizceyi anadili İngilizce olan bir kişi onaylar ve biri her iddianın iki dildeki eşitliğini doğrular. Ürün adları — AdOS, Company Brain, AI-assisted workflows — ikisinde de İngilizce kalır. Makine çevirisi yapıp yayımlamaktan yavaştır. Aynı zamanda iki dilli bir sözün her iki dilde dürüst kalmasının tek yoludur.
 CTA: Rehberi Okuyun
 Hashtags: #Yerelleştirme #İkiDilli #İçerikOps #TRveEN #AdOS
 Image suggestion: Eşleşen iddiaları bağlayan bir eşitlik onayıyla iki aynalı metin bloğu (TR/EN).
@@ -761,7 +771,7 @@ Video suggestion: 40 sn ekran turu: aynı arayüzü Türkçe ve İngilizce aras�
 
 **EN**
 Hook: An illustrative audit that took minutes instead of days.
-Body: Fictional scenario, NovaMak demo world — no real customer. Picture an internal review at NovaMak: which approvals over a threshold were signed last quarter, by whom, on what evidence? In the old telling, that's days of digging through inboxes and shared drives. In AdOS, every consequential action already sits in an immutable audit trail, so the reviewer reconstructs the full path — request, routed tier, Digital Employee context, sign-off — in minutes, each step traceable. The illustration's lesson: when accountability is built into the system instead of reconstructed after the fact, an audit stops being a fire drill. Sovereign AI keeps both the data and the proof of what was done.
+Body: Fictional scenario, NovaMak demo world — no real customer. Picture an internal review at NovaMak: which approvals over a threshold were signed last quarter, by whom, on what evidence? In the old telling, that's days of digging through inboxes and shared drives. In AdOS, every consequential action already sits in an activity log and per-approval timeline, so the reviewer reconstructs the full path — request, routed tier, AI-assisted workflow context, sign-off — in minutes, each step traceable. The illustration's lesson: when accountability is built into the system instead of reconstructed after the fact, an audit stops being a fire drill. Sovereign AI keeps both the data and the proof of what was done.
 CTA: Request a Demo
 Hashtags: #Auditability #Compliance #Workflows #Governance #AdOS
 Image suggestion: A calendar showing "days" struck through, replaced by "minutes," beside an audit trail. Labeled illustrative.
@@ -770,7 +780,7 @@ Video suggestion: 45s dramatized demo (fictional) reconstructing an approval pat
 
 **TR**
 Hook: Günler yerine dakikalar süren illüstratif bir denetim.
-Body: Kurgusal senaryo, NovaMak demo dünyası — gerçek müşteri yok. NovaMak'ta bir iç incelemeyi düşünün: geçen çeyrek eşiğin üzerindeki hangi onaylar, kim tarafından, hangi kanıtla imzalandı? Eski anlatımda bu, gelen kutuları ve paylaşılan sürücülerde günlerce eşelenmektir. AdOS'ta her önemli eylem zaten değiştirilemez bir denetim kaydında durur; böylece inceleyen kişi tüm yolu — talep, yönlendirilen kademe, Digital Employee bağlamı, onay — dakikalar içinde yeniden kurar, her adım izlenebilir. İllüstrasyonun dersi: hesap verebilirlik sonradan yeniden kurulmak yerine sisteme yerleşik olduğunda, bir denetim yangın tatbikatı olmaktan çıkar. Egemen yapay zeka hem veriyi hem de ne yapıldığının kanıtını tutar.
+Body: Kurgusal senaryo, NovaMak demo dünyası — gerçek müşteri yok. NovaMak'ta bir iç incelemeyi düşünün: geçen çeyrek eşiğin üzerindeki hangi onaylar, kim tarafından, hangi kanıtla imzalandı? Eski anlatımda bu, gelen kutuları ve paylaşılan sürücülerde günlerce eşelenmektir. AdOS'ta her önemli eylem zaten değiştirilemez bir denetim kaydında durur; böylece inceleyen kişi tüm yolu — talep, yönlendirilen kademe, AI-assisted workflow bağlamı, onay — dakikalar içinde yeniden kurar, her adım izlenebilir. İllüstrasyonun dersi: hesap verebilirlik sonradan yeniden kurulmak yerine sisteme yerleşik olduğunda, bir denetim yangın tatbikatı olmaktan çıkar. Egemen yapay zeka hem veriyi hem de ne yapıldığının kanıtını tutar.
 CTA: Demo Talep Edin
 Hashtags: #Denetlenebilirlik #Uyumluluk #İşAkışları #Yönetişim #AdOS
 Image suggestion: "Günler" üzeri çizili, yerine "dakikalar" yazılı bir takvim, denetim kaydının yanında. İllüstratif etiketli.
@@ -805,7 +815,7 @@ Video suggestion: 60 sn kurucu, kameraya: bir bulut asistanının tam tersini ku
 
 **EN**
 Hook: Faster isn't always better. Sometimes "here" beats "instant."
-Body: Hosted frontier AI answers in milliseconds. AdOS, running on your own hardware, answers in seconds — and we say so plainly, because better hardware closes the gap and honesty builds trust. But speed is only one axis. The other is where the thinking happens. A millisecond answer that shipped your confidential documents to someone else's cloud isn't a win for a regulated institution; it's a liability that came back fast. A grounded, cited, permission-aware answer that never left your building is worth the extra second. Choose the axis that matters for your risk. For a lot of organizations, "here and accountable" beats "instant and gone."
+Body: Hosted frontier AI answers in milliseconds. AdOS, running on your own hardware, answers in seconds — and we say so plainly, because better hardware closes the gap and honesty builds trust. But speed is only one axis. The other is where the thinking happens. A millisecond answer that shipped your confidential documents to someone else's cloud isn't a win for a regulated institution; it's a liability that came back fast. A grounded, cited, human-approved answer that never left your building is worth the extra second. Choose the axis that matters for your risk. For a lot of organizations, "here and accountable" beats "instant and gone."
 CTA: See the Platform
 Hashtags: #LocalLLM #SovereignAI #GroundedAI #EnterpriseAI #AdOS
 Image suggestion: A two-axis chart — speed vs sovereignty — with AdOS placed high on sovereignty, honestly mid on speed.
@@ -814,7 +824,7 @@ Video suggestion: 40s explainer contrasting a millisecond cloud answer that leav
 
 **TR**
 Hook: Hızlı her zaman daha iyi değildir. Bazen "burada", "anında"yı yener.
-Body: Barındırılan sınır yapay zekası milisaniyelerde yanıt verir. Kendi donanımınızda çalışan AdOS saniyelerde yanıt verir — ve bunu açıkça söylüyoruz, çünkü daha iyi donanım farkı kapatır ve dürüstlük güven kurar. Ama hız yalnızca bir eksendir. Diğeri düşünmenin nerede gerçekleştiğidir. Gizli belgelerinizi başkasının bulutuna gönderen bir milisaniyelik yanıt, regüle bir kurum için bir kazanç değildir; hızlı geri dönen bir yükümlülüktür. Binanızdan hiç çıkmayan; temellendirilmiş, alıntılı, yetki farkındalıklı bir yanıt, o fazladan saniyeye değer. Riskiniz için önemli olan ekseni seçin. Birçok kurum için "burada ve hesap verebilir", "anında ve gitmiş"i yener.
+Body: Barındırılan sınır yapay zekası milisaniyelerde yanıt verir. Kendi donanımınızda çalışan AdOS saniyelerde yanıt verir — ve bunu açıkça söylüyoruz, çünkü daha iyi donanım farkı kapatır ve dürüstlük güven kurar. Ama hız yalnızca bir eksendir. Diğeri düşünmenin nerede gerçekleştiğidir. Gizli verilerinizi başkasının bulutuna gönderen bir milisaniyelik yanıt, regüle bir kurum için bir kazanç değildir; hızlı geri dönen bir yükümlülüktür. Binanızdan hiç çıkmayan; temellendirilmiş, alıntılı, yetki farkındalıklı bir yanıt, o fazladan saniyeye değer. Riskiniz için önemli olan ekseni seçin. Birçok kurum için "burada ve hesap verebilir", "anında ve gitmiş"i yener.
 CTA: Platformu Keşfedin
 Hashtags: #LocalLLM #SovereignAI #TemellendirilmişYapayZeka #KurumsalYapayZeka #AdOS
 Image suggestion: İki eksenli grafik — hız vs egemenlik — AdOS egemenlikte yüksek, hızda dürüstçe orta.
@@ -827,16 +837,16 @@ Video suggestion: 40 sn açıklayıcı: dışarı çıkan milisaniyelik bulut ya
 
 **EN**
 Hook: Your best documentation is useless if nobody can find it.
-Body: Most organizations don't have a knowledge problem — they have a retrieval problem. The procedure exists; it's buried in a drive nobody browses. The policy is written; it's three versions deep in an email thread. A Company Brain fixes the last mile: it makes your own documents answerable, returning grounded responses with citations to the exact source, permission-scoped to each user. Institutional knowledge you already paid to create finally gets used. And because it lives on your infrastructure, none of it leaves the building to become findable. Stop writing documentation nobody reads. Make what you've already written answer questions on demand.
+Body: Most organizations don't have a knowledge problem — they have a retrieval problem. The procedure exists; it's buried in a drive nobody browses. The policy is written; it's three versions deep in an email thread. A Company Brain fixes the last mile: it makes your own documents answerable, returning grounded responses with citations to the exact source, workspace-scoped to each user. Institutional knowledge you already paid to create finally gets used. And because it lives on your infrastructure, none of it leaves the building to become findable. Stop writing documentation nobody reads. Make what you've already written answer questions on demand.
 CTA: See the Platform
 Hashtags: #KnowledgeManagement #CompanyBrain #Documentation #Productivity #AdOS
-Image suggestion: A buried document surfacing as a clean, cited answer to a typed question.
+Image suggestion: A buried document surfacing as a clean, performance-grounded recommendation to a typed question.
 Carousel suggestion: 5 slides — not a knowledge problem, the retrieval gap, answerable documents, cited and scoped, use what you already wrote.
-Video suggestion: 40s demo turning an existing buried policy doc into an instant cited answer.
+Video suggestion: 40s demo turning an existing buried policy doc into an instant performance-grounded recommendation.
 
 **TR**
 Hook: En iyi dokümantasyonunuz, kimse bulamıyorsa işe yaramaz.
-Body: Çoğu kurumun bilgi sorunu yoktur — erişim sorunu vardır. Prosedür mevcut; kimsenin göz atmadığı bir sürücüde gömülü. Politika yazılmış; bir e-posta zincirinin üç sürüm derininde. Bir Company Brain son adımı düzeltir: kendi belgelerinizi yanıtlanabilir kılar; tam kaynağa alıntılı, her kullanıcıya yetki kapsamlı, temellendirilmiş yanıtlar döndürür. Oluşturmak için zaten para ödediğiniz kurumsal bilgi nihayet kullanılır. Ve altyapınızda yaşadığı için, bulunabilir olmak uğruna hiçbiri binadan çıkmaz. Kimsenin okumadığı dokümantasyon yazmayı bırakın. Zaten yazdıklarınızı talep üzerine soruları yanıtlar hâle getirin.
+Body: Çoğu kurumun bilgi sorunu yoktur — erişim sorunu vardır. Prosedür mevcut; kimsenin göz atmadığı bir sürücüde gömülü. Politika yazılmış; bir e-posta zincirinin üç sürüm derininde. Bir Company Brain son adımı düzeltir: kendi verilerinizi yanıtlanabilir kılar; tam kaynağa alıntılı, her kullanıcıya yetki kapsamlı, temellendirilmiş yanıtlar döndürür. Oluşturmak için zaten para ödediğiniz kurumsal bilgi nihayet kullanılır. Ve altyapınızda yaşadığı için, bulunabilir olmak uğruna hiçbiri binadan çıkmaz. Kimsenin okumadığı dokümantasyon yazmayı bırakın. Zaten yazdıklarınızı talep üzerine soruları yanıtlar hâle getirin.
 CTA: Platformu Keşfedin
 Hashtags: #BilgiYönetimi #CompanyBrain #Dokümantasyon #Verimlilik #AdOS
 Image suggestion: Gömülü bir belgenin, yazılan bir soruya temiz, alıntılı bir yanıt olarak yüzeye çıkması.
@@ -870,18 +880,18 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Where does your AI's answer actually come from?"
-**Body:** Most enterprise AI can't tell you. It generates fluent text and hopes you trust it. Company Brain works differently: every answer is grounded in your own documents and cites the exact source behind it. If the source isn't in your files, the answer doesn't appear. And citations are permission-scoped — a user only sees, and the AI only cites, documents that user is entitled to open. That's the difference between a confident guess and an answer you can defend in an audit. Grounded, cited, permission-aware. On your infrastructure, not someone else's cloud.
+**Body:** Most enterprise AI can't tell you. It generates fluent text and hopes you trust it. Company Brain works differently: every answer is grounded in your own documents and cites the exact source behind it. If the source isn't in your files, the answer doesn't appear. And citations are workspace-scoped — a user only sees, and the AI only cites, documents that user is entitled to open. That's the difference between a confident guess and an answer you can defend in an audit. Grounded, cited, human-approved. On your infrastructure, not someone else's cloud.
 **CTA:** Read the Guide
-**Hashtags:** #EnterpriseAI #CompanyBrain #DataSovereignty #OnPremAI #RAG
+**Hashtags:** #EnterpriseAI #CompanyBrain #DataSovereignty #OnPremAI #CampaignAI
 **Image suggestion:** A document with a highlighted line connected by a clean vector thread to an answer card — no robots.
-**Carousel suggestion:** 5 slides — (1) The trust problem, (2) What "grounded" means, (3) How citations work, (4) Permission-scoped citations, (5) Why it matters in an audit.
+**Carousel suggestion:** 5 slides — (1) The trust problem, (2) What "grounded" means, (3) How citations work, (4) Workspace-Scoped citations, (5) Why it matters in an audit.
 **Video suggestion:** 40s screen capture: ask a question, watch the cited source open, click through to the exact paragraph.
 
 **TR**
 **Hook:** "Yapay zekânızın verdiği cevap tam olarak nereden geliyor?"
-**Body:** Çoğu kurumsal yapay zekâ bunu söyleyemez. Akıcı metin üretir ve güvenmenizi umar. Company Brain farklı çalışır: her cevap sizin kendi belgelerinize dayanır ve arkasındaki kaynağı birebir gösterir. Kaynak dosyalarınızda yoksa, cevap da çıkmaz. Üstelik atıflar yetki bazlıdır — kullanıcı yalnızca görmeye yetkili olduğu belgeleri görür, yapay zekâ da yalnızca onları kaynak gösterir. Kendinden emin bir tahmin ile denetimde savunabileceğiniz bir cevap arasındaki fark budur. Dayanaklı, atıflı, yetki farkındalıklı. Başkasının bulutunda değil, sizin altyapınızda.
+**Body:** Çoğu kurumsal yapay zekâ bunu söyleyemez. Akıcı metin üretir ve güvenmenizi umar. Company Brain farklı çalışır: her cevap sizin kendi verilerinize dayanır ve arkasındaki kaynağı birebir gösterir. Kaynak dosyalarınızda yoksa, cevap da çıkmaz. Üstelik atıflar yetki bazlıdır — kullanıcı yalnızca görmeye yetkili olduğu belgeleri görür, yapay zekâ da yalnızca onları kampanya verisine dayanır. Kendinden emin bir tahmin ile denetimde savunabileceğiniz bir cevap arasındaki fark budur. Dayanaklı, atıflı, yetki farkındalıklı. Başkasının bulutunda değil, sizin altyapınızda.
 **CTA:** Rehberi Okuyun
-**Hashtags:** #KurumsalYapayZeka #CompanyBrain #VeriEgemenligi #OnPremAI #RAG
+**Hashtags:** #KurumsalYapayZeka #CompanyBrain #VeriEgemenligi #OnPremAI #CampaignAI
 **Image suggestion:** Vurgulanmış bir satırdan temiz bir vektör bağıyla cevap kartına giden belge — robot yok.
 **Carousel suggestion:** 5 slayt — (1) Güven sorunu, (2) "Dayanaklı" ne demek, (3) Atıflar nasıl çalışır, (4) Yetki bazlı atıflar, (5) Denetimde neden önemli.
 **Video suggestion:** 40s ekran kaydı: bir soru sorun, kaynağın açılışını izleyin, tam paragrafa tıklayın.
@@ -914,20 +924,20 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "A chatbot answers. An operating system does the work."
-**Body:** AdOS is not a chat window bolted onto your intranet. It's an enterprise AI operating system with three working parts. Company Brain turns scattered documents into cited, permission-aware answers. Digital Employees perform real knowledge work — they draft, route, and prepare approvals inside defined roles. Workflows & Approvals give you tiered authority, deterministic routing, and an immutable audit trail. Together they don't just talk about the work; they move it. And all of it runs on your own infrastructure, offline-capable, with no vendor lock-in.
+**Body:** AdOS is not a chat window bolted onto your intranet. It's an enterprise AI operating system with three working parts. Company Brain turns scattered documents into cited, human-approved answers. AI-assisted workflows perform real knowledge work — they draft, route, and prepare approvals inside defined roles. Workflows & Approvals give you tiered authority, deterministic routing, and an activity log and per-approval timeline. Together they don't just talk about the work; they move it. And all of it runs on your own infrastructure, offline-capable, with no vendor lock-in.
 **CTA:** See the Platform
-**Hashtags:** #AdOS #DigitalEmployees #WorkflowAutomation #EnterpriseAI #OnPremAI
-**Image suggestion:** Three connected panels labeled Company Brain, Digital Employees, Workflows & Approvals inside one boundary.
-**Carousel suggestion:** 5 slides — (1) Chatbot vs OS, (2) Company Brain, (3) Digital Employees, (4) Workflows & Approvals, (5) All on your hardware.
+**Hashtags:** #AdOS #MarketingAI #WorkflowAutomation #EnterpriseAI #OnPremAI
+**Image suggestion:** Three connected panels labeled Company Brain, AI-assisted workflows, Workflows & Approvals inside one boundary.
+**Carousel suggestion:** 5 slides — (1) Chatbot vs OS, (2) Company Brain, (3) AI-assisted workflows, (4) Workflows & Approvals, (5) All on your hardware.
 **Video suggestion:** 50s product tour showing a task move from question to drafted approval.
 
 **TR**
 **Hook:** "Chatbot cevap verir. İşletim sistemi işi yapar."
-**Body:** AdOS, intranetinize eklenmiş bir sohbet penceresi değildir. Üç çalışan parçadan oluşan kurumsal bir yapay zekâ işletim sistemidir. Company Brain dağınık belgeleri atıflı, yetki farkındalıklı cevaplara dönüştürür. Digital Employees gerçek bilgi işini yapar — tanımlı roller içinde taslak hazırlar, yönlendirir, onaya hazırlar. Workflows & Approvals size kademeli yetki, belirlenmiş yönlendirme ve değiştirilemez denetim izi sunar. Birlikte işten sadece bahsetmez; işi ilerletirler. Ve hepsi kendi altyapınızda, çevrimdışı çalışabilir, tedarikçi kilidi olmadan.
+**Body:** AdOS, intranetinize eklenmiş bir sohbet penceresi değildir. Üç çalışan parçadan oluşan kurumsal bir yapay zekâ işletim sistemidir. Company Brain dağınık belgeleri atıflı, yetki farkındalıklı cevaplara dönüştürür. AI-assisted workflows gerçek bilgi işini yapar — tanımlı roller içinde taslak hazırlar, yönlendirir, onaya hazırlar. Workflows & Approvals size kademeli yetki, belirlenmiş yönlendirme ve değiştirilemez etkinlik günlüğü sunar. Birlikte işten sadece bahsetmez; işi ilerletirler. Ve hepsi kendi altyapınızda, çevrimdışı çalışabilir, tedarikçi kilidi olmadan.
 **CTA:** Platformu Keşfedin
-**Hashtags:** #AdOS #DigitalEmployees #İşAkışıOtomasyonu #KurumsalYapayZeka #OnPremAI
-**Image suggestion:** Tek bir sınır içinde Company Brain, Digital Employees, Workflows & Approvals etiketli üç bağlı panel.
-**Carousel suggestion:** 5 slayt — (1) Chatbot mu OS mu, (2) Company Brain, (3) Digital Employees, (4) Workflows & Approvals, (5) Hepsi kendi donanımınızda.
+**Hashtags:** #AdOS #MarketingAI #İşAkışıOtomasyonu #KurumsalYapayZeka #OnPremAI
+**Image suggestion:** Tek bir sınır içinde Company Brain, AI-assisted workflows, Workflows & Approvals etiketli üç bağlı panel.
+**Carousel suggestion:** 5 slayt — (1) Chatbot mu OS mu, (2) Company Brain, (3) AI-assisted workflows, (4) Workflows & Approvals, (5) Hepsi kendi donanımınızda.
 **Video suggestion:** 50s ürün turu: bir görevin sorudan hazırlanmış onaya ilerleyişi.
 
 ---
@@ -958,20 +968,20 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Illustrative scenario: six sites, one shared brain."
-**Body:** This is a fictional, illustrative case — NovaMak Endüstri A.Ş., our internally consistent demo manufacturer: 6 sites, 4 business units, 42 employees. In the scenario, a maintenance lead at one site asks how a recurring line fault was fixed last year at another. Before AdOS, that meant phone calls and lost time. With Company Brain, the answer arrives cited from the original site's maintenance log — and only because the user is permitted to see it. Twelve Digital Employees handle routine drafting; 25 workflows route approvals. It's a demo world, clearly labeled — built to show the mechanism, not to claim a real customer.
+**Body:** This is a fictional, illustrative case — NovaMak Endüstri A.Ş., our internally consistent demo manufacturer: 6 sites, 4 business units, 42 employees. In the scenario, a maintenance lead at one site asks how a recurring line fault was fixed last year at another. Before AdOS, that meant phone calls and lost time. With Company Brain, the answer arrives cited from the original site's maintenance log — and only because the user is permitted to see it. Twelve AI-assisted workflows handle routine drafting; 25 workflows route approvals. It's a demo world, clearly labeled — built to show the mechanism, not to claim a real customer.
 **CTA:** Request a Demo
-**Hashtags:** #Manufacturing #CompanyBrain #KnowledgeSharing #DigitalEmployees #AdOS
+**Hashtags:** #Manufacturing #CompanyBrain #KnowledgeSharing #MarketingAI #AdOS
 **Image suggestion:** A stylized map of six plant sites linked to one central boundary; marked "Illustrative."
-**Carousel suggestion:** 5 slides — (1) NovaMak (fictional) at a glance, (2) The cross-site question, (3) The cited answer, (4) Permission gate, (5) 12 Digital Employees, 25 workflows.
+**Carousel suggestion:** 5 slides — (1) NovaMak (fictional) at a glance, (2) The cross-site question, (3) The performance-grounded recommendation, (4) Permission gate, (5) 12 AI-assisted workflows, 25 workflows.
 **Video suggestion:** 45s narrated walkthrough of the NovaMak cross-site query, watermarked "Illustrative demo."
 
 **TR**
 **Hook:** "Örnek senaryo: altı saha, tek ortak beyin."
-**Body:** Bu kurgusal, örnekleyici bir vaka — NovaMak Endüstri A.Ş., içsel tutarlı demo üreticimiz: 6 saha, 4 iş birimi, 42 çalışan. Senaryoda bir sahadaki bakım sorumlusu, geçen yıl başka bir sahada tekrarlayan bir hat arızasının nasıl çözüldüğünü soruyor. AdOS öncesinde bu, telefon trafiği ve kaybolan zaman demekti. Company Brain ile cevap, orijinal sahanın bakım kaydından atıflı olarak geliyor — ve yalnızca kullanıcı görmeye yetkili olduğu için. On iki Digital Employee rutin taslakları üstleniyor; 25 iş akışı onayları yönlendiriyor. Açıkça etiketli bir demo dünyası — mekanizmayı göstermek için kurulmuş, gerçek müşteri iddiası değil.
+**Body:** Bu kurgusal, örnekleyici bir vaka — NovaMak Endüstri A.Ş., içsel tutarlı demo üreticimiz: 6 saha, 4 iş birimi, 42 çalışan. Senaryoda bir sahadaki bakım sorumlusu, geçen yıl başka bir sahada tekrarlayan bir hat arızasının nasıl çözüldüğünü soruyor. AdOS öncesinde bu, telefon trafiği ve kaybolan zaman demekti. Company Brain ile cevap, orijinal sahanın bakım kaydından atıflı olarak geliyor — ve yalnızca kullanıcı görmeye yetkili olduğu için. On iki AI-assisted workflow rutin taslakları üstleniyor; 25 iş akışı onayları yönlendiriyor. Açıkça etiketli bir demo dünyası — mekanizmayı göstermek için kurulmuş, gerçek müşteri iddiası değil.
 **CTA:** Demo Talep Edin
-**Hashtags:** #Üretim #CompanyBrain #BilgiPaylaşımı #DigitalEmployees #AdOS
+**Hashtags:** #Üretim #CompanyBrain #BilgiPaylaşımı #MarketingAI #AdOS
 **Image suggestion:** Tek bir merkezî sınıra bağlı altı tesis sahasının stilize haritası; "Örnektir" işaretli.
-**Carousel suggestion:** 5 slayt — (1) NovaMak (kurgusal) bir bakışta, (2) Sahalar arası soru, (3) Atıflı cevap, (4) Yetki kapısı, (5) 12 Digital Employee, 25 iş akışı.
+**Carousel suggestion:** 5 slayt — (1) NovaMak (kurgusal) bir bakışta, (2) Sahalar arası soru, (3) Atıflı cevap, (4) Yetki kapısı, (5) 12 AI-assisted workflow, 25 iş akışı.
 **Video suggestion:** 45s anlatımlı gezinti: NovaMak sahalar arası sorgusu, "Örnek demo" filigranlı.
 
 ---
@@ -1024,12 +1034,12 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "When your best operator retires, does their knowledge leave with them?"
-**Body:** In most organizations, the answer is yes. Decades of judgment — how to handle the tricky line, which supplier to call, what the exception really means — walks out the door. Company Brain captures that institutional knowledge before it disappears. As documents, procedures, and decisions accumulate, they become a cited, searchable, permission-aware base that new hires can query on day one. The knowledge stays inside the walls even when people move on. That's not a filing cabinet; it's a living memory your organization owns — grounded in real sources, and answering only from what each user is entitled to see.
+**Body:** In most organizations, the answer is yes. Decades of judgment — how to handle the tricky line, which supplier to call, what the exception really means — walks out the door. Company Brain captures that institutional knowledge before it disappears. As documents, procedures, and decisions accumulate, they become a cited, searchable, human-approved base that new hires can query on day one. The knowledge stays inside the walls even when people move on. That's not a filing cabinet; it's a living memory your organization owns — grounded in real sources, and answering only from what each user is entitled to see.
 **CTA:** See the Platform
 **Hashtags:** #KnowledgeManagement #KnowledgeRetention #CompanyBrain #HR #EnterpriseAI
 **Image suggestion:** A grounded stone archive-building metaphor with light inside — no brain clichés.
 **Carousel suggestion:** 5 slides — (1) The retirement problem, (2) Tacit knowledge walks out, (3) Capture as it accumulates, (4) Query on day one, (5) A memory you own.
-**Video suggestion:** 40s: split screen of a departing expert and a new hire getting the same cited answer.
+**Video suggestion:** 40s: split screen of a departing expert and a new hire getting the same performance-grounded recommendation.
 
 **TR**
 **Hook:** "En iyi operatörünüz emekli olduğunda bilgisi de onunla mı gidiyor?"
@@ -1050,12 +1060,12 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 **CTA:** See the Platform
 **Hashtags:** #EnterpriseIT #MultiTenant #OnPremAI #ITOps #AdOS
 **Image suggestion:** Isolated tenant lanes inside a single boundary, each sealed from the others.
-**Carousel suggestion:** 5 slides — (1) Not a monolith, (2) Tenant isolation, (3) Permission-scoped cites, (4) One-command Docker bring-up, (5) Day-2 runbooks.
+**Carousel suggestion:** 5 slides — (1) Not a monolith, (2) Tenant isolation, (3) Workspace-Scoped cites, (4) One-command Docker bring-up, (5) Day-2 runbooks.
 **Video suggestion:** 45s: terminal shows the one-command bring-up, then a dashboard with isolated units.
 
 **TR**
 **Hook:** "Tek kurulum. Çok birim. Olmaması gereken yere geçen sıfır veri."
-**Body:** Büyük kurumlar tek parça değildir — farklı erişim kurallarına sahip sahalar, birimler ve departmanlardır. AdOS katı kiracı izolasyonuyla çok kiracılıdır; böylece paylaşılan bir platform asla paylaşılan bir açığa dönüşmez. Bir iş birimindeki kullanıcı bir başkasının kısıtlı belgelerini göremez, yapay zekâ da o kullanıcının açamayacağını kaynak gösteremez. Kurulum, tek komutla ayağa kalkan standart Docker'dır; ayrıca belgelenmiş yedekleme, geri yükleme, yükseltme ve felaket kurtarma kılavuzları vardır. 1. günde başlatmakla kalmayıp 2. günde de çalıştırmak zorunda olan IT/BT ekipleri için kurulmuştur — on-premise ya da özel bulutunuzda, tamamen sizin kontrolünüzde.
+**Body:** Büyük kurumlar tek parça değildir — farklı erişim kurallarına sahip sahalar, birimler ve departmanlardır. AdOS katı kiracı izolasyonuyla çok kiracılıdır; böylece paylaşılan bir platform asla paylaşılan bir açığa dönüşmez. Bir iş birimindeki kullanıcı bir başkasının kısıtlı belgelerini göremez, yapay zekâ da o kullanıcının açamayacağını kampanya verisine dayanemez. Kurulum, tek komutla ayağa kalkan standart Docker'dır; ayrıca belgelenmiş yedekleme, geri yükleme, yükseltme ve felaket kurtarma kılavuzları vardır. 1. günde başlatmakla kalmayıp 2. günde de çalıştırmak zorunda olan IT/BT ekipleri için kurulmuştur — on-premise ya da özel bulutunuzda, tamamen sizin kontrolünüzde.
 **CTA:** Platformu Keşfedin
 **Hashtags:** #KurumsalBT #ÇokKiracılı #OnPremAI #BTOperasyon #AdOS
 **Image suggestion:** Tek bir sınır içinde, birbirinden yalıtılmış kiracı şeritleri.
@@ -1068,20 +1078,20 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "The safest data is the data that never leaves."
-**Body:** Security teams spend careers reducing the ways data can escape. Cloud AI adds a new one: every prompt, document, and answer can travel to an external service. AdOS removes that path entirely. Inference runs on your hardware; business content — documents, prompts, answers, workflows — never leaves your premises, and there's no telemetry of it. Access is permission-aware end to end: the model can never surface or cite content a user isn't allowed to see. Every consequential action lands in an immutable audit trail. Fewer exit paths, complete evidence. That's a smaller attack surface by design, not by policy alone.
+**Body:** Security teams spend careers reducing the ways data can escape. Cloud AI adds a new one: every prompt, document, and answer can travel to an external service. AdOS removes that path entirely. Inference runs on your hardware; business content — documents, prompts, answers, workflows — never leaves your premises, and there's no telemetry of it. Access is human-approved end to end: the model can never surface or cite content a user isn't allowed to see. Every consequential action lands in an activity log and per-approval timeline. Fewer exit paths, complete evidence. That's a smaller attack surface by design, not by policy alone.
 **CTA:** Talk to Sales
 **Hashtags:** #CISO #DataSecurity #ZeroDataExfiltration #AuditTrail #OnPremAI
 **Image suggestion:** A sealed perimeter with a struck-through outbound arrow.
-**Carousel suggestion:** 5 slides — (1) Reduce exit paths, (2) Cloud AI's new path, (3) No data leaves, (4) Permission-aware end to end, (5) Immutable audit trail.
+**Carousel suggestion:** 5 slides — (1) Reduce exit paths, (2) Cloud AI's new path, (3) No data leaves, (4) Human-Approved end to end, (5) Activity Log and Per-Approval Timeline.
 **Video suggestion:** 35s sober motion graphic: data points bouncing off the boundary, none escaping.
 
 **TR**
 **Hook:** "En güvenli veri, hiç dışarı çıkmayan veridir."
-**Body:** Güvenlik ekipleri kariyerlerini verinin kaçış yollarını azaltmaya harcar. Bulut yapay zekâ yeni bir yol ekler: her istem, belge ve cevap harici bir servise gidebilir. AdOS bu yolu tamamen ortadan kaldırır. Çıkarım kendi donanımınızda çalışır; iş içeriği — belgeler, istemler, cevaplar, iş akışları — tesisinizden hiç çıkmaz ve buna dair telemetri yoktur. Erişim baştan sona yetki farkındalıklıdır: model, kullanıcının görmeye izinli olmadığı içeriği asla ortaya çıkaramaz veya kaynak gösteremez. Her sonuç doğuran eylem değiştirilemez bir denetim izine düşer. Daha az çıkış yolu, tam kanıt. Bu, tasarımla daha küçük bir saldırı yüzeyidir, yalnızca politikayla değil.
+**Body:** Güvenlik ekipleri kariyerlerini verinin kaçış yollarını azaltmaya harcar. Bulut yapay zekâ yeni bir yol ekler: her istem, belge ve cevap harici bir servise gidebilir. AdOS bu yolu tamamen ortadan kaldırır. Çıkarım kendi donanımınızda çalışır; iş içeriği — belgeler, istemler, cevaplar, iş akışları — tesisinizden hiç çıkmaz ve buna dair telemetri yoktur. Erişim baştan sona yetki farkındalıklıdır: model, kullanıcının görmeye izinli olmadığı içeriği asla ortaya çıkaramaz veya kampanya verisine dayanemez. Her sonuç doğuran eylem değiştirilemez bir etkinlik günlüğüne düşer. Daha az çıkış yolu, tam kanıt. Bu, tasarımla daha küçük bir saldırı yüzeyidir, yalnızca politikayla değil.
 **CTA:** Satışla Görüşün
 **Hashtags:** #CISO #VeriGüvenliği #SıfırVeriSızıntısı #DenetimİZİ #OnPremAI
 **Image suggestion:** Üstü çizili giden ok içeren mühürlü çevre.
-**Carousel suggestion:** 5 slayt — (1) Çıkış yollarını azalt, (2) Bulut yapay zekânın yeni yolu, (3) Veri çıkmaz, (4) Baştan sona yetki farkındalıklı, (5) Değiştirilemez denetim izi.
+**Carousel suggestion:** 5 slayt — (1) Çıkış yollarını azalt, (2) Bulut yapay zekânın yeni yolu, (3) Veri çıkmaz, (4) Baştan sona yetki farkındalıklı, (5) Değiştirilemez etkinlik günlüğü.
 **Video suggestion:** 35s ağırbaşlı hareketli grafik: sınırdan seken, hiçbiri kaçmayan veri noktaları.
 
 ---
@@ -1089,19 +1099,19 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 ## Week 17 · Post 2 (Educational)
 
 **EN**
-**Hook:** "Permission-aware AI: three words that change everything."
-**Body:** Traditional search can leak. If a document is indexed, a clever query can surface a snippet — even to someone who shouldn't see it. AdOS is permission-aware at the core: the model can never surface or cite content a user isn't entitled to open. Two people can ask the identical question and get different, correct answers, because each answer is scoped to what that person is allowed to access. This isn't a filter bolted on after generation; entitlement is part of retrieval itself. For HR files, board papers, or patient records, that distinction is the difference between useful and unsafe.
+**Hook:** "Human-Approved AI: three words that change everything."
+**Body:** Traditional search can leak. If a document is indexed, a clever query can surface a snippet — even to someone who shouldn't see it. AdOS is human-approved at the core: the model can never surface or cite content a user isn't entitled to open. Two people can ask the identical question and get different, correct answers, because each answer is scoped to what that person is allowed to access. This isn't a filter bolted on after generation; entitlement is part of retrieval itself. For HR files, board papers, or patient records, that distinction is the difference between useful and unsafe.
 **CTA:** Read the Guide
-**Hashtags:** #PermissionAwareAI #RBAC #DataGovernance #CompanyBrain #EnterpriseAI
+**Hashtags:** #HumanInTheLoop #GovernedAI #DataGovernance #CompanyBrain #EnterpriseAI
 **Image suggestion:** Two users, same question, two correctly different scoped answers.
-**Carousel suggestion:** 5 slides — (1) How search leaks, (2) Permission-aware core, (3) Same question, different answers, (4) Entitlement in retrieval, (5) Where it matters most.
+**Carousel suggestion:** 5 slides — (1) How search leaks, (2) Human-Approved core, (3) Same question, different answers, (4) Entitlement in retrieval, (5) Where it matters most.
 **Video suggestion:** 40s: two logins ask one question; the restricted user simply doesn't get the restricted source.
 
 **TR**
 **Hook:** "Yetki farkındalıklı yapay zekâ: her şeyi değiştiren üç kelime."
-**Body:** Geleneksel arama sızdırabilir. Bir belge indekslenmişse, akıllı bir sorgu bir parçayı ortaya çıkarabilir — görmemesi gereken birine bile. AdOS özünde yetki farkındalıklıdır: model, kullanıcının açmaya yetkili olmadığı içeriği asla ortaya çıkaramaz veya kaynak gösteremez. İki kişi birebir aynı soruyu sorup farklı ve doğru cevaplar alabilir; çünkü her cevap o kişinin erişebildiğine göre sınırlandırılır. Bu, üretimden sonra eklenen bir filtre değil; yetki, getirmenin kendisinin bir parçasıdır. İK dosyaları, kurul evrakları veya hasta kayıtları için bu ayrım, faydalı ile güvensiz arasındaki farktır.
+**Body:** Geleneksel arama sızdırabilir. Bir belge indekslenmişse, akıllı bir sorgu bir parçayı ortaya çıkarabilir — görmemesi gereken birine bile. AdOS özünde yetki farkındalıklıdır: model, kullanıcının açmaya yetkili olmadığı içeriği asla ortaya çıkaramaz veya kampanya verisine dayanemez. İki kişi birebir aynı soruyu sorup farklı ve doğru cevaplar alabilir; çünkü her cevap o kişinin erişebildiğine göre sınırlandırılır. Bu, üretimden sonra eklenen bir filtre değil; yetki, getirmenin kendisinin bir parçasıdır. İK dosyaları, kurul evrakları veya hasta kayıtları için bu ayrım, faydalı ile güvensiz arasındaki farktır.
 **CTA:** Rehberi Okuyun
-**Hashtags:** #YetkiFarkındalıklıYapayZeka #RBAC #VeriYönetişimi #CompanyBrain #KurumsalYapayZeka
+**Hashtags:** #İnsanKontrolünde #GovernedAI #VeriYönetişimi #CompanyBrain #KurumsalYapayZeka
 **Image suggestion:** İki kullanıcı, aynı soru, doğru şekilde farklı iki sınırlı cevap.
 **Carousel suggestion:** 5 slayt — (1) Arama nasıl sızdırır, (2) Yetki farkındalıklı öz, (3) Aynı soru, farklı cevap, (4) Getirmede yetki, (5) En çok nerede önemli.
 **Video suggestion:** 40s: iki oturum aynı soruyu sorar; kısıtlı kullanıcı kısıtlı kaynağı almaz.
@@ -1134,21 +1144,21 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Meet the coworker who never forgets a procedure."
-**Body:** Digital Employees are AI agents that do real knowledge work inside defined roles and permissions. They answer routine questions, draft responses, route requests, and prepare approvals — always within the boundaries you set. They're not autonomous wildcards; every action stays inside their role and lands in the audit trail. In the NovaMak demo world, 12 Digital Employees carry the repetitive load so people handle the judgment calls. Think of them as tireless junior staff who work only from your Company Brain, cite their sources, and never touch what they're not permitted to see. Capable, and accountable by design.
+**Body:** AI-assisted workflows are AI agents that do real knowledge work inside defined roles and permissions. They answer routine questions, draft responses, route requests, and prepare approvals — always within the boundaries you set. They're not autonomous wildcards; every action stays inside their role and lands in the audit trail. In the NovaMak demo world, 12 AI-assisted workflows carry the repetitive load so people handle the judgment calls. Think of them as tireless junior staff who work only from your Company Brain, cite their sources, and never touch what they're not permitted to see. Capable, and accountable by design.
 **CTA:** See the Platform
-**Hashtags:** #DigitalEmployees #AIagents #WorkflowAutomation #AdOS #EnterpriseAI
-**Image suggestion:** A clean org-chart tile for a "Digital Employee" role slotted beside human roles.
-**Carousel suggestion:** 5 slides — (1) What a Digital Employee is, (2) What it does, (3) Bounded by role, (4) Everything audited, (5) 12 in the NovaMak demo.
-**Video suggestion:** 45s: a Digital Employee drafts a reply from cited sources and hands it to a human for approval.
+**Hashtags:** #MarketingAI #AIagents #WorkflowAutomation #AdOS #EnterpriseAI
+**Image suggestion:** A clean org-chart tile for a "AI-assisted workflow" role slotted beside human roles.
+**Carousel suggestion:** 5 slides — (1) What an AI-assisted workflow is, (2) What it does, (3) Bounded by role, (4) Everything audited, (5) 12 in the NovaMak demo.
+**Video suggestion:** 45s: an AI-assisted workflow drafts a reply from cited sources and hands it to a human for approval.
 
 **TR**
 **Hook:** "Hiçbir prosedürü unutmayan çalışma arkadaşıyla tanışın."
-**Body:** Digital Employees, tanımlı roller ve yetkiler içinde gerçek bilgi işi yapan yapay zekâ ajanlarıdır. Rutin soruları yanıtlar, cevap taslakları hazırlar, talepleri yönlendirir ve onayları hazırlar — hep sizin belirlediğiniz sınırlarda. Otonom serbest oyuncular değildir; her eylem rolü içinde kalır ve denetim izine düşer. NovaMak demo dünyasında 12 Digital Employee tekrar eden yükü taşır, böylece insanlar muhakeme gerektiren kararlara odaklanır. Onları, yalnızca Company Brain'inizden çalışan, kaynaklarını gösteren ve görmeye izinli olmadığına asla dokunmayan yorulmaz genç kadro gibi düşünün. Yetenekli ve tasarımla hesap verebilir.
+**Body:** AI-assisted workflows, tanımlı roller ve yetkiler içinde gerçek bilgi işi yapan yapay zekâ ajanlarıdır. Rutin soruları yanıtlar, cevap taslakları hazırlar, talepleri yönlendirir ve onayları hazırlar — hep sizin belirlediğiniz sınırlarda. Otonom serbest oyuncular değildir; her eylem rolü içinde kalır ve etkinlik günlüğüne düşer. NovaMak demo dünyasında 12 AI-assisted workflow tekrar eden yükü taşır, böylece insanlar muhakeme gerektiren kararlara odaklanır. Onları, yalnızca Company Brain'inizden çalışan, kampanya sonuçlarına dayanan ve görmeye izinli olmadığına asla dokunmayan yorulmaz genç kadro gibi düşünün. Yetenekli ve tasarımla hesap verebilir.
 **CTA:** Platformu Keşfedin
-**Hashtags:** #DigitalEmployees #YapayZekaAjanları #İşAkışıOtomasyonu #AdOS #KurumsalYapayZeka
-**Image suggestion:** İnsan rollerinin yanına yerleştirilmiş "Digital Employee" rolü için temiz org-şema karosu.
-**Carousel suggestion:** 5 slayt — (1) Digital Employee nedir, (2) Ne yapar, (3) Rolle sınırlı, (4) Her şey denetimli, (5) NovaMak demoda 12 adet.
-**Video suggestion:** 45s: bir Digital Employee atıflı kaynaklardan cevap taslağı hazırlar ve onaya insana verir.
+**Hashtags:** #MarketingAI #YapayZekaAjanları #İşAkışıOtomasyonu #AdOS #KurumsalYapayZeka
+**Image suggestion:** İnsan rollerinin yanına yerleştirilmiş "AI-assisted workflow" rolü için temiz org-şema karosu.
+**Carousel suggestion:** 5 slayt — (1) AI-assisted workflow nedir, (2) Ne yapar, (3) Rolle sınırlı, (4) Her şey denetimli, (5) NovaMak demoda 12 adet.
+**Video suggestion:** 45s: bir AI-assisted workflow atıflı kaynaklardan cevap taslağı hazırlar ve onaya insana verir.
 
 ---
 
@@ -1178,20 +1188,20 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Illustrative: the approval that used to take three days now takes an hour."
-**Body:** A fictional, illustrative scenario in our NovaMak demo world (a made-up manufacturer, not a real customer). A capital-expense request needs tiered sign-off across two business units. In the old flow it bounced between inboxes for days. In AdOS, Workflows & Approvals route it deterministically: the right approver at each tier, in order, with an immutable audit trail of who approved what and when. A Digital Employee assembles the supporting documents — each cited — so approvers decide with context, not guesswork. The numbers here are illustrative model outcomes, shown to demonstrate the mechanism, not a claim about a named client.
+**Body:** A fictional, illustrative scenario in our NovaMak demo world (a made-up manufacturer, not a real customer). A capital-expense request needs tiered sign-off across two business units. In the old flow it bounced between inboxes for days. In AdOS, Workflows & Approvals route it deterministically: the right approver at each tier, in order, with an activity log and per-approval timeline of who approved what and when. An AI-assisted workflow assembles the supporting documents — each cited — so approvers decide with context, not guesswork. The numbers here are illustrative model outcomes, shown to demonstrate the mechanism, not a claim about a named client.
 **CTA:** Request a Demo
-**Hashtags:** #WorkflowAutomation #Approvals #Manufacturing #AdOS #DigitalEmployees
-**Image suggestion:** A tiered approval flow diagram with an audit-trail sidebar; marked "Illustrative."
+**Hashtags:** #WorkflowAutomation #Approvals #Manufacturing #AdOS #MarketingAI
+**Image suggestion:** A human approval gate flow diagram with an audit-trail sidebar; marked "Illustrative."
 **Carousel suggestion:** 5 slides — (1) The 3-day problem (illustrative), (2) Deterministic routing, (3) Tiered authority, (4) Cited supporting docs, (5) Audit trail.
 **Video suggestion:** 45s: a capex request moving through tiers, audit entries appearing; "Illustrative demo" watermark.
 
 **TR**
 **Hook:** "Örnek: eskiden üç gün süren onay artık bir saat sürüyor."
-**Body:** NovaMak demo dünyamızda kurgusal, örnekleyici bir senaryo (gerçek müşteri değil, uydurma bir üretici). Bir yatırım harcaması talebi, iki iş birimi arasında kademeli onay gerektiriyor. Eski akışta günlerce gelen kutuları arasında dolaşıyordu. AdOS'ta Workflows & Approvals bunu belirlenmiş şekilde yönlendirir: her kademede doğru onaylayıcı, sırayla, kimin neyi ne zaman onayladığına dair değiştirilemez bir denetim iziyle. Bir Digital Employee destekleyici belgeleri — her biri atıflı — bir araya getirir, böylece onaylayıcılar tahminle değil bağlamla karar verir. Buradaki sayılar örnekleyici model sonuçlarıdır; adı belirtilmiş bir müşteri iddiası değil, mekanizmayı göstermek içindir.
+**Body:** NovaMak demo dünyamızda kurgusal, örnekleyici bir senaryo (gerçek müşteri değil, uydurma bir üretici). Bir yatırım harcaması talebi, iki iş birimi arasında insan onay adÄ±mÄ± gerektiriyor. Eski akışta günlerce gelen kutuları arasında dolaşıyordu. AdOS'ta Workflows & Approvals bunu belirlenmiş şekilde yönlendirir: her kademede doğru onaylayıcı, sırayla, kimin neyi ne zaman onayladığına dair değiştirilemez bir etkinlik günlüğüyle. Bir AI-assisted workflow destekleyici belgeleri — her biri atıflı — bir araya getirir, böylece onaylayıcılar tahminle değil bağlamla karar verir. Buradaki sayılar örnekleyici model sonuçlarıdır; adı belirtilmiş bir müşteri iddiası değil, mekanizmayı göstermek içindir.
 **CTA:** Demo Talep Edin
-**Hashtags:** #İşAkışıOtomasyonu #Onaylar #Üretim #AdOS #DigitalEmployees
-**Image suggestion:** Denetim izi kenar çubuğu olan kademeli onay akış şeması; "Örnektir" işaretli.
-**Carousel suggestion:** 5 slayt — (1) 3 günlük sorun (örnek), (2) Belirlenmiş yönlendirme, (3) Kademeli yetki, (4) Atıflı destek belgeleri, (5) Denetim izi.
+**Hashtags:** #İşAkışıOtomasyonu #Onaylar #Üretim #AdOS #MarketingAI
+**Image suggestion:** etkinlik günlüğü kenar çubuğu olan insan onay adÄ±mÄ± akış şeması; "Örnektir" işaretli.
+**Carousel suggestion:** 5 slayt — (1) 3 günlük sorun (örnek), (2) Belirlenmiş yönlendirme, (3) Kademeli yetki, (4) Atıflı destek belgeleri, (5) etkinlik günlüğü.
 **Video suggestion:** 45s: bir yatırım talebi kademelerden geçer, denetim kayıtları belirir; "Örnek demo" filigranı.
 
 ---
@@ -1224,16 +1234,16 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 **Hook:** "Grounding beats guessing. Here's the mechanism."
 **Body:** A general model, asked about your internal process, will produce plausible text — sometimes wrong, always confident. Company Brain constrains the model to your own documents and returns the source behind each claim. The model isn't inventing from training data; it's answering from your files and pointing to the paragraph. When the source doesn't exist, you get "not found," not a fabrication. That's grounding: retrieval first, generation second, citation always. It's how you turn a fluent generalist into a reliable specialist on your operations — running locally, on your hardware, with no data sent anywhere. Capable because it's grounded.
 **CTA:** Read the Guide
-**Hashtags:** #RAG #Grounding #LocalLLM #CompanyBrain #EnterpriseAI
-**Image suggestion:** A retrieval-then-generation pipeline diagram ending in a cited answer.
+**Hashtags:** #CampaignAI #Grounding #LocalLLM #CompanyBrain #EnterpriseAI
+**Image suggestion:** A retrieval-then-generation pipeline diagram ending in a performance-grounded recommendation.
 **Carousel suggestion:** 5 slides — (1) The confident wrong answer, (2) Retrieval first, (3) Generation from your files, (4) Citation always, (5) "Not found" beats fabrication.
-**Video suggestion:** 40s: side-by-side of an ungrounded guess vs a grounded cited answer.
+**Video suggestion:** 40s: side-by-side of an ungrounded guess vs a grounded performance-grounded recommendation.
 
 **TR**
 **Hook:** "Dayanak, tahmini yener. İşte mekanizması."
-**Body:** Genel bir modele iç süreçlerinizi sorarsanız makul bir metin üretir — bazen yanlış, hep kendinden emin. Company Brain modeli kendi belgelerinizle sınırlar ve her iddianın arkasındaki kaynağı döndürür. Model eğitim verisinden uydurmaz; dosyalarınızdan yanıtlar ve paragrafı işaret eder. Kaynak yoksa, uydurma değil "bulunamadı" alırsınız. Dayanak budur: önce getirme, sonra üretim, her zaman atıf. Akıcı bir genelciyi operasyonlarınızda güvenilir bir uzmana böyle dönüştürürsünüz — yerelde, kendi donanımınızda, hiçbir yere veri gönderilmeden. Dayanaklı olduğu için yetenekli.
+**Body:** Genel bir modele iç süreçlerinizi sorarsanız makul bir metin üretir — bazen yanlış, hep kendinden emin. Company Brain modeli kendi verilerinizle sınırlar ve her iddianın arkasındaki kaynağı döndürür. Model eğitim verisinden uydurmaz; dosyalarınızdan yanıtlar ve paragrafı işaret eder. Kaynak yoksa, uydurma değil "bulunamadı" alırsınız. Dayanak budur: önce getirme, sonra üretim, her zaman atıf. Akıcı bir genelciyi operasyonlarınızda güvenilir bir uzmana böyle dönüştürürsünüz — yerelde, kendi donanımınızda, hiçbir yere veri gönderilmeden. Dayanaklı olduğu için yetenekli.
 **CTA:** Rehberi Okuyun
-**Hashtags:** #RAG #Dayanak #YerelLLM #CompanyBrain #KurumsalYapayZeka
+**Hashtags:** #CampaignAI #Dayanak #YerelLLM #CompanyBrain #KurumsalYapayZeka
 **Image suggestion:** Atıflı cevapla biten getirme-sonra-üretim boru hattı şeması.
 **Carousel suggestion:** 5 slayt — (1) Kendinden emin yanlış cevap, (2) Önce getirme, (3) Dosyalarınızdan üretim, (4) Her zaman atıf, (5) "Bulunamadı" uydurmayı yener.
 **Video suggestion:** 40s: dayanaksız tahmin ile dayanaklı atıflı cevabın yan yana karşılaştırması.
@@ -1247,8 +1257,8 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 **Body:** New employees spend weeks asking colleagues where things are and how things work. Every question interrupts someone senior. Company Brain shortens that curve: a new hire queries the organization's own cited knowledge on day one and gets grounded answers scoped to what they're allowed to see. Procedures, past decisions, and site-specific know-how are already there, searchable and sourced. The senior expert isn't a help desk anymore, and the new hire isn't blocked waiting for a reply. Faster ramp, lower training load, and knowledge that compounds instead of resetting every time someone leaves. Owned by you, on your infrastructure.
 **CTA:** See the Platform
 **Hashtags:** #Onboarding #KnowledgeManagement #HR #CompanyBrain #EnterpriseAI
-**Image suggestion:** A ramp-up curve steepening, annotated "day-one cited answers."
-**Carousel suggestion:** 5 slides — (1) The onboarding drag, (2) Day-one queries, (3) Scoped, cited answers, (4) Experts freed up, (5) Compounding knowledge.
+**Image suggestion:** A ramp-up curve steepening, annotated "day-one performance-grounded recommendations."
+**Carousel suggestion:** 5 slides — (1) The onboarding drag, (2) Day-one queries, (3) Scoped, performance-grounded recommendations, (4) Experts freed up, (5) Compounding knowledge.
 **Video suggestion:** 40s: a new hire's first week compressed, questions answered from Company Brain.
 
 **TR**
@@ -1266,7 +1276,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Shared industrial zones need shared AI — without shared exposure."
-**Body:** Organized Industrial Zones (OSB) host dozens of member firms with overlapping needs and strict boundaries. AdOS fits that shape: multi-tenant with strict isolation means an OSB can offer sovereign AI services to members while each firm's data stays sealed from the others. One deployment, many tenants, zero cross-contamination — every answer permission-scoped, every action audited. It runs on infrastructure the zone controls, offline-capable, with no per-token bill to pass along. For OSB bodies, that's a way to deliver modern AI as a shared service without becoming a data-leakage risk for the members they serve.
+**Body:** Organized Industrial Zones (OSB) host dozens of member firms with overlapping needs and strict boundaries. AdOS fits that shape: multi-tenant with strict isolation means an OSB can offer sovereign AI services to members while each firm's data stays sealed from the others. One deployment, many tenants, zero cross-contamination — every answer workspace-scoped, every action audited. It runs on infrastructure the zone controls, offline-capable, with no per-token bill to pass along. For OSB bodies, that's a way to deliver modern AI as a shared service without becoming a data-leakage risk for the members they serve.
 **CTA:** Talk to Sales
 **Hashtags:** #OSB #OrganizedIndustrialZones #MultiTenant #SovereignAI #OnPremAI
 **Image suggestion:** A zone map with sealed member-firm tiles under one governed roof.
@@ -1288,7 +1298,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "An audit trail you can't alter is worth more than a report you can."
-**Body:** When something goes wrong — a wrong approval, a disputed decision, a compliance review — the question is always "who did what, when?" AdOS answers it by default. Every consequential action lands in an immutable audit trail: not a log you can quietly edit, but a record you can present. Combined with permission-aware access, that means you can prove both what the AI did and what it could never have shown. For finance and public institutions under regulatory scrutiny, that's not a nice extra — it's the evidence that lets you say yes to AI at all. Accountable by construction.
+**Body:** When something goes wrong — a wrong approval, a disputed decision, a compliance review — the question is always "who did what, when?" AdOS answers it by default. Every consequential action lands in an activity log and per-approval timeline: not a log you can quietly edit, but a record you can present. Combined with human-approved access, that means you can prove both what the AI did and what it could never have shown. For finance and public institutions under regulatory scrutiny, that's not a nice extra — it's the evidence that lets you say yes to AI at all. Accountable by construction.
 **CTA:** Talk to Sales
 **Hashtags:** #Compliance #AuditTrail #CISO #Finance #OnPremAI
 **Image suggestion:** A tamper-evident ledger with sealed, time-stamped entries.
@@ -1296,8 +1306,8 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 **Video suggestion:** 35s: an auditor scrolls a locked trail; entries can't be edited, only read.
 
 **TR**
-**Hook:** "Değiştiremeyeceğiniz bir denetim izi, değiştirebileceğiniz bir rapordan değerlidir."
-**Body:** Bir şey ters gittiğinde — yanlış bir onay, tartışmalı bir karar, bir uyum incelemesi — soru hep aynıdır: "kim, ne zaman, ne yaptı?" AdOS bunu varsayılan olarak yanıtlar. Her sonuç doğuran eylem değiştirilemez bir denetim izine düşer: sessizce düzenleyebileceğiniz bir kayıt değil, sunabileceğiniz bir kanıt. Yetki farkındalıklı erişimle birleştiğinde, hem yapay zekânın ne yaptığını hem de asla gösteremeyeceğini kanıtlayabilirsiniz. Düzenleyici denetim altındaki finans ve kamu kurumları için bu hoş bir ekstra değil — yapay zekâya evet demenizi sağlayan kanıttır. Yapısı gereği hesap verebilir.
+**Hook:** "Değiştiremeyeceğiniz bir etkinlik günlüğü, değiştirebileceğiniz bir rapordan değerlidir."
+**Body:** Bir şey ters gittiğinde — yanlış bir onay, tartışmalı bir karar, bir uyum incelemesi — soru hep aynıdır: "kim, ne zaman, ne yaptı?" AdOS bunu varsayılan olarak yanıtlar. Her sonuç doğuran eylem değiştirilemez bir etkinlik günlüğüne düşer: sessizce düzenleyebileceğiniz bir kayıt değil, sunabileceğiniz bir kanıt. Yetki farkındalıklı erişimle birleştiğinde, hem yapay zekânın ne yaptığını hem de asla gösteremeyeceğini kanıtlayabilirsiniz. Düzenleyici denetim altındaki finans ve kamu kurumları için bu hoş bir ekstra değil — yapay zekâya evet demenizi sağlayan kanıttır. Yapısı gereği hesap verebilir.
 **CTA:** Satışla Görüşün
 **Hashtags:** #Uyum #DenetimİZİ #CISO #Finans #OnPremAI
 **Image suggestion:** Mühürlü, zaman damgalı kayıtlarla kurcalamayı belli eden defter.
@@ -1310,7 +1320,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Air-gap isn't paranoia. For some networks, it's policy."
-**Body:** An air-gapped network has no connection to the outside world — common in defense, critical infrastructure, and high-security public systems. Most AI simply can't run there; it needs the internet to reach a hosted model. AdOS is offline-first and air-gap capable by design. All inference runs locally through an on-box engine; no external API, no keys, no internet required. That means the exact same Company Brain, Digital Employees, and Workflows work on a fully disconnected network as on a connected one. If your environment must stay sealed, sovereignty isn't a selling point — it's the only way AI is allowed in at all.
+**Body:** An air-gapped network has no connection to the outside world — common in defense, critical infrastructure, and high-security public systems. Most AI simply can't run there; it needs the internet to reach a hosted model. AdOS is offline-first and air-gap capable by design. All inference runs locally through an on-box engine; no external API, no keys, no internet required. That means the exact same Company Brain, AI-assisted workflows, and Workflows work on a fully disconnected network as on a connected one. If your environment must stay sealed, sovereignty isn't a selling point — it's the only way AI is allowed in at all.
 **CTA:** Read the Guide
 **Hashtags:** #AirGap #CriticalInfrastructure #OfflineAI #OnPremAI #DataSovereignty
 **Image suggestion:** A sealed network diagram with a clean gap between it and the internet.
@@ -1319,7 +1329,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "Air-gap paranoya değil. Bazı ağlar için politikadır."
-**Body:** Air-gap'li bir ağın dış dünyayla bağlantısı yoktur — savunma, kritik altyapı ve yüksek güvenlikli kamu sistemlerinde yaygındır. Çoğu yapay zekâ orada çalışamaz; barındırılan bir modele ulaşmak için internete ihtiyaç duyar. AdOS tasarımı gereği çevrimdışı öncelikli ve air-gap yeteneklidir. Tüm çıkarım cihaz üstü bir motorla yerelde çalışır; harici API yok, anahtar yok, internet gerekmez. Yani birebir aynı Company Brain, Digital Employees ve Workflows, tamamen kopuk bir ağda da bağlı bir ağdaki gibi çalışır. Ortamınız mühürlü kalmak zorundaysa, egemenlik bir satış argümanı değil — yapay zekânın içeri girmesinin tek yoludur.
+**Body:** Air-gap'li bir ağın dış dünyayla bağlantısı yoktur — savunma, kritik altyapı ve yüksek güvenlikli kamu sistemlerinde yaygındır. Çoğu yapay zekâ orada çalışamaz; barındırılan bir modele ulaşmak için internete ihtiyaç duyar. AdOS tasarımı gereği çevrimdışı öncelikli ve air-gap yeteneklidir. Tüm çıkarım cihaz üstü bir motorla yerelde çalışır; harici API yok, anahtar yok, internet gerekmez. Yani birebir aynı Company Brain, AI-assisted workflows ve Workflows, tamamen kopuk bir ağda da bağlı bir ağdaki gibi çalışır. Ortamınız mühürlü kalmak zorundaysa, egemenlik bir satış argümanı değil — yapay zekânın içeri girmesinin tek yoludur.
 **CTA:** Rehberi Okuyun
 **Hashtags:** #AirGap #KritikAltyapı #ÇevrimdışıYapayZeka #OnPremAI #VeriEgemenligi
 **Image suggestion:** İnternetle arasında temiz bir boşluk olan mühürlü ağ şeması.
@@ -1332,16 +1342,16 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Healthcare wants AI. Confidentiality won't let it use the cloud."
-**Body:** Patient records are among the most tightly governed data anywhere. Clinicians would benefit enormously from fast, grounded answers — but sending records to an external model is a non-starter. That's the sovereignty wedge in one sector: the value is obvious, the exposure is unacceptable. AdOS resolves it by keeping everything inside the hospital: local inference, no data leaving the premises, permission-aware access so the AI never surfaces a record to someone not entitled to see it, and a full audit trail for every access. Same capability clinicians want from the cloud — delivered without the confidentiality risk that rules the cloud out.
+**Body:** Patient records are among the most tightly governed data anywhere. Clinicians would benefit enormously from fast, grounded answers — but sending records to an external model is a non-starter. That's the sovereignty wedge in one sector: the value is obvious, the exposure is unacceptable. AdOS resolves it by keeping everything inside the hospital: local inference, no data leaving the premises, human-approved access so the AI never surfaces a record to someone not entitled to see it, and a full audit trail for every access. Same capability clinicians want from the cloud — delivered without the confidentiality risk that rules the cloud out.
 **CTA:** Talk to Sales
 **Hashtags:** #Healthcare #PatientPrivacy #DataSovereignty #Compliance #OnPremAI
 **Image suggestion:** A hospital outline with records staying inside a solid boundary.
-**Carousel suggestion:** 4 slides — (1) The clinical upside, (2) Why cloud is a non-starter, (3) Everything stays inside, (4) Permission-aware + audited.
-**Video suggestion:** 30s: a clinician gets a cited answer; the record never leaves the hospital network.
+**Carousel suggestion:** 4 slides — (1) The clinical upside, (2) Why cloud is a non-starter, (3) Everything stays inside, (4) Human-Approved + audited.
+**Video suggestion:** 30s: a clinician gets a performance-grounded recommendation; the record never leaves the hospital network.
 
 **TR**
 **Hook:** "Sağlık yapay zekâ istiyor. Gizlilik bulutu kullanmasına izin vermiyor."
-**Body:** Hasta kayıtları her yerdeki en sıkı yönetilen verilerdendir. Klinisyenler hızlı, dayanaklı cevaplardan çok fayda görürdü — ama kayıtları harici bir modele göndermek baştan imkânsız. Tek bir sektörde egemenlik ayrımı budur: değer aşikâr, risk kabul edilemez. AdOS bunu her şeyi hastane içinde tutarak çözer: yerel çıkarım, tesisten çıkmayan veri, yapay zekânın bir kaydı görmeye yetkili olmayan birine asla göstermemesi için yetki farkındalıklı erişim ve her erişim için tam denetim izi. Klinisyenlerin buluttan istediği aynı yetenek — bulutu eleyen gizlilik riski olmadan sunulur.
+**Body:** Hasta kayıtları her yerdeki en sıkı yönetilen verilerdendir. Klinisyenler hızlı, dayanaklı cevaplardan çok fayda görürdü — ama kayıtları harici bir modele göndermek baştan imkânsız. Tek bir sektörde egemenlik ayrımı budur: değer aşikâr, risk kabul edilemez. AdOS bunu her şeyi hastane içinde tutarak çözer: yerel çıkarım, tesisten çıkmayan veri, yapay zekânın bir kaydı görmeye yetkili olmayan birine asla göstermemesi için yetki farkındalıklı erişim ve her erişim için tam etkinlik günlüğü. Klinisyenlerin buluttan istediği aynı yetenek — bulutu eleyen gizlilik riski olmadan sunulur.
 **CTA:** Satışla Görüşün
 **Hashtags:** #Sağlık #HastaGizliliği #VeriEgemenligi #Uyum #OnPremAI
 **Image suggestion:** Kayıtların sağlam bir sınır içinde kaldığı hastane silüeti.
@@ -1354,21 +1364,21 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Three parts, one system: knowledge, workers, processes."
-**Body:** Point tools solve one thing and leave the seams to you. AdOS is an operating system because its three parts share one boundary and one permission model. Company Brain holds the cited knowledge. Digital Employees act on it within their roles. Workflows & Approvals move decisions through tiered authority with a full audit trail. A question in the Brain can trigger a Digital Employee to draft, which can enter a workflow for approval — all inside the same sovereign environment, all on your hardware. You're not integrating three vendors; you're running one system you own end to end. That's the difference an OS makes.
+**Body:** Point tools solve one thing and leave the seams to you. AdOS is an operating system because its three parts share one boundary and one permission model. Company Brain holds the cited knowledge. AI-assisted workflows act on it within their roles. Workflows & Approvals move decisions through tiered authority with a full audit trail. A question in the Brain can trigger an AI-assisted workflow to draft, which can enter a workflow for approval — all inside the same sovereign environment, all on your hardware. You're not integrating three vendors; you're running one system you own end to end. That's the difference an OS makes.
 **CTA:** See the Platform
-**Hashtags:** #AdOS #EnterpriseAI #OperatingSystem #DigitalEmployees #WorkflowAutomation
+**Hashtags:** #AdOS #EnterpriseAI #OperatingSystem #MarketingAI #WorkflowAutomation
 **Image suggestion:** One boundary containing three interlocking gears: knowledge, workers, processes.
 **Carousel suggestion:** 5 slides — (1) Point tools leave seams, (2) One boundary, one permission model, (3) Brain → Employee → Workflow, (4) All on your hardware, (5) One system you own.
-**Video suggestion:** 50s: a single request flowing Brain → Digital Employee → approval, uninterrupted.
+**Video suggestion:** 50s: a single request flowing Brain → AI-assisted workflow → approval, uninterrupted.
 
 **TR**
 **Hook:** "Üç parça, tek sistem: bilgi, çalışanlar, süreçler."
-**Body:** Nokta araçlar tek bir şeyi çözer, dikişleri size bırakır. AdOS bir işletim sistemidir; çünkü üç parçası tek bir sınırı ve tek bir yetki modelini paylaşır. Company Brain atıflı bilgiyi tutar. Digital Employees rolleri içinde bunun üzerine hareket eder. Workflows & Approvals kararları tam denetim iziyle kademeli yetkiden geçirir. Brain'deki bir soru, bir Digital Employee'yi taslak hazırlamaya tetikleyebilir; bu da onay için bir iş akışına girebilir — hepsi aynı egemen ortamda, hepsi kendi donanımınızda. Üç tedarikçiyi entegre etmiyorsunuz; baştan sona sahip olduğunuz tek bir sistemi çalıştırıyorsunuz. İşletim sisteminin farkı budur.
+**Body:** Nokta araçlar tek bir şeyi çözer, dikişleri size bırakır. AdOS bir işletim sistemidir; çünkü üç parçası tek bir sınırı ve tek bir yetki modelini paylaşır. Company Brain atıflı bilgiyi tutar. AI-assisted workflows rolleri içinde bunun üzerine hareket eder. Workflows & Approvals kararları tam etkinlik günlüğüyle kademeli yetkiden geçirir. Brain'deki bir soru, bir AI-assisted workflow'yi taslak hazırlamaya tetikleyebilir; bu da onay için bir iş akışına girebilir — hepsi aynı egemen ortamda, hepsi kendi donanımınızda. Üç tedarikçiyi entegre etmiyorsunuz; baştan sona sahip olduğunuz tek bir sistemi çalıştırıyorsunuz. İşletim sisteminin farkı budur.
 **CTA:** Platformu Keşfedin
-**Hashtags:** #AdOS #KurumsalYapayZeka #İşletimSistemi #DigitalEmployees #İşAkışıOtomasyonu
+**Hashtags:** #AdOS #KurumsalYapayZeka #İşletimSistemi #MarketingAI #İşAkışıOtomasyonu
 **Image suggestion:** Bilgi, çalışanlar, süreçler için üç iç içe geçmiş dişli içeren tek sınır.
 **Carousel suggestion:** 5 slayt — (1) Nokta araçlar dikiş bırakır, (2) Tek sınır, tek yetki modeli, (3) Brain → Employee → Workflow, (4) Hepsi donanımınızda, (5) Sahip olduğunuz tek sistem.
-**Video suggestion:** 50s: tek bir talebin Brain → Digital Employee → onay boyunca kesintisiz akışı.
+**Video suggestion:** 50s: tek bir talebin Brain → AI-assisted workflow → onay boyunca kesintisiz akışı.
 
 ---
 
@@ -1376,7 +1386,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Why our demo world has exactly 42 employees and 25 workflows."
-**Body:** NovaMak Endüstri A.Ş. is a fiction, but a disciplined one: 6 sites, 4 business units, 42 employees, 16 departments, 12 Digital Employees, 25 workflows. Every number is fixed so the demo is deterministic — the same question yields the same cited answer, every time, for everyone. We built it that way on purpose. A sales demo that improvises isn't proof; it's theatre. A demo that behaves identically on every run lets a skeptical CIO test the mechanism, not our showmanship. NovaMak is clearly labeled fictional, and it exists so what you see is what the system actually does.
+**Body:** NovaMak Endüstri A.Ş. is a fiction, but a disciplined one: 6 sites, 4 business units, 42 employees, 16 departments, 12 AI-assisted workflows, 25 workflows. Every number is fixed so the demo is deterministic — the same question yields the same performance-grounded recommendation, every time, for everyone. We built it that way on purpose. A sales demo that improvises isn't proof; it's theatre. A demo that behaves identically on every run lets a skeptical CIO test the mechanism, not our showmanship. NovaMak is clearly labeled fictional, and it exists so what you see is what the system actually does.
 **CTA:** Request a Demo
 **Hashtags:** #ProductDemo #BehindTheScenes #DeterministicDemo #AdOS #EnterpriseAI
 **Image suggestion:** A tidy spec sheet of the NovaMak world with all its fixed numbers.
@@ -1385,7 +1395,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "Demo dünyamızın neden tam olarak 42 çalışanı ve 25 iş akışı var."
-**Body:** NovaMak Endüstri A.Ş. bir kurgu, ama disiplinli bir kurgu: 6 saha, 4 iş birimi, 42 çalışan, 16 departman, 12 Digital Employee, 25 iş akışı. Her sayı sabit ki demo belirlenimci olsun — aynı soru herkes için, her seferinde aynı atıflı cevabı versin. Bunu bilerek böyle kurduk. Doğaçlama yapan bir satış demosu kanıt değil, tiyatrodur. Her çalıştırmada birebir aynı davranan bir demo, şüpheci bir CIO'nun bizim gösterimizi değil mekanizmayı test etmesini sağlar. NovaMak açıkça kurgusal olarak etiketlidir ve gördüğünüzün sistemin gerçekte yaptığı şey olması için vardır.
+**Body:** NovaMak Endüstri A.Ş. bir kurgu, ama disiplinli bir kurgu: 6 saha, 4 iş birimi, 42 çalışan, 16 departman, 12 AI-assisted workflow, 25 iş akışı. Her sayı sabit ki demo belirlenimci olsun — aynı soru herkes için, her seferinde aynı atıflı cevabı versin. Bunu bilerek böyle kurduk. Doğaçlama yapan bir satış demosu kanıt değil, tiyatrodur. Her çalıştırmada birebir aynı davranan bir demo, şüpheci bir CIO'nun bizim gösterimizi değil mekanizmayı test etmesini sağlar. NovaMak açıkça kurgusal olarak etiketlidir ve gördüğünüzün sistemin gerçekte yaptığı şey olması için vardır.
 **CTA:** Demo Talep Edin
 **Hashtags:** #ÜrünDemosu #PerdeArkası #BelirlenimciDemo #AdOS #KurumsalYapayZeka
 **Image suggestion:** NovaMak dünyasının tüm sabit sayılarını içeren derli toplu künye.
@@ -1398,20 +1408,20 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Illustrative: a logistics dispatcher, 2 a.m., no one to call."
-**Body:** A fictional scenario in our NovaMak demo world (illustrative, not a real client). It's the night shift. A shipment hits an exception that only last quarter's revised routing procedure covers — and the person who wrote it is asleep. The dispatcher asks Company Brain and gets the answer, cited to the exact procedure version, scoped to what they're permitted to see. No phone tree, no guessing, no waiting for morning. A Digital Employee prepares the paperwork for the exception route so the shipment moves. This is a demonstration of the mechanism on invented data — shown to illustrate value, not to claim a named customer outcome.
+**Body:** A fictional scenario in our NovaMak demo world (illustrative, not a real client). It's the night shift. A shipment hits an exception that only last quarter's revised routing procedure covers — and the person who wrote it is asleep. The dispatcher asks Company Brain and gets the answer, cited to the exact procedure version, scoped to what they're permitted to see. No phone tree, no guessing, no waiting for morning. An AI-assisted workflow prepares the paperwork for the exception route so the shipment moves. This is a demonstration of the mechanism on invented data — shown to illustrate value, not to claim a named customer outcome.
 **CTA:** Request a Demo
-**Hashtags:** #Logistics #NightShift #CompanyBrain #DigitalEmployees #AdOS
+**Hashtags:** #Logistics #NightShift #CompanyBrain #MarketingAI #AdOS
 **Image suggestion:** A dark dispatch desk lit by a screen showing a cited procedure; marked "Illustrative."
-**Carousel suggestion:** 5 slides — (1) 2 a.m. exception (illustrative), (2) The right procedure version, (3) Cited + scoped, (4) Digital Employee preps paperwork, (5) Shipment moves.
+**Carousel suggestion:** 5 slides — (1) 2 a.m. exception (illustrative), (2) The right procedure version, (3) Cited + scoped, (4) AI-assisted workflow preps paperwork, (5) Shipment moves.
 **Video suggestion:** 45s: night-shift walkthrough of the query and resolution; "Illustrative demo" watermark.
 
 **TR**
 **Hook:** "Örnek: bir lojistik sevkiyatçısı, gece 2, arayacak kimse yok."
-**Body:** NovaMak demo dünyamızda kurgusal bir senaryo (örnektir, gerçek müşteri değil). Gece vardiyası. Bir sevkiyat, yalnızca geçen çeyrek revize edilen yönlendirme prosedürünün kapsadığı bir istisnaya takılıyor — ve onu yazan kişi uyuyor. Sevkiyatçı Company Brain'e sorup cevabı alıyor: tam prosedür sürümüne atıflı, görmeye izinli olduğuyla sınırlı. Telefon zinciri yok, tahmin yok, sabahı bekleme yok. Bir Digital Employee istisna rotası için evrakı hazırlıyor, böylece sevkiyat ilerliyor. Bu, uydurma veri üzerinde mekanizmanın gösterimidir — değeri örneklemek için, adı belirtilmiş bir müşteri sonucu iddiası için değil.
+**Body:** NovaMak demo dünyamızda kurgusal bir senaryo (örnektir, gerçek müşteri değil). Gece vardiyası. Bir sevkiyat, yalnızca geçen çeyrek revize edilen yönlendirme prosedürünün kapsadığı bir istisnaya takılıyor — ve onu yazan kişi uyuyor. Sevkiyatçı Company Brain'e sorup cevabı alıyor: tam prosedür sürümüne atıflı, görmeye izinli olduğuyla sınırlı. Telefon zinciri yok, tahmin yok, sabahı bekleme yok. Bir AI-assisted workflow istisna rotası için evrakı hazırlıyor, böylece sevkiyat ilerliyor. Bu, uydurma veri üzerinde mekanizmanın gösterimidir — değeri örneklemek için, adı belirtilmiş bir müşteri sonucu iddiası için değil.
 **CTA:** Demo Talep Edin
-**Hashtags:** #Lojistik #GeceVardiyası #CompanyBrain #DigitalEmployees #AdOS
+**Hashtags:** #Lojistik #GeceVardiyası #CompanyBrain #MarketingAI #AdOS
 **Image suggestion:** Atıflı bir prosedür gösteren ekranla aydınlanan karanlık sevk masası; "Örnektir" işaretli.
-**Carousel suggestion:** 5 slayt — (1) Gece 2 istisnası (örnek), (2) Doğru prosedür sürümü, (3) Atıflı + sınırlı, (4) Digital Employee evrakı hazırlar, (5) Sevkiyat ilerler.
+**Carousel suggestion:** 5 slayt — (1) Gece 2 istisnası (örnek), (2) Doğru prosedür sürümü, (3) Atıflı + sınırlı, (4) AI-assisted workflow evrakı hazırlar, (5) Sevkiyat ilerler.
 **Video suggestion:** 45s: gece vardiyası sorgu ve çözüm gezintisi; "Örnek demo" filigranı.
 
 ---
@@ -1451,7 +1461,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "Modeliniz ayrılamayacağınız bir ev sahibi değil, değiştirebileceğiniz bir bileşen olmalı."
-**Body:** Model tercihi hızlı değişir. Bu çeyrek en iyi olan, gelecek çeyrek en iyi olmayabilir. AdOS modeli değiştirilebilir bir bileşen olarak ele alır: OpenAI uyumlu bir arayüzün arkasında açık motorlarda çalışır; böylece platformu yeniden mimarlamadan altındaki modeli değiştirebilirsiniz — daha yeni bir açık ağırlık, alana göre ayarlanmış biri, daha yetenekli donanım için daha büyüğü. Sizi tek sağlayıcıya bağlayan API anahtarı yok, yeniden pazarlık edilecek sözleşme yok. Company Brain, yetkiler, iş akışları ve denetim izi aynen kalır; yalnızca altındaki motor değişir. Egemen bir sistem güncel böyle kalır: seçim kalıcı olarak sizindir.
+**Body:** Model tercihi hızlı değişir. Bu çeyrek en iyi olan, gelecek çeyrek en iyi olmayabilir. AdOS modeli değiştirilebilir bir bileşen olarak ele alır: OpenAI uyumlu bir arayüzün arkasında açık motorlarda çalışır; böylece platformu yeniden mimarlamadan altındaki modeli değiştirebilirsiniz — daha yeni bir açık ağırlık, alana göre ayarlanmış biri, daha yetenekli donanım için daha büyüğü. Sizi tek sağlayıcıya bağlayan API anahtarı yok, yeniden pazarlık edilecek sözleşme yok. Company Brain, yetkiler, iş akışları ve etkinlik günlüğü aynen kalır; yalnızca altındaki motor değişir. Egemen bir sistem güncel böyle kalır: seçim kalıcı olarak sizindir.
 **CTA:** Platformu Keşfedin
 **Hashtags:** #YerelLLM #ModelTercihi #AçıkStandartlar #TedarikçiKilidiYok #OnPremAI
 **Image suggestion:** Bir model çipi çıkarken aynı yuvaya yenisinin girmesi.
@@ -1464,7 +1474,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Scattered documents aren't knowledge. They're a search problem."
-**Body:** Most organizations don't lack information — they lack access to it. It's spread across drives, inboxes, wikis, and PDFs no one can find under pressure. Company Brain turns that scatter into a single, cited, permission-aware base. Ask a question in plain language; get an answer grounded in the actual documents, with the source attached, scoped to what you're allowed to open. The documents stay where they are and stay yours — nothing leaves the premises. The shift is from "somewhere we have a policy on this" to "here's the policy, here's the paragraph." That's when a document pile finally becomes usable knowledge.
+**Body:** Most organizations don't lack information — they lack access to it. It's spread across drives, inboxes, wikis, and PDFs no one can find under pressure. Company Brain turns that scatter into a single, cited, human-approved base. Ask a question in plain language; get an answer grounded in the actual documents, with the source attached, scoped to what you're allowed to open. The documents stay where they are and stay yours — nothing leaves the premises. The shift is from "somewhere we have a policy on this" to "here's the policy, here's the paragraph." That's when a document pile finally becomes usable knowledge.
 **CTA:** See the Platform
 **Hashtags:** #KnowledgeManagement #EnterpriseSearch #CompanyBrain #DataSovereignty #EnterpriseAI
 **Image suggestion:** Scattered document icons converging into one grounded, cited structure.
@@ -1552,16 +1562,16 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Retail runs on thousands of the same question, asked by a workforce that turns over."
-**Body:** Distributed stores, high staff turnover, and a constant stream of "how do I handle this?" — retail's real cost isn't the question, it's asking it a thousand times and retraining every quarter. Company Brain answers the repetitive questions from your own policies, cited and consistent, so a new associate gets the same correct answer as a veteran. Digital Employees handle routine drafting and routing. And because it's unmetered, thousands of daily questions don't add a cent to a usage bill. Lower training load, consistent answers across every location, and knowledge that survives turnover — all on infrastructure you control.
+**Body:** Distributed stores, high staff turnover, and a constant stream of "how do I handle this?" — retail's real cost isn't the question, it's asking it a thousand times and retraining every quarter. Company Brain answers the repetitive questions from your own policies, cited and consistent, so a new associate gets the same correct answer as a veteran. AI-assisted workflows handle routine drafting and routing. And because it's unmetered, thousands of daily questions don't add a cent to a usage bill. Lower training load, consistent answers across every location, and knowledge that survives turnover — all on infrastructure you control.
 **CTA:** Calculate Your ROI
 **Hashtags:** #Retail #WorkforceTraining #CompanyBrain #NoPerTokenBilling #EnterpriseAI
-**Image suggestion:** Many store icons all pulling the same cited answer from one center.
-**Carousel suggestion:** 5 slides — (1) Retail's real cost, (2) Same question, thousand times, (3) Consistent cited answers, (4) Unmetered at scale, (5) Knowledge survives turnover.
-**Video suggestion:** 35s: three associates in different stores getting the identical cited answer.
+**Image suggestion:** Many store icons all pulling the same performance-grounded recommendation from one center.
+**Carousel suggestion:** 5 slides — (1) Retail's real cost, (2) Same question, thousand times, (3) Consistent performance-grounded recommendations, (4) Unmetered at scale, (5) Knowledge survives turnover.
+**Video suggestion:** 35s: three associates in different stores getting the identical performance-grounded recommendation.
 
 **TR**
 **Hook:** "Perakende, devir yaşayan bir işgücünün sorduğu binlerce aynı soruyla döner."
-**Body:** Dağıtık mağazalar, yüksek personel devri ve sürekli bir "bunu nasıl hallederim?" akışı — perakendenin gerçek maliyeti soru değil, onu bin kez sormak ve her çeyrek yeniden eğitmektir. Company Brain tekrar eden soruları kendi politikalarınızdan, atıflı ve tutarlı olarak yanıtlar; böylece yeni bir çalışan, deneyimli biriyle aynı doğru cevabı alır. Digital Employees rutin taslak ve yönlendirmeyi üstlenir. Sayaçsız olduğundan, günde binlerce soru kullanım faturasına bir kuruş eklemez. Daha düşük eğitim yükü, her lokasyonda tutarlı cevaplar ve devirde hayatta kalan bilgi — hepsi kontrol ettiğiniz altyapıda.
+**Body:** Dağıtık mağazalar, yüksek personel devri ve sürekli bir "bunu nasıl hallederim?" akışı — perakendenin gerçek maliyeti soru değil, onu bin kez sormak ve her çeyrek yeniden eğitmektir. Company Brain tekrar eden soruları kendi politikalarınızdan, atıflı ve tutarlı olarak yanıtlar; böylece yeni bir çalışan, deneyimli biriyle aynı doğru cevabı alır. AI-assisted workflows rutin taslak ve yönlendirmeyi üstlenir. Sayaçsız olduğundan, günde binlerce soru kullanım faturasına bir kuruş eklemez. Daha düşük eğitim yükü, her lokasyonda tutarlı cevaplar ve devirde hayatta kalan bilgi — hepsi kontrol ettiğiniz altyapıda.
 **CTA:** ROI'nizi Hesaplayın
 **Hashtags:** #Perakende #İşgücüEğitimi #CompanyBrain #TokenBaşınaFaturaYok #KurumsalYapayZeka
 **Image suggestion:** Birçok mağaza ikonunun tek merkezden aynı atıflı cevabı çekmesi.
@@ -1574,7 +1584,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Bilingual isn't a setting we added. It's how AdOS thinks."
-**Body:** AdOS ships a full Turkish and English interface, auto-detected from the environment — not a half-translated menu, but native TR and EN across the product. Ask a question in Turkish, get a cited answer in Turkish, grounded in documents that may be in either language. For multinational teams and Turkey-first organizations, that means no one works in a second-class version of the tool. The Company Brain, Digital Employees, and Workflows behave identically in both languages, with the same permissions and the same audit trail. Product names stay English everywhere — but the experience meets each user in their own language.
+**Body:** AdOS ships a full Turkish and English interface, auto-detected from the environment — not a half-translated menu, but native TR and EN across the product. Ask a question in Turkish, get a performance-grounded recommendation in Turkish, grounded in documents that may be in either language. For multinational teams and Turkey-first organizations, that means no one works in a second-class version of the tool. The Company Brain, AI-assisted workflows, and Workflows behave identically in both languages, with the same permissions and the same audit trail. Product names stay English everywhere — but the experience meets each user in their own language.
 **CTA:** See the Platform
 **Hashtags:** #Bilingual #TurkishTech #Localization #AdOS #EnterpriseAI
 **Image suggestion:** One interface shown in TR and EN side by side, identical layout.
@@ -1583,7 +1593,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "İki dillilik eklediğimiz bir ayar değil. AdOS'un düşünme biçimi."
-**Body:** AdOS, ortamdan otomatik algılanan tam bir Türkçe ve İngilizce arayüzle gelir — yarım çevrilmiş bir menü değil, ürün genelinde native TR ve EN. Türkçe soru sorun, her iki dilde de olabilen belgelere dayanan, Türkçe atıflı bir cevap alın. Çok uluslu ekipler ve Türkiye öncelikli kurumlar için bu, kimsenin aracın ikinci sınıf bir sürümünde çalışmaması demektir. Company Brain, Digital Employees ve Workflows her iki dilde de birebir aynı davranır; aynı yetkiler, aynı denetim izi. Ürün adları her yerde İngilizce kalır — ama deneyim her kullanıcıyı kendi dilinde karşılar.
+**Body:** AdOS, ortamdan otomatik algılanan tam bir Türkçe ve İngilizce arayüzle gelir — yarım çevrilmiş bir menü değil, ürün genelinde native TR ve EN. Türkçe soru sorun, her iki dilde de olabilen belgelere dayanan, Türkçe atıflı bir cevap alın. Çok uluslu ekipler ve Türkiye öncelikli kurumlar için bu, kimsenin aracın ikinci sınıf bir sürümünde çalışmaması demektir. Company Brain, AI-assisted workflows ve Workflows her iki dilde de birebir aynı davranır; aynı yetkiler, aynı etkinlik günlüğü. Ürün adları her yerde İngilizce kalır — ama deneyim her kullanıcıyı kendi dilinde karşılar.
 **CTA:** Platformu Keşfedin
 **Hashtags:** #İkiDilli #TürkTeknoloji #Yerelleştirme #AdOS #KurumsalYapayZeka
 **Image suggestion:** Aynı arayüzün TR ve EN yan yana, birebir aynı düzen.
@@ -1596,19 +1606,19 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "The hardest feature to build was the one that says 'not found.'"
-**Body:** It's easy to make an AI always produce an answer. It's harder — and more valuable — to make it stop when the source isn't there. We spent real effort making Company Brain return "not found" instead of a confident fabrication when your documents don't cover a question. That restraint is the feature. A cited answer you can trust requires a system willing to admit when it has nothing to cite. Combined with permission-scoping, "not found" also protects boundaries: a user asking about a document they can't see gets nothing, not a leaked hint. Honest silence is a design decision.
+**Body:** It's easy to make an AI always produce an answer. It's harder — and more valuable — to make it stop when the source isn't there. We spent real effort making Company Brain return "not found" instead of a confident fabrication when your data don't cover a question. That restraint is the feature. A performance-grounded recommendation you can trust requires a system willing to admit when it has nothing to cite. Combined with permission-scoping, "not found" also protects boundaries: a user asking about a document they can't see gets nothing, not a leaked hint. Honest silence is a design decision.
 **CTA:** See the Platform
 **Hashtags:** #BehindTheScenes #Grounding #NoHallucination #CompanyBrain #EnterpriseAI
-**Image suggestion:** A clean "Not found — no source in your documents" answer card.
+**Image suggestion:** A clean "Not found — no source in your data" answer card.
 **Carousel suggestion:** 4 slides — (1) Always-answer is easy, (2) Knowing when to stop, (3) "Not found" as a feature, (4) It also protects boundaries.
 **Video suggestion:** 35s: a query with no supporting doc returns an honest "not found," not a guess.
 
 **TR**
 **Hook:** "İnşası en zor özellik, 'bulunamadı' diyen özellikti."
-**Body:** Bir yapay zekâyı her zaman cevap üretecek şekilde yapmak kolaydır. Onu, kaynak yokken durduracak şekilde yapmak daha zor — ve daha değerlidir. Company Brain'in, belgeleriniz bir soruyu kapsamadığında kendinden emin bir uydurma yerine "bulunamadı" döndürmesi için gerçek emek harcadık. Bu öz denetim, özelliğin ta kendisidir. Güvenebileceğiniz atıflı bir cevap, kaynak gösterecek bir şeyi olmadığını itiraf etmeye razı bir sistem gerektirir. Yetki sınırlamasıyla birleşince "bulunamadı" sınırları da korur: göremeyeceği bir belgeyi soran kullanıcı, sızdırılmış bir ipucu değil, hiçbir şey alır. Dürüst sessizlik bir tasarım kararıdır.
+**Body:** Bir yapay zekâyı her zaman cevap üretecek şekilde yapmak kolaydır. Onu, kaynak yokken durduracak şekilde yapmak daha zor — ve daha değerlidir. Company Brain'in, verileriniz bir soruyu kapsamadığında kendinden emin bir uydurma yerine "bulunamadı" döndürmesi için gerçek emek harcadık. Bu öz denetim, özelliğin ta kendisidir. Güvenebileceğiniz atıflı bir cevap, kampanya verisine dayanecek bir şeyi olmadığını itiraf etmeye razı bir sistem gerektirir. Yetki sınırlamasıyla birleşince "bulunamadı" sınırları da korur: göremeyeceği bir belgeyi soran kullanıcı, sızdırılmış bir ipucu değil, hiçbir şey alır. Dürüst sessizlik bir tasarım kararıdır.
 **CTA:** Platformu Keşfedin
 **Hashtags:** #PerdeArkası #Dayanak #HalüsinasyonYok #CompanyBrain #KurumsalYapayZeka
-**Image suggestion:** Temiz bir "Bulunamadı — belgelerinizde kaynak yok" cevap kartı.
+**Image suggestion:** Temiz bir "Bulunamadı — verilerinizde kaynak yok" cevap kartı.
 **Carousel suggestion:** 4 slayt — (1) Her zaman cevap kolay, (2) Ne zaman durulacağını bilmek, (3) Özellik olarak "bulunamadı", (4) Sınırları da korur.
 **Video suggestion:** 35s: destek belgesi olmayan bir sorgu, tahmin değil dürüst "bulunamadı" döndürür.
 
@@ -1618,11 +1628,11 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Illustrative: a municipality answering residents without exposing their files."
-**Body:** A fictional, illustrative scenario (not a real institution). A mid-size municipality fields the same citizen and internal questions daily — permits, procedures, prior decisions. Officers dig through archives; answers vary by who you ask. In the scenario, AdOS runs on the municipality's own servers, mandated by data-residency rules. Company Brain gives officers cited, consistent answers from official records, permission-scoped so sensitive files never surface to unauthorized staff. Every access is audited. No resident data touches a cloud. This is a demonstration of the mechanism on invented data — illustrative of value, not a claim about any named public body.
+**Body:** A fictional, illustrative scenario (not a real institution). A mid-size municipality fields the same citizen and internal questions daily — permits, procedures, prior decisions. Officers dig through archives; answers vary by who you ask. In the scenario, AdOS runs on the municipality's own servers, mandated by data-residency rules. Company Brain gives officers cited, consistent answers from official records, workspace-scoped so sensitive files never surface to unauthorized staff. Every access is audited. No resident data touches a cloud. This is a demonstration of the mechanism on invented data — illustrative of value, not a claim about any named public body.
 **CTA:** Request a Demo
 **Hashtags:** #PublicSector #Municipality #DataResidency #CompanyBrain #OnPremAI
 **Image suggestion:** A civic building with records staying inside; marked "Illustrative."
-**Carousel suggestion:** 5 slides — (1) Municipality (fictional) setup, (2) The daily questions, (3) On-prem by mandate, (4) Cited + permission-scoped, (5) Audited, nothing to cloud.
+**Carousel suggestion:** 5 slides — (1) Municipality (fictional) setup, (2) The daily questions, (3) On-prem by mandate, (4) Cited + workspace-scoped, (5) Audited, nothing to cloud.
 **Video suggestion:** 45s: an officer answering a resident from cited records; "Illustrative demo" watermark.
 
 **TR**
@@ -1671,7 +1681,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "En tehlikeli yapay zekâ çıktısı, akıcı ve yanlış olandır."
-**Body:** Kendinden emin, iyi yazılmış yanlış bir cevap, cevapsızlıktan beterdir — üzerine hareket edilir. Genel modeller, hiç eğitilmedikleri özgül şeyler sorulduğunda bunları üretir: sizin politikalarınız, prosedürleriniz, istisnalarınız. AdOS bu riski yapısı gereği azaltır. Company Brain her cevabı kendi belgelerinize dayandırır ve kaynağı iliştirir; böylece iddiayı geldiği paragrafla doğrulayabilirsiniz. Kaynak yoksa, bunu söyler. Modelin hafızasına güvenmeniz istenmez; kanıt gösterilir. Yüksek riskli kararlarda "işte nedeni", "bana güven"i her zaman yener — ve tamamen kendi donanımınızda çalışır.
+**Body:** Kendinden emin, iyi yazılmış yanlış bir cevap, cevapsızlıktan beterdir — üzerine hareket edilir. Genel modeller, hiç eğitilmedikleri özgül şeyler sorulduğunda bunları üretir: sizin politikalarınız, prosedürleriniz, istisnalarınız. AdOS bu riski yapısı gereği azaltır. Company Brain her cevabı kendi verilerinize dayandırır ve kaynağı iliştirir; böylece iddiayı geldiği paragrafla doğrulayabilirsiniz. Kaynak yoksa, bunu söyler. Modelin hafızasına güvenmeniz istenmez; kanıt gösterilir. Yüksek riskli kararlarda "işte nedeni", "bana güven"i her zaman yener — ve tamamen kendi donanımınızda çalışır.
 **CTA:** Rehberi Okuyun
 **Hashtags:** #YapayZekaGüvenliği #Dayanak #Halüsinasyon #CompanyBrain #OnPremAI
 **Image suggestion:** Atıf üzerinde kaynağı doğrula büyeciyle akıcı bir cevap.
@@ -1684,12 +1694,12 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **EN**
 **Hook:** "Every time an expert answers the same question, that's knowledge you're paying to reissue."
-**Body:** Senior people spend a surprising share of their week answering questions that were already answered — last month, last year, at another site. That repeated retrieval is invisible cost: expert time spent as a lookup service. Company Brain captures the answer once and makes it reusable: cited, consistent, permission-scoped, available to anyone entitled to it. The expert answers once; the organization keeps the answer. Multiply that across departments and sites and the saving is real — not from replacing people, but from freeing them to do the work only they can do. Knowledge stops being re-issued and starts compounding, on infrastructure you own.
+**Body:** Senior people spend a surprising share of their week answering questions that were already answered — last month, last year, at another site. That repeated retrieval is invisible cost: expert time spent as a lookup service. Company Brain captures the answer once and makes it reusable: cited, consistent, workspace-scoped, available to anyone entitled to it. The expert answers once; the organization keeps the answer. Multiply that across departments and sites and the saving is real — not from replacing people, but from freeing them to do the work only they can do. Knowledge stops being re-issued and starts compounding, on infrastructure you own.
 **CTA:** Calculate Your ROI
 **Hashtags:** #KnowledgeManagement #Productivity #CompanyBrain #KnowledgeRetention #EnterpriseAI
 **Image suggestion:** A single answer captured once, then radiating to many requesters.
 **Carousel suggestion:** 5 slides — (1) The re-answering tax, (2) Experts as a lookup service, (3) Capture once, reuse, (4) Freed to do real work, (5) Knowledge compounds.
-**Video suggestion:** 35s: an expert answers once; the same cited answer serves five later requests.
+**Video suggestion:** 35s: an expert answers once; the same performance-grounded recommendation serves five later requests.
 
 **TR**
 **Hook:** "Bir uzman aynı soruyu her yanıtladığında, yeniden yayımlamak için para ödediğiniz bir bilgidir bu."
@@ -1715,7 +1725,7 @@ Video suggestion: 30 sn demo: sistem çalışırken sıfır dışa giden ağ ça
 
 **TR**
 **Hook:** "Yapay zekâ almak bir komite kararıdır. AdOS tüm masayı memnun etmek için kurulmuştur."
-**Body:** Kurumsal yapay zekâyı tek kişi onaylamaz. CEO ROI ister. CIO desteklenebilirlik ister. CTO mimari ve model tercihi ister. CISO sıfır veri sızıntısı ve denetim izi ister. İK benimseme ve bilginin korunmasını ister. AdOS her birini diğerleriyle çelişmeden yanıtlar: CISO için egemen, CIO için işletilebilir, CTO için taşınabilir ve OpenAI uyumlu, CEO için sayaçsız ve sonuç odaklı, İK için ilk gün faydalı. Tek sistem, tek gerçekler kümesi, tek sınır — bir paydaşa verilip sessizce bir diğerinin gereğini bozan söz yok. Bir komiteyi evete getiren şey bu tutarlılıktır.
+**Body:** Kurumsal yapay zekâyı tek kişi onaylamaz. CEO ROI ister. CIO desteklenebilirlik ister. CTO mimari ve model tercihi ister. CISO sıfır veri sızıntısı ve etkinlik günlüğü ister. İK benimseme ve bilginin korunmasını ister. AdOS her birini diğerleriyle çelişmeden yanıtlar: CISO için egemen, CIO için işletilebilir, CTO için taşınabilir ve OpenAI uyumlu, CEO için sayaçsız ve sonuç odaklı, İK için ilk gün faydalı. Tek sistem, tek gerçekler kümesi, tek sınır — bir paydaşa verilip sessizce bir diğerinin gereğini bozan söz yok. Bir komiteyi evete getiren şey bu tutarlılıktır.
 **CTA:** Demo Talep Edin
 **Hashtags:** #KurumsalYapayZeka #SatınAlmaKomitesi #CISO #CIO #OnPremAI
 **Image suggestion:** Her koltuğu bir kaygıyla etiketli, hepsi tek platforma işaret eden kurul masası.
@@ -1771,18 +1781,18 @@ Video suggestion: 40sn açıklayıcı, verinin ulusal/kurumsal sınır içinde k
 
 **EN**
 Hook: "An answer you cannot trace is just a confident guess."
-Body: Company Brain is the private, permission-aware knowledge base at the core of AdOS. Ask it a question and every answer arrives grounded in your own documents — with citations you can open and verify. Those citations are permission-scoped: a user only sees, and the AI only cites, documents that user is entitled to. So the model can never surface content someone is not cleared to read. For a CIO, that turns "the AI said so" into "here is the source, and here is who could see it." Grounded, cited, and access-aware by design — not a chatbot improvising over a search box.
+Body: Company Brain is the private, human-approved marketing-performance memory at the core of AdOS. Ask it a question and every answer arrives grounded in your own documents — with citations you can open and verify. Those citations are workspace-scoped: a user only sees, and the AI only cites, documents that user is entitled to. So the model can never surface content someone is not cleared to read. For a CIO, that turns "the AI said so" into "here is the source, and here is who could see it." Grounded, cited, and access-aware by design — not a chatbot improvising over a search box.
 CTA: See the Platform
-Hashtags: #CompanyBrain #CitedAI #PermissionAware #EnterpriseAI #KnowledgeManagement #SovereignAI
+Hashtags: #CompanyBrain #PerformanceMemory #HumanInTheLoop #EnterpriseAI #KnowledgeManagement #SovereignAI
 Image suggestion: A single answer card with three source citations linked beneath it.
-Carousel suggestion: 5 slides — question in, retrieval, permission check, cited answer, verify the source.
+Carousel suggestion: 5 slides — question in, retrieval, permission check, performance-grounded recommendation, verify the source.
 Video suggestion: 45s product walkthrough clicking a citation to open the exact source paragraph.
 
 **TR**
 Hook: "İzini süremediğiniz bir yanıt, kendinden emin bir tahminden ibarettir."
-Body: Company Brain, AdOS'un merkezindeki özel, izin-farkında bilgi tabanıdır. Bir soru sorun; her yanıt kendi belgelerinize dayanarak gelir — açıp doğrulayabileceğiniz kaynak atıflarıyla. Bu atıflar izin kapsamlıdır: kullanıcı yalnızca yetkili olduğu belgeleri görür, yapay zeka da yalnızca onları alıntılar. Böylece model, birinin görmeye yetkili olmadığı içeriği asla ortaya çıkaramaz. Bir CIO için bu, "yapay zeka öyle dedi" cümlesini "işte kaynak ve bunu kim görebilirdi" gerçeğine dönüştürür. Tasarımı gereği dayanaklı, atıflı ve erişim-farkında — bir arama kutusu üzerinde doğaçlama yapan sohbet botu değil.
+Body: Company Brain, AdOS'un merkezindeki özel, izin-farkında pazarlama-performans belleğidır. Bir soru sorun; her yanıt kendi verilerinize dayanarak gelir — açıp doğrulayabileceğiniz kaynak atıflarıyla. Bu atıflar insan onaylıdır: kullanıcı yalnızca yetkili olduğu belgeleri görür, yapay zeka da yalnızca onları alıntılar. Böylece model, birinin görmeye yetkili olmadığı içeriği asla ortaya çıkaramaz. Bir CIO için bu, "yapay zeka öyle dedi" cümlesini "işte kaynak ve bunu kim görebilirdi" gerçeğine dönüştürür. Tasarımı gereği dayanaklı, atıflı ve erişim-farkında — bir arama kutusu üzerinde doğaçlama yapan sohbet botu değil.
 CTA: Platformu Keşfedin
-Hashtags: #CompanyBrain #AtifliYapayZeka #IzinFarkinda #EnterpriseAI #BilgiYonetimi #EgemenYapayZeka
+Hashtags: #CompanyBrain #AtifliYapayZeka #İnsanKontrolünde #EnterpriseAI #BilgiYonetimi #EgemenYapayZeka
 Image suggestion: Altına bağlı üç kaynak atfı olan tek bir yanıt kartı.
 Carousel suggestion: 5 slayt — soru girer, erişim, izin kontrolü, atıflı yanıt, kaynağı doğrula.
 Video suggestion: 45sn ürün turu, atfa tıklayıp tam kaynak paragrafını açma.
@@ -1793,7 +1803,7 @@ Video suggestion: 45sn ürün turu, atfa tıklayıp tam kaynak paragrafını aç
 
 **EN**
 Hook: "We tested the demo by pulling the network cable. On purpose."
-Body: Building AdOS meant proving the hardest claim first: it works with no internet at all. So our air-gap check is blunt — bring the system up, ask Company Brain a real question, then physically disconnect the network and ask again. The answer still arrives, still cited, still permission-scoped. No cloud call to fail, because there was never one to make. Local AI runs on the box in front of you. We do this not as a party trick but as an engineering discipline: if a feature secretly needs the internet, the air-gap test finds it. Sovereignty you can watch is more convincing than sovereignty you're told about.
+Body: Building AdOS meant proving the hardest claim first: it works with no internet at all. So our air-gap check is blunt — bring the system up, ask Company Brain a real question, then physically disconnect the network and ask again. The answer still arrives, still cited, still workspace-scoped. No cloud call to fail, because there was never one to make. Local AI runs on the box in front of you. We do this not as a party trick but as an engineering discipline: if a feature secretly needs the internet, the air-gap test finds it. Sovereignty you can watch is more convincing than sovereignty you're told about.
 CTA: Request a Demo
 Hashtags: #AirGap #OfflineAI #LocalAI #SovereignAI #EngineeringCulture #OnPremAI
 Image suggestion: A hand unplugging an ethernet cable beside a running terminal still answering.
@@ -1802,7 +1812,7 @@ Video suggestion: 60s single-take: ask, unplug on camera, ask again, answer appe
 
 **TR**
 Hook: "Demoyu ağ kablosunu çekerek test ettik. Bilerek."
-Body: AdOS'u kurmak, en zor iddiayı önce kanıtlamak demekti: internet olmadan çalışır. Bu yüzden air-gap kontrolümüz nettir — sistemi ayağa kaldır, Company Brain'e gerçek bir soru sor, sonra ağı fiziksel olarak çıkar ve tekrar sor. Yanıt yine gelir, yine atıflı, yine izin kapsamlı. Başarısız olacak bir bulut çağrısı yok, çünkü baştan hiç yoktu. Local AI önünüzdeki kutuda çalışır. Bunu bir gösteri numarası olarak değil, mühendislik disiplini olarak yaparız: bir özellik gizlice interneti istiyorsa, air-gap testi bunu bulur. İzleyebildiğiniz egemenlik, anlatılan egemenlikten daha inandırıcıdır.
+Body: AdOS'u kurmak, en zor iddiayı önce kanıtlamak demekti: internet olmadan çalışır. Bu yüzden air-gap kontrolümüz nettir — sistemi ayağa kaldır, Company Brain'e gerçek bir soru sor, sonra ağı fiziksel olarak çıkar ve tekrar sor. Yanıt yine gelir, yine atıflı, yine insan onaylı. Başarısız olacak bir bulut çağrısı yok, çünkü baştan hiç yoktu. Local AI önünüzdeki kutuda çalışır. Bunu bir gösteri numarası olarak değil, mühendislik disiplini olarak yaparız: bir özellik gizlice interneti istiyorsa, air-gap testi bunu bulur. İzleyebildiğiniz egemenlik, anlatılan egemenlikten daha inandırıcıdır.
 CTA: Demo Talep Edin
 Hashtags: #AirGap #CevrimdisiYapayZeka #LocalAI #EgemenYapayZeka #MuhendislikKulturu #OnPremAI
 Image suggestion: Çalışan bir terminalin yanında ethernet kablosunu çeken bir el, yanıt sürüyor.
@@ -1815,18 +1825,18 @@ Video suggestion: 60sn tek çekim: sor, kamerada fişi çek, tekrar sor, yanıt 
 
 **EN**
 Hook: "Illustrative scenario: a 6-site manufacturer stops losing answers between shifts."
-Body: This is a fictional, illustrative case — our demo world, NovaMak Endüstri A.Ş.: 6 sites, 4 business units, 42 employees, 12 Digital Employees, 25 workflows. In the scenario, a night-shift operator hits an unfamiliar fault code. Instead of waiting for morning, they ask Company Brain, which cites the exact maintenance note and the site-specific exception — permission-scoped to their role. The fix happens on shift. No data left the plant; the model ran locally. Illustrative numbers, but the mechanism is real and shown live in the demo. The point isn't a hero metric. It's that institutional knowledge stops evaporating at 2 a.m.
+Body: This is a fictional, illustrative case — our demo world, NovaMak Endüstri A.Ş.: 6 sites, 4 business units, 42 employees, 12 AI-assisted workflows, 25 workflows. In the scenario, a night-shift operator hits an unfamiliar fault code. Instead of waiting for morning, they ask Company Brain, which cites the exact maintenance note and the site-specific exception — workspace-scoped to their role. The fix happens on shift. No data left the plant; the model ran locally. Illustrative numbers, but the mechanism is real and shown live in the demo. The point isn't a hero metric. It's that institutional knowledge stops evaporating at 2 a.m.
 CTA: Request a Demo
-Hashtags: #Manufacturing #DigitalEmployees #CompanyBrain #KnowledgeRetention #OnPremAI #SovereignAI
-Image suggestion: Night-shift control room, one screen showing a cited answer. Label "Illustrative."
-Carousel suggestion: 6 slides — the NovaMak setup, the 2 a.m. fault, the cited answer, the fix, "illustrative" disclaimer, what's real.
+Hashtags: #Manufacturing #MarketingAI #CompanyBrain #KnowledgeRetention #OnPremAI #SovereignAI
+Image suggestion: Night-shift control room, one screen showing a performance-grounded recommendation. Label "Illustrative."
+Carousel suggestion: 6 slides — the NovaMak setup, the 2 a.m. fault, the performance-grounded recommendation, the fix, "illustrative" disclaimer, what's real.
 Video suggestion: 50s dramatized scene with on-screen "Illustrative scenario" watermark throughout.
 
 **TR**
 Hook: "Örnek senaryo: 6 sahalı bir üretici vardiyalar arasında yanıt kaybetmeyi bırakıyor."
-Body: Bu kurgusal, örnekleyici bir vakadır — demo dünyamız NovaMak Endüstri A.Ş.: 6 saha, 4 iş birimi, 42 çalışan, 12 Digital Employees, 25 workflow. Senaryoda gece vardiyası operatörü tanımadığı bir arıza koduyla karşılaşır. Sabahı beklemek yerine Company Brain'e sorar; sistem tam bakım notunu ve sahaya özel istisnayı, rolüne göre izin kapsamlı biçimde alıntılar. Çözüm vardiyada gerçekleşir. Veri tesisten çıkmadı; model yerelde çalıştı. Sayılar örnekleyici, ama mekanizma gerçek ve demoda canlı gösterilir. Amaç kahraman bir metrik değil. Kurumsal bilginin gece 2'de buharlaşmayı bırakmasıdır.
+Body: Bu kurgusal, örnekleyici bir vakadır — demo dünyamız NovaMak Endüstri A.Ş.: 6 saha, 4 iş birimi, 42 çalışan, 12 AI-assisted workflows, 25 workflow. Senaryoda gece vardiyası operatörü tanımadığı bir arıza koduyla karşılaşır. Sabahı beklemek yerine Company Brain'e sorar; sistem tam bakım notunu ve sahaya özel istisnayı, rolüne göre insan onaylı biçimde alıntılar. Çözüm vardiyada gerçekleşir. Veri tesisten çıkmadı; model yerelde çalıştı. Sayılar örnekleyici, ama mekanizma gerçek ve demoda canlı gösterilir. Amaç kahraman bir metrik değil. Kurumsal bilginin gece 2'de buharlaşmayı bırakmasıdır.
 CTA: Demo Talep Edin
-Hashtags: #Manufacturing #DigitalEmployees #CompanyBrain #BilgiKorunumu #OnPremAI #EgemenYapayZeka
+Hashtags: #Manufacturing #MarketingAI #CompanyBrain #BilgiKorunumu #OnPremAI #EgemenYapayZeka
 Image suggestion: Gece vardiyası kontrol odası, bir ekranda atıflı yanıt. "Örnekleyici" etiketi.
 Carousel suggestion: 6 slayt — NovaMak kurulumu, gece 2 arızası, atıflı yanıt, çözüm, "örnekleyici" notu, gerçek olan.
 Video suggestion: 50sn canlandırma, boyunca "Örnek senaryo" filigranı.
@@ -1881,16 +1891,16 @@ Video suggestion: 40sn yan yana gecikme klibi, milisaniye farkını kabul eden a
 
 **EN**
 Hook: "When a 30-year expert retires, does their knowledge leave with them?"
-Body: In most organizations, yes. Procedures live in one person's head, a few shared drives, and a decade of email. AdOS turns that scattered institutional knowledge into Company Brain — a private, permission-aware base where answers come cited from your own documents. The retiring expert's approved notes stay searchable, grounded, and access-controlled. New hires ask questions and get sourced answers instead of guessing or interrupting a senior colleague. For HR leaders measuring knowledge retention and training cost, the payoff is concrete: the organization stops re-learning what it already knew. Knowledge that's written down but unfindable is knowledge you don't really have.
+Body: In most organizations, yes. Procedures live in one person's head, a few shared drives, and a decade of email. AdOS turns that scattered institutional knowledge into Company Brain — a private, human-approved base where answers come cited from your own documents. The retiring expert's approved notes stay searchable, grounded, and access-controlled. New hires ask questions and get sourced answers instead of guessing or interrupting a senior colleague. For HR leaders measuring knowledge retention and training cost, the payoff is concrete: the organization stops re-learning what it already knew. Knowledge that's written down but unfindable is knowledge you don't really have.
 CTA: Read the Guide
 Hashtags: #KnowledgeManagement #CompanyBrain #KnowledgeRetention #HR #Onboarding #EnterpriseAI
 Image suggestion: A doorway with knowledge streams flowing back into a building rather than out.
-Carousel suggestion: 5 slides — the retirement problem, scattered sources, Company Brain, cited answer, retention outcome.
+Carousel suggestion: 5 slides — the retirement problem, scattered sources, Company Brain, performance-grounded recommendation, retention outcome.
 Video suggestion: 50s narrated animation of institutional knowledge being captured before an exit.
 
 **TR**
 Hook: "30 yıllık bir uzman emekli olduğunda bilgisi onunla birlikte mi gidiyor?"
-Body: Çoğu kurumda evet. Prosedürler bir kişinin aklında, birkaç paylaşımlı sürücüde ve on yıllık e-postada yaşar. AdOS bu dağınık kurumsal bilgiyi Company Brain'e dönüştürür — yanıtların kendi belgelerinizden atıflı geldiği özel, izin-farkında bir taban. Emekli olan uzmanın onaylı notları aranabilir, dayanaklı ve erişim-kontrollü kalır. Yeni işe alınanlar soru sorar ve tahmin etmek ya da kıdemli bir meslektaşı rahatsız etmek yerine kaynaklı yanıt alır. Bilgi korunumunu ve eğitim maliyetini ölçen HR liderleri için kazanç somuttur: kurum zaten bildiğini yeniden öğrenmeyi bırakır. Yazılı ama bulunamaz bilgi, aslında sahip olmadığınız bilgidir.
+Body: Çoğu kurumda evet. Prosedürler bir kişinin aklında, birkaç paylaşımlı sürücüde ve on yıllık e-postada yaşar. AdOS bu dağınık kurumsal bilgiyi Company Brain'e dönüştürür — yanıtların kendi verilerinizden atıflı geldiği özel, izin-farkında bir taban. Emekli olan uzmanın onaylı notları aranabilir, dayanaklı ve erişim-kontrollü kalır. Yeni işe alınanlar soru sorar ve tahmin etmek ya da kıdemli bir meslektaşı rahatsız etmek yerine performansa dayalı öneri alır. Bilgi korunumunu ve eğitim maliyetini ölçen HR liderleri için kazanç somuttur: kurum zaten bildiğini yeniden öğrenmeyi bırakır. Yazılı ama bulunamaz bilgi, aslında sahip olmadığınız bilgidir.
 CTA: Rehberi Okuyun
 Hashtags: #BilgiYonetimi #CompanyBrain #BilgiKorunumu #HR #Oryantasyon #EnterpriseAI
 Image suggestion: Bilgi akışlarının dışarı değil binaya geri aktığı bir kapı.
@@ -1903,7 +1913,7 @@ Video suggestion: 50sn anlatımlı animasyon, kurumsal bilginin çıkıştan ön
 
 **EN**
 Hook: "One AI service. Many member firms. Data that never mixes."
-Body: Organized Industrial Zones (OSB) sit on a real opportunity: offer shared, sovereign AI to member companies without any of them exposing data to each other or the cloud. AdOS is multi-tenant with strict tenant isolation, so each firm's Company Brain, Digital Employees, and workflows stay walled off — while the OSB operates the platform on-premise for all. No firm's documents feed another's answers. No data leaves the zone. For an OSB body weighing a member-services offering, this is a differentiated, defensible service: enterprise AI capability delivered collectively, with sovereignty preserved individually. Shared infrastructure, separated tenants — capability at zone scale.
+Body: Organized Industrial Zones (OSB) sit on a real opportunity: offer shared, sovereign AI to member companies without any of them exposing data to each other or the cloud. AdOS is multi-tenant with strict tenant isolation, so each firm's Company Brain, AI-assisted workflows, and workflows stay walled off — while the OSB operates the platform on-premise for all. No firm's documents feed another's answers. No data leaves the zone. For an OSB body weighing a member-services offering, this is a differentiated, defensible service: enterprise AI capability delivered collectively, with sovereignty preserved individually. Shared infrastructure, separated tenants — capability at zone scale.
 CTA: Talk to Sales
 Hashtags: #OSB #OrganizedIndustrialZones #MultiTenant #SovereignAI #EnterpriseAI #OnPremAI
 Image suggestion: A zone map with distinct member buildings, each with its own sealed data core.
@@ -1912,7 +1922,7 @@ Video suggestion: 45s diagram animation of isolated tenants under one on-prem pl
 
 **TR**
 Hook: "Tek bir yapay zeka hizmeti. Çok sayıda üye firma. Asla karışmayan veri."
-Body: Organize Sanayi Bölgeleri (OSB) gerçek bir fırsatın üzerinde oturur: üye şirketlere, hiçbirinin verisini birbirine ya da buluta açmadan paylaşılan, egemen yapay zeka sunmak. AdOS, katı kiracı yalıtımıyla çok kiracılıdır; böylece her firmanın Company Brain, Digital Employees ve workflow'ları ayrı duvarlar içinde kalır — OSB ise platformu herkes için on-premise işletir. Hiçbir firmanın belgeleri bir başkasının yanıtını beslemez. Veri bölgeden çıkmaz. Üye hizmeti sunmayı değerlendiren bir OSB için bu, farklılaşmış ve savunulabilir bir hizmettir: toplu sunulan kurumsal yapay zeka yeteneği, bireysel korunan egemenlik. Paylaşılan altyapı, ayrılan kiracılar — bölge ölçeğinde yetenek.
+Body: Organize Sanayi Bölgeleri (OSB) gerçek bir fırsatın üzerinde oturur: üye şirketlere, hiçbirinin verisini birbirine ya da buluta açmadan paylaşılan, egemen yapay zeka sunmak. AdOS, katı kiracı yalıtımıyla çok kiracılıdır; böylece her firmanın Company Brain, AI-assisted workflows ve workflow'ları ayrı duvarlar içinde kalır — OSB ise platformu herkes için on-premise işletir. Hiçbir firmanın belgeleri bir başkasının yanıtını beslemez. Veri bölgeden çıkmaz. Üye hizmeti sunmayı değerlendiren bir OSB için bu, farklılaşmış ve savunulabilir bir hizmettir: toplu sunulan kurumsal yapay zeka yeteneği, bireysel korunan egemenlik. Paylaşılan altyapı, ayrılan kiracılar — bölge ölçeğinde yetenek.
 CTA: Satışla Görüşün
 Hashtags: #OSB #OrganizeSanayi #CokKiracili #EgemenYapayZeka #EnterpriseAI #OnPremAI
 Image suggestion: Her biri kendi mühürlü veri çekirdeğine sahip ayrı üye binalarıyla bölge haritası.
@@ -1946,19 +1956,19 @@ Video suggestion: 40sn sakin anlatım, sıfır dışa yapay zeka trafiği göste
 ## Week 30 · Post 2 (Educational)
 
 **EN**
-Hook: "'Permission-aware AI' sounds like a slogan. Here's the mechanism."
-Body: A model that can read every document but shouldn't reveal every document is a leak waiting to happen. AdOS solves this at retrieval, not with a disclaimer. In Company Brain, citations are permission-scoped: before the AI answers, it filters sources to what the asking user is entitled to see. A restricted HR file or a sealed board memo is invisible to a user who lacks access — the model can never surface or cite it. So two people can ask the same question and correctly get different answers based on their clearance. For Healthcare and Finance, that's the difference between a helpful assistant and a compliance incident. Access control belongs inside the AI, not around it.
+Hook: "'Human-Approved AI' sounds like a slogan. Here's the mechanism."
+Body: A model that can read every document but shouldn't reveal every document is a leak waiting to happen. AdOS solves this at retrieval, not with a disclaimer. In Company Brain, citations are workspace-scoped: before the AI answers, it filters sources to what the asking user is entitled to see. A restricted HR file or a sealed board memo is invisible to a user who lacks access — the model can never surface or cite it. So two people can ask the same question and correctly get different answers based on their clearance. For Healthcare and Finance, that's the difference between a helpful assistant and a compliance incident. human approval gates belongs inside the AI, not around it.
 CTA: Read the Guide
-Hashtags: #PermissionAware #RBAC #Healthcare #Finance #CompanyBrain #SovereignAI
+Hashtags: #HumanInTheLoop #GovernedAI #Healthcare #Finance #CompanyBrain #SovereignAI
 Image suggestion: Two user icons asking one question, receiving differently scoped answers.
 Carousel suggestion: 6 slides — the leak risk, retrieval-time filtering, entitled sources only, two users two answers, restricted doc stays hidden, why it matters.
 Video suggestion: 45s demo of the same query from two roles returning access-appropriate results.
 
 **TR**
 Hook: "'İzin-farkında yapay zeka' bir slogan gibi geliyor. İşte mekanizması."
-Body: Her belgeyi okuyabilen ama her belgeyi açığa vurmaması gereken bir model, patlamayı bekleyen bir sızıntıdır. AdOS bunu bir feragatnameyle değil, erişim anında çözer. Company Brain'de atıflar izin kapsamlıdır: yapay zeka yanıtlamadan önce kaynakları, soran kullanıcının görmeye yetkili olduğuyla sınırlar. Kısıtlı bir HR dosyası ya da mühürlü bir yönetim notu, erişimi olmayan kullanıcıya görünmezdir — model onu asla ortaya çıkaramaz ya da alıntılayamaz. Böylece iki kişi aynı soruyu sorar ve yetkilerine göre doğru biçimde farklı yanıt alır. Healthcare ve Finance için bu, yardımcı bir asistan ile bir uyum ihlali arasındaki farktır. Erişim kontrolü yapay zekanın etrafına değil, içine aittir.
+Body: Her belgeyi okuyabilen ama her belgeyi açığa vurmaması gereken bir model, patlamayı bekleyen bir sızıntıdır. AdOS bunu bir feragatnameyle değil, erişim anında çözer. Company Brain'de atıflar insan onaylıdır: yapay zeka yanıtlamadan önce kaynakları, soran kullanıcının görmeye yetkili olduğuyla sınırlar. Kısıtlı bir HR dosyası ya da mühürlü bir yönetim notu, erişimi olmayan kullanıcıya görünmezdir — model onu asla ortaya çıkaramaz ya da alıntılayamaz. Böylece iki kişi aynı soruyu sorar ve yetkilerine göre doğru biçimde farklı yanıt alır. Healthcare ve Finance için bu, yardımcı bir asistan ile bir uyum ihlali arasındaki farktır. Erişim kontrolü yapay zekanın etrafına değil, içine aittir.
 CTA: Rehberi Okuyun
-Hashtags: #IzinFarkinda #RBAC #Healthcare #Finance #CompanyBrain #EgemenYapayZeka
+Hashtags: #İnsanKontrolünde #GovernedAI #Healthcare #Finance #CompanyBrain #EgemenYapayZeka
 Image suggestion: Bir soru soran iki kullanıcı simgesi, farklı kapsamlı yanıtlar alıyor.
 Carousel suggestion: 6 slayt — sızıntı riski, erişim anı filtreleme, yalnızca yetkili kaynaklar, iki kullanıcı iki yanıt, kısıtlı belge gizli kalır, önemi.
 Video suggestion: 45sn demo, aynı sorgunun iki rolden erişime uygun sonuç dönmesi.
@@ -1991,20 +2001,20 @@ Video suggestion: 40sn animasyon, iş yükü on-prem'e geçince dönen sayacın 
 
 **EN**
 Hook: "Approvals don't stall because people are slow. They stall because authority is unclear."
-Body: Workflows & Approvals in AdOS make authority explicit. Processes are structured, routing is deterministic, and approval authority is tiered — the right request reaches the right level automatically, and every consequential action lands in an immutable audit trail. No more chasing a signature across email threads or guessing who can sign off on what. For Operations leaders, that means fewer stalled approvals and a clean record of who decided, when, and on what basis. Digital Employees can even prepare approvals for a human to authorize. Structure removes ambiguity; the audit trail removes doubt. Speed follows clarity, not the other way around.
+Body: Workflows & Approvals in AdOS make authority explicit. Processes are structured, routing is deterministic, and approval authority is tiered — the right request reaches the right level automatically, and every consequential action lands in an activity log and per-approval timeline. No more chasing a signature across email threads or guessing who can sign off on what. For Operations leaders, that means fewer stalled approvals and a clean record of who decided, when, and on what basis. AI-assisted workflows can even prepare approvals for a human to authorize. Structure removes ambiguity; the audit trail removes doubt. Speed follows clarity, not the other way around.
 CTA: See the Platform
-Hashtags: #WorkflowsAndApprovals #Operations #AuditTrail #DigitalEmployees #EnterpriseAI #SovereignAI
+Hashtags: #WorkflowsAndApprovals #Operations #AuditTrail #MarketingAI #EnterpriseAI #SovereignAI
 Image suggestion: A clean tiered-approval ladder with an audit-log strip alongside.
 Carousel suggestion: 6 slides — the stall problem, structured process, deterministic routing, tiered authority, audit trail, faster outcome.
 Video suggestion: 45s walkthrough of a request routed up tiers and recorded in the audit log.
 
 **TR**
 Hook: "Onaylar insanlar yavaş olduğu için tıkanmaz. Yetki belirsiz olduğu için tıkanır."
-Body: AdOS'ta Workflows & Approvals yetkiyi açık hale getirir. Süreçler yapılandırılmış, yönlendirme deterministik, onay yetkisi kademelidir — doğru talep doğru seviyeye otomatik ulaşır ve her önemli eylem değişmez bir denetim izine düşer. E-posta zincirlerinde imza kovalamak ya da kimin neyi onaylayabileceğini tahmin etmek yok. Operations liderleri için bu, daha az tıkanan onay ve kimin, ne zaman, hangi temelde karar verdiğine dair temiz bir kayıt demektir. Digital Employees, bir insanın yetkilendirmesi için onayları hazırlayabilir bile. Yapı belirsizliği kaldırır; denetim izi kuşkuyu kaldırır. Hız, netliği izler, tersi değil.
+Body: AdOS'ta Workflows & Approvals yetkiyi açık hale getirir. Süreçler yapılandırılmış, yönlendirme deterministik, onay yetkisi kademelidir — doğru talep doğru seviyeye otomatik ulaşır ve her önemli eylem değişmez bir etkinlik günlüğüne düşer. E-posta zincirlerinde imza kovalamak ya da kimin neyi onaylayabileceğini tahmin etmek yok. Operations liderleri için bu, daha az tıkanan onay ve kimin, ne zaman, hangi temelde karar verdiğine dair temiz bir kayıt demektir. AI-assisted workflows, bir insanın yetkilendirmesi için onayları hazırlayabilir bile. Yapı belirsizliği kaldırır; etkinlik günlüğü kuşkuyu kaldırır. Hız, netliği izler, tersi değil.
 CTA: Platformu Keşfedin
-Hashtags: #WorkflowsAndApprovals #Operasyon #DenetimIzi #DigitalEmployees #EnterpriseAI #EgemenYapayZeka
-Image suggestion: Yanında denetim kaydı şeridi olan temiz bir kademeli onay merdiveni.
-Carousel suggestion: 6 slayt — tıkanma sorunu, yapılandırılmış süreç, deterministik yönlendirme, kademeli yetki, denetim izi, hızlı sonuç.
+Hashtags: #WorkflowsAndApprovals #Operasyon #DenetimIzi #MarketingAI #EnterpriseAI #EgemenYapayZeka
+Image suggestion: Yanında denetim kaydı şeridi olan temiz bir insan onay adÄ±mÄ± merdiveni.
+Carousel suggestion: 6 slayt — tıkanma sorunu, yapılandırılmış süreç, deterministik yönlendirme, kademeli yetki, etkinlik günlüğü, hızlı sonuç.
 Video suggestion: 45sn tur, kademeler arası yönlendirilen ve denetim kaydına geçen bir talep.
 
 ---
@@ -2035,20 +2045,20 @@ Video suggestion: 50sn ekran kaydı, ayağa kaldırma komutu ardından geri yük
 
 **EN**
 Hook: "Illustrative: a public agency approves a permit without a single email chase."
-Body: Fictional scenario, real mechanism. A municipal office (modeled on our NovaMak-style demo world) receives a permit request. A Digital Employee prepares the file, Company Brain cites the exact regulation and precedent — permission-scoped — and Workflows & Approvals routes it up the tiered authority automatically. Each step lands in an immutable audit trail, so the decision is defensible later. No document left the building; everything ran on the agency's own hardware, air-gap capable. The illustrative outcome: a process that used to bounce between inboxes now moves in one tracked line. This case is fictional and labeled as such — but the tiered approval and cited answer are shown live in the demo.
+Body: Fictional scenario, real mechanism. A municipal office (modeled on our NovaMak-style demo world) receives a permit request. An AI-assisted workflow prepares the file, Company Brain cites the exact regulation and precedent — workspace-scoped — and Workflows & Approvals routes it up the tiered authority automatically. Each step lands in an activity log and per-approval timeline, so the decision is defensible later. No document left the building; everything ran on the agency's own hardware, air-gap capable. The illustrative outcome: a process that used to bounce between inboxes now moves in one tracked line. This case is fictional and labeled as such — but the human approval gate and performance-grounded recommendation are shown live in the demo.
 CTA: Request a Demo
-Hashtags: #PublicSector #GovTech #WorkflowsAndApprovals #AuditTrail #DigitalEmployees #SovereignAI
+Hashtags: #PublicSector #GovTech #WorkflowsAndApprovals #AuditTrail #MarketingAI #SovereignAI
 Image suggestion: A permit moving up a tiered ladder, audit stamps at each step. Label "Illustrative."
-Carousel suggestion: 6 slides — the permit request, Digital Employee prep, cited regulation, tiered routing, audit trail, "illustrative" note.
+Carousel suggestion: 6 slides — the permit request, AI-assisted workflow prep, cited regulation, tiered routing, audit trail, "illustrative" note.
 Video suggestion: 50s dramatized flow with persistent "Illustrative scenario" watermark.
 
 **TR**
 Hook: "Örnekleyici: bir kamu kurumu tek bir e-posta kovalamadan ruhsat onaylıyor."
-Body: Kurgusal senaryo, gerçek mekanizma. Bir belediye ofisi (NovaMak tarzı demo dünyamıza göre modellenmiş) ruhsat talebi alır. Bir Digital Employee dosyayı hazırlar, Company Brain tam mevzuatı ve emsali izin kapsamlı biçimde alıntılar ve Workflows & Approvals talebi kademeli yetki boyunca otomatik yönlendirir. Her adım değişmez bir denetim izine düşer, böylece karar sonradan savunulabilir. Hiçbir belge binadan çıkmadı; her şey kurumun kendi donanımında, air-gap yetenekli çalıştı. Örnekleyici sonuç: eskiden gelen kutuları arasında sekip duran süreç artık tek izlenen bir hatta ilerler. Bu vaka kurgusaldır ve öyle etiketlenir — ama kademeli onay ve atıflı yanıt demoda canlı gösterilir.
+Body: Kurgusal senaryo, gerçek mekanizma. Bir belediye ofisi (NovaMak tarzı demo dünyamıza göre modellenmiş) ruhsat talebi alır. Bir AI-assisted workflow dosyayı hazırlar, Company Brain tam mevzuatı ve emsali insan onaylı biçimde alıntılar ve Workflows & Approvals talebi kademeli yetki boyunca otomatik yönlendirir. Her adım değişmez bir etkinlik günlüğüne düşer, böylece karar sonradan savunulabilir. Hiçbir belge binadan çıkmadı; her şey kurumun kendi donanımında, air-gap yetenekli çalıştı. Örnekleyici sonuç: eskiden gelen kutuları arasında sekip duran süreç artık tek izlenen bir hatta ilerler. Bu vaka kurgusaldır ve öyle etiketlenir — ama insan onay adÄ±mÄ± ve atıflı yanıt demoda canlı gösterilir.
 CTA: Demo Talep Edin
-Hashtags: #KamuSektoru #GovTech #WorkflowsAndApprovals #DenetimIzi #DigitalEmployees #EgemenYapayZeka
+Hashtags: #KamuSektoru #GovTech #WorkflowsAndApprovals #DenetimIzi #MarketingAI #EgemenYapayZeka
 Image suggestion: Kademeli merdivende yükselen bir ruhsat, her adımda denetim damgası. "Örnekleyici" etiketi.
-Carousel suggestion: 6 slayt — ruhsat talebi, Digital Employee hazırlığı, atıflı mevzuat, kademeli yönlendirme, denetim izi, "örnekleyici" notu.
+Carousel suggestion: 6 slayt — ruhsat talebi, AI-assisted workflow hazırlığı, atıflı mevzuat, kademeli yönlendirme, etkinlik günlüğü, "örnekleyici" notu.
 Video suggestion: 50sn canlandırılmış akış, kalıcı "Örnek senaryo" filigranı.
 
 ---
@@ -2057,19 +2067,19 @@ Video suggestion: 50sn canlandırılmış akış, kalıcı "Örnek senaryo" fili
 
 **EN**
 Hook: "We named it an operating system on purpose. A chatbot wouldn't have earned the word."
-Body: The easy product was a chat box over a search index. We didn't build that. AdOS is an enterprise AI operating system because it does three things a chatbot can't: it holds your knowledge as a permission-aware Company Brain, it puts Digital Employees to work inside real roles, and it runs Workflows & Approvals with tiered authority and audit trails. Those pieces operate together, on your own infrastructure. Calling it a chatbot would flatter the demo and mislead the buyer. I'd rather claim less and mean it. If the word "operating system" feels heavy, good — it's carrying the weight of what actually runs.
+Body: The easy product was a chat box over a search index. We didn't build that. AdOS is an enterprise AI operating system because it does three things a chatbot can't: it holds your knowledge as a human-approved Company Brain, it puts AI-assisted workflows to work inside real roles, and it runs Workflows & Approvals with tiered authority and audit trails. Those pieces operate together, on your own infrastructure. Calling it a chatbot would flatter the demo and mislead the buyer. I'd rather claim less and mean it. If the word "operating system" feels heavy, good — it's carrying the weight of what actually runs.
 CTA: See the Platform
-Hashtags: #FounderPOV #EnterpriseAI #OperatingSystem #DigitalEmployees #CompanyBrain #SovereignAI
-Image suggestion: Three interlocking modules labeled Company Brain, Digital Employees, Workflows.
+Hashtags: #FounderPOV #EnterpriseAI #OperatingSystem #MarketingAI #CompanyBrain #SovereignAI
+Image suggestion: Three interlocking modules labeled Company Brain, AI-assisted workflows, Workflows.
 Carousel suggestion: 4 slides — the easy product, why we refused it, the three pillars, what "OS" earns.
 Video suggestion: 45s founder to camera explaining why "chatbot" was the wrong word.
 
 **TR**
 Hook: "Ona bilerek işletim sistemi dedik. Bir sohbet botu bu kelimeyi hak etmezdi."
-Body: Kolay ürün, arama dizini üzerinde bir sohbet kutusuydu. Onu yapmadık. AdOS bir kurumsal yapay zeka işletim sistemidir; çünkü bir sohbet botunun yapamayacağı üç şeyi yapar: bilginizi izin-farkında bir Company Brain olarak tutar, Digital Employees'i gerçek roller içinde çalıştırır ve Workflows & Approvals'ı kademeli yetki ve denetim izleriyle işletir. Bu parçalar birlikte, kendi altyapınızda çalışır. Ona sohbet botu demek demoyu pohpohlar, alıcıyı yanıltır. Daha az iddia edip arkasında durmayı tercih ederim. "İşletim sistemi" kelimesi ağır geliyorsa, iyi — gerçekten çalışan şeyin ağırlığını taşıyor.
+Body: Kolay ürün, arama dizini üzerinde bir sohbet kutusuydu. Onu yapmadık. AdOS bir kurumsal yapay zeka işletim sistemidir; çünkü bir sohbet botunun yapamayacağı üç şeyi yapar: bilginizi izin-farkında bir Company Brain olarak tutar, AI-assisted workflows'i gerçek roller içinde çalıştırır ve Workflows & Approvals'ı kademeli yetki ve denetim izleriyle işletir. Bu parçalar birlikte, kendi altyapınızda çalışır. Ona sohbet botu demek demoyu pohpohlar, alıcıyı yanıltır. Daha az iddia edip arkasında durmayı tercih ederim. "İşletim sistemi" kelimesi ağır geliyorsa, iyi — gerçekten çalışan şeyin ağırlığını taşıyor.
 CTA: Platformu Keşfedin
-Hashtags: #KurucuBakisi #EnterpriseAI #IsletimSistemi #DigitalEmployees #CompanyBrain #EgemenYapayZeka
-Image suggestion: Company Brain, Digital Employees, Workflows etiketli iç içe geçmiş üç modül.
+Hashtags: #KurucuBakisi #EnterpriseAI #IsletimSistemi #MarketingAI #CompanyBrain #EgemenYapayZeka
+Image suggestion: Company Brain, AI-assisted workflows, Workflows etiketli iç içe geçmiş üç modül.
 Carousel suggestion: 4 slayt — kolay ürün, neden reddettik, üç sütun, "işletim sistemi" ne hak eder.
 Video suggestion: 45sn kurucu kameraya, "sohbet botu"nun neden yanlış kelime olduğunu anlatıyor.
 
@@ -2101,20 +2111,20 @@ Video suggestion: 40sn klip, alttaki modelin arayüz değişmeden değiştirilme
 
 **EN**
 Hook: "Your intranet search finds the document. It rarely finds the answer."
-Body: Keyword search returns a list of files and leaves the reading to you. Company Brain returns the answer — grounded in those files and cited so you can verify it in one click. The difference matters most in Education and large public bodies, where the knowledge base is enormous and budgets are tight. Instead of a librarian's list, a teacher or administrator gets a sourced response scoped to what they're permitted to see. Retrieval plus grounding plus permissions turns a pile of documents into usable institutional memory. Finding a file is not the same as getting an answer, and most organizations have confused the two for years.
+Body: Keyword search returns a list of files and leaves the reading to you. Company Brain returns the answer — grounded in those files and cited so you can verify it in one click. The difference matters most in Education and large public bodies, where the marketing-performance memory is enormous and budgets are tight. Instead of a librarian's list, a teacher or administrator gets a sourced response scoped to what they're permitted to see. Retrieval plus grounding plus permissions turns a pile of documents into usable institutional memory. Finding a file is not the same as getting an answer, and most organizations have confused the two for years.
 CTA: Read the Guide
-Hashtags: #KnowledgeManagement #Education #CompanyBrain #CitedAI #PublicSector #SovereignAI
-Image suggestion: Split image — a long search-results list vs one cited answer card.
+Hashtags: #KnowledgeManagement #Education #CompanyBrain #PerformanceMemory #PublicSector #SovereignAI
+Image suggestion: Split image — a long search-results list vs one performance-grounded recommendation card.
 Carousel suggestion: 5 slides — keyword list, the reading burden, grounded answer, citation, permission scope.
-Video suggestion: 40s side-by-side of intranet search vs a Company Brain cited answer.
+Video suggestion: 40s side-by-side of intranet search vs a Company Brain performance-grounded recommendation.
 
 **TR**
 Hook: "İntranet aramanız belgeyi bulur. Yanıtı nadiren bulur."
-Body: Anahtar kelime araması bir dosya listesi döndürür ve okumayı size bırakır. Company Brain yanıtı döndürür — o dosyalara dayanır ve tek tıkla doğrulayabilmeniz için atıflıdır. Fark, bilgi tabanının devasa ve bütçenin kısıtlı olduğu Education ve büyük kamu kurumlarında en çok önem kazanır. Bir kütüphaneci listesi yerine, öğretmen ya da yönetici, görmeye yetkili olduğuyla sınırlı kaynaklı bir yanıt alır. Erişim, dayanak ve izinler bir belge yığınını kullanılabilir kurumsal hafızaya çevirir. Bir dosyayı bulmak, bir yanıt almakla aynı şey değildir ve çoğu kurum bu ikisini yıllardır karıştırıyor.
+Body: Anahtar kelime araması bir dosya listesi döndürür ve okumayı size bırakır. Company Brain yanıtı döndürür — o dosyalara dayanır ve tek tıkla doğrulayabilmeniz için atıflıdır. Fark, pazarlama-performans belleğinin devasa ve bütçenin kısıtlı olduğu Education ve büyük kamu kurumlarında en çok önem kazanır. Bir kütüphaneci listesi yerine, öğretmen ya da yönetici, görmeye yetkili olduğuyla sınırlı kaynaklı bir yanıt alır. Erişim, dayanak ve izinler bir belge yığınını kullanılabilir kurumsal hafızaya çevirir. Bir dosyayı bulmak, bir yanıt almakla aynı şey değildir ve çoğu kurum bu ikisini yıllardır karıştırıyor.
 CTA: Rehberi Okuyun
 Hashtags: #BilgiYonetimi #Education #CompanyBrain #AtifliYapayZeka #KamuSektoru #EgemenYapayZeka
 Image suggestion: Bölünmüş görsel — uzun arama sonuç listesi ile tek atıflı yanıt kartı.
-Carousel suggestion: 5 slayt — anahtar kelime listesi, okuma yükü, dayanaklı yanıt, atıf, izin kapsamı.
+Carousel suggestion: 5 slayt — anahtar kelime listesi, okuma yükü, dayanaklı yanıt, atıf, insan onayı.
 Video suggestion: 40sn yan yana, intranet araması ile Company Brain atıflı yanıtı.
 
 ---
@@ -2123,16 +2133,16 @@ Video suggestion: 40sn yan yana, intranet araması ile Company Brain atıflı ya
 
 **EN**
 Hook: "Multi-site enterprises don't have a knowledge problem. They have a knowledge-fragmentation problem."
-Body: Six plants, four business units, sixteen departments — and each one quietly develops its own version of the truth. Manufacturing groups feel this daily: the same fault has three fixes depending on who you ask. AdOS unifies without centralizing risk. Company Brain grounds answers in the actual documents of the actual site, permission-scoped, while multi-tenant isolation keeps units cleanly separated where they should be. One operating system, consistent cited answers, no single point where sensitive data pools unnecessarily. For a CIO standing up AI across sites, the win isn't just capability — it's coherence. Fragmented knowledge is expensive precisely because no one can see the whole bill.
+Body: Six plants, four business units, sixteen departments — and each one quietly develops its own version of the truth. Manufacturing groups feel this daily: the same fault has three fixes depending on who you ask. AdOS unifies without centralizing risk. Company Brain grounds answers in the actual documents of the actual site, workspace-scoped, while multi-tenant isolation keeps units cleanly separated where they should be. One operating system, consistent performance-grounded recommendations, no single point where sensitive data pools unnecessarily. For a CIO standing up AI across sites, the win isn't just capability — it's coherence. Fragmented knowledge is expensive precisely because no one can see the whole bill.
 CTA: Talk to Sales
 Hashtags: #Manufacturing #MultiSite #EnterpriseAI #CompanyBrain #CIO #SovereignAI
 Image suggestion: Multiple plant icons linked to one coherent, bounded knowledge core.
 Carousel suggestion: 5 slides — fragmentation, three fixes problem, grounded per-site answers, isolation, coherence.
-Video suggestion: 45s animation of scattered site knowledge resolving into consistent cited answers.
+Video suggestion: 45s animation of scattered site knowledge resolving into consistent performance-grounded recommendations.
 
 **TR**
 Hook: "Çok sahalı işletmelerin bilgi sorunu yoktur. Bilgi parçalanması sorunu vardır."
-Body: Altı tesis, dört iş birimi, on altı departman — ve her biri sessizce kendi gerçek versiyonunu geliştirir. Manufacturing grupları bunu her gün yaşar: aynı arızanın kime sorduğunuza göre üç çözümü vardır. AdOS, riski merkezileştirmeden birleştirir. Company Brain, yanıtları gerçek sahanın gerçek belgelerine izin kapsamlı biçimde dayandırırken, çok kiracılı yalıtım birimleri gerektiği yerde temizce ayrı tutar. Tek işletim sistemi, tutarlı atıflı yanıtlar, hassas verinin gereksiz yere biriktiği tek bir nokta yok. Sahalar boyunca yapay zeka kuran bir CIO için kazanç yalnızca yetenek değil — tutarlılıktır. Parçalanmış bilgi tam da kimse tüm faturayı göremediği için pahalıdır.
+Body: Altı tesis, dört iş birimi, on altı departman — ve her biri sessizce kendi gerçek versiyonunu geliştirir. Manufacturing grupları bunu her gün yaşar: aynı arızanın kime sorduğunuza göre üç çözümü vardır. AdOS, riski merkezileştirmeden birleştirir. Company Brain, yanıtları gerçek sahanın gerçek belgelerine insan onaylı biçimde dayandırırken, çok kiracılı yalıtım birimleri gerektiği yerde temizce ayrı tutar. Tek işletim sistemi, tutarlı atıflı yanıtlar, hassas verinin gereksiz yere biriktiği tek bir nokta yok. Sahalar boyunca yapay zeka kuran bir CIO için kazanç yalnızca yetenek değil — tutarlılıktır. Parçalanmış bilgi tam da kimse tüm faturayı göremediği için pahalıdır.
 CTA: Satışla Görüşün
 Hashtags: #Manufacturing #CokSaha #EnterpriseAI #CompanyBrain #CIO #EgemenYapayZeka
 Image suggestion: Tek tutarlı, sınırlı bilgi çekirdeğine bağlı çok sayıda tesis simgesi.
@@ -2145,21 +2155,21 @@ Video suggestion: 45sn animasyon, dağınık saha bilgisinin tutarlı atıflı y
 
 **EN**
 Hook: "'Who saw what, and when?' should have an answer before the auditor asks."
-Body: In regulated environments, an AI that can't account for itself is a liability. AdOS records every consequential action in an immutable audit trail — questions, approvals, routing decisions, access. For a CISO or a Finance compliance lead, that means the reconstruction of any decision is already sitting there, tamper-evident, before anyone requests it. Pair that with permission-aware answers (the model never cites what a user can't see) and you have both prevention and proof. Auditability isn't a report you generate under pressure; it's a property the system maintains continuously. When the question comes, the honest, complete answer is already written down. That's what accountable means.
+Body: In regulated environments, an AI that can't account for itself is a liability. AdOS records every consequential action in an activity log and per-approval timeline — questions, approvals, routing decisions, access. For a CISO or a Finance compliance lead, that means the reconstruction of any decision is already sitting there, tamper-evident, before anyone requests it. Pair that with human-approved answers (the model never cites what a user can't see) and you have both prevention and proof. Auditability isn't a report you generate under pressure; it's a property the system maintains continuously. When the question comes, the honest, complete answer is already written down. That's what accountable means.
 CTA: See the Platform
 Hashtags: #Auditability #CISO #Finance #Compliance #AccountableAI #SovereignAI
 Image suggestion: An append-only log strip with tamper-evident seals at each entry.
-Carousel suggestion: 5 slides — the accountability gap, immutable audit trail, what's recorded, permission-aware pairing, audit-ready proof.
+Carousel suggestion: 5 slides — the accountability gap, activity log and per-approval timeline, what's recorded, human-approved pairing, audit-ready proof.
 Video suggestion: 40s sober walkthrough of reconstructing a decision from the audit trail.
 
 **TR**
 Hook: "'Kim neyi, ne zaman gördü?' sorusunun yanıtı, denetçi sormadan önce hazır olmalı."
-Body: Regüle ortamlarda kendini hesap veremeyen bir yapay zeka bir yükümlülüktür. AdOS her önemli eylemi değişmez bir denetim izine kaydeder — sorular, onaylar, yönlendirme kararları, erişim. Bir CISO ya da Finance uyum lideri için bu, herhangi bir kararın yeniden kurgusunun, kimse istemeden önce, kurcalanmaya karşı korumalı biçimde orada durması demektir. Bunu izin-farkında yanıtlarla (model kullanıcının göremediğini asla alıntılamaz) birleştirin; hem önleme hem kanıt elde edersiniz. Denetlenebilirlik baskı altında ürettiğiniz bir rapor değildir; sistemin sürekli koruduğu bir özelliktir. Soru geldiğinde dürüst, eksiksiz yanıt çoktan yazılmıştır. Hesap verebilir olmak budur.
+Body: Regüle ortamlarda kendini hesap veremeyen bir yapay zeka bir yükümlülüktür. AdOS her önemli eylemi değişmez bir etkinlik günlüğüne kaydeder — sorular, onaylar, yönlendirme kararları, erişim. Bir CISO ya da Finance uyum lideri için bu, herhangi bir kararın yeniden kurgusunun, kimse istemeden önce, kurcalanmaya karşı korumalı biçimde orada durması demektir. Bunu izin-farkında yanıtlarla (model kullanıcının göremediğini asla alıntılamaz) birleştirin; hem önleme hem kanıt elde edersiniz. Denetlenebilirlik baskı altında ürettiğiniz bir rapor değildir; sistemin sürekli koruduğu bir özelliktir. Soru geldiğinde dürüst, eksiksiz yanıt çoktan yazılmıştır. Hesap verebilir olmak budur.
 CTA: Platformu Keşfedin
 Hashtags: #Denetlenebilirlik #CISO #Finance #Uyum #HesapVerebilirYapayZeka #EgemenYapayZeka
 Image suggestion: Her girdide kurcalama kanıtı mühürleri olan eklenti-yalnızca kayıt şeridi.
-Carousel suggestion: 5 slayt — hesap verebilirlik açığı, değişmez denetim izi, neler kaydedilir, izin-farkında eşleşme, denetime hazır kanıt.
-Video suggestion: 40sn sakin tur, bir kararın denetim izinden yeniden kurgulanması.
+Carousel suggestion: 5 slayt — hesap verebilirlik açığı, değişmez etkinlik günlüğü, neler kaydedilir, izin-farkında eşleşme, denetime hazır kanıt.
+Video suggestion: 40sn sakin tur, bir kararın etkinlik günlüğünden yeniden kurgulanması.
 
 ---
 
@@ -2189,18 +2199,18 @@ Video suggestion: 45sn açıklayıcı, dağıtım modelleri arasında donanım s
 
 **EN**
 Hook: "Healthcare wants AI at the bedside but can't afford it at the breach."
-Body: Clinical knowledge is exactly where AI could help most — and exactly where a data leak is least forgivable. Patient confidentiality and strict access control aren't nice-to-haves; they're the license to operate. That tension stalls a lot of hospital AI projects: the value is obvious, the exposure is disqualifying. AdOS resolves it structurally. Local AI keeps inference on the hospital's hardware, so no clinical content leaves the premises, and permission-aware Company Brain ensures a user only ever sees cited sources they're cleared for. The result is decision support without the disclosure risk. In Healthcare, the winning AI isn't the smartest — it's the one that never leaks.
+Body: Clinical knowledge is exactly where AI could help most — and exactly where a data leak is least forgivable. Patient confidentiality and strict human approval gates aren't nice-to-haves; they're the license to operate. That tension stalls a lot of hospital AI projects: the value is obvious, the exposure is disqualifying. AdOS resolves it structurally. Local AI keeps inference on the hospital's hardware, so no clinical content leaves the premises, and human-approved Company Brain ensures a user only ever sees cited sources they're cleared for. The result is decision support without the disclosure risk. In Healthcare, the winning AI isn't the smartest — it's the one that never leaks.
 CTA: Talk to Sales
-Hashtags: #Healthcare #PatientPrivacy #PermissionAware #OnPremAI #SovereignAI #ClinicalAI
+Hashtags: #Healthcare #PatientPrivacy #HumanInTheLoop #OnPremAI #SovereignAI #ClinicalAI
 Image suggestion: A hospital wing with a clearly sealed data perimeter, no outbound arrows.
-Carousel suggestion: 5 slides — the bedside value, the breach cost, local inference, permission-aware access, decision support without leakage.
+Carousel suggestion: 5 slides — the bedside value, the breach cost, local inference, human-approved access, decision support without leakage.
 Video suggestion: 45s sober narration over a hospital data-boundary diagram.
 
 **TR**
 Hook: "Healthcare yapay zekayı hasta başında istiyor ama ihlalde karşılayamıyor."
 Body: Klinik bilgi, yapay zekanın en çok yardım edebileceği yerdir — ve veri sızıntısının en az affedilebilir olduğu yer. Hasta gizliliği ve katı erişim kontrolü lüks değil; faaliyet ruhsatıdır. Bu gerilim pek çok hastane yapay zeka projesini tıkar: değer aşikardır, maruziyet ise eleyicidir. AdOS bunu yapısal olarak çözer. Local AI çıkarımı hastanenin donanımında tutar, böylece hiçbir klinik içerik binadan çıkmaz ve izin-farkında Company Brain, kullanıcının yalnızca yetkili olduğu atıflı kaynakları görmesini sağlar. Sonuç, ifşa riski olmadan karar desteğidir. Healthcare'de kazanan yapay zeka en zeki olan değil — hiç sızdırmayandır.
 CTA: Satışla Görüşün
-Hashtags: #Healthcare #HastaGizliligi #IzinFarkinda #OnPremAI #EgemenYapayZeka #KlinikYapayZeka
+Hashtags: #Healthcare #HastaGizliligi #İnsanKontrolünde #OnPremAI #EgemenYapayZeka #KlinikYapayZeka
 Image suggestion: Açıkça mühürlü veri çevresi olan bir hastane kanadı, dışa ok yok.
 Carousel suggestion: 5 slayt — hasta başı değer, ihlal maliyeti, yerel çıkarım, izin-farkında erişim, sızıntısız karar desteği.
 Video suggestion: 45sn sakin anlatım, hastane veri sınırı diyagramı.
@@ -2210,22 +2220,22 @@ Video suggestion: 45sn sakin anlatım, hastane veri sınırı diyagramı.
 ## Week 34 · Post 2 (Product)
 
 **EN**
-Hook: "A Digital Employee isn't a smarter search box. It holds a role."
-Body: In AdOS, Digital Employees are AI agents that do real knowledge work inside defined roles and permissions: they answer, draft, route, prepare approvals, and move workflows forward. Crucially, each one operates within the same permission boundaries as a human in that role — it can only act on and cite what its role is entitled to. So a Digital Employee in procurement drafts within procurement's scope, not finance's. That's what separates an agent that works from a chatbot that talks. For Operations leaders, it means offloading repeatable knowledge work without loosening a single access rule. Give the work a role, and the role its limits — then let it run.
+Hook: "An AI-assisted workflow isn't a smarter search box. It holds a role."
+Body: In AdOS, AI-assisted workflows are AI agents that do real knowledge work inside defined roles and permissions: they answer, draft, route, prepare approvals, and move workflows forward. Crucially, each one operates within the same permission boundaries as a human in that role — it can only act on and cite what its role is entitled to. So an AI-assisted workflow in procurement drafts within procurement's scope, not finance's. That's what separates an agent that works from a chatbot that talks. For Operations leaders, it means offloading repeatable knowledge work without loosening a single access rule. Give the work a role, and the role its limits — then let it run.
 CTA: See the Platform
-Hashtags: #DigitalEmployees #AIAgents #Operations #PermissionAware #EnterpriseAI #SovereignAI
+Hashtags: #MarketingAI #AIAgents #Operations #HumanInTheLoop #EnterpriseAI #SovereignAI
 Image suggestion: A role badge on an agent icon, permission scope drawn as a boundary around it.
 Carousel suggestion: 6 slides — beyond search, defined role, permission boundary, tasks it performs, approval prep, human oversight.
-Video suggestion: 50s walkthrough of a Digital Employee drafting and routing within role limits.
+Video suggestion: 50s walkthrough of an AI-assisted workflow drafting and routing within role limits.
 
 **TR**
-Hook: "Bir Digital Employee daha akıllı bir arama kutusu değildir. Bir rol taşır."
-Body: AdOS'ta Digital Employees, tanımlı roller ve izinler içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır: yanıtlar, taslak hazırlar, yönlendirir, onay hazırlar ve workflow'ları ilerletir. En önemlisi, her biri o roldeki bir insanla aynı izin sınırları içinde çalışır — yalnızca rolünün yetkili olduğu şey üzerinde işlem yapabilir ve alıntılayabilir. Yani satın almadaki bir Digital Employee, finansın değil satın almanın kapsamında taslak hazırlar. Çalışan bir ajanı, konuşan bir sohbet botundan ayıran budur. Operations liderleri için bu, tek bir erişim kuralını gevşetmeden tekrarlanabilir bilgi işini devretmek demektir. İşe bir rol, role sınırlarını verin — sonra çalışmasına izin verin.
+Hook: "Bir AI-assisted workflow daha akıllı bir arama kutusu değildir. Bir rol taşır."
+Body: AdOS'ta AI-assisted workflows, tanımlı roller ve izinler içinde gerçek bilgi işi yapan yapay zeka ajanlarıdır: yanıtlar, taslak hazırlar, yönlendirir, onay hazırlar ve workflow'ları ilerletir. En önemlisi, her biri o roldeki bir insanla aynı izin sınırları içinde çalışır — yalnızca rolünün yetkili olduğu şey üzerinde işlem yapabilir ve alıntılayabilir. Yani satın almadaki bir AI-assisted workflow, finansın değil satın almanın kapsamında taslak hazırlar. Çalışan bir ajanı, konuşan bir sohbet botundan ayıran budur. Operations liderleri için bu, tek bir erişim kuralını gevşetmeden tekrarlanabilir bilgi işini devretmek demektir. İşe bir rol, role sınırlarını verin — sonra çalışmasına izin verin.
 CTA: Platformu Keşfedin
-Hashtags: #DigitalEmployees #YapayZekaAjanlari #Operasyon #IzinFarkinda #EnterpriseAI #EgemenYapayZeka
-Image suggestion: Ajan simgesinde bir rol rozeti, izin kapsamı etrafına sınır olarak çizilmiş.
+Hashtags: #MarketingAI #YapayZekaAjanlari #Operasyon #İnsanKontrolünde #EnterpriseAI #EgemenYapayZeka
+Image suggestion: Ajan simgesinde bir rol rozeti, insan onayı etrafına sınır olarak çizilmiş.
 Carousel suggestion: 6 slayt — aramanın ötesi, tanımlı rol, izin sınırı, yaptığı görevler, onay hazırlığı, insan denetimi.
-Video suggestion: 50sn tur, bir Digital Employee'nin rol sınırları içinde taslak hazırlayıp yönlendirmesi.
+Video suggestion: 50sn tur, bir AI-assisted workflow'nin rol sınırları içinde taslak hazırlayıp yönlendirmesi.
 
 ---
 
@@ -2233,16 +2243,16 @@ Video suggestion: 50sn tur, bir Digital Employee'nin rol sınırları içinde ta
 
 **EN**
 Hook: "The hardest part of a bilingual product isn't translation. It's parity."
-Body: AdOS is fully bilingual — Turkish and English UI, auto-detected from the environment. But the discipline we hold ourselves to goes further than a language toggle: every claim and number must exist identically in both languages, and Turkish must read as native, not translated word-for-word. Product terms stay English on purpose — Company Brain, Digital Employees, AdOS — so the concept never drifts across languages. A native Turkish reviewer and a native English reviewer sign off separately, then we check parity. It's slower. It's also why a Turkish buyer and an English buyer read the same truth, not two marketing dialects. Bilingual isn't a feature you add; it's a standard you keep.
+Body: AdOS is fully bilingual — Turkish and English UI, auto-detected from the environment. But the discipline we hold ourselves to goes further than a language toggle: every claim and number must exist identically in both languages, and Turkish must read as native, not translated word-for-word. Product terms stay English on purpose — Company Brain, AI-assisted workflows, AdOS — so the concept never drifts across languages. A native Turkish reviewer and a native English reviewer sign off separately, then we check parity. It's slower. It's also why a Turkish buyer and an English buyer read the same truth, not two marketing dialects. Bilingual isn't a feature you add; it's a standard you keep.
 CTA: See the Platform
 Hashtags: #Bilingual #Localization #TurkishTech #EnterpriseAI #ProductCulture #SovereignAI
 Image suggestion: Two mirrored copy blocks, TR and EN, with a parity checkmark between them.
 Carousel suggestion: 5 slides — auto-detected language, claim parity rule, native TR, English product terms, dual sign-off.
-Video suggestion: 40s of the UI switching TR/EN live, same cited answer in both.
+Video suggestion: 40s of the UI switching TR/EN live, same performance-grounded recommendation in both.
 
 **TR**
 Hook: "İki dilli bir ürünün en zor kısmı çeviri değildir. Denkliktir."
-Body: AdOS tamamen iki dillidir — ortamdan otomatik algılanan Türkçe ve İngilizce arayüz. Ama kendimize koyduğumuz disiplin bir dil düğmesinden öteye gider: her iddia ve sayı iki dilde birebir var olmalı ve Türkçe kelimesi kelimesine çeviri değil, yerel okunmalı. Ürün terimleri bilerek İngilizce kalır — Company Brain, Digital Employees, AdOS — böylece kavram diller arasında kaymaz. Bir ana dili Türkçe gözden geçiren ve bir ana dili İngilizce gözden geçiren ayrı ayrı onaylar, sonra denkliği kontrol ederiz. Daha yavaştır. Aynı zamanda bir Türk alıcı ile bir İngiliz alıcının iki pazarlama lehçesini değil, aynı gerçeği okumasının nedenidir. İki dillilik eklediğiniz bir özellik değil; koruduğunuz bir standarttır.
+Body: AdOS tamamen iki dillidir — ortamdan otomatik algılanan Türkçe ve İngilizce arayüz. Ama kendimize koyduğumuz disiplin bir dil düğmesinden öteye gider: her iddia ve sayı iki dilde birebir var olmalı ve Türkçe kelimesi kelimesine çeviri değil, yerel okunmalı. Ürün terimleri bilerek İngilizce kalır — Company Brain, AI-assisted workflows, AdOS — böylece kavram diller arasında kaymaz. Bir ana dili Türkçe gözden geçiren ve bir ana dili İngilizce gözden geçiren ayrı ayrı onaylar, sonra denkliği kontrol ederiz. Daha yavaştır. Aynı zamanda bir Türk alıcı ile bir İngiliz alıcının iki pazarlama lehçesini değil, aynı gerçeği okumasının nedenidir. İki dillilik eklediğiniz bir özellik değil; koruduğunuz bir standarttır.
 CTA: Platformu Keşfedin
 Hashtags: #IkiDilli #Yerellestirme #TurkTeknoloji #EnterpriseAI #UrunKulturu #EgemenYapayZeka
 Image suggestion: Aralarında denklik onay işareti olan iki aynalı metin bloğu, TR ve EN.
@@ -2255,20 +2265,20 @@ Video suggestion: 40sn arayüzün canlı TR/EN geçişi, iki dilde aynı atıfl�
 
 **EN**
 Hook: "Illustrative: a bank's compliance team stops being the bottleneck."
-Body: Fictional scenario, honest mechanism. Model it on our demo world: a Finance institution where every answer must be sourced and every decision auditable. A relationship manager asks a policy question; Company Brain replies with the exact clause cited, scoped to their entitlements — no peeking at restricted files. When an exception needs sign-off, Workflows & Approvals routes it up the tiered authority, and the immutable audit trail captures the whole chain. Nothing left the bank's premises; it all ran on local hardware. Illustrative outcome: compliance shifts from gatekeeper to enabler, because the evidence is built in. This case is fictional and labeled as such — the cited answer and tiered approval are shown live in the demo.
+Body: Fictional scenario, honest mechanism. Model it on our demo world: a Finance institution where every answer must be sourced and every decision auditable. A relationship manager asks a policy question; Company Brain replies with the exact clause cited, scoped to their entitlements — no peeking at restricted files. When an exception needs sign-off, Workflows & Approvals routes it up the tiered authority, and the activity log and per-approval timeline captures the whole chain. Nothing left the bank's premises; it all ran on local hardware. Illustrative outcome: compliance shifts from gatekeeper to enabler, because the evidence is built in. This case is fictional and labeled as such — the performance-grounded recommendation and human approval gate are shown live in the demo.
 CTA: Request a Demo
 Hashtags: #Finance #Compliance #AuditTrail #CompanyBrain #WorkflowsAndApprovals #SovereignAI
 Image suggestion: A bank office with a cited policy answer on screen. Label "Illustrative."
-Carousel suggestion: 6 slides — the compliance bottleneck, cited policy answer, entitlement scope, tiered approval, audit trail, "illustrative" note.
+Carousel suggestion: 6 slides — the compliance bottleneck, cited policy answer, entitlement scope, human approval gate, audit trail, "illustrative" note.
 Video suggestion: 50s dramatized flow with a persistent "Illustrative scenario" watermark.
 
 **TR**
 Hook: "Örnekleyici: bir bankanın uyum ekibi darboğaz olmayı bırakıyor."
-Body: Kurgusal senaryo, dürüst mekanizma. Demo dünyamıza göre modelleyin: her yanıtın kaynaklı, her kararın denetlenebilir olması gereken bir Finance kurumu. Bir müşteri temsilcisi politika sorusu sorar; Company Brain tam maddeyi, yetkilerine göre kapsamlı biçimde atıflayarak yanıtlar — kısıtlı dosyalara göz atmadan. Bir istisna onay gerektirdiğinde Workflows & Approvals onu kademeli yetki boyunca yönlendirir ve değişmez denetim izi tüm zinciri yakalar. Hiçbir şey bankanın binasından çıkmadı; hepsi yerel donanımda çalıştı. Örnekleyici sonuç: kanıt içeride olduğundan uyum, bekçilikten kolaylaştırıcılığa geçer. Bu vaka kurgusaldır ve öyle etiketlenir — atıflı yanıt ve kademeli onay demoda canlı gösterilir.
+Body: Kurgusal senaryo, dürüst mekanizma. Demo dünyamıza göre modelleyin: her yanıtın kaynaklı, her kararın denetlenebilir olması gereken bir Finance kurumu. Bir müşteri temsilcisi politika sorusu sorar; Company Brain tam maddeyi, yetkilerine göre kapsamlı biçimde atıflayarak yanıtlar — kısıtlı dosyalara göz atmadan. Bir istisna onay gerektirdiğinde Workflows & Approvals onu kademeli yetki boyunca yönlendirir ve değişmez etkinlik günlüğü tüm zinciri yakalar. Hiçbir şey bankanın binasından çıkmadı; hepsi yerel donanımda çalıştı. Örnekleyici sonuç: kanıt içeride olduğundan uyum, bekçilikten kolaylaştırıcılığa geçer. Bu vaka kurgusaldır ve öyle etiketlenir — atıflı yanıt ve insan onay adÄ±mÄ± demoda canlı gösterilir.
 CTA: Demo Talep Edin
 Hashtags: #Finance #Uyum #DenetimIzi #CompanyBrain #WorkflowsAndApprovals #EgemenYapayZeka
 Image suggestion: Ekranında atıflı politika yanıtı olan bir banka ofisi. "Örnekleyici" etiketi.
-Carousel suggestion: 6 slayt — uyum darboğazı, atıflı politika yanıtı, yetki kapsamı, kademeli onay, denetim izi, "örnekleyici" notu.
+Carousel suggestion: 6 slayt — uyum darboğazı, atıflı politika yanıtı, yetki kapsamı, insan onay adÄ±mÄ±, etkinlik günlüğü, "örnekleyici" notu.
 Video suggestion: 50sn canlandırılmış akış, kalıcı "Örnek senaryo" filigranı.
 
 ---
@@ -2277,7 +2287,7 @@ Video suggestion: 50sn canlandırılmış akış, kalıcı "Örnek senaryo" fili
 
 **EN**
 Hook: "The best compliment we get: 'it's boring in exactly the right places.'"
-Body: I didn't set out to build something exciting. I set out to build something a CISO could sign off on without losing sleep. That means the surprising parts live in the capability — cited answers, Digital Employees, tiered approvals — and the boring parts live where they belong: data stays on your hardware, actions hit an audit trail, access rules never bend. Excitement in an enterprise system is usually a euphemism for risk. We concede the honest trade-offs plainly, including that local inference runs in seconds, not milliseconds. Calm is a design goal. If our security page reads as understated, that's not modesty — it's the point.
+Body: I didn't set out to build something exciting. I set out to build something a CISO could sign off on without losing sleep. That means the surprising parts live in the capability — performance-grounded recommendations, AI-assisted workflows, human approval gates — and the boring parts live where they belong: data stays on your hardware, actions hit an audit trail, access rules never bend. Excitement in an enterprise system is usually a euphemism for risk. We concede the honest trade-offs plainly, including that local inference runs in seconds, not milliseconds. Calm is a design goal. If our security page reads as understated, that's not modesty — it's the point.
 CTA: Talk to Sales
 Hashtags: #FounderPOV #EnterpriseAI #CISO #Trust #SovereignAI #Leadership
 Image suggestion: A plain quote card on dark canvas, the "boring in the right places" line.
@@ -2286,7 +2296,7 @@ Video suggestion: 45s founder to camera on why calm beats flashy in enterprise s
 
 **TR**
 Hook: "Aldığımız en iyi iltifat: 'tam da doğru yerlerde sıkıcı.'"
-Body: Heyecan verici bir şey kurmaya çıkmadım. Bir CISO'nun uykusunu kaçırmadan onaylayabileceği bir şey kurmaya çıktım. Bu, şaşırtıcı kısımların yetenekte yaşaması demek — atıflı yanıtlar, Digital Employees, kademeli onaylar — ve sıkıcı kısımların ait oldukları yerde: veri donanımınızda kalır, eylemler denetim izine düşer, erişim kuralları asla eğilmez. Kurumsal bir sistemde heyecan genellikle riskin örtük adıdır. Yerel çıkarımın milisaniye değil saniye sürdüğü dahil, dürüst ödünleşmeleri açıkça kabul ederiz. Sakinlik bir tasarım hedefidir. Güvenlik sayfamız sade okunuyorsa, bu alçakgönüllülük değil — amacın kendisidir.
+Body: Heyecan verici bir şey kurmaya çıkmadım. Bir CISO'nun uykusunu kaçırmadan onaylayabileceği bir şey kurmaya çıktım. Bu, şaşırtıcı kısımların yetenekte yaşaması demek — atıflı yanıtlar, AI-assisted workflows, insan onay adÄ±mÄ±lar — ve sıkıcı kısımların ait oldukları yerde: veri donanımınızda kalır, eylemler etkinlik günlüğüne düşer, erişim kuralları asla eğilmez. Kurumsal bir sistemde heyecan genellikle riskin örtük adıdır. Yerel çıkarımın milisaniye değil saniye sürdüğü dahil, dürüst ödünleşmeleri açıkça kabul ederiz. Sakinlik bir tasarım hedefidir. Güvenlik sayfamız sade okunuyorsa, bu alçakgönüllülük değil — amacın kendisidir.
 CTA: Satışla Görüşün
 Hashtags: #KurucuBakisi #EnterpriseAI #CISO #Guven #EgemenYapayZeka #Liderlik
 Image suggestion: Koyu zeminde sade alıntı kartı, "doğru yerlerde sıkıcı" cümlesi.
@@ -2299,18 +2309,18 @@ Video suggestion: 45sn kurucu kameraya, kurumsal yazılımda sakinliğin göster
 
 **EN**
 Hook: "Grounding isn't a safety add-on. It's how the answer earns the right to exist."
-Body: An ungrounded model generates fluent text and hopes it's true. A grounded one retrieves your actual documents first, then answers from them — and shows the citation so you can check. In AdOS, every Company Brain answer works this way: sourced from your own content, permission-scoped, verifiable in a click. That's not a filter bolted onto a chatbot; it's the architecture. The difference shows up when it matters — a Government regulation, a Manufacturing spec, a clinical protocol — where "sounds right" and "is right" are worlds apart. If a model can't point to where an answer came from, treat the answer as a hypothesis. Grounded AI hands you the source, not just the sentence.
+Body: An ungrounded model generates fluent text and hopes it's true. A grounded one surfaces your actual documents first, then answers from them — and shows the citation so you can check. In AdOS, every Company Brain answer works this way: sourced from your own content, workspace-scoped, verifiable in a click. That's not a filter bolted onto a chatbot; it's the architecture. The difference shows up when it matters — a Government regulation, a Manufacturing spec, a clinical protocol — where "sounds right" and "is right" are worlds apart. If a model can't point to where an answer came from, treat the answer as a hypothesis. Grounded AI hands you the source, not just the sentence.
 CTA: See the Platform
-Hashtags: #GroundedAI #CitedAI #RAG #CompanyBrain #EnterpriseAI #SovereignAI
+Hashtags: #GroundedAI #PerformanceMemory #CampaignAI #CompanyBrain #EnterpriseAI #SovereignAI
 Image suggestion: An answer with a visible thread back to a specific source paragraph.
 Carousel suggestion: 5 slides — ungrounded guessing, retrieval first, answer from sources, citation shown, verify in a click.
-Video suggestion: 40s of a cited answer with the source paragraph highlighted on click.
+Video suggestion: 40s of a performance-grounded recommendation with the source paragraph highlighted on click.
 
 **TR**
 Hook: "Dayanak bir güvenlik eklentisi değildir. Yanıtın var olma hakkını kazanma biçimidir."
-Body: Dayanaksız bir model akıcı metin üretir ve doğru olmasını umar. Dayanaklı olan önce gerçek belgelerinizi getirir, sonra onlardan yanıtlar — ve doğrulayabilmeniz için atfı gösterir. AdOS'ta her Company Brain yanıtı böyle çalışır: kendi içeriğinizden kaynaklı, izin kapsamlı, tek tıkla doğrulanabilir. Bu, bir sohbet botuna eklenmiş bir filtre değil; mimarinin kendisidir. Fark, önemli olduğunda ortaya çıkar — bir Government mevzuatı, bir Manufacturing şartnamesi, bir klinik protokol — burada "doğru gibi" ile "doğru" bambaşka dünyalardır. Bir model yanıtın nereden geldiğini gösteremiyorsa, yanıtı bir hipotez olarak görün. Dayanaklı yapay zeka size yalnızca cümleyi değil kaynağı verir.
+Body: Dayanaksız bir model akıcı metin üretir ve doğru olmasını umar. Dayanaklı olan önce gerçek verilerinizi getirir, sonra onlardan yanıtlar — ve doğrulayabilmeniz için atfı gösterir. AdOS'ta her Company Brain yanıtı böyle çalışır: kendi içeriğinizden kaynaklı, insan onaylı, tek tıkla doğrulanabilir. Bu, bir sohbet botuna eklenmiş bir filtre değil; mimarinin kendisidir. Fark, önemli olduğunda ortaya çıkar — bir Government mevzuatı, bir Manufacturing şartnamesi, bir klinik protokol — burada "doğru gibi" ile "doğru" bambaşka dünyalardır. Bir model yanıtın nereden geldiğini gösteremiyorsa, yanıtı bir hipotez olarak görün. Dayanaklı yapay zeka size yalnızca cümleyi değil kaynağı verir.
 CTA: Platformu Keşfedin
-Hashtags: #DayanakliYapayZeka #AtifliYapayZeka #RAG #CompanyBrain #EnterpriseAI #EgemenYapayZeka
+Hashtags: #DayanakliYapayZeka #AtifliYapayZeka #CampaignAI #CompanyBrain #EnterpriseAI #EgemenYapayZeka
 Image suggestion: Belirli bir kaynak paragrafa geri giden görünür bir iplikle bir yanıt.
 Carousel suggestion: 5 slayt — dayanaksız tahmin, önce erişim, kaynaktan yanıt, atıf gösterimi, tek tıkla doğrulama.
 Video suggestion: 40sn atıflı yanıt, tıklamada kaynak paragrafın vurgulanması.
@@ -2321,10 +2331,10 @@ Video suggestion: 40sn atıflı yanıt, tıklamada kaynak paragrafın vurgulanma
 
 **EN**
 Hook: "Onboarding a new hire in Logistics used to mean two weeks of asking around."
-Body: In high-volume, time-critical operations, the cost of a new person not knowing is measured in delays, not just training hours. Company Brain shortens that curve. A new dispatcher asks a plain question — how do we handle this exception, which carrier for this lane — and gets a cited answer from the company's own approved procedures, scoped to their role. No interrupting a senior colleague, no guessing, no stale PDF. For an HR or Operations lead, the metric that moves is time-to-first-useful-answer. The institutional memory that used to live in a few heads now answers on day one. Faster onboarding isn't about smarter people; it's about findable knowledge.
+Body: In high-volume, time-critical operations, the cost of a new person not knowing is measured in delays, not just training hours. Company Brain shortens that curve. A new dispatcher asks a plain question — how do we handle this exception, which carrier for this lane — and gets a performance-grounded recommendation from the company's own approved procedures, scoped to their role. No interrupting a senior colleague, no guessing, no stale PDF. For an HR or Operations lead, the metric that moves is time-to-first-useful-answer. The institutional memory that used to live in a few heads now answers on day one. Faster onboarding isn't about smarter people; it's about findable knowledge.
 CTA: Read the Guide
 Hashtags: #Logistics #Onboarding #KnowledgeManagement #CompanyBrain #HR #SovereignAI
-Image suggestion: A dispatch desk with a new hire getting a cited answer on screen, day one.
+Image suggestion: A dispatch desk with a new hire getting a performance-grounded recommendation on screen, day one.
 Carousel suggestion: 5 slides — the two-week problem, plain question, cited procedure, role scope, day-one productivity.
 Video suggestion: 45s of a new dispatcher resolving an exception via a cited Company Brain answer.
 
@@ -2367,7 +2377,7 @@ Video suggestion: 45sn kullanım ölçeklenirken ayrışan animasyonlu maliyet e
 
 **EN**
 Hook: "Air-gap isn't a paranoid setting. For some networks, it's the baseline."
-Body: Defense-adjacent manufacturing, critical infrastructure, certain public bodies — plenty of environments run air-gapped by mandate, with no route to the internet at all. Most enterprise AI simply cannot operate there; it assumes a cloud call. AdOS was designed offline-first: Local AI runs entirely on-premise, so Company Brain answers, Digital Employees work, and approvals route with the network cable pulled. There is no external dependency to fail because there is no external dependency. For a CISO securing an isolated network, that turns AI from "impossible here" into "already compatible." We prove it in the demo by disconnecting live. The strongest security boundary is the one the software respects by design, not by configuration.
+Body: Defense-adjacent manufacturing, critical infrastructure, certain public bodies — plenty of environments run air-gapped by mandate, with no route to the internet at all. Most enterprise AI simply cannot operate there; it assumes a cloud call. AdOS was designed offline-first: Local AI runs entirely on-premise, so Company Brain answers, AI-assisted workflows work, and approvals route with the network cable pulled. There is no external dependency to fail because there is no external dependency. For a CISO securing an isolated network, that turns AI from "impossible here" into "already compatible." We prove it in the demo by disconnecting live. The strongest security boundary is the one the software respects by design, not by configuration.
 CTA: Request a Demo
 Hashtags: #AirGap #CriticalInfrastructure #OfflineAI #CISO #OnPremAI #SovereignAI
 Image suggestion: An isolated network with no internet link, AdOS running fully inside.
@@ -2376,7 +2386,7 @@ Video suggestion: 50s air-gap demo: full workflow completed with the network phy
 
 **TR**
 Hook: "Air-gap paranoyak bir ayar değildir. Bazı ağlar için temel çizgidir."
-Body: Savunmaya yakın imalat, kritik altyapı, bazı kamu kurumları — pek çok ortam, internete hiç yolu olmadan, zorunluluk gereği air-gap çalışır. Çoğu kurumsal yapay zeka orada basitçe çalışamaz; bir bulut çağrısı varsayar. AdOS çevrimdışı-öncelikli tasarlandı: Local AI tamamen on-premise çalışır, böylece ağ kablosu çekiliyken Company Brain yanıtlar, Digital Employees çalışır ve onaylar yönlendirilir. Başarısız olacak harici bağımlılık yok, çünkü harici bağımlılık yok. İzole bir ağı güvenceye alan bir CISO için bu, yapay zekayı "burada imkansız"dan "zaten uyumlu"ya çevirir. Bunu demoda canlı bağlantıyı keserek kanıtlarız. En güçlü güvenlik sınırı, yazılımın yapılandırmayla değil tasarımıyla saygı gösterdiğidir.
+Body: Savunmaya yakın imalat, kritik altyapı, bazı kamu kurumları — pek çok ortam, internete hiç yolu olmadan, zorunluluk gereği air-gap çalışır. Çoğu kurumsal yapay zeka orada basitçe çalışamaz; bir bulut çağrısı varsayar. AdOS çevrimdışı-öncelikli tasarlandı: Local AI tamamen on-premise çalışır, böylece ağ kablosu çekiliyken Company Brain yanıtlar, AI-assisted workflows çalışır ve onaylar yönlendirilir. Başarısız olacak harici bağımlılık yok, çünkü harici bağımlılık yok. İzole bir ağı güvenceye alan bir CISO için bu, yapay zekayı "burada imkansız"dan "zaten uyumlu"ya çevirir. Bunu demoda canlı bağlantıyı keserek kanıtlarız. En güçlü güvenlik sınırı, yazılımın yapılandırmayla değil tasarımıyla saygı gösterdiğidir.
 CTA: Demo Talep Edin
 Hashtags: #AirGap #KritikAltyapi #CevrimdisiYapayZeka #CISO #OnPremAI #EgemenYapayZeka
 Image suggestion: İnternet bağlantısı olmayan izole bir ağ, AdOS tamamen içeride çalışıyor.
@@ -2389,16 +2399,16 @@ Video suggestion: 50sn air-gap demosu: ağ fiziksel kesikken tamamlanan tam work
 
 **EN**
 Hook: "Three questions that reveal whether an 'AI platform' is really yours."
-Body: Before you sign, ask these. One: where does inference run — your hardware, or a vendor's cloud? Two: can you point to the source of every answer, and is that source permission-scoped to the person asking? Three: what happens when you disconnect the internet — does it still work? AdOS answers all three the way an owner would: inference is local, every Company Brain answer is cited and access-scoped, and it runs air-gapped. If a platform can't pass these plainly, you're renting capability and exporting data, whatever the brochure says. Ownership isn't a feeling; it's what survives those three questions. Ask them early, while you still have leverage.
+Body: Before you sign, ask these. One: where does inference run — your hardware, or a vendor's cloud? Two: can you point to the source of every answer, and is that source workspace-scoped to the person asking? Three: what happens when you disconnect the internet — does it still work? AdOS answers all three the way an owner would: inference is local, every Company Brain answer is cited and access-scoped, and it runs air-gapped. If a platform can't pass these plainly, you're renting capability and exporting data, whatever the brochure says. Ownership isn't a feeling; it's what survives those three questions. Ask them early, while you still have leverage.
 CTA: Read the Guide
-Hashtags: #BuyersGuide #OnPremAI #DataSovereignty #EnterpriseAI #CitedAI #SovereignAI
+Hashtags: #BuyersGuide #OnPremAI #DataSovereignty #EnterpriseAI #PerformanceMemory #SovereignAI
 Image suggestion: A three-question checklist card, each with a clean checkmark.
 Carousel suggestion: 5 slides — question one (where inference runs), question two (cited + scoped), question three (air-gap), how AdOS answers, ownership defined.
 Video suggestion: 40s to-camera posing the three questions with on-screen text.
 
 **TR**
 Hook: "Bir 'yapay zeka platformu'nun gerçekten sizin olup olmadığını ortaya çıkaran üç soru."
-Body: İmzalamadan önce bunları sorun. Bir: çıkarım nerede çalışır — donanımınızda mı, bir satıcının bulutunda mı? İki: her yanıtın kaynağını gösterebilir misiniz ve o kaynak soran kişiye göre izin kapsamlı mı? Üç: interneti kestiğinizde ne olur — hâlâ çalışır mı? AdOS üçüne de bir sahibin yanıtlayacağı gibi yanıt verir: çıkarım yereldir, her Company Brain yanıtı atıflı ve erişim kapsamlıdır ve air-gap çalışır. Bir platform bunları açıkça geçemiyorsa, broşür ne derse desin, yeteneği kiralıyor ve veriyi dışa aktarıyorsunuz demektir. Sahiplik bir his değildir; bu üç soruyu atlatan şeydir. Bunları erken sorun, hâlâ elinizde koz varken.
+Body: İmzalamadan önce bunları sorun. Bir: çıkarım nerede çalışır — donanımınızda mı, bir satıcının bulutunda mı? İki: her yanıtın sonucuna dayanebilir misiniz ve o kaynak soran kişiye göre insan onaylı mı? Üç: interneti kestiğinizde ne olur — hâlâ çalışır mı? AdOS üçüne de bir sahibin yanıtlayacağı gibi yanıt verir: çıkarım yereldir, her Company Brain yanıtı atıflı ve erişim kapsamlıdır ve air-gap çalışır. Bir platform bunları açıkça geçemiyorsa, broşür ne derse desin, yeteneği kiralıyor ve veriyi dışa aktarıyorsunuz demektir. Sahiplik bir his değildir; bu üç soruyu atlatan şeydir. Bunları erken sorun, hâlâ elinizde koz varken.
 CTA: Rehberi Okuyun
 Hashtags: #AliciRehberi #OnPremAI #VeriEgemenligi #EnterpriseAI #AtifliYapayZeka #EgemenYapayZeka
 Image suggestion: Her biri temiz onay işaretli üç soruluk kontrol listesi kartı.
@@ -2410,17 +2420,17 @@ Video suggestion: 40sn kameraya üç soruyu sorma, ekranda metin.
 ## Week 37 · Post 2 (Industry insight)
 
 **EN**
-Hook: "Education has the biggest knowledge bases and the smallest AI budgets. That combination isn't a dead end."
-Body: Universities and school systems sit on enormous document stores — curricula, research, policy, administration — and rarely have room for a metered cloud bill that grows with every query. That's exactly the shape AdOS fits. Inference runs on your own hardware, often existing on-prem labs, with no per-token billing; cost is fixed and ownable. Company Brain turns that sprawling archive into cited, permission-scoped answers for staff and administrators. Budget-sensitive doesn't have to mean AI-excluded. The institutions with the most to gain from sovereign AI are often the ones told they can't afford the cloud version — and they were being sold the wrong shape all along.
+Hook: "Education has the biggest marketing-performance memorys and the smallest AI budgets. That combination isn't a dead end."
+Body: Universities and school systems sit on enormous document stores — curricula, research, policy, administration — and rarely have room for a metered cloud bill that grows with every query. That's exactly the shape AdOS fits. Inference runs on your own hardware, often existing on-prem labs, with no per-token billing; cost is fixed and ownable. Company Brain turns that sprawling archive into cited, workspace-scoped answers for staff and administrators. Budget-sensitive doesn't have to mean AI-excluded. The institutions with the most to gain from sovereign AI are often the ones told they can't afford the cloud version — and they were being sold the wrong shape all along.
 CTA: Talk to Sales
 Hashtags: #Education #EdTech #OnPremAI #NoPerTokenBilling #CompanyBrain #SovereignAI
-Image suggestion: A campus building with a large archive resolving into cited answers, fixed-cost tag.
-Carousel suggestion: 5 slides — big archive small budget, on-prem labs, no per-token, cited answers, fixed ownable cost.
-Video suggestion: 45s of a university archive becoming searchable cited answers on local hardware.
+Image suggestion: A campus building with a large archive resolving into performance-grounded recommendations, fixed-cost tag.
+Carousel suggestion: 5 slides — big archive small budget, on-prem labs, no per-token, performance-grounded recommendations, fixed ownable cost.
+Video suggestion: 45s of a university archive becoming searchable performance-grounded recommendations on local hardware.
 
 **TR**
 Hook: "Education en büyük bilgi tabanlarına ve en küçük yapay zeka bütçelerine sahip. Bu bileşim çıkmaz değil."
-Body: Üniversiteler ve okul sistemleri devasa belge depolarının üzerinde oturur — müfredat, araştırma, politika, idare — ve her sorguyla büyüyen ölçümlü bir bulut faturasına nadiren yer vardır. AdOS'un tam oturduğu şekil budur. Çıkarım kendi donanımınızda, çoğu zaman mevcut on-prem laboratuvarlarda, token başına faturalama olmadan çalışır; maliyet sabit ve sahip olunabilirdir. Company Brain o dağınık arşivi personel ve yöneticiler için atıflı, izin kapsamlı yanıtlara çevirir. Bütçe-duyarlı olmak, yapay zeka-dışı olmak zorunda değildir. Egemen yapay zekadan en çok kazanacak kurumlar çoğu zaman bulut versiyonunu karşılayamayacakları söylenenlerdir — ve baştan beri yanlış şekil satılıyordu onlara.
+Body: Üniversiteler ve okul sistemleri devasa belge depolarının üzerinde oturur — müfredat, araştırma, politika, idare — ve her sorguyla büyüyen ölçümlü bir bulut faturasına nadiren yer vardır. AdOS'un tam oturduğu şekil budur. Çıkarım kendi donanımınızda, çoğu zaman mevcut on-prem laboratuvarlarda, token başına faturalama olmadan çalışır; maliyet sabit ve sahip olunabilirdir. Company Brain o dağınık arşivi personel ve yöneticiler için atıflı, insan onaylı yanıtlara çevirir. Bütçe-duyarlı olmak, yapay zeka-dışı olmak zorunda değildir. Egemen yapay zekadan en çok kazanacak kurumlar çoğu zaman bulut versiyonunu karşılayamayacakları söylenenlerdir — ve baştan beri yanlış şekil satılıyordu onlara.
 CTA: Satışla Görüşün
 Hashtags: #Education #EdTech #OnPremAI #TokenBasinaFaturaYok #CompanyBrain #EgemenYapayZeka
 Image suggestion: Büyük bir arşivin atıflı yanıtlara çözüldüğü bir kampüs binası, sabit maliyet etiketi.
@@ -2433,20 +2443,20 @@ Video suggestion: 45sn üniversite arşivinin yerel donanımda aranabilir atıfl
 
 **EN**
 Hook: "Three pillars, one system. Miss any one and it's just software."
-Body: AdOS holds together because its three pillars work as one. Company Brain is the private, permission-aware knowledge base where every answer is grounded and cited. Digital Employees are AI agents doing real work inside defined roles. Workflows & Approvals give processes structure, tiered authority, and immutable audit trails. Separately, each is useful; together, they're an operating system — knowledge feeds the workers, the workers move the processes, and every step is recorded and access-controlled. That integration, running on your own infrastructure, is the product. A knowledge base without workers is a library; workers without workflows are chaos. The value is in the seam where they meet.
+Body: AdOS holds together because its three pillars work as one. Company Brain is the private, human-approved marketing-performance memory where every answer is grounded and cited. AI-assisted workflows are AI agents doing real work inside defined roles. Workflows & Approvals give processes structure, tiered authority, and activity log and per-approval timelines. Separately, each is useful; together, they're an operating system — knowledge feeds the workers, the workers move the processes, and every step is recorded and access-controlled. That integration, running on your own infrastructure, is the product. A marketing-performance memory without workers is a library; workers without workflows are chaos. The value is in the seam where they meet.
 CTA: See the Platform
-Hashtags: #CompanyBrain #DigitalEmployees #WorkflowsAndApprovals #EnterpriseAI #OperatingSystem #SovereignAI
+Hashtags: #CompanyBrain #MarketingAI #WorkflowsAndApprovals #EnterpriseAI #OperatingSystem #SovereignAI
 Image suggestion: Three pillars supporting one clean roofline labeled AdOS.
-Carousel suggestion: 6 slides — Company Brain, Digital Employees, Workflows & Approvals, how they interlock, on your infrastructure, the whole system.
+Carousel suggestion: 6 slides — Company Brain, AI-assisted workflows, Workflows & Approvals, how they interlock, on your infrastructure, the whole system.
 Video suggestion: 50s animation of knowledge feeding an agent feeding a workflow, all recorded.
 
 **TR**
 Hook: "Üç sütun, tek sistem. Birini kaçırın, yalnızca yazılım kalır."
-Body: AdOS bir arada durur çünkü üç sütunu tek olarak çalışır. Company Brain, her yanıtın dayanaklı ve atıflı olduğu özel, izin-farkında bilgi tabanıdır. Digital Employees, tanımlı roller içinde gerçek iş yapan yapay zeka ajanlarıdır. Workflows & Approvals süreçlere yapı, kademeli yetki ve değişmez denetim izleri verir. Ayrı ayrı her biri yararlıdır; birlikte bir işletim sistemidir — bilgi işçileri besler, işçiler süreçleri ilerletir ve her adım kaydedilir ve erişim-kontrollüdür. Bu bütünleşme, kendi altyapınızda çalışarak, ürünün kendisidir. İşçisiz bir bilgi tabanı kütüphanedir; workflow'suz işçiler kaostur. Değer, buluştukları dikişte yatar.
+Body: AdOS bir arada durur çünkü üç sütunu tek olarak çalışır. Company Brain, her yanıtın dayanaklı ve atıflı olduğu özel, izin-farkında pazarlama-performans belleğidır. AI-assisted workflows, tanımlı roller içinde gerçek iş yapan yapay zeka ajanlarıdır. Workflows & Approvals süreçlere yapı, kademeli yetki ve değişmez denetim izleri verir. Ayrı ayrı her biri yararlıdır; birlikte bir işletim sistemidir — bilgi işçileri besler, işçiler süreçleri ilerletir ve her adım kaydedilir ve erişim-kontrollüdür. Bu bütünleşme, kendi altyapınızda çalışarak, ürünün kendisidir. İşçisiz bir pazarlama-performans belleği kütüphanedir; workflow'suz işçiler kaostur. Değer, buluştukları dikişte yatar.
 CTA: Platformu Keşfedin
-Hashtags: #CompanyBrain #DigitalEmployees #WorkflowsAndApprovals #EnterpriseAI #IsletimSistemi #EgemenYapayZeka
+Hashtags: #CompanyBrain #MarketingAI #WorkflowsAndApprovals #EnterpriseAI #IsletimSistemi #EgemenYapayZeka
 Image suggestion: AdOS etiketli tek temiz çatı çizgisini taşıyan üç sütun.
-Carousel suggestion: 6 slayt — Company Brain, Digital Employees, Workflows & Approvals, nasıl kenetlenir, altyapınızda, tüm sistem.
+Carousel suggestion: 6 slayt — Company Brain, AI-assisted workflows, Workflows & Approvals, nasıl kenetlenir, altyapınızda, tüm sistem.
 Video suggestion: 50sn animasyon, bilginin ajanı, ajanın workflow'u beslemesi, hepsi kaydedilir.
 
 ---
@@ -2455,18 +2465,18 @@ Video suggestion: 50sn animasyon, bilginin ajanı, ajanın workflow'u beslemesi,
 
 **EN**
 Hook: "Building a deterministic demo taught us more than any pitch deck."
-Body: Our demo world, NovaMak Endüstri A.Ş., is fictional but ruthlessly consistent: 6 sites, 4 business units, 42 employees, 16 departments, 12 Digital Employees, 25 workflows. Every scenario has to hold together — the same question gives the same cited answer, the same approval routes the same way, every time. Determinism sounds boring until you realize it's honesty made testable: if the demo drifts, we broke something. Building it forced us to make the product internally coherent, not just impressive for ninety seconds. When we say "watch cited answers, watch it air-gapped," we mean a world that behaves identically whether a prospect or an engineer is driving. A demo you can't trust is a promise you can't keep.
+Body: Our demo world, NovaMak Endüstri A.Ş., is fictional but ruthlessly consistent: 6 sites, 4 business units, 42 employees, 16 departments, 12 AI-assisted workflows, 25 workflows. Every scenario has to hold together — the same question gives the same performance-grounded recommendation, the same approval routes the same way, every time. Determinism sounds boring until you realize it's honesty made testable: if the demo drifts, we broke something. Building it forced us to make the product internally coherent, not just impressive for ninety seconds. When we say "watch performance-grounded recommendations, watch it air-gapped," we mean a world that behaves identically whether a prospect or an engineer is driving. A demo you can't trust is a promise you can't keep.
 CTA: Request a Demo
-Hashtags: #DemoCulture #NovaMak #EngineeringCulture #EnterpriseAI #DigitalEmployees #SovereignAI
+Hashtags: #DemoCulture #NovaMak #EngineeringCulture #EnterpriseAI #MarketingAI #SovereignAI
 Image suggestion: A tidy org map of the NovaMak demo world with its counts labeled.
 Carousel suggestion: 5 slides — the NovaMak setup, determinism defined, why it's honesty, what it forced us to fix, what you'll see.
-Video suggestion: 50s tour of the NovaMak demo world showing consistent cited answers.
+Video suggestion: 50s tour of the NovaMak demo world showing consistent performance-grounded recommendations.
 
 **TR**
 Hook: "Deterministik bir demo kurmak bize her sunum destesinden fazlasını öğretti."
-Body: Demo dünyamız NovaMak Endüstri A.Ş. kurgusal ama acımasızca tutarlıdır: 6 saha, 4 iş birimi, 42 çalışan, 16 departman, 12 Digital Employees, 25 workflow. Her senaryo bir arada durmalı — aynı soru her seferinde aynı atıflı yanıtı verir, aynı onay aynı şekilde yönlendirilir. Determinizm, test edilebilir hale gelmiş dürüstlük olduğunu fark edene kadar sıkıcı gelir: demo kayarsa, bir şeyi bozmuşuzdur. Onu kurmak, bizi ürünü yalnızca doksan saniye etkileyici değil, içsel olarak tutarlı yapmaya zorladı. "Atıflı yanıtları izleyin, air-gap izleyin" derken, bir aday ya da bir mühendis sürerken aynı davranan bir dünyayı kastediyoruz. Güvenemeyeceğiniz bir demo, tutamayacağınız bir sözdür.
+Body: Demo dünyamız NovaMak Endüstri A.Ş. kurgusal ama acımasızca tutarlıdır: 6 saha, 4 iş birimi, 42 çalışan, 16 departman, 12 AI-assisted workflows, 25 workflow. Her senaryo bir arada durmalı — aynı soru her seferinde aynı atıflı yanıtı verir, aynı onay aynı şekilde yönlendirilir. Determinizm, test edilebilir hale gelmiş dürüstlük olduğunu fark edene kadar sıkıcı gelir: demo kayarsa, bir şeyi bozmuşuzdur. Onu kurmak, bizi ürünü yalnızca doksan saniye etkileyici değil, içsel olarak tutarlı yapmaya zorladı. "Atıflı yanıtları izleyin, air-gap izleyin" derken, bir aday ya da bir mühendis sürerken aynı davranan bir dünyayı kastediyoruz. Güvenemeyeceğiniz bir demo, tutamayacağınız bir sözdür.
 CTA: Demo Talep Edin
-Hashtags: #DemoKulturu #NovaMak #MuhendislikKulturu #EnterpriseAI #DigitalEmployees #EgemenYapayZeka
+Hashtags: #DemoKulturu #NovaMak #MuhendislikKulturu #EnterpriseAI #MarketingAI #EgemenYapayZeka
 Image suggestion: Sayıları etiketli NovaMak demo dünyasının derli toplu organizasyon haritası.
 Carousel suggestion: 5 slayt — NovaMak kurulumu, determinizm tanımı, neden dürüstlük, neyi düzeltmeye zorladı, ne göreceksiniz.
 Video suggestion: 50sn NovaMak demo dünyası turu, tutarlı atıflı yanıtlar.
@@ -2477,16 +2487,16 @@ Video suggestion: 50sn NovaMak demo dünyası turu, tutarlı atıflı yanıtlar.
 
 **EN**
 Hook: "Illustrative: a retailer trains 3,000 store staff without a single sync to the cloud."
-Body: Fictional scenario, real mechanism. Picture a distributed Retail chain modeled on our demo world. Store associates ask constant questions — returns policy, promotions, escalation steps — and each store runs answers locally through Company Brain, cited from head-office procedures and scoped to the associate's role. No query is metered; usage is free at the margin, so nobody rations the help. Regional exceptions stay isolated by tenant. The illustrative outcome: consistent, sourced answers at every till, training load down, and not one customer record leaving the store's own hardware. This case is fictional and labeled as such — the cited answers and no-per-token model are real and shown live in the demo.
+Body: Fictional scenario, real mechanism. Picture a distributed Retail chain modeled on our demo world. Store associates ask constant questions — returns policy, promotions, escalation steps — and each store runs answers locally through Company Brain, cited from head-office procedures and scoped to the associate's role. No query is metered; usage is free at the margin, so nobody rations the help. Regional exceptions stay isolated by tenant. The illustrative outcome: consistent, sourced answers at every till, training load down, and not one customer record leaving the store's own hardware. This case is fictional and labeled as such — the performance-grounded recommendations and no-per-token model are real and shown live in the demo.
 CTA: Request a Demo
 Hashtags: #Retail #CompanyBrain #NoPerTokenBilling #Onboarding #OnPremAI #SovereignAI
-Image suggestion: A store counter with a cited answer on a terminal. Label "Illustrative."
-Carousel suggestion: 6 slides — distributed retail, constant questions, local cited answers, unmetered usage, tenant isolation, "illustrative" note.
+Image suggestion: A store counter with a performance-grounded recommendation on a terminal. Label "Illustrative."
+Carousel suggestion: 6 slides — distributed retail, constant questions, local performance-grounded recommendations, unmetered usage, tenant isolation, "illustrative" note.
 Video suggestion: 50s dramatized store scene with a persistent "Illustrative scenario" watermark.
 
 **TR**
 Hook: "Örnekleyici: bir perakendeci 3.000 mağaza personelini buluta tek senkron olmadan eğitiyor."
-Body: Kurgusal senaryo, gerçek mekanizma. Demo dünyamıza göre modellenmiş dağıtık bir Retail zinciri düşünün. Mağaza görevlileri sürekli soru sorar — iade politikası, kampanyalar, eskalasyon adımları — ve her mağaza yanıtları Company Brain üzerinden yerelde çalıştırır, genel müdürlük prosedürlerinden atıflı ve görevlinin rolüne göre kapsamlı. Hiçbir sorgu ölçülmez; kullanım marjda ücretsizdir, kimse yardımı kısıtlamaz. Bölgesel istisnalar kiracıyla yalıtık kalır. Örnekleyici sonuç: her kasada tutarlı, kaynaklı yanıtlar, eğitim yükü düşer ve tek bir müşteri kaydı mağazanın kendi donanımından çıkmaz. Bu vaka kurgusaldır ve öyle etiketlenir — atıflı yanıtlar ve token başına yok modeli gerçektir ve demoda canlı gösterilir.
+Body: Kurgusal senaryo, gerçek mekanizma. Demo dünyamıza göre modellenmiş dağıtık bir Retail zinciri düşünün. Mağaza görevlileri sürekli soru sorar — iade politikası, kampanyalar, eskalasyon adımları — ve her mağaza yanıtları Company Brain üzerinden yerelde çalıştırır, genel müdürlük prosedürlerinden atıflı ve görevlinin rolüne göre kapsamlı. Hiçbir sorgu ölçülmez; kullanım marjda ücretsizdir, kimse yardımı kısıtlamaz. Bölgesel istisnalar kiracıyla yalıtık kalır. Örnekleyici sonuç: her kasada tutarlı, performansa dayalı öneriler, eğitim yükü düşer ve tek bir müşteri kaydı mağazanın kendi donanımından çıkmaz. Bu vaka kurgusaldır ve öyle etiketlenir — atıflı yanıtlar ve token başına yok modeli gerçektir ve demoda canlı gösterilir.
 CTA: Demo Talep Edin
 Hashtags: #Retail #CompanyBrain #TokenBasinaFaturaYok #Oryantasyon #OnPremAI #EgemenYapayZeka
 Image suggestion: Bir terminalde atıflı yanıt olan mağaza tezgahı. "Örnekleyici" etiketi.
@@ -2543,7 +2553,7 @@ Video suggestion: 40sn kameraya maruziyet sorusunu ve yanıtını çerçeveleme.
 
 **EN**
 Hook: "Institutional knowledge is an asset. Most balance sheets just can't find it."
-Body: A company's real value includes what it knows — how it runs a line, wins a bid, handles an exception. Yet that knowledge is usually scattered, undocumented, or trapped with a few tenured people. AdOS turns it into something the organization can actually use: Company Brain grounds answers in your own documents, cited and permission-scoped, so know-how becomes findable, verifiable, and access-controlled. Across Manufacturing, Government, and Finance, that converts tacit expertise into durable institutional memory that survives turnover. Knowledge you can't retrieve is knowledge you're re-buying every time someone leaves. Make it an asset you can query, not a rumor you have to chase down the hall.
+Body: A company's real value includes what it knows — how it runs a line, wins a bid, handles an exception. Yet that knowledge is usually scattered, undocumented, or trapped with a few tenured people. AdOS turns it into something the organization can actually use: Company Brain grounds answers in your own documents, cited and workspace-scoped, so know-how becomes findable, verifiable, and access-controlled. Across Manufacturing, Government, and Finance, that converts tacit expertise into durable institutional memory that survives turnover. Knowledge you can't retrieve is knowledge you're re-buying every time someone leaves. Make it an asset you can query, not a rumor you have to chase down the hall.
 CTA: Read the Guide
 Hashtags: #KnowledgeManagement #CompanyBrain #InstitutionalMemory #EnterpriseAI #KnowledgeRetention #SovereignAI
 Image suggestion: A ledger where "knowledge" is a line item, backed by a searchable archive.
@@ -2552,7 +2562,7 @@ Video suggestion: 45s of scattered expertise consolidating into queryable instit
 
 **TR**
 Hook: "Kurumsal bilgi bir varlıktır. Çoğu bilanço onu bulamıyor sadece."
-Body: Bir şirketin gerçek değeri, bildiklerini de içerir — bir hattı nasıl işlettiği, bir ihaleyi nasıl kazandığı, bir istisnayı nasıl ele aldığı. Yine de bu bilgi genellikle dağınık, belgelenmemiş ya da birkaç kıdemli kişiyle sıkışmıştır. AdOS onu kurumun gerçekten kullanabileceği bir şeye çevirir: Company Brain yanıtları kendi belgelerinize, atıflı ve izin kapsamlı biçimde dayandırır; böylece bilgi birikimi bulunabilir, doğrulanabilir ve erişim-kontrollü olur. Manufacturing, Government ve Finance genelinde bu, örtük uzmanlığı, devir tesliminden sağ çıkan kalıcı kurumsal hafızaya dönüştürür. Getiremediğiniz bilgi, biri her ayrıldığında yeniden satın aldığınız bilgidir. Onu koridorda kovaladığınız bir söylenti değil, sorgulayabildiğiniz bir varlık yapın.
+Body: Bir şirketin gerçek değeri, bildiklerini de içerir — bir hattı nasıl işlettiği, bir ihaleyi nasıl kazandığı, bir istisnayı nasıl ele aldığı. Yine de bu bilgi genellikle dağınık, belgelenmemiş ya da birkaç kıdemli kişiyle sıkışmıştır. AdOS onu kurumun gerçekten kullanabileceği bir şeye çevirir: Company Brain yanıtları kendi verilerinize, atıflı ve insan onaylı biçimde dayandırır; böylece bilgi birikimi bulunabilir, doğrulanabilir ve erişim-kontrollü olur. Manufacturing, Government ve Finance genelinde bu, örtük uzmanlığı, devir tesliminden sağ çıkan kalıcı kurumsal hafızaya dönüştürür. Getiremediğiniz bilgi, biri her ayrıldığında yeniden satın aldığınız bilgidir. Onu koridorda kovaladığınız bir söylenti değil, sorgulayabildiğiniz bir varlık yapın.
 CTA: Rehberi Okuyun
 Hashtags: #BilgiYonetimi #CompanyBrain #KurumsalHafiza #EnterpriseAI #BilgiKorunumu #EgemenYapayZeka
 Image suggestion: "Bilgi"nin bir kalem olduğu, aranabilir bir arşivle desteklenen bir defter.
@@ -2583,7 +2593,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 40 · Post 1 (Educational)
 **EN**
 - **Hook:** "Where does your data go when you use AI?" is now a board-level question.
-- **Body:** Most AI answers by sending your text to someone else's cloud. AdOS doesn't. It's an enterprise AI operating system that runs entirely on your own infrastructure — Company Brain, Digital Employees, Workflows & Approvals — with no external API and no data leaving the building. The capability is real; the data path is not.
+- **Body:** Most AI answers by sending your text to someone else's cloud. AdOS doesn't. It's an enterprise AI operating system that runs entirely on your own infrastructure — Company Brain, AI-assisted workflows, Workflows & Approvals — with no external API and no data leaving the building. The capability is real; the data path is not.
 - **CTA:** See the Platform
 - **Hashtags:** #EnterpriseAI #DataSovereignty #OnPremAI #LocalLLM #InformationSecurity
 - **Image suggestion:** A building outline with data flows staying inside its walls.
@@ -2592,7 +2602,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** "Yapay zekâ kullanınca verin nereye gidiyor?" artık yönetim kurulu sorusu.
-- **Body:** Çoğu yapay zekâ, metninizi bir başkasının bulutuna göndererek yanıt verir. AdOS bunu yapmaz. Tamamen kendi altyapınızda çalışan bir kurumsal yapay zekâ işletim sistemidir — Company Brain, Digital Employees, Workflows & Approvals — harici API olmadan ve veri binadan çıkmadan. Yetenek gerçek; veri yolu değil.
+- **Body:** Çoğu yapay zekâ, metninizi bir başkasının bulutuna göndererek yanıt verir. AdOS bunu yapmaz. Tamamen kendi altyapınızda çalışan bir kurumsal yapay zekâ işletim sistemidir — Company Brain, AI-assisted workflows, Workflows & Approvals — harici API olmadan ve veri binadan çıkmadan. Yetenek gerçek; veri yolu değil.
 - **CTA:** Platformu Keşfedin
 - **Hashtags:** #KurumsalYapayZeka #VeriEgemenliği #KurumİçiYapayZeka #YerelLLM #BilgiGüvenliği
 - **Image suggestion:** Veri akışları duvarların içinde kalan bir bina taslağı.
@@ -2602,7 +2612,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 40 · Post 2 (Industry insight)
 **EN**
 - **Hook:** In regulated sectors, "on-prem" stopped being a preference this year.
-- **Body:** For public institutions, healthcare, and finance, data residency isn't a nice-to-have — it's the rule. That's why the AI conversation there is shifting from "which model" to "which architecture." An enterprise AI operating system that runs offline, on your hardware, with permission-aware and cited answers, is the only form of AI many of these organizations can adopt at all.
+- **Body:** For public institutions, healthcare, and finance, data residency isn't a nice-to-have — it's the rule. That's why the AI conversation there is shifting from "which model" to "which architecture." An enterprise AI operating system that runs offline, on your hardware, with human-approved and performance-grounded recommendations, is the only form of AI many of these organizations can adopt at all.
 - **CTA:** Talk to Sales
 - **Hashtags:** #PublicSector #Healthcare #Finance #DataResidency #SovereignAI
 - **Image suggestion:** Three sector icons (public, health, finance) over an on-prem server.
@@ -2611,7 +2621,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** Düzenlemeye tabi sektörlerde "kurum içi" bu yıl bir tercih olmaktan çıktı.
-- **Body:** Kamu kurumları, sağlık ve finans için veri yerleşimi bir lüks değil, kuraldır. Bu yüzden oradaki yapay zekâ tartışması "hangi model"den "hangi mimari"ye kayıyor. Çevrimdışı, kendi donanımınızda, izin-farkında ve kaynaklı yanıtlar veren bir kurumsal yapay zekâ işletim sistemi, bu kurumların çoğunun benimseyebileceği tek yapay zekâ biçimidir.
+- **Body:** Kamu kurumları, sağlık ve finans için veri yerleşimi bir lüks değil, kuraldır. Bu yüzden oradaki yapay zekâ tartışması "hangi model"den "hangi mimari"ye kayıyor. Çevrimdışı, kendi donanımınızda, izin-farkında ve performansa dayalı öneriler veren bir kurumsal yapay zekâ işletim sistemi, bu kurumların çoğunun benimseyebileceği tek yapay zekâ biçimidir.
 - **CTA:** Satışla Görüşün
 - **Hashtags:** #KamuSektörü #Sağlık #Finans #VeriYerleşimi #EgemenYapayZeka
 - **Image suggestion:** Kurum içi sunucu üzerinde üç sektör simgesi.
@@ -2621,26 +2631,26 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 40 · Post 3 (Product)
 **EN**
 - **Hook:** Every AdOS answer shows its source. Every one.
-- **Body:** The Company Brain doesn't ask you to trust it. It answers from your own documents and attaches the citation, so anyone can verify in one click. And it only ever cites what the asker is entitled to see — permission-aware by design. Grounded, cited, accountable. That's the difference between an assistant you hope is right and one you can check.
+- **Body:** The Company Brain doesn't ask you to trust it. It answers from your own documents and attaches the citation, so anyone can verify in one click. And it only ever cites what the asker is entitled to see — human-approved by design. Grounded, cited, accountable. That's the difference between an assistant you hope is right and one you can check.
 - **CTA:** Request a Demo
 - **Hashtags:** #CompanyBrain #ExplainableAI #EnterpriseAI #KnowledgeManagement
 - **Image suggestion:** An answer card with a highlighted citation link.
-- **Carousel suggestion:** "Anatomy of a cited answer."
-- **Video suggestion:** 15s screen capture: ask → cited answer → click to source.
+- **Carousel suggestion:** "Anatomy of a performance-grounded recommendation."
+- **Video suggestion:** 15s screen capture: ask → performance-grounded recommendation → click to source.
 
 **TR**
-- **Hook:** Her AdOS yanıtı kaynağını gösterir. Her biri.
-- **Body:** Company Brain size güvenmenizi istemez. Kendi belgelerinizden yanıt verir ve alıntıyı ekler; böylece herkes tek tıkla doğrulayabilir. Ve yalnızca soranın görmeye yetkili olduğunu alıntılar — tasarımı gereği izin-farkında. Dayanaklı, kaynaklı, hesap verebilir. Doğru olduğunu umduğunuz bir asistan ile kontrol edebileceğiniz bir asistan arasındaki fark budur.
+- **Hook:** Her AdOS yanıtı sonucuna dayanir. Her biri.
+- **Body:** Company Brain size güvenmenizi istemez. Kendi verilerinizden yanıt verir ve alıntıyı ekler; böylece herkes tek tıkla doğrulayabilir. Ve yalnızca soranın görmeye yetkili olduğunu alıntılar — tasarımı gereği izin-farkında. Dayanaklı, kaynaklı, hesap verebilir. Doğru olduğunu umduğunuz bir asistan ile kontrol edebileceğiniz bir asistan arasındaki fark budur.
 - **CTA:** Demo Talep Edin
 - **Hashtags:** #CompanyBrain #AçıklanabilirYapayZeka #KurumsalYapayZeka #BilgiYönetimi
 - **Image suggestion:** Vurgulanmış alıntı bağlantısı olan bir yanıt kartı.
 - **Carousel suggestion:** "Kaynaklı bir yanıtın anatomisi."
-- **Video suggestion:** 15 sn ekran kaydı: sor → kaynaklı yanıt → kaynağa tıkla.
+- **Video suggestion:** 15 sn ekran kaydı: sor → performansa dayalı öneri → kaynağa tıkla.
 
 ## Week 41 · Post 1 (Security)
 **EN**
 - **Hook:** The safest data path is the one that doesn't exist.
-- **Body:** You can't breach an external API call that never happens. Because AdOS runs on your infrastructure with local AI — no cloud, no keys, air-gap capable — there is no third-party path for your documents to travel. Security here isn't a bolt-on control; it's the shape of the architecture.
+- **Body:** You can't breach an external API call that never happens. Because AdOS runs on your infrastructure with local AI — no cloud, no keys, air-gap capable — there is no third-party path for your data to travel. Security here isn't a bolt-on control; it's the shape of the architecture.
 - **CTA:** Read the Guide
 - **Hashtags:** #CyberSecurity #AirGap #ZeroDataEgress #OnPremAI #CISO
 - **Image suggestion:** A severed cable between "your building" and "the internet," system still running.
@@ -2649,7 +2659,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** En güvenli veri yolu, var olmayan yoldur.
-- **Body:** Hiç gerçekleşmeyen bir harici API çağrısını ihlal edemezsiniz. AdOS altyapınızda yerel yapay zekâ ile çalıştığından — bulut yok, anahtar yok, hava boşluğu uyumlu — belgelerinizin gideceği üçüncü taraf bir yol yoktur. Buradaki güvenlik sonradan eklenen bir denetim değil; mimarinin biçimidir.
+- **Body:** Hiç gerçekleşmeyen bir harici API çağrısını ihlal edemezsiniz. AdOS altyapınızda yerel yapay zekâ ile çalıştığından — bulut yok, anahtar yok, hava boşluğu uyumlu — verilerinizin gideceği üçüncü taraf bir yol yoktur. Buradaki güvenlik sonradan eklenen bir denetim değil; mimarinin biçimidir.
 - **CTA:** Rehberi Okuyun
 - **Hashtags:** #SiberGüvenlik #HavaBoşluğu #SıfırVeriÇıkışı #KurumİçiYapayZeka #CISO
 - **Image suggestion:** "Binanız" ile "internet" arasında kesilmiş kablo, sistem hâlâ çalışıyor.
@@ -2659,7 +2669,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 41 · Post 2 (Knowledge)
 **EN**
 - **Hook:** When your best expert retires, does your knowledge retire with them?
-- **Body:** For most organizations, yes. Decades of judgment leave with one person. A Company Brain turns the documents you already have — procedures, decisions, reports — into cited answers that stay after people go. Onboarding gets faster; institutional memory stops walking out the door. And it all stays on your infrastructure.
+- **Body:** For most organizations, yes. Decades of judgment leave with one person. A Company Brain turns the documents you already have — procedures, decisions, reports — into performance-grounded recommendations that stay after people go. Onboarding gets faster; institutional memory stops walking out the door. And it all stays on your infrastructure.
 - **CTA:** See the Platform
 - **Hashtags:** #KnowledgeManagement #Onboarding #CompanyBrain #FutureOfWork
 - **Image suggestion:** A door with an arrow leaving, but a glowing "brain" staying inside.
@@ -2668,7 +2678,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** En iyi uzmanınız emekli olduğunda, bilginiz de onunla mı emekli oluyor?
-- **Body:** Çoğu kurum için evet. On yılların muhakemesi tek bir kişiyle gider. Company Brain, zaten sahip olduğunuz belgeleri — prosedürler, kararlar, raporlar — insanlar gittikten sonra kalan kaynaklı yanıtlara dönüştürür. İşe alıştırma hızlanır; kurumsal hafıza kapıdan çıkmayı bırakır. Ve hepsi altyapınızda kalır.
+- **Body:** Çoğu kurum için evet. On yılların muhakemesi tek bir kişiyle gider. Company Brain, zaten sahip olduğunuz belgeleri — prosedürler, kararlar, raporlar — insanlar gittikten sonra kalan performansa dayalı önerilere dönüştürür. İşe alıştırma hızlanır; kurumsal hafıza kapıdan çıkmayı bırakır. Ve hepsi altyapınızda kalır.
 - **CTA:** Platformu Keşfedin
 - **Hashtags:** #BilgiYönetimi #İşeAlıştırma #CompanyBrain #İşinGeleceği
 - **Image suggestion:** Okla çıkan bir kapı, ama içeride kalan parlayan bir "beyin".
@@ -2678,7 +2688,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 41 · Post 3 (Founder perspective)
 **EN**
 - **Hook:** We built AdOS because "trust us with your data" is not a strategy.
-- **Body:** Every enterprise I met wanted AI and feared the same thing: sending their most sensitive knowledge to someone else's cloud. So we inverted it. Keep the data where it is; bring the AI to it. On your hardware, offline-capable, permission-aware, unmetered. Sovereignty isn't a feature we added — it's the reason AdOS exists.
+- **Body:** Every enterprise I met wanted AI and feared the same thing: sending their most sensitive knowledge to someone else's cloud. So we inverted it. Keep the data where it is; bring the AI to it. On your hardware, offline-capable, human-approved, unmetered. Sovereignty isn't a feature we added — it's the reason AdOS exists.
 - **CTA:** Talk to Sales
 - **Hashtags:** #FounderMindset #SovereignAI #EnterpriseAI #BuildInPublic
 - **Image suggestion:** Plain-text quote card on dark background.
@@ -2735,18 +2745,18 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 42 · Post 3 (Enterprise)
 **EN**
 - **Hook:** An assistant answers questions. An operating system runs the work.
-- **Body:** AdOS isn't a chatbot on your intranet. It's three pillars working together: Company Brain for cited knowledge, Digital Employees for real tasks, and Workflows & Approvals for structured, audited processes — all permission-aware, all on your infrastructure. That's why we call it an enterprise AI operating system, not an assistant.
+- **Body:** AdOS isn't a chatbot on your intranet. It's three pillars working together: Company Brain for cited knowledge, AI-assisted workflows for real tasks, and Workflows & Approvals for structured, audited processes — all human-approved, all on your infrastructure. That's why we call it an enterprise AI operating system, not an assistant.
 - **CTA:** See the Platform
-- **Hashtags:** #EnterpriseAI #DigitalEmployees #WorkflowAutomation #CompanyBrain
+- **Hashtags:** #EnterpriseAI #MarketingAI #WorkflowAutomation #CompanyBrain
 - **Image suggestion:** Three-pillar diagram under one roof labeled AdOS.
 - **Carousel suggestion:** "Chatbot vs operating system: what changes."
 - **Video suggestion:** 30s motion graphic of the three pillars.
 
 **TR**
 - **Hook:** Bir asistan soruları yanıtlar. Bir işletim sistemi işi yürütür.
-- **Body:** AdOS intranetinizde bir sohbet robotu değildir. Birlikte çalışan üç sütundur: kaynaklı bilgi için Company Brain, gerçek görevler için Digital Employees ve yapılandırılmış, denetlenen süreçler için Workflows & Approvals — hepsi izin-farkında, hepsi altyapınızda. Bu yüzden ona asistan değil, kurumsal yapay zekâ işletim sistemi diyoruz.
+- **Body:** AdOS intranetinizde bir sohbet robotu değildir. Birlikte çalışan üç sütundur: kaynaklı bilgi için Company Brain, gerçek görevler için AI-assisted workflows ve yapılandırılmış, denetlenen süreçler için Workflows & Approvals — hepsi izin-farkında, hepsi altyapınızda. Bu yüzden ona asistan değil, kurumsal yapay zekâ işletim sistemi diyoruz.
 - **CTA:** Platformu Keşfedin
-- **Hashtags:** #KurumsalYapayZeka #DigitalEmployees #İşAkışıOtomasyonu #CompanyBrain
+- **Hashtags:** #KurumsalYapayZeka #MarketingAI #İşAkışıOtomasyonu #CompanyBrain
 - **Image suggestion:** AdOS çatısı altında üç sütun diyagramı.
 - **Carousel suggestion:** "Sohbet robotu ile işletim sistemi: ne değişir."
 - **Video suggestion:** 30 sn üç sütunun hareketli grafiği.
@@ -2754,59 +2764,59 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 43 · Post 1 (Customer story — illustrative)
 **EN**
 - **Hook:** A manufacturer (illustrative) cut answer-hunting from minutes to seconds.
-- **Body:** In an illustrative composite, a mid-size manufacturer pointed its Company Brain at scattered procedures and quality records. Line supervisors stopped hunting through shared drives; they asked and got cited answers on the spot — offline, on their own servers. The point isn't a magic number. It's that the knowledge was always there; retrieval was the bottleneck.
+- **Body:** In an illustrative composite, a mid-size manufacturer pointed its Company Brain at scattered procedures and quality records. Line supervisors stopped hunting through shared drives; they asked and got performance-grounded recommendations on the spot — offline, on their own servers. The point isn't a magic number. It's that the knowledge was always there; retrieval was the bottleneck.
 - **CTA:** Calculate Your ROI
 - **Hashtags:** #Manufacturing #CompanyBrain #Productivity #OnPremAI
-- **Image suggestion:** Factory floor with a tablet showing a cited answer. (Labeled illustrative.)
+- **Image suggestion:** Factory floor with a tablet showing a performance-grounded recommendation. (Labeled illustrative.)
 - **Carousel suggestion:** "Illustrative: a day on the line, before and after."
 - **Video suggestion:** 30s illustrative scenario, clearly captioned.
 
 **TR**
 - **Hook:** Bir üretici (temsili) yanıt aramayı dakikalardan saniyelere indirdi.
-- **Body:** Temsili bir bileşikte, orta ölçekli bir üretici Company Brain'ini dağınık prosedürlere ve kalite kayıtlarına yöneltti. Hat amirleri paylaşımlı sürücülerde aramayı bıraktı; sordular ve anında kaynaklı yanıt aldılar — çevrimdışı, kendi sunucularında. Mesele sihirli bir rakam değil. Bilgi hep oradaydı; darboğaz erişimdi.
+- **Body:** Temsili bir bileşikte, orta ölçekli bir üretici Company Brain'ini dağınık prosedürlere ve kalite kayıtlarına yöneltti. Hat amirleri paylaşımlı sürücülerde aramayı bıraktı; sordular ve anında performansa dayalı öneri aldılar — çevrimdışı, kendi sunucularında. Mesele sihirli bir rakam değil. Bilgi hep oradaydı; darboğaz erişimdi.
 - **CTA:** ROI'nizi Hesaplayın
 - **Hashtags:** #Üretim #CompanyBrain #Verimlilik #KurumİçiYapayZeka
-- **Image suggestion:** Kaynaklı yanıt gösteren bir tabletle fabrika sahası. (Temsili etiketli.)
+- **Image suggestion:** performansa dayalı öneri gösteren bir tabletle fabrika sahası. (Temsili etiketli.)
 - **Carousel suggestion:** "Temsili: hatta bir gün, öncesi ve sonrası."
 - **Video suggestion:** 30 sn temsili senaryo, açıkça altyazılı.
 
 ## Week 43 · Post 2 (AI)
 **EN**
 - **Hook:** Hallucination is a feature of ungrounded AI — not an unavoidable law.
-- **Body:** A model that generates from memory will confidently invent. A Company Brain answers from your documents and cites the source, so unsupported claims are visible and checkable. It won't eliminate every error, but it changes the default from "trust the fluent text" to "verify the citation." For enterprise decisions, that's the difference that matters.
+- **Body:** A model that generates from memory will confidently invent. A Company Brain answers from your data and cites the source, so unsupported claims are visible and checkable. It won't eliminate every error, but it changes the default from "trust the fluent text" to "verify the citation." For enterprise decisions, that's the difference that matters.
 - **CTA:** Read the Guide
 - **Hashtags:** #AI #ResponsibleAI #Grounding #EnterpriseAI
 - **Image suggestion:** Two speech bubbles: one blank-sourced, one with a citation badge.
 - **Carousel suggestion:** "Why grounded AI hallucinates less."
-- **Video suggestion:** 25s: side-by-side ungrounded vs cited answer.
+- **Video suggestion:** 25s: side-by-side ungrounded vs performance-grounded recommendation.
 
 **TR**
 - **Hook:** Halüsinasyon, dayanaksız yapay zekânın bir özelliğidir — kaçınılmaz bir yasa değil.
-- **Body:** Hafızadan üreten bir model kendinden emin şekilde uydurur. Company Brain belgelerinizden yanıt verir ve kaynağı gösterir; böylece desteksiz iddialar görünür ve kontrol edilebilir. Her hatayı ortadan kaldırmaz, ama varsayılanı "akıcı metne güven"den "alıntıyı doğrula"ya çevirir. Kurumsal kararlar için önemli olan fark budur.
+- **Body:** Hafızadan üreten bir model kendinden emin şekilde uydurur. Company Brain verilerinizden yanıt verir ve kaynağı gösterir; böylece desteksiz iddialar görünür ve kontrol edilebilir. Her hatayı ortadan kaldırmaz, ama varsayılanı "akıcı metne güven"den "alıntıyı doğrula"ya çevirir. Kurumsal kararlar için önemli olan fark budur.
 - **CTA:** Rehberi Okuyun
 - **Hashtags:** #YapayZeka #SorumluYapayZeka #Dayandırma #KurumsalYapayZeka
 - **Image suggestion:** İki konuşma balonu: biri kaynaksız, biri alıntı rozetli.
 - **Carousel suggestion:** "Dayanaklı yapay zekâ neden daha az halüsinasyon görür."
-- **Video suggestion:** 25 sn: yan yana dayanaksız ve kaynaklı yanıt.
+- **Video suggestion:** 25 sn: yan yana dayanaksız ve performansa dayalı öneri.
 
 ## Week 43 · Post 3 (Product)
 **EN**
-- **Hook:** Give a Digital Employee a task, not just a question.
-- **Body:** Digital Employees don't only answer — they do defined work: draft, route, prepare an approval, move a workflow forward. Each acts within a role and a permission boundary, and every action lands in the audit trail. Delegation and accountability arrive together, on your own infrastructure.
+- **Hook:** Give an AI-assisted workflow a task, not just a question.
+- **Body:** AI-assisted workflows don't only answer — they do defined work: draft, route, prepare an approval, move a workflow forward. Each acts within a role and a permission boundary, and every action lands in the audit trail. Delegation and accountability arrive together, on your own infrastructure.
 - **CTA:** Request a Demo
-- **Hashtags:** #DigitalEmployees #WorkflowAutomation #EnterpriseAI #Accountability
+- **Hashtags:** #MarketingAI #WorkflowAutomation #EnterpriseAI #Accountability
 - **Image suggestion:** A task card moving through a workflow with an audit stamp.
-- **Carousel suggestion:** "What a Digital Employee can (and can't) do."
-- **Video suggestion:** 30s: a Digital Employee routing an approval end to end.
+- **Carousel suggestion:** "What an AI-assisted workflow can (and can't) do."
+- **Video suggestion:** 30s: an AI-assisted workflow routing an approval end to end.
 
 **TR**
-- **Hook:** Bir Digital Employee'ye yalnızca soru değil, görev verin.
-- **Body:** Digital Employees yalnızca yanıtlamaz — tanımlı işler yapar: taslak hazırlar, yönlendirir, bir onay hazırlar, bir iş akışını ilerletir. Her biri bir rol ve izin sınırı içinde çalışır ve her eylem denetim izine düşer. Yetki devri ve hesap verebilirlik birlikte gelir, kendi altyapınızda.
+- **Hook:** Bir AI-assisted workflow'ye yalnızca soru değil, görev verin.
+- **Body:** AI-assisted workflows yalnızca yanıtlamaz — tanımlı işler yapar: taslak hazırlar, yönlendirir, bir onay hazırlar, bir iş akışını ilerletir. Her biri bir rol ve izin sınırı içinde çalışır ve her eylem etkinlik günlüğüne düşer. Yetki devri ve hesap verebilirlik birlikte gelir, kendi altyapınızda.
 - **CTA:** Demo Talep Edin
-- **Hashtags:** #DigitalEmployees #İşAkışıOtomasyonu #KurumsalYapayZeka #HesapVerebilirlik
+- **Hashtags:** #MarketingAI #İşAkışıOtomasyonu #KurumsalYapayZeka #HesapVerebilirlik
 - **Image suggestion:** Denetim damgasıyla bir iş akışında ilerleyen görev kartı.
-- **Carousel suggestion:** "Bir Digital Employee neyi yapar (ve yapamaz)."
-- **Video suggestion:** 30 sn: bir Digital Employee bir onayı baştan sona yönlendiriyor.
+- **Carousel suggestion:** "Bir AI-assisted workflow neyi yapar (ve yapamaz)."
+- **Video suggestion:** 30 sn: bir AI-assisted workflow bir onayı baştan sona yönlendiriyor.
 
 ## Week 44 · Post 1 (Industry insight)
 **EN**
@@ -2830,7 +2840,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 44 · Post 2 (Security)
 **EN**
 - **Hook:** Your audit trail should answer "who saw what, and when" without a war room.
-- **Body:** Every consequential action in AdOS — a question asked, an approval granted, a task completed — lands in an immutable audit trail. Combined with permission-aware answers, you can demonstrate that access control held, not just assert it. Accountability isn't a report you assemble later; it's recorded as it happens.
+- **Body:** Every consequential action in AdOS — a question asked, an approval granted, a task completed — lands in an activity log and per-approval timeline. Combined with human-approved answers, you can demonstrate that human approval gates held, not just assert it. Accountability isn't a report you assemble later; it's recorded as it happens.
 - **CTA:** Read the Guide
 - **Hashtags:** #Compliance #AuditTrail #CyberSecurity #Governance
 - **Image suggestion:** A tamper-evident ledger line with timestamps.
@@ -2838,12 +2848,12 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 - **Video suggestion:** 25s: an auditor filtering the trail by user and date.
 
 **TR**
-- **Hook:** Denetim iziniz "kim neyi ne zaman gördü" sorusunu kriz masası olmadan yanıtlamalı.
-- **Body:** AdOS'ta sonuç doğuran her eylem — sorulan bir soru, verilen bir onay, tamamlanan bir görev — değiştirilemez bir denetim izine düşer. İzin-farkında yanıtlarla birleştiğinde, erişim denetiminin tutulduğunu iddia etmekle kalmaz gösterirsiniz. Hesap verebilirlik sonradan derlediğiniz bir rapor değil; olurken kaydedilir.
+- **Hook:** etkinlik günlüğüniz "kim neyi ne zaman gördü" sorusunu kriz masası olmadan yanıtlamalı.
+- **Body:** AdOS'ta sonuç doğuran her eylem — sorulan bir soru, verilen bir onay, tamamlanan bir görev — değiştirilemez bir etkinlik günlüğüne düşer. İzin-farkında yanıtlarla birleştiğinde, erişim denetiminin tutulduğunu iddia etmekle kalmaz gösterirsiniz. Hesap verebilirlik sonradan derlediğiniz bir rapor değil; olurken kaydedilir.
 - **CTA:** Rehberi Okuyun
 - **Hashtags:** #Uyum #DenetimİZi #SiberGüvenlik #Yönetişim
 - **Image suggestion:** Zaman damgalı, kurcalamaya karşı korumalı bir kayıt satırı.
-- **Carousel suggestion:** "İyi bir yapay zekâ denetim izinin yakalaması gereken 5 şey."
+- **Carousel suggestion:** "İyi bir yapay zekâ etkinlik günlüğünin yakalaması gereken 5 şey."
 - **Video suggestion:** 25 sn: bir denetçi izi kullanıcı ve tarihe göre filtreliyor.
 
 ## Week 44 · Post 3 (Knowledge)
@@ -3001,18 +3011,18 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 47 · Post 2 (Product)
 **EN**
 - **Hook:** Approvals shouldn't wait on a person to notice an email.
-- **Body:** Workflows & Approvals in AdOS route requests deterministically through tiered authority, so nothing stalls in an inbox. Each step is on the record, each approver acts within their limit, and a Digital Employee can prepare the request so humans just decide. Faster cycles, full audit, on your infrastructure.
+- **Body:** Workflows & Approvals in AdOS route requests deterministically through tiered authority, so nothing stalls in an inbox. Each step is on the record, each approver acts within their limit, and an AI-assisted workflow can prepare the request so humans just decide. Faster cycles, full audit, on your infrastructure.
 - **CTA:** Request a Demo
-- **Hashtags:** #WorkflowAutomation #Approvals #DigitalEmployees #EnterpriseAI
+- **Hashtags:** #WorkflowAutomation #Approvals #MarketingAI #EnterpriseAI
 - **Image suggestion:** An approval moving through tiers with a progress bar.
-- **Carousel suggestion:** "Anatomy of a tiered approval."
+- **Carousel suggestion:** "Anatomy of a human approval gate."
 - **Video suggestion:** 30s: a request routed through three approval tiers.
 
 **TR**
 - **Hook:** Onaylar, birinin bir e-postayı fark etmesini beklememeli.
-- **Body:** AdOS'ta Workflows & Approvals, talepleri kademeli yetki üzerinden belirlenimci biçimde yönlendirir; böylece hiçbir şey gelen kutusunda takılmaz. Her adım kayıttadır, her onaylayan kendi limiti içinde işlem yapar ve bir Digital Employee talebi hazırlayabilir; insanlar yalnızca karar verir. Daha hızlı döngüler, tam denetim, altyapınızda.
+- **Body:** AdOS'ta Workflows & Approvals, talepleri kademeli yetki üzerinden belirlenimci biçimde yönlendirir; böylece hiçbir şey gelen kutusunda takılmaz. Her adım kayıttadır, her onaylayan kendi limiti içinde işlem yapar ve bir AI-assisted workflow talebi hazırlayabilir; insanlar yalnızca karar verir. Daha hızlı döngüler, tam denetim, altyapınızda.
 - **CTA:** Demo Talep Edin
-- **Hashtags:** #İşAkışıOtomasyonu #Onaylar #DigitalEmployees #KurumsalYapayZeka
+- **Hashtags:** #İşAkışıOtomasyonu #Onaylar #MarketingAI #KurumsalYapayZeka
 - **Image suggestion:** İlerleme çubuğuyla kademeler arasında ilerleyen bir onay.
 - **Carousel suggestion:** "Kademeli bir onayın anatomisi."
 - **Video suggestion:** 30 sn: üç onay kademesinde yönlendirilen bir talep.
@@ -3020,7 +3030,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 47 · Post 3 (Industry insight)
 **EN**
 - **Hook:** In healthcare, "where does the AI send patient data?" ends most pilots.
-- **Body:** Clinical confidentiality leaves little room for cloud round-trips. An enterprise AI operating system that runs on-prem, offline-capable, with permission-aware and cited answers, keeps patient information inside the institution's own walls. The question that ends other pilots is the one AdOS is built to answer.
+- **Body:** Clinical confidentiality leaves little room for cloud round-trips. An enterprise AI operating system that runs on-prem, offline-capable, with human-approved and performance-grounded recommendations, keeps patient information inside the institution's own walls. The question that ends other pilots is the one AdOS is built to answer.
 - **CTA:** Talk to Sales
 - **Hashtags:** #Healthcare #PatientPrivacy #OnPremAI #Compliance
 - **Image suggestion:** A hospital outline with data contained inside.
@@ -3029,7 +3039,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** Sağlıkta "yapay zekâ hasta verisini nereye gönderiyor?" çoğu pilotu bitirir.
-- **Body:** Klinik gizlilik, bulut gidiş-dönüşlerine az yer bırakır. Kurum içi çalışan, çevrimdışı uyumlu, izin-farkında ve kaynaklı yanıtlar veren bir kurumsal yapay zekâ işletim sistemi, hasta bilgisini kurumun kendi duvarları içinde tutar. Diğer pilotları bitiren soru, AdOS'un yanıtlamak için kurulduğu sorudur.
+- **Body:** Klinik gizlilik, bulut gidiş-dönüşlerine az yer bırakır. Kurum içi çalışan, çevrimdışı uyumlu, izin-farkında ve performansa dayalı öneriler veren bir kurumsal yapay zekâ işletim sistemi, hasta bilgisini kurumun kendi duvarları içinde tutar. Diğer pilotları bitiren soru, AdOS'un yanıtlamak için kurulduğu sorudur.
 - **CTA:** Satışla Görüşün
 - **Hashtags:** #Sağlık #HastaGizliliği #KurumİçiYapayZeka #Uyum
 - **Image suggestion:** Verinin içeride tutulduğu bir hastane taslağı.
@@ -3039,7 +3049,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 48 · Post 1 (Knowledge)
 **EN**
 - **Hook:** Documentation nobody can find is just expensive forgetting.
-- **Body:** Every wiki page nobody retrieves is knowledge that might as well not exist. The fix isn't writing more — it's making what you have answerable. A Company Brain turns your existing documents into cited, permission-aware answers on demand, so writing something down finally means someone can use it.
+- **Body:** Every wiki page nobody surfaces is knowledge that might as well not exist. The fix isn't writing more — it's making what you have answerable. A Company Brain turns your existing documents into cited, human-approved answers on demand, so writing something down finally means someone can use it.
 - **CTA:** See the Platform
 - **Hashtags:** #KnowledgeManagement #CompanyBrain #Productivity #EnterpriseAI
 - **Image suggestion:** A dusty wiki page transforming into a crisp answer card.
@@ -3048,7 +3058,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** Kimsenin bulamadığı belgeler, sadece pahalı bir unutmadır.
-- **Body:** Kimsenin getirmediği her wiki sayfası, var olmasa da olur bir bilgidir. Çözüm daha çok yazmak değil — sahip olduğunuzu yanıtlanabilir kılmaktır. Company Brain, mevcut belgelerinizi talep üzerine kaynaklı, izin-farkında yanıtlara dönüştürür; böylece bir şeyi yazmak sonunda birinin onu kullanabilmesi anlamına gelir.
+- **Body:** Kimsenin getirmediği her wiki sayfası, var olmasa da olur bir bilgidir. Çözüm daha çok yazmak değil — sahip olduğunuzu yanıtlanabilir kılmaktır. Company Brain, mevcut verilerinizi talep üzerine kaynaklı, izin-farkında yanıtlara dönüştürür; böylece bir şeyi yazmak sonunda birinin onu kullanabilmesi anlamına gelir.
 - **CTA:** Platformu Keşfedin
 - **Hashtags:** #BilgiYönetimi #CompanyBrain #Verimlilik #KurumsalYapayZeka
 - **Image suggestion:** Tozlu bir wiki sayfasının net bir yanıt kartına dönüşmesi.
@@ -3229,7 +3239,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 51 · Post 2 (Roadmap tease)
 **EN**
 - **Hook:** Next year, the same promise — deeper. Data still never leaves.
-- **Body:** Our roadmap keeps one rule fixed: everything on your infrastructure, nothing to the cloud. Within that boundary we're deepening the Company Brain, expanding what Digital Employees can safely do, and sharpening day-2 operations. New capability, same sovereignty. We'll share specifics soon — bound by what we can actually ship.
+- **Body:** Our roadmap keeps one rule fixed: everything on your infrastructure, nothing to the cloud. Within that boundary we're deepening the Company Brain, expanding what AI-assisted workflows can safely do, and sharpening day-2 operations. New capability, same sovereignty. We'll share specifics soon — bound by what we can actually ship.
 - **CTA:** See the Platform
 - **Hashtags:** #Roadmap #EnterpriseAI #OnPremAI #ProductVision
 - **Image suggestion:** A path forward staying inside a walled boundary.
@@ -3238,7 +3248,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 
 **TR**
 - **Hook:** Gelecek yıl aynı söz — daha derin. Veri yine hiç çıkmıyor.
-- **Body:** Yol haritamız tek bir kuralı sabit tutar: her şey altyapınızda, hiçbir şey buluta değil. Bu sınır içinde Company Brain'i derinleştiriyor, Digital Employees'in güvenle yapabileceklerini genişletiyor ve ikinci-gün operasyonlarını keskinleştiriyoruz. Yeni yetenek, aynı egemenlik. Ayrıntıları yakında — gerçekten sunabileceğimizle sınırlı olarak — paylaşacağız.
+- **Body:** Yol haritamız tek bir kuralı sabit tutar: her şey altyapınızda, hiçbir şey buluta değil. Bu sınır içinde Company Brain'i derinleştiriyor, AI-assisted workflows'in güvenle yapabileceklerini genişletiyor ve ikinci-gün operasyonlarını keskinleştiriyoruz. Yeni yetenek, aynı egemenlik. Ayrıntıları yakında — gerçekten sunabileceğimizle sınırlı olarak — paylaşacağız.
 - **CTA:** Platformu Keşfedin
 - **Hashtags:** #YolHaritası #KurumsalYapayZeka #KurumİçiYapayZeka #ÜrünVizyonu
 - **Image suggestion:** Duvarlı bir sınır içinde kalan, ileri giden bir yol.
@@ -3267,7 +3277,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 52 · Post 1 (Enterprise)
 **EN**
 - **Hook:** If you evaluate one thing about enterprise AI next year, evaluate the data path.
-- **Body:** Models will keep impressing. The durable question is architectural: does your knowledge leave the building or not? Start every AI evaluation there. If the answer is "it stays, fully, offline-capable, permission-aware, and audited," you're looking at an enterprise AI operating system — which is exactly what AdOS is.
+- **Body:** Models will keep impressing. The durable question is architectural: does your knowledge leave the building or not? Start every AI evaluation there. If the answer is "it stays, fully, offline-capable, human-approved, and audited," you're looking at an enterprise AI operating system — which is exactly what AdOS is.
 - **CTA:** See the Platform
 - **Hashtags:** #EnterpriseAI #DataSovereignty #OnPremAI #Strategy
 - **Image suggestion:** A checklist headed "evaluate the data path first."
@@ -3305,7 +3315,7 @@ Video suggestion: 45sn karar-ağacı animasyonu, satın-al-ve-sahip-ol'da sonlan
 ## Week 52 · Post 3 (Product / forward-looking)
 **EN**
 - **Hook:** Start next year with AI you own — not AI you rent your dependence on.
-- **Body:** One resolution worth keeping: adopt AI on your terms. On your infrastructure. Offline-capable. Permission-aware. Cited. Unmetered. No data leaving the building. If that's on your list for the new year, the first step is a demo where we pull the cable and it keeps working.
+- **Body:** One resolution worth keeping: adopt AI on your terms. On your infrastructure. Offline-capable. Human-Approved. Cited. Unmetered. No data leaving the building. If that's on your list for the new year, the first step is a demo where we pull the cable and it keeps working.
 - **CTA:** Request a Demo
 - **Hashtags:** #EnterpriseAI #SovereignAI #OnPremAI #NewYear
 - **Image suggestion:** A doorway into a new year, data staying inside.
