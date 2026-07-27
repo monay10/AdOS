@@ -17,7 +17,7 @@ local-AI platform that takes a client's advertising objective (a **Mission**) th
 → performance report → executive dashboard — and remembers what works in a
 marketing-performance **Company Brain**. It **drafts**; it never launches live ads.
 
-This playbook covers three lifecycle stages from the shared CS canon (`CS_CANON.md` §4.1):
+This playbook covers three lifecycle stages from the shared CS canon (`CUSTOMER_SUCCESS_CONSTITUTION.md`):
 
 | Lifecycle stage | Timeline | This playbook |
 |---|---|---|
@@ -30,7 +30,7 @@ This playbook covers three lifecycle stages from the shared CS canon (`CS_CANON.
 
 The playbook is organized by timeline: **Day 0 · Week 1 · Month 1 · Month 3 · Month 6 ·
 Month 12**. It also maps each block to the **Adoption Maturity** model M1–M5
-(`CS_CANON.md` §4.2).
+(`CUSTOMER_SUCCESS_CONSTITUTION.md`).
 
 ### 0.1 CRITICAL onboarding constraint — self-hosted, no vendor telemetry
 
@@ -44,14 +44,14 @@ confirmed from vendor-side dashboards, because none exist.** When a checkpoint s
 "verified", it means "verified by the Admin demonstrating it, screen-shared or exported,
 to the CSM/Solution Architect".
 
-### 0.2 Roles (from `CS_CANON.md` §4.6)
+### 0.2 Roles (from `CUSTOMER_SUCCESS_CONSTITUTION.md`)
 
 | Abbrev. | Role | Side | Owns during onboarding |
 |---|---|---|---|
 | **CSM** | Customer Success Manager | Vendor | Relationship, plan, health, checkpoints, renewal trajectory |
 | **SA** | Solution Architect | Vendor | Install, security config, AI engine, persistence, backups, scale |
 | **Trainer** | Trainer | Vendor | Enablement + certification (references training docs) |
-| **Support** | Support Engineer | Vendor | Severity triage during onboarding (see `CS_CANON.md` §4.4) |
+| **Support** | Support Engineer | Vendor | Severity triage during onboarding (see `CUSTOMER_SUCCESS_CONSTITUTION.md`) |
 | **Admin** | Customer Admin | Customer | Runs the install, holds the environment, exports evidence |
 | **Champion** | Customer Champion (power user) | Customer | First real Missions, internal enablement, Company Brain seeding |
 | **Exec Sponsor** | Executive Sponsor | Customer | Business objectives, resourcing, EBR attendance |
@@ -349,7 +349,7 @@ SA confirms operational health; Exec Sponsor validates business impact.
 
 ### Training
 - Advanced **Administrator** topics as needed — see `ADMINISTRATOR_TRAINING.md`.
-- Certification progression (Associate → Professional → Administrator; see `CS_CANON.md`
+- Certification progression (Associate → Professional → Administrator; see `CUSTOMER_SUCCESS_CONSTITUTION.md`
   §4.5) via the Trainer.
 
 ### Validation
@@ -387,7 +387,7 @@ this block is the bridge to the renewal/expansion motion and confirms durable ma
 | Task | Owner |
 |---|---|
 | Confirm AdOS is the **standard advertising operating layer** across teams | Exec Sponsor · Champion |
-| Certify admins and champions (up to Administrator / Architect; see `CS_CANON.md` §4.5) | Trainer |
+| Certify admins and champions (up to Administrator / Architect; see `CUSTOMER_SUCCESS_CONSTITUTION.md`) | Trainer |
 | Document internal **best practices / SOPs** for Missions and approvals | Champion |
 | Assemble the **annual value review** from customer-shared evidence | CSM |
 | Identify **expansion** (more seats, more brands/clients) | CSM · Exec Sponsor |
@@ -402,7 +402,7 @@ the renewal/expansion narrative and health.
 - A renewal/expansion recommendation (handoff to the renewal playbook).
 
 ### Training
-- Certification to **Administrator / Architect** — Trainer, per `CS_CANON.md` §4.5,
+- Certification to **Administrator / Architect** — Trainer, per `CUSTOMER_SUCCESS_CONSTITUTION.md`,
   building on `ADMINISTRATOR_TRAINING.md` and `END_USER_TRAINING.md`.
 
 ### Validation
@@ -464,17 +464,17 @@ When the Definition of Done is met, the CSM formally transitions the account fro
   (M2 minimum; M3 target).
 - The **evidence export routine**: how the Admin exports the activity log, Mission counts,
   KPI reports, and Company Brain growth — the sole basis for health scoring, since there is
-  **no vendor telemetry** (`CS_CANON.md` §3, §4.3).
+  **no vendor telemetry** (`CUSTOMER_SUCCESS_CONSTITUTION.md`).
 - Open risks + mitigations carried forward.
 - Training/certification status and the plan to certify a second admin (bus-factor).
 - The value narrative tied to the Exec Sponsor's Day 0 objectives, for the first EBR.
 
-**Cadence handed to the Adopt stage** (`CS_CANON.md` §4.7): weekly during onboarding →
+**Cadence handed to the Adopt stage** (`CUSTOMER_SUCCESS_CONSTITUTION.md`): weekly during onboarding →
 **monthly check-in** → **quarterly EBR** → annual renewal review. Support severity/SLA
-during and after onboarding follows `CS_CANON.md` §4.4 (SLA = vendor **response**, not
+during and after onboarding follows `CUSTOMER_SUCCESS_CONSTITUTION.md` (SLA = vendor **response**, not
 remote fix, because the instance is on customer infrastructure).
 
-Health scoring for the Adopt stage uses the 10-dimension RAG model (`CS_CANON.md` §4.3) —
+Health scoring for the Adopt stage uses the 10-dimension RAG model (`CUSTOMER_SUCCESS_CONSTITUTION.md`) —
 Adoption, Usage, AI utilization, Campaign throughput, Knowledge growth, Support tickets,
 Training completion, Executive engagement, Renewal probability, Expansion opportunity —
 **all inputs customer-shared, never vendor-collected**.
