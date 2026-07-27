@@ -17,7 +17,7 @@ and inherits its canonical facts verbatim (§1). Where any marketing document
 contradicts this Constitution, this document wins.
 
 The mandate: **build demand for AdOS without ever compromising the truth of what
-it is** — a sovereign, on-premise, enterprise AI operating system.
+it is** — a sovereign, on-premise, enterprise AI operating system for advertising.
 
 ---
 
@@ -68,8 +68,8 @@ These facts are shared with the Sales Kit. Any change propagates to both.
   assistant; we are creating the on-premise alternative to it.
 - **Strategic wedge:** the growing tension between wanting AI and refusing to send
   data to someone else's cloud. AdOS resolves it.
-- **Proof over promise:** the brand earns trust by showing (cited answers,
-  air-gap demos, audit trails), not by adjectives.
+- **Proof over promise:** the brand earns trust by showing (a drafted campaign,
+  air-gap demos, the approval timeline and activity log), not by adjectives.
 - **Turkey-first, sovereignty-universal:** native TR/EN; built for markets where
   data residency is a mandate, not a preference.
 
@@ -80,7 +80,7 @@ These facts are shared with the Sales Kit. Any change propagates to both.
 Five traits (use them to sanity-check any creative):
 
 1. **Sovereign** — self-reliant, in control, independent.
-2. **Grounded** — evidence-based, cited, honest about trade-offs.
+2. **Grounded** — evidence-based, grounded in campaign performance, honest about trade-offs.
 3. **Precise** — engineering-grade accuracy; no vague hype.
 4. **Composed** — calm authority, not loud disruption.
 5. **Respectful** — treats the buyer as an expert; never condescends.
@@ -97,14 +97,14 @@ control, not a flashy Magician promising miracles.
 - Explains, never hypes. Concedes honest trade-offs to build trust.
 - Speaks to a smart, skeptical buyer (CIO/CISO/CEO), not a consumer.
 - Product terms stay in English in both languages: **AdOS**, **Company Brain**,
-  **Digital Employees**.
+  **Mission**.
 
 **Banned words:** revolutionary, magic(al), game-changer, disrupt, cutting-edge,
 next-gen, world-class, seamless(ly) (as filler), unleash, supercharge, 10x (as a
 vague claim), "AI-powered" as a standalone boast.
 
-**Preferred register:** sovereign, private, on your infrastructure, cited,
-grounded, permission-aware, auditable, on your terms, no data leaves your building.
+**Preferred register:** sovereign, private, on your infrastructure, offline,
+grounded, human-approved, drafts, on your terms, no data leaves your building.
 
 ---
 
@@ -130,29 +130,30 @@ Every message follows **Sovereignty → Capability → Outcome** (shared with Sa
 
 - **Sovereignty (differentiator):** your data and your AI stay under your control,
   on your hardware, offline-capable.
-- **Capability (mechanism):** Company Brain, Digital Employees, Workflows &
-  Approvals — permission-aware, cited, audited.
-- **Outcome (payoff):** faster answers, fewer stalled approvals, retained
-  knowledge, lower training cost, quantifiable ROI.
+- **Capability (mechanism):** Company Brain, the human-approved campaign pipeline,
+  Workflows & Approvals — local, deterministic, human-gated.
+- **Outcome (payoff):** faster campaign drafts, fewer stalled approvals, retained
+  marketing know-how (winning-ad patterns), lower agency cost, quantifiable ROAS/ROI.
 
 **Three headline value pillars (always this order):** **Sovereign · Capable ·
 Accountable.**
 
 **Message hierarchy:**
 - **Primary:** "Enterprise AI that never leaves your building."
-- **Secondary:** "A real AI operating system — Company Brain, Digital Employees,
-  Workflows — not a chatbot."
-- **Tertiary:** "Grounded, cited, permission-aware, and fully audited."
+- **Secondary:** "A real AI operating system for advertising — Company Brain, a
+  human-approved campaign pipeline, Workflows — not a chatbot."
+- **Tertiary:** "Grounded in your campaign performance, human-approved at every stage."
 
 ---
 
 ## 7. Positioning statement
 
 > **For** enterprises and public institutions that need AI but cannot let their
-> data leave their premises, **AdOS** is an **enterprise AI operating system**
-> that runs **100% on the customer's own infrastructure** — unifying knowledge
-> (Company Brain), AI workers (Digital Employees), and processes (Workflows &
-> Approvals) with permission-aware, cited, fully-audited AI. **Unlike** public
+> data leave their premises, **AdOS** is an **enterprise AI operating system for
+> advertising** that runs **100% on the customer's own infrastructure** — unifying
+> marketing-performance memory (Company Brain), a human-approved campaign pipeline
+> (Mission → Brief → Creative → Draft → Report), and processes (Workflows &
+> Approvals) with local, deterministic, human-gated AI. **Unlike** public
 > cloud AI assistants that meter usage and move data off-site, AdOS keeps
 > everything sovereign, offline-capable, and unmetered.
 
@@ -162,11 +163,11 @@ Accountable.**
 
 - **10 seconds:** "AdOS is enterprise AI that runs entirely on your own servers —
   your data never leaves the building."
-- **30 seconds:** "Most AI means sending your company's knowledge to someone
-  else's cloud. AdOS doesn't. It's a full AI operating system — a Company Brain
-  that answers with cited sources, Digital Employees that do real work, and
-  automated approvals — running 100% on your infrastructure, offline-capable, with
-  no per-token bills and no vendor lock-in."
+- **30 seconds:** "Most AI means sending your company's data to someone
+  else's cloud. AdOS doesn't. It's a full AI operating system for advertising — a
+  Company Brain that remembers what works, and a human-approved pipeline that drafts
+  briefs, creative, and campaigns — running 100% on your infrastructure,
+  offline-capable, with no per-token bills and no vendor lock-in."
 - **Board-level one-liner:** "Sovereign AI: all the capability, none of the data
   leaving your building."
 
@@ -174,10 +175,11 @@ Accountable.**
 
 ## 9. Core value proposition
 
-**AdOS gives an organization a real AI operating system it fully owns** — turning
-scattered institutional knowledge into cited, permission-aware answers; automating
-approvals and workflows; and deploying Digital Employees — **without a single byte
-of business data leaving the premises, and without a metered cloud bill.**
+**AdOS gives an organization a real AI operating system for advertising it fully
+owns** — turning its campaign history into remembered, reusable marketing know-how;
+drafting briefs, creative, and campaigns through human-approved workflows —
+**without a single byte of business data leaving the premises, and without a metered
+cloud bill.**
 
 ---
 
@@ -187,14 +189,14 @@ Inherited from Sales ICP. Primary segments and their message angle:
 
 | Segment | Angle |
 |---|---|
-| Manufacturing | Capture tacit process knowledge across sites; speed approvals |
+| Manufacturing | Draft multi-brand campaigns across sites; speed marketing approvals |
 | Organized Industrial Zones (OSB) | Shared sovereign AI services for member firms |
 | Municipalities / public institutions | Data-residency mandates → on-prem is required |
-| Healthcare | Confidentiality + strict access control |
-| Logistics | High document volume, time-critical routing |
-| Retail | Distributed workforce, query volume, training load |
-| Education | Large knowledge bases, budget-sensitive, on-prem labs |
-| Finance | Regulatory residency, auditability, zero leakage |
+| Healthcare | Confidentiality; campaign data never leaves the premises |
+| Logistics | High campaign volume, time-critical promotions |
+| Retail | Distributed brands, high campaign volume, fast local creative |
+| Education | Budget-sensitive enrollment campaigns, on-prem labs |
+| Finance | Regulatory residency, approval trails, zero leakage |
 
 Persona targets: CEO/GM, CIO, CTO, CISO, HR, Operations, IT/BT.
 
@@ -220,7 +222,7 @@ Every asset declares which stage it serves.
   enterprise", "data sovereignty AI", "yapay zeka veri güvenliği", "şirket içi
   yapay zeka".
 - **Educate first:** evergreen blog clusters (On-Prem AI, Local LLM, Company
-  Brain, Knowledge Management, Security) that teach the buyer to want sovereignty.
+  Brain, Marketing Performance, Security) that teach the buyer to want sovereignty.
 - **Founder & expert POV** on LinkedIn: sharp, contrarian-but-true takes on
   cloud-AI data risk.
 - **PR** around the launch and the category ("Sovereign Enterprise AI").
@@ -232,8 +234,8 @@ Every asset declares which stage it serves.
 
 - Deep **platform and feature pages** that pair benefit → mechanism → proof.
 - **Case studies** (clearly illustrative) per vertical.
-- **Webinars / demo sessions** on NovaMak: "watch cited answers; watch it work
-  air-gapped."
+- **Webinars / demo sessions** on NovaMak: "watch it draft a campaign; watch it
+  work air-gapped."
 - **Comparison content** by category (cloud vs local; point tool vs operating
   system; build vs buy) — never name-and-shame.
 - **ROI calculator** as an interactive consideration tool.
@@ -243,8 +245,8 @@ Every asset declares which stage it serves.
 ## 14. Decision strategy
 
 - **Live demo** to discovered pain (NovaMak), with the five mandatory proof
-  moments (cited answer, hidden restricted doc, tiered approval, Digital Employee
-  task, pull-the-cable/air-gap).
+  moments (a drafted marketing brief, an assembled campaign draft, Company Brain
+  surfacing winning-ad patterns, a human approval gate, pull-the-cable/air-gap).
 - **Security page + architecture page** to satisfy CISO/CTO.
 - **ROI model** built with the buyer; **proposal** with objective acceptance
   criteria.
@@ -255,10 +257,11 @@ Every asset declares which stage it serves.
 ## 15. Retention strategy
 
 - Onboarding content, admin/operator guides, and in-product help that drive
-  successful first value (seed the Company Brain, add first Digital Employee).
+  successful first value (seed the Company Brain, run the first Mission to a
+  campaign draft).
 - Quarterly value reviews tied to the ROI model's outcomes.
 - Roadmap transparency; upgrade/backup/DR runbooks.
-- Health metric: time-to-first-cited-answer and adoption rate.
+- Health metric: time-to-first-campaign-draft and adoption rate.
 
 ---
 

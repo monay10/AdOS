@@ -8,7 +8,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 **Bilingual glossary (consistent terms):**
 | EN | TR |
 | --- | --- |
-| Enterprise AI Operating System | Kurumsal Yapay Zekâ İşletim Sistemi |
+| Enterprise AI Operating System for Advertising | Reklam için Kurumsal Yapay Zekâ İşletim Sistemi |
 | on-prem / on-premise | kurum içi |
 | local AI | yerel yapay zekâ |
 | offline-first | çevrimdışı öncelikli |
@@ -43,9 +43,9 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 **Hero**
 | Element | English | Türkçe |
 | --- | --- | --- |
-| Eyebrow | The Enterprise AI Operating System | Kurumsal Yapay Zekâ İşletim Sistemi |
+| Eyebrow | The Enterprise AI Operating System for Advertising | Reklam için Kurumsal Yapay Zekâ İşletim Sistemi |
 | Headline | Run an AI ad agency inside your own walls. | Yapay zekâ reklam ajansını kendi duvarlarınızın içinde çalıştırın. |
-| Subhero | AdOS plans and runs your campaigns end to end — using AI models that stay entirely on your own infrastructure. No cloud. No API keys. No data leaving the building. | AdOS kampanyalarınızı baştan sona planlayıp yürütür — tamamen kendi altyapınızda kalan yapay zekâ modelleriyle. Bulut yok. API anahtarı yok. Verileriniz binadan çıkmaz. |
+| Subhero | AdOS plans and drafts your campaigns end to end for your approval — using AI models that stay entirely on your own infrastructure. It drafts; you run the approved campaign in your own ad platform. No cloud. No API keys. No data leaving the building. | AdOS kampanyalarınızı baştan sona planlayıp onayınıza sunmak üzere taslak olarak hazırlar — tamamen kendi altyapınızda kalan yapay zekâ modelleriyle. Hazırlar; onaylanan kampanyayı kendi reklam platformunuzda siz yayınlarsınız. Bulut yok. API anahtarı yok. Verileriniz binadan çıkmaz. |
 | Primary button | Book a demo | Demo talep edin |
 | Secondary button | See how it works | Nasıl çalıştığını görün |
 
@@ -84,7 +84,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 | Element | English | Türkçe |
 | --- | --- | --- |
 | Section title | Enterprise security, built in from the first line. | Kurumsal güvenlik, ilk satırdan itibaren yerleşik. |
-| Card 1 | Strict multi-tenancy — every query, event and file is scoped to one tenant. | Sıkı çok kiracılılık — her sorgu, olay ve dosya tek bir kiracıya sınırlıdır. |
+| Card 1 | Application-level multi-tenancy — every query, event and file is scoped to one tenant. | Uygulama düzeyinde çok kiracılılık — her sorgu, olay ve dosya tek bir kiracıya sınırlıdır. |
 | Card 2 | Argon2id credentials, security headers, CSP, rate limiting. | Argon2id kimlik bilgileri, güvenlik başlıkları, CSP, hız sınırlama. |
 | Card 3 | Encrypted, verifiable backups and a documented recovery path. | Şifreli, doğrulanabilir yedekler ve belgelenmiş bir kurtarma yolu. |
 | Link | Explore security | Güvenliği inceleyin |
@@ -281,7 +281,7 @@ authored, not machine-translated. Voice: precise, calm, credible — no buzzword
 
 | Element | English | Türkçe |
 | --- | --- | --- |
-| Positioning line | The Enterprise AI Operating System — enterprise AI advertising that never leaves your building. | Kurumsal Yapay Zekâ İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı. |
+| Positioning line | The Enterprise AI Operating System for Advertising — enterprise AI advertising that never leaves your building. | Reklam için Kurumsal Yapay Zekâ İşletim Sistemi — binanızdan hiç çıkmayan kurumsal yapay zekâ reklamı. |
 | Col: Product | Product | Ürün |
 | Col: Solutions | Solutions | Çözümler |
 | Col: Resources | Resources | Kaynaklar |

@@ -20,30 +20,33 @@ Illustrative material (e.g. the NovaMak demo world) is labeled as fictional.
 
 ## Company overview
 
-AdOS is an **enterprise AI operating system** that runs **entirely on the
-customer's own infrastructure**. It exists to resolve a single tension: enterprises
-and public institutions want the capability of AI, but cannot let their data leave
-their premises. AdOS gives them that capability without moving a byte off-site.
+AdOS is an **Enterprise AI Operating System for Advertising** that runs **entirely
+on the customer's own infrastructure**. It exists to resolve a single tension:
+enterprises and agencies want the capability of AI for their advertising work, but
+cannot let their data leave their premises. AdOS gives them that capability without
+moving a byte off-site.
 
 AdOS unifies three pillars into one owned platform:
 
-- **Company Brain** — the organization's private, permission-aware knowledge base.
-  Every AI answer is grounded in the company's own documents and **cites its
-  sources**; citations are permission-scoped, so a user only sees, and the AI only
-  cites, documents that user is entitled to.
-- **Digital Employees** — AI agents that perform real knowledge work (answer,
-  draft, route, prepare approvals, move workflows) within defined roles and
-  permissions.
-- **Workflows & Approvals** — structured processes with tiered approval authority,
-  deterministic routing, and full audit trails.
+- **Company Brain** — the organization's private marketing-performance memory. It
+  learns which campaigns, creatives, and ads worked and surfaces what to repeat,
+  drawing on CompanyDNA, brand profiles, marketing/creative/sales insights, a
+  campaign→ad→lead→ROI knowledge graph, and a winning-ad pattern library.
+- **Human-approved campaign pipeline** — AI-assisted stages that **draft** a campaign
+  from objective to executive dashboard: marketing brief → creative copy → campaign
+  draft → performance report → executive dashboard. It drafts; it never launches
+  live ads.
+- **Workflows & Approvals** — structured processes with approval gates,
+  deterministic routing, an activity log, and a per-approval timeline. Every stage
+  requires an explicit human approval click.
 
 All AI inference runs **locally**, on the customer's own hardware, via open,
 OpenAI-compatible engines. There is no cloud dependency, no external API, no API
 keys, and no internet requirement. The customer owns the entire stack — application,
 data, and model. AdOS is Turkey-first and fully bilingual (Turkish and English).
 
-The category AdOS defines and owns is **Sovereign Enterprise AI** (Marketing
-Constitution §2).
+The category AdOS defines and owns is the **Enterprise AI Operating System for
+Advertising** (Marketing Constitution §2).
 
 ---
 
@@ -54,28 +57,30 @@ in English in both.*
 
 ### About AdOS (EN)
 
-AdOS is an enterprise AI operating system that runs entirely on the customer's own
-infrastructure. It unifies three pillars: Company Brain, a private,
-permission-aware knowledge base whose every answer is cited and permission-scoped;
-Digital Employees, AI agents that perform real knowledge work within defined roles;
-and Workflows & Approvals, structured processes with tiered authority and full
-audit trails. All AI inference runs locally on open, OpenAI-compatible engines — no
-cloud, no external API, no internet required. Customer data never leaves the
-premises. AdOS is on-premise, offline and air-gap capable, multi-tenant, bilingual
-(Turkish and English), auditable, and free of per-token billing and vendor lock-in.
+AdOS is an Enterprise AI Operating System for Advertising that runs entirely on the
+customer's own infrastructure. It unifies three pillars: Company Brain, a private
+marketing-performance memory that learns which campaigns and ads worked; a
+human-approved campaign pipeline that drafts advertising from objective to executive
+dashboard (brief → creative copy → campaign draft → report → dashboard) but never
+launches live ads; and Workflows & Approvals, structured processes with approval
+gates and an activity log. All AI inference runs locally on open, OpenAI-compatible
+engines — no cloud, no external API, no internet required. Customer data never leaves
+the premises. AdOS is on-premise, offline and air-gap capable, multi-tenant,
+bilingual (Turkish and English), and free of per-token billing and vendor lock-in.
 
 ### AdOS Hakkında (TR)
 
-AdOS, tümüyle müşterinin kendi altyapısında çalışan bir kurumsal yapay zeka işletim
-sistemidir. Üç sütunu birleştirir: Company Brain — her yanıtı kaynak göstererek
-veren, izin duyarlı özel bilgi tabanı; Digital Employees — tanımlı roller içinde
-gerçek bilgi işi yapan yapay zeka ajanları; ve Workflows & Approvals — kademeli
-yetki ve eksiksiz denetim izine sahip yapılandırılmış süreçler. Tüm yapay zeka
-çıkarımı, açık ve OpenAI uyumlu motorlarla yerelde çalışır — bulut, harici API veya
-internet gerekmez. Müşteri verisi kurumun dışına çıkmaz. AdOS; şirket içinde
-(on-premise), çevrimdışı ve air-gap uyumlu, çok kiracılı, iki dilli (Türkçe ve
-İngilizce), denetlenebilir; token başına ücretlendirme ve tedarikçi bağımlılığı
-olmadan çalışır.
+AdOS, tümüyle müşterinin kendi altyapısında çalışan, reklam için bir kurumsal yapay
+zekâ işletim sistemidir. Üç sütunu birleştirir: Company Brain — hangi kampanya ve
+reklamların işe yaradığını öğrenen özel bir pazarlama-performansı belleği; insan
+onaylı bir kampanya hattı — reklamı hedeften yönetici panosuna kadar taslak olarak
+hazırlar (brief → kreatif metin → kampanya taslağı → rapor → pano), ancak canlı
+reklamları hiçbir zaman yayınlamaz; ve Workflows & Approvals — onay kapıları ve
+etkinlik günlüğüne sahip yapılandırılmış süreçler. Tüm yapay zekâ çıkarımı, açık ve
+OpenAI uyumlu motorlarla yerelde çalışır — bulut, harici API veya internet gerekmez.
+Müşteri verisi kurumun dışına çıkmaz. AdOS; şirket içinde (on-premise), çevrimdışı ve
+air-gap uyumlu, çok kiracılı, iki dilli (Türkçe ve İngilizce); token başına
+ücretlendirme ve tedarikçi bağımlılığı olmadan çalışır.
 
 ---
 
@@ -96,13 +101,14 @@ in regulated industry}}, and repeatedly saw the same wall: **data residency and
 confidentiality made cloud AI a non-starter.**
 
 The insight behind AdOS was simple to state and hard to build: **all the capability
-of enterprise AI, with none of the data leaving the building.** That meant local
-inference on the customer's own hardware, answers that cite their sources,
-permission-aware access, and a full audit trail — a real operating system, not a
+of enterprise AI for advertising, with none of the data leaving the building.** That
+meant local inference on the customer's own hardware, an AI-assisted pipeline that
+drafts campaigns for human approval, a marketing-performance memory that learns what
+works, and application-level tenant isolation — a real operating system, not a
 chatbot.
 
 {{Founder first name}} {{and any co-founders}} started AdOS in {{location}} to
-serve {{initial market — e.g. Turkish manufacturers and public institutions}}
+serve {{initial market — e.g. Turkish advertisers, agencies, and marketing teams}}
 first, where data sovereignty is a mandate rather than a preference.
 
 > **Founder quote (fill):** "{{One to two sentences, in the founder's own words,
@@ -146,17 +152,20 @@ delete the sentence — never approximate.*
 AdOS is a single platform with three integrated pillars, deployed on the customer's
 own infrastructure.
 
-**Company Brain.** A private, permission-aware knowledge base. Every answer is
-grounded in the organization's own documents and returns **cited sources**.
-Citations are permission-scoped: the model can never surface or cite content a user
-is not entitled to see.
+**Company Brain.** A private marketing-performance memory. It learns which
+campaigns, creatives, and ads worked — storing CompanyDNA, brand profiles,
+marketing/creative/sales insights, a campaign→ad→lead→ROI knowledge graph, and a
+winning-ad pattern library — and surfaces what to repeat.
 
-**Digital Employees.** AI agents that perform real knowledge work — answering,
-drafting, routing, preparing approvals, and moving workflows forward — each
-operating within a defined role and permission set.
+**Human-approved campaign pipeline.** AI-assisted stages that draft advertising from
+an objective to an executive dashboard — marketing brief → creative copy → campaign
+draft → performance report → executive dashboard. It **drafts** copy, channels, and
+budget splits; it never launches or optimizes live ads.
 
-**Workflows & Approvals.** Structured processes with tiered approval authority,
-deterministic routing, and an immutable audit trail for every consequential action.
+**Workflows & Approvals.** Structured processes with approval gates
+(strategy_and_budget, creative_assets, campaign_launch), deterministic routing, an
+activity log, and a per-approval timeline. Every stage requires an explicit human
+approval click.
 
 **How it runs.** All inference is **Local AI** on the customer's hardware, via
 Ollama or any OpenAI-compatible local engine (vLLM, LM Studio, llama.cpp, SGLang).
@@ -177,10 +186,11 @@ states this openly rather than hiding it.
 *All facts below trace to CANON. Placeholders marked `{{...}}`.*
 
 - **Name:** AdOS (never ADOS, Ados, or adOS)
-- **Category:** Sovereign Enterprise AI — an enterprise AI operating system
-- **What it is:** AI-powered enterprise operating system that runs 100% on the
-  customer's own infrastructure
-- **Three pillars:** Company Brain · Digital Employees · Workflows & Approvals
+- **Category:** Enterprise AI Operating System for Advertising
+- **What it is:** an Enterprise AI Operating System for Advertising that drafts
+  human-approved campaigns and runs 100% on the customer's own infrastructure
+- **Three pillars:** Company Brain · Human-approved campaign pipeline · Workflows &
+  Approvals
 - **Value pillars (order):** Sovereign · Capable · Accountable
 - **Deployment:** on-premise or customer private cloud/VPC; standard Docker,
   one-command bring-up
@@ -189,9 +199,10 @@ states this openly rather than hiding it.
 - **Connectivity:** offline-first; air-gap capable; no internet required
 - **Data sovereignty:** customer data never leaves the premises; no telemetry of
   business content
-- **Access control:** permission-aware AI; permission-scoped citations
-- **Auditability:** every consequential action in an immutable audit trail
-- **Tenancy:** multi-tenant with strict tenant isolation
+- **Access control:** real authentication (Argon2id password hashing, HMAC HttpOnly
+  sessions, CSRF, brute-force lockout); every pipeline stage human-approved
+- **Activity log:** structured logging, an activity feed, and a per-approval timeline
+- **Tenancy:** multi-tenant with application-level tenant isolation
 - **Languages:** full Turkish + English UI, auto-detected from environment
 - **Billing model:** no per-token / per-query metering; value-based platform
   license + support/success (per deployment or per-seat band)
@@ -203,8 +214,8 @@ states this openly rather than hiding it.
 - **Verticals:** Manufacturing · Organized Industrial Zones (OSB) · Municipalities
   & public institutions · Healthcare · Logistics · Retail · Education · Finance
 - **Reference demo world:** NovaMak Endüstri A.Ş. — *fictional* manufacturer used
-  for demos (6 sites, 4 business units, 42 employees, 16 departments, 12 Digital
-  Employees, 25 workflows)
+  for demos (6 sites, 4 business units, 42 employees, 16 departments, 12 draft
+  campaigns, 25 workflows)
 - **Headquarters:** {{city, country}}
 - **Founded:** {{founding year}}
 - **Employees:** {{headcount or "not disclosed"}}
@@ -224,7 +235,7 @@ fact. Fill each `{{...}}` only with a verified date when authorized.*
 | Concept / founding | {{founding date}} | AdOS founded to build sovereign, on-premise enterprise AI |
 | Platform build | {{build period}} | Three pillars developed; local-AI architecture |
 | Version 1.0.0 | {{v1.0.0 date}} | Current release (CANON: v1.0.0) |
-| Public launch | {{launch date}} | "Sovereign Enterprise AI" category introduction |
+| Public launch | {{launch date}} | "Enterprise AI Operating System for Advertising" category introduction |
 | First pilot(s) | {{first pilot date}} | On customer-owned hardware |
 | {{future milestone}} | {{date}} | {{description}} |
 
@@ -237,8 +248,8 @@ before it is confirmed by an authorized owner.*
 
 - **Product 1.0.0 released** — the current AdOS version (CANON fact; date =
   `{{v1.0.0 date}}`).
-- **Category launch** — public introduction of Sovereign Enterprise AI on
-  `{{launch date}}`.
+- **Category launch** — public introduction of the Enterprise AI Operating System
+  for Advertising category on `{{launch date}}`.
 - **First production pilot** — `{{first pilot date}}`, deployed on the customer's
   own hardware.
 - **First named reference customer** — `{{none yet — to be added only when real
@@ -253,6 +264,46 @@ before it is confirmed by an authorized owner.*
 
 ---
 
+## Roadmap / Yol Haritası
+
+*Forward-looking only. Nothing below is available today; each item is a planned
+direction, not a shipped capability. Never present a Roadmap item as present-tense
+fact, and never interleave it with shipped capabilities.*
+
+### Roadmap (EN)
+
+Planned directions under evaluation — explicitly **not** shipped:
+
+- **Document knowledge base with cited answers** — a permission-scoped Q&A layer over
+  the organization's own documents. *Planned.*
+- **Autonomous agents ("Digital Employees")** — AI workers that carry pipeline stages
+  further with less human intervention. *Planned.*
+- **Ad-platform connectors** — export a campaign draft to run in Meta, Google,
+  TikTok, or LinkedIn Ads. *Planned.*
+- **Enforced role-based access control (RBAC)** — permission-aware AI and
+  permission-scoped access. *Planned.*
+- **Immutable audit trail** — append-only, tamper-evident logging. *Planned.*
+- **Live campaign launch and optimization** — today AdOS drafts only. *Planned.*
+
+### Yol Haritası (TR)
+
+Değerlendirme aşamasındaki planlanan yönler — kesinlikle **yayında değildir**:
+
+- **Kaynak gösteren, belge tabanlı bilgi tabanı** — kurumun kendi belgeleri üzerinde
+  izin kapsamlı soru-yanıt katmanı. *Planlanan.*
+- **Otonom ajanlar ("Digital Employees")** — hattın aşamalarını daha az insan
+  müdahalesiyle ilerleten yapay zekâ çalışanları. *Planlanan.*
+- **Reklam platformu bağlayıcıları** — bir kampanya taslağını Meta, Google, TikTok
+  veya LinkedIn Ads'te yayınlamak üzere dışa aktarma. *Planlanan.*
+- **Uygulanan rol tabanlı erişim denetimi (RBAC)** — izin duyarlı yapay zekâ ve izin
+  kapsamlı erişim. *Planlanan.*
+- **Değiştirilemez denetim izi** — yalnızca ekleme yapılan, kurcalamaya karşı korumalı
+  günlük. *Planlanan.*
+- **Canlı kampanya yayını ve optimizasyonu** — bugün AdOS yalnızca taslak hazırlar.
+  *Planlanan.*
+
+---
+
 ## Mission
 
 *Grounded in the AdOS core value proposition (Marketing Constitution §9). Ships
@@ -260,18 +311,19 @@ TR + EN with identical meaning.*
 
 ### Mission (EN)
 
-To give every organization a real AI operating system it fully owns — turning
-scattered institutional knowledge into cited, permission-aware answers, automating
-approvals and workflows, and deploying Digital Employees — **without a single byte
-of business data leaving the premises, and without a metered cloud bill.**
+To give every organization a real AI operating system for advertising it fully owns
+— turning a campaign objective into a human-approved draft, learning what works in a
+marketing-performance Company Brain, and automating approvals and workflows —
+**without a single byte of business data leaving the premises, and without a metered
+cloud bill.**
 
 ### Misyon (TR)
 
-Her kuruma, tümüyle sahip olduğu gerçek bir yapay zeka işletim sistemi sunmak:
-dağınık kurumsal bilgiyi kaynak gösteren, izin duyarlı yanıtlara dönüştürmek;
-onayları ve iş akışlarını otomatikleştirmek; Digital Employees'i devreye almak — ve
-tüm bunları **tek bir bayt iş verisi bile kurumun dışına çıkmadan, ölçümlü bir bulut
-faturası olmadan** yapmak.
+Her kuruma, tümüyle sahip olduğu, reklam için gerçek bir yapay zekâ işletim sistemi
+sunmak: bir kampanya hedefini insan onaylı bir taslağa dönüştürmek; neyin işe
+yaradığını pazarlama-performansı belleği Company Brain'de öğrenmek; onayları ve iş
+akışlarını otomatikleştirmek — ve tüm bunları **tek bir bayt iş verisi bile kurumun
+dışına çıkmadan, ölçümlü bir bulut faturası olmadan** yapmak.
 
 ---
 
@@ -373,14 +425,15 @@ misrepresent the UI.*
 
 Set to produce:
 
-1. **Company Brain — cited answer.** A question answered with visible source
-   citations attached.
-2. **Permission-aware citation.** The same query for two different roles, showing a
-   restricted document cited for one user and absent for the other.
-3. **Digital Employee at work.** An agent completing a real task (draft / route /
-   prepare approval) within its role.
-4. **Workflow & approval.** A tiered approval moving through defined stages.
-5. **Audit trail.** The immutable log of a consequential action.
+1. **Company Brain — what works.** The marketing-performance memory surfacing a
+   winning-ad pattern and past-campaign ROI.
+2. **Human-approved brief.** An AI-drafted marketing brief awaiting a human approval
+   click.
+3. **Creative copy draft.** An AI-assisted creative set (headline, ad copy, CTA)
+   generated as a draft — never launched.
+4. **Workflow & approval.** An approval gate moving through defined stages
+   (strategy_and_budget → creative_assets → campaign_launch).
+5. **Activity log.** The activity feed and per-approval timeline of a campaign draft.
 6. **Deployment / architecture view.** On-prem topology showing data staying inside
    the perimeter (diagram, not a photo).
 7. **Air-gap / offline indicator.** The product operating with no internet
@@ -395,14 +448,15 @@ captures use clean UI on `--panel`; real screens only.*
 ## Media FAQ
 
 **What is AdOS in one sentence?**
-"AdOS is an enterprise AI operating system that runs 100% on your own
-infrastructure — your data never leaves your building, and it works with no
-internet at all." (CANON, the one sentence.)
+"AdOS is an Enterprise AI Operating System for Advertising that runs 100% on your own
+infrastructure — it drafts human-approved campaigns, your data never leaves your
+building, and it works with no internet at all." (CANON, the one sentence.)
 
 **Is AdOS a cloud service or a chatbot?**
 Neither. It is not public-cloud SaaS, not a wrapper around a hosted AI API, and not
-a website chatbot. It is a full operating system — Company Brain, Digital Employees,
-Workflows & Approvals — that runs on the customer's own infrastructure.
+a website chatbot. It is a full operating system — Company Brain, a human-approved
+campaign pipeline, and Workflows & Approvals — that runs on the customer's own
+infrastructure.
 
 **Does AdOS use OpenAI, Anthropic, or Google models?**
 No. All inference runs locally on the customer's hardware via open,
@@ -410,15 +464,17 @@ OpenAI-compatible engines (Ollama, vLLM, LM Studio, llama.cpp, SGLang). There is
 external API dependency.
 
 **Where does the customer's data go?**
-Nowhere. Documents, prompts, answers, and workflows never leave the premises. There
-is no telemetry of business content.
+Nowhere. Briefs, creatives, campaign drafts, reports, and workflows never leave the
+premises. There is no telemetry of business content.
 
 **Can it run without internet?**
 Yes. AdOS is offline-first and air-gap capable.
 
-**How does it keep AI from leaking restricted information?**
-AdOS is permission-aware: the model can never surface or cite content a user is not
-entitled to see. Citations are permission-scoped.
+**How does it keep business data isolated?**
+Every tenant's data is isolated at the application level — every query is scoped by
+tenant. Access requires real authentication (Argon2id hashing, HMAC signed sessions,
+CSRF, brute-force lockout), and every pipeline stage is human-approved. (Enforced
+role-based permissions are on the roadmap.)
 
 **Is it slower than cloud AI?**
 Local CPU inference is seconds, not milliseconds — slower than a hosted frontier
@@ -454,9 +510,9 @@ A: Because organizations want AI but can't send their data to someone else's clo
 AdOS gives them the capability with none of the data leaving the building.
 
 **Q: What makes it an "operating system," not a tool?**
-A: It unifies knowledge (Company Brain), AI workers (Digital Employees), and
-processes (Workflows & Approvals) into one owned platform with audit and access
-control across all of them.
+A: It unifies marketing memory (Company Brain), an AI-assisted campaign pipeline, and
+processes (Workflows & Approvals) into one owned platform, with a human-approved
+workflow and application-level isolation across all of them.
 
 **Q: What's the single biggest differentiator?**
 A: Sovereignty. Everything runs on the customer's own hardware, offline-capable,
@@ -468,9 +524,9 @@ milliseconds. We say so openly; better hardware narrows the gap. That trade is
 worth it when data cannot leave the building.
 
 **Q: How do you prove the claims?**
-A: We show, not tell — cited answers, a restricted document that stays hidden by
-permission, a tiered approval, a Digital Employee completing a task, and the system
-running with the network cable pulled.
+A: We show, not tell — a marketing brief and creative drafted and then human-approved,
+a campaign that stays a draft and is never launched, the Company Brain surfacing a
+past winning pattern, and the system running with the network cable pulled.
 
 **Q: Who is the buyer?**
 A: A skeptical, expert committee — CEO/GM, CIO, CTO, CISO, HR, Operations, IT/BT,
@@ -490,8 +546,7 @@ game-changer, disrupt, seamless, supercharge, 10x, etc.
 **Style**
 - Formal, factual, quotable. No hype, no banned words (Marketing Constitution §4).
 - Verbs and numbers over adjectives; short sentences.
-- Product names stay in English in both languages: AdOS, Company Brain, Digital
-  Employees.
+- Product names stay in English in both languages: AdOS, Company Brain.
 - Every claim traces to CANON or a clearly labeled model/illustrative source. No
   invented prices, certifications, customer names, quotes, or metrics.
 - Bilingual parity: TR + EN carry identical claims and numbers; TR is native, not

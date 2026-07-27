@@ -15,22 +15,27 @@ site structure, on-page and technical SEO, structured data, performance, and the
 12-month roadmap — for **both** the English and Turkish sites, treated as equal
 tracks rather than a primary market with a translated afterthought.
 
-It inherits the canonical facts verbatim: AdOS is a **sovereign, on-premise,
-enterprise AI operating system** (Company Brain, Digital Employees, Workflows &
-Approvals) that runs **100% on the customer's own infrastructure**, offline and
-air-gap capable, with **no cloud, no external API, no per-token billing, no
-vendor lock-in**. Every keyword, page, and claim in this plan must be consistent
-with those facts. We rank by teaching the buyer to want sovereignty — never by
-claiming capabilities AdOS does not have.
+It inherits the canonical facts verbatim: AdOS is a **sovereign, on-premise
+Enterprise AI Operating System for Advertising** — a marketing-performance **Company
+Brain** plus a **human-approved campaign pipeline** (brief → creative copy →
+campaign draft → performance report → executive dashboard) — that runs **100% on the
+customer's own infrastructure**, offline and air-gap capable, with **no cloud, no
+external API, no per-token billing, no vendor lock-in**. It **drafts** campaigns; it
+does not launch live ads. Every keyword, page, and claim in this plan must be
+consistent with those facts. We rank by teaching the buyer to want sovereignty —
+never by claiming capabilities AdOS does not have.
 
 **Non-negotiables carried into SEO:**
 - Bilingual parity: no target keyword, page, or claim exists in one language only.
-- Product terms stay in English in both languages: **AdOS**, **Company Brain**,
-  **Digital Employees**. We never translate product names, even in TR titles.
+- Product terms stay in English in both languages: **AdOS**, **Company Brain**. We
+  never translate product names, even in TR titles.
 - Honest performance framing: we may target "fast on your hardware" intents but we
   never imply millisecond frontier-cloud latency on local CPU.
-- Category ownership: we are building **"Sovereign Enterprise AI"** as a category,
-  not chasing generic "AI tool" head terms we cannot win or honestly serve.
+- Honest scope: AdOS **drafts** campaigns for human approval; we never target
+  "launch/run/optimize live ads" intents as a present capability.
+- Category ownership: we are building **"Sovereign Advertising AI"** /
+  **"Enterprise AI Operating System for Advertising"** as a category, not chasing
+  generic "AI tool" head terms we cannot win or honestly serve.
 
 ---
 
@@ -63,19 +68,19 @@ compete where sovereignty is the differentiator.
 - local LLM enterprise · self-hosted LLM · run LLM on-premise
 - data sovereignty AI · sovereign enterprise AI · sovereign AI
 - air-gapped AI · offline AI for enterprise
-- private enterprise AI · enterprise AI operating system
-- permission-aware AI · cited AI answers / grounded AI
-- Company Brain (branded category term) · Digital Employees (branded category term)
+- private enterprise AI · enterprise AI operating system for advertising
+- performance-grounded AI · marketing-performance memory
+- Company Brain (branded category term) · human-approved campaign pipeline
 
 **High-value long-tail (EN) — informational/commercial:**
 - "how to run an LLM on-premise for enterprise"
 - "AI that keeps data on our own servers"
 - "on-prem AI vs cloud AI data risk"
-- "enterprise knowledge base with cited answers"
-- "self-hosted AI with role-based permissions"
+- "local AI to draft ad campaigns"
+- "self-hosted AI with human approval gates"
 - "air-gapped generative AI deployment"
 - "no per-token AI pricing on-premise"
-- "on-prem RAG for regulated industries"
+- "on-prem campaign drafting for regulated industries"
 
 ### 1.4 Turkish keyword set (first-class, native — not translated EN)
 
@@ -89,7 +94,7 @@ translation. Product names remain English inside Turkish queries and titles.
 - kurumsal yapay zeka · kurumsal yapay zeka platformu
 - çevrimdışı yapay zeka · air-gap yapay zeka
 - KVKK uyumlu yapay zeka · veri güvenliği yapay zeka
-- kaynak gösteren yapay zeka (cited answers) · izin farkındalıklı yapay zeka
+- performansa dayalı yapay zeka (performance-grounded) · insan onaylı yapay zeka
 
 **High-value long-tail (TR):**
 - "verimiz dışarı çıkmadan yapay zeka nasıl kullanılır"
@@ -111,14 +116,14 @@ is a real target for a vertical solution page and supporting blog spokes.
 
 | Vertical | Vertical keyword seed (EN) | Vertical keyword seed (TR) | Product angle |
 |---|---|---|---|
-| Manufacturing | on-prem AI for manufacturing | üretim için şirket içi yapay zeka | Company Brain: tacit process knowledge |
-| Organized Industrial Zones (OSB) | shared sovereign AI for industrial zones | OSB için ortak yapay zeka | Multi-tenant Company Brain for member firms |
-| Municipalities / public | data-residency AI for government | kamu için KVKK uyumlu yapay zeka | On-prem mandate, audit trails |
-| Healthcare | confidential AI for healthcare | sağlıkta gizli hasta verisi yapay zeka | Permission-aware, no egress |
-| Logistics | on-prem AI document automation | lojistik belge otomasyonu yapay zeka | Digital Employees: routing, docs |
-| Retail | AI knowledge base for distributed teams | perakende için kurum içi yapay zeka | Company Brain across stores |
-| Education | on-prem AI for universities | üniversite için yerel yapay zeka | On-prem labs, large knowledge base |
-| Finance | sovereign AI for regulated finance | finans için veri egemenliği yapay zeka | Auditability, zero leakage |
+| Manufacturing | on-prem AI for manufacturing | üretim için şirket içi yapay zeka | Company Brain: what worked in past launches |
+| Organized Industrial Zones (OSB) | shared sovereign marketing AI for industrial zones | OSB için ortak pazarlama yapay zekası | Application-level multi-tenant Company Brain for member firms |
+| Municipalities / public | data-residency AI for government | kamu için KVKK uyumlu yapay zeka | On-prem mandate, approval timelines |
+| Healthcare | confidential marketing AI for healthcare | sağlıkta gizli veri pazarlama yapay zekası | Human-approved, no egress |
+| Logistics | on-prem campaign drafting for logistics | lojistik için kampanya hazırlama yapay zekası | AI-assisted pipeline: campaign drafting |
+| Retail | on-prem marketing AI for retail chains | perakende için şirket içi pazarlama yapay zekası | Company Brain: on-brand campaigns across stores |
+| Education | on-prem AI for universities | üniversite için yerel yapay zeka | On-prem labs, recruitment campaign drafting |
+| Finance | sovereign AI for regulated finance | finans için veri egemenliği yapay zeka | Approval timelines, zero leakage |
 
 ### 1.6 Prioritization method
 
@@ -130,7 +135,7 @@ honestly with an on-prem, offline product.
 
 ### 1.7 Branded and defensive terms
 
-Own 100% of SERP for **AdOS**, **Company Brain**, **Digital Employees**, and
+Own 100% of SERP for **AdOS**, **Company Brain**, and
 "AdOS + [feature/vertical]" in both languages. These are category terms we are
 minting — protect them from dilution and rank the canonical pages first.
 
@@ -173,31 +178,37 @@ EN and TR with an `hreflang` pair.
 - **Spokes:**
   - What data sovereignty means for AI (and why cloud fails it)
   - KVKK & GDPR-aligned AI: keeping data on-premises
-  - Permission-aware AI: why the model must never leak restricted docs
-  - Audit trails for AI decisions
+  - Human approval gates: nothing ships without a human click
+  - Activity logs and approval timelines for AI decisions (Roadmap: immutable audit)
   - Air-gap demo: proving no data egress
 
-### Cluster D — Company Brain (Knowledge)
+### Cluster D — Company Brain (Marketing-Performance Memory)
 - **Pillar (EN):** `/en/product/how-it-works` (Company Brain section anchor) —
-  target: *enterprise knowledge base with cited answers, grounded AI*.
+  target: *marketing-performance memory, performance-grounded AI*.
 - **Pillar (TR):** `/tr/product/how-it-works`.
 - **Spokes:**
   - What is a Company Brain?
-  - Cited AI answers vs hallucinating chatbots
-  - Permission-scoped citations explained
-  - Capturing tacit knowledge across multiple sites
-  - Time-to-first-cited-answer as an adoption metric
+  - Performance-grounded suggestions vs guesswork
+  - The winning-ad pattern library explained
+  - Capturing what works across brands and products
+  - Time-to-first-campaign-draft as an adoption metric
 
-### Cluster E — Digital Employees & Workflows
-- **Pillar (EN):** `/en/product/ai-pipeline` — "Digital Employees & Workflows" —
-  target: *AI agents for knowledge work, workflow automation on-prem*.
+### Cluster E — AI Campaign Pipeline & Approvals
+- **Pillar (EN):** `/en/product/ai-pipeline` — "AI Campaign Pipeline & Approvals" —
+  target: *AI-assisted campaign pipeline, human-approved workflow on-prem*.
 - **Pillar (TR):** `/tr/product/ai-pipeline`.
 - **Spokes:**
-  - What are Digital Employees? (roles, permissions, not "bots")
-  - Automating approvals with tiered authority
-  - Deterministic routing and full audit trails
-  - Digital Employees vs generic AI assistants
+  - What are the AI pipeline stages? (brief, creative, draft, report, dashboard)
+  - Approval gates: strategy-and-budget, creative, campaign-launch
+  - Deterministic routing and per-approval timelines
+  - An AI campaign pipeline vs a generic AI assistant
   - Designing a workflow with approval gates
+
+> **Roadmap (not shipped, label clearly wherever mentioned):** autonomous agents
+> ("Digital Employees"), enforced RBAC / permission-aware AI, external connectors to
+> ad platforms/CRMs, immutable audit trail, DB-level row-level security, cloud
+> inference, vision/speech generation, and tiered approval authority are future
+> directions — never presented as current capabilities.
 
 ### Cluster F — Vertical clusters (eight)
 Each vertical (§1.5) gets a solution page as a mini-pillar plus 2–3 spokes that
@@ -296,7 +307,7 @@ concrete `price`; use `PriceSpecification` placeholders or omit.
   "name": "AdOS",
   "url": "https://ados.example/en/",
   "logo": "https://ados.example/assets/logo.png",
-  "description": "AdOS is a sovereign, on-premise enterprise AI operating system. It runs 100% on your own infrastructure — your data never leaves your building, and it works with no internet at all.",
+  "description": "AdOS is a sovereign, on-premise Enterprise AI Operating System for Advertising. It runs 100% on your own infrastructure — your data never leaves your building, and it works with no internet at all.",
   "slogan": "Enterprise AI that never leaves your building.",
   "sameAs": [
     "https://www.linkedin.com/company/ados"
@@ -319,13 +330,13 @@ concrete `price`; use `PriceSpecification` placeholders or omit.
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "On-premise (Docker); Linux",
   "softwareVersion": "1.0.0",
-  "description": "An enterprise AI operating system that runs entirely on the customer's own infrastructure: Company Brain (permission-aware, cited knowledge), Digital Employees (AI agents), and Workflows & Approvals. Local AI via Ollama or any OpenAI-compatible engine. No cloud, no external API, no per-token billing.",
+  "description": "An Enterprise AI Operating System for Advertising that runs entirely on the customer's own infrastructure: a marketing-performance Company Brain, an AI-assisted human-approved campaign pipeline (brief → creative → draft → report → dashboard), and deterministic ad-KPI reporting. Local AI via Ollama or any OpenAI-compatible engine. It drafts campaigns; it does not launch live ads. No cloud, no external API, no per-token billing.",
   "featureList": [
-    "Company Brain — permission-aware, cited knowledge base",
-    "Digital Employees — AI agents for knowledge work",
-    "Workflows & Approvals — tiered, audited",
+    "Company Brain — marketing-performance memory (what campaigns work)",
+    "AI-assisted, human-approved campaign pipeline",
+    "Deterministic ad KPIs — CTR, CPC, CPA, CPL, ROAS, ROI",
     "Local AI — runs on your hardware, offline/air-gap capable",
-    "Multi-tenant with strict isolation",
+    "Application-level multi-tenant isolation",
     "Full Turkish + English UI"
   ],
   "offers": {
@@ -346,10 +357,10 @@ concrete `price`; use `PriceSpecification` placeholders or omit.
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "AdOS — Sovereign Enterprise AI Operating System",
+  "name": "AdOS — Sovereign Enterprise AI Operating System for Advertising",
   "brand": { "@type": "Brand", "name": "AdOS" },
-  "category": "Sovereign Enterprise AI",
-  "description": "On-premise enterprise AI: Company Brain, Digital Employees, Workflows & Approvals. Runs on your infrastructure, offline-capable, permission-aware, fully audited.",
+  "category": "Sovereign Enterprise AI for Advertising",
+  "description": "On-premise AI for advertising: a marketing-performance Company Brain, an AI-assisted human-approved campaign pipeline, and deterministic ad-KPI reporting. Runs on your infrastructure, offline-capable; drafts campaigns, never launches them.",
   "offers": {
     "@type": "Offer",
     "availability": "https://schema.org/InStock",
@@ -374,7 +385,7 @@ concrete `price`; use `PriceSpecification` placeholders or omit.
       "name": "Does AdOS send our data to the cloud?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. AdOS runs 100% on your own infrastructure. Documents, prompts, answers, and workflows never leave your premises. There is no external API and no internet is required."
+        "text": "No. AdOS runs 100% on your own infrastructure. Client data, briefs, creative, campaign drafts, and prompts never leave your premises. There is no external API and no internet is required."
       }
     },
     {
@@ -477,7 +488,7 @@ Locale is explicit and paired.
 ```html
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="On-Premise & Offline Enterprise AI | AdOS">
-<meta name="twitter:description" content="Enterprise AI that runs 100% on your infrastructure. Offline, air-gap capable, permission-aware, no per-token billing.">
+<meta name="twitter:description" content="Advertising AI that runs 100% on your infrastructure. Offline, air-gap capable, human-approved drafts, no per-token billing.">
 <meta name="twitter:image" content="https://ados.example/assets/og/on-prem.png">
 <meta name="twitter:image:alt" content="AdOS on-prem architecture diagram.">
 ```
@@ -722,11 +733,11 @@ structure, same clusters, same claims, native phrasing.
 - ≤ 155 characters (aim 140–155); one per page/language; benefit + differentiator;
   include the primary keyword naturally; end with intent, not a hard sell.
 - Honest voice — no banned words (revolutionary, magic, seamless, etc.).
-  - EN example: "Run enterprise AI 100% on your own infrastructure. Cited,
-    permission-aware answers — offline and air-gap capable. No cloud, no per-token
-    bills."
-  - TR example: "Kurumsal yapay zekayı %100 kendi altyapınızda çalıştırın.
-    Kaynak gösteren, izin farkındalıklı yanıtlar — çevrimdışı ve air-gap uyumlu."
+  - EN example: "Run advertising AI 100% on your own infrastructure. AI-assisted,
+    human-approved campaign drafts — offline and air-gap capable. No cloud, no
+    per-token bills."
+  - TR example: "Reklam yapay zekasını %100 kendi altyapınızda çalıştırın. Yapay
+    zeka destekli, insan onaylı kampanya taslakları — çevrimdışı ve air-gap uyumlu."
 
 **Other meta rules:**
 - `<meta name="robots" content="index,follow">` on content; `noindex` on
@@ -777,9 +788,9 @@ Localization is editorial, not mechanical — the TR track earns its own ranking
   behavior — not translated from the EN keyword list.
 - **Locale-correct technical signals:** `lang` attribute, `hreflang`, `og:locale`,
   date/number formats, TR glyph subset in fonts (§10), TR alt text (§12).
-- **Terminology lock:** product names (AdOS, Company Brain, Digital Employees) stay
-  English in both languages; canonical terms (data sovereignty / veri egemenliği,
-  on-premise / şirket içi) used consistently.
+- **Terminology lock:** product names (AdOS, Company Brain) stay English in both
+  languages; canonical terms (data sovereignty / veri egemenliği, on-premise /
+  şirket içi) used consistently.
 - **Same claims both ways:** no claim, stat, or CTA exists in only one language
   (Constitution §1/§18). CTAs use the canonical bilingual labels (Constitution §20:
   "Request a Demo" / "Demo Talep Edin", etc.).
@@ -808,22 +819,25 @@ stronger and currently under-served.
 ### Archetype B — On-prem point tools (single-purpose self-hosted AI/RAG)
 - **They own:** narrow "self-hosted RAG", "local chatbot", "on-prem vector search"
   terms.
-- **Their gap:** the *operating-system* framing — "enterprise AI operating system",
-  "Company Brain", "Digital Employees", "Workflows & Approvals", permission-aware +
-  audited + multi-tenant. They rank for a feature; we rank for the platform.
+- **Their gap:** the *operating-system* framing — "Enterprise AI Operating System
+  for Advertising", "Company Brain" (marketing-performance memory), an AI-assisted
+  human-approved campaign pipeline, application-level multi-tenant. They rank for a
+  feature; we rank for the platform.
 - **Our play:** Clusters D, E and the "operating system, not a point tool"
   comparison; vertical solution pages that a single tool cannot cover.
 
 ### Archetype C — DIY / build-your-own (open-source stacks, internal builds)
 - **They own:** developer-tutorial long-tail — "run Llama locally", "Ollama
   enterprise setup", "self-host an LLM".
-- **Their gap:** the *enterprise-readiness* intents — governance, permission-scoped
-  citations, audit trails, multi-tenant isolation, backup/DR, support, TCO of
-  building vs buying. High-intent buyers searching "on-prem LLM permissions and
-  audit" or "self-hosted AI TCO" are under-served.
+- **Their gap:** the *enterprise-readiness* intents — brand governance, human
+  approval gates, activity logs and approval timelines, application-level
+  multi-tenant isolation, backup/DR, support, TCO of building vs buying. High-intent
+  buyers searching "on-prem LLM approvals and logs" or "self-hosted AI TCO" are
+  under-served.
 - **Our play:** Cluster B spokes that start at the DIY query and lead to the
-  build-vs-buy comparison; honest "what a DIY local LLM still lacks" content
-  (governance, citations, workflows) — factual, never disparaging.
+  build-vs-buy comparison; honest "what a DIY local LLM still lacks" content (brand
+  governance, marketing-performance memory, a human-approved pipeline) — factual,
+  never disparaging.
 
 **Cross-archetype priority:** the richest gap is **cloud-AI's data-egress anxiety
 intersecting DIY's enterprise-readiness gap** — buyers who want cloud capability
@@ -842,7 +856,7 @@ counts a bilingual pair as one logical page shipped twice.
 | **Q1 — Foundation & Flagship** | Sovereignty problem | Ship canonical, hreflang, robots.txt, sitemap index, all schema templates (§5), CWV budgets in CI, GSC/Bing for EN+TR properties | Home + 3 pillars (Local AI, On-Prem & Offline, Security) EN/TR; Cluster A + C pillars + 4 spokes each | Indexation of all core pages; CWV "good" p75; baseline rankings for on-prem AI / şirket içi yapay zeka |
 | **Q2 — Depth & Verticals** | Prove capability | Structured-data coverage to 100%; internal-linking audit; image pipeline (AVIF/WebP); redirect map live | Clusters B, D, E pillars + spokes; 4 vertical solution pages (Manufacturing, OSB, Municipalities, Finance) EN/TR | Top-20 for 10 body terms EN + 10 TR; ROI-calculator + Demo internal links converting; grow organic sessions |
 | **Q3 — Authority & Gap capture** | Sovereign vs cloud | Blog engine mature; FAQ schema expanded; INP hardening; hreflang QA sweep | Remaining 4 vertical pages (Healthcare, Logistics, Retail, Education); comparison content by archetype (§18); 12+ new spokes EN/TR | Top-10 for flagship on-prem AI / data sovereignty AI terms EN+TR; measurable demo requests from organic (north-star) |
-| **Q4 — Scale & Optimize** | Category ownership | Content refresh cycle; broken-link + orphan audit; Core Web Vitals re-baseline; sitemap/priority tune | Refresh top pillars with new proof; 15+ long-tail spokes; expand branded "Company Brain / Digital Employees" category pages EN/TR | Share of voice leader on "sovereign/on-prem AI" EN+TR; rising organic MQLs; bilingual parity rate 100% |
+| **Q4 — Scale & Optimize** | Category ownership | Content refresh cycle; broken-link + orphan audit; Core Web Vitals re-baseline; sitemap/priority tune | Refresh top pillars with new proof; 15+ long-tail spokes; expand branded "Company Brain / AI campaign pipeline" category pages EN/TR | Share of voice leader on "sovereign/on-prem AI" EN+TR; rising organic MQLs; bilingual parity rate 100% |
 
 **Continuous across all quarters:** weekly rank + GSC monitoring per language;
 monthly CWV/structured-data health check; quarterly keyword re-score (§1.6); every

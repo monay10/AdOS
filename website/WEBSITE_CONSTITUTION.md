@@ -25,22 +25,22 @@ specifies **what** and **why**, not the build.
 ## 1. Brand positioning
 
 **One-line positioning**
-> AdOS is the Enterprise AI Operating System that runs an autonomous AI ad agency
-> entirely on your own infrastructure — no cloud, no API keys, no data leaving
-> your walls.
+> AdOS is the Enterprise AI Operating System for Advertising that drafts an AI ad
+> agency's work — human-approved at every stage — entirely on your own
+> infrastructure — no cloud, no API keys, no data leaving your walls.
 
 **Positioning statement (long form)**
 For enterprises and regulated organizations that need modern AI advertising but
 cannot send their customer data to third-party clouds, AdOS is an on-premise,
-offline-first enterprise AI operating system that plans and runs campaigns end to
-end — brief, creative, campaign, analytics, executive review — using local AI
-models the customer controls. Unlike cloud martech suites and API-dependent AI
+offline-first Enterprise AI Operating System for Advertising that plans and drafts
+campaigns end to end — brief, creative, campaign draft, analytics, executive
+review — using local AI models the customer controls. Unlike cloud martech suites and API-dependent AI
 tools, AdOS keeps every prompt, asset and result inside the customer's own
 network, with enterprise-grade security, multi-tenancy and disaster recovery
 built in.
 
-**Category:** Enterprise AI Operating System (a new category — not "another
-martech point tool," not "a ChatGPT wrapper").
+**Category:** Enterprise AI Operating System for Advertising (a new category — not
+"another martech point tool," not "a ChatGPT wrapper").
 
 **Brand character:** Precise, calm, credible, sovereign. We sound like
 infrastructure, not hype. Closer to Linear/OpenAI restraint than to loud
@@ -50,7 +50,7 @@ growth-marketing. Confidence through specificity, never through adjectives.
 
 **Brand pillars (every message ladders to one):**
 1. **Sovereign** — your data, your models, your hardware.
-2. **Autonomous** — an AI company that does the work, with you approving.
+2. **Human-in-the-loop** — an AI company that drafts the work, with you approving every stage.
 3. **Enterprise-ready** — security, multi-tenancy, backup/DR from day one.
 4. **Open & local** — Ollama/vLLM/LM Studio; no vendor lock, no API bill.
 
@@ -60,14 +60,14 @@ growth-marketing. Confidence through specificity, never through adjectives.
 
 **Message architecture (pyramid):**
 
-- **Tagline (hero):** *The Enterprise AI Operating System.*
-- **Sub-tagline:** *Run an autonomous AI ad agency — 100% on your own
+- **Tagline (hero):** *The Enterprise AI Operating System for Advertising.*
+- **Sub-tagline:** *Run an AI ad agency — human-approved, 100% on your own
   infrastructure.*
 - **Three proof messages (below the fold):**
   1. **Local AI, zero cloud.** Every model runs on your hardware. No API keys,
      no data egress.
-  2. **From objective to campaign, autonomously.** State a goal; AdOS produces
-     brief → creative → campaign → analytics → executive report, with your
+  2. **From objective to campaign draft, human-approved.** State a goal; AdOS
+     drafts brief → creative → campaign → analytics → executive report, with your
      approval at each step.
   3. **Enterprise from the first commit.** Multi-tenant isolation, Argon2id auth,
      encrypted backups, disaster recovery, monitoring.
@@ -117,7 +117,7 @@ them.
 **P1 — "Selin," CMO / VP Marketing (Economic buyer)**
 - Wants: pipeline and campaign output without growing headcount.
 - Fears: brand risk, opaque AI, another tool nobody adopts.
-- Win: an autonomous agency she still controls via approvals.
+- Win: an AI-assisted agency she still controls via approvals.
 - Served by: Home hero, Product overview, ROI/outcomes, Customer stories.
 
 **P2 — "Emre," CISO / Head of Security (Veto power)**
@@ -142,7 +142,7 @@ them.
 **P5 — "Mr. Öztürk," Group/Agency Executive (Portfolio buyer)**
 - Wants: one platform serving many clients, isolated.
 - Fears: cross-client data leakage.
-- Win: strict multi-tenancy.
+- Win: application-level multi-tenant isolation.
 - Served by: For Agencies, Security, Pricing/Contact.
 
 ---
@@ -150,8 +150,8 @@ them.
 ## 5. Core value proposition
 
 **The single sentence:**
-> Modern AI advertising with zero data egress — an autonomous ad agency that runs
-> entirely inside your own infrastructure.
+> Modern AI advertising with zero data egress — a human-approved ad agency pipeline
+> that runs entirely inside your own infrastructure.
 
 **The value stack:**
 - **Control** — you own the models, the data, and the hardware.
@@ -164,7 +164,7 @@ them.
 | Claim | On-site evidence |
 | --- | --- |
 | No data leaves your walls | "Local AI" + "On-Prem" pages; architecture diagram |
-| Autonomous, still controlled | Pipeline animation with approval gates |
+| Human-approved at every stage | Pipeline animation with approval gates |
 | Enterprise-ready | Security page + Trust Center + DR/backup docs |
 | Open, no lock-in | "Runs on Ollama/vLLM/LM Studio" logos + docs |
 | Bilingual | Full TR/EN site parity |
@@ -753,7 +753,7 @@ form never blocks on non-essential fields.
 **Message spine:**
 - **Data never leaves your perimeter** — the platform runs on-prem; the AI is
   local; there is no cloud endpoint to leak to.
-- **Isolation by design** — strict multi-tenancy (`TenantContext` scopes every
+- **Isolation by design** — application-level multi-tenancy (`TenantContext` scopes every
   query, event, job, storage key).
 - **Hardened by default** — Argon2id credentials, CSP + full security-header set,
   brute-force lockout + rate limiting, CSRF protection, HTTPS/HSTS.
@@ -771,18 +771,18 @@ Compliance stated honestly (§22). Never overclaim certifications.
 
 **Thesis:** *An AI company, governed by you.*
 
-- **Autonomous, not unaccountable:** AdOS runs the full pipeline (brief →
+- **Human-approved, not unaccountable:** AdOS drafts the full pipeline (brief →
   creative → campaign → analytics → executive → learning) but **stops for your
-  approval at every stage.**
+  approval at every stage** and never launches ads itself.
 - **Governed AI:** one interface (`AIManagerPort`) mediates all AI; nothing talks
   to a model directly — safety, validation and structure are enforced.
 - **Explainable output:** structured, schema-valid results with provenance
   (which model, when).
 - **Model-agnostic:** swap models without changing anything downstream.
 
-**Rules:** never anthropomorphize beyond "AI company / autonomous agency"; never
-imply human-level guarantees; always foreground human approval; show real
-pipeline output, not fabricated demos.
+**Rules:** never anthropomorphize beyond "AI company / AI ad agency"; never claim
+autonomy without humans; never imply human-level guarantees; always foreground
+human approval; show real pipeline output, not fabricated demos.
 
 ---
 

@@ -26,8 +26,8 @@ Every asset conforms to the Marketing Constitution — voice (§4), messaging
 - **No external copyrighted assets.** Everything is owned or licensed; original
   vector illustration is preferred. No stock photos of servers we do not own.
 - **Bilingual TR/EN parity** — every buyer-facing asset ships in both languages
-  with identical claims and numbers; product names (AdOS, Company Brain, Digital
-  Employees) stay in English in both.
+  with identical claims and numbers; product names (AdOS, Company Brain,
+  Mission) stay in English in both.
 - **Every asset carries exactly one primary CTA** from the canonical list (§20)
   and declares its funnel stage (§11).
 
@@ -111,7 +111,7 @@ canvas, single accent, one message + one CTA (QR to demo request).
 | Asset name | Purpose | Audience | Dimensions | Format | Owner | Priority |
 |---|---|---|---|---|---|---|
 | Primary roll-up — "Never leaves your building" | Booth statement banner | Event attendees, TOFU | 85×200 cm | PDF (CMYK, print-ready) | Brand Designer | P0 |
-| Platform roll-up (three pillars) | Explain Company Brain / Digital Employees / Workflows | Event attendees, MOFU | 85×200 cm | PDF (CMYK) | Brand Designer | P1 |
+| Platform roll-up (three pillars) | Explain Company Brain / campaign pipeline / Workflows & Approvals | Event attendees, MOFU | 85×200 cm | PDF (CMYK) | Brand Designer | P1 |
 | Wide roll-up | Large-format backdrop panel | Event attendees | 100×200 cm | PDF (CMYK) | Brand Designer | P2 |
 | Security/sovereignty roll-up | Public-sector/CISO angle (data residency) | Public sector, BOFU | 85×200 cm | PDF (CMYK) | Brand Designer | P2 |
 | TR-language roll-up set | Turkish-first venues | TR attendees | 85×200 cm | PDF (CMYK) | Brand Designer | P1 |
@@ -166,17 +166,18 @@ possible (embed or inline); accessible alt text; single accent line. TR/EN.
 ## Product Screenshots
 
 Real, honest UI captures of AdOS (dark theme default) using the NovaMak demo
-world. Must show sovereign proof: cited answers, permission scoping, audit trail.
-No mocked-up fake data beyond the sanctioned demo. Retina @2x. TR and EN UI
-captures (auto-detected bilingual UI).
+world. Must show real product surfaces: the human-approved campaign pipeline, the
+marketing-performance Company Brain, and the activity log. No mocked-up fake data
+beyond the sanctioned demo. Retina @2x. TR and EN UI captures (auto-detected
+bilingual UI).
 
 | Asset name | Purpose | Audience | Dimensions | Format | Owner | Priority |
 |---|---|---|---|---|---|---|
-| Company Brain — cited answer | Show grounded answer with source citations | CIO/CISO, MOFU/BOFU | 2560×1440 | PNG | PMM | P0 |
-| Company Brain — permission-scoped result | Prove a restricted doc is not surfaced | CISO, BOFU | 2560×1440 | PNG | PMM | P0 |
-| Digital Employees — task view | Show an AI worker performing real work | Operations/HR, MOFU | 2560×1440 | PNG | PMM | P0 |
-| Workflows & Approvals — tiered approval | Show routing + approval authority | Operations, MOFU | 2560×1440 | PNG | PMM | P0 |
-| Audit trail view | Show immutable, consequential-action log | CISO/CIO, BOFU | 2560×1440 | PNG | PMM | P0 |
+| Company Brain — winning-ad pattern | Show what ads/campaigns worked from performance memory | CIO/CISO, MOFU/BOFU | 2560×1440 | PNG | PMM | P0 |
+| Company Brain — marketing insight | Surface a CTR/ROAS insight from past campaigns | CISO, BOFU | 2560×1440 | PNG | PMM | P0 |
+| Creative set — ad copy | Show AI-drafted headline/adCopy/CTA, human-gated | Operations, MOFU | 2560×1440 | PNG | PMM | P0 |
+| Workflows & Approvals — approval gate | Show a human approval click on a pipeline stage | Operations, MOFU | 2560×1440 | PNG | PMM | P0 |
+| Activity log view | Show the activity feed + per-approval timeline | CISO/CIO, BOFU | 2560×1440 | PNG | PMM | P0 |
 | Dashboard / overview | System at-a-glance | CIO/GM, MOFU | 2560×1440 | PNG | PMM | P1 |
 | Mobile/responsive capture | Show responsive UI | IT/BT, MOFU | 1290×2796 (device frame) | PNG | PMM | P2 |
 | Light-theme capture set | Theme-aware proof (light mirror) | Any, MOFU | 2560×1440 | PNG | PMM | P2 |
@@ -193,14 +194,14 @@ hero element; no data flows cross it. Every diagram has a TR and EN label set.
 | Asset name | Purpose | Audience | Dimensions | Format | Owner | Priority |
 |---|---|---|---|---|---|---|
 | On-prem boundary overview | Show the whole stack (app + data + model) inside the wall, no cloud egress | CTO/CISO, BOFU | 1600×900 (scalable) | SVG | Brand Designer | P0 |
-| Company Brain data flow | Document → index → cited, permission-scoped answer, all local | CIO/CTO, MOFU | 1600×900 | SVG | Brand Designer | P0 |
+| Company Brain data flow | Campaign → ad → lead → ROI performance memory, all local | CIO/CTO, MOFU | 1600×900 | SVG | Brand Designer | P0 |
 | Local AI inference diagram | Ollama / OpenAI-compatible engine on customer hardware, no API keys | CTO, BOFU | 1600×900 | SVG | Brand Designer | P0 |
-| Permission-aware access model (RBAC) | How permission scoping gates what AI can cite | CISO, BOFU | 1600×900 | SVG | Brand Designer | P0 |
+| Auth & security model | Argon2id, HMAC HttpOnly sessions, CSRF, brute-force lockout, CSP/HSTS | CISO, BOFU | 1600×900 | SVG | Brand Designer | P0 |
 | Air-gap / offline deployment | Pull-the-cable topology; fully disconnected operation | CISO/public sector, BOFU | 1600×900 | SVG | Brand Designer | P1 |
-| Multi-tenant isolation | Strict tenant boundaries within one deployment | CIO/CTO, MOFU | 1600×900 | SVG | Brand Designer | P1 |
+| Multi-tenant isolation | Application-level tenant boundaries within one deployment | CIO/CTO, MOFU | 1600×900 | SVG | Brand Designer | P1 |
 | Deployment / Docker bring-up | One-command on-prem/private-cloud deploy | IT/BT, BOFU | 1600×900 | SVG | Brand Designer | P1 |
 | Backup / restore / DR runbook diagram | Day-2 operability confidence | IT/BT/CIO, BOFU | 1600×900 | SVG | Brand Designer | P2 |
-| Workflows & Approvals routing | Deterministic routing + tiered authority + audit | Operations, MOFU | 1600×900 | SVG | Brand Designer | P2 |
+| Workflows & Approvals routing | Deterministic routing + human approval gates + activity log | Operations, MOFU | 1600×900 | SVG | Brand Designer | P2 |
 
 ---
 
@@ -232,7 +233,7 @@ honest numbers labeled as estimates where modeled. Follow the dataviz standards
 | Cloud AI vs. Sovereign AI comparison | Frame the sovereignty problem (never name-and-shame) | CIO/CISO, TOFU | 1080×1350 (portrait) | SVG + PNG | Content Designer | P0 |
 | Where your data goes (boundary map) | Show data never leaving the building | All, TOFU | 1600×900 | SVG + PNG | Content Designer | P0 |
 | ROI / TCO model summary | Visualize value, no per-token bill (labeled model) | CFO/CIO, MOFU | 1080×1350 | SVG + PNG | PMM | P1 |
-| Anatomy of a cited answer | Explain grounding + citation + permission scope | CIO, MOFU | 1600×900 | SVG + PNG | Content Designer | P1 |
+| Anatomy of the campaign pipeline | Explain brief → creative → draft → report → dashboard | CIO, MOFU | 1600×900 | SVG + PNG | Content Designer | P1 |
 | On-prem AI buyer checklist | Consideration aid for evaluators | IT/BT/CIO, MOFU | 1080×1350 | SVG + PDF | Content Designer | P1 |
 | Vertical use-case infographic (per §10) | Segment-specific value story | Segment buyers | 1080×1350 | SVG + PNG | PMM | P2 |
 | "How AdOS deploys" timeline | Simplify the deploy/day-2 story | IT/BT, BOFU | 1600×900 | SVG + PNG | Content Designer | P2 |
@@ -242,17 +243,18 @@ honest numbers labeled as estimates where modeled. Follow the dataviz standards
 ## Demo Videos
 
 Recorded, honest product demos in the NovaMak world. Show the five mandatory
-proof moments (cited answer, hidden restricted doc, tiered approval, Digital
-Employee task, pull-the-cable/air-gap). Concede the honest latency trade-off.
+proof moments (AI-drafted marketing brief, ad-copy creative set, campaign draft
+that is never launched, Company Brain performance insight, pull-the-cable/air-gap).
+Concede the honest latency trade-off.
 Captions burned + SRT, TR and EN. 1080p min; 4K master retained.
 
 | Asset name | Purpose | Audience | Dimensions | Format | Owner | Priority |
 |---|---|---|---|---|---|---|
 | Full product demo (NovaMak) | The core BOFU proof walkthrough | Buying committee, BOFU | 1920×1080 | MP4 (H.264) | Video Producer | P0 |
 | 5 proof-moments highlight reel | Condensed evidence montage | CIO/CISO, MOFU/BOFU | 1920×1080 | MP4 | Video Producer | P0 |
-| Cited-answer micro-demo | 60–90s: watch a grounded, cited answer | CIO, MOFU | 1920×1080 | MP4 | Video Producer | P1 |
+| Campaign-draft micro-demo | 60–90s: watch a campaign draft assembled for approval | CIO, MOFU | 1920×1080 | MP4 | Video Producer | P1 |
 | Air-gap / pull-the-cable demo | Prove operation with no internet | CISO/public sector, BOFU | 1920×1080 | MP4 | Video Producer | P1 |
-| Digital Employee task demo | Show an AI worker completing real work | Operations/HR, MOFU | 1920×1080 | MP4 | Video Producer | P1 |
+| Creative-set demo | Show AI-drafted ad copy produced for human approval | Operations/HR, MOFU | 1920×1080 | MP4 | Video Producer | P1 |
 | Vertical square demo cut | Feed-native short for social | Segment buyers, TOFU | 1080×1080 | MP4 | Motion Designer | P2 |
 | Vertical story demo cut | Stories/Reels short | Social, TOFU | 1080×1920 | MP4 | Motion Designer | P2 |
 
@@ -268,7 +270,7 @@ scenes, single accent.
 |---|---|---|---|---|---|---|
 | "What is AdOS?" 90-second explainer | Category + one-sentence pitch | All ICP, TOFU | 1920×1080 | MP4 | Motion Designer | P0 |
 | Sovereignty problem explainer | Teach the "why" of on-prem AI | CIO/CISO, TOFU | 1920×1080 | MP4 | Motion Designer | P1 |
-| Three-pillars explainer | Company Brain / Digital Employees / Workflows | CIO/CTO, MOFU | 1920×1080 | MP4 | Motion Designer | P1 |
+| Three-pillars explainer | Company Brain / campaign pipeline / Workflows & Approvals | CIO/CTO, MOFU | 1920×1080 | MP4 | Motion Designer | P1 |
 | Architecture explainer (animated diagram) | Animate data staying inside the boundary | CTO/CISO, BOFU | 1920×1080 | MP4 | Motion Designer | P1 |
 | 30-second social explainer cut | Awareness reach on social | Social, TOFU | 1080×1080 | MP4 | Motion Designer | P2 |
 | 15-second vertical teaser | Story/Reel hook | Social, TOFU | 1080×1920 | MP4 | Motion Designer | P2 |
@@ -298,15 +300,16 @@ supports it.
 - **P0 (launch-critical, ~28 assets):** homepage hero + mobile + OG image;
   LinkedIn post/square + company banner; email signature + logo mark; master &
   sales deck covers; primary roll-up; standard business card; the five product
-  screenshots (cited answer, permission-scoped, Digital Employee, approval, audit)
-  plus dashboard-critical captures; core architecture diagrams (boundary
-  overview, Company Brain flow, Local AI inference, RBAC); core icon set, pillar
+  screenshots (winning-ad pattern, marketing insight, creative set, approval gate,
+  activity log) plus dashboard-critical captures; core architecture diagrams
+  (boundary overview, Company Brain flow, Local AI inference, Auth & security);
+  core icon set, pillar
   icons, favicon; full product demo + 5-proof-moments reel; "What is AdOS?"
   explainer; animated logo sting. These carry the core funnel and cannot slip.
 - **P1 (within one quarter):** platform/security banners, carousels and document
   posts, webinar covers, platform roll-up + booth graphics, remaining
-  screenshots, air-gap/multi-tenant/deploy diagrams, ROI and cited-answer
-  infographics, micro/air-gap/Digital-Employee demos, sovereignty/pillars/
+  screenshots, air-gap/multi-tenant/deploy diagrams, ROI and campaign-pipeline
+  infographics, micro/air-gap/creative-set demos, sovereignty/pillars/
   architecture explainers, hero loop and lower-thirds.
 - **P2 (backlog):** display ad sizes, secondary social profiles, 4:3/legacy
   covers, wide/TR roll-up variants, floor decals and table throws, executive and

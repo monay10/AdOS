@@ -10,18 +10,19 @@
 
 ## 0. Campaign overview
 
-This is the official launch of **AdOS** — an **enterprise AI operating system that
-runs 100% on the customer's own infrastructure**. The launch introduces the
-category we own, **Sovereign Enterprise AI** (Constitution §2), and moves ICP
-accounts from awareness of the sovereignty problem to a qualified demo request.
+This is the official launch of **AdOS** — an **Enterprise AI Operating System for
+Advertising that runs 100% on the customer's own infrastructure**. The launch
+introduces the category we own, **Sovereign Enterprise AI** (Constitution §2), and
+moves ICP accounts from awareness of the sovereignty problem to a qualified demo
+request.
 
 - **Master campaign:** `AdOS · Sovereign AI · 2026`
 - **Sub-themes (campaign naming §17):**
-  - `AdOS · Company Brain · 2026Q3` — cited, permission-aware knowledge
-  - `AdOS · Digital Employees · 2026Q3` — AI workers doing real work
+  - `AdOS · Company Brain · 2026Q3` — marketing-performance memory that learns what works
+  - `AdOS · Campaign Pipeline · 2026Q3` — AI-assisted, human-approved campaign drafting
   - `AdOS · Sovereign AI · 2026Q4` — vertical + OSB expansion
 - **UTM convention (§17):** `utm_campaign=ados_sovereign_2026` (sub-themes:
-  `ados_companybrain_2026`, `ados_digitalemployees_2026`).
+  `ados_companybrain_2026`, `ados_pipeline_2026`).
 - **North-star metric (§21):** qualified demo requests from ICP accounts.
 - **Message spine (§6):** Sovereignty → Capability → Outcome. Pillars, in order:
   **Sovereign · Capable · Accountable.**
@@ -33,6 +34,14 @@ accounts from awareness of the sovereignty problem to a qualified demo request.
   are **illustrative** planning placeholders, not commitments.
 - **Dates:** relative placeholders anchored on `{{launch week}}` (the public launch
   week). No fabricated specifics.
+
+> **Roadmap / Yol Haritası (not shipped — never marketed as present-tense):**
+> autonomous agents (a "Digital Employees" workforce), document knowledge base with
+> cited answers, ad-platform connectors and live campaign launch/optimization,
+> enforced RBAC / permission-aware AI, and an immutable audit trail are **future
+> directions only**. They must never appear as current capabilities in any launch
+> asset; if referenced at all, they carry an explicit **Roadmap / Yol Haritası**
+> label.
 
 **CTA discipline (§20):** one primary CTA per asset. Canonical labels only:
 - BOFU: **"Request a Demo"** / TR **"Demo Talep Edin"**
@@ -78,13 +87,14 @@ warm list before anything is announced.
 - **Announcement live:** homepage hero + platform pages go public. Primary CTA
   **"Request a Demo" / "Demo Talep Edin"**; secondary **"See the Platform"**.
 - **Press release out (TR/EN):** category + product launch (see Press campaign).
-- **Founder launch post (LinkedIn):** the one sentence — *"AdOS is an enterprise
-  AI operating system that runs 100% on your own infrastructure — your data never
-  leaves your building, and it works with no internet at all."*
+- **Founder launch post (LinkedIn):** the one sentence — *"AdOS is an Enterprise AI
+  Operating System for Advertising that runs 100% on your own infrastructure — your
+  data never leaves your building, and it works with no internet at all."*
 - **Launch email #1** to the warm list and waitlist (see Email campaign).
 - **Launch webinar registration open:** headline session scheduled for Week one.
-- **Live proof asset:** publish a short recorded NovaMak demo clip showing a cited
-  answer and the pull-the-cable / air-gap moment (§14).
+- **Live proof asset:** publish a short recorded NovaMak demo clip showing the
+  Company Brain surface a winning-ad pattern and the pull-the-cable / air-gap
+  moment (§14).
 - **War room:** demand-gen, sales, and support monitor inbound; SLA on demo-request
   response measured from minute one.
 
@@ -97,8 +107,9 @@ warm list before anything is announced.
 
 - **Launch webinar** (`AdOS · Sovereign AI · 2026`): live NovaMak walkthrough with
   the five proof moments; live Q&A. CTA **"Request a Demo"**.
-- **LinkedIn cadence:** one idea per post per day (§5) — Company Brain citations,
-  air-gap, permission-aware AI, no per-token billing, honest performance trade-off.
+- **LinkedIn cadence:** one idea per post per day (§5) — Company Brain marketing
+  memory, air-gap, human-approved pipeline, no per-token billing, honest performance
+  trade-off.
 - **Email #2 (proof)** to non-openers and new signups (see Email campaign).
 - **Press follow-through:** distribute to vertical/trade outlets (manufacturing,
   public sector, OSB press).
@@ -114,9 +125,10 @@ warm list before anything is announced.
 **Goal:** move from announcement to consideration (MOFU/§11); build pipeline.
 
 - **Vertical waves:** tailor the message angle per segment (§10) — Manufacturing
-  (tacit knowledge across sites), OSB (shared sovereign AI for member firms),
-  Municipalities/Public (data-residency mandate), Healthcare/Finance (zero leakage,
-  audit). Each wave = 1 blog + 1 LinkedIn thread + 1 email, TR/EN.
+  (consistent brand & campaign memory across sites), OSB (shared sovereign AI for
+  member firms), Municipalities/Public (data-residency mandate),
+  Healthcare/Finance (zero data leakage, local-only). Each wave = 1 blog + 1
+  LinkedIn thread + 1 email, TR/EN.
 - **Webinar series:** repeat the flagship + add a security/architecture deep-dive
   for CISO/CTO. CTA **"See the Platform"** then **"Request a Demo"**.
 - **NovaMak demo sessions** open weekly (see Demo sessions).
@@ -132,7 +144,7 @@ warm list before anything is announced.
 **Goal:** durable demand engine; convert pipeline; stand up advocacy.
 
 - **Sub-theme campaigns live:** `AdOS · Company Brain · 2026Q3` and
-  `AdOS · Digital Employees · 2026Q3` deepen each pillar.
+  `AdOS · Campaign Pipeline · 2026Q3` deepen each pillar.
 - **Case studies (illustrative, labeled §18):** publish NovaMak-based vertical
   stories; begin converting real pilots into references only when true and approved
   (§16).
@@ -155,12 +167,12 @@ claim in one language only. Product names stay English in both.
 | # | Purpose (funnel stage) | EN subject | TR subject | Primary CTA |
 |---|---|---|---|---|
 | 1 | Launch announcement (TOFU→MOFU) | AdOS is here: enterprise AI that never leaves your building | AdOS geldi: binanızdan asla çıkmayan kurumsal yapay zeka | See the Platform / Platformu Keşfedin |
-| 2 | Proof — cited, air-gap (MOFU) | Watch AI answer with sources — offline, on your hardware | Yapay zekanın kaynak göstererek yanıtlamasını izleyin — çevrimdışı, kendi donanımınızda | Request a Demo / Demo Talep Edin |
-| 3 | Company Brain deep-dive (MOFU) | Every answer cited. Every citation permission-scoped. | Her yanıt kaynaklı. Her kaynak yetkiye göre. | See the Platform / Platformu Keşfedin |
-| 4 | Digital Employees (MOFU) | Digital Employees that do real work — within your rules | Kurallarınız dahilinde gerçek iş yapan Digital Employees | Request a Demo / Demo Talep Edin |
+| 2 | Proof — draft + air-gap (MOFU) | Watch AI draft a campaign — offline, on your hardware | Yapay zekanın kampanya taslağı hazırlamasını izleyin — çevrimdışı, kendi donanımınızda | Request a Demo / Demo Talep Edin |
+| 3 | Company Brain deep-dive (MOFU) | Your Company Brain learns which ads and campaigns actually work | Company Brain, hangi reklam ve kampanyaların gerçekten işe yaradığını öğrenir | See the Platform / Platformu Keşfedin |
+| 4 | AI-assisted pipeline (MOFU) | An AI-assisted pipeline drafts your campaigns — you approve every step | Kampanyalarınızın taslağını hazırlayan yapay zeka destekli akış — her adımı siz onaylarsınız | Request a Demo / Demo Talep Edin |
 | 5 | Economics — no per-token bill (MOFU) | No cloud bill, no per-token metering — the math | Bulut faturası yok, token başına ücret yok — hesabı | Calculate Your ROI / ROI'nizi Hesaplayın |
 | 6 | Webinar invite (MOFU) | See AdOS run air-gapped — live NovaMak walkthrough | AdOS'u air-gapped çalışırken görün — canlı NovaMak turu | Request a Demo / Demo Talep Edin |
-| 7 | Security & audit (BOFU, CISO/CTO) | Permission-aware, fully audited — the CISO briefing | Yetki-farkında, tamamen denetlenen — CISO brifingi | Request a Demo / Demo Talep Edin |
+| 7 | Security & sovereignty (BOFU, CISO/CTO) | Local, air-gapped, activity-logged — the CISO briefing | Yerel, air-gapped, etkinlik kaydı tutulan — CISO brifingi | Request a Demo / Demo Talep Edin |
 | 8 | Decision nudge / pilot (BOFU) | Prove it on your own hardware | Kendi donanımınızda kanıtlayın | Request a Demo / Demo Talep Edin |
 
 **Cadence:** #1 launch day; #2–3 Week one; #4–6 Month one; #7–8 as MQLs mature.
@@ -177,8 +189,9 @@ performance is claimed (CANON).
 - **Founder / expert POV** carries the category thesis: the tension between wanting
   AI and refusing to send data to someone else's cloud (§2, §12).
 - **Post pillars (rotate):** Sovereign (no data leaves the building) · Capable
-  (Company Brain, Digital Employees, Workflows) · Accountable (cited, permission-
-  aware, audited).
+  (Company Brain marketing memory, AI-assisted campaign pipeline, human-approved
+  workflow) · Accountable (human-approved at every stage, activity log +
+  per-approval timeline, application-level tenant isolation).
 - **Formats:** short takes, carousel of the five demo proof moments, a 60-second
   air-gap clip, webinar promos.
 - **Cadence:** daily in Week one, 3–4×/week through Month one.
@@ -214,11 +227,14 @@ performance is claimed (CANON).
 building." Live in Week one, repeated in Month one.
 
 - **Structure:** the sovereignty problem → the AdOS answer → live NovaMak demo with
-  the **five mandatory proof moments** (§14): (1) a cited answer, (2) a hidden
-  restricted document the AI will not surface, (3) a tiered approval, (4) a Digital
-  Employee completing a task, (5) pull-the-cable / air-gap. Then live Q&A.
+  the **five mandatory proof moments** (§14): (1) the Company Brain surfacing a
+  winning-ad pattern from past campaign performance, (2) an AI-generated marketing
+  brief and creative set (ad copy only), (3) a campaign draft assembled
+  (channels, ad sets, budget split) that is never launched, (4) a human approval
+  gate stopping the pipeline until someone clicks, (5) pull-the-cable / air-gap.
+  Then live Q&A.
 - **Track variants:** an executive track (CEO/CIO — ROI, TCO) and a technical track
-  (CTO/CISO — architecture, audit, model choice).
+  (CTO/CISO — architecture, activity log & data boundary, model choice).
 - **Registration CTA:** **"Request a Demo"** on the thank-you step.
 - **Bilingual delivery:** TR and EN sessions; identical claims and numbers.
 - **Recording** gated as a MOFU asset for nurture.
@@ -227,17 +243,18 @@ building." Live in Week one, repeated in Month one.
 
 ## Demo sessions (NovaMak)
 
-**World:** NovaMak Endüstri A.Ş. — explicitly fictional manufacturer (6 sites, 4
-business units, 42 employees, 16 departments, 12 Digital Employees, 25 workflows),
-deterministic and internally consistent (CANON, `demo/`).
+**World:** NovaMak Endüstri A.Ş. — explicitly fictional manufacturer and agency
+client (6 sites, 4 business units, 42 employees, 16 departments, 12 brands and
+products, 25 campaign missions), deterministic and internally consistent
+(CANON, `demo/`).
 
 - **Format:** live, discovered-pain demo (§14) walking the five proof moments on
   the NovaMak dataset; tailored to the attendee's vertical (§10).
 - **Cadence:** weekly open sessions from Month one; private sessions for SQL
   accounts on request.
-- **Persona framing:** CISO sees the restricted-doc and audit trail; Operations
-  sees tiered approvals; HR sees knowledge retention; CIO sees TCO and no
-  per-token billing.
+- **Persona framing:** CISO sees the air-gap data boundary and activity log;
+  Operations sees the human approval gates; Marketing sees the Company Brain
+  surface winning-ad patterns; CIO sees TCO and no per-token billing.
 - **De-risking (§14):** offer a pilot on the customer's own hardware.
 - **CTA:** **"Request a Demo" / "Demo Talep Edin"** everywhere the demo is promoted.
 - **Honesty:** show real local-inference latency and state the trade-off plainly.
@@ -274,7 +291,7 @@ employees, multi-site; Turkey-first) across the eight verticals (§10, CANON).
 - **Pilot offer (§14):** prove it on the customer's own hardware — the primary
   risk-remover.
 - **Retention seed (§15):** onboarding content ready so first value (seed the
-  Company Brain, add the first Digital Employee) is fast.
+  Company Brain, draft the first campaign mission) is fast.
 
 ---
 
@@ -334,7 +351,7 @@ asset declares its funnel stage; MQL→SQL handoff logged for the north-star.
 | Illustrative targets read as commitments | Label all KPIs "illustrative"; only cadence/parity are binding |
 | Demo requests outpace sales capacity | War-room SLA; qualification filter; partner overflow; pilot-on-your-hardware to prioritize |
 | Press misframes the category | Embargoed pre-brief with press kit + fact sheet; approved quote; spokespeople briefed on §6 |
-| Security/CISO objections stall deals | Security + architecture pages and CISO webinar track ready at launch (§14); audit trail shown live |
+| Security/CISO objections stall deals | Security + architecture pages and CISO webinar track ready at launch (§14); activity log and air-gap data boundary shown live |
 | Competitors reframe "on-prem" as niche | Own the question, not the keyword (§12); category thesis "Sovereign Enterprise AI"; proof over promise |
 | Partner channel under-activated | Partner enablement in Pre-launch; co-marketing formalized in Quarter one (§16) |
 | Weak content health (CWV, structured data) | Foundation freeze in Pre-launch; monitored in Success metrics |
@@ -351,7 +368,7 @@ Phase table anchored on `{{launch week}}`. Dates are relative placeholders.
 | Launch day | `{{launch week}} Day 1` | Announce product + category | Site live; press release (TR/EN); founder launch post; Email #1; webinar registration; recorded air-gap clip; war room | Request a Demo |
 | Week one | `Day 1 → Day 7` | Reach + flagship webinar | Launch webinar (NovaMak, 5 proof moments); daily LinkedIn; Email #2; press follow-through; partner amplification; first metrics read | Request a Demo |
 | Month one | `{{launch week}} → +4w` | Move to consideration; build pipeline | Vertical waves (§10); webinar series + security deep-dive; weekly NovaMak demos; ROI-calculator push; nurture flows; community seeding | See the Platform → Request a Demo |
-| Quarter one | `{{launch week}} → +13w` | Durable engine; convert; advocacy | Sub-theme campaigns (Company Brain, Digital Employees); illustrative case studies; partner co-marketing; pilot program; quarterly review | Request a Demo |
+| Quarter one | `{{launch week}} → +13w` | Durable engine; convert; advocacy | Sub-theme campaigns (Company Brain, Campaign Pipeline); illustrative case studies; partner co-marketing; pilot program; quarterly review | Request a Demo |
 
 ---
 
