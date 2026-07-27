@@ -86,27 +86,27 @@ lines), and **Speaker notes**. `[EN]` / `[TR]` mark the language.
 ## Slide 4 — Knowledge loss
 
 **Title**
-- `[EN]` Your most valuable asset walks out the door every day
-- `[TR]` En değerli varlığınız her gün kapıdan çıkıyor
+- `[EN]` What worked in your campaigns walks out the door
+- `[TR]` Kampanyalarınızda işe yarayan bilgi kapıdan çıkıyor
 
 **On-slide copy**
-- `[EN]` Experience retires. Documents get lost. Every departure takes knowledge
-  with it. What if your organization could remember everything it has ever
-  learned?
-- `[TR]` Deneyim emekli oluyor. Belgeler kayboluyor. Her ayrılış bilgiyi de
-  götürüyor. Ya kurumunuz öğrendiği her şeyi hatırlayabilseydi?
+- `[EN]` Experience retires. Winning playbooks get lost. Every departure takes
+  campaign know-how with it. What if your team could remember every campaign that
+  worked?
+- `[TR]` Deneyim emekli oluyor. Kazanan taktikler kayboluyor. Her ayrılış kampanya
+  bilgisini götürüyor. Ya ekibiniz işe yarayan her kampanyayı hatırlayabilseydi?
 
 **Speaker notes**
 - `[EN]` "Think about what happens when an experienced engineer or manager leaves.
   Decades of judgment leave with them. Procedures live in scattered files nobody
-  can find. This is silent, expensive loss. AdOS turns your documents and
-  decisions into a living memory your whole organization can use — and it stays
+  can find. This is silent, expensive loss. AdOS turns your campaign history and
+  results into a living memory your whole team can reuse — and it stays
   inside your walls."
 - `[TR]` "Deneyimli bir mühendis ya da yönetici ayrıldığında ne olduğunu düşünün.
   On yılların birikimi onlarla gider. Prosedürler kimsenin bulamadığı dağınık
-  dosyalarda kalır. Bu, sessiz ve pahalı bir kayıptır. AdOS, belgelerinizi ve
-  kararlarınızı tüm kurumunuzun kullanabileceği yaşayan bir hafızaya dönüştürür —
-  ve bu, duvarlarınızın içinde kalır."
+  dosyalarda kalır. Bu, sessiz ve pahalı bir kayıptır. AdOS, kampanya geçmişinizi
+  ve sonuçlarınızı tüm ekibinizin yeniden kullanabileceği yaşayan bir hafızaya
+  dönüştürür — ve bu, duvarlarınızın içinde kalır."
 
 ---
 
@@ -243,50 +243,57 @@ lines), and **Speaker notes**. `[EN]` / `[TR]` mark the language.
 - `[TR]` Şirket Beyni: kurumunuzun yaşayan hafızası
 
 **On-slide copy**
-- `[EN]` Every document, decision and outcome becomes shared, searchable
-  knowledge that grows more valuable over time — and never leaves your walls.
-- `[TR]` Her belge, karar ve sonuç; zamanla daha değerli hâle gelen, paylaşılan
-  ve aranabilir bir bilgiye dönüşür — ve asla duvarlarınızdan çıkmaz.
+- `[EN]` Every campaign, creative and result becomes shared, reusable knowledge —
+  winning ads, channels and budgets — that grows more valuable over time and never
+  leaves your walls.
+- `[TR]` Her kampanya, kreatif ve sonuç; kazanan reklamlar, kanallar ve bütçeler
+  olarak paylaşılan, yeniden kullanılabilir bir bilgiye dönüşür — zamanla değerlenir
+  ve asla duvarlarınızdan çıkmaz.
 
 **Speaker notes**
 - `[EN]` "This is where it becomes strategic. AdOS builds a 'Company Brain' from
-  your own documents, decisions and results. Anyone can ask it a question and get
-  an answer grounded in your organization's real knowledge. The more you use it,
-  the smarter it gets — on your data, inside your walls. That is an asset no
-  outside vendor can take or copy."
-- `[TR]` "İşte burada stratejik hâle gelir. AdOS, kendi belgelerinizden,
-  kararlarınızdan ve sonuçlarınızdan bir 'Şirket Beyni' oluşturur. Herkes ona bir
-  soru sorup kurumunuzun gerçek bilgisine dayanan bir yanıt alabilir. Kullandıkça
-  daha akıllı olur — sizin verinizde, duvarlarınızın içinde. Bu, hiçbir dış
-  tedarikçinin alamayacağı ya da kopyalayamayacağı bir varlıktır."
+  your own campaigns, creatives and results. It surfaces what worked — winning
+  ads, channels and budgets — grounded in your real campaign performance. The more
+  you use it, the smarter it gets — on your data, inside your walls. That is an
+  asset no outside vendor can take or copy."
+- `[TR]` "İşte burada stratejik hâle gelir. AdOS, kendi kampanyalarınızdan,
+  kreatiflerinizden ve sonuçlarınızdan bir 'Şirket Beyni' oluşturur. İşe yarayanı —
+  kazanan reklamları, kanalları ve bütçeleri — gerçek kampanya performansınıza
+  dayanarak yüzeye çıkarır. Kullandıkça daha akıllı olur — sizin verinizde,
+  duvarlarınızın içinde. Bu, hiçbir dış tedarikçinin alamayacağı ya da
+  kopyalayamayacağı bir varlıktır."
 
 ---
 
-## Slide 11 — Digital Employees
+## Slide 11 — AI-assisted pipeline
 
 **Title**
-- `[EN]` Digital Employees: AI assistants for every department
-- `[TR]` Dijital Çalışanlar: her departman için yapay zekâ asistanları
+- `[EN]` An AI-assisted stage at every step
+- `[TR]` Her adımda yapay zekâ destekli bir aşama
 
 **On-slide copy**
-- `[EN]` Specialized assistants — HR, Finance, Quality, Maintenance and more —
-  that know your policies and help your people, within clear limits.
-- `[TR]` Uzmanlaşmış asistanlar — İK, Finans, Kalite, Bakım ve daha fazlası —
-  politikalarınızı bilen ve net sınırlar içinde çalışanlarınıza yardım eden.
+- `[EN]` Brief, creative, campaign draft, report — each stage drafted by local AI
+  within your brand voice and rules, for a human to review and approve.
+- `[TR]` Özet, kreatif, kampanya taslağı, rapor — her aşama, marka sesiniz ve
+  kurallarınız içinde yerel yapay zekâ tarafından taslaklanır; bir insan inceler
+  ve onaylar.
 
 **Speaker notes**
-- `[EN]` "Think of these as tireless assistants for each department. An HR
-  assistant that knows your leave policy. A maintenance assistant that knows your
-  equipment manuals. A finance assistant that follows your approval rules. They
-  work within clear limits, they cite your own documents, and they escalate to a
-  human when a decision is needed. They don't replace your people — they remove
-  the busywork so your people do higher-value work."
-- `[TR]` "Bunları her departman için yorulmaz asistanlar olarak düşünün. İzin
-  politikanızı bilen bir İK asistanı. Ekipman kılavuzlarınızı bilen bir bakım
-  asistanı. Onay kurallarınızı izleyen bir finans asistanı. Net sınırlar içinde
-  çalışırlar, kendi belgelerinizi kaynak gösterirler ve bir karar gerektiğinde
-  bir insana yönlendirirler. İnsanlarınızın yerini almazlar — rutin işi ortadan
-  kaldırırlar, böylece insanlarınız daha değerli işler yapar."
+- `[EN]` "Think of the pipeline as AI-assisted stages, not autonomous workers. The
+  brief stage drafts the marketing brief. The creative stage drafts ad copy — copy
+  only; it never touches an ad platform. The campaign stage assembles channels, ad
+  sets and a budget split — as a draft that is never launched. Each draft stays
+  within your brand voice, rules and banned words, and a human approves before the
+  next stage begins. AdOS drafts the work so your people spend their judgment where
+  it matters — not on the busywork."
+- `[TR]` "Hattı otonom çalışanlar değil, yapay zekâ destekli aşamalar olarak
+  düşünün. Özet aşaması pazarlama özetini taslaklar. Kreatif aşaması reklam metnini
+  taslaklar — yalnızca metin; hiçbir reklam platformuna dokunmaz. Kampanya aşaması
+  kanalları, reklam setlerini ve bütçe dağılımını bir araya getirir — asla yayına
+  alınmayan bir taslak olarak. Her taslak marka sesiniz, kurallarınız ve yasaklı
+  kelimeleriniz içinde kalır ve bir sonraki aşama başlamadan önce bir insan onaylar.
+  AdOS işi taslaklar; böylece insanlarınız muhakemelerini önemli olan yere
+  ayırır — rutin işe değil."
 
 ---
 
@@ -297,12 +304,12 @@ lines), and **Speaker notes**. `[EN]` / `[TR]` mark the language.
 - `[TR]` Gerçek dünyada ne yapar
 
 **On-slide copy**
-- `[EN]` Run advertising campaigns. Answer policy questions instantly. Route
-  approvals. Draft reports. Find the right document in seconds. Onboard new staff
-  faster.
-- `[TR]` Reklam kampanyaları yürütün. Politika sorularını anında yanıtlayın.
-  Onayları yönlendirin. Raporlar hazırlayın. Doğru belgeyi saniyeler içinde
-  bulun. Yeni personeli daha hızlı işe alıştırın.
+- `[EN]` Draft advertising campaigns from an objective. Generate briefs, creative
+  and budget plans. Route approvals. Draft performance reports. Reuse what worked —
+  and onboard new staff faster.
+- `[TR]` Bir hedeften reklam kampanyaları taslaklayın. Özet, kreatif ve bütçe
+  planı üretin. Onayları yönlendirin. Performans raporları hazırlayın. İşe yarayanı
+  yeniden kullanın — ve yeni personeli daha hızlı işe alıştırın.
 
 **Speaker notes**
 - `[EN]` "Concretely, here is what teams do with AdOS: marketing produces full

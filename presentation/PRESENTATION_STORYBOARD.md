@@ -219,7 +219,7 @@ room for discussion. Slides marked *(cuttable)* can be dropped if time is short.
 - **Title:** Your knowledge is your advantage — keep it.
 - **Key Message:** Your data + your models = an asset competitors can't copy.
 - **Visual:** A knowledge graph forming inside the perimeter, growing denser.
-- **Diagram:** Nodes (documents, decisions, outcomes) linking into a "Company
+- **Diagram:** Nodes (campaigns, creatives, results) linking into a "Company
   Brain" inside the boundary.
 - **Icons:** Brain/graph, node, lock.
 - **Charts:** A "compounding" curve (illustrative) — knowledge value over time.

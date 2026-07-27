@@ -128,7 +128,7 @@ frame, single-weight line diagrams, the perimeter motif).
 
 ---
 
-## 5. Digital Employee diagrams
+## 5. AI-assisted pipeline diagrams
 
 ### D1 — Department assistants (Slide 11)
 - **Content:** a central "Company Brain" node with a ring of labeled assistant
@@ -239,7 +239,7 @@ paired with words; the deck is legible with icons removed.
 | Coin | Cost / predictable pricing | 4, 10, 13 |
 | Chain / chain-break | Dependency / independence | 4, 10 |
 | Brain-graph | Company Brain / knowledge | 10, 11 |
-| Assistant | Digital Employee | 11 |
+| Assistant | AI-assisted stage | 11 |
 | Target | Objective | 7, 12 |
 | Chart / bars | Results / analytics | 8, 12, 13 |
 | Flag / gear / growth | Roadmap milestones | 19 |

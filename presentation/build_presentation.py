@@ -43,7 +43,7 @@ FONT = "Arial"
 SLIDES = [
     {"kind": "title", "n": 1,
      "en_t": "AdOS", "tr_t": "AdOS",
-     "en_s": "The Advertising Operating System", "tr_s": "Reklam İşletim Sistemi",
+     "en_s": "Enterprise AI Operating System for Advertising", "tr_s": "Reklam için Kurumsal Yapay Zekâ İşletim Sistemi",
      "en_l": "Enterprise AI that never leaves your building.",
      "tr_l": "Binanızdan hiç çıkmayan kurumsal yapay zekâ."},
 
@@ -58,9 +58,9 @@ SLIDES = [
      "tr_l": "Süreçlerinizi dijitalleştirdiniz. Sıradaki adım zekâ — işinizi anlayan ve işi yapan sistemler, sizin koşullarınızda."},
 
     {"kind": "content", "n": 4, "sec": "The world changed",
-     "en_t": "Your most valuable asset walks out daily", "tr_t": "En değerli varlığınız her gün çıkıyor",
-     "en_l": "Experience retires. Documents get lost. Every departure takes knowledge with it. What if your organization could remember everything it learned?",
-     "tr_l": "Deneyim emekli oluyor. Belgeler kayboluyor. Her ayrılış bilgiyi götürüyor. Ya kurumunuz öğrendiği her şeyi hatırlayabilseydi?"},
+     "en_t": "What worked in your campaigns walks out the door", "tr_t": "Kampanyalarınızda işe yarayan bilgi kapıdan çıkıyor",
+     "en_l": "Experience retires. Winning playbooks get lost. Every departure takes campaign know-how with it. What if your team could remember every campaign that worked?",
+     "tr_l": "Deneyim emekli oluyor. Kazanan taktikler kayboluyor. Her ayrılış kampanya bilgisini götürüyor. Ya ekibiniz işe yarayan her kampanyayı hatırlayabilseydi?"},
 
     {"kind": "content", "n": 5, "sec": "The world changed",
      "en_t": "AI is inevitable. The risk is where it runs.", "tr_t": "Yapay zekâ kaçınılmaz. Risk, nerede çalıştığında.",
@@ -91,24 +91,24 @@ SLIDES = [
      ]},
 
     {"kind": "diagram", "diagram": "pipeline", "n": 10, "sec": "The answer",
-     "en_t": "The work gets done — you approve each step", "tr_t": "İş yapılır — her adımı siz onaylarsınız",
-     "en_l": "AdOS moves work through clear stages, with a human decision at each gate. Autonomous, but never unaccountable.",
-     "tr_l": "AdOS işi net aşamalardan geçirir; her adımda bir insan kararı vardır. Otonom, ama asla hesapsız değil."},
+     "en_t": "The work gets drafted — you approve each step", "tr_t": "İş taslaklanır — her adımı siz onaylarsınız",
+     "en_l": "AdOS drafts each campaign through clear stages, with a human decision at every gate. AI-assisted, never unaccountable — and never launched without you.",
+     "tr_l": "AdOS her kampanyayı net aşamalarda taslaklar; her adımda bir insan kararı vardır. Yapay zekâ destekli, asla hesapsız değil — ve siz olmadan asla yayına alınmaz."},
 
     {"kind": "content", "n": 11, "sec": "The answer",
-     "en_t": "The Company Brain: your living memory", "tr_t": "Şirket Beyni: yaşayan hafızanız",
-     "en_l": "Every document, decision and outcome becomes shared, searchable knowledge that grows more valuable over time — and never leaves your walls.",
-     "tr_l": "Her belge, karar ve sonuç; zamanla değerlenen, paylaşılan ve aranabilir bir bilgiye dönüşür — ve asla duvarlarınızdan çıkmaz."},
+     "en_t": "The Company Brain: your marketing memory", "tr_t": "Şirket Beyni: pazarlama hafızanız",
+     "en_l": "Every campaign, creative and result becomes shared, reusable knowledge — winning ads, channels and budgets — that grows more valuable over time and never leaves your walls.",
+     "tr_l": "Her kampanya, kreatif ve sonuç; paylaşılan ve yeniden kullanılabilir bir bilgiye dönüşür — kazanan reklamlar, kanallar ve bütçeler — zamanla değerlenir ve asla duvarlarınızdan çıkmaz."},
 
     {"kind": "content", "n": 12, "sec": "The answer",
-     "en_t": "Digital Employees for every department", "tr_t": "Her departman için Dijital Çalışanlar",
-     "en_l": "Specialized assistants — HR, Finance, Quality, Maintenance and more — that know your policies and help your people, within clear limits.",
-     "tr_l": "Uzmanlaşmış asistanlar — İK, Finans, Kalite, Bakım ve daha fazlası — politikalarınızı bilen ve net sınırlar içinde yardım eden."},
+     "en_t": "An AI-assisted stage at every step", "tr_t": "Her adımda yapay zekâ destekli bir aşama",
+     "en_l": "Brief, creative, campaign draft, report — each stage drafted by local AI within your brand voice and rules, for a human to review and approve.",
+     "tr_l": "Özet, kreatif, kampanya taslağı, rapor — her aşama, marka sesiniz ve kurallarınız içinde yerel yapay zekâ tarafından taslaklanır; bir insan inceler ve onaylar."},
 
     {"kind": "content", "n": 13, "sec": "Believe it",
      "en_t": "What it does, in the real world", "tr_t": "Gerçek dünyada ne yapar",
-     "en_l": "Run advertising campaigns. Answer policy questions instantly. Route approvals. Draft reports. Find the right document in seconds.",
-     "tr_l": "Reklam kampanyaları yürütün. Politika sorularını anında yanıtlayın. Onayları yönlendirin. Rapor hazırlayın. Doğru belgeyi saniyeler içinde bulun."},
+     "en_l": "Draft advertising campaigns from an objective. Generate briefs, creative and budget plans. Route approvals. Draft performance reports. Reuse what worked.",
+     "tr_l": "Bir hedeften reklam kampanyaları taslaklayın. Özet, kreatif ve bütçe planı üretin. Onayları yönlendirin. Performans raporları hazırlayın. İşe yarayanı yeniden kullanın."},
 
     {"kind": "audience", "n": 14, "sec": "Believe it",
      "en_t": "Built for organizations that can't compromise", "tr_t": "Ödün veremeyen kurumlar için",
@@ -150,8 +150,8 @@ SLIDES = [
 
     {"kind": "content", "n": 20, "sec": "Decide",
      "en_t": "In one picture", "tr_t": "Tek bir resimde",
-     "en_l": "Modern AI for advertising and enterprise knowledge, running entirely on your infrastructure, under your control, with your data never leaving your building.",
-     "tr_l": "Reklam ve kurumsal bilgi için modern yapay zekâ; tamamen altyapınızda, kontrolünüzde çalışan, verileriniz binanızdan hiç çıkmadan."},
+     "en_l": "Modern AI for advertising, running entirely on your infrastructure, under your control, with your data never leaving your building.",
+     "tr_l": "Reklam için modern yapay zekâ; tamamen altyapınızda, kontrolünüzde çalışan, verileriniz binanızdan hiç çıkmadan."},
 
     {"kind": "closing", "n": 21, "sec": "Decide",
      "en_t": "Let's run a pilot on your infrastructure", "tr_t": "Altyapınızda bir pilot yürütelim",
@@ -160,7 +160,7 @@ SLIDES = [
 
     {"kind": "title", "n": 22,
      "en_t": "Thank you", "tr_t": "Teşekkürler",
-     "en_s": "AdOS — The Advertising Operating System", "tr_s": "AdOS — Reklam İşletim Sistemi",
+     "en_s": "AdOS — Enterprise AI Operating System for Advertising", "tr_s": "AdOS — Reklam için Kurumsal Yapay Zekâ İşletim Sistemi",
      "en_l": "The AI comes to your data — never the other way around.",
      "tr_l": "Yapay zekâ verinize gelir — asla tersi değil."},
 ]
@@ -240,7 +240,7 @@ def _chrome(slide, s):
     _text(slide, Inches(12.0), Inches(6.95), Inches(1.1), Inches(0.4),
           [(f"{s['n']} / {len(SLIDES)}", 10, MUTED, False)], align=PP_ALIGN.RIGHT)
     _text(slide, Inches(0.6), Inches(6.95), Inches(4), Inches(0.4),
-          [("AdOS — The Advertising Operating System", 10, MUTED, False)])
+          [("AdOS — Enterprise AI Operating System for Advertising", 10, MUTED, False)])
 
 
 def _titles(slide, s, top=Inches(1.4)):
@@ -551,7 +551,7 @@ def build_pdf():
             c.drawString(40, H - 66, s["sec"].upper())
         c.setFillColor(muted); c.setFont(reg, 9)
         c.drawRightString(W - 40, 24, f"{s['n']} / {len(SLIDES)}")
-        c.drawString(40, 24, "AdOS — The Advertising Operating System")
+        c.drawString(40, 24, "AdOS — Enterprise AI Operating System for Advertising")
 
     def titles(s, y=H - 130):
         c.setFillColor(text); c.setFont(bold, 26)
