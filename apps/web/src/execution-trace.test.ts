@@ -70,6 +70,10 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     await c.req('POST', `/missions/${missionId}/brief`);
     const briefHtml = await (await c.req('GET', `/missions/${missionId}`)).text();
     expect(briefHtml).toContain('Whitening');
+    // Sprint 9: the up-front mission plan renders; this is the first dental
+    // campaign, so the plan is honestly a cold start (no fabricated expectations).
+    expect(briefHtml).toContain('Mission plan');
+    expect(briefHtml).toContain('cold start');
 
     // Sprint 4.3A: the governance verdict is surfaced at the human approval gate
     // as ADVISORY — it informs the decision but never blocks. This first,

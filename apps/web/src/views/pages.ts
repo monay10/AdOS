@@ -4,6 +4,7 @@ import type { ApprovalFunnel, ReviewStats } from '../governance-decisions.js';
 import type { StageTiming } from '../stage-latency.js';
 import type { RevisionFunnel } from '../revision-funnel.js';
 import type { ResilienceStats } from '../resilience-stats.js';
+import type { MissionPlan } from '../mission-planner.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -184,6 +185,28 @@ export interface GovernanceView {
   enforced?: boolean;
 }
 
+/** The up-front mission plan — deterministic, grounded in Company Brain history (Sprint 9). */
+function missionPlanPanel(plan?: MissionPlan): string {
+  if (!plan) return '';
+  const badge = plan.grounded
+    ? `<span class="badge active">${esc(t('plan.grounded'))}</span>`
+    : `<span class="badge">${esc(t('plan.coldStart'))}</span>`;
+  const expected = plan.expected
+    ? `<p class="sub">${esc(t('plan.expected', { roas: plan.expected.roas.toString(), ctr: plan.expected.ctr.toString(), n: plan.expected.basisSampleSize.toString() }))}</p>`
+    : '';
+  const rows = plan.steps
+    .map(
+      (s, i) =>
+        `<tr><td style="opacity:.6">${i + 1}</td><td><strong>${esc(s.action)}</strong><br><span class="sub">${esc(s.rationale)}</span></td><td>${s.grounded ? `<span class="badge active">${esc(t('plan.groundedTag'))}</span>` : ''}</td></tr>`,
+    )
+    .join('');
+  return `<div class="panel" style="margin-top:20px">
+    <h2>${esc(t('plan.title'))} ${badge}</h2>
+    <p class="sub">${esc(t('plan.sub'))}</p>${expected}
+    <table><tbody>${rows}</tbody></table>
+  </div>`;
+}
+
 /** The advisory banner shown above the approve/reject controls at the gate. */
 function governanceAdvisory(g?: GovernanceView): string {
   if (!g) return '';
@@ -209,6 +232,7 @@ export function missionDetailPage(opts: {
   learning?: LearningView;
   executive?: ExecutiveView;
   governance?: GovernanceView;
+  plan?: MissionPlan;
   failureReason?: string;
   canCancel?: boolean;
   prereqMissing?: string;
@@ -351,6 +375,7 @@ export function missionDetailPage(opts: {
         <label>${esc(t('mission.budget'))}</label><div>${esc(budget)}</div>
         ${cancelControl}
       </div>
+      ${missionPlanPanel(opts.plan)}
       ${briefBlock}
       ${creativeBlock}
       ${campaignBlock}

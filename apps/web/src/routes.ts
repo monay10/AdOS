@@ -58,6 +58,7 @@ import { stageLatency } from './stage-latency.js';
 import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
 import { resilienceStats } from './resilience-stats.js';
 import { isEnforced, type MissionGate } from './governance-policy.js';
+import { planMission } from './mission-planner.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -847,6 +848,19 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const report = (await app.reports.list(id))[0];
   const executive = (await app.executive.list(id))[0];
 
+  // Mission plan (Sprint 9): a deterministic, brain-grounded plan of the mission,
+  // shown up front. Grounded in the vertical's accumulated performance when the
+  // Company Brain has history for it.
+  const planClient = await app.clients.get(ClientId.of(mission.clientId));
+  const vertical = planClient.isErr ? 'general' : planClient.value.industry;
+  const plan = planMission({
+    objective: mission.brief,
+    vertical,
+    budgetAmount: mission.budget ? mission.budget.amountMinor / 100 : 0,
+    currency: mission.budget?.currency ?? 'TRY',
+    insight: await app.brain.marketing(vertical),
+  });
+
   // Each earlier stage is implicitly approved once the next artifact exists.
   const briefApproval: Approval = !brief ? 'none' : creative ? 'approved' : statusApproval(mission.status);
   const creativeApproval: Approval = !creative ? 'none' : campaign ? 'approved' : statusApproval(mission.status);
@@ -895,6 +909,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(report ? { report: toReportView(report) } : {}),
       ...(learning ? { learning } : {}),
       ...(executive ? { executive: toExecutiveView(executive) } : {}),
+      plan,
       ...(mission.status === 'awaiting_approval' ? spreadGovernance(app, session.tenantId, id, activeGate) : {}),
       canCancel: mission.status !== 'completed' && mission.status !== 'failed',
       ...(mission.failureReason ? { failureReason: mission.failureReason } : {}),
