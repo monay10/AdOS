@@ -97,6 +97,35 @@ describe('Mission (domain lifecycle)', () => {
     expect(failed[0]!.eventName).toBe('mission.failed.v1');
     expect(m.fail('again').isErr).toBe(true); // already terminal
   });
+
+  it('sends a gate back for revision NON-destructively and records the history', () => {
+    const m = submitted();
+    m.plan();
+    m.requestApproval('creative_assets');
+    m.pullDomainEvents();
+
+    // Reject at the gate → back to planning, NOT failed; history recorded.
+    expect(m.requestRevision('creative_assets', 'off-brand hook').isOk).toBe(true);
+    expect(m.status).toBe('planning'); // reworkable, not terminal
+    expect(m.revisionCount).toBe(1);
+    expect(m.revisionHistory).toEqual([{ gate: 'creative_assets', reason: 'off-brand hook' }]);
+    expect(m.snapshot().revisionHistory).toEqual([{ gate: 'creative_assets', reason: 'off-brand hook' }]); // survives persistence
+    const events = m.pullDomainEvents();
+    expect(events[0]!.eventName).toBe('mission.revision.requested.v1');
+
+    // The mission continues: re-request approval and revise again accumulates history.
+    m.requestApproval('creative_assets');
+    expect(m.requestRevision('creative_assets', 'weak CTA').isOk).toBe(true);
+    expect(m.revisionCount).toBe(2);
+    expect(m.revisionHistory.map((r) => r.reason)).toEqual(['off-brand hook', 'weak CTA']);
+  });
+
+  it('refuses revision unless a gate is awaiting approval', () => {
+    const m = submitted();
+    expect(m.requestRevision('strategy_and_budget', 'no').isErr).toBe(true); // submitted, not awaiting
+    m.plan();
+    expect(m.requestRevision('strategy_and_budget', 'no').isErr).toBe(true); // planning, not awaiting
+  });
 });
 
 // ── Integration tests: service + repository + event bus ───────────────────────

@@ -6,7 +6,7 @@
 **Source of truth:** ../../PRODUCT_TRUTH.md
 **Governing reference:** ../1-ai-foundations/AI_CONSTITUTION.md
 
-> **Implementation status:** ❌ **ROADMAP** for *AI-driven* revision (no re-generation / rewrite path exists) · ✅ **SHIPPED** for *human* revision (the Approval aggregate's `requestRevision` loop) · This document closes **Book A gap B-3** (non-destructive revision) by reconciling the mission gate's destructive `fail()` with the Approval aggregate's graceful `revision_requested` loop.
+> **Implementation status:** ✅ **SHIPPED (Series 2 · 2026-07-28)** for *human, non-destructive* mission-gate revision — **Book A gap B-3 is CLOSED.** Rejecting a brief/creative/campaign at its gate now calls `Mission.requestRevision(gate, reason)` (`domains/agency-os/src/mission/mission.ts:225`, via `apps/web/src/routes.ts:893`): the mission returns to `planning`, the rejection is appended to its `revisionHistory` (never lost), a `mission.revision.requested.v1` event fires, and the rejected draft is discarded so the stage regenerates under the **same** mission. The mission gate's old destructive `fail()` is reserved for customer *cancellation* only. Still ❌ **ROADMAP:** *AI-driven* revision — auto re-generation/rewrite from the reviewer's feedback (the loop is human-driven; the operator clicks "Generate" again). This aligns the mission gate with Book F Law 5 (see [`../../book-f/1-orchestration-foundations/AI_ORCHESTRATION_CONSTITUTION.md`](../../book-f/1-orchestration-foundations/AI_ORCHESTRATION_CONSTITUTION.md)).
 
 ---
 

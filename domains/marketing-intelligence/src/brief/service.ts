@@ -100,6 +100,11 @@ export class MarketingBriefService {
     return this.tele.span('list', async () => this.repo.list(missionId));
   }
 
+  /** Discard every brief for a mission — used when a rejected brief is sent back for rework. */
+  async discardForMission(missionId: string): Promise<void> {
+    for (const brief of await this.repo.list(missionId)) await this.repo.delete(brief.id);
+  }
+
   private async publish(brief: MarketingBrief): Promise<void> {
     const events: DomainEvent[] = brief.pullDomainEvents();
     if (events.length > 0) await this.bus.publish(events.map((e) => e.toEnvelope()));

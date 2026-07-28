@@ -742,17 +742,17 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     // Phase 2 — brief approval gate.
     if (action === 'brief' && method === 'POST') return generateBrief(app, session, res, id);
     if (action === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'strategy_and_budget');
-    if (action === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Rejected by executive');
+    if (action === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'strategy_and_budget', 'Rejected by executive');
 
     // Phase 3 — creative + creative-review gate.
     if (action === 'creative' && !sub && method === 'POST') return generateCreative(app, session, res, id);
     if (action === 'creative' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'creative_assets');
-    if (action === 'creative' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Creative rejected by executive');
+    if (action === 'creative' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'creative_assets', 'Creative rejected by executive');
 
     // Phase 4 — campaign + launch-approval gate.
     if (action === 'campaign' && !sub && method === 'POST') return generateCampaign(app, session, res, id);
     if (action === 'campaign' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'campaign_launch');
-    if (action === 'campaign' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'Campaign rejected by executive');
+    if (action === 'campaign' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'campaign_launch', 'Campaign rejected by executive');
 
     // Phase 5 — analytics report (no approval gate; produces KPIs + summary).
     if (action === 'analytics' && method === 'POST') return generateReport(app, session, res, id, req);
@@ -883,10 +883,32 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   return res.redirect(`/missions/${id}`);
 }
 
-async function gateReject(app: App, session: Session, res: Res, id: string, reason: string): Promise<void> {
-  const r = await app.missions.fail(MissionId.of(id), reason);
+/**
+ * Human rejection at a gate — NON-DESTRUCTIVE (Book F, Law 5). The mission is
+ * sent back for revision (returned to `planning`, rejection recorded in its
+ * revision history) rather than terminally failed, and the rejected draft is
+ * discarded so the stage can be regenerated. Approving a later stage is never
+ * possible on a rejected one because its artifact is gone.
+ */
+async function gateReject(
+  app: App,
+  session: Session,
+  res: Res,
+  id: string,
+  gate: 'strategy_and_budget' | 'creative_assets' | 'campaign_launch',
+  reason: string,
+): Promise<void> {
+  const r = await app.missions.requestRevision(MissionId.of(id), gate, reason);
   if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+  await discardRejectedDraft(app, id, gate);
   return res.redirect(`/missions/${id}`);
+}
+
+/** Remove the rejected stage's draft so it is regenerated fresh on rework. */
+async function discardRejectedDraft(app: App, id: string, gate: 'strategy_and_budget' | 'creative_assets' | 'campaign_launch'): Promise<void> {
+  if (gate === 'strategy_and_budget') return app.briefs.discardForMission(id);
+  if (gate === 'creative_assets') return app.creative.discardForMission(id);
+  if (gate === 'campaign_launch') return app.campaigns.discardForMission(id);
 }
 
 /** Customer-initiated cancellation: fail the mission with the given reason. */

@@ -116,6 +116,11 @@ export class CreativeStudioService {
     return this.tele.span('list', async () => this.repo.list(missionId));
   }
 
+  /** Discard every creative set for a mission — used when a rejected creative is sent back for rework. */
+  async discardForMission(missionId: string): Promise<void> {
+    for (const set of await this.repo.list(missionId)) await this.repo.delete(set.id);
+  }
+
   private async publish(set: CreativeSet): Promise<void> {
     const events: DomainEvent[] = set.pullDomainEvents();
     if (events.length > 0) await this.bus.publish(events.map((e) => e.toEnvelope()));

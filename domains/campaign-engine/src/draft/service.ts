@@ -93,6 +93,11 @@ export class CampaignDraftService {
     return this.tele.span('list', async () => this.repo.list(missionId));
   }
 
+  /** Discard every campaign draft for a mission — used when a rejected campaign is sent back for rework. */
+  async discardForMission(missionId: string): Promise<void> {
+    for (const draft of await this.repo.list(missionId)) await this.repo.delete(draft.id);
+  }
+
   private async publish(draft: CampaignDraft): Promise<void> {
     const events: DomainEvent[] = draft.pullDomainEvents();
     if (events.length > 0) await this.bus.publish(events.map((e) => e.toEnvelope()));

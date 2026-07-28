@@ -280,16 +280,20 @@ approval and revision are equally valid, equally expected outcomes of a stage wh
 purpose is to *await a human decision*. Revision is a loop, not a dead end.
 
 **Enforcement.** The gate is a real stage with two normal transitions. The shipped state machine
-already models the *approval* branch cleanly (`requestApproval` / `approve`, `mission.ts:179,
-188` ✅). The target design adds a **Revision** branch that returns an unapproved artifact to an
-earlier stage for regeneration, advancing the mission's history rather than destroying it. F007
-owns this design.
+models both branches: the *approval* branch (`requestApproval` / `approve`, `mission.ts:179,
+188` ✅) and, since Series 2, the *revision* branch — `requestRevision` (`mission.ts:225` ✅) returns
+the mission to `planning` for rework, advancing its revision history rather than destroying it.
 
-**Honest status.** Today this law is **VIOLATED** on the reject path. Gate reject and cancel call
-the **destructive** `mission.fail()` (`mission.ts:209`, invoked at `routes.ts:886`), which drives
-the mission to a terminal `failed` state with no reopen — modelling a human's "revise this" as a
-terminal *failure*. The constitutional design replaces that with a normal `Human Review →
-{Approved | Revision}` branch. Until then, the code contradicts the law, and this book says so.
+**Honest status.** ✅ **SHIPPED (Series 2 · 2026-07-28) — this law now HOLDS on the reject path.**
+Gate reject calls the **non-destructive** `mission.requestRevision(gate, reason)` (`mission.ts:225`,
+via `routes.ts:893`): the mission returns to `planning`, the rejection is appended to its
+`revisionHistory` (never lost), a `mission.revision.requested.v1` event is emitted, and the rejected
+draft is discarded so the stage is regenerated under the **same** mission — a real `Human Review →
+{Approved | Revision}` branch. A human's "revise this" is now a first-class revision, not a terminal
+failure. **Customer cancellation** still calls the terminal `mission.fail()` (`mission.ts:209`,
+`routes.ts:894`) — correctly, because a cancellation *is* an end state, not a revision. What remains
+🔶/❌ is AI-*assisted* revision (auto re-generation from the feedback) — the loop is human-driven
+today; see [`../../book-b/4-optimization/REVISION_ENGINE.md`](../../book-b/4-optimization/REVISION_ENGINE.md).
 
 ### LAW 6 — Observable by design
 

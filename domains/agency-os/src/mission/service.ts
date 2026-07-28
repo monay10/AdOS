@@ -47,6 +47,11 @@ export class MissionService {
     return this.transition('approve', id, (m) => m.approve(gate));
   }
 
+  /** Non-destructive human rejection: send a gate back for revision (see Mission.requestRevision). */
+  async requestRevision(id: MissionId, gate: MissionApprovalGate, reason: string): Promise<Result<Mission, AppError>> {
+    return this.transition('request_revision', id, (m) => m.requestRevision(gate, reason));
+  }
+
   async startExecuting(id: MissionId): Promise<Result<Mission, AppError>> {
     return this.transition('start_executing', id, (m) => m.startExecuting());
   }

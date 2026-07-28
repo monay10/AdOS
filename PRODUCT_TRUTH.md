@@ -6,8 +6,8 @@ marketing, sales, website, presentation, or demo document was used as evidence.
 Every statement below cites `path:line`.
 **Scope audited:** `apps/web`, all 16 `domains/`, all 17 `packages/`, ~263 source
 files, ~64 test files (~368 test cases).
-**Date:** 2026-07-27 (Series 2 updates appended as shipped; latest 2026-07-28 —
-brand-safety enforcement on generated creative).
+**Date:** 2026-07-27 (Series 2 updates appended as shipped; 2026-07-28 —
+brand-safety enforcement on generated creative; non-destructive gate revision).
 
 > **One-sentence truth:** AdOS is an **autonomous AI marketing/advertising agency
 > operating system** ("Agency OS") that runs local, offline-capable AI to take a
@@ -138,6 +138,7 @@ brand-safety enforcement on generated creative).
 | Marketing brief generation (AI, provenance) | `marketing-intelligence/.../service.ts:43-96`, `mission-processing.test.ts:76-127` |
 | Creative set generation (copy only, gated) | `creative-studio/.../service.ts:38-89`, `creative.test.ts` |
 | Brand-safety enforcement on generated creative — banned words + PII/secret scan, **blocks before persist**, emits `creative.blocked.v1` | gate `creative-studio/.../service.ts:70-90`, adapter `apps/web/src/safety.ts:18`, reused engine `ai-manager/.../safety-engine.ts:48`, `safety.test.ts`, `creative.test.ts` (block case) |
+| Non-destructive gate revision — rejecting a brief/creative/campaign returns the mission to **rework** (not a terminal fail), records revision history, emits `mission.revision.requested.v1`; the rejected draft is discarded and regenerated under the same mission | `mission/mission.ts:225` (`requestRevision`), `mission/service.ts:51`, route `apps/web/src/routes.ts:893-916` (`gateReject`→`discardRejectedDraft`), `mission.test.ts` (revision unit), `creative.test.ts`/`campaign.test.ts`/`mission-processing.test.ts` (loop + non-destructive) |
 | Campaign draft assembly (channels/budget, gated, never launched) | `campaign-engine/.../service.ts:36-90`, `campaign.test.ts:86-87` |
 | Deterministic ad-KPI math (CTR/CPC/CPA/CPL/ROAS/ROI) | `analytics-engine/.../kpi.ts:39-50`, `campaign-report.test.ts:31-45` |
 | Executive/CEO dashboard synthesis (single AI call) | `executive-ai/.../service.ts:48-64` |

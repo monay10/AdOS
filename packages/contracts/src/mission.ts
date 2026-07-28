@@ -65,6 +65,7 @@ export const MISSION_EVENTS = {
   PLANNED: 'mission.planned.v1',
   APPROVAL_REQUESTED: 'mission.approval.requested.v1',
   APPROVED: 'mission.approved.v1',
+  REVISION_REQUESTED: 'mission.revision.requested.v1',
   EXECUTING: 'mission.executing.v1',
   UPDATED: 'mission.updated.v1',
   COMPLETED: 'mission.completed.v1',

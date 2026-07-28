@@ -145,9 +145,19 @@ describe('Phase 2 — Mission Processing (Mission → Brief → Executive Approv
     await c.req('POST', `/missions/${missionId}/brief`);
     const r = await c.req('POST', `/missions/${missionId}/reject`);
     expect(r.status).toBe(303);
+
+    // Non-destructive: the mission is sent back for revision, not failed.
     const rejected = await (await c.req('GET', `/missions/${missionId}`)).text();
-    expect(rejected).toContain('Brief rejected by executive');
-    expect(app.recentEvents(t, 20).map((e) => e.eventName)).toContain('mission.failed.v1');
+    expect(rejected).toContain('Generate Marketing Brief'); // brief discarded → re-offered for rework
+    await asT(async () => {
+      const mission = (await app.missions.list()).find((m) => m.tenantId === t)!;
+      expect(mission.status).toBe('planning');
+      expect(mission.revisionCount).toBe(1);
+      expect(await app.briefs.list(missionId)).toHaveLength(0);
+    });
+    const events = app.recentEvents(t, 20).map((e) => e.eventName);
+    expect(events).toContain('mission.revision.requested.v1');
+    expect(events).not.toContain('mission.failed.v1');
   });
 
   it('blocks brief generation until a brand and product exist', async () => {

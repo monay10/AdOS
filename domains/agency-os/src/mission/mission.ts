@@ -29,6 +29,13 @@ export interface MissionTargetMetric {
   unit: string;
 }
 
+/** One recorded revision: which gate a human rejected, and why. Preserved so a
+ * mission's rejection history is never lost when it is sent back for rework. */
+export interface MissionRevision {
+  gate: MissionApprovalGate;
+  reason: string;
+}
+
 export interface MissionProps {
   tenantId: string;
   workspaceId: string;
@@ -43,8 +50,12 @@ export interface MissionProps {
   approvalGates: MissionApprovalGate[];
   status: MissionStatus;
   createdBy: string;
-  /** Why the mission ended in `failed` (executive rejection or customer cancellation). */
+  /** Why the mission ended in `failed` (customer cancellation). */
   failureReason?: string;
+  /** How many times a gate has been sent back for revision. */
+  revisionCount: number;
+  /** The ordered history of gate rejections — never discarded on rework. */
+  revisionHistory: MissionRevision[];
 }
 
 // ── Domain events ─────────────────────────────────────────────────────────────
@@ -59,6 +70,9 @@ export class MissionApprovalRequested extends DomainEvent<{ gate: MissionApprova
 }
 export class MissionApproved extends DomainEvent<{ gate: MissionApprovalGate }> {
   readonly eventName = MISSION_EVENTS.APPROVED;
+}
+export class MissionRevisionRequested extends DomainEvent<{ gate: MissionApprovalGate; reason: string; revisionCount: number }> {
+  readonly eventName = MISSION_EVENTS.REVISION_REQUESTED;
 }
 export class MissionExecuting extends DomainEvent<Record<string, never>> {
   readonly eventName = MISSION_EVENTS.EXECUTING;
@@ -110,6 +124,8 @@ export class Mission extends AggregateRoot<MissionId> {
       approvalGates: input.approvalGates ?? ['strategy_and_budget', 'campaign_launch'],
       status: 'submitted',
       createdBy: input.createdBy,
+      revisionCount: 0,
+      revisionHistory: [],
     });
     mission.addDomainEvent(
       new MissionSubmitted(
@@ -159,6 +175,12 @@ export class Mission extends AggregateRoot<MissionId> {
   get failureReason(): string | undefined {
     return this.props.failureReason;
   }
+  get revisionCount(): number {
+    return this.props.revisionCount ?? 0;
+  }
+  get revisionHistory(): readonly MissionRevision[] {
+    return this.props.revisionHistory ?? [];
+  }
 
   snapshot(): MissionProps {
     return {
@@ -166,6 +188,8 @@ export class Mission extends AggregateRoot<MissionId> {
       ...(this.props.budget ? { budget: { ...this.props.budget } } : {}),
       ...(this.props.targetMetric ? { targetMetric: { ...this.props.targetMetric } } : {}),
       approvalGates: [...this.props.approvalGates],
+      revisionCount: this.props.revisionCount ?? 0,
+      revisionHistory: [...(this.props.revisionHistory ?? [])],
     };
   }
 
@@ -189,6 +213,27 @@ export class Mission extends AggregateRoot<MissionId> {
     if (this.props.status !== 'awaiting_approval') return this.invalidTransition('approve');
     this.props = { ...this.props, status: 'planning' };
     this.addDomainEvent(new MissionApproved(this.id.toString(), { gate }, { tenantId: this.props.tenantId }));
+    return ok(undefined);
+  }
+
+  /**
+   * Human rejection at a gate — NON-DESTRUCTIVE. Instead of failing the mission
+   * terminally, it is returned to `planning` so the rejected stage can be
+   * reworked, and the rejection is recorded in the revision history. The gate is
+   * a first-class Review → Revision branch, not an error.
+   */
+  requestRevision(gate: MissionApprovalGate, reason: string): Result<void, ValidationError> {
+    if (this.props.status !== 'awaiting_approval') return this.invalidTransition('requestRevision');
+    const revisionCount = (this.props.revisionCount ?? 0) + 1;
+    this.props = {
+      ...this.props,
+      status: 'planning',
+      revisionCount,
+      revisionHistory: [...(this.props.revisionHistory ?? []), { gate, reason }],
+    };
+    this.addDomainEvent(
+      new MissionRevisionRequested(this.id.toString(), { gate, reason, revisionCount }, { tenantId: this.props.tenantId }),
+    );
     return ok(undefined);
   }
 

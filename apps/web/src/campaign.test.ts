@@ -121,15 +121,30 @@ describe('Phase 4 — Campaign (Creative → Campaign Draft → Approval → Das
     expect(campaignScreen).toContain(`/missions/${missionId}`);
   });
 
-  it('supports campaign rejection', async () => {
+  it('sends a rejected campaign back for revision NON-destructively', async () => {
     const c = client();
     const { missionId, tenantId } = await readyForCampaign(c, 'Campaign Reject Co');
+    const asT = <T>(fn: () => Promise<T>): Promise<T> =>
+      TenantContext.run({ tenantId, correlationId: 't', actor: 'o@x.com', roles: [] } as RequestContext, fn);
+
     await c.req('POST', `/missions/${missionId}/campaign`);
     const r = await c.req('POST', `/missions/${missionId}/campaign/reject`);
     expect(r.status).toBe(303);
+
     const rejected = await (await c.req('GET', `/missions/${missionId}`)).text();
-    expect(rejected).toContain('Campaign rejected by executive');
-    expect(app.recentEvents(tenantId, 60).map((e) => e.eventName)).toContain('mission.failed.v1');
+    // Not failed — creative stays approved and the campaign is re-offered for rework.
+    expect(rejected).toContain('Creative approved by executive');
+    expect(rejected).toContain('Generate Campaign Draft');
+
+    await asT(async () => {
+      const mission = (await app.missions.list()).find((m) => m.tenantId === tenantId)!;
+      expect(mission.status).toBe('planning');
+      expect(mission.revisionCount).toBe(1);
+      expect(await app.campaigns.list(missionId)).toHaveLength(0);
+    });
+    const events = app.recentEvents(tenantId, 60).map((e) => e.eventName);
+    expect(events).toContain('mission.revision.requested.v1');
+    expect(events).not.toContain('mission.failed.v1');
   });
 
   it('does not offer campaign generation before the creative is approved', async () => {

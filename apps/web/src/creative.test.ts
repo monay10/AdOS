@@ -129,17 +129,58 @@ describe('Phase 3 — Creative (Brief → Creative Studio → Creative Review �
     expect(creativeScreen).toContain(`/missions/${missionId}`);
   });
 
-  it('supports creative rejection', async () => {
+  it('sends a rejected creative back for revision NON-destructively (not a mission failure)', async () => {
     const c = client();
     const { missionId, tenantId } = await readyForCreative(c, 'Reject Creative Co');
+    const asT = <T>(fn: () => Promise<T>): Promise<T> =>
+      TenantContext.run({ tenantId, correlationId: 't', actor: 'o@x.com', roles: [] } as RequestContext, fn);
+
     await c.req('POST', `/missions/${missionId}/creative`);
     const r = await c.req('POST', `/missions/${missionId}/creative/reject`);
     expect(r.status).toBe(303);
+
     const rejected = await (await c.req('GET', `/missions/${missionId}`)).text();
-    expect(rejected).toContain('Creative rejected by executive');
-    // Brief still reads as approved even though the creative was rejected.
+    // The mission is NOT failed — the brief stays approved and creative is re-offered for rework.
     expect(rejected).toContain('Brief approved by executive');
-    expect(app.recentEvents(tenantId, 40).map((e) => e.eventName)).toContain('mission.failed.v1');
+    expect(rejected).toContain('Generate Creative');
+
+    await asT(async () => {
+      const mission = (await app.missions.list()).find((m) => m.tenantId === tenantId)!;
+      expect(mission.status).toBe('planning'); // reworkable, not terminal
+      expect(mission.revisionCount).toBe(1);
+      expect(mission.revisionHistory).toEqual([{ gate: 'creative_assets', reason: 'Creative rejected by executive' }]);
+      // The rejected draft was discarded so a fresh one is generated on rework.
+      expect(await app.creative.list(missionId)).toHaveLength(0);
+    });
+
+    const events = app.recentEvents(tenantId, 40).map((e) => e.eventName);
+    expect(events).toContain('mission.revision.requested.v1');
+    expect(events).not.toContain('mission.failed.v1');
+  });
+
+  it('completes the full revision loop: reject → regenerate → approve', async () => {
+    const c = client();
+    const { missionId, tenantId } = await readyForCreative(c, 'Revision Loop Co');
+    const asT = <T>(fn: () => Promise<T>): Promise<T> =>
+      TenantContext.run({ tenantId, correlationId: 't', actor: 'o@x.com', roles: [] } as RequestContext, fn);
+
+    await c.req('POST', `/missions/${missionId}/creative`);
+    await c.req('POST', `/missions/${missionId}/creative/reject`);
+
+    // Regenerate under the SAME mission, then approve.
+    let r = await c.req('POST', `/missions/${missionId}/creative`);
+    expect(r.status).toBe(303);
+    await asT(async () => expect(await app.creative.list(missionId)).toHaveLength(1));
+
+    r = await c.req('POST', `/missions/${missionId}/creative/approve`);
+    expect(r.status).toBe(303);
+    await asT(async () => {
+      const mission = (await app.missions.list()).find((m) => m.tenantId === tenantId)!;
+      expect(mission.status).toBe('planning'); // approved → ready for the campaign stage
+      expect(mission.revisionCount).toBe(1); // the earlier rejection is still on the record
+    });
+    const approved = await (await c.req('GET', `/missions/${missionId}`)).text();
+    expect(approved).toContain('Creative approved by executive');
   });
 
   it('blocks creative generation when the copy contains a brand banned word', async () => {
