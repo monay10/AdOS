@@ -117,8 +117,8 @@ describe('Governed live runtime — resilience (Sprint 7: retry / recovery / fal
     expect(res.output).toEqual({ ok: true }); // recovered — the mission did not fail
     expect(res.model).toBe('base'); // served by the fallback
     expect(res.attempts).toEqual([
-      { model: 'reasoner', ok: false, error: expect.any(String) },
-      { model: 'base', ok: true },
+      { model: 'reasoner', ok: false, error: expect.any(String), tries: 1 }, // non-retryable → one call, no retry
+      { model: 'base', ok: true, tries: 1 },
     ]);
   });
 
@@ -134,7 +134,8 @@ describe('Governed live runtime — resilience (Sprint 7: retry / recovery / fal
     const res = await run(() => ai.submit(req()));
 
     expect(res.output).toEqual({ ok: true });
-    expect(calls).toBeGreaterThan(1); // it retried
-    expect(res.attempts).toEqual([{ model: 'm', ok: true }]); // one model, recovered via retry
+    expect(calls).toBe(2); // failed once, retried once, succeeded
+    // One model, recovered via retry — the tries count records the retry.
+    expect(res.attempts).toEqual([{ model: 'm', ok: true, tries: 2 }]);
   });
 });

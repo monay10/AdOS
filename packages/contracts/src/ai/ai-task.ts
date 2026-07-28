@@ -75,8 +75,10 @@ export interface AITaskResult<T = unknown> {
   latencyMs: number;
   /** True when served from the prompt/token cache. */
   cached: boolean;
-  /** Models that failed before this one succeeded (fallback chain audit). */
-  attempts: Array<{ model: string; ok: boolean; error?: string }>;
+  /** Models tried (the fallback chain audit). `tries` is the engine-call count
+   * for that model — 1 = no retry, >1 = retried transient failures, 0 = skipped
+   * before any call. Optional so non-pipeline managers need not set it. */
+  attempts: Array<{ model: string; ok: boolean; error?: string; tries?: number }>;
 }
 
 export interface AIStreamChunk {

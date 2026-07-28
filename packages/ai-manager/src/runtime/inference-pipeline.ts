@@ -13,6 +13,10 @@ export interface InferenceAttempt {
   model: string;
   ok: boolean;
   error?: string;
+  /** Engine calls made for this model: 1 = no retry, >1 = retried transient
+   * failures. 0 = the model was skipped before any call (didn't fit / circuit
+   * open / no engine). */
+  tries: number;
 }
 
 export interface InferenceOutcome {
@@ -93,24 +97,24 @@ export class InferencePipeline {
 
     for (const model of [decision.primary, ...decision.fallbacks]) {
       if (!(await this.scheduler.canFit(model))) {
-        attempts.push({ model: model.id, ok: false, error: 'does_not_fit' });
+        attempts.push({ model: model.id, ok: false, error: 'does_not_fit', tries: 0 });
         continue;
       }
       const breaker = this.breakerFor(model.id);
       if (!breaker.allow()) {
-        attempts.push({ model: model.id, ok: false, error: 'circuit_open' });
+        attempts.push({ model: model.id, ok: false, error: 'circuit_open', tries: 0 });
         continue;
       }
       const engine = this.engines.get(model.engine);
       if (!engine) {
-        attempts.push({ model: model.id, ok: false, error: `no_engine:${model.engine}` });
+        attempts.push({ model: model.id, ok: false, error: `no_engine:${model.engine}`, tries: 0 });
         continue;
       }
 
       const result = await this.tryModel(engine, model, messages, params);
       if (result.ok) {
         breaker.onSuccess();
-        attempts.push({ model: model.id, ok: true });
+        attempts.push({ model: model.id, ok: true, tries: result.tries });
         return {
           model: model.id,
           engine: model.engine,
@@ -121,7 +125,7 @@ export class InferencePipeline {
         };
       }
       breaker.onFailure();
-      attempts.push({ model: model.id, ok: false, error: result.error.message });
+      attempts.push({ model: model.id, ok: false, error: result.error.message, tries: result.tries });
     }
 
     throw new UnavailableError('All routed models failed', { details: { attempts } });
@@ -150,11 +154,16 @@ export class InferencePipeline {
     model: ModelDescriptor,
     messages: AIMessage[],
     params: { maxTokens?: number; temperature?: number; timeoutMs?: number; signal?: AbortSignal },
-  ): Promise<{ ok: true; text: string; promptTokens: number; completionTokens: number } | { ok: false; error: AIError }> {
+  ): Promise<
+    | { ok: true; text: string; promptTokens: number; completionTokens: number; tries: number }
+    | { ok: false; error: AIError; tries: number }
+  > {
     const lease = await this.scheduler.acquire(model);
     try {
       let lastError: AIError | undefined;
+      let tries = 0;
       for (let attempt = 0; attempt <= this.maxRetries; attempt++) {
+        tries += 1;
         try {
           const out = await this.withTimeout(
             (signal) =>
@@ -168,14 +177,14 @@ export class InferencePipeline {
             params.timeoutMs ?? this.timeoutMs,
             params.signal,
           );
-          return { ok: true, ...out };
+          return { ok: true, ...out, tries };
         } catch (e) {
           lastError = normalizeError(e);
           if (!lastError.retryable || attempt === this.maxRetries) break;
           await this.sleep(2 ** attempt * 100); // exponential backoff
         }
       }
-      return { ok: false, error: lastError ?? { code: 'INTERNAL', category: 'internal', message: 'unknown', retryable: false } };
+      return { ok: false, error: lastError ?? { code: 'INTERNAL', category: 'internal', message: 'unknown', retryable: false }, tries };
     } finally {
       await lease.release();
     }

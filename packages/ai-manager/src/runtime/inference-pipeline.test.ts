@@ -41,7 +41,7 @@ describe('InferencePipeline', () => {
     const decision: RoutingDecision = { primary: model('a', 'ollama'), fallbacks: [] };
     const out = await pipe.run(decision, messages);
     expect(out.model).toBe('a');
-    expect(out.attempts).toEqual([{ model: 'a', ok: true }]);
+    expect(out.attempts).toEqual([{ model: 'a', ok: true, tries: 1 }]);
   });
 
   it('retries transient failures then succeeds (flaky)', async () => {
@@ -49,6 +49,7 @@ describe('InferencePipeline', () => {
     const pipe = new InferencePipeline(engines, fitAll, noSleep);
     const out = await pipe.run({ primary: model('a', 'ollama'), fallbacks: [] }, messages);
     expect(out.text).toBe('from ollama');
+    expect(out.attempts).toEqual([{ model: 'a', ok: true, tries: 2 }]); // one retry recorded
   });
 
   it('falls back to the next model when the primary keeps failing', async () => {
@@ -59,7 +60,7 @@ describe('InferencePipeline', () => {
     const pipe = new InferencePipeline(engines, fitAll, { ...noSleep, maxRetries: 1 });
     const out = await pipe.run({ primary: model('a', 'ollama'), fallbacks: [model('b', 'vllm')] }, messages);
     expect(out.model).toBe('b');
-    expect(out.attempts).toEqual([{ model: 'a', ok: false, error: 'down' }, { model: 'b', ok: true }]);
+    expect(out.attempts).toEqual([{ model: 'a', ok: false, error: 'down', tries: 2 }, { model: 'b', ok: true, tries: 1 }]);
   });
 
   it('skips a model that does not fit the machine', async () => {
@@ -68,7 +69,7 @@ describe('InferencePipeline', () => {
     const pipe = new InferencePipeline(engines, tiny, noSleep);
     const out = await pipe.run({ primary: model('big', 'ollama', 24), fallbacks: [model('small', 'ollama', 4)] }, messages);
     expect(out.model).toBe('small');
-    expect(out.attempts[0]).toEqual({ model: 'big', ok: false, error: 'does_not_fit' });
+    expect(out.attempts[0]).toEqual({ model: 'big', ok: false, error: 'does_not_fit', tries: 0 });
   });
 
   it('throws when every model fails', async () => {

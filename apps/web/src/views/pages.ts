@@ -1267,6 +1267,7 @@ function resiliencePanelHtml(r: ResilienceStats): string {
       ${stat(t('res.recovered'), String(r.recoveredViaFallback))}
       ${stat(t('res.failed'), String(r.failed))}
       ${stat(t('res.fallbackRate'), `${r.fallbackRatePct}%`)}
+      ${stat(t('res.retryRate'), `${r.retryRatePct}%`)}
       ${stat(t('res.failureRate'), `${r.failureRatePct}%`)}
     </div>
     ${healthRows ? `<div><label>${esc(t('res.modelHealth'))}</label><table><thead><tr><th>${esc(t('common.model'))}</th><th>${esc(t('res.attempts'))}</th><th>${esc(t('res.failures'))}</th></tr></thead><tbody>${healthRows}</tbody></table></div>` : ''}

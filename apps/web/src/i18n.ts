@@ -118,6 +118,7 @@ const DICT: Dict = {
   'res.recovered': { en: 'Recovered via fallback', tr: 'Yedekle kurtarıldı' },
   'res.failed': { en: 'Failed outright', tr: 'Tamamen başarısız' },
   'res.fallbackRate': { en: 'Fallback rate', tr: 'Yedeğe geçiş oranı' },
+  'res.retryRate': { en: 'Retry rate', tr: 'Yeniden deneme oranı' },
   'res.failureRate': { en: 'Failure rate', tr: 'Hata oranı' },
   'res.modelHealth': { en: 'Model health', tr: 'Model sağlığı' },
   'res.attempts': { en: 'Attempts', tr: 'Deneme' },
