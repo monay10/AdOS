@@ -27,6 +27,7 @@ import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
+import { InMemoryMissionQueue } from './mission-queue.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
 import { REVIEW_ONLY, type GovernancePolicy } from './governance-policy.js';
@@ -75,6 +76,8 @@ export class App {
   readonly governanceDecisions: InMemoryGovernanceDecisionLog;
   /** Which gates hard-enforce a failing governance verdict (Sprint 8; default none). */
   readonly governance: GovernancePolicy;
+  /** Missions an agent created from an applied recommendation (Recommendation → Apply). */
+  readonly missionQueue = new InMemoryMissionQueue();
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];

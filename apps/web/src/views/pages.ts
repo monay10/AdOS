@@ -6,6 +6,7 @@ import type { RevisionFunnel } from '../revision-funnel.js';
 import type { ResilienceStats } from '../resilience-stats.js';
 import type { MissionPlan } from '../mission-planner.js';
 import type { Recommendation } from '../recommendation-engine.js';
+import type { QueuedMission } from '../mission-queue.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1364,14 +1365,29 @@ function stageLatencyPanel(timings: StageTiming[]): string {
   </div>`;
 }
 
-/** Recommendations — ranked, brain-grounded next actions (Sprint 10). */
-export function recommendationsPage(opts: { session: Session; recommendations: Recommendation[] }): string {
+/** Recommendations — ranked, brain-grounded next actions + Apply (Sprint 10 / Apply). */
+export function recommendationsPage(opts: {
+  session: Session;
+  recommendations: Recommendation[];
+  queue?: QueuedMission[];
+  error?: string;
+}): string {
   const kindBadge: Record<string, string> = {
     scale: `<span class="badge active">${esc(t('rec.kind.scale'))}</span>`,
     improve: `<span class="badge">${esc(t('rec.kind.improve'))}</span>`,
     revision: `<span class="badge">${esc(t('rec.kind.revision'))}</span>`,
     explore: `<span class="badge">${esc(t('rec.kind.explore'))}</span>`,
   };
+  // Only kinds that map to a concrete mission are applyable.
+  const applyable = new Set(['scale', 'improve', 'explore']);
+  const applyBtn = (r: Recommendation): string =>
+    applyable.has(r.kind)
+      ? `<form method="post" action="/recommendations/apply" style="margin-top:12px">
+           <input type="hidden" name="vertical" value="${esc(r.vertical)}">
+           <input type="hidden" name="kind" value="${esc(r.kind)}">
+           <button class="btn" style="margin-top:0">${esc(t('rec.apply'))}</button>
+         </form>`
+      : '';
   const body =
     opts.recommendations.length === 0
       ? `<div class="panel"><div class="empty">${esc(t('rec.empty'))}</div></div>`
@@ -1380,6 +1396,7 @@ export function recommendationsPage(opts: { session: Session; recommendations: R
             (r) => `<div class="panel" style="margin-bottom:14px">
               <h2 style="margin:0 0 4px">${kindBadge[r.kind] ?? ''} ${esc(r.title)} ${r.grounded ? `<span class="badge active">${esc(t('rec.grounded'))}</span>` : ''}</h2>
               <p class="sub" style="margin:0">${esc(r.detail)}</p>
+              ${applyBtn(r)}
             </div>`,
           )
           .join('');
@@ -1388,8 +1405,33 @@ export function recommendationsPage(opts: { session: Session; recommendations: R
     active: '/recommendations',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('rec.title'))}</h1><p>${esc(t('rec.sub'))}</p></div>
-      <span class="badge active">${esc(t('rec.count', { n: String(opts.recommendations.length) }))}</span></div>${body}`,
+      <span class="badge active">${esc(t('rec.count', { n: String(opts.recommendations.length) }))}</span></div>
+      ${opts.error ? `<div class="err" style="margin-bottom:14px">${esc(opts.error)}</div>` : ''}
+      ${missionQueuePanel(opts.queue)}${body}`,
   });
+}
+
+/** The agent-driven Mission Queue — what applied recommendations turned into. */
+function missionQueuePanel(queue?: QueuedMission[]): string {
+  if (!queue || queue.length === 0) return '';
+  const statusBadge: Record<string, string> = {
+    generating: `<span class="badge">${esc(t('queue.generating'))}</span>`,
+    awaiting_approval: `<span class="badge active">${esc(t('queue.awaiting'))}</span>`,
+    failed: `<span class="badge">${esc(t('queue.failed'))}</span>`,
+  };
+  const rows = queue
+    .map(
+      (q) => `<tr>
+        <td><a href="/missions/${esc(q.missionId)}">${esc(q.objective)}</a></td>
+        <td>${esc(q.vertical)}</td>
+        <td>${statusBadge[q.status] ?? esc(q.status)}</td>
+      </tr>`,
+    )
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('queue.title'))}</h2><p class="sub">${esc(t('queue.sub'))}</p>
+    <table><thead><tr><th>${esc(t('queue.mission'))}</th><th>${esc(t('queue.vertical'))}</th><th>${esc(t('common.status'))}</th></tr></thead><tbody>${rows}</tbody></table>
+  </div>`;
 }
 
 /** Approval/override funnel — the signal for hard-enforcement (Sprint 5). */

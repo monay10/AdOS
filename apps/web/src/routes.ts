@@ -753,8 +753,10 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     for (const [vertical, a] of agg) {
       stats.push({ vertical, insight: await app.brain.marketing(vertical), missions: a.missions, completed: a.completed, revisions: a.revisions });
     }
-    return res.html(recommendationsPage({ session, recommendations: recommend(stats) }));
+    return res.html(recommendationsPage({ session, recommendations: recommend(stats), queue: app.missionQueue.list(session.tenantId) }));
   }
+  // Recommendation → Apply: the agent turns a recommendation into a queued, governed mission.
+  if (path === '/recommendations/apply' && method === 'POST') return applyRecommendation(app, session, res, req);
 
   // ── Executive (CEO Dashboards, Phase 10) ──
   if (path === '/executive' && method === 'GET') {
@@ -1066,6 +1068,73 @@ function generationErrorMessage(error: AppError): string {
   return error.retryable ? t('ai.unavailable') : error.message;
 }
 
+/** The mission objective an applied recommendation becomes. */
+function recommendationObjective(kind: string, vertical: string): string {
+  if (kind === 'scale') return t('rec.obj.scale', { vertical });
+  if (kind === 'improve') return t('rec.obj.improve', { vertical });
+  return t('rec.obj.explore', { vertical });
+}
+
+/**
+ * Recommendation → Apply (safe application). The operator applies a
+ * recommendation; the system creates a mission from it, an AGENT runs the
+ * mechanical generation (the brief, through the full governed pipeline — routing,
+ * evidence/confidence/constitution observe), and the mission STOPS at the human
+ * approval gate (Book F Law 5 — the human gate is never skipped). The queue
+ * records what the recommendation turned into; the human picks up the decision,
+ * with the governance verdict (and any enforced hard-block) applied at the gate
+ * exactly as for a hand-run mission. So the platform turns advice into governed,
+ * queued work — never into an autonomous, ungoverned launch.
+ */
+async function applyRecommendation(app: App, session: Session, res: Res, req: Req): Promise<void> {
+  const vertical = (req.body['vertical'] ?? '').trim();
+  const kind = (req.body['kind'] ?? '').trim();
+  if (!vertical) return res.redirect('/recommendations');
+
+  // Find a client in the vertical that has a brand + product (mission prereqs).
+  const clients = (await app.clients.list()).filter((c) => c.industry === vertical);
+  let chosen: (typeof clients)[number] | undefined;
+  let brand: Awaited<ReturnType<typeof app.brands.list>>[number] | undefined;
+  let product: Awaited<ReturnType<typeof app.products.list>>[number] | undefined;
+  for (const c of clients) {
+    const b = (await app.brands.list(c.id.toString()))[0];
+    const p = (await app.products.list(c.id.toString()))[0];
+    if (b && p) {
+      chosen = c;
+      brand = b;
+      product = p;
+      break;
+    }
+  }
+  if (!chosen || !brand || !product) {
+    const recs = app.missionQueue.list(session.tenantId); // keep the queue visible
+    return res.html(recommendationsPage({ session, recommendations: [], queue: recs, error: t('rec.applyNoClient', { vertical }) }), 400);
+  }
+
+  // Create the mission from the recommendation (a sensible default budget).
+  const objective = recommendationObjective(kind, vertical);
+  const wizard = MissionWizard.start({
+    tenantId: session.tenantId,
+    workspaceId: chosen.workspaceId,
+    clientId: chosen.id.toString(),
+    createdBy: session.actor,
+  })
+    .withObjective(objective)
+    .withBudget({ amountMinor: 500000, currency: 'TRY', period: 'monthly' });
+  const created = await app.missions.submit(wizard);
+  if (created.isErr) {
+    return res.html(recommendationsPage({ session, recommendations: [], queue: app.missionQueue.list(session.tenantId), error: created.error.message }), 400);
+  }
+  const missionId = created.value.id.toString();
+
+  // Enqueue, then run the agent: generate the brief and stop at the human gate.
+  app.missionQueue.enqueue(session.tenantId, { missionId, vertical, kind, objective, status: 'generating', at: new Date().toISOString() });
+  const outcome = await briefGenerateAndAdvance(app, session, missionId, created.value, chosen, brand, product);
+  app.missionQueue.updateStatus(session.tenantId, missionId, outcome.isErr ? 'failed' : 'awaiting_approval');
+
+  return res.redirect(`/missions/${missionId}`);
+}
+
 /** Marketing Intelligence: generate the brief, then move the mission to approval. */
 async function generateBrief(app: App, session: Session, res: Res, id: string): Promise<void> {
   const found = await app.missions.get(MissionId.of(id));
@@ -1087,8 +1156,26 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
       }),
     );
   }
-  const client = clientRes.value;
+  const outcome = await briefGenerateAndAdvance(app, session, id, mission, clientRes.value, brand, product);
+  if (outcome.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(outcome.error));
+  return res.redirect(`/missions/${id}`);
+}
 
+/**
+ * Generate the brief for a loaded mission (Performance-Memory-grounded) and
+ * advance it to the human approval gate. Shared by the interactive `/brief`
+ * route and the Recommendation → Apply agent, so both take the exact same
+ * governed generation path and stop at the same gate.
+ */
+async function briefGenerateAndAdvance(
+  app: App,
+  session: Session,
+  id: string,
+  mission: { clientId: string; brief: string; status: string; budget?: { amountMinor: number; currency: string; period: string } | undefined },
+  client: { name: string; industry: string },
+  brand: { profile: { voice: string; values: readonly string[] } },
+  product: { name: string; description: string },
+): Promise<{ isErr: false } | { isErr: true; error: AppError }> {
   // Performance Memory read-back: pull this vertical's aggregated past performance
   // from the Company Brain and inject it as descriptive context for the new brief.
   const past = await app.brain.marketing(client.industry);
@@ -1118,12 +1205,12 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
       : {}),
     ...(historicalPerformance ? { historicalPerformance } : {}),
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
+  if (generated.isErr) return { isErr: true, error: generated.error };
 
   // Advance the mission into the executive approval gate.
   if (mission.status === 'submitted') await app.missions.plan(MissionId.of(id));
   await app.missions.requestApproval(MissionId.of(id), 'strategy_and_budget');
-  return res.redirect(`/missions/${id}`);
+  return { isErr: false };
 }
 
 /** Creative Studio: generate the creative set from the approved brief, then move
