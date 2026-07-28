@@ -104,6 +104,22 @@ export class LiveAIManager implements AIManagerPort {
   }
 }
 
+/**
+ * Operator-tunable resilience thresholds for the governed InferencePipeline. All
+ * optional — each falls back to the pipeline's default when unset. Numbers only
+ * (the pipeline's `sleep`/`now` seams stay internal, for tests).
+ */
+export interface ResilienceConfig {
+  /** Retries per model on retryable failures (default 2). */
+  maxRetries?: number;
+  /** Per-inference timeout in ms (default 60000). */
+  timeoutMs?: number;
+  /** Consecutive failures before a model's circuit opens (default 3). */
+  breakerThreshold?: number;
+  /** How long a tripped circuit stays open, in ms (default 30000). */
+  breakerCooldownMs?: number;
+}
+
 export interface LiveAIConfig {
   /** Model used when a capability has no specific mapping (e.g. "qwen2.5:7b"). */
   defaultModel: string;
@@ -111,6 +127,8 @@ export interface LiveAIConfig {
   models?: Partial<Record<AITaskRequest['capability'], string>>;
   /** Sampling temperature; low by default for structured, deterministic output. */
   temperature?: number;
+  /** Operator-tunable pipeline resilience thresholds; pipeline defaults when omitted. */
+  resilience?: ResilienceConfig;
   /**
    * Returns the human-readable language the model should answer in (e.g.
    * "Turkish" / "English"), evaluated per request. Wired to the request locale

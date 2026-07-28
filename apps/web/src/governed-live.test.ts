@@ -138,4 +138,16 @@ describe('Governed live runtime — resilience (Sprint 7: retry / recovery / fal
     // One model, recovered via retry — the tries count records the retry.
     expect(res.attempts).toEqual([{ model: 'm', ok: true, tries: 2 }]);
   });
+
+  it('honors a configured maxRetries of 0 — a transient failure is not retried', async () => {
+    let calls = 0;
+    const engine = new PerModelEngine(() => {
+      calls += 1;
+      throw new UnavailableError('temporarily overloaded'); // retryable, but retries are disabled
+    });
+    const ai = createLiveGovernedManager(engine, { defaultModel: 'm', resilience: { maxRetries: 0 } });
+
+    await expect(run(() => ai.submit(req()))).rejects.toThrow();
+    expect(calls).toBe(1); // config honored — a single attempt, no retry (default would be 3)
+  });
 });
