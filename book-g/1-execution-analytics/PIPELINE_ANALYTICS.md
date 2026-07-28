@@ -124,6 +124,18 @@ is built; it is not yet the live record.
 > wrapped manager). Generation stayed byte-for-byte unchanged in 4.2 by construction. Turning these
 > observe-only stages into the deciding, enforcing governed engine is **Sprint 4.3**.
 
+> **Series 2 · Sprint 5 (first live analytics) update (2026-07-28) — governance metrics over live traces.**
+> The AI Traces view (`/traces`) now leads with **aggregate governance analytics computed purely from
+> the live `ExecutionTrace`s** (`apps/web/src/governance-metrics.ts` → `governanceMetrics`): evidence
+> coverage %, no-evidence rate %, constitution pass rate %, mean confidence, a 20-point confidence
+> histogram, mean latency, and warnings ranked by capability. This is the **first serious 🔶→✅** for
+> this book's analytics tier — real questions ("how often is output ungrounded? what is the confidence
+> distribution?") answered from data the pipeline actually produced, not from tests. It is deliberately
+> **measurement before enforcement**: these numbers are the inputs the later evidence-required /
+> confidence-threshold rungs must set their cutoffs from. Still ❌ here: **stage-duration** and
+> **retry** analytics inside a multi-model inference *loop* (the offline path serves in one call, so no
+> retries yet), and dedicated dashboards (revision/approval funnels, execution timeline) — later slices.
+
 > **Series 2 · Sprint 4.3 (observe ladder) update (2026-07-28) — governance now runs live, observed.**
 > The stage engine's post-generation `governance.observe` stage (`apps/web/src/stage-engine.ts`)
 > now runs the REAL grounding + governance chain on every live AI task: **`evidence`** (the real

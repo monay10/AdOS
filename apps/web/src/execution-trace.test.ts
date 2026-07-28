@@ -143,12 +143,16 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     expect(promptKeys).toContain('creative.set');
     expect(promptKeys).toContain('campaign.draft');
 
-    // The /traces view surfaces the live audit trail.
+    // The /traces view surfaces the live audit trail + governance metrics (Sprint 5).
     const tracesHtml = await (await c.req('GET', '/traces')).text();
     expect(tracesHtml).toContain('AI Execution Traces');
     expect(tracesHtml).toContain('offline-deterministic');
     expect(tracesHtml).toContain('marketing.brief');
     expect(tracesHtml).toContain('inference');
+    // Governance metrics measured over the live traces (before any enforcement).
+    expect(tracesHtml).toContain('Governance metrics');
+    expect(tracesHtml).toContain('No-evidence rate');
+    expect(tracesHtml).toContain('Confidence distribution');
 
     // ── The grounded half: finish mission 1 so its KPIs land in the Company
     // Brain (Sprint 3 write), then a NEW campaign's brief trace is genuinely

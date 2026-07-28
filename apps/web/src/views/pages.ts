@@ -1,4 +1,5 @@
 import type { ExecutionTrace } from '@ados/ai-manager';
+import type { GovernanceMetrics } from '../governance-metrics.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1190,8 +1191,9 @@ export function listPage(opts: {
  * (received → inference → completed/failed). Governed stages are not shown
  * because they are not wired yet — the trace never claims what didn't run.
  */
-export function tracesPage(opts: { session: Session; traces: ExecutionTrace[] }): string {
+export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; metrics?: GovernanceMetrics }): string {
   const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
+  const metricsPanel = opts.metrics && opts.metrics.total > 0 ? governanceMetricsPanel(opts.metrics) : '';
   const body =
     opts.traces.length === 0
       ? `<div class="panel"><div class="empty">${esc(t('traces.empty'))}</div></div>`
@@ -1228,6 +1230,33 @@ export function tracesPage(opts: { session: Session; traces: ExecutionTrace[] })
     active: '/traces',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
-      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${body}`,
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${body}`,
   });
+}
+
+/** Governance analytics summary — measurement before enforcement (Sprint 5). */
+function governanceMetricsPanel(m: GovernanceMetrics): string {
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+  const maxBucket = Math.max(1, ...m.confidenceBuckets.map((b) => b.count));
+  const bars = m.confidenceBuckets
+    .map((b) => `<div class="bar"><span>${esc(b.label)}</span><div class="track"><div class="fill" style="width:${Math.round((b.count / maxBucket) * 100)}%"></div></div><span class="v">${b.count}</span></div>`)
+    .join('');
+  const capRows = m.byCapability
+    .map((c) => `<tr><td>${esc(c.capability)}</td><td>${c.count}</td><td>${c.warnings} ${esc(t('gm.warnings'))}</td></tr>`)
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('gm.title'))}</h2><p class="sub">${esc(t('gm.sub'))}</p>
+    <div class="grid" style="margin-bottom:18px">
+      ${stat(t('gm.evidenceCoverage'), `${m.evidenceCoveragePct}%`)}
+      ${stat(t('gm.noEvidence'), `${m.noEvidenceRatePct}%`)}
+      ${stat(t('gm.passRate'), `${m.constitutionPassRatePct}%`)}
+      ${stat(t('gm.confidenceAvg'), String(m.confidenceAvg))}
+      ${stat(t('gm.avgLatency'), `${m.avgLatencyMs} ms`)}
+    </div>
+    <div class="row">
+      <div><label>${esc(t('gm.confidenceDist'))}</label><div class="bars">${bars}</div></div>
+      <div><label>${esc(t('gm.byCapability'))}</label><table><tbody>${capRows}</tbody></table></div>
+    </div>
+  </div>`;
 }

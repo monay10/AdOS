@@ -50,6 +50,7 @@ import {
   type NextStep,
   type ReportView,
 } from './views/pages.js';
+import { governanceMetrics } from './governance-metrics.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -706,10 +707,11 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     return res.html(notFound(session), 404);
   }
 
-  // ── AI Execution Traces (Sprint 4.1 — every AI task is auditable) ──
+  // ── AI Execution Traces (Sprint 4.1) + governance metrics (Sprint 5) ──
   if (path === '/traces' && method === 'GET') {
     const traces = app.traces.list(session.tenantId, 50);
-    return res.html(tracesPage({ session, traces }));
+    const metrics = governanceMetrics(app.traces.list(session.tenantId, 100));
+    return res.html(tracesPage({ session, traces, metrics }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
