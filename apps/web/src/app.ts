@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { AIManagerPort, CompanyBrainPort } from '@ados/contracts';
+import type { AIManagerPort, CompanyBrainPort, DecisionJournalPort, ExecutiveMemoryPort } from '@ados/contracts';
 import { InMemoryEventBus, type EventBus } from '@ados/event-bus';
 import { TenantContext } from '@ados/tenancy';
 import { telemetry, type Telemetry } from '@ados/observability';
@@ -28,6 +28,7 @@ import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
 import { isRestorableBrain } from './brain-persistence.js';
+import { isRestorable } from './executive-persistence.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -65,8 +66,8 @@ export class App {
   readonly reports: CampaignReportService;
   readonly executive: ExecutiveReportService;
   readonly brain: CompanyBrainPort;
-  readonly execMemory: InMemoryExecutiveMemory;
-  readonly journal: InMemoryDecisionJournal;
+  readonly execMemory: ExecutiveMemoryPort;
+  readonly journal: DecisionJournalPort;
   /** Every AI task leaves an auditable ExecutionTrace here (Sprint 4.1). */
   readonly traces: InMemoryExecutionTraceStore;
   /** Each gate approval records flagged/override for the approval funnel (Sprint 5). */
@@ -80,9 +81,11 @@ export class App {
     bus: EventBus = new InMemoryEventBus(),
     ai: AIManagerPort = createOfflineGovernedManager(),
     repos: RepositoryBundle = inMemoryRepositories(),
-    // In-memory by default (dev/tests). `main.ts` injects a PersistentCompanyBrain
-    // (SQLite-backed) so the compounding knowledge survives restarts (Sprint 6).
+    // In-memory by default (dev/tests). `main.ts` injects SQLite-backed persistent
+    // stores so the compounding learned state survives restarts (Sprint 6).
     brain: CompanyBrainPort = new InMemoryCompanyBrain(),
+    execMemory: ExecutiveMemoryPort = new InMemoryExecutiveMemory(),
+    journal: DecisionJournalPort = new InMemoryDecisionJournal(),
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -111,8 +114,8 @@ export class App {
     this.campaigns = new CampaignDraftService(repos.campaigns, bus, ai);
     this.reports = new CampaignReportService(repos.reports, bus, ai);
     this.executive = new ExecutiveReportService(repos.executive, bus, ai);
-    this.execMemory = new InMemoryExecutiveMemory();
-    this.journal = new InMemoryDecisionJournal();
+    this.execMemory = execMemory;
+    this.journal = journal;
   }
 
   /**
@@ -144,6 +147,8 @@ export class App {
     // Rehydrate the Company Brain from durable storage before serving, when a
     // persistent brain was injected (Sprint 6). In-memory brains are a no-op.
     if (isRestorableBrain(this.brain)) await this.brain.restore();
+    if (isRestorable(this.execMemory)) await this.execMemory.restore();
+    if (isRestorable(this.journal)) await this.journal.restore();
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,

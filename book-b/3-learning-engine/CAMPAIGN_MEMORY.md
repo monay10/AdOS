@@ -280,9 +280,19 @@ Consequences, stated plainly:
 > restores it via `snapshot()`/`restore()` seams on the in-memory classes. So the
 > **entire Company Brain now survives a restart** (`❌→✅`); §3.4 below is retained as the
 > historical pre-Sprint-6 record. **Still ❌:** archive/compaction (whole-blob rewrite is
-> fine locally but grows unbounded), per-tenant brain scoping (§3.4's second point, the
-> global-`Map` gap, is unchanged), and durability for **Executive Memory / Decision
-> Journal** (separate stores, not part of the Company Brain).
+> fine locally but grows unbounded), and per-tenant brain scoping (§3.4's second point, the
+> global-`Map` gap, is unchanged).
+
+> **Series 2 · Sprint 6 (persistence, slice 4) update (2026-07-28) — Executive Memory +
+> Decision Journal are durable too.** The two remaining learned-state stores (separate
+> from the Company Brain) now persist to the same `BRAIN_DB` SQLite file via
+> `PersistentExecutiveMemory` / `PersistentDecisionJournal` (`apps/web/src/executive-persistence.ts`)
+> over `snapshot()`/`hydrate()` seams on `InMemoryExecutiveMemory` / `InMemoryDecisionJournal`:
+> the Decision Journal — the audit trail this book's Learning Engine reads (`journal.history`),
+> with evidence, alternatives, confidence, and attached outcome — now survives a restart, as
+> does each executive's private memory. Both already carry `tenantId` and filter on it, so
+> unlike the Company Brain they are tenant-scoped. **Remaining Sprint 6 work:** archive/compaction
+> and per-tenant scoping *of the Company Brain*.
 - **No tenant scoping in the Company Brain.** The DNA/brand/marketing/creative/
   sales/SOP/experience/pattern/graph stores are global `Map`s — one tenant's
   patterns are visible to the whole process. (Executive Memory and Decision

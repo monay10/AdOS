@@ -37,6 +37,16 @@ export class InMemoryExecutiveMemory implements ExecutiveMemoryPort {
       .slice(0, query.k)
       .map((x) => x.e);
   }
+
+  // ── snapshot/hydrate seams (Sprint 6 persistence) ────────────────────────────
+  // Named `hydrate` (not `restore`) so it never collides with a persistence
+  // decorator's parameterless `restore()` under a duck-typed capability check.
+  snapshot(): ExecutiveMemoryEntry[] {
+    return [...this.entries];
+  }
+  hydrate(entries: readonly ExecutiveMemoryEntry[]): void {
+    this.entries.splice(0, this.entries.length, ...entries);
+  }
 }
 
 function relevance(content: string, terms: string[]): number {
@@ -76,5 +86,14 @@ export class InMemoryDecisionJournal implements DecisionJournalPort {
     const entry = this.journal.get(id);
     if (!entry) throw new NotFoundError(`Decision "${id}" not found`, { details: { id } });
     this.journal.set(id, { ...entry, outcome });
+  }
+
+  // ── snapshot/hydrate seams (Sprint 6 persistence) ────────────────────────────
+  snapshot(): DecisionJournalEntry[] {
+    return [...this.journal.values()];
+  }
+  hydrate(entries: readonly DecisionJournalEntry[]): void {
+    this.journal.clear();
+    for (const e of entries) this.journal.set(e.id, e);
   }
 }
