@@ -29,6 +29,7 @@ import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
+import { REVIEW_ONLY, type GovernancePolicy } from './governance-policy.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -72,6 +73,8 @@ export class App {
   readonly traces: InMemoryExecutionTraceStore;
   /** Each gate approval records flagged/override for the approval funnel (Sprint 5). */
   readonly governanceDecisions: InMemoryGovernanceDecisionLog;
+  /** Which gates hard-enforce a failing governance verdict (Sprint 8; default none). */
+  readonly governance: GovernancePolicy;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -86,6 +89,10 @@ export class App {
     brain: CompanyBrainPort = new InMemoryCompanyBrain(),
     execMemory: ExecutiveMemoryPort = new InMemoryExecutiveMemory(),
     journal: DecisionJournalPort = new InMemoryDecisionJournal(),
+    // Which gates hard-enforce governance (Sprint 8). Default: none — every gate
+    // stays in overridable Required-review mode. `main.ts` reads the operator's
+    // GOVERNANCE_ENFORCED_GATES opt-in.
+    governance: GovernancePolicy = REVIEW_ONLY,
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -116,6 +123,7 @@ export class App {
     this.executive = new ExecutiveReportService(repos.executive, bus, ai);
     this.execMemory = execMemory;
     this.journal = journal;
+    this.governance = governance;
   }
 
   /**

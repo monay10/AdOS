@@ -57,6 +57,7 @@ import { approvalFunnel, reviewStats } from './governance-decisions.js';
 import { stageLatency } from './stage-latency.js';
 import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
 import { resilienceStats } from './resilience-stats.js';
+import { isEnforced, type MissionGate } from './governance-policy.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -851,6 +852,13 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const creativeApproval: Approval = !creative ? 'none' : campaign ? 'approved' : statusApproval(mission.status);
   const campaignApproval: Approval = !campaign ? 'none' : report ? 'approved' : statusApproval(mission.status);
 
+  // The gate the mission is currently awaiting (for governance enforcement, Sprint 8).
+  const activeGate: MissionGate | undefined =
+    briefApproval === 'pending' ? 'strategy_and_budget'
+    : creativeApproval === 'pending' ? 'creative_assets'
+    : campaignApproval === 'pending' ? 'campaign_launch'
+    : undefined;
+
   const spend = mission.budget ? mission.budget.amountMinor / 100 : 1000;
   const currency = mission.budget?.currency ?? 'TRY';
 
@@ -887,7 +895,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(report ? { report: toReportView(report) } : {}),
       ...(learning ? { learning } : {}),
       ...(executive ? { executive: toExecutiveView(executive) } : {}),
-      ...(mission.status === 'awaiting_approval' ? spreadGovernance(app, session.tenantId, id) : {}),
+      ...(mission.status === 'awaiting_approval' ? spreadGovernance(app, session.tenantId, id, activeGate) : {}),
       canCancel: mission.status !== 'completed' && mission.status !== 'failed',
       ...(mission.failureReason ? { failureReason: mission.failureReason } : {}),
       ...(error ? { error } : {}),
@@ -900,12 +908,15 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
  * latest ExecutionTrace for the mission that carries a constitution verdict and
  * surfaces it as advisory — it informs the human decision, it never blocks.
  */
-function spreadGovernance(app: App, tenantId: string, missionId: string): { governance?: GovernanceView } {
+function spreadGovernance(app: App, tenantId: string, missionId: string, activeGate?: MissionGate): { governance?: GovernanceView } {
   const trace = latestGovernanceTrace(app, tenantId, missionId);
   if (!trace) return {};
   const detail = trace.steps.find((s) => s.name === 'constitution')?.detail ?? {};
   const violations = Array.isArray(detail['violations']) ? (detail['violations'] as string[]) : [];
-  return { governance: { passed: Boolean(detail['passed']), confidence: trace.confidence?.score ?? 0, violations } };
+  // Sprint 8: mark the view as enforced when this gate hard-blocks a failing
+  // verdict, so the UI shows a block (no ack/approve) instead of the ack path.
+  const enforced = !!activeGate && isEnforced(app.governance, activeGate);
+  return { governance: { passed: Boolean(detail['passed']), confidence: trace.confidence?.score ?? 0, violations, enforced } };
 }
 
 /** The latest ExecutionTrace for the mission that carries a constitution verdict. */
@@ -929,6 +940,11 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   // approval is still possible once acknowledged (override, not a hard block).
   const trace = latestGovernanceTrace(app, session.tenantId, id);
   const flagged = !!trace && !constitutionPassed(trace);
+  // Sprint 8 — Enforced tier: when this gate is hard-enforced and governance
+  // flagged the artifact, approval is BLOCKED server-side with no override.
+  if (flagged && isEnforced(app.governance, gate)) {
+    return renderMissionDetail(app, session, res, id, t('gov.enforcedBlock'));
+  }
   if (!acknowledged && flagged) {
     return renderMissionDetail(app, session, res, id, t('gov.reviewRequiredError'));
   }

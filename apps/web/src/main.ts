@@ -6,6 +6,7 @@ import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executiv
 import { App } from './app.js';
 import { PersistentCompanyBrain, SqlBrainStore } from './brain-persistence.js';
 import { PersistentDecisionJournal, PersistentExecutiveMemory, SqlExecutiveStore } from './executive-persistence.js';
+import { policyFromEnv } from './governance-policy.js';
 import { createAIManager } from './ai-factory.js';
 import { AuthService } from './auth/auth-service.js';
 import { authCredentialsMigration, InMemoryCredentialStore, SqlCredentialStore } from './auth/credential-store.js';
@@ -69,6 +70,12 @@ async function main(): Promise<void> {
     logger.warn('BRAIN_DB not set — Company Brain / Executive Memory / Decision Journal are in-memory (learned state is NOT durable across restarts)');
   }
 
+  // Governance enforcement (Sprint 8). Off by default — GOVERNANCE_ENFORCED_GATES
+  // is an explicit per-gate operator opt-in (e.g. "campaign_launch").
+  const { policy: governance, ignored } = policyFromEnv();
+  if (governance.enforcedGates.size > 0) logger.info({ enforcedGates: [...governance.enforcedGates] }, 'governance HARD-ENFORCED on gates (no override)');
+  if (ignored.length > 0) logger.warn({ ignored }, 'GOVERNANCE_ENFORCED_GATES: ignored unknown gate name(s)');
+
   let db: PostgresDatabase | undefined;
   let app: App;
   if (databaseUrl) {
@@ -76,10 +83,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal);
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance);
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App(undefined, ai, undefined, brain, execMemory, journal);
+    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance);
   }
 
   let auth: AuthGateway | undefined;

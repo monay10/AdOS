@@ -180,6 +180,8 @@ export interface GovernanceView {
   passed: boolean;
   confidence: number;
   violations: string[];
+  /** This gate hard-enforces a failing verdict — approval is blocked, no override (Sprint 8). */
+  enforced?: boolean;
 }
 
 /** The advisory banner shown above the approve/reject controls at the gate. */
@@ -458,6 +460,17 @@ function reviewControls(approveHref: string, rejectHref: string, approval: Appro
     // and server-side (the /approve handler rejects without it). Override is
     // still possible once acknowledged; it is not a hard block.
     const advisory = governanceAdvisory(governance);
+    const blocked = !!governance && !governance.passed && governance.enforced === true;
+    // Sprint 8 — Enforced tier: a failing verdict at an enforced gate hard-blocks
+    // approval (no override). We drop the approve control entirely; the artifact
+    // can still be REJECTED (sent back for revision), which is the way forward.
+    if (blocked) {
+      const red = 'background:rgba(248,81,73,.10);border:1px solid rgba(248,81,73,.4);color:#ff9492';
+      return `${advisory}<div style="${red};padding:11px 14px;border-radius:9px;margin-top:14px;font-size:14px">${esc(t('gov.enforcedNotice'))}</div>
+      <div class="actions" style="margin-top:16px">
+        <form method="post" action="${rejectHref}"><button class="btn ghost">${esc(t('review.reviseBtn'))}</button></form>
+      </div>`;
+    }
     const needsAck = !!governance && !governance.passed;
     const ack = needsAck
       ? `<label style="display:flex;align-items:center;gap:8px;margin:0 0 12px;font-weight:500;color:var(--text)"><input type="checkbox" name="acknowledge" value="governance" required style="width:auto"> ${esc(t('gov.ackLabel'))}</label>`
