@@ -4,10 +4,7 @@ import type {
   CompanyBrainPort,
   CompanyDNA,
   CreativeInsight,
-  ExperienceEnginePort,
-  KnowledgeGraphPort,
   MarketingInsight,
-  PatternLibraryPort,
   SalesInsight,
   SopPerformance,
 } from '@ados/contracts';
@@ -25,9 +22,11 @@ import { InMemoryKnowledgeGraph } from './knowledge-graph.js';
  * durable ones (LanceDB/FAISS + Postgres + a graph store) behind the same port.
  */
 export class InMemoryCompanyBrain implements CompanyBrainPort {
-  readonly graph: KnowledgeGraphPort = new InMemoryKnowledgeGraph();
-  readonly experience: ExperienceEnginePort;
-  readonly patterns: PatternLibraryPort = new InMemoryPatternLibrary();
+  // Concrete types (still satisfy the port) so a persistence decorator can reach
+  // the snapshot/restore seams the ports do not expose (Sprint 6).
+  readonly graph: InMemoryKnowledgeGraph = new InMemoryKnowledgeGraph();
+  readonly experience: InMemoryExperienceEngine;
+  readonly patterns: InMemoryPatternLibrary = new InMemoryPatternLibrary();
 
   private dnaStore = new Map<string, CompanyDNA>();
   private brandStore = new Map<string, BrandProfile>();

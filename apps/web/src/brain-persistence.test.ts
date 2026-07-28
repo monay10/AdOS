@@ -39,7 +39,7 @@ describe('PersistentCompanyBrain', () => {
     expect(isRestorableBrain(new InMemoryCompanyBrain())).toBe(false);
   });
 
-  it('delegates reads through to the inner brain; sub-brains are the same instances', async () => {
+  it('delegates reads through to the inner brain', async () => {
     const inner = new InMemoryCompanyBrain();
     const store = new SqlBrainStore(new SqliteDatabase(':memory:'));
     await store.init();
@@ -47,9 +47,10 @@ describe('PersistentCompanyBrain', () => {
     await brain.enrich({ kind: 'creative', insight: { format: 'video', sampleSize: 3, bestColor: 'red', bestFont: 'sans', bestCta: 'Buy' } });
     // The write landed in the inner brain, read back through the decorator.
     expect(await brain.creative('video')).toMatchObject({ format: 'video', bestColor: 'red' });
-    expect(brain.graph).toBe(inner.graph); // sub-brains (graph/experience/patterns) delegate verbatim
-    expect(brain.experience).toBe(inner.experience);
-    expect(brain.patterns).toBe(inner.patterns);
+    // Sub-brains route through persistent decorators over the SAME inner instances,
+    // so a write on the decorator is visible on the inner store.
+    await brain.graph.upsertNode({ id: 'n1', type: 'Node', props: {} });
+    expect(await inner.graph.query({ type: 'Node' })).toHaveLength(1);
   });
 
   it('survives a restart: marketing memory persists across brain instances on the same file', async () => {
@@ -96,6 +97,29 @@ describe('PersistentCompanyBrain', () => {
     expect(persisted).toHaveLength(1);
     expect(persisted[0]!.sampleSize).toBe(20);
     expect(persisted[0]!.successRate).toBeCloseTo(0.8); // (0.6*10 + 1.0*10)/20
+  });
+
+  it('persists and restores the three port-backed sub-brains: experience, patterns, graph', async () => {
+    const brain1 = new PersistentCompanyBrain(new InMemoryCompanyBrain(), new SqlBrainStore(new SqliteDatabase(file)));
+    await brain1.restore(); // create schema
+    await brain1.experience.record({ tenantId: 't', vertical: 'dental', context: { format: 'video' }, action: 'ran', result: { ctr: 6 }, reason: 'r', learned: 'l', at: '2026-01-01T00:00:00.000Z' });
+    const patternId = await brain1.patterns.capture({ domain: 'dental', name: 'P', structure: ['15s'], evidence: { sampleSize: 50, metric: 'ctr', value: 6 } });
+    await brain1.patterns.markReused(patternId);
+    await brain1.graph.upsertNode({ id: 'm1', type: 'Mission', props: { objective: 'grow' } });
+    await brain1.graph.upsertNode({ id: 'c1', type: 'Campaign', props: { name: 'C' } });
+    await brain1.graph.relate({ from: 'm1', to: 'c1', relation: 'ran' });
+
+    // Fresh instance on the same file → restore rehydrates all three sub-brains.
+    const brain2 = new PersistentCompanyBrain(new InMemoryCompanyBrain(), new SqlBrainStore(new SqliteDatabase(file)));
+    await brain2.restore();
+    const exps = await brain2.experience.findSimilar({ vertical: 'dental', context: { format: 'video' }, k: 5 });
+    expect(exps).toHaveLength(1);
+    expect(exps[0]).toMatchObject({ action: 'ran', learned: 'l' });
+    const restoredPattern = await brain2.patterns.get(patternId);
+    expect(restoredPattern).toMatchObject({ name: 'P', reuseCount: 1 }); // markReused survived
+    const neighbors = await brain2.graph.neighbors('m1', 'ran');
+    expect(neighbors).toHaveLength(1);
+    expect(neighbors[0]).toMatchObject({ id: 'c1', type: 'Campaign' });
   });
 
   it('persists the MERGED long-run average, not the last raw sample', async () => {

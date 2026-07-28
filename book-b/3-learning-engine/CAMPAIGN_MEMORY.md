@@ -267,10 +267,22 @@ Consequences, stated plainly:
 > **creative, SOP, sales, DNA, and brand** through the same `BrainStore` port: uniform
 > `(k, data)` key-value tables, written through on every enrichment/`setDna`/`setBrand`
 > (the merged/settled value, never the raw sample) and restored on startup via
-> per-store `restore*` seams. So the §3.4 "not durable" claim now holds **only** for the
-> three port-backed sub-brains — **experience, patterns, graph** — which remain RAM-only
-> (`InMemoryExperienceEngine`, `InMemoryPatternLibrary`, `InMemoryKnowledgeGraph`). Those,
-> plus archive/compaction and per-tenant scoping, are the remaining Sprint 6 slices.
+> per-store `restore*` seams.
+
+> **Series 2 · Sprint 6 (persistence, slice 3) update (2026-07-28) — the three
+> sub-brains are now durable too; the §3.4 claim is retired for the brain.** The last
+> RAM-only stores — **experience** (`InMemoryExperienceEngine`), **pattern library**
+> (`InMemoryPatternLibrary`), and **knowledge graph** (`InMemoryKnowledgeGraph`) — now
+> persist through per-sub-brain write-through decorators (`PersistentExperienceEngine`
+> / `PersistentPatternLibrary` / `PersistentKnowledgeGraph` in
+> `apps/web/src/brain-persistence.ts`): each mutation re-serialises the whole collection
+> to one JSON blob (`brain_experience` / `brain_pattern` / `brain_graph`) and startup
+> restores it via `snapshot()`/`restore()` seams on the in-memory classes. So the
+> **entire Company Brain now survives a restart** (`❌→✅`); §3.4 below is retained as the
+> historical pre-Sprint-6 record. **Still ❌:** archive/compaction (whole-blob rewrite is
+> fine locally but grows unbounded), per-tenant brain scoping (§3.4's second point, the
+> global-`Map` gap, is unchanged), and durability for **Executive Memory / Decision
+> Journal** (separate stores, not part of the Company Brain).
 - **No tenant scoping in the Company Brain.** The DNA/brand/marketing/creative/
   sales/SOP/experience/pattern/graph stores are global `Map`s — one tenant's
   patterns are visible to the whole process. (Executive Memory and Decision

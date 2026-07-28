@@ -29,6 +29,15 @@ export class InMemoryPatternLibrary implements PatternLibraryPort {
     const p = this.patterns.get(id);
     if (p) this.patterns.set(id, { ...p, reuseCount: p.reuseCount + 1 });
   }
+
+  // ── snapshot/restore seams (Sprint 6 persistence) ────────────────────────────
+  snapshot(): Pattern[] {
+    return [...this.patterns.values()];
+  }
+  restore(patterns: readonly Pattern[]): void {
+    this.patterns.clear();
+    for (const p of patterns) this.patterns.set(p.id, p);
+  }
 }
 
 /** Evidence value weighted by sample size, nudged by proven reuse. */

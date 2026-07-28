@@ -40,4 +40,14 @@ export class InMemoryKnowledgeGraph implements KnowledgeGraphPort {
       return true;
     });
   }
+
+  // ── snapshot/restore seams (Sprint 6 persistence) ────────────────────────────
+  snapshot(): { nodes: GraphNode[]; edges: GraphEdge[] } {
+    return { nodes: [...this.nodes.values()], edges: [...this.edges] };
+  }
+  restore(state: { nodes: readonly GraphNode[]; edges: readonly GraphEdge[] }): void {
+    this.nodes.clear();
+    for (const n of state.nodes) this.nodes.set(n.id, n);
+    this.edges.splice(0, this.edges.length, ...state.edges);
+  }
 }

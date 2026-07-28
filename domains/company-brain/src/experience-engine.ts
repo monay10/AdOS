@@ -19,6 +19,14 @@ export class InMemoryExperienceEngine implements ExperienceEnginePort {
     this.experiences.push({ ...exp, id: randomUUID(), at: exp.at || this.now() });
   }
 
+  // ── snapshot/restore seams (Sprint 6 persistence) ────────────────────────────
+  snapshot(): Experience[] {
+    return [...this.experiences];
+  }
+  restore(exps: readonly Experience[]): void {
+    this.experiences.splice(0, this.experiences.length, ...exps);
+  }
+
   async findSimilar(query: {
     vertical: string;
     context?: Record<string, unknown>;
