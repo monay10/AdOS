@@ -61,15 +61,21 @@ export class OfflineAIManager implements AIManagerPort {
     const objective = str(v['missionBrief'], `Grow demand for ${product}`);
     const values = Array.isArray(v['brandValues']) ? (v['brandValues'] as unknown[]).map(String) : [];
 
+    const keyMessages = [
+      `Why ${product} is the right choice`,
+      `The ${voice} promise of ${client}`,
+      values.length ? `Grounded in ${values[0]}` : 'Proven results',
+    ];
+    // Performance Memory context, when present, flows into the brief so the
+    // generation is grounded in the organization's own past results.
+    const historical = str(v['historicalPerformance'], '');
+    if (historical) keyMessages.push(historical);
+
     return {
       objective: `Deliver on: ${objective}`,
       targetAudience: audience || `People who would buy ${product} from ${client}`,
       positioning: `${product} — ${voice} and built on ${values.length ? values.join(', ') : 'trust and quality'}.`,
-      keyMessages: [
-        `Why ${product} is the right choice`,
-        `The ${voice} promise of ${client}`,
-        values.length ? `Grounded in ${values[0]}` : 'Proven results',
-      ],
+      keyMessages,
       recommendedChannels: ['meta', 'google_ads'],
       budgetAllocation: [
         { channel: 'meta', percentage: 60 },

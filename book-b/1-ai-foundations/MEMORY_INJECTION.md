@@ -8,12 +8,21 @@
 | **Version** | 1.0.0 · Aligned to AdOS v1.0.0 |
 | **Status** | Official |
 
-> **Implementation status:** ❌ **ROADMAP** for the read-back that closes the loop —
-> **no generator reads memory today**. Recording of memory at mission completion is
-> ✅ **SHIPPED** (write-only, in-memory). The *reader* components that would perform
-> the read-back already exist as 🔶 **BUILT (UNWIRED)** code in the repo but are on
-> no live app path. This document is the specification for wiring them in. It is the
-> **B-2 gap** named in the Book A walkthrough.
+> **Implementation status:** ✅ **SHIPPED (Series 2 · 2026-07-28) — first read-back
+> closed; the Company Brain is no longer write-only.** On mission completion the
+> per-vertical `MarketingInsight` is written and sample-weighted-merged
+> (`apps/web/src/routes.ts:1215`, `in-memory-company-brain.ts:100`); a **new** campaign's
+> brief generation now **reads that aggregate back** (`routes.ts:946`, `brain.marketing(vertical)`)
+> and injects a deterministic summary — "across N past campaigns in {vertical}, average
+> ROAS was Xx at Y% CTR" — into the brief prompt context
+> (`marketing-intelligence/.../brief/service.ts:60`), proven end-to-end by
+> `apps/web/src/performance-memory.test.ts`. This is **descriptive context only**: it
+> reads history and builds context; it does **not** learn, rank, recommend, or optimize.
+>
+> **Still 🔶/❌ (the deferred remainder of B-2):** reading back Executive Memory, the
+> Pattern Library, and the Experience Engine; similarity/semantic retrieval; freshness
+> decay; multi-dimensional aggregation; and any recommendation/ranking. Those remain
+> specification below — a first read-back is closed, not the whole loop.
 
 ---
 

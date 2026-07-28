@@ -57,6 +57,7 @@ export class MarketingBriefService {
             productDescription: context.productDescription,
             missionBrief: context.missionBrief,
             budget: context.budget,
+            historicalPerformance: context.historicalPerformance,
           },
           responseSchema: BRIEF_SCHEMA,
         });

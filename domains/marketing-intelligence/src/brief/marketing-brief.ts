@@ -27,6 +27,10 @@ export interface MarketingContext {
   productDescription: string;
   missionBrief: string;
   budget?: Money & { period: string };
+  /** Deterministic summary of the organization's past campaign performance in this
+   * vertical, read from the Company Brain and injected into the prompt as context.
+   * It is descriptive history — not a recommendation. */
+  historicalPerformance?: string;
 }
 
 /** A channel and the share of budget the brief recommends for it. */

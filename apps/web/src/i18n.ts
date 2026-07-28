@@ -215,6 +215,7 @@ const DICT: Dict = {
   'learn.learned': { en: 'Learned', tr: 'Öğrenilen' },
   'learn.writtenTo': { en: 'Written to', tr: 'Yazıldığı yerler' },
   'learn.insight': { en: 'In {vertical}, "{name}" on {channels} returned {roas}x ROAS. {verdict}', tr: '{vertical} sektöründe, {channels} üzerinde "{name}" {roas}x ROAS getirdi. {verdict}' },
+  'brief.historicalContext': { en: 'Historical context: across {n} past campaign(s) in {vertical}, average ROAS was {roas}x at {ctr}% CTR.', tr: 'Geçmiş bağlam: {vertical} sektöründeki {n} geçmiş kampanyada ortalama ROAS {roas}x ve CTR %{ctr} oldu.' },
   'learn.reuse': { en: 'Reuse this structure.', tr: 'Bu yapıyı yeniden kullanın.' },
   'learn.avoid': { en: 'Avoid this structure as-is.', tr: 'Bu yapıyı olduğu gibi kullanmayın.' },
   'learn.chosen.scale': { en: 'Scale the winning channel mix', tr: 'Kazanan kanal karışımını ölçeklendir' },

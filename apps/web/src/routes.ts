@@ -941,6 +941,19 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
   }
   const client = clientRes.value;
 
+  // Performance Memory read-back: pull this vertical's aggregated past performance
+  // from the Company Brain and inject it as descriptive context for the new brief.
+  const past = await app.brain.marketing(client.industry);
+  const historicalPerformance =
+    past && past.sampleSize > 0
+      ? t('brief.historicalContext', {
+          n: past.sampleSize,
+          vertical: client.industry,
+          roas: past.roas.toFixed(1),
+          ctr: past.ctr.toFixed(1),
+        })
+      : undefined;
+
   const generated = await app.briefs.generate({
     tenantId: session.tenantId,
     missionId: id,
@@ -955,6 +968,7 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
     ...(mission.budget
       ? { budget: { amountMinor: mission.budget.amountMinor, currency: mission.budget.currency, period: mission.budget.period } }
       : {}),
+    ...(historicalPerformance ? { historicalPerformance } : {}),
   });
   if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
 
@@ -1193,6 +1207,26 @@ async function recordLearning(app: App, session: Session, res: Res, id: string):
   if (brief) await app.brain.graph.relate({ from: missionNode, to: `brief:${brief.id.toString()}`, relation: 'planned_by' });
   await app.brain.graph.relate({ from: missionNode, to: campaignNode, relation: 'ran' });
   await app.brain.graph.relate({ from: campaignNode, to: reportNode, relation: 'produced' });
+
+  // 3b) Per-vertical Marketing memory — the aggregate a NEW campaign reads back for
+  // context. enrich() sample-weight-merges KPIs so N campaigns become one running
+  // average (ctr/cpa/roas + sampleSize). Descriptive history only; not a ranking.
+  const cpa = report.kpi('cpa') ?? 0;
+  await app.brain.enrich({
+    kind: 'marketing',
+    insight: {
+      vertical,
+      ctr,
+      cpa,
+      roas,
+      // Qualitative fields are carried, not ranked — the read-back summary uses only the KPIs.
+      bestHook: campaign.content.name,
+      bestHeadline: brief?.content.objective ?? campaign.content.name,
+      bestOffer: channels[0] ?? 'meta',
+      bestFunnel: channels.join(' + '),
+      sampleSize: 1,
+    },
+  });
 
   // 4) Announce the learning + complete the mission.
   await app.emit(EXECUTIVE_MEMORY_EVENTS.DECISION_JOURNALED, id, { role: 'cmo', roas });

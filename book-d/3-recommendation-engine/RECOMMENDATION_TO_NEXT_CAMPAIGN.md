@@ -7,6 +7,18 @@
 >
 > **Laws:** *Memory is evidence, not knowledge · Raw → Aggregate → Recommendation · every
 > recommendation carries its sample size · freshness before frequency.*
+>
+> **✅ SHIPPED (Series 2 · 2026-07-28) — the Raw → Aggregate → *Context* half is live; the
+> Company Brain is no longer write-only.** A completed campaign's KPIs are written and
+> sample-weighted-merged per vertical (`apps/web/src/routes.ts:1215`,
+> `domains/company-brain/src/in-memory-company-brain.ts:100`), and a **new** campaign's brief
+> reads that aggregate back (`routes.ts:946`) and injects it as **descriptive context** —
+> "across N past campaigns in {vertical}, average ROAS was Xx at Y% CTR" — into generation
+> (`performance-memory.test.ts`). What ships is **context, not a recommendation**: no ranking,
+> no similarity, no "do this next," no confidence scoring. The *Recommendation* step this
+> document specifies (turning the aggregate into a ranked, sample-sized suggestion) remains
+> **❌ ROADMAP** — honestly, per *Raw → Aggregate → Recommendation*, only the first two arrows
+> are live.
 
 ---
 
