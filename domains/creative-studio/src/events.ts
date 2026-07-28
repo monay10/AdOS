@@ -8,6 +8,7 @@
 /** Events this context publishes to the bus. */
 export const CREATIVE_STUDIO_EVENTS = {
   CREATIVE_GENERATED_V1: 'creative.generated.v1',
+  CREATIVE_BLOCKED_V1: 'creative.blocked.v1',
   CREATIVE_REVIEWED_V1: 'creative.reviewed.v1',
   CREATIVE_VARIANT_CREATED_V1: 'creative.variant.created.v1',
   CREATIVE_PUBLISHED_V1: 'creative.published.v1',

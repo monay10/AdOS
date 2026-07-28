@@ -22,6 +22,7 @@ import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
 import { ExecutiveReportService } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
+import { RegexCreativeSafetyGate } from './safety.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -82,7 +83,7 @@ export class App {
     this.performance = new PerformanceReportService(repos.performance, bus);
     this.missions = new MissionService(repos.missions, bus);
     this.briefs = new MarketingBriefService(repos.briefs, bus, ai);
-    this.creative = new CreativeStudioService(repos.creative, bus, ai);
+    this.creative = new CreativeStudioService(repos.creative, bus, ai, new RegexCreativeSafetyGate());
     this.campaigns = new CampaignDraftService(repos.campaigns, bus, ai);
     this.reports = new CampaignReportService(repos.reports, bus, ai);
     this.executive = new ExecutiveReportService(repos.executive, bus, ai);

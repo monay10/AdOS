@@ -8,13 +8,26 @@
 | **Version** | 1.0.0 · Aligned to AdOS v1.0.0 |
 | **Status** | Official |
 
-> **Implementation status.** 🔶 **BUILT (UNWIRED)** — the enforcement code exists and
-> is unit-tested (`packages/ai-manager/src/runtime/safety-engine.ts`,
-> `domains/executive-memory/src/governance.ts`) but is instantiated by **no live app
-> path**. ❌ **NOT on the live path** — Brand `bannedWords` and Company Brain
-> `forbiddenWords` are **stored but never checked** against generated copy today. This
-> document specifies the wiring that **closes Book A gap B-1**, the single
-> highest-value item in Book B.
+> **Implementation status.** ✅ **SHIPPED (Series 2 · 2026-07-28)** — the Brand-Safety
+> Gate is now **wired into live creative generation**. `CreativeStudioService.generate`
+> runs the gate after generation and **before persistence**; generated copy that
+> contains a Brand `bannedWords` term (or leaks PII / a secret) is **blocked** — no
+> `CreativeSet` is saved, the mission never advances to the review gate, and a
+> `creative.blocked.v1` event is emitted. The gate reuses the deterministic
+> `RegexSafetyEngine` for PII/secret scanning
+> (`packages/ai-manager/src/runtime/safety-engine.ts:48`) plus the operator's Brand
+> `bannedWords` (`domains/agency-os/src/brand/brand.ts:37`), composed at the
+> composition root (`apps/web/src/safety.ts`, wired `apps/web/src/app.ts:85`) behind a
+> domain-local port (`domains/creative-studio/src/creative/safety.ts`); enforced in
+> `domains/creative-studio/src/creative/service.ts:70-90`; tested in
+> `apps/web/src/safety.test.ts` and `apps/web/src/creative.test.ts` (block case).
+> **Book A gap B-1 is CLOSED for creative generation.**
+>
+> **Still 🔶 / ❌ (honest remainder).** The `ConstitutionChecker` governance path
+> (`domains/executive-memory/src/governance.ts`) remains **🔶 BUILT (UNWIRED)**; the
+> gate covers **creative generation only** (briefs, campaign drafts, and reports are
+> not yet gated); and it blocks/passes (no "warn" tier yet). The sections below specify
+> that fuller target design.
 
 ---
 

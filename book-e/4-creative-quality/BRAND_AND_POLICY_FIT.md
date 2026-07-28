@@ -24,6 +24,16 @@ They are the **most grounded** part of Book E, because the machinery that would 
 app yet. That makes them the clearest **🔶 BUILT (UNWIRED)** story in the whole book, and the
 single most shippable capability Book E describes.
 
+> **✅ SHIPPED (Series 2 · 2026-07-28) — the enforcement half.** The rule/regex checks behind
+> Brand Fit and Policy Fit are now **wired and enforced** on live creative generation: generated
+> copy that contains a Brand `bannedWords` term (Brand Fit) or leaks PII / a secret (Policy Fit)
+> is **blocked before it is persisted**, emitting `creative.blocked.v1`. This ships as the
+> **Brand-Safety Gate** — see [`../../book-b/4-optimization/BRAND_SAFETY.md`](../../book-b/4-optimization/BRAND_SAFETY.md)
+> (enforced in `domains/creative-studio/src/creative/service.ts:70-90`, composed in
+> `apps/web/src/safety.ts`). What is **still 🔶/❌** is Brand Fit and Policy Fit as **scored
+> dimensions** of a Creative Score (a 0..100 contribution): no Creative Score is computed live
+> yet. The gate *blocks*; it does not yet *score*.
+
 Both dimensions share one defining property that makes them ideal citizens of Creative
 Intelligence: they are **rule and regex checks, not model opinions**. A banned word is present or
 it is not. A PII pattern matches or it does not. There is no sampling, no temperature, no "the

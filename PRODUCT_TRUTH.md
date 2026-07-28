@@ -6,7 +6,8 @@ marketing, sales, website, presentation, or demo document was used as evidence.
 Every statement below cites `path:line`.
 **Scope audited:** `apps/web`, all 16 `domains/`, all 17 `packages/`, ~263 source
 files, ~64 test files (~368 test cases).
-**Date:** 2026-07-27
+**Date:** 2026-07-27 (Series 2 updates appended as shipped; latest 2026-07-28 —
+brand-safety enforcement on generated creative).
 
 > **One-sentence truth:** AdOS is an **autonomous AI marketing/advertising agency
 > operating system** ("Agency OS") that runs local, offline-capable AI to take a
@@ -26,7 +27,9 @@ files, ~64 test files (~368 test cases).
    Mission → Approval → Asset → PerformanceReport —
    `domains/agency-os/src/{workspace,client,brand,product,project,mission,approval,asset,report}/`.
    Brands carry voice/rules/banned words (`brand/brand.ts:20-42`); Products carry
-   pricing (`product/product.ts:30`).
+   pricing (`product/product.ts:30`). Banned words are **enforced** on generated
+   creative — the brand-safety gate blocks copy containing them before it is saved
+   (`creative-studio/.../service.ts:70-90`, `apps/web/src/safety.ts`).
 3. **A linear, human-gated campaign pipeline**, orchestrated in
    `apps/web/src/routes.ts:731-1184`:
    Mission → **MarketingBrief** (`domains/marketing-intelligence/.../brief/service.ts:43-96`)
@@ -134,6 +137,7 @@ files, ~64 test files (~368 test cases).
 | Mission lifecycle state machine + approval gates | `mission.ts:172-216`, `approval.ts:187`, `approval.test.ts` |
 | Marketing brief generation (AI, provenance) | `marketing-intelligence/.../service.ts:43-96`, `mission-processing.test.ts:76-127` |
 | Creative set generation (copy only, gated) | `creative-studio/.../service.ts:38-89`, `creative.test.ts` |
+| Brand-safety enforcement on generated creative — banned words + PII/secret scan, **blocks before persist**, emits `creative.blocked.v1` | gate `creative-studio/.../service.ts:70-90`, adapter `apps/web/src/safety.ts:18`, reused engine `ai-manager/.../safety-engine.ts:48`, `safety.test.ts`, `creative.test.ts` (block case) |
 | Campaign draft assembly (channels/budget, gated, never launched) | `campaign-engine/.../service.ts:36-90`, `campaign.test.ts:86-87` |
 | Deterministic ad-KPI math (CTR/CPC/CPA/CPL/ROAS/ROI) | `analytics-engine/.../kpi.ts:39-50`, `campaign-report.test.ts:31-45` |
 | Executive/CEO dashboard synthesis (single AI call) | `executive-ai/.../service.ts:48-64` |

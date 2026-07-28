@@ -236,6 +236,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
         targetAudience: (req.body['targetAudience'] ?? '').trim(),
         values: parseList(req.body['values']),
       },
+      rules: { bannedWords: parseList(req.body['bannedWords']) },
     });
     if (r.isErr) return res.html(brandForm({ session, clients: idName(clients), error: r.error.message, values: req.body }), 400);
     return res.redirect('/products/new');
@@ -969,6 +970,8 @@ async function generateCreative(app: App, session: Session, res: Res, id: string
     targetAudience: brief.content.targetAudience,
     positioning: brief.content.positioning,
     keyMessages: [...brief.content.keyMessages],
+    brandId: brand.id.toString(),
+    bannedWords: [...brand.rules.bannedWords],
   });
   if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
 

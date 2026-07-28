@@ -26,6 +26,10 @@ export interface CreativeContext {
   targetAudience: string;
   positioning: string;
   keyMessages: string[];
+  /** Brand identity of the mission's brand — used by the brand-safety gate. */
+  brandId?: string;
+  /** Operator-defined words the generated copy must never contain. */
+  bannedWords?: string[];
 }
 
 export interface LandingPageCopy {
@@ -76,6 +80,17 @@ export class CreativeGenerated extends DomainEvent<{
   tenantId: string;
 }> {
   readonly eventName = CREATIVE_STUDIO_EVENTS.CREATIVE_GENERATED_V1;
+}
+
+/** Emitted when the brand-safety gate blocks generated copy before it is saved. */
+export class CreativeBlocked extends DomainEvent<{
+  missionId: string;
+  clientId: string;
+  briefId: string;
+  issues: string[];
+  tenantId: string;
+}> {
+  readonly eventName = CREATIVE_STUDIO_EVENTS.CREATIVE_BLOCKED_V1;
 }
 
 /**

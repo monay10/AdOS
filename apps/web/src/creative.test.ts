@@ -44,7 +44,11 @@ function client() {
 }
 
 /** Onboard + generate & approve a brief, leaving the mission ready for creative. */
-async function readyForCreative(c: ReturnType<typeof client>, company: string): Promise<{ missionId: string; tenantId: string }> {
+async function readyForCreative(
+  c: ReturnType<typeof client>,
+  company: string,
+  opts: { bannedWords?: string } = {},
+): Promise<{ missionId: string; tenantId: string }> {
   const tenantId = slugifyTenant(company);
   const asT = <T>(fn: () => Promise<T>): Promise<T> =>
     TenantContext.run({ tenantId, correlationId: 't', actor: 'o@x.com', roles: [] } as RequestContext, fn);
@@ -54,7 +58,13 @@ async function readyForCreative(c: ReturnType<typeof client>, company: string): 
   const wsId = await asT(async () => (await app.workspaces.list()).find((w) => w.tenantId === tenantId)!.id.toString());
   await c.req('POST', '/clients', { workspaceId: wsId, name: 'Client', industry: 'healthcare', email: 'c@x.com' });
   const clientId = await asT(async () => (await app.clients.list()).find((cl) => cl.tenantId === tenantId)!.id.toString());
-  await c.req('POST', '/brands', { clientId, name: 'Brand', voice: 'warm and trustworthy', values: 'care, expertise' });
+  await c.req('POST', '/brands', {
+    clientId,
+    name: 'Brand',
+    voice: 'warm and trustworthy',
+    values: 'care, expertise',
+    ...(opts.bannedWords ? { bannedWords: opts.bannedWords } : {}),
+  });
   await c.req('POST', '/products', { clientId, name: 'Whitening', description: 'In-clinic whitening', pricingModel: 'one_time', price: '129', currency: 'TRY' });
   await c.req('POST', '/missions', { workspaceId: wsId, clientId, objective: 'Acquire new dental patients next month', budget: '80000', currency: 'TRY', period: 'monthly' });
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
@@ -130,6 +140,28 @@ describe('Phase 3 — Creative (Brief → Creative Studio → Creative Review �
     // Brief still reads as approved even though the creative was rejected.
     expect(rejected).toContain('Brief approved by executive');
     expect(app.recentEvents(tenantId, 40).map((e) => e.eventName)).toContain('mission.failed.v1');
+  });
+
+  it('blocks creative generation when the copy contains a brand banned word', async () => {
+    const c = client();
+    // The deterministic offline copy always contains the word "trust"; ban it.
+    const { missionId, tenantId } = await readyForCreative(c, 'Safety Creative Co', { bannedWords: 'trust' });
+    const asT = <T>(fn: () => Promise<T>): Promise<T> =>
+      TenantContext.run({ tenantId, correlationId: 't', actor: 'o@x.com', roles: [] } as RequestContext, fn);
+
+    const r = await c.req('POST', `/missions/${missionId}/creative`);
+    const body = await r.text();
+    // The gate blocks and the mission detail re-renders with the safety error.
+    expect(body).toContain('brand safety');
+
+    await asT(async () => {
+      // Nothing was persisted, and the mission never advanced to the review gate.
+      expect(await app.creative.list(missionId)).toHaveLength(0);
+      expect((await app.missions.list()).find((m) => m.tenantId === tenantId)!.status).toBe('planning');
+    });
+
+    // The block is observable on the event bus.
+    expect(app.recentEvents(tenantId, 40).map((e) => e.eventName)).toContain('creative.blocked.v1');
   });
 
   it('does not offer creative generation before the brief is approved', async () => {

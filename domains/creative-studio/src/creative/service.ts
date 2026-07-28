@@ -1,9 +1,10 @@
-import { UnavailableError, type AppError, type Result, err, ok } from '@ados/kernel';
+import { ForbiddenError, UnavailableError, type AppError, type Result, err, ok } from '@ados/kernel';
 import type { DomainEvent } from '@ados/kernel';
 import type { EventBus } from '@ados/event-bus';
 import { telemetry, type Telemetry } from '@ados/observability';
 import type { AIManagerPort, AITaskResult } from '@ados/contracts';
-import { CreativeSet, type CreativeContent, type CreativeContext } from './creative-set.js';
+import { CreativeBlocked, CreativeSet, type CreativeContent, type CreativeContext } from './creative-set.js';
+import type { CreativeSafetyGate } from './safety.js';
 import type { CreativeSetRepository } from './repository.js';
 
 /** JSON schema the AI Manager enforces on the creative set the model returns. */
@@ -33,6 +34,7 @@ export class CreativeStudioService {
     private readonly repo: CreativeSetRepository,
     private readonly bus: EventBus,
     private readonly ai: AIManagerPort,
+    private readonly safety?: CreativeSafetyGate,
   ) {}
 
   async generate(context: CreativeContext): Promise<Result<CreativeSet, AppError>> {
@@ -65,6 +67,27 @@ export class CreativeStudioService {
       const content = validateContent(result.output);
       if (content.isErr) return err(content.error);
 
+      // Brand-safety gate — reject unsafe copy BEFORE it is ever persisted.
+      if (this.safety) {
+        const verdict = await this.safety.inspect(content.value, {
+          brandId: context.brandId,
+          bannedWords: context.bannedWords,
+        });
+        if (!verdict.safe) {
+          await this.publishBlocked(context, verdict.issues);
+          this.tele.count('blocked');
+          this.tele.logger.warn(
+            { missionId: context.missionId, issues: verdict.issues },
+            'creative set blocked by brand safety',
+          );
+          return err(
+            new ForbiddenError('Creative blocked by brand safety', {
+              details: { missionId: context.missionId, issues: verdict.issues },
+            }),
+          );
+        }
+      }
+
       const set = CreativeSet.generate({
         context,
         content: content.value,
@@ -96,6 +119,21 @@ export class CreativeStudioService {
   private async publish(set: CreativeSet): Promise<void> {
     const events: DomainEvent[] = set.pullDomainEvents();
     if (events.length > 0) await this.bus.publish(events.map((e) => e.toEnvelope()));
+  }
+
+  private async publishBlocked(context: CreativeContext, issues: string[]): Promise<void> {
+    const event = new CreativeBlocked(
+      context.missionId,
+      {
+        missionId: context.missionId,
+        clientId: context.clientId,
+        briefId: context.briefId,
+        issues,
+        tenantId: context.tenantId,
+      },
+      { tenantId: context.tenantId },
+    );
+    await this.bus.publish([event.toEnvelope()]);
   }
 }
 

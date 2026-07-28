@@ -502,6 +502,7 @@ export function brandForm(opts: {
           <div><label>${esc(t('form.brand.targetAudience'))}</label><input name="targetAudience" placeholder="${esc(t('ph.audience'))}" value="${esc(v['targetAudience'])}"></div>
         </div>
         <label>${esc(t('form.brand.values'))}</label><input name="values" placeholder="${esc(t('ph.values'))}" value="${esc(v['values'])}">
+        <label>${esc(t('form.brand.bannedWords'))}</label><input name="bannedWords" placeholder="${esc(t('ph.bannedWords'))}" value="${esc(v['bannedWords'])}">
         <div class="actions"><button class="btn">${esc(t('form.brand.submit'))}</button></div>
       </form></div>`,
   });
