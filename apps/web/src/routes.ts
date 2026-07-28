@@ -55,6 +55,7 @@ import { governanceMetrics } from './governance-metrics.js';
 import { approvalFunnel, reviewStats } from './governance-decisions.js';
 import { stageLatency } from './stage-latency.js';
 import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
+import { resilienceStats } from './resilience-stats.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -719,11 +720,12 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const funnel = approvalFunnel(decisions);
     const review = reviewStats(decisions);
     const latency = stageLatency(app.traces.list(session.tenantId, 100));
+    const resilience = resilienceStats(app.traces.list(session.tenantId, 100));
     const missionRows: MissionSummary[] = (await app.missions.list())
       .filter((m) => m.tenantId === session.tenantId)
       .map((m) => ({ revisionCount: m.revisionCount, status: m.status }));
     const revisions = revisionFunnel(missionRows);
-    return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions }));
+    return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions, resilience }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──

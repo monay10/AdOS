@@ -153,6 +153,19 @@ is built; it is not yet the live record.
 > live (local-model) path where inference dominates. Still ❌: **retry-rate** analytics (needs a
 > multi-model inference *loop* that actually retries — no retries on the offline path yet).
 
+> **Series 2 · Sprint 7 (slice 1) update (2026-07-28) — inference resilience is measured.**
+> The `/traces` view now carries an **Inference resilience** panel (`apps/web/src/resilience-stats.ts`
+> → `resilienceStats`) computed from each trace's `inference` step `attempts` — the ordered list of
+> models the resilient `InferencePipeline` tried: **clean-first-try vs recovered-via-fallback**,
+> **outright failures** (a `failed` step), **fallback rate**, **failure rate**, and **per-model
+> health** (attempts / failures, least-healthy first). This moves the §5 "how often did the pipeline
+> fall back / fail?" rows **🔶→✅**. It is also *verified*, not just surfaced: `governed-live.test.ts`
+> now drives the governed live runtime through a fake failing engine and asserts it **falls back** to
+> the next routed model (both attempts recorded) and **retries** a transient (retryable) failure on the
+> same model and recovers. **Honest limit:** `attempts` records models *tried* (the fallback chain),
+> so the per-model **retry count** within one model stays internal to the pipeline and is not yet
+> surfaced — recording it is a later slice.
+
 > **Series 2 · Sprint 4.3 (observe ladder) update (2026-07-28) — governance now runs live, observed.**
 > The stage engine's post-generation `governance.observe` stage (`apps/web/src/stage-engine.ts`)
 > now runs the REAL grounding + governance chain on every live AI task: **`evidence`** (the real
@@ -260,8 +273,8 @@ its honest tier is the clearest summary this document can give:
 | --- | --- | --- | --- |
 | **Which stages ran, in what order?** | ExecutionTrace `steps` (`kernel.ts:124`) | **Yes** — Stage Engine produces the trace live; `stageLatency` reads it in order (Sprint 4.1 + 5) | ✅ |
 | **How long did each stage take?** (stage durations) | ExecutionTrace step timestamps (`kernel.ts:124`) | **Yes** — `stage-latency.ts` computes per-stage mean from consecutive step gaps (Sprint 5); near-zero on the sub-ms offline path, real on live | ✅ (outer record) |
-| **How often did stages retry?** (retry rate) | ExecutionTrace + MonitoringPort (`ports.ts:160-161`) | No — needs a multi-model inference loop that retries (offline serves in one call) | 🔶 built / ❌ live |
-| **How often did runs fail?** (failure rate) | ExecutionTrace outcome; live *events* via feed | Partly — failures visible as events (`app.ts:118-129`); rate-over-time not | partial ✅ / ❌ rate |
+| **How often did the pipeline fall back / a model fail?** (resilience) | ExecutionTrace `inference` step `attempts` (`ai-task.ts:79`) | **Yes** — `resilience-stats.ts` reads the fallback chain + per-model health from the recorded attempts (Sprint 7); clean on the offline path, real on live | ✅ (fallback + failure + model health; per-model *retry count* not yet recorded) |
+| **How often did runs fail?** (failure rate) | ExecutionTrace `failed` step + `inference` attempts | **Yes** — `resilience-stats.ts` failureRatePct over the same traces (Sprint 7) | ✅ (outer record) |
 | **How often did a human approve?** (approval rate) | ExecutionTrace decisions; live *events* via feed | Partly — approvals visible as events (`app.ts:118-129`); rate-over-time not | partial ✅ / ❌ rate |
 
 Two honest patterns fall out of the table. First, **every rich, per-stage, time-series pipeline

@@ -162,6 +162,10 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     expect(tracesHtml).toContain('Review duration'); // gate approvals carried a real reviewMs
     expect(tracesHtml).toContain('Revision funnel'); // at least one mission was created
     expect(tracesHtml).toContain('Stage latency'); // per-stage timeline over the traces
+    // Sprint 7: inference resilience measured over the same traces. The offline
+    // path never fails, so this reads clean first-try — truthfully.
+    expect(tracesHtml).toContain('Inference resilience');
+    expect(tracesHtml).toContain('offline-deterministic'); // model health lists the served model
 
     // ── The grounded half: finish mission 1 so its KPIs land in the Company
     // Brain (Sprint 3 write), then a NEW campaign's brief trace is genuinely

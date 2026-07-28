@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { TenantContext, type RequestContext } from '@ados/tenancy';
+import { UnavailableError } from '@ados/kernel';
 import type { AIMessage, AITaskRequest } from '@ados/contracts';
 import type { InferenceEngineId, InferenceEnginePort } from '@ados/ai-manager';
 import { createLiveGovernedManager } from './governed-inference.js';
@@ -85,5 +86,55 @@ describe('Governed live runtime (Sprint 4.4b — live path on the governed pipel
 
     const system = engine.lastMessages.find((m) => m.role === 'system')!.content;
     expect(system).toContain('Turkish');
+  });
+});
+
+/** Engine whose behaviour depends on which model is asked, to drive the fallback
+ * chain: it fails for the primary model and succeeds for the fallback. */
+class PerModelEngine implements InferenceEnginePort {
+  readonly id: InferenceEngineId = 'ollama';
+  constructor(private readonly behaviour: (model: string) => string) {}
+  async health(): Promise<{ ok: boolean }> {
+    return { ok: true };
+  }
+  async complete(input: { model: string; messages: AIMessage[] }): Promise<{ text: string; promptTokens: number; completionTokens: number }> {
+    return { text: this.behaviour(input.model), promptTokens: 0, completionTokens: 0 };
+  }
+  async *stream(): AsyncIterable<never> {}
+}
+
+describe('Governed live runtime — resilience (Sprint 7: retry / recovery / fallback)', () => {
+  it('falls back to the next routed model when the primary fails, recording both attempts', async () => {
+    // reasoning override 'reasoner' is the primary; the default 'base' is the fallback.
+    const engine = new PerModelEngine((model) => {
+      if (model === 'reasoner') throw new Error('primary model unavailable'); // non-retryable → immediate fallback
+      return '{"ok":true}';
+    });
+    const ai = createLiveGovernedManager(engine, { defaultModel: 'base', models: { reasoning: 'reasoner' } });
+
+    const res = await run(() => ai.submit(req({ capability: 'reasoning' })));
+
+    expect(res.output).toEqual({ ok: true }); // recovered — the mission did not fail
+    expect(res.model).toBe('base'); // served by the fallback
+    expect(res.attempts).toEqual([
+      { model: 'reasoner', ok: false, error: expect.any(String) },
+      { model: 'base', ok: true },
+    ]);
+  });
+
+  it('retries a transient (retryable) failure on the same model and recovers', async () => {
+    let calls = 0;
+    const engine = new PerModelEngine(() => {
+      calls += 1;
+      if (calls === 1) throw new UnavailableError('temporarily overloaded'); // retryable → same-model retry
+      return '{"ok":true}';
+    });
+    const ai = createLiveGovernedManager(engine, { defaultModel: 'm' });
+
+    const res = await run(() => ai.submit(req()));
+
+    expect(res.output).toEqual({ ok: true });
+    expect(calls).toBeGreaterThan(1); // it retried
+    expect(res.attempts).toEqual([{ model: 'm', ok: true }]); // one model, recovered via retry
   });
 });

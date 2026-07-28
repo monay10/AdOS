@@ -3,6 +3,7 @@ import type { GovernanceMetrics } from '../governance-metrics.js';
 import type { ApprovalFunnel, ReviewStats } from '../governance-decisions.js';
 import type { StageTiming } from '../stage-latency.js';
 import type { RevisionFunnel } from '../revision-funnel.js';
+import type { ResilienceStats } from '../resilience-stats.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1202,6 +1203,7 @@ export function tracesPage(opts: {
   review?: ReviewStats;
   latency?: StageTiming[];
   revisions?: RevisionFunnel;
+  resilience?: ResilienceStats;
 }): string {
   const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
   const metricsPanel = opts.metrics && opts.metrics.total > 0 ? governanceMetricsPanel(opts.metrics) : '';
@@ -1209,6 +1211,7 @@ export function tracesPage(opts: {
   const reviewPanel = opts.review && opts.review.count > 0 ? reviewStatsPanel(opts.review) : '';
   const revisionPanel = opts.revisions && opts.revisions.created > 0 ? revisionFunnelPanel(opts.revisions) : '';
   const latencyPanel = opts.latency && opts.latency.length > 0 ? stageLatencyPanel(opts.latency) : '';
+  const resiliencePanel = opts.resilience && opts.resilience.aiTasks > 0 ? resiliencePanelHtml(opts.resilience) : '';
   const body =
     opts.traces.length === 0
       ? `<div class="panel"><div class="empty">${esc(t('traces.empty'))}</div></div>`
@@ -1245,8 +1248,29 @@ export function tracesPage(opts: {
     active: '/traces',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
-      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${body}`,
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${resiliencePanel}${body}`,
   });
+}
+
+/** Inference resilience — fallback / failure / model health over live traces (Sprint 7). */
+function resiliencePanelHtml(r: ResilienceStats): string {
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+  const healthRows = r.modelHealth
+    .map((m) => `<tr><td>${esc(m.model)}</td><td>${m.attempts}</td><td>${m.failures}</td></tr>`)
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('res.title'))}</h2><p class="sub">${esc(t('res.sub'))}</p>
+    <div class="grid" style="margin-bottom:18px">
+      ${stat(t('res.tasks'), String(r.aiTasks))}
+      ${stat(t('res.clean'), String(r.cleanFirstTry))}
+      ${stat(t('res.recovered'), String(r.recoveredViaFallback))}
+      ${stat(t('res.failed'), String(r.failed))}
+      ${stat(t('res.fallbackRate'), `${r.fallbackRatePct}%`)}
+      ${stat(t('res.failureRate'), `${r.failureRatePct}%`)}
+    </div>
+    ${healthRows ? `<div><label>${esc(t('res.modelHealth'))}</label><table><thead><tr><th>${esc(t('common.model'))}</th><th>${esc(t('res.attempts'))}</th><th>${esc(t('res.failures'))}</th></tr></thead><tbody>${healthRows}</tbody></table></div>` : ''}
+  </div>`;
 }
 
 /** Review-duration statistics — how long human review actually takes (Sprint 5). */
