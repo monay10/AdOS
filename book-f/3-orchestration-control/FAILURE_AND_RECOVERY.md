@@ -9,6 +9,22 @@
 > deterministic · every stage has one responsibility · the orchestrator never changes evidence ·
 > the human gate is a first-class stage, not an exception · observable by design.*
 
+> **Series 2 · Sprint 7 update (2026-07-28) — the resilient runtime is wired, verified, and
+> degrades gracefully.** Since Sprint 4.4 the governed `AIManager` runtime IS the generation path
+> (both offline and live), so its `InferencePipeline` resilience is no longer "built (unwired)":
+> **(1) Retry / fallback / circuit-breaker are verified end-to-end** — `governed-live.test.ts` drives
+> the governed live runtime through a fake failing engine and proves it retries a transient failure on
+> the same model (recorded as `tries: 2`) and falls back to the next routed model when the primary
+> fails. Thresholds are operator-tunable (`AI_MAX_RETRIES` / `AI_TIMEOUT_MS` / `AI_BREAKER_THRESHOLD` /
+> `AI_BREAKER_COOLDOWN_MS`). **(2) Total failure degrades gracefully** — when every routed model fails,
+> each generation service catches the throw (→ a `retryable` `UnavailableError`) and the mission route
+> shows a localized *"AI temporarily unavailable — your mission is unchanged, retry"* banner, never a
+> 500 and never a corrupted mission; a `failed` ExecutionTrace is recorded and the resilience-analytics
+> failure count reflects it. `graceful-degrade.test.ts` proves degrade → intact mission → recovery on
+> retry. So §3's "self-repair / retry" is now joined by cross-model **recovery** and a clean
+> **degrade** signal, both ✅ SHIPPED on the wired runtime. The §3.2 "🔶 BUILT (UNWIRED)" tier note
+> below predates Sprint 4.4 and is retained as historical record.
+
 ---
 
 ## 1. What this document defines

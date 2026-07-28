@@ -123,6 +123,10 @@ const DICT: Dict = {
   'res.modelHealth': { en: 'Model health', tr: 'Model sağlığı' },
   'res.attempts': { en: 'Attempts', tr: 'Deneme' },
   'res.failures': { en: 'Failures', tr: 'Hata' },
+  'ai.unavailable': {
+    en: 'The AI is temporarily unavailable (all routed models failed). Your mission is unchanged — please try again in a moment.',
+    tr: 'AI şu anda geçici olarak kullanılamıyor (yönlendirilen tüm modeller başarısız oldu). Göreviniz değişmedi — lütfen birazdan tekrar deneyin.',
+  },
   'gov.warn': { en: '⚠ Governance (advisory)', tr: '⚠ Yönetişim (bilgilendirme)' },
   'gov.pass': { en: '✓ Governance: passed', tr: '✓ Yönetişim: geçti' },
   'gov.confidence': { en: 'confidence', tr: 'güven' },

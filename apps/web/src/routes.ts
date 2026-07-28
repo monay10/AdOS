@@ -1,4 +1,5 @@
 import { TenantContext, type RequestContext } from '@ados/tenancy';
+import type { AppError } from '@ados/kernel';
 import { ApprovalId, AssetId, ClientId, MissionId, MissionWizard, PerformanceReportId, ProjectId, WorkspaceId, type AssetKind, type ProductPricing, type ProjectStatus, type ReportMetric } from '@ados/agency-os';
 import { COMPANY_BRAIN_EVENTS } from '@ados/company-brain';
 import { EXECUTIVE_MEMORY_EVENTS } from '@ados/executive-memory';
@@ -996,6 +997,19 @@ async function cancelMission(app: App, session: Session, res: Res, id: string, r
   return res.redirect(`/missions/${id}`);
 }
 
+/**
+ * Map a generation failure to an operator-facing message (Sprint 7 — graceful
+ * degrade). When the AI is transiently unavailable — the resilient pipeline
+ * exhausted every routed model — the error is `retryable`; we show a clear
+ * "temporarily unavailable, mission unchanged, retry" banner rather than a raw
+ * technical string. The mission is never corrupted: no artifact was created, so
+ * clicking generate again simply retries. Non-retryable errors keep their
+ * specific message.
+ */
+function generationErrorMessage(error: AppError): string {
+  return error.retryable ? t('ai.unavailable') : error.message;
+}
+
 /** Marketing Intelligence: generate the brief, then move the mission to approval. */
 async function generateBrief(app: App, session: Session, res: Res, id: string): Promise<void> {
   const found = await app.missions.get(MissionId.of(id));
@@ -1048,7 +1062,7 @@ async function generateBrief(app: App, session: Session, res: Res, id: string): 
       : {}),
     ...(historicalPerformance ? { historicalPerformance } : {}),
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
 
   // Advance the mission into the executive approval gate.
   if (mission.status === 'submitted') await app.missions.plan(MissionId.of(id));
@@ -1087,7 +1101,7 @@ async function generateCreative(app: App, session: Session, res: Res, id: string
     brandId: brand.id.toString(),
     bannedWords: [...brand.rules.bannedWords],
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
 
   await app.missions.requestApproval(MissionId.of(id), 'creative_assets');
   return res.redirect(`/missions/${id}`);
@@ -1123,7 +1137,7 @@ async function generateCampaign(app: App, session: Session, res: Res, id: string
     adCopy: creative.content.adCopy,
     cta: creative.content.cta,
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
 
   await app.missions.requestApproval(MissionId.of(id), 'campaign_launch');
   return res.redirect(`/missions/${id}`);
@@ -1163,7 +1177,7 @@ async function generateReport(app: App, session: Session, res: Res, id: string, 
     spend: { amountMinor: spendMinor, currency },
     revenue: { amountMinor: revenueMinor, currency },
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
   return res.redirect(`/missions/${id}`);
 }
 
@@ -1196,7 +1210,7 @@ async function generateExecutive(app: App, session: Session, res: Res, id: strin
     reportSummary: report.narrative.summary,
     reportRecommendations: [...report.narrative.recommendations],
   });
-  if (generated.isErr) return renderMissionDetail(app, session, res, id, generated.error.message);
+  if (generated.isErr) return renderMissionDetail(app, session, res, id, generationErrorMessage(generated.error));
   return res.redirect(`/missions/${id}`);
 }
 
