@@ -26,6 +26,7 @@ import { createOfflineGovernedManager } from './governed-inference.js';
 import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
+import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -67,6 +68,8 @@ export class App {
   readonly journal: InMemoryDecisionJournal;
   /** Every AI task leaves an auditable ExecutionTrace here (Sprint 4.1). */
   readonly traces: InMemoryExecutionTraceStore;
+  /** Each gate approval records flagged/override for the approval funnel (Sprint 5). */
+  readonly governanceDecisions: InMemoryGovernanceDecisionLog;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -88,6 +91,7 @@ export class App {
     // orchestration stages run observably around generation; Sprint 4.3 — real
     // governance stages run in observe mode, recorded but never enforced).
     this.traces = new InMemoryExecutionTraceStore();
+    this.governanceDecisions = new InMemoryGovernanceDecisionLog();
     ai = new StagedAIManager(ai, this.traces, defaultStageEngine(this.brain));
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);

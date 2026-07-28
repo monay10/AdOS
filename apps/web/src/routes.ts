@@ -51,6 +51,7 @@ import {
   type ReportView,
 } from './views/pages.js';
 import { governanceMetrics } from './governance-metrics.js';
+import { approvalFunnel } from './governance-decisions.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -707,11 +708,12 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     return res.html(notFound(session), 404);
   }
 
-  // ── AI Execution Traces (Sprint 4.1) + governance metrics (Sprint 5) ──
+  // ── AI Execution Traces (Sprint 4.1) + governance metrics/funnel (Sprint 5) ──
   if (path === '/traces' && method === 'GET') {
     const traces = app.traces.list(session.tenantId, 50);
     const metrics = governanceMetrics(app.traces.list(session.tenantId, 100));
-    return res.html(tracesPage({ session, traces, metrics }));
+    const funnel = approvalFunnel(app.governanceDecisions.list(session.tenantId));
+    return res.html(tracesPage({ session, traces, metrics, funnel }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
@@ -907,11 +909,14 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   // Sprint 4.3B (Required Review, phase 1): when governance flagged this
   // artifact, approving REQUIRES an explicit operator acknowledgment — but the
   // approval is still possible once acknowledged (override, not a hard block).
-  if (!acknowledged && governanceReviewRequired(app, session.tenantId, id)) {
+  const flagged = governanceReviewRequired(app, session.tenantId, id);
+  if (!acknowledged && flagged) {
     return renderMissionDetail(app, session, res, id, t('gov.reviewRequiredError'));
   }
   const r = await app.missions.approve(MissionId.of(id), gate);
   if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
+  // Sprint 5: record the gate decision for the approval/override funnel.
+  app.governanceDecisions.record(session.tenantId, { gate, flagged, acknowledged, at: new Date().toISOString() });
   return res.redirect(`/missions/${id}`);
 }
 

@@ -1,5 +1,6 @@
 import type { ExecutionTrace } from '@ados/ai-manager';
 import type { GovernanceMetrics } from '../governance-metrics.js';
+import type { ApprovalFunnel } from '../governance-decisions.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1191,9 +1192,10 @@ export function listPage(opts: {
  * (received → inference → completed/failed). Governed stages are not shown
  * because they are not wired yet — the trace never claims what didn't run.
  */
-export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; metrics?: GovernanceMetrics }): string {
+export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; metrics?: GovernanceMetrics; funnel?: ApprovalFunnel }): string {
   const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
   const metricsPanel = opts.metrics && opts.metrics.total > 0 ? governanceMetricsPanel(opts.metrics) : '';
+  const funnelPanel = opts.funnel && opts.funnel.approvals > 0 ? approvalFunnelPanel(opts.funnel) : '';
   const body =
     opts.traces.length === 0
       ? `<div class="panel"><div class="empty">${esc(t('traces.empty'))}</div></div>`
@@ -1230,8 +1232,23 @@ export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; m
     active: '/traces',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
-      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${body}`,
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${body}`,
   });
+}
+
+/** Approval/override funnel — the signal for hard-enforcement (Sprint 5). */
+function approvalFunnelPanel(f: ApprovalFunnel): string {
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('gm.funnelTitle'))}</h2><p class="sub">${esc(t('gm.funnelSub'))}</p>
+    <div class="grid">
+      ${stat(t('gm.approvals'), String(f.approvals))}
+      ${stat(t('gm.flagged'), String(f.flagged))}
+      ${stat(t('gm.overrides'), String(f.overrides))}
+      ${stat(t('gm.overrideRate'), `${f.overrideRatePct}%`)}
+    </div>
+  </div>`;
 }
 
 /** Governance analytics summary — measurement before enforcement (Sprint 5). */

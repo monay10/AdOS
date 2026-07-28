@@ -153,6 +153,10 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     expect(tracesHtml).toContain('Governance metrics');
     expect(tracesHtml).toContain('No-evidence rate');
     expect(tracesHtml).toContain('Confidence distribution');
+    // Approval funnel: the earlier gate approvals were governance-flagged and
+    // overridden via acknowledgment, so the override signal is now measured.
+    expect(tracesHtml).toContain('Approval funnel');
+    expect(tracesHtml).toContain('Override rate');
 
     // ── The grounded half: finish mission 1 so its KPIs land in the Company
     // Brain (Sprint 3 write), then a NEW campaign's brief trace is genuinely
