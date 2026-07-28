@@ -27,7 +27,9 @@ import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
-import { InMemoryMissionQueue } from './mission-queue.js';
+import { InMemoryMissionQueue, type MissionQueue } from './mission-queue.js';
+import { QueueWorker } from './queue-worker.js';
+import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
 import { REVIEW_ONLY, type GovernancePolicy } from './governance-policy.js';
@@ -76,8 +78,10 @@ export class App {
   readonly governanceDecisions: InMemoryGovernanceDecisionLog;
   /** Which gates hard-enforce a failing governance verdict (Sprint 8; default none). */
   readonly governance: GovernancePolicy;
-  /** Missions an agent created from an applied recommendation (Recommendation → Apply). */
-  readonly missionQueue = new InMemoryMissionQueue();
+  /** Durable queue of missions an agent created from applied recommendations. */
+  readonly missionQueue: MissionQueue;
+  /** Background drain of {@link missionQueue} — started explicitly via {@link startWorker}. */
+  private readonly worker: QueueWorker;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -96,6 +100,10 @@ export class App {
     // stays in overridable Required-review mode. `main.ts` reads the operator's
     // GOVERNANCE_ENFORCED_GATES opt-in.
     governance: GovernancePolicy = REVIEW_ONLY,
+    // Durable queue for applied recommendations (Async Queue Worker sprint).
+    // In-memory by default; `main.ts` injects the SQLite-backed queue so applied
+    // recommendations survive a restart and the worker resumes them.
+    queue: MissionQueue = new InMemoryMissionQueue(),
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -127,6 +135,11 @@ export class App {
     this.execMemory = execMemory;
     this.journal = journal;
     this.governance = governance;
+    this.missionQueue = queue;
+    // The worker runs the same governed brief step an operator would, out of band,
+    // and stops at the human gate. Started explicitly (startWorker) so tests that
+    // only construct/`start()` the app never spawn a background loop.
+    this.worker = new QueueWorker(this.missionQueue, (job) => runApplyJob(this, job));
   }
 
   /**
@@ -160,6 +173,11 @@ export class App {
     if (isRestorableBrain(this.brain)) await this.brain.restore();
     if (isRestorable(this.execMemory)) await this.execMemory.restore();
     if (isRestorable(this.journal)) await this.journal.restore();
+    // Prepare the durable queue and resume any job a crash left mid-flight: a
+    // `running` job with an expired lease returns to `pending` so the worker
+    // picks it up again (Async Queue Worker — crash recovery / resume).
+    if (this.missionQueue.init) await this.missionQueue.init();
+    await this.missionQueue.recoverStale(Date.now());
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,
@@ -175,5 +193,24 @@ export class App {
   /** Most recent events for the current tenant, newest first. */
   recentEvents(tenantId: string, limit = 10): FeedEntry[] {
     return this.feed.filter((e) => e.tenantId === tenantId).slice(0, limit);
+  }
+
+  /** Start the background queue worker (production). No-op if already running. */
+  startWorker(): void {
+    this.worker.start();
+  }
+
+  /**
+   * Drain the queue by exactly one job (recover → claim → run → settle). Returns
+   * true if it did work. Deterministic hook for tests + a one-shot drain; the
+   * production loop is {@link startWorker}.
+   */
+  processQueueOnce(): Promise<boolean> {
+    return this.worker.tick();
+  }
+
+  /** Graceful shutdown: stop claiming and await the in-flight queue job. */
+  async stop(): Promise<void> {
+    await this.worker.stop();
   }
 }

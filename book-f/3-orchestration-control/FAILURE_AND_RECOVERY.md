@@ -25,6 +25,24 @@
 > **degrade** signal, both ✅ SHIPPED on the wired runtime. The §3.2 "🔶 BUILT (UNWIRED)" tier note
 > below predates Sprint 4.4 and is retained as historical record.
 
+> **Addendum (Async Queue Worker — the recovery law applied to background work, ✅ SHIPPED).** §2's
+> deterministic-recovery law and §4's idempotency now govern more than in-request generation: applied
+> recommendations run through a **durable Mission Queue** (`apps/web/src/mission-queue.ts` — `SqlMissionQueue`
+> on the local `BRAIN_DB` file, `InMemoryMissionQueue` for dev) drained by an out-of-band **Queue Worker**
+> (`queue-worker.ts`). It embodies exactly this document's rules for background jobs: **bounded retry with
+> exponential backoff on *retryable* failures only** (a non-retryable failure fails at once — §2, no
+> open-ended retry); **idempotent processing** — the runner skips generation when a brief already exists and
+> only advances an un-advanced mission (§4, safe replay of a completed step); **crash recovery / resume** —
+> `recoverStale` returns `running` jobs whose lease expired to `pending` at startup, so a job a restart
+> interrupted is re-run, not lost; **no duplicate execution** — an atomic claim + lease flips a due job to
+> `running` exactly once; and **graceful shutdown** — `App.stop()` stops claiming and awaits the in-flight
+> job so a mission is never left half-generated. The worker runs each job inside the job's `TenantContext`
+> and **stops at the human approval gate** (Book F Law 5 — never an autonomous launch). Proven by
+> `queue-worker.test.ts`, `mission-queue.test.ts`, `sql-mission-queue.test.ts`, and the worker-drained
+> `recommendation-apply.e2e.test.ts`. **Still 🔶/❌:** single-process today (the lease design is
+> multi-worker-correct but not yet exercised across processes); fixed-interval poll, not event-driven; no
+> dead-letter inspection UI for `failed` jobs.
+
 ---
 
 ## 1. What this document defines

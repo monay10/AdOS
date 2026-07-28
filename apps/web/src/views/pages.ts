@@ -1415,7 +1415,8 @@ export function recommendationsPage(opts: {
 function missionQueuePanel(queue?: QueuedMission[]): string {
   if (!queue || queue.length === 0) return '';
   const statusBadge: Record<string, string> = {
-    generating: `<span class="badge">${esc(t('queue.generating'))}</span>`,
+    pending: `<span class="badge">${esc(t('queue.pending'))}</span>`,
+    running: `<span class="badge">${esc(t('queue.generating'))}</span>`,
     awaiting_approval: `<span class="badge active">${esc(t('queue.awaiting'))}</span>`,
     failed: `<span class="badge">${esc(t('queue.failed'))}</span>`,
   };

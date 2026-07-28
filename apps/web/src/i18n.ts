@@ -161,6 +161,7 @@ const DICT: Dict = {
   'queue.sub': { en: 'Missions an agent created from applied recommendations — each stops at the human approval gate.', tr: 'Bir ajanın uygulanan önerilerden oluşturduğu görevler — her biri insan onay kapısında durur.' },
   'queue.mission': { en: 'Mission', tr: 'Görev' },
   'queue.vertical': { en: 'Vertical', tr: 'Dikey' },
+  'queue.pending': { en: 'queued', tr: 'kuyrukta' },
   'queue.generating': { en: 'generating…', tr: 'üretiliyor…' },
   'queue.awaiting': { en: 'awaiting approval', tr: 'onay bekliyor' },
   'queue.failed': { en: 'failed', tr: 'başarısız' },

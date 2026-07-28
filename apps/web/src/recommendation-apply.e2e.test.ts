@@ -23,6 +23,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await app.stop();
   await close();
 });
 
@@ -58,7 +59,7 @@ const dentalWin: MarketingInsight = {
 };
 
 describe('Recommendation → Apply (safe application)', () => {
-  it('applies a recommendation: agent creates + generates a mission, queued, stopped at the human gate', async () => {
+  it('applies a recommendation: enqueues a durable job, the worker generates + stops at the human gate', async () => {
     const c = client();
     const company = 'Apply Co';
     const tenantId = slugifyTenant(company);
@@ -79,13 +80,24 @@ describe('Recommendation → Apply (safe application)', () => {
     expect(recsHtml).toContain('Scale dental');
     expect(recsHtml).toContain('/recommendations/apply'); // the Apply control
 
-    // Apply it.
+    // Apply it — this ENQUEUES a durable job and returns immediately; nothing is
+    // generated inline.
     const applyRes = await c.req('POST', '/recommendations/apply', { vertical: 'dental', kind: 'scale' });
     expect(applyRes.status).toBe(303); // redirected to the created mission
     const missionPath = applyRes.headers.get('location')!;
     const missionId = missionPath.split('/').pop()!;
 
-    // The agent generated the brief through the governed pipeline and STOPPED at
+    // Before the worker runs, the mission is merely queued (not yet at the gate).
+    const queuedHtml = await (await c.req('GET', '/recommendations')).text();
+    expect(queuedHtml).toContain('Mission queue');
+    expect(queuedHtml).toContain('queued');
+    const beforeWork = await asT(() => app.missions.get(MissionId.of(missionId)));
+    if (!beforeWork.isErr) expect(beforeWork.value.status).not.toBe('awaiting_approval');
+
+    // Drain the queue by one job (the production worker does this in a poll loop).
+    expect(await app.processQueueOnce()).toBe(true);
+
+    // The worker generated the brief through the governed pipeline and STOPPED at
     // the human gate — the mission awaits approval, a brief exists, and it was
     // grounded by the seeded history.
     const mission = await asT(() => app.missions.get(MissionId.of(missionId)));

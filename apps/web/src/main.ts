@@ -6,6 +6,7 @@ import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executiv
 import { App } from './app.js';
 import { PersistentCompanyBrain, SqlBrainStore } from './brain-persistence.js';
 import { PersistentDecisionJournal, PersistentExecutiveMemory, SqlExecutiveStore } from './executive-persistence.js';
+import { SqlMissionQueue, type MissionQueue } from './mission-queue.js';
 import { policyFromEnv } from './governance-policy.js';
 import { createAIManager } from './ai-factory.js';
 import { AuthService } from './auth/auth-service.js';
@@ -58,6 +59,10 @@ async function main(): Promise<void> {
   let brain;
   let execMemory;
   let journal;
+  // The applied-recommendation queue is durable on the same local file, so an
+  // applied recommendation survives a restart and the worker resumes it. Unset
+  // BRAIN_DB → in-memory (App's default).
+  let queue: MissionQueue | undefined;
   if (brainDbPath) {
     // One SQLite connection shared by every durable learned-state store.
     const knowledgeDb = new SqliteDatabase(brainDbPath);
@@ -65,9 +70,10 @@ async function main(): Promise<void> {
     const execStore = new SqlExecutiveStore(knowledgeDb);
     execMemory = new PersistentExecutiveMemory(new InMemoryExecutiveMemory(), execStore);
     journal = new PersistentDecisionJournal(new InMemoryDecisionJournal(), execStore);
-    logger.info({ brainDbPath }, 'durable learned state enabled (Company Brain + Executive Memory + Decision Journal, SQLite)');
+    queue = new SqlMissionQueue(knowledgeDb);
+    logger.info({ brainDbPath }, 'durable learned state enabled (Company Brain + Executive Memory + Decision Journal + Mission Queue, SQLite)');
   } else {
-    logger.warn('BRAIN_DB not set — Company Brain / Executive Memory / Decision Journal are in-memory (learned state is NOT durable across restarts)');
+    logger.warn('BRAIN_DB not set — Company Brain / Executive Memory / Decision Journal / Mission Queue are in-memory (NOT durable across restarts)');
   }
 
   // Governance enforcement (Sprint 8). Off by default — GOVERNANCE_ENFORCED_GATES
@@ -83,10 +89,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance);
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance, queue);
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance);
+    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance, queue);
   }
 
   let auth: AuthGateway | undefined;
@@ -100,6 +106,8 @@ async function main(): Promise<void> {
 
   const { server } = buildServer({ sessionSecret, app, ...(auth ? { auth } : {}) });
   await app.start();
+  // Drain applied-recommendation jobs out of band (Async Queue Worker).
+  app.startWorker();
 
   server.listen(port, () => {
     logger.info({ port }, 'AdOS web app listening');
@@ -109,9 +117,13 @@ async function main(): Promise<void> {
 
   const shutdown = (signal: string): void => {
     logger.info({ signal }, 'shutting down');
-    server.close(() => process.exit(0));
-    // Force-exit if connections do not drain in time.
-    setTimeout(() => process.exit(1), 5000).unref();
+    // Stop accepting HTTP, then drain the in-flight queue job before exiting so a
+    // mission is never left half-generated (graceful shutdown).
+    server.close(() => {
+      void app.stop().then(() => process.exit(0));
+    });
+    // Force-exit if connections/worker do not drain in time.
+    setTimeout(() => process.exit(1), 8000).unref();
   };
   process.on('SIGTERM', () => shutdown('SIGTERM'));
   process.on('SIGINT', () => shutdown('SIGINT'));
