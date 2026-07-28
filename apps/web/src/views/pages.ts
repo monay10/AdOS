@@ -5,6 +5,7 @@ import type { StageTiming } from '../stage-latency.js';
 import type { RevisionFunnel } from '../revision-funnel.js';
 import type { ResilienceStats } from '../resilience-stats.js';
 import type { MissionPlan } from '../mission-planner.js';
+import type { Recommendation } from '../recommendation-engine.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1361,6 +1362,34 @@ function stageLatencyPanel(timings: StageTiming[]): string {
     <h2>${esc(t('sl.title'))}</h2><p class="sub">${esc(t('sl.sub'))}</p>
     <div class="bars">${bars}</div>
   </div>`;
+}
+
+/** Recommendations — ranked, brain-grounded next actions (Sprint 10). */
+export function recommendationsPage(opts: { session: Session; recommendations: Recommendation[] }): string {
+  const kindBadge: Record<string, string> = {
+    scale: `<span class="badge active">${esc(t('rec.kind.scale'))}</span>`,
+    improve: `<span class="badge">${esc(t('rec.kind.improve'))}</span>`,
+    revision: `<span class="badge">${esc(t('rec.kind.revision'))}</span>`,
+    explore: `<span class="badge">${esc(t('rec.kind.explore'))}</span>`,
+  };
+  const body =
+    opts.recommendations.length === 0
+      ? `<div class="panel"><div class="empty">${esc(t('rec.empty'))}</div></div>`
+      : opts.recommendations
+          .map(
+            (r) => `<div class="panel" style="margin-bottom:14px">
+              <h2 style="margin:0 0 4px">${kindBadge[r.kind] ?? ''} ${esc(r.title)} ${r.grounded ? `<span class="badge active">${esc(t('rec.grounded'))}</span>` : ''}</h2>
+              <p class="sub" style="margin:0">${esc(r.detail)}</p>
+            </div>`,
+          )
+          .join('');
+  return layout({
+    title: t('nav.recommendations'),
+    active: '/recommendations',
+    session: opts.session,
+    body: `<div class="head"><div><h1>${esc(t('rec.title'))}</h1><p>${esc(t('rec.sub'))}</p></div>
+      <span class="badge active">${esc(t('rec.count', { n: String(opts.recommendations.length) }))}</span></div>${body}`,
+  });
 }
 
 /** Approval/override funnel — the signal for hard-enforcement (Sprint 5). */

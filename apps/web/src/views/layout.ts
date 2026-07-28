@@ -40,6 +40,7 @@ const NAV: NavDef[] = [
   { href: '/approvals', key: 'nav.approvals', icon: '☑', ready: true },
   { href: '/assets', key: 'nav.assets', icon: '▣', ready: true },
   { href: '/executive', key: 'nav.executive', icon: '★', ready: true },
+  { href: '/recommendations', key: 'nav.recommendations', icon: '➜', ready: true },
   { href: '/reports', key: 'nav.reports', icon: '❐', ready: true },
   { href: '/traces', key: 'nav.traces', icon: '❂', ready: true },
   { href: '/settings', key: 'nav.settings', icon: '⚙', ready: true },

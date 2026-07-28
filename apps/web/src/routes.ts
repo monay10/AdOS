@@ -31,6 +31,7 @@ import {
   productForm,
   projectDashboardPage,
   projectForm,
+  recommendationsPage,
   reportDetailPage,
   reportForm,
   settingsPage,
@@ -59,6 +60,7 @@ import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
 import { resilienceStats } from './resilience-stats.js';
 import { isEnforced, type MissionGate } from './governance-policy.js';
 import { planMission } from './mission-planner.js';
+import { recommend, type VerticalStat } from './recommendation-engine.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -729,6 +731,29 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       .map((m) => ({ revisionCount: m.revisionCount, status: m.status }));
     const revisions = revisionFunnel(missionRows);
     return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions, resilience }));
+  }
+
+  // ── Recommendations (Sprint 10 — ranked, brain-grounded next actions) ──
+  if (path === '/recommendations' && method === 'GET') {
+    const clients = await app.clients.list();
+    const missions = (await app.missions.list()).filter((m) => m.tenantId === session.tenantId);
+    const industryOf = new Map(clients.map((c) => [c.id.toString(), c.industry]));
+    // Aggregate the tenant's mission history per vertical (client industry).
+    const agg = new Map<string, { missions: number; completed: number; revisions: number }>();
+    for (const c of clients) if (!agg.has(c.industry)) agg.set(c.industry, { missions: 0, completed: 0, revisions: 0 });
+    for (const m of missions) {
+      const vertical = industryOf.get(m.clientId) ?? 'general';
+      const a = agg.get(vertical) ?? { missions: 0, completed: 0, revisions: 0 };
+      a.missions += 1;
+      if (m.status === 'completed') a.completed += 1;
+      a.revisions += m.revisionCount;
+      agg.set(vertical, a);
+    }
+    const stats: VerticalStat[] = [];
+    for (const [vertical, a] of agg) {
+      stats.push({ vertical, insight: await app.brain.marketing(vertical), missions: a.missions, completed: a.completed, revisions: a.revisions });
+    }
+    return res.html(recommendationsPage({ session, recommendations: recommend(stats) }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
