@@ -133,8 +133,13 @@ const ROLES: Record<string, string> = {
     'You are a chief marketing officer. Produce an executive summary of the campaign for leadership.',
 };
 
-/** Build the chat prompt the local model sees, from the service's structured request. */
-function buildMessages(request: AITaskRequest, language?: string): AIMessage[] {
+/**
+ * Build the chat prompt the local model sees, from the service's structured
+ * request. Exported so the governed live runtime (Sprint 4.4b) reuses the exact
+ * same prompt via its context builder — keeping the live prompt identical
+ * whether generation runs through LiveAIManager or the governed pipeline.
+ */
+export function buildMessages(request: AITaskRequest, language?: string): AIMessage[] {
   const role = (request.promptRef && ROLES[request.promptRef.key]) ?? 'You are a helpful assistant.';
   const lang = language
     ? `\n\nWrite ALL natural-language text values in ${language}. Keep JSON keys in English.`

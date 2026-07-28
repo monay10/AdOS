@@ -1,7 +1,7 @@
 import type { AIManagerPort } from '@ados/contracts';
 import { OllamaEngine, OpenAICompatibleEngine, type InferenceEnginePort, type InferenceEngineId } from '@ados/ai-manager';
-import { OfflineAIManager } from './ai.js';
-import { LiveAIManager, type LiveAIConfig } from './ai-live.js';
+import { type LiveAIConfig } from './ai-live.js';
+import { createOfflineGovernedManager, createLiveGovernedManager } from './governed-inference.js';
 import { currentLocale, languageName } from './i18n.js';
 
 /**
@@ -23,8 +23,8 @@ import { currentLocale, languageName } from './i18n.js';
 export function createAIManager(log: (msg: string) => void = () => {}): AIManagerPort {
   const kind = (process.env['AI_ENGINE'] ?? 'offline').toLowerCase();
   if (kind === 'offline' || kind === '') {
-    log('AI_ENGINE offline — using deterministic OfflineAIManager (no model server)');
-    return new OfflineAIManager();
+    log('AI_ENGINE offline — governed runtime over the deterministic engine (no model server)');
+    return createOfflineGovernedManager();
   }
 
   const engine = buildLocalEngine(kind);
@@ -35,8 +35,8 @@ export function createAIManager(log: (msg: string) => void = () => {}): AIManage
     // the generated ads match the UI language.
     resolveLanguage: () => languageName(currentLocale()),
   };
-  log(`AI_ENGINE ${engine.id} (local) — model ${config.defaultModel}`);
-  return new LiveAIManager(engine, config);
+  log(`AI_ENGINE ${engine.id} (local, governed runtime) — model ${config.defaultModel}`);
+  return createLiveGovernedManager(engine, config);
 }
 
 /** Build a LOCAL inference engine. Ollama or any OpenAI-compatible local server. */

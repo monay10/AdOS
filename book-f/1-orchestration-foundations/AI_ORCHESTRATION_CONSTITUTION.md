@@ -205,6 +205,19 @@ governed engine entirely.
 > *inference engine*, not the *governance decision*. First Law status: the bypass that "proved the
 > First Law is unmet" is now gone on the offline path — the governed pipeline and the live workflow
 > **meet** there — with governance still observed/advisory rather than enforced.
+>
+> **Sprint 4.4b — the bypass is retired on the live path too.** The live (local-model) composition
+> (`ai-factory.ts`) now builds the governed runtime via `createLiveGovernedManager` instead of the
+> thin `LiveAIManager`: the configured model(s) are routed by `CapabilityRouter`, served by the real
+> `InferenceEnginePort` through the resilient `InferencePipeline`, with the exact `buildMessages`
+> prompt (shared, so the live prompt is unchanged) and **real schema validation + a repair turn** —
+> a genuine gain over `LiveAIManager`'s single JSON-parse attempt. The live path has no model server
+> in CI, so it is covered by `governed-live.test.ts` driving the composed runtime with an in-process
+> fake engine (prompt build, routing, per-capability model, validate/repair, language). With 4.4a +
+> 4.4b, **both** execution paths now run through the one governed runtime — the "single AI pipeline"
+> the First Law demands as the *engine*. The law is still **VIOLATED-but-narrowing** only in the
+> governance sense: evidence/confidence/constitution run as observe/advisory around generation, not
+> as enforcing stages inside the engine. Making them enforce is the remaining ladder.
 
 ### 4.4 Book F is the design to unify them
 
