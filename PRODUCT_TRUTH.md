@@ -13,16 +13,35 @@ every AI task now leaves an auditable, observable trace; a real Stage Engine run
 observable orchestration stages around generation without changing output; real
 governance — evidence/confidence/constitution — now runs live in OBSERVE mode,
 recorded into the trace but not yet enforcing; the constitution verdict is surfaced
-at the human approval gate as ADVISORY — it informs the decision, it never blocks).
+at the human approval gate as ADVISORY, then as REQUIRED REVIEW — when governance
+flags an output, approving requires an explicit operator acknowledgment, enforced
+server-side; the approval is still possible once acknowledged (override, not a hard
+block)).
 
 > **Governance maturity vocabulary (Series 2).** A governance capability moves through
 > honest states, and this document tags which one each is in:
 > **Observed** — runs and records, but has no consequence.
 > **Advisory** — runs and is surfaced to the human decision, but never auto-acts.
-> **Enforced / Required** — runs and changes system behavior (blocks, rejects, or gates
-> progress). Today the grounding + constitution chain is **Observed**, and the
-> constitution verdict is additionally **Advisory** at the approval gate. Nothing is
-> **Enforced** yet — that is the remaining observe→enforce ladder.
+> **Required review** — runs and *gates* the human decision: the operator must explicitly
+> acknowledge before proceeding, but can still proceed (override).
+> **Enforced / Required** — runs and changes system behavior autonomously (blocks or
+> rejects, no override).
+>
+> Governance maturity snapshot (governance-related capabilities only):
+>
+> | Capability | Tier | Maturity |
+> |---|---|---|
+> | Brand safety on creative | ✅ | **Enforced** (blocks before persist) |
+> | Non-destructive revision loop | ✅ | **Enforced** |
+> | Performance Memory read-back | ✅ | **Enforced** (read — grounds the brief) |
+> | Evidence engine (grounding) | ✅ | **Observed** |
+> | Confidence scoring | ✅ | **Observed** |
+> | Constitution verdict | ✅ | **Required review** (advisory + operator ack at the gate) |
+> | Constitution auto-reject | ❌ | Planned **Enforced** (hard block) — later rung |
+> | Confidence threshold gating | ❌ | Planned **Enforced** — separate later sprint |
+>
+> Nothing in the grounding/constitution chain **auto-blocks** yet; that is the remaining
+> observe→enforce ladder.
 
 > **One-sentence truth:** AdOS is an **autonomous AI marketing/advertising agency
 > operating system** ("Agency OS") that runs local, offline-capable AI to take a
@@ -163,7 +182,7 @@ at the human approval gate as ADVISORY — it informs the decision, it never blo
 | **ExecutionTrace on the live path** — every AI task (brief/creative/campaign/analytics/executive) leaves a sealed, tenant-scoped `ExecutionTrace` (capability, prompt ref, model/engine, token usage, latency, mission, honest step list), surfaced at `/traces`. `StagedAIManager` wraps the AI Manager; **generation output is byte-for-byte unchanged** | manager `apps/web/src/staged-ai-manager.ts`, store `apps/web/src/execution-trace-store.ts`, wired `apps/web/src/app.ts:78`, view `views/pages.ts` (`tracesPage`) + route `routes.ts` (`/traces`), trace type/builder `ai-manager/.../runtime/kernel.ts:124`, `execution-trace.test.ts` (e2e) |
 | **Stage Engine around generation** — a real ordered pipeline runs live: `plan` (placeholder) → `safety.input` (RegexSafetyEngine inspection) → `route` (CapabilityRouter decision + fallback chain) → `inference` (still the wrapped LiveAIManager/offline manager — same prompt/model/output) → `safety.output` (inspection) → `governance.observe`. Each stage records its own trace step; stages are **observe-only** (inspect + record, never block or replace generation) | engine `apps/web/src/stage-engine.ts`, run by `staged-ai-manager.ts`, real components `ai-manager/.../safety-engine.ts:33` + `capability-router.ts:11` + `model-registry.ts:50`, `execution-trace.test.ts` asserts per-stage records + byte-for-byte output |
 | **Governance, OBSERVED** — the real grounding + governance chain now runs live on every AI task in **observe mode**: `evidence` (`BrainEvidenceEngine` reads the Company Brain's per-vertical marketing memory — the same store Sprint 3 writes) → `confidence` (`HeuristicConfidenceEngine`) → `constitution` (`ConstitutionChecker`). Genuine findings are recorded into the trace (`evidence`, `confidence`, and a `constitution` step with `passed`/`violations`/`requiresApproval`, tagged `observed:true, enforced:false`). A grounded campaign shows real evidence + higher confidence; a first, ungrounded campaign honestly records `no_evidence` — **nothing is fabricated, and nothing is blocked** | stage `apps/web/src/stage-engine.ts` (`governanceObserveStage`), components `executive-memory/.../reasoning.ts:14,62` + `governance.ts:23`, wired `apps/web/src/app.ts` (brain → `defaultStageEngine`), `execution-trace.test.ts` asserts both the ungrounded (`no_evidence`, non-blocking) and grounded (`marketing_brain` evidence, confidence > floor) paths. **Still ❌ (later observe→enforce mini-sprints):** any **enforcement** (constitution rejecting an output, safety/route deciding); governed `execute()` as the actual generation engine |
-| **Governance verdict at the approval gate (ADVISORY)** — when a mission is awaiting human approval, the latest AI artifact's constitution verdict (pass/fail + violations + confidence) is surfaced right above the approve/reject controls. It **informs the human decision but never auto-blocks** — the approve control is always present. This gives the observed verdict a real consequence (a human can reject an ungrounded output) while staying non-destructive and matching AdOS's human-in-the-loop design | route `apps/web/src/routes.ts` (`spreadGovernance`, reads latest `constitution` trace step), view `views/pages.ts` (`governanceAdvisory` in `reviewControls`), `execution-trace.test.ts` asserts the advisory + `no_evidence` show at the gate AND the approve control remains. **Still ❌:** hard enforcement (auto-reject); evidence-required / confidence-threshold gating (later rungs) |
+| **Governance at the approval gate — ADVISORY + REQUIRED REVIEW** — when a mission awaits human approval, the latest AI artifact's constitution verdict (pass/fail + violations + confidence) is surfaced right above the approve/reject controls (advisory). When the verdict did **not** pass, approving **requires an explicit operator acknowledgment**: the approve form carries a `required` checkbox and the `/approve` handler **rejects the approval server-side without `acknowledge=governance`** (`renderMissionDetail` re-prompts). The approval is still possible once acknowledged — an **override, not a hard block** — matching AdOS's human-in-the-loop design | route `apps/web/src/routes.ts` (`spreadGovernance` + `governanceReviewRequired` + `gateApprove` acknowledgment gate), view `views/pages.ts` (`governanceAdvisory` + required-ack checkbox in `reviewControls`), `execution-trace.test.ts` asserts the advisory + `no_evidence` + the ack checkbox show at the gate, and that approval proceeds with `acknowledge=governance`. **Still ❌:** hard auto-reject (no override); evidence-required / confidence-threshold gating (later rungs) |
 | Campaign draft assembly (channels/budget, gated, never launched) | `campaign-engine/.../service.ts:36-90`, `campaign.test.ts:86-87` |
 | Deterministic ad-KPI math (CTR/CPC/CPA/CPL/ROAS/ROI) | `analytics-engine/.../kpi.ts:39-50`, `campaign-report.test.ts:31-45` |
 | Executive/CEO dashboard synthesis (single AI call) | `executive-ai/.../service.ts:48-64` |

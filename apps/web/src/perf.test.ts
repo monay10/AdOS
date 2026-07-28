@@ -65,11 +65,11 @@ async function journey(company: string): Promise<Record<string, number>> {
   await timed('mission', () => c.req('POST', '/missions', { workspaceId: wsId, clientId, projectId, objective: 'Grow quarterly revenue via a new campaign', budget: '50000', currency: 'USD', period: 'monthly', metricName: 'sales', metricTarget: '100', metricUnit: 'count' }));
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.projectId === projectId)!.id.toString());
   await timed('brief', () => c.req('POST', `/missions/${missionId}/brief`));
-  await c.req('POST', `/missions/${missionId}/approve`);
+  await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
   await timed('creative', () => c.req('POST', `/missions/${missionId}/creative`));
-  await c.req('POST', `/missions/${missionId}/creative/approve`);
+  await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
   await timed('campaign', () => c.req('POST', `/missions/${missionId}/campaign`));
-  await c.req('POST', `/missions/${missionId}/campaign/approve`);
+  await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' });
   await timed('analytics', () => c.req('POST', `/missions/${missionId}/analytics`, { impressions: '100000', clicks: '4000', spend: '50000', conversions: '100', revenue: '200000', leads: '100' }));
   await timed('executive', () => c.req('POST', `/missions/${missionId}/executive`));
   await c.req('POST', '/logout');

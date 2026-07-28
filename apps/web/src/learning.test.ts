@@ -60,11 +60,11 @@ async function readyForLearning(c: ReturnType<typeof client>, company: string): 
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
   await c.req('POST', `/missions/${missionId}/brief`);
-  await c.req('POST', `/missions/${missionId}/approve`);
+  await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/creative`);
-  await c.req('POST', `/missions/${missionId}/creative/approve`);
+  await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/campaign`);
-  await c.req('POST', `/missions/${missionId}/campaign/approve`);
+  await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/analytics`, { impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '80000', revenue: '240000', currency: 'TRY' });
   return { missionId, tenantId, clientId, asT };
 }
@@ -149,7 +149,7 @@ describe('Phase 6 — Company Brain Learning (Analytics → Journal → Memory �
     const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
     await c.req('POST', `/missions/${missionId}/brief`);
-    await c.req('POST', `/missions/${missionId}/approve`);
+    await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
     const detail = await (await c.req('GET', `/missions/${missionId}`)).text();
     expect(detail).not.toContain('Record learning to Company Brain');
 

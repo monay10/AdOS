@@ -84,6 +84,8 @@ const DICT: Dict = {
   'gov.pass': { en: '✓ Governance: passed', tr: '✓ Yönetişim: geçti' },
   'gov.confidence': { en: 'confidence', tr: 'güven' },
   'gov.advisoryNote': { en: 'Advisory only — this does not block. Review before approving.', tr: 'Yalnızca bilgilendirme — engellemez. Onaylamadan önce inceleyin.' },
+  'gov.ackLabel': { en: 'I have reviewed the governance flags and approve anyway.', tr: 'Yönetişim uyarılarını inceledim ve yine de onaylıyorum.' },
+  'gov.reviewRequiredError': { en: 'Governance flagged this output — acknowledge the review to approve.', tr: 'Yönetişim bu çıktıyı işaretledi — onaylamak için incelemeyi kabul edin.' },
   'chrome.tenant': { en: 'Tenant', tr: 'Kiracı' },
   'chrome.signOut': { en: 'Sign out', tr: 'Çıkış yap' },
   'chrome.soon': { en: 'soon', tr: 'yakında' },

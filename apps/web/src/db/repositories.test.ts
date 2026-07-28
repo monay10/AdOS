@@ -144,7 +144,8 @@ describe('The whole app running on SQL persistence', () => {
     const missionId = await asT(async () => (await app.missions.list())[0]!.id.toString());
 
     for (const step of ['brief', 'approve', 'creative', 'creative/approve', 'campaign', 'campaign/approve']) {
-      await c.req('POST', `/missions/${missionId}/${step}`);
+      // Governance flags ungrounded output; approving requires the operator ack (Sprint 4.3B).
+      await c.req('POST', `/missions/${missionId}/${step}`, step.endsWith('approve') ? { acknowledge: 'governance' } : undefined);
     }
     await c.req('POST', `/missions/${missionId}/analytics`, { impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '1000', revenue: '3000', currency: 'TRY' });
     await c.req('POST', `/missions/${missionId}/executive`);

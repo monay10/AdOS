@@ -89,11 +89,11 @@ describe('Phase 12 — First Live Pilot (whole product, one session)', () => {
 
     // ── 4. The AI pipeline: brief → approve → creative → approve → campaign → approve → analytics ──
     ok303(await c.req('POST', `/missions/${missionId}/brief`));
-    ok303(await c.req('POST', `/missions/${missionId}/approve`));
+    ok303(await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' }));
     ok303(await c.req('POST', `/missions/${missionId}/creative`));
-    ok303(await c.req('POST', `/missions/${missionId}/creative/approve`));
+    ok303(await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' }));
     ok303(await c.req('POST', `/missions/${missionId}/campaign`));
-    ok303(await c.req('POST', `/missions/${missionId}/campaign/approve`));
+    ok303(await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' }));
     ok303(await c.req('POST', `/missions/${missionId}/analytics`, {
       impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '1000', revenue: '3000', currency: 'TRY',
     }));

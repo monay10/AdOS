@@ -79,6 +79,7 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     expect(briefHtml).toContain('no_evidence'); // the real, recorded violation
     expect(briefHtml).toContain('does not block'); // advisory, non-enforcing
     expect(briefHtml).toContain(`/missions/${missionId}/approve`); // human can still approve
+    expect(briefHtml).toContain('reviewed the governance flags'); // required-review ack checkbox at the gate
 
     // A trace now exists for the brief task — recording only what actually ran.
     const afterBrief = app.traces.list(tenantId);
@@ -132,9 +133,9 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     // rendered its real content above, and the mission proceeds below.
 
     // Run the rest of the mission → each AI task adds a trace.
-    await c.req('POST', `/missions/${missionId}/approve`);
+    await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/creative`);
-    await c.req('POST', `/missions/${missionId}/creative/approve`);
+    await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/campaign`);
 
     const promptKeys = app.traces.list(tenantId).map((tr) => tr.promptKey);
@@ -152,7 +153,7 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     // ── The grounded half: finish mission 1 so its KPIs land in the Company
     // Brain (Sprint 3 write), then a NEW campaign's brief trace is genuinely
     // grounded by the observe stage — real evidence, higher confidence. ──
-    await c.req('POST', `/missions/${missionId}/campaign/approve`);
+    await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/analytics`, {
       impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '1000', revenue: '3000', currency: 'TRY',
     });

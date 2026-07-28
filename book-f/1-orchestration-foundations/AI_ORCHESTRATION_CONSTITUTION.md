@@ -177,13 +177,18 @@ governed engine entirely.
 > is now surfaced at the **human approval gate** as **advisory** (`apps/web/src/routes.ts`
 > `spreadGovernance` → `views/pages.ts` `governanceAdvisory`), so a failing verdict (e.g.
 > `no_evidence`) is shown to the approver right above the approve/reject controls. This gives the
-> verdict a real consequence — a human can reject on it — while still never auto-blocking. Note why
-> hard auto-reject was *not* chosen: the only constitution rules that fire for the app's object
-> outputs are `no_evidence` + `insufficient_confidence`, and confidence sits below the threshold even
-> when grounded on a small sample — so auto-rejecting on `!passed` would block the entire ungrounded
-> happy path. Enforcing that honestly is the job of the later evidence-required / confidence-threshold
-> rungs, not a flag flip. Until an output is actually blocked, this law stays
-> **VIOLATED-but-narrowing** (now: observed + advisory), stated plainly rather than upgraded.
+> verdict a real consequence — a human can reject on it — while still never auto-blocking. **Sprint
+> 4.3B** then took the next rung: when the verdict does not pass, approving now **requires an explicit
+> operator acknowledgment**, enforced *server-side* (`gateApprove` rejects an approval that lacks
+> `acknowledge=governance` and re-prompts) as well as client-side (a `required` checkbox). The
+> approval is still possible once acknowledged — an **override, not a hard block** (Required-review
+> maturity, not yet Enforced). Note why hard auto-reject was *not* chosen: the only constitution rules
+> that fire for the app's object outputs are `no_evidence` + `insufficient_confidence`, and confidence
+> sits below the threshold even when grounded on a small sample — so auto-rejecting on `!passed` would
+> block the entire ungrounded happy path. Removing the override (hard block) is the job of the later
+> evidence-required / confidence-threshold rungs, not a flag flip. Until an output is actually blocked
+> without recourse, this law stays **VIOLATED-but-narrowing** (now: observed + advisory + required
+> review), stated plainly rather than upgraded.
 
 ### 4.4 Book F is the design to unify them
 

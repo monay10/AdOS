@@ -208,8 +208,9 @@ export function missionDetailPage(opts: {
   error?: string;
 }): string {
   // The governance verdict belongs to the latest AI artifact — i.e. the one now
-  // in the gate. It renders once, above whichever review control is pending.
-  const gov = governanceAdvisory(opts.governance);
+  // in the gate. reviewControls renders it (advisory + required-ack) once, at
+  // whichever gate is pending.
+  const gov = opts.governance;
   const m = opts.mission;
   const budget = m.budget ? `${m.budget.amount.toLocaleString()} ${m.budget.currency} / ${m.budget.period}` : '—';
 
@@ -422,7 +423,7 @@ function renderReport(r: ReportView): string {
   </div>`;
 }
 
-function renderCampaign(missionId: string, c: CampaignView, approval: Approval, advisory = ''): string {
+function renderCampaign(missionId: string, c: CampaignView, approval: Approval, governance?: GovernanceView): string {
   const budgetRows = c.channels
     .map((ch) => `<tr><td>${esc(ch.channel)}</td><td>${ch.budgetPercentage}%</td><td>${esc(ch.adSets.map((a) => a.audience).join('; '))}</td></tr>`)
     .join('');
@@ -436,19 +437,28 @@ function renderCampaign(missionId: string, c: CampaignView, approval: Approval, 
     <table><thead><tr><th>${esc(t('campaign.channel'))}</th><th>${esc(t('mission.budget'))}</th><th>${esc(t('campaign.audience'))}</th></tr></thead><tbody>${budgetRows}</tbody></table>
     <label style="margin-top:16px">${esc(t('campaign.adSets'))}</label><ul>${adSets}</ul>
     <label>${esc(t('campaign.schedule'))}</label><div><span class="badge">${esc(t('campaign.start'))}: ${esc(c.schedule.startHint)}</span> <span class="badge">${c.schedule.durationDays} ${esc(t('campaign.days'))}</span></div>
-    ${reviewControls(`/missions/${esc(missionId)}/campaign/approve`, `/missions/${esc(missionId)}/campaign/reject`, approval, 'campaign', t('review.next.campaign'), advisory)}
+    ${reviewControls(`/missions/${esc(missionId)}/campaign/approve`, `/missions/${esc(missionId)}/campaign/reject`, approval, 'campaign', t('review.next.campaign'), governance)}
   </div>`;
 }
 
-function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string, advisory = ''): string {
+function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string, governance?: GovernanceView): string {
   const subject = t(`noun.${noun}`); // capitalized subject in the active locale
   const lc = t(`noun.${noun}.lc`); // lower/accusative form for the button
   if (approval === 'approved') return `<div class="ok" style="margin-top:18px">${esc(t('review.approvedMsg', { noun: subject, next: nextHint }))}</div>`;
   if (approval === 'rejected') return `<div class="err" style="margin-top:18px">${esc(t('review.rejectedMsg', { noun: subject }))}</div>`;
   if (approval === 'pending') {
     // Governance advisory (if any) sits directly above the decision at the gate.
+    // When the verdict did not pass, approving REQUIRES an explicit operator
+    // acknowledgment (Sprint 4.3B) — enforced client-side (required checkbox)
+    // and server-side (the /approve handler rejects without it). Override is
+    // still possible once acknowledged; it is not a hard block.
+    const advisory = governanceAdvisory(governance);
+    const needsAck = !!governance && !governance.passed;
+    const ack = needsAck
+      ? `<label style="display:flex;align-items:center;gap:8px;margin:0 0 12px;font-weight:500;color:var(--text)"><input type="checkbox" name="acknowledge" value="governance" required style="width:auto"> ${esc(t('gov.ackLabel'))}</label>`
+      : '';
     return `${advisory}<div class="actions" style="margin-top:20px">
-      <form method="post" action="${approveHref}"><button class="btn">${esc(t('review.approveBtn', { noun: lc }))}</button></form>
+      <form method="post" action="${approveHref}" style="display:flex;flex-direction:column;gap:0">${ack}<button class="btn">${esc(t('review.approveBtn', { noun: lc }))}</button></form>
       <form method="post" action="${rejectHref}"><button class="btn ghost">${esc(t('common.reject'))}</button></form>
     </div>`;
   }

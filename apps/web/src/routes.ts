@@ -749,17 +749,17 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
 
     // Phase 2 — brief approval gate.
     if (action === 'brief' && method === 'POST') return generateBrief(app, session, res, id);
-    if (action === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'strategy_and_budget');
+    if (action === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'strategy_and_budget', acknowledged(req));
     if (action === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'strategy_and_budget', 'Rejected by executive');
 
     // Phase 3 — creative + creative-review gate.
     if (action === 'creative' && !sub && method === 'POST') return generateCreative(app, session, res, id);
-    if (action === 'creative' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'creative_assets');
+    if (action === 'creative' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'creative_assets', acknowledged(req));
     if (action === 'creative' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'creative_assets', 'Creative rejected by executive');
 
     // Phase 4 — campaign + launch-approval gate.
     if (action === 'campaign' && !sub && method === 'POST') return generateCampaign(app, session, res, id);
-    if (action === 'campaign' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'campaign_launch');
+    if (action === 'campaign' && sub === 'approve' && method === 'POST') return gateApprove(app, session, res, id, 'campaign_launch', acknowledged(req));
     if (action === 'campaign' && sub === 'reject' && method === 'POST') return gateReject(app, session, res, id, 'campaign_launch', 'Campaign rejected by executive');
 
     // Phase 5 — analytics report (no approval gate; produces KPIs + summary).
@@ -901,10 +901,27 @@ function statusApproval(status: string): Approval {
   return 'none';
 }
 
-async function gateApprove(app: App, session: Session, res: Res, id: string, gate: 'strategy_and_budget' | 'creative_assets' | 'campaign_launch'): Promise<void> {
+async function gateApprove(app: App, session: Session, res: Res, id: string, gate: 'strategy_and_budget' | 'creative_assets' | 'campaign_launch', acknowledged: boolean): Promise<void> {
+  // Sprint 4.3B (Required Review, phase 1): when governance flagged this
+  // artifact, approving REQUIRES an explicit operator acknowledgment — but the
+  // approval is still possible once acknowledged (override, not a hard block).
+  if (!acknowledged && governanceReviewRequired(app, session.tenantId, id)) {
+    return renderMissionDetail(app, session, res, id, t('gov.reviewRequiredError'));
+  }
   const r = await app.missions.approve(MissionId.of(id), gate);
   if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
   return res.redirect(`/missions/${id}`);
+}
+
+/** Did the operator explicitly acknowledge the governance flags on this POST? */
+function acknowledged(req: Req): boolean {
+  return req.body['acknowledge'] === 'governance';
+}
+
+/** True when the latest constitution verdict for the mission did not pass. */
+function governanceReviewRequired(app: App, tenantId: string, missionId: string): boolean {
+  const { governance } = spreadGovernance(app, tenantId, missionId);
+  return !!governance && !governance.passed;
 }
 
 /**

@@ -60,11 +60,11 @@ async function readyForAnalytics(c: ReturnType<typeof client>, company: string):
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
   await c.req('POST', `/missions/${missionId}/brief`);
-  await c.req('POST', `/missions/${missionId}/approve`);
+  await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/creative`);
-  await c.req('POST', `/missions/${missionId}/creative/approve`);
+  await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/campaign`);
-  await c.req('POST', `/missions/${missionId}/campaign/approve`);
+  await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' });
   return { missionId, tenantId, asT };
 }
 
@@ -156,9 +156,9 @@ describe('Phase 5 — Analytics (Campaign → KPIs → Summary → Recommendatio
     const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
     await c.req('POST', `/missions/${missionId}/brief`);
-    await c.req('POST', `/missions/${missionId}/approve`);
+    await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/creative`);
-    await c.req('POST', `/missions/${missionId}/creative/approve`);
+    await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/campaign`); // campaign generated but NOT approved
     const detail = await (await c.req('GET', `/missions/${missionId}`)).text();
     expect(detail).not.toContain('Generate Analytics Report');

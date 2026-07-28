@@ -60,9 +60,9 @@ async function readyForCampaign(c: ReturnType<typeof client>, company: string): 
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
   await c.req('POST', `/missions/${missionId}/brief`);
-  await c.req('POST', `/missions/${missionId}/approve`);
+  await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${missionId}/creative`);
-  await c.req('POST', `/missions/${missionId}/creative/approve`);
+  await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
   return { missionId, tenantId, asT };
 }
 
@@ -97,7 +97,7 @@ describe('Phase 4 — Campaign (Creative → Campaign Draft → Approval → Das
     expect(afterGen).toContain('Approve campaign');
 
     // Executive approves the launch.
-    r = await c.req('POST', `/missions/${missionId}/campaign/approve`);
+    r = await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' });
     expect(r.status).toBe(303);
     await asT(async () => {
       expect((await app.missions.list()).find((m) => m.tenantId === tenantId)!.status).toBe('planning');
@@ -164,7 +164,7 @@ describe('Phase 4 — Campaign (Creative → Campaign Draft → Approval → Das
     const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
     await c.req('POST', `/missions/${missionId}/brief`);
-    await c.req('POST', `/missions/${missionId}/approve`);
+    await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId}/creative`); // creative generated but NOT approved
     const detail = await (await c.req('GET', `/missions/${missionId}`)).text();
     expect(detail).not.toContain('Generate Campaign Draft');

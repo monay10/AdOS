@@ -103,7 +103,7 @@ describe('Phase 2 — Mission Processing (Mission → Brief → Executive Approv
     expect(dash1).toContain('Pending executive approvals');
 
     // Executive approves.
-    r = await c.req('POST', `/missions/${missionId}/approve`);
+    r = await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
     expect(r.status).toBe(303);
     await runAs(async () => {
       expect((await app.missions.list())[0]!.status).toBe('planning'); // approved gate returns to planning

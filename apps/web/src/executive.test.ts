@@ -67,11 +67,11 @@ async function missionWithReport(c: ReturnType<typeof client>, company: string) 
 
   // Pipeline: brief → approve → creative → approve → campaign → approve → analytics.
   await c.req('POST', `/missions/${id}/brief`);
-  await c.req('POST', `/missions/${id}/approve`);
+  await c.req('POST', `/missions/${id}/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${id}/creative`);
-  await c.req('POST', `/missions/${id}/creative/approve`);
+  await c.req('POST', `/missions/${id}/creative/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${id}/campaign`);
-  await c.req('POST', `/missions/${id}/campaign/approve`);
+  await c.req('POST', `/missions/${id}/campaign/approve`, { acknowledge: 'governance' });
   await c.req('POST', `/missions/${id}/analytics`, {
     impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '1000', revenue: '3000', currency: 'TRY',
   });

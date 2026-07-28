@@ -69,11 +69,11 @@ describe('Performance Memory read-back (Company Brain is no longer write-only)',
     expect(brief1).not.toContain('Historical context'); // brain empty on the first campaign
 
     // Complete mission 1 → its outcome is written to the per-vertical Marketing memory.
-    await c.req('POST', `/missions/${missionId1}/approve`);
+    await c.req('POST', `/missions/${missionId1}/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId1}/creative`);
-    await c.req('POST', `/missions/${missionId1}/creative/approve`);
+    await c.req('POST', `/missions/${missionId1}/creative/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId1}/campaign`);
-    await c.req('POST', `/missions/${missionId1}/campaign/approve`);
+    await c.req('POST', `/missions/${missionId1}/campaign/approve`, { acknowledge: 'governance' });
     await c.req('POST', `/missions/${missionId1}/analytics`, {
       impressions: '100000', clicks: '2000', conversions: '100', leads: '130', spend: '1000', revenue: '3000', currency: 'TRY',
     });

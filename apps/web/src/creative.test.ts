@@ -70,7 +70,7 @@ async function readyForCreative(
   const missionId = await asT(async () => (await app.missions.list()).find((m) => m.tenantId === tenantId)!.id.toString());
 
   await c.req('POST', `/missions/${missionId}/brief`);
-  await c.req('POST', `/missions/${missionId}/approve`);
+  await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' });
   return { missionId, tenantId };
 }
 
@@ -108,7 +108,7 @@ describe('Phase 3 — Creative (Brief → Creative Studio → Creative Review �
     expect(afterGen).toContain('Landing page');
 
     // Executive approves the creative.
-    r = await c.req('POST', `/missions/${missionId}/creative/approve`);
+    r = await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
     expect(r.status).toBe(303);
     await asT(async () => {
       expect((await app.missions.list()).find((m) => m.tenantId === tenantId)!.status).toBe('planning');
@@ -172,7 +172,7 @@ describe('Phase 3 — Creative (Brief → Creative Studio → Creative Review �
     expect(r.status).toBe(303);
     await asT(async () => expect(await app.creative.list(missionId)).toHaveLength(1));
 
-    r = await c.req('POST', `/missions/${missionId}/creative/approve`);
+    r = await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' });
     expect(r.status).toBe(303);
     await asT(async () => {
       const mission = (await app.missions.list()).find((m) => m.tenantId === tenantId)!;

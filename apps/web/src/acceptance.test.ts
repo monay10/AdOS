@@ -70,11 +70,11 @@ async function runPipeline(c: ReturnType<typeof client>, opts: { wsId: string; c
   const missionId = await asT(async () => (await app.missions.list()).map((m) => m.id.toString()).find((id) => !opts.known.has(id))!);
   opts.known.add(missionId);
   ok303(await c.req('POST', `/missions/${missionId}/brief`));
-  ok303(await c.req('POST', `/missions/${missionId}/approve`));
+  ok303(await c.req('POST', `/missions/${missionId}/approve`, { acknowledge: 'governance' }));
   ok303(await c.req('POST', `/missions/${missionId}/creative`));
-  ok303(await c.req('POST', `/missions/${missionId}/creative/approve`));
+  ok303(await c.req('POST', `/missions/${missionId}/creative/approve`, { acknowledge: 'governance' }));
   ok303(await c.req('POST', `/missions/${missionId}/campaign`));
-  ok303(await c.req('POST', `/missions/${missionId}/campaign/approve`));
+  ok303(await c.req('POST', `/missions/${missionId}/campaign/approve`, { acknowledge: 'governance' }));
   ok303(await c.req('POST', `/missions/${missionId}/analytics`, { impressions: '100000', clicks: '4000', spend: '50000', conversions: '100', revenue: '200000', leads: '100' }));
   return missionId;
 }
