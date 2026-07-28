@@ -173,9 +173,17 @@ governed engine entirely.
 > yet *removed*; (2) every governed stage here is **observe-only** — it inspects, grounds and records
 > into the trace but **never blocks or decides**. Evidence, confidence and the constitution verdict
 > are now produced and recorded on the live path (a real advance over "unwired"), yet no output is
-> rejected. Flipping each observed stage to **enforce** — and swapping generation for the governed
-> engine — is the remaining observe→enforce work. Until then this law stays **VIOLATED-but-narrowing**,
-> stated plainly rather than upgraded.
+> rejected. **Sprint 4.3A** then took the first step off pure observation: the constitution verdict
+> is now surfaced at the **human approval gate** as **advisory** (`apps/web/src/routes.ts`
+> `spreadGovernance` → `views/pages.ts` `governanceAdvisory`), so a failing verdict (e.g.
+> `no_evidence`) is shown to the approver right above the approve/reject controls. This gives the
+> verdict a real consequence — a human can reject on it — while still never auto-blocking. Note why
+> hard auto-reject was *not* chosen: the only constitution rules that fire for the app's object
+> outputs are `no_evidence` + `insufficient_confidence`, and confidence sits below the threshold even
+> when grounded on a small sample — so auto-rejecting on `!passed` would block the entire ungrounded
+> happy path. Enforcing that honestly is the job of the later evidence-required / confidence-threshold
+> rungs, not a flag flip. Until an output is actually blocked, this law stays
+> **VIOLATED-but-narrowing** (now: observed + advisory), stated plainly rather than upgraded.
 
 ### 4.4 Book F is the design to unify them
 

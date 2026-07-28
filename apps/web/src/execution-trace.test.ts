@@ -71,6 +71,15 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     const briefHtml = await (await c.req('GET', `/missions/${missionId}`)).text();
     expect(briefHtml).toContain('Whitening');
 
+    // Sprint 4.3A: the governance verdict is surfaced at the human approval gate
+    // as ADVISORY — it informs the decision but never blocks. This first,
+    // ungrounded brief shows the warning + its real violation, AND the approve
+    // control is still present (the gate is not auto-rejected).
+    expect(briefHtml).toContain('Governance'); // advisory banner at the gate
+    expect(briefHtml).toContain('no_evidence'); // the real, recorded violation
+    expect(briefHtml).toContain('does not block'); // advisory, non-enforcing
+    expect(briefHtml).toContain(`/missions/${missionId}/approve`); // human can still approve
+
     // A trace now exists for the brief task — recording only what actually ran.
     const afterBrief = app.traces.list(tenantId);
     expect(afterBrief.length).toBe(1);

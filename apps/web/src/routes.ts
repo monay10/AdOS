@@ -45,6 +45,7 @@ import {
   type CreativeView,
   type DashStats,
   type ExecutiveView,
+  type GovernanceView,
   type LearningView,
   type NextStep,
   type ReportView,
@@ -869,11 +870,27 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
       ...(report ? { report: toReportView(report) } : {}),
       ...(learning ? { learning } : {}),
       ...(executive ? { executive: toExecutiveView(executive) } : {}),
+      ...(mission.status === 'awaiting_approval' ? spreadGovernance(app, session.tenantId, id) : {}),
       canCancel: mission.status !== 'completed' && mission.status !== 'failed',
       ...(mission.failureReason ? { failureReason: mission.failureReason } : {}),
       ...(error ? { error } : {}),
     }),
   );
+}
+
+/**
+ * The governance readout for the artifact in the gate (Sprint 4.3A). Reads the
+ * latest ExecutionTrace for the mission that carries a constitution verdict and
+ * surfaces it as advisory — it informs the human decision, it never blocks.
+ */
+function spreadGovernance(app: App, tenantId: string, missionId: string): { governance?: GovernanceView } {
+  const trace = app.traces
+    .list(tenantId, 50)
+    .find((tr) => tr.missionId === missionId && tr.steps.some((s) => s.name === 'constitution'));
+  if (!trace) return {};
+  const detail = trace.steps.find((s) => s.name === 'constitution')?.detail ?? {};
+  const violations = Array.isArray(detail['violations']) ? (detail['violations'] as string[]) : [];
+  return { governance: { passed: Boolean(detail['passed']), confidence: trace.confidence?.score ?? 0, violations } };
 }
 
 /** Map a mission status to a review state for whichever artifact is in the gate. */

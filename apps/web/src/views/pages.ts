@@ -164,6 +164,30 @@ export interface ExecutiveView {
 
 export type Approval = 'none' | 'pending' | 'approved' | 'rejected';
 
+/**
+ * Governance readout for the artifact currently in the human approval gate
+ * (Sprint 4.3A — constitution observe→advisory). The verdict is recorded by the
+ * stage engine's governance.observe stage; surfacing it here gives it a real
+ * consequence — it informs the human's approve/reject decision — without
+ * auto-blocking. It is advisory, never enforcing.
+ */
+export interface GovernanceView {
+  passed: boolean;
+  confidence: number;
+  violations: string[];
+}
+
+/** The advisory banner shown above the approve/reject controls at the gate. */
+function governanceAdvisory(g?: GovernanceView): string {
+  if (!g) return '';
+  const amber = 'background:rgba(210,153,34,.12);border:1px solid rgba(210,153,34,.4);color:#e2c08d';
+  const green = 'background:rgba(63,185,80,.10);border:1px solid rgba(63,185,80,.35);color:#9be6a6';
+  const style = `${g.passed ? green : amber};padding:11px 14px;border-radius:9px;margin-top:18px;font-size:14px`;
+  const head = g.passed ? t('gov.pass') : t('gov.warn');
+  const vio = g.violations.length ? ` — ${g.violations.map((v) => esc(v)).join(', ')}` : '';
+  return `<div style="${style}">${esc(head)} · ${esc(t('gov.confidence'))}: ${esc(g.confidence)}${vio}<br><span style="opacity:.8">${esc(t('gov.advisoryNote'))}</span></div>`;
+}
+
 export function missionDetailPage(opts: {
   session: Session;
   mission: { id: string; objective: string; status: string; budget?: { amount: number; currency: string; period: string } };
@@ -177,11 +201,15 @@ export function missionDetailPage(opts: {
   reportDefaults?: { spend: number; revenue: number; currency: string };
   learning?: LearningView;
   executive?: ExecutiveView;
+  governance?: GovernanceView;
   failureReason?: string;
   canCancel?: boolean;
   prereqMissing?: string;
   error?: string;
 }): string {
+  // The governance verdict belongs to the latest AI artifact — i.e. the one now
+  // in the gate. It renders once, above whichever review control is pending.
+  const gov = governanceAdvisory(opts.governance);
   const m = opts.mission;
   const budget = m.budget ? `${m.budget.amount.toLocaleString()} ${m.budget.currency} / ${m.budget.period}` : '—';
 
@@ -210,7 +238,7 @@ export function missionDetailPage(opts: {
           <div><label>${esc(t('mission.budgetSplit'))}</label><div>${opts.brief.budgetAllocation.map((b) => `<span class="badge">${esc(b.channel)} ${b.percentage}%</span>`).join(' ')}</div></div>
         </div>
         <label>${esc(t('mission.kpis'))}</label><div>${opts.brief.kpis.map((k) => `<span class="badge">${esc(k.name)}: ${k.target} ${esc(k.unit)}</span>`).join(' ')}</div>
-        ${reviewControls(`/missions/${esc(m.id)}/approve`, `/missions/${esc(m.id)}/reject`, opts.briefApproval, 'brief', t('review.next.brief'))}
+        ${reviewControls(`/missions/${esc(m.id)}/approve`, `/missions/${esc(m.id)}/reject`, opts.briefApproval, 'brief', t('review.next.brief'), gov)}
       </div>`
     : opts.prereqMissing
       ? `<div class="panel" style="margin-top:20px"><div class="err">${esc(opts.prereqMissing)}</div></div>`
@@ -234,7 +262,7 @@ export function missionDetailPage(opts: {
             <label>${esc(t('mission.socialPost'))}</label><div>${esc(opts.creative.socialPost)}</div>
             <label>${esc(t('mission.landingPage'))}</label><div><b>${esc(opts.creative.landingPage.headline)}</b><br>${esc(opts.creative.landingPage.body)}<br><span class="badge">${esc(opts.creative.landingPage.cta)}</span></div>
             <label>${esc(t('mission.emailLabel'))}</label><div><b>${esc(opts.creative.email.subject)}</b><br>${esc(opts.creative.email.body)}</div>
-            ${reviewControls(`/missions/${esc(m.id)}/creative/approve`, `/missions/${esc(m.id)}/creative/reject`, opts.creativeApproval, 'creative', t('review.next.creative'))}
+            ${reviewControls(`/missions/${esc(m.id)}/creative/approve`, `/missions/${esc(m.id)}/creative/reject`, opts.creativeApproval, 'creative', t('review.next.creative'), gov)}
           </div>`
         : `<div class="panel" style="margin-top:20px">
             <h2>${esc(t('mission.creativeTitle'))}</h2>
@@ -247,7 +275,7 @@ export function missionDetailPage(opts: {
     opts.creativeApproval !== 'approved'
       ? ''
       : opts.campaign
-        ? renderCampaign(m.id, opts.campaign, opts.campaignApproval)
+        ? renderCampaign(m.id, opts.campaign, opts.campaignApproval, gov)
         : `<div class="panel" style="margin-top:20px">
             <h2>${esc(t('mission.campaignTitle'))}</h2>
             <p class="sub">${esc(t('mission.campaignGenSub'))}</p>
@@ -394,7 +422,7 @@ function renderReport(r: ReportView): string {
   </div>`;
 }
 
-function renderCampaign(missionId: string, c: CampaignView, approval: Approval): string {
+function renderCampaign(missionId: string, c: CampaignView, approval: Approval, advisory = ''): string {
   const budgetRows = c.channels
     .map((ch) => `<tr><td>${esc(ch.channel)}</td><td>${ch.budgetPercentage}%</td><td>${esc(ch.adSets.map((a) => a.audience).join('; '))}</td></tr>`)
     .join('');
@@ -408,17 +436,18 @@ function renderCampaign(missionId: string, c: CampaignView, approval: Approval):
     <table><thead><tr><th>${esc(t('campaign.channel'))}</th><th>${esc(t('mission.budget'))}</th><th>${esc(t('campaign.audience'))}</th></tr></thead><tbody>${budgetRows}</tbody></table>
     <label style="margin-top:16px">${esc(t('campaign.adSets'))}</label><ul>${adSets}</ul>
     <label>${esc(t('campaign.schedule'))}</label><div><span class="badge">${esc(t('campaign.start'))}: ${esc(c.schedule.startHint)}</span> <span class="badge">${c.schedule.durationDays} ${esc(t('campaign.days'))}</span></div>
-    ${reviewControls(`/missions/${esc(missionId)}/campaign/approve`, `/missions/${esc(missionId)}/campaign/reject`, approval, 'campaign', t('review.next.campaign'))}
+    ${reviewControls(`/missions/${esc(missionId)}/campaign/approve`, `/missions/${esc(missionId)}/campaign/reject`, approval, 'campaign', t('review.next.campaign'), advisory)}
   </div>`;
 }
 
-function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string): string {
+function reviewControls(approveHref: string, rejectHref: string, approval: Approval, noun: string, nextHint: string, advisory = ''): string {
   const subject = t(`noun.${noun}`); // capitalized subject in the active locale
   const lc = t(`noun.${noun}.lc`); // lower/accusative form for the button
   if (approval === 'approved') return `<div class="ok" style="margin-top:18px">${esc(t('review.approvedMsg', { noun: subject, next: nextHint }))}</div>`;
   if (approval === 'rejected') return `<div class="err" style="margin-top:18px">${esc(t('review.rejectedMsg', { noun: subject }))}</div>`;
   if (approval === 'pending') {
-    return `<div class="actions" style="margin-top:20px">
+    // Governance advisory (if any) sits directly above the decision at the gate.
+    return `${advisory}<div class="actions" style="margin-top:20px">
       <form method="post" action="${approveHref}"><button class="btn">${esc(t('review.approveBtn', { noun: lc }))}</button></form>
       <form method="post" action="${rejectHref}"><button class="btn ghost">${esc(t('common.reject'))}</button></form>
     </div>`;
