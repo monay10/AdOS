@@ -124,6 +124,22 @@ is built; it is not yet the live record.
 > wrapped manager). Generation stayed byte-for-byte unchanged in 4.2 by construction. Turning these
 > observe-only stages into the deciding, enforcing governed engine is **Sprint 4.3**.
 
+> **Series 2 · Sprint 4.3 (observe ladder) update (2026-07-28) — governance now runs live, observed.**
+> The stage engine's post-generation `governance.observe` stage (`apps/web/src/stage-engine.ts`)
+> now runs the REAL grounding + governance chain on every live AI task: **`evidence`** (the real
+> `BrainEvidenceEngine`, `executive-memory/.../reasoning.ts:14`, reading the Company Brain's
+> per-vertical marketing memory — the same store Sprint 3 writes) → **`confidence`** (the real
+> `HeuristicConfidenceEngine`, `reasoning.ts:62`) → **`constitution`** (the real
+> `ConstitutionChecker`, `governance.ts:23`). So **"was the output grounded? how confident? would it
+> pass the constitution?"** is **now ✅ live** as a *recorded* fact: the trace carries real
+> `evidence`, a real `confidence`, and a `constitution` step with `passed`/`violations`, tagged
+> `observed:true, enforced:false`. A grounded campaign shows real `marketing_brain` evidence and a
+> higher score; a first ungrounded campaign honestly records `no_evidence`. What is **still ❌ live:**
+> any **enforcement** — the constitution verdict is recorded, never acted on; a failing verdict does
+> not block. Per-stage **durations** and **retries** inside a governed inference *loop* remain ❌
+> (generation is still the single wrapped call, not the multi-model governed loop). Flipping each
+> observed stage to enforce is a separate mini-sprint on the observe→enforce ladder.
+
 ---
 
 ## 3. The operational monitoring hook — MonitoringPort.recordInference (🔶 BUILT (UNWIRED))

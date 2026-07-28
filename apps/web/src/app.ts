@@ -24,6 +24,7 @@ import { ExecutiveReportService } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
 import { RegexCreativeSafetyGate } from './safety.js';
 import { StagedAIManager } from './staged-ai-manager.js';
+import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
@@ -77,12 +78,17 @@ export class App {
     repos: RepositoryBundle = inMemoryRepositories(),
   ) {
     this.bus = bus;
+    // The Company Brain must exist before the AI wrap: the Stage Engine's
+    // governance.observe stage reads its per-vertical marketing memory to ground
+    // evidence/confidence/constitution (Sprint 4.3 observe ladder).
+    this.brain = new InMemoryCompanyBrain();
     // Run a real Stage Engine around every AI task and seal an ExecutionTrace,
     // without changing generation. Covers the default offline manager and any
     // injected live manager alike (Sprint 4.1 — trace goes live; Sprint 4.2 —
-    // orchestration stages run observably around generation).
+    // orchestration stages run observably around generation; Sprint 4.3 — real
+    // governance stages run in observe mode, recorded but never enforced).
     this.traces = new InMemoryExecutionTraceStore();
-    ai = new StagedAIManager(ai, this.traces);
+    ai = new StagedAIManager(ai, this.traces, defaultStageEngine(this.brain));
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);
     this.brands = new BrandService(repos.brands, bus);
@@ -97,7 +103,6 @@ export class App {
     this.campaigns = new CampaignDraftService(repos.campaigns, bus, ai);
     this.reports = new CampaignReportService(repos.reports, bus, ai);
     this.executive = new ExecutiveReportService(repos.executive, bus, ai);
-    this.brain = new InMemoryCompanyBrain();
     this.execMemory = new InMemoryExecutiveMemory();
     this.journal = new InMemoryDecisionJournal();
   }

@@ -160,6 +160,23 @@ So the honest picture is: the **stages** exist (governed pipeline 🔶), the **w
 (manual route-driven, human-gated ✅), and **they do not meet.** The live workflow bypasses the
 governed engine entirely.
 
+> **Series 2 · Sprint 4.1–4.3 update (2026-07-28) — the stages and the workflow have started to
+> meet, in observe mode.** The live path no longer runs *zero* governed stages. A `StagedAIManager`
+> (`apps/web/src/staged-ai-manager.ts`) now wraps the AI Manager at the composition root and runs a
+> real `StageEngine` (`apps/web/src/stage-engine.ts`) around every live AI task, sealing an
+> `ExecutionTrace`: **`plan` → `safety.input` (real `RegexSafetyEngine`) → `route` (real
+> `CapabilityRouter`) → `inference` → `safety.output` → `governance.observe` (real
+> `BrainEvidenceEngine` → `HeuristicConfidenceEngine` → `ConstitutionChecker`)**. Two honest limits
+> remain, and are the substance of the remaining ladder: (1) generation is still served by the
+> *wrapped* `LiveAIManager`/offline manager — the governed `runExecute` engine (§4.2) is **not** yet
+> the generator, so §4.3's "bypass" is *narrowed* (the stages now run alongside generation) but not
+> yet *removed*; (2) every governed stage here is **observe-only** — it inspects, grounds and records
+> into the trace but **never blocks or decides**. Evidence, confidence and the constitution verdict
+> are now produced and recorded on the live path (a real advance over "unwired"), yet no output is
+> rejected. Flipping each observed stage to **enforce** — and swapping generation for the governed
+> engine — is the remaining observe→enforce work. Until then this law stays **VIOLATED-but-narrowing**,
+> stated plainly rather than upgraded.
+
 ### 4.4 Book F is the design to unify them
 
 Book F is the specification that makes the governed pipeline the **engine behind the mission
