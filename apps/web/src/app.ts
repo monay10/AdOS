@@ -21,8 +21,8 @@ import { CampaignReportService } from '@ados/analytics-engine';
 import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
 import { ExecutiveReportService } from '@ados/executive-ai';
-import { OfflineAIManager } from './ai.js';
 import { RegexCreativeSafetyGate } from './safety.js';
+import { createOfflineGovernedManager } from './governed-inference.js';
 import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
@@ -74,7 +74,7 @@ export class App {
 
   constructor(
     bus: EventBus = new InMemoryEventBus(),
-    ai: AIManagerPort = new OfflineAIManager(),
+    ai: AIManagerPort = createOfflineGovernedManager(),
     repos: RepositoryBundle = inMemoryRepositories(),
   ) {
     this.bus = bus;

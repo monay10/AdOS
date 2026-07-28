@@ -189,6 +189,22 @@ governed engine entirely.
 > evidence-required / confidence-threshold rungs, not a flag flip. Until an output is actually blocked
 > without recourse, this law stays **VIOLATED-but-narrowing** (now: observed + advisory + required
 > review), stated plainly rather than upgraded.
+>
+> **Sprint 4.4a — the bypass is retired on the offline path.** Generation on the offline/deterministic
+> path no longer calls the thin `OfflineAIManager` bypass; it now flows through the governed
+> `AIManager` runtime (`apps/web/src/governed-inference.ts` → `createOfflineGovernedManager`):
+> `CapabilityRouter` → resilient `InferencePipeline` → `JsonResponseFormatter` → validation →
+> `InMemoryMonitoring` → sealed job. To keep this a true engine swap and not a behavior change, the
+> governed runtime is wired to reproduce today's output exactly — its inference engine reuses the
+> `OfflineAIManager` responder, a single `offline-deterministic` model keeps the model name, and
+> validation is pass-through (the domain services stay the validators). The full 119-test web suite
+> passes byte-for-byte through it. Two honest limits remain: (1) the **live** (local-model) path still
+> uses `LiveAIManager` — Sprint 4.4b moves it onto the same governed runtime; (2) the governed
+> runtime here is wired **without** the evidence/confidence/constitution governance stages (they stay
+> as the StagedAIManager observe stages + the approval-gate advisory), so this slice unifies the
+> *inference engine*, not the *governance decision*. First Law status: the bypass that "proved the
+> First Law is unmet" is now gone on the offline path — the governed pipeline and the live workflow
+> **meet** there — with governance still observed/advisory rather than enforced.
 
 ### 4.4 Book F is the design to unify them
 

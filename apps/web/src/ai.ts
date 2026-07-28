@@ -33,6 +33,16 @@ export class OfflineAIManager implements AIManagerPort {
     // streaming is not used by the web app
   }
 
+  /**
+   * The deterministic output for a request, exposed so the governed inference
+   * runtime can reuse the exact same responder as an inference engine (Sprint
+   * 4.4). This keeps output byte-for-byte identical whether generation runs
+   * through the thin manager or the governed pipeline.
+   */
+  outputFor(request: AITaskRequest): unknown {
+    return this.respond(request);
+  }
+
   private respond(request: AITaskRequest): unknown {
     const v = request.variables ?? {};
     if (request.promptRef?.key === 'marketing.brief') {
