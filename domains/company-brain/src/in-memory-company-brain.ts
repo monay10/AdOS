@@ -52,13 +52,27 @@ export class InMemoryCompanyBrain implements CompanyBrainPort {
   }
 
   // ── restore side (Sprint 6 persistence) ──────────────────────────────────────
-  /**
-   * Seed already-merged marketing insights directly, WITHOUT re-merging — used to
-   * restore a persisted brain at startup. Persisted values are the accumulated
-   * long-run averages, so merging them again would double-count sample weight.
-   */
+  // Seed already-merged/settled values directly, WITHOUT re-merging — used to
+  // restore a persisted brain at startup. Persisted values are the accumulated
+  // long-run averages (or the settled DNA/brand), so merging again would
+  // double-count sample weight.
   restoreMarketing(insights: readonly MarketingInsight[]): void {
     for (const insight of insights) this.marketingStore.set(insight.vertical, insight);
+  }
+  restoreCreative(insights: readonly CreativeInsight[]): void {
+    for (const insight of insights) this.creativeStore.set(insight.format, insight);
+  }
+  restoreSop(perfs: readonly SopPerformance[]): void {
+    for (const perf of perfs) this.sopStore.set(perf.sopKey, perf);
+  }
+  restoreSales(insight: SalesInsight | null): void {
+    this.salesStore = insight;
+  }
+  restoreDna(dnas: readonly CompanyDNA[]): void {
+    for (const dna of dnas) this.dnaStore.set(dna.brandId ?? '__company__', dna);
+  }
+  restoreBrand(brands: readonly BrandProfile[]): void {
+    for (const brand of brands) this.brandStore.set(brand.brandId, brand);
   }
   async creative(format: string): Promise<CreativeInsight | null> {
     return this.creativeStore.get(format) ?? null;

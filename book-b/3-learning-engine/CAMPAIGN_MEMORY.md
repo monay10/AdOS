@@ -261,6 +261,16 @@ Consequences, stated plainly:
 > no server or API. **Still ❌:** the other five stores + the three sub-brains
 > (experience / patterns / graph), archive/compaction, and per-tenant brain scoping
 > (the pre-existing global-`Map` gap below is unchanged) — all later slices.
+
+> **Series 2 · Sprint 6 (persistence, slice 2) update (2026-07-28) — all six scalar
+> sub-brains are now durable.** Slice 1's marketing-only durability now extends to
+> **creative, SOP, sales, DNA, and brand** through the same `BrainStore` port: uniform
+> `(k, data)` key-value tables, written through on every enrichment/`setDna`/`setBrand`
+> (the merged/settled value, never the raw sample) and restored on startup via
+> per-store `restore*` seams. So the §3.4 "not durable" claim now holds **only** for the
+> three port-backed sub-brains — **experience, patterns, graph** — which remain RAM-only
+> (`InMemoryExperienceEngine`, `InMemoryPatternLibrary`, `InMemoryKnowledgeGraph`). Those,
+> plus archive/compaction and per-tenant scoping, are the remaining Sprint 6 slices.
 - **No tenant scoping in the Company Brain.** The DNA/brand/marketing/creative/
   sales/SOP/experience/pattern/graph stores are global `Map`s — one tenant's
   patterns are visible to the whole process. (Executive Memory and Decision
