@@ -81,11 +81,33 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     expect(briefTrace.engine).toBe('ollama');
     expect(briefTrace.missionId).toBe(missionId);
     expect(briefTrace.latencyMs).toBeGreaterThanOrEqual(0);
-    expect(briefTrace.steps.map((s) => s.name)).toEqual(['received', 'inference', 'completed']);
+    // Sprint 4.2: a real ordered Stage Engine runs around generation, each stage
+    // recorded as its own trace step. Generation itself is the `inference` step.
+    expect(briefTrace.steps.map((s) => s.name)).toEqual([
+      'plan',
+      'safety.input',
+      'route',
+      'inference',
+      'safety.output',
+      'completed',
+    ]);
     expect(briefTrace.finishedAt).toBeDefined();
+
+    // Each stage genuinely ran and left a real, honest record.
+    const step = (name: string) => briefTrace.steps.find((s) => s.name === name)!;
+    expect(step('plan').detail).toMatchObject({ placeholder: true, capability: 'reasoning', missionId });
+    expect(step('safety.input').detail).toMatchObject({ ok: true }); // clean input, observe-only
+    // Routing DECISION is recorded (a real reasoning-capable local model), while
+    // generation was served by the wrapped manager (recorded separately below).
+    expect(step('route').detail?.['decidedModel']).toBeTruthy();
+    expect(step('safety.output').detail).toMatchObject({ ok: true });
+    // The served model is the wrapped manager's, NOT the routing decision.
+    expect(briefTrace.model).toBe('offline-deterministic');
+
     // Governed stages are NOT wired yet — the trace never fabricates them.
     expect(briefTrace.evidence).toEqual([]);
     expect(briefTrace.confidence).toBeUndefined();
+    expect(briefTrace.steps.map((s) => s.name)).not.toContain('constitution');
 
     // Run the rest of the mission → each AI task adds a trace.
     await c.req('POST', `/missions/${missionId}/approve`);

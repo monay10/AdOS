@@ -108,6 +108,22 @@ is built; it is not yet the live record.
 > stages populate the trace) is **Sprint 4.3**. The rows in §5 that read "trace not produced live"
 > are, as of 4.1, produced live for the *outer* record; the *inner governed stages* remain 🔶/❌.
 
+> **Series 2 · Sprint 4.2 update (2026-07-28) — a real Stage Engine now runs live (partial ✅).**
+> `StagedAIManager` (`apps/web/src/staged-ai-manager.ts`) drives a real ordered `StageEngine`
+> (`apps/web/src/stage-engine.ts`) around every live AI task: **`plan`** (placeholder) →
+> **`safety.input`** (the real `RegexSafetyEngine`, `safety-engine.ts:33`) → **`route`** (the real
+> `CapabilityRouter`, `capability-router.ts:11`, over the seeded `InMemoryModelRegistry`) →
+> **`inference`** (still the wrapped LiveAIManager/offline manager) → **`safety.output`** (real
+> inspection). Each stage records its **own** trace step, so **"which stages ran, in what order"**
+> is **now ✅ live** for this subset, and **stage-level failures are recorded** (an inspection stage
+> that throws is caught and written as `{ ok:false, error }` — it can never break generation). What
+> is **still ❌ live:** the *governed* inner stages (evidence, confidence, constitution, decision
+> journal), per-stage **durations** and **retry counts** inside the governed inference loop, and any
+> **enforcement** — the safety and route stages here are **observe-only** (they inspect and record;
+> they do not block, and the `route` decision is recorded but the request is still served by the
+> wrapped manager). Generation stayed byte-for-byte unchanged in 4.2 by construction. Turning these
+> observe-only stages into the deciding, enforcing governed engine is **Sprint 4.3**.
+
 ---
 
 ## 3. The operational monitoring hook — MonitoringPort.recordInference (🔶 BUILT (UNWIRED))

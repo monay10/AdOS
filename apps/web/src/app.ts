@@ -23,7 +23,7 @@ import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executiv
 import { ExecutiveReportService } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
 import { RegexCreativeSafetyGate } from './safety.js';
-import { TracingAIManager } from './ai-tracing.js';
+import { StagedAIManager } from './staged-ai-manager.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
@@ -77,11 +77,12 @@ export class App {
     repos: RepositoryBundle = inMemoryRepositories(),
   ) {
     this.bus = bus;
-    // Wrap the AI Manager so every task leaves an ExecutionTrace, without
-    // changing generation. This covers the default offline manager and any
-    // injected live manager alike (Sprint 4.1 — ExecutionTrace goes live).
+    // Run a real Stage Engine around every AI task and seal an ExecutionTrace,
+    // without changing generation. Covers the default offline manager and any
+    // injected live manager alike (Sprint 4.1 — trace goes live; Sprint 4.2 —
+    // orchestration stages run observably around generation).
     this.traces = new InMemoryExecutionTraceStore();
-    ai = new TracingAIManager(ai, this.traces);
+    ai = new StagedAIManager(ai, this.traces);
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);
     this.brands = new BrandService(repos.brands, bus);
