@@ -246,6 +246,21 @@ Consequences, stated plainly:
   or Postgres — the persistence adapters (`packages/persistence`) back the
   *agency-os* aggregates, not the brain. PRODUCT_TRUTH.md §2.6 records that the
   Company Brain has no durable/tenant-scoped store.
+
+> **Series 2 · Sprint 6 (persistence, slice 1) update (2026-07-28) — the marketing
+> sub-brain is now durable.** The claim above is now **narrowed**: the per-vertical
+> `MarketingInsight` store — deliberately chosen first because it is the exact store
+> the governance observe chain (`BrainEvidenceEngine`) reads to ground evidence /
+> confidence / constitution — is **written through to a local SQLite file on every
+> enrichment** (as the already-merged long-run average) and **restored at startup**,
+> so it moves **❌→✅ (marketing store only)**. It uses the existing `SqliteDatabase`
+> adapter (`packages/persistence`, `node:sqlite`) behind a new `SqlBrainStore`, and a
+> transparent `PersistentCompanyBrain` decorator (`apps/web/src/brain-persistence.ts`)
+> that leaves reads, sub-brains, and the §3.3 sample-weighted merge unchanged. Opt-in
+> via `BRAIN_DB` (a file path); a default `new App()` stays pure in-memory. 100% local,
+> no server or API. **Still ❌:** the other five stores + the three sub-brains
+> (experience / patterns / graph), archive/compaction, and per-tenant brain scoping
+> (the pre-existing global-`Map` gap below is unchanged) — all later slices.
 - **No tenant scoping in the Company Brain.** The DNA/brand/marketing/creative/
   sales/SOP/experience/pattern/graph stores are global `Map`s — one tenant's
   patterns are visible to the whole process. (Executive Memory and Decision

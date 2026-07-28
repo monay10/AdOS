@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { AIManagerPort } from '@ados/contracts';
+import type { AIManagerPort, CompanyBrainPort } from '@ados/contracts';
 import { InMemoryEventBus, type EventBus } from '@ados/event-bus';
 import { TenantContext } from '@ados/tenancy';
 import { telemetry, type Telemetry } from '@ados/observability';
@@ -27,6 +27,7 @@ import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
+import { isRestorableBrain } from './brain-persistence.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -63,7 +64,7 @@ export class App {
   readonly campaigns: CampaignDraftService;
   readonly reports: CampaignReportService;
   readonly executive: ExecutiveReportService;
-  readonly brain: InMemoryCompanyBrain;
+  readonly brain: CompanyBrainPort;
   readonly execMemory: InMemoryExecutiveMemory;
   readonly journal: InMemoryDecisionJournal;
   /** Every AI task leaves an auditable ExecutionTrace here (Sprint 4.1). */
@@ -79,12 +80,15 @@ export class App {
     bus: EventBus = new InMemoryEventBus(),
     ai: AIManagerPort = createOfflineGovernedManager(),
     repos: RepositoryBundle = inMemoryRepositories(),
+    // In-memory by default (dev/tests). `main.ts` injects a PersistentCompanyBrain
+    // (SQLite-backed) so the compounding knowledge survives restarts (Sprint 6).
+    brain: CompanyBrainPort = new InMemoryCompanyBrain(),
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
     // governance.observe stage reads its per-vertical marketing memory to ground
     // evidence/confidence/constitution (Sprint 4.3 observe ladder).
-    this.brain = new InMemoryCompanyBrain();
+    this.brain = brain;
     // Run a real Stage Engine around every AI task and seal an ExecutionTrace,
     // without changing generation. Covers the default offline manager and any
     // injected live manager alike (Sprint 4.1 — trace goes live; Sprint 4.2 —
@@ -137,6 +141,9 @@ export class App {
 
   /** Subscribe the activity feed + audit log to every domain event. */
   async start(): Promise<void> {
+    // Rehydrate the Company Brain from durable storage before serving, when a
+    // persistent brain was injected (Sprint 6). In-memory brains are a no-op.
+    if (isRestorableBrain(this.brain)) await this.brain.restore();
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,

@@ -1,7 +1,9 @@
 import { randomUUID } from 'node:crypto';
 import { initLogger } from '@ados/observability';
-import { PostgresDatabase, SqlAggregateStore, runMigrations } from '@ados/persistence';
+import { PostgresDatabase, SqlAggregateStore, SqliteDatabase, runMigrations } from '@ados/persistence';
+import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { App } from './app.js';
+import { PersistentCompanyBrain, SqlBrainStore } from './brain-persistence.js';
 import { createAIManager } from './ai-factory.js';
 import { AuthService } from './auth/auth-service.js';
 import { authCredentialsMigration, InMemoryCredentialStore, SqlCredentialStore } from './auth/credential-store.js';
@@ -21,6 +23,9 @@ import { buildServer } from './server.js';
  *   DATABASE_URL     — Postgres connection string. When set, persistence is
  *                      durable Postgres (migrations run at startup); otherwise
  *                      the app uses in-memory persistence (dev only).
+ *   BRAIN_DB         — local SQLite file path for the durable Company Brain
+ *                      (Sprint 6). When set, learned marketing memory survives
+ *                      restarts (100% local, no server); unset → in-memory.
  *   AUTH_MODE        — "password" for production email/password authentication;
  *                      otherwise the open/dev passwordless login.
  *   AUTH_SECURE_COOKIES — "false" to omit the Secure cookie flag (local HTTP).
@@ -42,6 +47,19 @@ async function main(): Promise<void> {
   // cloud API. See ai-factory.ts.
   const ai = createAIManager((msg) => logger.info(msg));
 
+  // Durable Company Brain (Sprint 6). BRAIN_DB is a local SQLite file path — the
+  // compounding marketing memory survives restarts, 100% local, no server/API.
+  // Unset → in-memory (the brain is wiped on restart; fine for dev/tests).
+  const brainDbPath = process.env['BRAIN_DB'];
+  let brain;
+  if (brainDbPath) {
+    const store = new SqlBrainStore(new SqliteDatabase(brainDbPath));
+    brain = new PersistentCompanyBrain(new InMemoryCompanyBrain(), store);
+    logger.info({ brainDbPath }, 'durable Company Brain enabled (SQLite)');
+  } else {
+    logger.warn('BRAIN_DB not set — Company Brain is in-memory (learned knowledge is NOT durable across restarts)');
+  }
+
   let db: PostgresDatabase | undefined;
   let app: App;
   if (databaseUrl) {
@@ -49,10 +67,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)));
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain);
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App(undefined, ai);
+    app = new App(undefined, ai, undefined, brain);
   }
 
   let auth: AuthGateway | undefined;

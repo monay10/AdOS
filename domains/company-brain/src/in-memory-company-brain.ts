@@ -50,6 +50,16 @@ export class InMemoryCompanyBrain implements CompanyBrainPort {
   async marketing(vertical: string): Promise<MarketingInsight | null> {
     return this.marketingStore.get(vertical) ?? null;
   }
+
+  // ── restore side (Sprint 6 persistence) ──────────────────────────────────────
+  /**
+   * Seed already-merged marketing insights directly, WITHOUT re-merging — used to
+   * restore a persisted brain at startup. Persisted values are the accumulated
+   * long-run averages, so merging them again would double-count sample weight.
+   */
+  restoreMarketing(insights: readonly MarketingInsight[]): void {
+    for (const insight of insights) this.marketingStore.set(insight.vertical, insight);
+  }
   async creative(format: string): Promise<CreativeInsight | null> {
     return this.creativeStore.get(format) ?? null;
   }
