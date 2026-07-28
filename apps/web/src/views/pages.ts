@@ -1,6 +1,8 @@
 import type { ExecutionTrace } from '@ados/ai-manager';
 import type { GovernanceMetrics } from '../governance-metrics.js';
-import type { ApprovalFunnel } from '../governance-decisions.js';
+import type { ApprovalFunnel, ReviewStats } from '../governance-decisions.js';
+import type { StageTiming } from '../stage-latency.js';
+import type { RevisionFunnel } from '../revision-funnel.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1192,10 +1194,21 @@ export function listPage(opts: {
  * (received → inference → completed/failed). Governed stages are not shown
  * because they are not wired yet — the trace never claims what didn't run.
  */
-export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; metrics?: GovernanceMetrics; funnel?: ApprovalFunnel }): string {
+export function tracesPage(opts: {
+  session: Session;
+  traces: ExecutionTrace[];
+  metrics?: GovernanceMetrics;
+  funnel?: ApprovalFunnel;
+  review?: ReviewStats;
+  latency?: StageTiming[];
+  revisions?: RevisionFunnel;
+}): string {
   const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
   const metricsPanel = opts.metrics && opts.metrics.total > 0 ? governanceMetricsPanel(opts.metrics) : '';
   const funnelPanel = opts.funnel && opts.funnel.approvals > 0 ? approvalFunnelPanel(opts.funnel) : '';
+  const reviewPanel = opts.review && opts.review.count > 0 ? reviewStatsPanel(opts.review) : '';
+  const revisionPanel = opts.revisions && opts.revisions.created > 0 ? revisionFunnelPanel(opts.revisions) : '';
+  const latencyPanel = opts.latency && opts.latency.length > 0 ? stageLatencyPanel(opts.latency) : '';
   const body =
     opts.traces.length === 0
       ? `<div class="panel"><div class="empty">${esc(t('traces.empty'))}</div></div>`
@@ -1232,8 +1245,59 @@ export function tracesPage(opts: { session: Session; traces: ExecutionTrace[]; m
     active: '/traces',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
-      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${body}`,
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${body}`,
   });
+}
+
+/** Review-duration statistics — how long human review actually takes (Sprint 5). */
+function reviewStatsPanel(r: ReviewStats): string {
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+  const ms = (n: number): string => `${n} ms`;
+  const capRows = r.byCapability
+    .map((c) => `<tr><td>${esc(c.capability)}</td><td>${c.count}</td><td>${ms(c.meanMs)}</td></tr>`)
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('rd.title'))}</h2><p class="sub">${esc(t('rd.sub'))}</p>
+    <div class="grid" style="margin-bottom:18px">
+      ${stat(t('rd.count'), String(r.count))}
+      ${stat(t('rd.mean'), ms(r.meanMs))}
+      ${stat(t('rd.p50'), ms(r.p50Ms))}
+      ${stat(t('rd.p95'), ms(r.p95Ms))}
+    </div>
+    ${capRows ? `<div><label>${esc(t('gm.byCapability'))}</label><table><tbody>${capRows}</tbody></table></div>` : ''}
+  </div>`;
+}
+
+/** Revision funnel — created → revised → completed across the tenant (Sprint 5). */
+function revisionFunnelPanel(f: RevisionFunnel): string {
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('rf.title'))}</h2><p class="sub">${esc(t('rf.sub'))}</p>
+    <div class="grid">
+      ${stat(t('rf.created'), String(f.created))}
+      ${stat(t('rf.withRevisions'), String(f.withRevisions))}
+      ${stat(t('rf.totalRevisions'), String(f.totalRevisions))}
+      ${stat(t('rf.completed'), String(f.completed))}
+      ${stat(t('rf.revisionRate'), `${f.revisionRatePct}%`)}
+    </div>
+  </div>`;
+}
+
+/** Stage latency + execution timeline — per-stage mean, in execution order (Sprint 5). */
+function stageLatencyPanel(timings: StageTiming[]): string {
+  const maxMs = Math.max(1, ...timings.map((s) => s.meanMs));
+  const bars = timings
+    .map(
+      (s) =>
+        `<div class="bar"><span>${esc(s.name)}</span><div class="track"><div class="fill" style="width:${Math.round((s.meanMs / maxMs) * 100)}%"></div></div><span class="v">${s.meanMs} ms</span></div>`,
+    )
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('sl.title'))}</h2><p class="sub">${esc(t('sl.sub'))}</p>
+    <div class="bars">${bars}</div>
+  </div>`;
 }
 
 /** Approval/override funnel — the signal for hard-enforcement (Sprint 5). */

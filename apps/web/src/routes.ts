@@ -50,8 +50,11 @@ import {
   type NextStep,
   type ReportView,
 } from './views/pages.js';
+import type { ExecutionTrace } from '@ados/ai-manager';
 import { governanceMetrics } from './governance-metrics.js';
-import { approvalFunnel } from './governance-decisions.js';
+import { approvalFunnel, reviewStats } from './governance-decisions.js';
+import { stageLatency } from './stage-latency.js';
+import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
 import { esc } from './views/layout.js';
 import { handleAuth, type AuthGateway } from './auth/routes.js';
 
@@ -711,9 +714,16 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
   // ── AI Execution Traces (Sprint 4.1) + governance metrics/funnel (Sprint 5) ──
   if (path === '/traces' && method === 'GET') {
     const traces = app.traces.list(session.tenantId, 50);
+    const decisions = app.governanceDecisions.list(session.tenantId);
     const metrics = governanceMetrics(app.traces.list(session.tenantId, 100));
-    const funnel = approvalFunnel(app.governanceDecisions.list(session.tenantId));
-    return res.html(tracesPage({ session, traces, metrics, funnel }));
+    const funnel = approvalFunnel(decisions);
+    const review = reviewStats(decisions);
+    const latency = stageLatency(app.traces.list(session.tenantId, 100));
+    const missionRows: MissionSummary[] = (await app.missions.list())
+      .filter((m) => m.tenantId === session.tenantId)
+      .map((m) => ({ revisionCount: m.revisionCount, status: m.status }));
+    const revisions = revisionFunnel(missionRows);
+    return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
@@ -888,13 +898,18 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
  * surfaces it as advisory — it informs the human decision, it never blocks.
  */
 function spreadGovernance(app: App, tenantId: string, missionId: string): { governance?: GovernanceView } {
-  const trace = app.traces
-    .list(tenantId, 50)
-    .find((tr) => tr.missionId === missionId && tr.steps.some((s) => s.name === 'constitution'));
+  const trace = latestGovernanceTrace(app, tenantId, missionId);
   if (!trace) return {};
   const detail = trace.steps.find((s) => s.name === 'constitution')?.detail ?? {};
   const violations = Array.isArray(detail['violations']) ? (detail['violations'] as string[]) : [];
   return { governance: { passed: Boolean(detail['passed']), confidence: trace.confidence?.score ?? 0, violations } };
+}
+
+/** The latest ExecutionTrace for the mission that carries a constitution verdict. */
+function latestGovernanceTrace(app: App, tenantId: string, missionId: string): ExecutionTrace | undefined {
+  return app.traces
+    .list(tenantId, 50)
+    .find((tr) => tr.missionId === missionId && tr.steps.some((s) => s.name === 'constitution'));
 }
 
 /** Map a mission status to a review state for whichever artifact is in the gate. */
@@ -909,14 +924,27 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   // Sprint 4.3B (Required Review, phase 1): when governance flagged this
   // artifact, approving REQUIRES an explicit operator acknowledgment — but the
   // approval is still possible once acknowledged (override, not a hard block).
-  const flagged = governanceReviewRequired(app, session.tenantId, id);
+  const trace = latestGovernanceTrace(app, session.tenantId, id);
+  const flagged = !!trace && !constitutionPassed(trace);
   if (!acknowledged && flagged) {
     return renderMissionDetail(app, session, res, id, t('gov.reviewRequiredError'));
   }
   const r = await app.missions.approve(MissionId.of(id), gate);
   if (r.isErr) return renderMissionDetail(app, session, res, id, r.error.message);
-  // Sprint 5: record the gate decision for the approval/override funnel.
-  app.governanceDecisions.record(session.tenantId, { gate, flagged, acknowledged, at: new Date().toISOString() });
+  // Sprint 5: record the gate decision for the approval/override funnel + review
+  // duration. `reviewMs` is the real wall-clock gap from the reviewed artifact's
+  // trace finishing (it became ready for review) to this approval; recorded only
+  // when the trace could be matched, so review-duration stats stay honest.
+  const finishedAt = trace?.finishedAt ? Date.parse(trace.finishedAt) : NaN;
+  const reviewMs = Number.isNaN(finishedAt) ? undefined : Math.max(0, Date.now() - finishedAt);
+  app.governanceDecisions.record(session.tenantId, {
+    gate,
+    flagged,
+    acknowledged,
+    at: new Date().toISOString(),
+    ...(trace?.capability ? { capability: trace.capability } : {}),
+    ...(reviewMs !== undefined ? { reviewMs } : {}),
+  });
   return res.redirect(`/missions/${id}`);
 }
 
@@ -925,10 +953,10 @@ function acknowledged(req: Req): boolean {
   return req.body['acknowledge'] === 'governance';
 }
 
-/** True when the latest constitution verdict for the mission did not pass. */
-function governanceReviewRequired(app: App, tenantId: string, missionId: string): boolean {
-  const { governance } = spreadGovernance(app, tenantId, missionId);
-  return !!governance && !governance.passed;
+/** True when a trace's recorded constitution verdict passed. */
+function constitutionPassed(trace: ExecutionTrace): boolean {
+  const detail = trace.steps.find((s) => s.name === 'constitution')?.detail ?? {};
+  return Boolean(detail['passed']);
 }
 
 /**

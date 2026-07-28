@@ -157,6 +157,11 @@ describe('ExecutionTrace goes live (Sprint 4.1 — every AI task is auditable)',
     // overridden via acknowledgment, so the override signal is now measured.
     expect(tracesHtml).toContain('Approval funnel');
     expect(tracesHtml).toContain('Override rate');
+    // Sprint 5 completion: review duration, revision funnel, and stage latency
+    // are measured over the same live traces + gate decisions.
+    expect(tracesHtml).toContain('Review duration'); // gate approvals carried a real reviewMs
+    expect(tracesHtml).toContain('Revision funnel'); // at least one mission was created
+    expect(tracesHtml).toContain('Stage latency'); // per-stage timeline over the traces
 
     // ── The grounded half: finish mission 1 so its KPIs land in the Company
     // Brain (Sprint 3 write), then a NEW campaign's brief trace is genuinely

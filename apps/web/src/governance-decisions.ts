@@ -18,6 +18,14 @@ export interface GateDecision {
   /** The operator explicitly acknowledged the governance flags to proceed. */
   acknowledged: boolean;
   at: string;
+  /** Capability of the AI task under review (from its trace), when known. */
+  capability?: string;
+  /**
+   * Wall-clock ms from when the reviewed artifact's trace finished (it became
+   * ready for human review) to when the operator approved it — the real review
+   * latency, when the artifact's trace could be matched.
+   */
+  reviewMs?: number;
 }
 
 export interface ApprovalFunnel {
@@ -58,4 +66,59 @@ export function approvalFunnel(decisions: readonly GateDecision[]): ApprovalFunn
   const overrides = decisions.filter((d) => d.flagged && d.acknowledged).length;
   const overrideRatePct = flagged === 0 ? 0 : Math.round((overrides / flagged) * 1000) / 10;
   return { approvals, flagged, overrides, overrideRatePct };
+}
+
+export interface ReviewStats {
+  /** Decisions that carried a real review latency. */
+  count: number;
+  meanMs: number;
+  p50Ms: number;
+  p95Ms: number;
+  /** Mean review latency per capability, for the capabilities that appeared. */
+  byCapability: Array<{ capability: string; count: number; meanMs: number }>;
+}
+
+/** Percentile (0–100) of an ascending-sorted numeric array (nearest-rank). */
+function percentile(sorted: readonly number[], p: number): number {
+  if (sorted.length === 0) return 0;
+  const rank = Math.ceil((p / 100) * sorted.length);
+  const idx = Math.min(sorted.length - 1, Math.max(0, rank - 1));
+  return sorted[idx]!;
+}
+
+/**
+ * Review-duration statistics over gate decisions that carried a real review
+ * latency (mean, P50, P95, and per-capability mean). Decisions without a
+ * matched `reviewMs` are honestly excluded rather than counted as zero.
+ */
+export function reviewStats(decisions: readonly GateDecision[]): ReviewStats {
+  const timed = decisions.filter(
+    (d): d is GateDecision & { reviewMs: number } => typeof d.reviewMs === 'number' && d.reviewMs >= 0,
+  );
+  const count = timed.length;
+  if (count === 0) return { count: 0, meanMs: 0, p50Ms: 0, p95Ms: 0, byCapability: [] };
+
+  const sorted = timed.map((d) => d.reviewMs).sort((a, b) => a - b);
+  const total = sorted.reduce((sum, ms) => sum + ms, 0);
+  const round = (n: number) => Math.round(n * 10) / 10;
+
+  const perCap = new Map<string, { count: number; sum: number }>();
+  for (const d of timed) {
+    const cap = d.capability ?? 'unknown';
+    const agg = perCap.get(cap) ?? { count: 0, sum: 0 };
+    agg.count += 1;
+    agg.sum += d.reviewMs;
+    perCap.set(cap, agg);
+  }
+  const byCapability = [...perCap.entries()]
+    .map(([capability, agg]) => ({ capability, count: agg.count, meanMs: round(agg.sum / agg.count) }))
+    .sort((a, b) => b.count - a.count || a.capability.localeCompare(b.capability));
+
+  return {
+    count,
+    meanMs: round(total / count),
+    p50Ms: round(percentile(sorted, 50)),
+    p95Ms: round(percentile(sorted, 95)),
+    byCapability,
+  };
 }
