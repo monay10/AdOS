@@ -46,17 +46,21 @@ describe('Walking Skeleton — end-to-end AI task on a local model', () => {
     const clock = fixedClock();
 
     // Knowledge: Company Brain seeded with dental experience + brand + DNA.
+    // The brain is tenant-isolated, so seed it under the SAME tenant ('acme')
+    // that the pipeline executes as below — otherwise the evidence read is empty.
     const brain = new InMemoryCompanyBrain(() => 't0');
-    await brain.enrich({
-      kind: 'marketing',
-      insight: { vertical: 'dental', ctr: 5.8, cpa: 60, roas: 5.8, bestHook: 'confidence', bestHeadline: 'Brighten your smile', bestOffer: 'free checkup', bestFunnel: 'lead', sampleSize: 382 },
+    await TenantContext.run({ tenantId: 'acme', correlationId: 'seed', actor: 'seed', roles: [] }, async () => {
+      await brain.enrich({
+        kind: 'marketing',
+        insight: { vertical: 'dental', ctr: 5.8, cpa: 60, roas: 5.8, bestHook: 'confidence', bestHeadline: 'Brighten your smile', bestOffer: 'free checkup', bestFunnel: 'lead', sampleSize: 382 },
+      });
+      await brain.setDna({
+        tenantId: 'acme', brandId: 'b1', mission: 'Fill the clinic', vision: 'Best smiles', culture: 'caring',
+        values: ['trust'], tone: 'warm', brandRules: [], writingStyle: 'friendly', approvalRules: ['campaign.launch'],
+        qualityStandards: [], namingStandards: [], designLanguage: 'clean', riskAppetite: 'medium', decisionStyle: 'data-driven',
+      });
+      await brain.setBrand({ brandId: 'b1', name: 'BrightDental', toneOfVoice: 'warm', forbiddenWords: ['cheap'], targetAudience: 'families', colors: ['#0af'], products: ['implants'], campaignHistoryRefs: [], approvedCreativeRefs: [] });
     });
-    await brain.setDna({
-      tenantId: 'acme', brandId: 'b1', mission: 'Fill the clinic', vision: 'Best smiles', culture: 'caring',
-      values: ['trust'], tone: 'warm', brandRules: [], writingStyle: 'friendly', approvalRules: ['campaign.launch'],
-      qualityStandards: [], namingStandards: [], designLanguage: 'clean', riskAppetite: 'medium', decisionStyle: 'data-driven',
-    });
-    await brain.setBrand({ brandId: 'b1', name: 'BrightDental', toneOfVoice: 'warm', forbiddenWords: ['cheap'], targetAudience: 'families', colors: ['#0af'], products: ['implants'], campaignHistoryRefs: [], approvedCreativeRefs: [] });
 
     // Prompt Registry (versioned, no hardcoded prompt).
     const prompts = new InMemoryPromptRegistry(() => 't0');
@@ -144,7 +148,9 @@ describe('Walking Skeleton — end-to-end AI task on a local model', () => {
     // 3. Side effects: journal recorded, event emitted, brain enriched, metrics.
     expect(await decisions.recall({ subjectId: execution.response.taskId, k: 1 })).toHaveLength(1);
     expect(events).toContain('ai.task.completed.v1');
-    expect((await brain.experience.findSimilar({ vertical: 'dental', k: 5 })).length).toBeGreaterThan(0);
+    // The brain is tenant-isolated — read the enriched experience as 'acme'.
+    const acmeExp = await TenantContext.run({ tenantId: 'acme', correlationId: 'r', actor: 'r', roles: [] }, () => brain.experience.findSimilar({ vertical: 'dental', k: 5 }));
+    expect(acmeExp.length).toBeGreaterThan(0);
     expect(monitoring.snapshot().totalInferences).toBe(1);
   });
 

@@ -902,7 +902,7 @@ async function renderMissionDetail(app: App, session: Session, res: Res, id: str
   const currency = mission.budget?.currency ?? 'TRY';
 
   // Learning is recorded once the mission is completed (Phase 6).
-  const journalEntry = mission.status === 'completed' ? (await app.journal.history({ subjectId: id, k: 1 }))[0] : undefined;
+  const journalEntry = mission.status === 'completed' ? (await app.journal.history({ tenantId: session.tenantId, subjectId: id, k: 1 }))[0] : undefined;
   const learning: LearningView | undefined = journalEntry
     ? {
         decision: journalEntry.decision,

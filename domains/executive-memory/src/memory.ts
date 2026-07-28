@@ -71,11 +71,13 @@ export class InMemoryDecisionJournal implements DecisionJournalPort {
   }
 
   async history(query: {
+    tenantId?: string;
     role?: DecisionJournalEntry['role'];
     subjectId?: string;
     k: number;
   }): Promise<DecisionJournalEntry[]> {
     return [...this.journal.values()]
+      .filter((e) => (query.tenantId ? e.tenantId === query.tenantId : true)) // tenant isolation
       .filter((e) => (query.role ? e.role === query.role : true))
       .filter((e) => (query.subjectId ? e.subjectId === query.subjectId : true))
       .sort((a, b) => b.at.localeCompare(a.at))

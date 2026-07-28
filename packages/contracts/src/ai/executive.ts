@@ -94,7 +94,7 @@ export interface DecisionJournalEntry {
 
 export interface DecisionJournalPort {
   record(entry: Omit<DecisionJournalEntry, 'id'>): Promise<string>;
-  history(query: { role?: ExecutiveRole; subjectId?: string; k: number }): Promise<DecisionJournalEntry[]>;
+  history(query: { tenantId?: string; role?: ExecutiveRole; subjectId?: string; k: number }): Promise<DecisionJournalEntry[]>;
   attachOutcome(id: string, outcome: Record<string, unknown>): Promise<void>;
 }
 
