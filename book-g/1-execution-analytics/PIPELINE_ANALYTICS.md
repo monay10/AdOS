@@ -93,6 +93,21 @@ durations and retries straight off the trace the moment the trace were produced.
 gap upstream, in Book F, and it is named here rather than papered over. The rich pipeline record
 is built; it is not yet the live record.
 
+> **Series 2 · Sprint 4.1 update (2026-07-28) — the trace is now produced live (partial ✅).**
+> A `TracingAIManager` decorator (`apps/web/src/ai-tracing.ts`) now wraps the AI Manager at the
+> composition root (`app.ts:78`), so **every** live AI task — brief, creative, campaign,
+> analytics, executive — seals a real `ExecutionTrace` into a tenant-scoped store
+> (`execution-trace-store.ts`), surfaced at **`/traces`** (`views/pages.ts` `tracesPage`) and
+> covered by `execution-trace.test.ts`. What is **now ✅ live:** *that a trace exists per task*,
+> its capability, prompt ref, model/engine, token usage, **latency**, mission correlation, and an
+> honest step list (`received → inference → completed`/`failed`). What is **still ❌ live:** the
+> governed multi-stage internals — per-stage durations across evidence/confidence/route/validate/
+> constitution, retry counts, and the decision-journal id — because those stages only run inside
+> the governed `execute()` path, which is **still not the live engine**. Slice 4.1 deliberately
+> changed nothing about generation; wiring the governed pipeline as the engine (so those inner
+> stages populate the trace) is **Sprint 4.3**. The rows in §5 that read "trace not produced live"
+> are, as of 4.1, produced live for the *outer* record; the *inner governed stages* remain 🔶/❌.
+
 ---
 
 ## 3. The operational monitoring hook — MonitoringPort.recordInference (🔶 BUILT (UNWIRED))

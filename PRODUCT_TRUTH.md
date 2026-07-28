@@ -8,7 +8,8 @@ Every statement below cites `path:line`.
 files, ~64 test files (~368 test cases).
 **Date:** 2026-07-27 (Series 2 updates appended as shipped; 2026-07-28 —
 brand-safety enforcement on generated creative; non-destructive gate revision;
-Performance Memory read-back into new-campaign briefs).
+Performance Memory read-back into new-campaign briefs; ExecutionTrace goes live —
+every AI task now leaves an auditable, observable trace).
 
 > **One-sentence truth:** AdOS is an **autonomous AI marketing/advertising agency
 > operating system** ("Agency OS") that runs local, offline-capable AI to take a
@@ -146,6 +147,7 @@ Performance Memory read-back into new-campaign briefs).
 | Brand-safety enforcement on generated creative — banned words + PII/secret scan, **blocks before persist**, emits `creative.blocked.v1` | gate `creative-studio/.../service.ts:70-90`, adapter `apps/web/src/safety.ts:18`, reused engine `ai-manager/.../safety-engine.ts:48`, `safety.test.ts`, `creative.test.ts` (block case) |
 | Non-destructive gate revision — rejecting a brief/creative/campaign returns the mission to **rework** (not a terminal fail), records revision history, emits `mission.revision.requested.v1`; the rejected draft is discarded and regenerated under the same mission | `mission/mission.ts:225` (`requestRevision`), `mission/service.ts:51`, route `apps/web/src/routes.ts:893-916` (`gateReject`→`discardRejectedDraft`), `mission.test.ts` (revision unit), `creative.test.ts`/`campaign.test.ts`/`mission-processing.test.ts` (loop + non-destructive) |
 | Performance Memory **read-back** — a completed campaign's KPIs are aggregated per vertical in the Company Brain and injected as **descriptive context** into a new campaign's brief generation (reads history / builds context; does NOT learn/optimize/recommend) | write `routes.ts:1215` (`brain.enrich` marketing, sample-weighted `in-memory-company-brain.ts:100`), read+inject `routes.ts:946`, brief prompt `marketing-intelligence/.../brief/service.ts:60`, `performance-memory.test.ts` (e2e) |
+| **ExecutionTrace on the live path** — every AI task (brief/creative/campaign/analytics/executive) leaves a sealed, tenant-scoped `ExecutionTrace` (capability, prompt ref, model/engine, token usage, latency, mission, honest step list), surfaced at `/traces`. A decorator wraps the AI Manager; **generation output is byte-for-byte unchanged**. Governed stages (evidence/confidence/constitution/decision journal) are **empty by design** — not yet wired (arrives Sprint 4.2/4.3) | decorator `apps/web/src/ai-tracing.ts`, store `apps/web/src/execution-trace-store.ts`, wired `apps/web/src/app.ts:78`, view `views/pages.ts` (`tracesPage`) + route `routes.ts` (`/traces`), trace type/builder `ai-manager/.../runtime/kernel.ts:124`, `execution-trace.test.ts` (e2e) |
 | Campaign draft assembly (channels/budget, gated, never launched) | `campaign-engine/.../service.ts:36-90`, `campaign.test.ts:86-87` |
 | Deterministic ad-KPI math (CTR/CPC/CPA/CPL/ROAS/ROI) | `analytics-engine/.../kpi.ts:39-50`, `campaign-report.test.ts:31-45` |
 | Executive/CEO dashboard synthesis (single AI call) | `executive-ai/.../service.ts:48-64` |

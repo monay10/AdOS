@@ -1,3 +1,4 @@
+import type { ExecutionTrace } from '@ados/ai-manager';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1141,5 +1142,53 @@ export function listPage(opts: {
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(opts.title)}</h1><p>${esc(opts.subtitle)}</p></div>
       <a class="btn" href="${opts.newHref}">${esc(opts.newLabel)}</a></div>${body}`,
+  });
+}
+
+/**
+ * AI Execution Traces — the live audit trail (Sprint 4.1). Each row is one AI
+ * task that actually ran; the step chips show the honest pipeline that executed
+ * (received → inference → completed/failed). Governed stages are not shown
+ * because they are not wired yet — the trace never claims what didn't run.
+ */
+export function tracesPage(opts: { session: Session; traces: ExecutionTrace[] }): string {
+  const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
+  const body =
+    opts.traces.length === 0
+      ? `<div class="panel"><div class="empty">${esc(t('traces.empty'))}</div></div>`
+      : `<div class="panel"><table><thead><tr>
+          <th>${esc(t('traces.col.capability'))}</th>
+          <th>${esc(t('traces.col.model'))}</th>
+          <th>${esc(t('traces.col.prompt'))}</th>
+          <th>${esc(t('traces.col.mission'))}</th>
+          <th>${esc(t('traces.col.latency'))}</th>
+          <th>${esc(t('traces.col.steps'))}</th>
+          <th>${esc(t('traces.col.started'))}</th>
+         </tr></thead><tbody>${opts.traces
+           .map((tr) => {
+             const chips = tr.steps
+               .map((s) => `<span class="step">${esc(s.name)}</span>`)
+               .join(' ');
+             const model = tr.model ? `${esc(tr.model)}${tr.engine ? ` <span class="badge">${esc(tr.engine)}</span>` : ''}` : '—';
+             const prompt = tr.promptKey
+               ? `${esc(tr.promptKey)}${tr.promptVersion !== undefined ? ` v${esc(tr.promptVersion)}` : ''}`
+               : '—';
+             return `<tr>
+               <td>${esc(tr.capability ?? '—')}</td>
+               <td>${model}</td>
+               <td>${prompt}</td>
+               <td>${tr.missionId ? esc(tr.missionId) : '—'}</td>
+               <td>${tr.latencyMs !== undefined ? `${esc(tr.latencyMs)} ms` : '—'}</td>
+               <td><div class="steps" style="margin:0">${chips}</div></td>
+               <td class="t">${time(tr.startedAt)}</td>
+             </tr>`;
+           })
+           .join('')}</tbody></table></div>`;
+  return layout({
+    title: t('traces.title'),
+    active: '/traces',
+    session: opts.session,
+    body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${body}`,
   });
 }

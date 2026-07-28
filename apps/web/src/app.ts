@@ -23,6 +23,8 @@ import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executiv
 import { ExecutiveReportService } from '@ados/executive-ai';
 import { OfflineAIManager } from './ai.js';
 import { RegexCreativeSafetyGate } from './safety.js';
+import { TracingAIManager } from './ai-tracing.js';
+import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -62,6 +64,8 @@ export class App {
   readonly brain: InMemoryCompanyBrain;
   readonly execMemory: InMemoryExecutiveMemory;
   readonly journal: InMemoryDecisionJournal;
+  /** Every AI task leaves an auditable ExecutionTrace here (Sprint 4.1). */
+  readonly traces: InMemoryExecutionTraceStore;
 
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
@@ -73,6 +77,11 @@ export class App {
     repos: RepositoryBundle = inMemoryRepositories(),
   ) {
     this.bus = bus;
+    // Wrap the AI Manager so every task leaves an ExecutionTrace, without
+    // changing generation. This covers the default offline manager and any
+    // injected live manager alike (Sprint 4.1 — ExecutionTrace goes live).
+    this.traces = new InMemoryExecutionTraceStore();
+    ai = new TracingAIManager(ai, this.traces);
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);
     this.brands = new BrandService(repos.brands, bus);

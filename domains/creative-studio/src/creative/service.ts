@@ -46,6 +46,7 @@ export class CreativeStudioService {
           submittedBy: 'creative-studio.creative',
           promptRef: { key: 'creative.set', version: 1 },
           variables: {
+            missionId: context.missionId,
             productName: context.productName,
             brandVoice: context.brandVoice,
             objective: context.objective,

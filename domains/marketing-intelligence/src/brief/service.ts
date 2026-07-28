@@ -49,6 +49,7 @@ export class MarketingBriefService {
           submittedBy: 'marketing-intelligence.brief',
           promptRef: { key: 'marketing.brief', version: 1 },
           variables: {
+            missionId: context.missionId,
             clientName: context.clientName,
             industry: context.industry,
             brandVoice: context.brandVoice,

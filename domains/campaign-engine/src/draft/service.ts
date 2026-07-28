@@ -42,6 +42,7 @@ export class CampaignDraftService {
           submittedBy: 'campaign-engine.draft',
           promptRef: { key: 'campaign.draft', version: 1 },
           variables: {
+            missionId: context.missionId,
             objective: context.objective,
             targetAudience: context.targetAudience,
             recommendedChannels: context.recommendedChannels,

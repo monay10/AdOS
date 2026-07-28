@@ -33,6 +33,7 @@ import {
   reportDetailPage,
   reportForm,
   settingsPage,
+  tracesPage,
   workspaceForm,
   type ApprovalDetailData,
   type AssetDetailData,
@@ -702,6 +703,12 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
     const id = path.slice('/reports/'.length).split('/')[0] ?? '';
     if (id && method === 'GET') return renderReportDetail(app, session, res, id);
     return res.html(notFound(session), 404);
+  }
+
+  // ── AI Execution Traces (Sprint 4.1 — every AI task is auditable) ──
+  if (path === '/traces' && method === 'GET') {
+    const traces = app.traces.list(session.tenantId, 50);
+    return res.html(tracesPage({ session, traces }));
   }
 
   // ── Executive (CEO Dashboards, Phase 10) ──
