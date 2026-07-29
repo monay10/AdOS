@@ -10,6 +10,7 @@ import type { QueuedMission } from '../mission-queue.js';
 import type { StorageStats } from '../maintenance.js';
 import type { GateCalibration, CalibrationReason } from '../governance-calibration.js';
 import type { BackupRecord, RestoreReport } from '@ados/backup';
+import type { RuntimeHealth } from '../runtime-health.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1426,6 +1427,72 @@ export function maintenancePage(opts: { session: Session; stats?: StorageStats }
     active: '/maintenance',
     session: opts.session,
     body: `${head}${metrics}${actions}${recent}`,
+  });
+}
+
+/** Seconds → a short human duration (measured uptime, no rounding-to-estimate). */
+function fmtDuration(s: number): string {
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ${s % 60}s`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ${m % 60}m`;
+  return `${Math.floor(h / 24)}d ${h % 24}h`;
+}
+
+/**
+ * Runtime Health — "is the system healthy right now?" on one screen (Series 3 ·
+ * Observability · Sprint 1). Every value is measured at request time; a degraded
+ * status always shows the concrete reason. No estimated numbers.
+ */
+export function healthPage(opts: { session: Session; health: RuntimeHealth }): string {
+  const h = opts.health;
+  const ok = h.system.status === 'pass';
+  const card = (label: string, value: string, good?: boolean, note?: string): string =>
+    `<div class="card stat"><div class="n"${good === false ? ' style="color:#c0392b"' : ''}>${esc(value)}</div>
+      <div class="l">${esc(label)}</div>${note ? `<div class="sub" style="margin-top:4px">${esc(note)}</div>` : ''}</div>`;
+
+  const dbValue = !h.database.durable
+    ? t('health.inMemory')
+    : h.database.reachable
+      ? fmtBytes(h.database.sizeBytes)
+      : t('health.unreachable');
+  const backupValue = h.backup.lastAt
+    ? `${h.backup.lastAt.slice(0, 19).replace('T', ' ')}`
+    : h.backup.count === 0
+      ? t('health.none')
+      : '—';
+  const mig = h.migration.version ?? t('health.none');
+
+  const head = `<div class="head"><div><h1>${esc(t('health.title'))}</h1><p>${esc(t('health.subtitle'))}</p></div>
+    <span class="badge ${ok ? 'active' : ''}">${esc(ok ? t('health.pass') : t('health.degraded'))}</span></div>`;
+
+  const reasons =
+    !ok && h.system.reasons.length
+      ? `<div class="err">${esc(t('health.degradedBecause'))}: ${h.system.reasons.map(esc).join(' · ')}</div>`
+      : '';
+
+  const grid = `<div class="panel"><div class="grid">
+    ${card(t('health.system'), ok ? t('health.pass') : t('health.degraded'), ok)}
+    ${card(t('health.uptime'), fmtDuration(h.system.uptimeSeconds))}
+    ${card(t('health.worker'), h.worker.running ? t('health.running') : t('health.stopped'), h.worker.running)}
+    ${card(t('health.queue'), String(h.queue.total), h.queue.failed === 0, t('health.queueBreakdown', {
+      p: String(h.queue.pending),
+      r: String(h.queue.running),
+      a: String(h.queue.awaiting_approval),
+      f: String(h.queue.failed),
+    }))}
+    ${card(t('health.database'), dbValue, !h.database.durable ? undefined : h.database.reachable)}
+    ${card(t('health.migration'), mig, undefined, t('health.migrationApplied', { n: String(h.migration.applied) }))}
+    ${card(t('health.backup'), backupValue, h.backup.lastValidated === null ? undefined : h.backup.lastValidated, t('health.backupCount', { n: String(h.backup.count) }))}
+    ${card(t('health.lastMaintenance'), h.maintenance.lastAt ? h.maintenance.lastAt.slice(0, 19).replace('T', ' ') : t('health.never'), undefined, h.maintenance.lastKind ?? '')}
+  </div></div>`;
+
+  return layout({
+    title: t('health.title'),
+    active: '/health',
+    session: opts.session,
+    body: `${head}${reasons}${grid}`,
   });
 }
 

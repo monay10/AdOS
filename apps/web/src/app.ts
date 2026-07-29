@@ -38,6 +38,7 @@ import { InMemoryMissionQueue, type MissionQueue } from './mission-queue.js';
 import { MaintenanceService } from './maintenance.js';
 import { BackupManager } from './backup-manager.js';
 import { QueueWorker } from './queue-worker.js';
+import { assembleHealth, type RuntimeHealth } from './runtime-health.js';
 import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
@@ -267,6 +268,48 @@ export class App {
    */
   enforcedAt(gate: string): boolean {
     return isEnforced(this.governance, gate) || this.calibration.isEnforced(gate);
+  }
+
+  /**
+   * A measured Runtime Health snapshot (Series 3 · Observability · Sprint 1).
+   * Every field is read from a real source now — no estimates: process uptime,
+   * the worker flag, counted queue rows, the SQLite size + schema version, the
+   * backup catalogue, and the maintenance log.
+   */
+  async health(): Promise<RuntimeHealth> {
+    const queue = await this.missionQueue.counts();
+    let database = { durable: false, reachable: false, sizeBytes: 0 };
+    let migration: { version: string | null; applied: number } = { version: null, applied: 0 };
+    let maintenance: { lastAt: string | null; lastKind: string | null } = { lastAt: null, lastKind: null };
+    if (this.maintenance) {
+      try {
+        const s = await this.maintenance.stats(); // PRAGMAs succeed ⇒ reachable
+        database = { durable: true, reachable: true, sizeBytes: s.totalBytes };
+        maintenance = { lastAt: s.lastMaintenanceAt ?? null, lastKind: s.recent[0]?.kind ?? null };
+        migration = await this.maintenance.schemaVersion();
+      } catch {
+        database = { durable: true, reachable: false, sizeBytes: 0 };
+      }
+    }
+    let backup = { count: 0, lastAt: null as string | null, lastValidated: null as boolean | null };
+    if (this.backups) {
+      const list = await this.backups.listBackups();
+      backup = {
+        count: list.length,
+        lastAt: list[0]?.createdAt ?? null,
+        lastValidated: list[0] ? list[0].restoreValidated : null,
+      };
+    }
+    return assembleHealth({
+      now: Date.now(),
+      uptimeSeconds: Math.round(process.uptime()),
+      workerRunning: this.worker.isRunning,
+      queue,
+      database,
+      migration,
+      backup,
+      maintenance,
+    });
   }
 
   /** Start the background queue worker (production). No-op if already running. */

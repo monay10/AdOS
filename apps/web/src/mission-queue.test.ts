@@ -104,4 +104,17 @@ describe('InMemoryMissionQueue', () => {
     expect(ids).toContain('m2');
     expect(ids).toContain('m3');
   });
+
+  it('counts jobs by status platform-wide (across tenants) for runtime health', async () => {
+    const q = new InMemoryMissionQueue();
+    await q.enqueue(input({ missionId: 'p1', tenantId: 'a' })); // pending
+    await q.enqueue(input({ missionId: 'p2', tenantId: 'b' })); // pending
+    await q.enqueue(input({ missionId: 'f1', tenantId: 'a' }));
+    await q.claim(Date.now(), 30_000); // claims oldest due → running
+    await q.fail('f1', 'boom'); // f1 → failed
+    const c = await q.counts();
+    expect(c.total).toBe(3);
+    expect(c.failed).toBe(1);
+    expect(c.pending + c.running).toBe(2);
+  });
 });

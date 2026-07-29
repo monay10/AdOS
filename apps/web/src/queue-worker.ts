@@ -86,6 +86,11 @@ export class QueueWorker {
     return true;
   }
 
+  /** Whether the background poll loop is currently running (runtime-health). */
+  get isRunning(): boolean {
+    return this.running;
+  }
+
   /** Start the background poll loop. Idempotent. */
   start(): void {
     if (this.running) return;

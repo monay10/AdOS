@@ -135,6 +135,14 @@ export class MaintenanceService {
     };
   }
 
+  /** The applied schema version (latest migration id) + how many are applied. */
+  async schemaVersion(): Promise<{ version: string | null; applied: number }> {
+    const names = await this.userTables();
+    if (!names.includes('schema_migrations')) return { version: null, applied: 0 };
+    const rows = await this.db.query<{ id: string }>('SELECT id FROM schema_migrations ORDER BY id');
+    return { version: rows.length ? rows[rows.length - 1]!.id : null, applied: rows.length };
+  }
+
   /** Active = entries still in the hot blob; Archived = frozen entries. */
   private async journalCounts(names: string[]): Promise<{ active: number; archived: number }> {
     let active = 0;

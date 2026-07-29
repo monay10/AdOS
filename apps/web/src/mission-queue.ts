@@ -84,7 +84,20 @@ export interface MissionQueue {
   recoverStale(now: number): Promise<number>;
   /** A tenant's jobs, newest first (for the UI). */
   list(tenantId: string): Promise<QueuedMission[]>;
+  /** Platform-wide job counts by status (measured, for the runtime-health view). */
+  counts(): Promise<QueueCounts>;
 }
+
+/** Platform-wide queue depth by status — every number measured, none estimated. */
+export interface QueueCounts {
+  pending: number;
+  running: number;
+  awaiting_approval: number;
+  failed: number;
+  total: number;
+}
+
+const ZERO_COUNTS = (): QueueCounts => ({ pending: 0, running: 0, awaiting_approval: 0, failed: 0, total: 0 });
 
 // ── In-memory (dev/tests) ─────────────────────────────────────────────────────
 
@@ -171,6 +184,15 @@ export class InMemoryMissionQueue implements MissionQueue {
       .filter((j) => j.tenantId === tenantId)
       .reverse()
       .map((j) => ({ ...j }));
+  }
+
+  async counts(): Promise<QueueCounts> {
+    const c = ZERO_COUNTS();
+    for (const j of this.jobs.values()) {
+      c[j.status] += 1;
+      c.total += 1;
+    }
+    return c;
   }
 
   private mutate(missionId: string, fn: (job: QueuedMission) => void): void {
@@ -324,5 +346,20 @@ export class SqlMissionQueue implements MissionQueue {
       [tenantId],
     );
     return rows.map(toJob);
+  }
+
+  async counts(): Promise<QueueCounts> {
+    const rows = await this.db.query<{ status: string; n: number }>(
+      'SELECT status, COUNT(*) AS n FROM mission_queue GROUP BY status',
+    );
+    const c = ZERO_COUNTS();
+    for (const r of rows) {
+      const n = Number(r.n);
+      if (r.status === 'pending' || r.status === 'running' || r.status === 'awaiting_approval' || r.status === 'failed') {
+        c[r.status] = n;
+      }
+      c.total += n;
+    }
+    return c;
   }
 }

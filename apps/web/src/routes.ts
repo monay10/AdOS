@@ -25,6 +25,7 @@ import {
   clientForm,
   dashboardPage,
   backupsPage,
+  healthPage,
   listPage,
   loginPage,
   maintenancePage,
@@ -765,6 +766,11 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       await app.maintenance.compactJournal(retain);
     }
     return res.redirect('/maintenance');
+  }
+
+  // ── Runtime Health (Series 3 · Observability — is the system healthy now?) ──
+  if (path === '/health' && method === 'GET') {
+    return res.html(healthPage({ session, health: await app.health() }));
   }
 
   // ── Backups (Series 3 · Deployment — app-integrated backup & restore) ──
