@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { initLogger } from '@ados/observability';
-import { PostgresDatabase, SqlAggregateStore, SqliteDatabase, runMigrations } from '@ados/persistence';
+import { MigrationEngine, PostgresDatabase, SqlAggregateStore, SqliteDatabase, runMigrations } from '@ados/persistence';
+import { BRAIN_DB_MIGRATIONS } from './migrations.js';
 import { InMemoryCompanyBrain } from '@ados/company-brain';
 import { InMemoryDecisionJournal, InMemoryExecutiveMemory } from '@ados/executive-memory';
 import { App } from './app.js';
@@ -81,6 +82,11 @@ async function main(): Promise<void> {
   if (brainDbPath) {
     // One SQLite connection shared by every durable learned-state store.
     const knowledgeDb = new SqliteDatabase(brainDbPath);
+    // Versioned schema migration BEFORE any store touches the file: plan the
+    // pending chain, apply each in a transaction (rollback on failure), verify.
+    // Halts startup loudly rather than serving on a half-migrated schema.
+    const outcome = await new MigrationEngine(knowledgeDb, BRAIN_DB_MIGRATIONS).run();
+    logger.info({ applied: outcome.applied, verified: outcome.verified }, 'BRAIN_DB schema migrations applied');
     brain = new PersistentCompanyBrain(new InMemoryCompanyBrain(), new SqlBrainStore(knowledgeDb));
     const execStore = new SqlExecutiveStore(knowledgeDb);
     execMemory = new PersistentExecutiveMemory(new InMemoryExecutiveMemory(), execStore);

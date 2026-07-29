@@ -34,6 +34,8 @@ export interface TransactionContext extends UnitOfWorkContext {
 export interface Migration {
   id: string; // "0001_create_outbox"
   up(exec: QueryExecutor): Promise<void>;
+  /** Optional post-apply consistency check (e.g. the expected tables now exist). */
+  verify?(exec: QueryExecutor): Promise<boolean>;
 }
 
 export interface MigrationRunner {
