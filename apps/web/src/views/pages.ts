@@ -7,6 +7,7 @@ import type { ResilienceStats } from '../resilience-stats.js';
 import type { MissionPlan } from '../mission-planner.js';
 import type { Recommendation } from '../recommendation-engine.js';
 import type { QueuedMission } from '../mission-queue.js';
+import type { StorageStats } from '../maintenance.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1289,6 +1290,84 @@ export function tracesPage(opts: {
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
       <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${resiliencePanel}${body}`,
+  });
+}
+
+/** Human-readable byte size (B / KB / MB). */
+function fmtBytes(n: number): string {
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${Math.round((n / 1024) * 10) / 10} KB`;
+  return `${Math.round((n / (1024 * 1024)) * 10) / 10} MB`;
+}
+
+/**
+ * Storage lifecycle — measure, compact, reclaim (data-lifecycle sprint).
+ *
+ * A platform-operator surface over the durable local SQLite store: whole-database
+ * storage metrics, Decision-Journal compaction (Active → Frozen archive), and a
+ * VACUUM that reports the space it reclaimed. When no durable store is wired
+ * (in-memory dev), it says so plainly rather than showing empty numbers.
+ */
+export function maintenancePage(opts: { session: Session; stats?: StorageStats }): string {
+  const { stats } = opts;
+  const head = `<div class="head"><div><h1>${esc(t('maint.title'))}</h1><p>${esc(t('maint.subtitle'))}</p></div></div>`;
+
+  if (!stats) {
+    const body = `${head}<div class="panel"><div class="empty">${esc(t('maint.unavailable'))}</div></div>`;
+    return layout({ title: t('maint.title'), active: '/maintenance', session: opts.session, body });
+  }
+
+  const stat = (label: string, value: string): string =>
+    `<div class="card stat"><div class="n">${esc(value)}</div><div class="l">${esc(label)}</div></div>`;
+
+  const metrics = `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('maint.storage'))}</h2><p class="sub">${esc(t('maint.storageSub'))}</p>
+    <div class="grid" style="margin-bottom:18px">
+      ${stat(t('maint.totalSize'), fmtBytes(stats.totalBytes))}
+      ${stat(t('maint.reclaimable'), fmtBytes(stats.reclaimableBytes))}
+      ${stat(t('maint.pages'), String(stats.pageCount))}
+      ${stat(t('maint.journalActive'), String(stats.journal.active))}
+      ${stat(t('maint.journalArchived'), String(stats.journal.archived))}
+      ${stat(t('maint.lastRun'), stats.lastMaintenanceAt ? esc(stats.lastMaintenanceAt.slice(0, 19).replace('T', ' ')) : '—')}
+    </div>
+    <div><label>${esc(t('maint.byTable'))}</label><table><thead><tr>
+      <th>${esc(t('maint.col.table'))}</th><th>${esc(t('maint.col.rows'))}</th><th>${esc(t('maint.col.bytes'))}</th>
+    </tr></thead><tbody>${stats.tables
+      .map((tb) => `<tr><td>${esc(tb.name)}</td><td>${tb.rows}</td><td>${esc(fmtBytes(tb.bytes))}</td></tr>`)
+      .join('')}</tbody></table></div>
+  </div>`;
+
+  const actions = `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('maint.actions'))}</h2><p class="sub">${esc(t('maint.actionsSub'))}</p>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end">
+      <form method="post" action="/maintenance/compact" style="display:flex;gap:8px;align-items:flex-end">
+        <div><label>${esc(t('maint.retainLabel'))}</label>
+          <input type="number" name="retain" value="500" min="0" style="width:120px"></div>
+        <button type="submit">${esc(t('maint.compactBtn'))}</button>
+      </form>
+      <form method="post" action="/maintenance/vacuum">
+        <button type="submit">${esc(t('maint.vacuumBtn'))}</button>
+      </form>
+    </div>
+    <p class="sub" style="margin-top:10px">${esc(t('maint.compactNote'))}</p>
+  </div>`;
+
+  const recent = stats.recent.length
+    ? `<div class="panel"><h2>${esc(t('maint.recent'))}</h2><table><thead><tr>
+        <th>${esc(t('maint.col.when'))}</th><th>${esc(t('maint.col.kind'))}</th><th>${esc(t('maint.col.reclaimed'))}</th><th>${esc(t('maint.col.detail'))}</th>
+      </tr></thead><tbody>${stats.recent
+        .map(
+          (r) =>
+            `<tr><td class="t">${esc(r.at.slice(0, 19).replace('T', ' '))}</td><td><span class="badge">${esc(r.kind)}</span></td><td>${esc(fmtBytes(r.reclaimedBytes))}</td><td>${esc(r.detail)}</td></tr>`,
+        )
+        .join('')}</tbody></table></div>`
+    : '';
+
+  return layout({
+    title: t('maint.title'),
+    active: '/maintenance',
+    session: opts.session,
+    body: `${head}${metrics}${actions}${recent}`,
   });
 }
 

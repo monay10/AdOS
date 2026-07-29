@@ -26,6 +26,7 @@ import {
   dashboardPage,
   listPage,
   loginPage,
+  maintenancePage,
   missionDetailPage,
   missionForm,
   productForm,
@@ -732,6 +733,24 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       .map((m) => ({ revisionCount: m.revisionCount, status: m.status }));
     const revisions = revisionFunnel(missionRows);
     return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions, resilience }));
+  }
+
+  // ── Maintenance (data-lifecycle — storage metrics, journal compaction, VACUUM) ──
+  if (path === '/maintenance' && method === 'GET') {
+    const stats = app.maintenance ? await app.maintenance.stats() : undefined;
+    return res.html(maintenancePage({ session, ...(stats ? { stats } : {}) }));
+  }
+  if (path === '/maintenance/vacuum' && method === 'POST') {
+    if (app.maintenance) await app.maintenance.vacuum();
+    return res.redirect('/maintenance');
+  }
+  if (path === '/maintenance/compact' && method === 'POST') {
+    if (app.maintenance) {
+      const parsed = Number.parseInt(req.body['retain'] ?? '', 10);
+      const retain = Number.isFinite(parsed) && parsed >= 0 ? parsed : 500;
+      await app.maintenance.compactJournal(retain);
+    }
+    return res.redirect('/maintenance');
   }
 
   // ── Recommendations (Sprint 10 — ranked, brain-grounded next actions) ──

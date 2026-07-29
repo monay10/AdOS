@@ -140,6 +140,24 @@ paths that go around it.
 
 ## 3. The state backbone — the Mission state machine (✅ SHIPPED)
 
+> **Addendum (Storage Lifecycle — durable state has a lifecycle, ✅ SHIPPED).** State is not only
+> *where the work has got to*; over a long-running install it is also *how much of it has piled up*.
+> The durable stores (`BRAIN_DB`) accumulate: the Decision Journal — the append-only audit record
+> this document treats as canonical state — was rewritten *whole* on every `record`, so its hot blob
+> and the restart-time restore both grew without bound, and repeated blob rewrites left SQLite
+> freelist pages behind. A **Storage Lifecycle / Maintenance service** (`apps/web/src/maintenance.ts`)
+> now gives that state a managed lifecycle without weakening the record: **it measures** whole-database
+> size, reclaimable bytes, and per-table + Active/Frozen journal counts; **it compacts** the Decision
+> Journal by keeping the most recent N entries per tenant *hot* (Active) and folding older ones into an
+> **immutable, append-only Frozen archive** (`decision_journal_archive`) — archive-*before*-prune and
+> `ON CONFLICT DO NOTHING` make it crash-safe and idempotent, so **no entry is ever lost**, only moved
+> off the hot path (history stays queryable via `journal.archive`); and **it reclaims** page bloat with
+> `VACUUM`/`ANALYZE`/`PRAGMA optimize`, reporting the bytes actually freed. This is the state-management
+> discipline of §3 extended across *time*: the legal-move guarantee is unchanged, but the record that
+> backs it now stays bounded and fast. Operator-triggered on a `/maintenance` page; 100% local. Proven
+> by `maintenance.test.ts` + `maintenance.e2e.test.ts`. **Not yet:** Company-Brain snapshot compaction
+> (experiences are not pruned/summarized), and no scheduled/threshold auto-run.
+
 The First Law is unmet, but the *foundation* the orchestrator builds on is real and shipped. The
 Mission state machine is the ordering guarantee that already exists, and it is the reason
 sequencing is not chaos even while it is procedural.

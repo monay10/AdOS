@@ -28,6 +28,7 @@ import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
 import { InMemoryMissionQueue, type MissionQueue } from './mission-queue.js';
+import { MaintenanceService } from './maintenance.js';
 import { QueueWorker } from './queue-worker.js';
 import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
@@ -80,6 +81,12 @@ export class App {
   readonly governance: GovernancePolicy;
   /** Durable queue of missions an agent created from applied recommendations. */
   readonly missionQueue: MissionQueue;
+  /**
+   * Storage lifecycle over the durable local SQLite store (metrics, journal
+   * compaction, VACUUM). Present only when a durable store is wired (`main.ts`);
+   * undefined for the in-memory default, where there is nothing to maintain.
+   */
+  readonly maintenance?: MaintenanceService;
   /** Background drain of {@link missionQueue} — started explicitly via {@link startWorker}. */
   private readonly worker: QueueWorker;
 
@@ -104,6 +111,10 @@ export class App {
     // In-memory by default; `main.ts` injects the SQLite-backed queue so applied
     // recommendations survive a restart and the worker resumes them.
     queue: MissionQueue = new InMemoryMissionQueue(),
+    // Storage lifecycle over the durable local store (data-lifecycle sprint).
+    // Undefined for the in-memory default; `main.ts` injects one bound to the
+    // BRAIN_DB SQLite file + the compactable Decision Journal.
+    maintenance?: MaintenanceService,
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -136,6 +147,7 @@ export class App {
     this.journal = journal;
     this.governance = governance;
     this.missionQueue = queue;
+    if (maintenance) this.maintenance = maintenance;
     // The worker runs the same governed brief step an operator would, out of band,
     // and stops at the human gate. Started explicitly (startWorker) so tests that
     // only construct/`start()` the app never spawn a background loop.
@@ -178,6 +190,8 @@ export class App {
     // picks it up again (Async Queue Worker — crash recovery / resume).
     if (this.missionQueue.init) await this.missionQueue.init();
     await this.missionQueue.recoverStale(Date.now());
+    // Prepare the maintenance bookkeeping table (no-op when in-memory).
+    if (this.maintenance) await this.maintenance.init();
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,

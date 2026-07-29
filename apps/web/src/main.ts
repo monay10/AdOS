@@ -7,6 +7,7 @@ import { App } from './app.js';
 import { PersistentCompanyBrain, SqlBrainStore } from './brain-persistence.js';
 import { PersistentDecisionJournal, PersistentExecutiveMemory, SqlExecutiveStore } from './executive-persistence.js';
 import { SqlMissionQueue, type MissionQueue } from './mission-queue.js';
+import { MaintenanceService } from './maintenance.js';
 import { policyFromEnv } from './governance-policy.js';
 import { createAIManager } from './ai-factory.js';
 import { AuthService } from './auth/auth-service.js';
@@ -63,6 +64,9 @@ async function main(): Promise<void> {
   // applied recommendation survives a restart and the worker resumes it. Unset
   // BRAIN_DB → in-memory (App's default).
   let queue: MissionQueue | undefined;
+  // Storage lifecycle over the same local file (data-lifecycle sprint): metrics,
+  // Decision-Journal compaction, VACUUM. Only meaningful with a durable store.
+  let maintenance: MaintenanceService | undefined;
   if (brainDbPath) {
     // One SQLite connection shared by every durable learned-state store.
     const knowledgeDb = new SqliteDatabase(brainDbPath);
@@ -71,6 +75,7 @@ async function main(): Promise<void> {
     execMemory = new PersistentExecutiveMemory(new InMemoryExecutiveMemory(), execStore);
     journal = new PersistentDecisionJournal(new InMemoryDecisionJournal(), execStore);
     queue = new SqlMissionQueue(knowledgeDb);
+    maintenance = new MaintenanceService(knowledgeDb, journal);
     logger.info({ brainDbPath }, 'durable learned state enabled (Company Brain + Executive Memory + Decision Journal + Mission Queue, SQLite)');
   } else {
     logger.warn('BRAIN_DB not set — Company Brain / Executive Memory / Decision Journal / Mission Queue are in-memory (NOT durable across restarts)');
@@ -89,10 +94,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance, queue);
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance, queue, maintenance);
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance, queue);
+    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance, queue, maintenance);
   }
 
   let auth: AuthGateway | undefined;
