@@ -1,5 +1,11 @@
 # AdOS — Product Truth (Source-of-Code Audit)
 
+> **Series 2 is FEATURE-COMPLETE (2026-07-29) — v2.0.0 Release Candidate.** From here the
+> Series 2 line accepts only bug fixes, performance, security, and documentation; new
+> capability work proceeds under Series 3 (Observability · Deployment · Multi-user ·
+> PostgreSQL). DB-level RLS is deliberately deferred to Series 3's PostgreSQL milestone.
+> The honest release checklist is [`SERIES_2_RELEASE.md`](SERIES_2_RELEASE.md).
+
 **Author:** Chief Product Architect / Product Marketing Auditor
 **Method:** source code, tests, and implementation-tied comments **only**. No
 marketing, sales, website, presentation, or demo document was used as evidence.
