@@ -51,6 +51,18 @@ they do not block declaring Series 2 feature-complete.
 
 Prior tags: `v1.0.0`, `v1.0.0-rc1`.
 
+## Branch model (from v2.0.0-rc1 onward)
+
+- **`release/2.0`** — the frozen Series 2 maintenance line. Accepts **only** bug fixes,
+  security, performance, and documentation. The `v2.0.0-rc1` tag lives on this line; the
+  eventual `v2.0.0` final tag is cut here.
+- **`main`** — the Series 3 development line (Deployment, backup/restore integration,
+  migration infrastructure, observability, and later PostgreSQL + RLS). New features land
+  here, never on `release/2.0`.
+
+`v2.0.0-rc1` is published to `origin` as a Release Candidate (not a final release) so the
+team can test the exact same commit and track the `release/2.0` line.
+
 ---
 
 ## What Series 2 became
