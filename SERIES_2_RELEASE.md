@@ -45,9 +45,10 @@ cut (see Tagging).
 ## Tagging
 
 - **`v2.0.0-rc1`** — cut at this commit: Series 2 feature-complete, items 1–11 green.
-- **`v2.0.0`** (final) — **ready to cut.** All 14 checklist items are green (Deployment Sprints
-  1–3 resolved items 12–14). The Deployment work lives on `main`; cutting the final tag means
-  merging it into `release/2.0` and tagging there (see Branch model), then publishing Release Notes.
+- **`v2.0.0`** (final) — **✅ RELEASED 2026-07-29.** All 14 checklist items green. `release/2.0`
+  fast-forwarded to the Deployment work and tagged `v2.0.0` (annotated), pushed to origin;
+  [`RELEASE_NOTES_v2.0.0.md`](RELEASE_NOTES_v2.0.0.md) published. Series 2 is closed — future work is
+  Series 3 on `main`.
 
 Prior tags: `v1.0.0`, `v1.0.0-rc1`.
 
