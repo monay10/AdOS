@@ -32,22 +32,22 @@ work proceeds under **Series 3** (see below). This is the freeze.
 | 11 | **Documentation** | ✅ | `PRODUCT_TRUTH.md` (the honest ledger) + Books A–H design specs. |
 | 12 | **Backup / Restore** | ✅ (Series 3 · Deployment · Sprint 1) | **Now app-integrated.** Operators create a checksummed, auto-validated snapshot of `BRAIN_DB`, dry-run a restore, and apply one behind a confirmation from `/backups`; restore is transactional + rehydrates in-memory state (no restart). `apps/web/src/backup-manager.ts` over `@ados/backup`; `backup-manager.test.ts` + `backup.e2e.test.ts`. No more manual file copying. |
 | 13 | **Upgrade / migration** | ✅ (Series 3 · Deployment · Sprint 2) | **Now a versioned migration engine.** `MigrationEngine` runs at startup: plan → apply-in-transaction → rollback-on-failure → verify, with a `schema_migrations` history ledger; ordered, idempotent, forward-only. `packages/persistence/src/migration-engine.ts` + `apps/web/src/migrations.ts`; `migration-engine.test.ts` + `migrations.test.ts`. Newer versions install safely. |
-| 14 | **Operator manual** | ⚠️ | No Series-2-verified operator manual. The honest operator reference today is `PRODUCT_TRUTH.md` + this document. The pre–Series-2 top-level guides (ADMIN/OPERATIONS/RUNBOOK/etc.) are **unverified** against the current app. A verified operator manual is **Series 3 · Deployment**. |
+| 14 | **Operator manual** | ✅ (Series 3 · Deployment · Sprint 3) | **Verified operator guides** in [`docs/operator/`](docs/operator/) — Installation, Upgrade, Disaster Recovery, Runbook — produced as a Release Readiness Audit: every step was **run against the live app** (or a passing test) and observed before being written. Each carries a "Verified against `bd35544` / 2026-07-29" header. Supersedes the pre–Series-2 root guides. |
 
-**Read of the table:** the *execution + governance + persistence core* is v2.0-ready and
-test-backed (items 1–11). The three ⚠️ items (12–14) are **operational packaging**, not
-features — they are exactly what Series 3's Deployment/PostgreSQL milestones deliver, so
-they do not block declaring Series 2 feature-complete.
+**Read of the table:** the *execution + governance + persistence core* was v2.0-ready and
+test-backed (items 1–11) at RC. The former ⚠️ items (12–14) — app-integrated Backup & Restore,
+a versioned migration engine, and verified operator guides — are now **✅ done** (Series 3 ·
+Deployment · Sprints 1–3). **All 14 checklist items are green**, so final `v2.0.0` is ready to
+cut (see Tagging).
 
 ---
 
 ## Tagging
 
 - **`v2.0.0-rc1`** — cut at this commit: Series 2 feature-complete, items 1–11 green.
-- **`v2.0.0`** (final) — cut once the ⚠️ items are resolved **or** the operator explicitly
-  accepts, for the local single-operator deployment, that "backup = copy the `BRAIN_DB`
-  file" + "`PRODUCT_TRUTH.md` as the operator reference" are sufficient. That decision is
-  the operator's, not the code's.
+- **`v2.0.0`** (final) — **ready to cut.** All 14 checklist items are green (Deployment Sprints
+  1–3 resolved items 12–14). The Deployment work lives on `main`; cutting the final tag means
+  merging it into `release/2.0` and tagging there (see Branch model), then publishing Release Notes.
 
 Prior tags: `v1.0.0`, `v1.0.0-rc1`.
 
@@ -80,8 +80,9 @@ Not new agents — **enterprise maturity**:
 1. **Observability** — health dashboard; queue throughput; worker / planner / governance
    latency; memory growth; DB health.
 2. **Deployment** — real install / update / **backup / restore** / migration experience.
-   *Progress: Sprint 1 (Backup & Restore) ✅ · Sprint 2 (versioned migration engine) ✅.
-   Next: Sprint 3 (operator experience — verified install/upgrade/DR guides), then final v2.0.0.*
+   *Progress: Sprint 1 (Backup & Restore) ✅ · Sprint 2 (versioned migration engine) ✅ ·
+   Sprint 3 (verified operator guides — Release Readiness Audit) ✅. Deployment milestone COMPLETE →
+   final v2.0.0 ready to cut on `release/2.0`.*
 3. **Multi-user** — authentication, authorization, organizations, tenants, roles.
 4. **PostgreSQL** — real Row-Level Security, advisory locks, LISTEN/NOTIFY, concurrent
    workers, online migration. **DB-level RLS lives here**, deliberately deferred from
