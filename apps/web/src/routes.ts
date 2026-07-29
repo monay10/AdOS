@@ -24,6 +24,7 @@ import {
   brandForm,
   clientForm,
   dashboardPage,
+  backupsPage,
   listPage,
   loginPage,
   maintenancePage,
@@ -764,6 +765,36 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       await app.maintenance.compactJournal(retain);
     }
     return res.redirect('/maintenance');
+  }
+
+  // ── Backups (Series 3 · Deployment — app-integrated backup & restore) ──
+  if (path === '/backups' && method === 'GET') {
+    const backups = app.backups ? await app.backups.listBackups() : undefined;
+    return res.html(backupsPage({ session, ...(backups ? { backups } : {}) }));
+  }
+  if (path === '/backups/create' && method === 'POST') {
+    if (app.backups) await app.backups.createBackup();
+    return res.redirect('/backups');
+  }
+  if (path === '/backups/verify' && method === 'POST') {
+    const id = (req.body['id'] ?? '').trim();
+    if (!app.backups || !id) return res.redirect('/backups');
+    const report = await app.backups.verify(id);
+    const backups = await app.backups.listBackups();
+    return res.html(backupsPage({ session, backups, report }));
+  }
+  if (path === '/backups/restore' && method === 'POST') {
+    const id = (req.body['id'] ?? '').trim();
+    if (!app.backups || !id) return res.redirect('/backups');
+    // Restore replaces live data — require an explicit confirmation (operator gate).
+    if (req.body['confirm'] !== 'yes') {
+      const report = await app.backups.verify(id); // re-show the dry-run to confirm against
+      const backups = await app.backups.listBackups();
+      return res.html(backupsPage({ session, backups, report }));
+    }
+    const report = await app.backups.restore(id);
+    const backups = await app.backups.listBackups();
+    return res.html(backupsPage({ session, backups, report, restored: report.ok }));
   }
 
   // ── Recommendations (Sprint 10 — ranked, brain-grounded next actions) ──

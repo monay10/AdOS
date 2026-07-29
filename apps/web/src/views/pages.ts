@@ -9,6 +9,7 @@ import type { Recommendation } from '../recommendation-engine.js';
 import type { QueuedMission } from '../mission-queue.js';
 import type { StorageStats } from '../maintenance.js';
 import type { GateCalibration, CalibrationReason } from '../governance-calibration.js';
+import type { BackupRecord, RestoreReport } from '@ados/backup';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1426,6 +1427,101 @@ export function maintenancePage(opts: { session: Session; stats?: StorageStats }
     session: opts.session,
     body: `${head}${metrics}${actions}${recent}`,
   });
+}
+
+/**
+ * Backup & Restore — app-integrated snapshots of the durable local store
+ * (Series 3 · Deployment · Sprint 1). Operators create a validated backup,
+ * inspect the catalogue, dry-run a restore (integrity/compat/consistency), and
+ * apply one behind an explicit confirmation. When no durable store is wired
+ * (in-memory dev), it says so plainly.
+ */
+export function backupsPage(opts: {
+  session: Session;
+  backups?: BackupRecord[];
+  report?: RestoreReport;
+  restored?: boolean;
+}): string {
+  const head = `<div class="head"><div><h1>${esc(t('backup.title'))}</h1><p>${esc(t('backup.subtitle'))}</p></div></div>`;
+
+  if (!opts.backups) {
+    const body = `${head}<div class="panel"><div class="empty">${esc(t('backup.unavailable'))}</div></div>`;
+    return layout({ title: t('backup.title'), active: '/backups', session: opts.session, body });
+  }
+
+  const report = opts.report ? reportPanel(opts.report, opts.restored) : '';
+
+  const createBar = `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('backup.create'))}</h2><p class="sub">${esc(t('backup.createSub'))}</p>
+    <form method="post" action="/backups/create"><button type="submit">${esc(t('backup.createBtn'))}</button></form>
+  </div>`;
+
+  const rows = opts.backups
+    .map((b) => {
+      const validated = b.restoreValidated
+        ? `<span class="badge active">${esc(t('backup.validated'))}</span>`
+        : `<span class="badge">${esc(t('backup.unvalidated'))}</span>`;
+      return `<tr>
+        <td class="t">${esc(b.createdAt.slice(0, 19).replace('T', ' '))}</td>
+        <td>${esc(fmtBytes(b.sizeBytes))}</td>
+        <td><span class="badge">${esc(b.kind)}</span> ${validated}</td>
+        <td><code>${esc(b.checksum.slice(0, 12))}</code></td>
+        <td>
+          <form method="post" action="/backups/verify" style="display:inline">
+            <input type="hidden" name="id" value="${esc(b.id)}">
+            <button type="submit" class="ghost">${esc(t('backup.verifyBtn'))}</button></form>
+        </td>
+      </tr>`;
+    })
+    .join('');
+
+  const table = opts.backups.length
+    ? `<div class="panel"><table><thead><tr>
+        <th>${esc(t('backup.col.created'))}</th><th>${esc(t('backup.col.size'))}</th>
+        <th>${esc(t('backup.col.kind'))}</th><th>${esc(t('backup.col.checksum'))}</th><th></th>
+       </tr></thead><tbody>${rows}</tbody></table></div>`
+    : `<div class="panel"><div class="empty">${esc(t('backup.none'))}</div></div>`;
+
+  return layout({
+    title: t('backup.title'),
+    active: '/backups',
+    session: opts.session,
+    body: `${head}${report}${createBar}${table}`,
+  });
+}
+
+/** The dry-run / restore report — per-check pass/fail, errors, and a confirm control. */
+function reportPanel(r: RestoreReport, restored?: boolean): string {
+  const checkRow = (label: string, ok: boolean): string =>
+    `<span class="step" style="opacity:${ok ? 1 : 0.55}">${ok ? '✓' : '✗'} ${esc(label)}</span>`;
+  const checks = `<div class="steps" style="margin:8px 0">
+    ${checkRow(t('backup.chk.integrity'), r.checks.integrity)}
+    ${checkRow(t('backup.chk.compatibility'), r.checks.compatibility)}
+    ${checkRow(t('backup.chk.checksums'), r.checks.checksums)}
+    ${checkRow(t('backup.chk.missing'), r.checks.missing_files)}
+    ${checkRow(t('backup.chk.consistency'), r.checks.db_consistency)}
+  </div>`;
+  const errors = r.errors.length
+    ? `<ul class="sub">${r.errors.map((e) => `<li>${esc(e)}</li>`).join('')}</ul>`
+    : '';
+  const banner = restored
+    ? `<div class="ok">${esc(t('backup.restored'))}</div>`
+    : r.ok
+      ? `<div class="ok">${esc(t('backup.verifyOk'))}</div>`
+      : `<div class="err">${esc(t('backup.verifyFail'))}</div>`;
+  // Only offer to apply when this was a passing DRY-RUN (not an already-applied restore).
+  const confirm =
+    r.dryRun && r.ok
+      ? `<form method="post" action="/backups/restore" style="margin-top:10px">
+          <input type="hidden" name="id" value="${esc(r.backupId)}">
+          <input type="hidden" name="confirm" value="yes">
+          <p class="sub" style="color:#c0392b;margin:0 0 8px">${esc(t('backup.restoreWarn'))}</p>
+          <button type="submit">${esc(t('backup.restoreBtn'))}</button>
+        </form>`
+      : '';
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('backup.report'))}</h2>${banner}${checks}${errors}${confirm}
+  </div>`;
 }
 
 /** Inference resilience — fallback / failure / model health over live traces (Sprint 7). */

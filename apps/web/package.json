@@ -26,6 +26,7 @@
     "@ados/agency-os": "workspace:*",
     "@ados/ai-manager": "workspace:*",
     "@ados/analytics-engine": "workspace:*",
+    "@ados/backup": "workspace:*",
     "@ados/campaign-engine": "workspace:*",
     "@ados/company-brain": "workspace:*",
     "@ados/contracts": "workspace:*",
@@ -39,6 +40,7 @@
     "@ados/observability": "workspace:*",
     "@ados/persistence": "workspace:*",
     "@ados/security": "workspace:^",
+    "@ados/storage": "workspace:*",
     "@ados/tenancy": "workspace:*",
     "@ados/workers": "workspace:*",
     "@node-rs/argon2": "^2.0.2"

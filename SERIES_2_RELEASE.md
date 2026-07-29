@@ -30,7 +30,7 @@ work proceeds under **Series 3** (see below). This is the freeze.
 | 9 | **Memory persistence** | ✅ | Company Brain + Executive Memory + Decision Journal durable + restored (`brain-persistence*.test.ts`, `executive-persistence.test.ts`). |
 | 10 | **Storage lifecycle** | ✅ | Metrics + journal compaction (Frozen archive) + VACUUM with reclaimed-bytes (`maintenance.test.ts`, `maintenance.e2e.test.ts`). |
 | 11 | **Documentation** | ✅ | `PRODUCT_TRUTH.md` (the honest ledger) + Books A–H design specs. |
-| 12 | **Backup / Restore** | ⚠️ | `packages/backup` is **built + tested as a package but NOT wired into the web app**. For the local single-operator deployment, backup today = **copy the `BRAIN_DB` SQLite file** (offline, while stopped); restore = put it back. An operator-facing backup/restore capability in the app is **Series 3 · Deployment**. |
+| 12 | **Backup / Restore** | ✅ (Series 3 · Deployment · Sprint 1) | **Now app-integrated.** Operators create a checksummed, auto-validated snapshot of `BRAIN_DB`, dry-run a restore, and apply one behind a confirmation from `/backups`; restore is transactional + rehydrates in-memory state (no restart). `apps/web/src/backup-manager.ts` over `@ados/backup`; `backup-manager.test.ts` + `backup.e2e.test.ts`. No more manual file copying. |
 | 13 | **Upgrade / migration** | ⚠️ | `BRAIN_DB` tables are `CREATE TABLE IF NOT EXISTS` — **additive / forward-compatible**, so a newer build reads an older file. There is **no destructive/versioned SQLite migration** yet (Postgres has `migration-runner`). Versioned local migration is **Series 3 · PostgreSQL/Deployment**. |
 | 14 | **Operator manual** | ⚠️ | No Series-2-verified operator manual. The honest operator reference today is `PRODUCT_TRUTH.md` + this document. The pre–Series-2 top-level guides (ADMIN/OPERATIONS/RUNBOOK/etc.) are **unverified** against the current app. A verified operator manual is **Series 3 · Deployment**. |
 
@@ -80,6 +80,8 @@ Not new agents — **enterprise maturity**:
 1. **Observability** — health dashboard; queue throughput; worker / planner / governance
    latency; memory growth; DB health.
 2. **Deployment** — real install / update / **backup / restore** / migration experience.
+   *Progress: Sprint 1 (app-integrated Backup & Restore) ✅ done. Next: Sprint 2 (versioned
+   migration), Sprint 3 (operator experience — verified install/upgrade/DR guides).*
 3. **Multi-user** — authentication, authorization, organizations, tenants, roles.
 4. **PostgreSQL** — real Row-Level Security, advisory locks, LISTEN/NOTIFY, concurrent
    workers, online migration. **DB-level RLS lives here**, deliberately deferred from

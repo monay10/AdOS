@@ -44,6 +44,7 @@ const NAV: NavDef[] = [
   { href: '/reports', key: 'nav.reports', icon: '❐', ready: true },
   { href: '/traces', key: 'nav.traces', icon: '❂', ready: true },
   { href: '/maintenance', key: 'nav.maintenance', icon: '⛭', ready: true },
+  { href: '/backups', key: 'nav.backups', icon: '⧉', ready: true },
   { href: '/settings', key: 'nav.settings', icon: '⚙', ready: true },
 ];
 

@@ -36,6 +36,7 @@ import {
 } from './governance-calibration.js';
 import { InMemoryMissionQueue, type MissionQueue } from './mission-queue.js';
 import { MaintenanceService } from './maintenance.js';
+import { BackupManager } from './backup-manager.js';
 import { QueueWorker } from './queue-worker.js';
 import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
@@ -100,6 +101,11 @@ export class App {
    * undefined for the in-memory default, where there is nothing to maintain.
    */
   readonly maintenance?: MaintenanceService;
+  /**
+   * App-integrated backup & restore over the durable local store (Series 3 ·
+   * Deployment). Present only when a durable store is wired (`main.ts`).
+   */
+  readonly backups?: BackupManager;
   /** Background drain of {@link missionQueue} — started explicitly via {@link startWorker}. */
   private readonly worker: QueueWorker;
 
@@ -133,6 +139,9 @@ export class App {
     // calibration state (default in-memory), `config` the thresholds (tests lower
     // them). `main.ts` injects the SQLite-backed decisions + state stores.
     calibrationDeps?: { decisions?: GovernanceDecisionLog; store?: CalibrationStore; config?: CalibrationConfig },
+    // App-integrated backup & restore (Series 3 · Deployment · Sprint 1). Built in
+    // `main.ts` over the durable BRAIN_DB store; undefined for the in-memory default.
+    backups?: BackupManager,
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -171,6 +180,11 @@ export class App {
     this.governance = governance;
     this.missionQueue = queue;
     if (maintenance) this.maintenance = maintenance;
+    if (backups) {
+      this.backups = backups;
+      // After a restore replaces the durable contents, reload in-memory state.
+      backups.setOnRestore(() => this.rehydrate());
+    }
     // The worker runs the same governed brief step an operator would, out of band,
     // and stops at the human gate. Started explicitly (startWorker) so tests that
     // only construct/`start()` the app never spawn a background loop.
@@ -201,10 +215,13 @@ export class App {
     ]);
   }
 
-  /** Subscribe the activity feed + audit log to every domain event. */
-  async start(): Promise<void> {
-    // Rehydrate the Company Brain from durable storage before serving, when a
-    // persistent brain was injected (Sprint 6). In-memory brains are a no-op.
+  /**
+   * Load all durable state into the in-memory decorators. Idempotent: run at
+   * startup, and again after a backup **restore** replaces the durable store's
+   * contents (so the running app reflects the restored data without a process
+   * restart). In-memory stores make each step a no-op.
+   */
+  async rehydrate(): Promise<void> {
     if (isRestorableBrain(this.brain)) await this.brain.restore();
     if (isRestorable(this.execMemory)) await this.execMemory.restore();
     if (isRestorable(this.journal)) await this.journal.restore();
@@ -213,13 +230,19 @@ export class App {
     // picks it up again (Async Queue Worker — crash recovery / resume).
     if (this.missionQueue.init) await this.missionQueue.init();
     await this.missionQueue.recoverStale(Date.now());
-    // Prepare the maintenance bookkeeping table (no-op when in-memory).
-    if (this.maintenance) await this.maintenance.init();
-    // Restore calibration state + inits the durable decision log, then recompute
-    // once so gate states reflect the accumulated history at boot (and any
-    // Enforced→Observe auto-relax is applied before the first approval is served).
+    // Restore calibration state + init the durable decision log, then recompute
+    // once so gate states reflect the accumulated history (and any Enforced→
+    // Observe auto-relax is applied before the first approval is served).
     await this.calibration.restore();
     await this.calibration.recompute(Date.now());
+  }
+
+  /** Subscribe the activity feed + audit log to every domain event. */
+  async start(): Promise<void> {
+    await this.rehydrate();
+    // Prepare the maintenance + backup bookkeeping tables (no-op when in-memory).
+    if (this.maintenance) await this.maintenance.init();
+    if (this.backups) await this.backups.init();
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,

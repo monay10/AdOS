@@ -72,6 +72,9 @@ importers:
       '@ados/analytics-engine':
         specifier: workspace:*
         version: link:../../domains/analytics-engine
+      '@ados/backup':
+        specifier: workspace:*
+        version: link:../../packages/backup
       '@ados/campaign-engine':
         specifier: workspace:*
         version: link:../../domains/campaign-engine
@@ -111,6 +114,9 @@ importers:
       '@ados/security':
         specifier: workspace:^
         version: link:../../packages/security
+      '@ados/storage':
+        specifier: workspace:*
+        version: link:../../packages/storage
       '@ados/tenancy':
         specifier: workspace:*
         version: link:../../packages/tenancy
