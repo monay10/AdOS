@@ -23,6 +23,7 @@
  */
 import { TenantContext, type RequestContext } from '@ados/tenancy';
 import type { MissionQueue, QueuedMission } from './mission-queue.js';
+import { NOOP_RECORDER, type MetricsRecorderPort } from './metrics-recorder.js';
 
 /** The outcome of running one queued job. */
 export type JobOutcome = { isErr: false } | { isErr: true; error: { retryable: boolean; message: string } };
@@ -41,6 +42,8 @@ export interface WorkerOptions {
   /** Injectable clock (epoch ms) for deterministic tests. */
   clock?: () => number;
   log?: (msg: string, meta?: Record<string, unknown>) => void;
+  /** Records queue-wait and worker-execution latencies. No-op by default. */
+  metrics?: MetricsRecorderPort;
 }
 
 export class QueueWorker {
@@ -54,6 +57,7 @@ export class QueueWorker {
   private readonly backoffMaxMs: number;
   private readonly clock: () => number;
   private readonly log: (msg: string, meta?: Record<string, unknown>) => void;
+  private readonly metrics: MetricsRecorderPort;
 
   constructor(
     private readonly queue: MissionQueue,
@@ -66,6 +70,7 @@ export class QueueWorker {
     this.backoffMaxMs = opts.backoffMaxMs ?? 30_000;
     this.clock = opts.clock ?? (() => Date.now());
     this.log = opts.log ?? (() => {});
+    this.metrics = opts.metrics ?? NOOP_RECORDER;
   }
 
   /**
@@ -77,11 +82,21 @@ export class QueueWorker {
     await this.queue.recoverStale(this.clock());
     const job = await this.queue.claim(this.clock(), this.leaseMs);
     if (!job) return false;
+    // Queue wait = enqueue → first claim. Only the first attempt, so retry backoff
+    // (a deliberate delay, not queue pressure) never inflates the measurement.
+    // enqueuedAt is a wall-clock ISO, so measure against wall clock too.
+    if (job.attempts === 1) {
+      const waited = Date.now() - Date.parse(job.enqueuedAt);
+      if (Number.isFinite(waited)) this.metrics.observe('queue_wait', waited);
+    }
+    const execStart = Date.now();
     this.inFlight = this.run(job);
     try {
       await this.inFlight;
     } finally {
       this.inFlight = null;
+      // Worker execution = claim → settle, regardless of success/failure.
+      this.metrics.observe('worker_execution', Date.now() - execStart);
     }
     return true;
   }

@@ -12,6 +12,7 @@ import { MaintenanceService } from './maintenance.js';
 import { SqlGovernanceDecisionLog, type GovernanceDecisionLog } from './governance-decisions.js';
 import { SqlCalibrationStore, type CalibrationStore } from './governance-calibration.js';
 import { BackupManager } from './backup-manager.js';
+import { SqlMetricsStore, type MetricsStore } from './metrics-store.js';
 import { SqlBackupRepository, LocalBackupArchiveStore } from '@ados/backup';
 import { policyFromEnv } from './governance-policy.js';
 import { createAIManager } from './ai-factory.js';
@@ -79,6 +80,11 @@ async function main(): Promise<void> {
   // Deployment). Archives are files next to BRAIN_DB (or BACKUP_DIR); the
   // catalogue lives in BRAIN_DB. Only meaningful with a durable store.
   let backups: BackupManager | undefined;
+  // Operational metrics (Series 3 · Observability · Sprint 2) live in their OWN
+  // local SQLite file — "operational metrics are not business data": deletable
+  // wholesale, and never part of a Brain backup. Default path is `${BRAIN_DB}.metrics`;
+  // override with METRICS_DB. In-memory (App default) when no durable store.
+  let metricsStore: MetricsStore | undefined;
   if (brainDbPath) {
     // One SQLite connection shared by every durable learned-state store.
     const knowledgeDb = new SqliteDatabase(brainDbPath);
@@ -96,6 +102,9 @@ async function main(): Promise<void> {
     calibrationDeps = { decisions: new SqlGovernanceDecisionLog(knowledgeDb), store: new SqlCalibrationStore(knowledgeDb) };
     const archiveDir = process.env['BACKUP_DIR'] ?? `${brainDbPath}.backups`;
     backups = new BackupManager(knowledgeDb, new SqlBackupRepository(knowledgeDb), new LocalBackupArchiveStore(archiveDir));
+    const metricsDbPath = process.env['METRICS_DB'] ?? `${brainDbPath}.metrics`;
+    metricsStore = new SqlMetricsStore(new SqliteDatabase(metricsDbPath));
+    logger.info({ metricsDbPath }, 'operational metrics store enabled (SEPARATE local SQLite file — not business data, safe to delete)');
     logger.info({ brainDbPath }, 'durable learned state enabled (Company Brain + Executive Memory + Decision Journal + Mission Queue + Governance Calibration, SQLite)');
   } else {
     logger.warn('BRAIN_DB not set — Company Brain / Executive Memory / Decision Journal / Mission Queue are in-memory (NOT durable across restarts)');
@@ -114,10 +123,10 @@ async function main(): Promise<void> {
     db = await PostgresDatabase.connect(databaseUrl, maxConnections ? { maxConnections: Number.parseInt(maxConnections, 10) } : {});
     const { applied } = await runMigrations(db, passwordAuth ? [authCredentialsMigration()] : []);
     logger.info({ applied }, 'database migrations applied');
-    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance, queue, maintenance, calibrationDeps, backups);
+    app = new App(undefined, ai, sqlRepositories(new SqlAggregateStore(db)), brain, execMemory, journal, governance, queue, maintenance, calibrationDeps, backups, metricsStore);
   } else {
     logger.warn('DATABASE_URL not set — using in-memory persistence (data is NOT durable across restarts)');
-    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance, queue, maintenance, calibrationDeps, backups);
+    app = new App(undefined, ai, undefined, brain, execMemory, journal, governance, queue, maintenance, calibrationDeps, backups, metricsStore);
   }
 
   let auth: AuthGateway | undefined;

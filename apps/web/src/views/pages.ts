@@ -11,6 +11,8 @@ import type { StorageStats } from '../maintenance.js';
 import type { GateCalibration, CalibrationReason } from '../governance-calibration.js';
 import type { BackupRecord, RestoreReport } from '@ados/backup';
 import type { RuntimeHealth } from '../runtime-health.js';
+import type { PerformanceSnapshot, PerfMetricView } from '../metrics-recorder.js';
+import type { MetricSummary } from '../metrics.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1493,6 +1495,68 @@ export function healthPage(opts: { session: Session; health: RuntimeHealth }): s
     active: '/health',
     session: opts.session,
     body: `${head}${reasons}${grid}`,
+  });
+}
+
+/** Milliseconds as a compact, honest latency label. */
+function fmtMs(ms: number): string {
+  if (ms >= 10_000) return `${(ms / 1000).toFixed(1)}s`;
+  if (ms >= 1_000) return `${(ms / 1000).toFixed(2)}s`;
+  return `${Math.round(ms)}ms`;
+}
+
+/**
+ * Performance — latency percentiles per subsystem (Series 3 · Observability ·
+ * Sprint 2). Four measured latencies (planner, governance, queue wait, worker
+ * execution) across three windows (last hour / 24h / 30 days). count/min/max/mean
+ * are exact; P50/P95/P99 are computed from measured histograms (bucket-bounded).
+ * Nothing is estimated free-hand — an empty window says so rather than showing a 0.
+ */
+export function performancePage(opts: { session: Session; snapshot: PerformanceSnapshot }): string {
+  const head = `<div class="head"><div><h1>${esc(t('perf.title'))}</h1><p>${esc(t('perf.subtitle'))}</p></div></div>`;
+
+  const label = (m: PerfMetricView['metric']): string => t(`perf.metric.${m}`);
+  const dash = '—';
+
+  const windowTable = (title: string, pick: (v: PerfMetricView) => MetricSummary): string => {
+    const rows = opts.snapshot.metrics
+      .map((v) => {
+        const s = pick(v);
+        if (s.count === 0) {
+          return `<tr><td>${esc(label(v.metric))}</td><td colspan="6" class="sub">${esc(t('perf.noData'))}</td></tr>`;
+        }
+        return `<tr><td>${esc(label(v.metric))}</td>
+          <td>${String(s.count)}</td>
+          <td>${esc(fmtMs(s.p50))}</td>
+          <td><strong>${esc(fmtMs(s.p95))}</strong></td>
+          <td>${esc(fmtMs(s.p99))}</td>
+          <td class="sub">${esc(fmtMs(s.min))} / ${esc(fmtMs(s.max))}</td>
+          <td class="sub">${esc(fmtMs(s.mean))}</td></tr>`;
+      })
+      .join('');
+    return `<div class="panel"><h2>${esc(title)}</h2>
+      <table><thead><tr>
+        <th>${esc(t('perf.col.metric'))}</th>
+        <th>${esc(t('perf.col.count'))}</th>
+        <th>${esc(t('perf.col.p50'))}</th>
+        <th>${esc(t('perf.col.p95'))}</th>
+        <th>${esc(t('perf.col.p99'))}</th>
+        <th>${esc(t('perf.col.range'))}</th>
+        <th>${esc(t('perf.col.mean'))}</th>
+      </tr></thead><tbody>${rows || `<tr><td colspan="7" class="sub">${dash}</td></tr>`}</tbody></table></div>`;
+  };
+
+  const note = `<div class="panel sub">${esc(t('perf.method'))}</div>`;
+
+  return layout({
+    title: t('perf.title'),
+    active: '/performance',
+    session: opts.session,
+    body: `${head}
+      ${windowTable(t('perf.window.lastHour'), (v) => v.lastHour)}
+      ${windowTable(t('perf.window.last24h'), (v) => v.last24h)}
+      ${windowTable(t('perf.window.last30d'), (v) => v.last30d)}
+      ${note}`,
   });
 }
 

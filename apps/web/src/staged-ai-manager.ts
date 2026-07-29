@@ -3,6 +3,7 @@ import { TraceBuilder, createJob, systemClock, type Clock } from '@ados/ai-manag
 import { TenantContext } from '@ados/tenancy';
 import type { InMemoryExecutionTraceStore } from './execution-trace-store.js';
 import { StageEngine, defaultStageEngine } from './stage-engine.js';
+import { NOOP_RECORDER, type MetricsRecorderPort } from './metrics-recorder.js';
 
 /**
  * StagedAIManager — runs a real, observable Stage Engine around every AI task
@@ -25,6 +26,10 @@ export class StagedAIManager implements AIManagerPort {
     private readonly store: InMemoryExecutionTraceStore,
     private readonly engine: StageEngine = defaultStageEngine(),
     private readonly clock: Clock = systemClock,
+    // Records the two latencies a staged task incurs — the governance stage
+    // pipeline (pre+post) and the planner/generation itself. No-op by default; the
+    // App wires a real recorder. Wall-clock (Date.now) is the honest measure here.
+    private readonly metrics: MetricsRecorderPort = NOOP_RECORDER,
   ) {}
 
   async submit<T = unknown>(request: AITaskRequest): Promise<AITaskResult<T>> {
@@ -43,9 +48,12 @@ export class StagedAIManager implements AIManagerPort {
     });
 
     // Pre-generation stages (observe-only — never abort the request).
+    const preStart = Date.now();
     await this.engine.runPre(request, trace);
+    const preMs = Date.now() - preStart;
 
     let result: AITaskResult<T>;
+    const genStart = Date.now();
     try {
       result = await this.inner.submit<T>(request);
     } catch (e) {
@@ -53,12 +61,17 @@ export class StagedAIManager implements AIManagerPort {
       this.store.record(tenantId, trace.seal());
       throw e;
     }
+    // Planner latency = the generation itself (the wrapped manager producing the plan).
+    this.metrics.observe('planner_latency', Date.now() - genStart);
 
     trace.step('inference', { model: result.model, engine: result.engine, attempts: result.attempts });
     trace.set({ model: result.model, engine: result.engine, usage: result.usage, latencyMs: result.latencyMs, cached: result.cached });
 
     // Post-generation stages (observe-only).
+    const postStart = Date.now();
     await this.engine.runPost(request, result, trace);
+    // Governance latency = the observe/safety stage pipeline around generation.
+    this.metrics.observe('governance_latency', preMs + (Date.now() - postStart));
 
     trace.step('completed');
     this.store.record(tenantId, trace.seal());

@@ -26,6 +26,7 @@ import {
   dashboardPage,
   backupsPage,
   healthPage,
+  performancePage,
   listPage,
   loginPage,
   maintenancePage,
@@ -771,6 +772,11 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
   // ── Runtime Health (Series 3 · Observability — is the system healthy now?) ──
   if (path === '/health' && method === 'GET') {
     return res.html(healthPage({ session, health: await app.health() }));
+  }
+
+  // ── Performance (Series 3 · Observability — how fast, at the tail? P50/P95/P99) ──
+  if (path === '/performance' && method === 'GET') {
+    return res.html(performancePage({ session, snapshot: await app.metrics.snapshot(Date.now()) }));
   }
 
   // ── Backups (Series 3 · Deployment — app-integrated backup & restore) ──

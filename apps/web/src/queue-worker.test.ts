@@ -127,4 +127,17 @@ describe('QueueWorker', () => {
     expect(finished).toBe(true); // stop() waited for it
     expect((await q.list('acme'))[0]!.status).toBe('awaiting_approval');
   });
+
+  it('records queue_wait (first claim only) and worker_execution latencies', async () => {
+    const q = new InMemoryMissionQueue();
+    await seed(q);
+    const observed: string[] = [];
+    const worker = new QueueWorker(q, async () => ({ isErr: false }), {
+      metrics: { observe: (m) => observed.push(m) },
+    });
+    await worker.tick();
+    // Both latencies are folded exactly once for the run.
+    expect(observed.filter((m) => m === 'queue_wait')).toHaveLength(1);
+    expect(observed.filter((m) => m === 'worker_execution')).toHaveLength(1);
+  });
 });

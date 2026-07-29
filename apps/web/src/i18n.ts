@@ -70,6 +70,7 @@ const DICT: Dict = {
   'nav.traces': { en: 'AI Traces', tr: 'AI İzleri' },
   'nav.maintenance': { en: 'Maintenance', tr: 'Bakım' },
   'nav.health': { en: 'Health', tr: 'Sağlık' },
+  'nav.performance': { en: 'Performance', tr: 'Performans' },
   'nav.backups': { en: 'Backups', tr: 'Yedekler' },
   // Runtime Health (Observability · Sprint 1)
   'health.title': { en: 'Runtime Health', tr: 'Çalışma Sağlığı' },
@@ -94,6 +95,32 @@ const DICT: Dict = {
   'health.lastMaintenance': { en: 'Last maintenance', tr: 'Son bakım' },
   'health.never': { en: 'never', tr: 'hiç' },
   'health.none': { en: 'none', tr: 'yok' },
+
+  // Performance (Series 3 · Observability · Sprint 2)
+  'perf.title': { en: 'Performance', tr: 'Performans' },
+  'perf.subtitle': {
+    en: 'How fast is the system, at the tail? Latency percentiles per subsystem — measured, aggregated, and stored (never raw traces).',
+    tr: 'Sistem ne kadar hızlı, kuyrukta ne oluyor? Alt sistem başına gecikme yüzdelikleri — ölçülür, toplulaştırılır ve saklanır (asla ham iz değil).',
+  },
+  'perf.window.lastHour': { en: 'Last hour', tr: 'Son saat' },
+  'perf.window.last24h': { en: 'Last 24 hours', tr: 'Son 24 saat' },
+  'perf.window.last30d': { en: 'Last 30 days', tr: 'Son 30 gün' },
+  'perf.metric.planner_latency': { en: 'Planner (generation)', tr: 'Planlayıcı (üretim)' },
+  'perf.metric.governance_latency': { en: 'Governance (stages)', tr: 'Yönetişim (aşamalar)' },
+  'perf.metric.queue_wait': { en: 'Queue wait', tr: 'Kuyruk bekleme' },
+  'perf.metric.worker_execution': { en: 'Worker execution', tr: 'İşçi çalışması' },
+  'perf.col.metric': { en: 'Subsystem', tr: 'Alt sistem' },
+  'perf.col.count': { en: 'Samples', tr: 'Örnek' },
+  'perf.col.p50': { en: 'P50', tr: 'P50' },
+  'perf.col.p95': { en: 'P95', tr: 'P95' },
+  'perf.col.p99': { en: 'P99', tr: 'P99' },
+  'perf.col.range': { en: 'min / max', tr: 'en az / en çok' },
+  'perf.col.mean': { en: 'Mean', tr: 'Ortalama' },
+  'perf.noData': { en: 'no samples in this window', tr: 'bu pencerede örnek yok' },
+  'perf.method': {
+    en: 'count, min, max and mean are exact. P50/P95/P99 are computed from measured fixed-bucket histograms (bucket-bounded), not free-hand estimates. Operational metrics live in a separate store — not business data, safe to delete, never part of a backup.',
+    tr: 'sayı, en az, en çok ve ortalama tamdır. P50/P95/P99, ölçülmüş sabit-kova histogramlarından hesaplanır (kova sınırlı), serbest tahmin değildir. Operasyonel metrikler ayrı bir depoda yaşar — iş verisi değildir, güvenle silinebilir, yedeğin parçası değildir.',
+  },
   'nav.settings': { en: 'Settings', tr: 'Ayarlar' },
   // Backup & Restore
   'backup.title': { en: 'Backup & Restore', tr: 'Yedekleme ve Geri Yükleme' },

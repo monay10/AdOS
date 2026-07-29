@@ -39,6 +39,9 @@ import { MaintenanceService } from './maintenance.js';
 import { BackupManager } from './backup-manager.js';
 import { QueueWorker } from './queue-worker.js';
 import { assembleHealth, type RuntimeHealth } from './runtime-health.js';
+import { MetricsRecorder } from './metrics-recorder.js';
+import { InMemoryMetricsStore, type MetricsStore } from './metrics-store.js';
+import { systemClock } from '@ados/ai-manager';
 import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
@@ -110,6 +113,17 @@ export class App {
   /** Background drain of {@link missionQueue} — started explicitly via {@link startWorker}. */
   private readonly worker: QueueWorker;
 
+  /**
+   * Operational-performance metrics (Series 3 · Observability · Sprint 2). Folds
+   * planner / governance / queue-wait / worker-execution latencies into durable
+   * aggregate histograms — never raw traces. Over a *separate* metrics store
+   * (in-memory by default; `main.ts` injects a separate local SQLite file), so
+   * operational metrics stay independent of — and deletable without — business data.
+   */
+  readonly metrics: MetricsRecorder;
+  /** Periodic flush+prune of {@link metrics}; started with {@link startWorker}. */
+  private metricsTimer: ReturnType<typeof setInterval> | undefined;
+
   private readonly tele: Telemetry = telemetry('web');
   private readonly feed: FeedEntry[] = [];
   private readonly maxFeed = 50;
@@ -143,6 +157,11 @@ export class App {
     // App-integrated backup & restore (Series 3 · Deployment · Sprint 1). Built in
     // `main.ts` over the durable BRAIN_DB store; undefined for the in-memory default.
     backups?: BackupManager,
+    // Durable operational-metrics store (Series 3 · Observability · Sprint 2).
+    // In-memory by default; `main.ts` injects a SQLite store over a *separate*
+    // local file so operational metrics are never business data (safe to delete,
+    // not part of a Brain backup).
+    metricsStore: MetricsStore = new InMemoryMetricsStore(),
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -161,7 +180,10 @@ export class App {
       calibrationDeps?.store ?? new InMemoryCalibrationStore(),
       calibrationDeps?.config ?? DEFAULT_CALIBRATION_CONFIG,
     );
-    ai = new StagedAIManager(ai, this.traces, defaultStageEngine(this.brain));
+    // Build the metrics recorder before the AI wrap so the staged manager can
+    // record planner + governance latencies into it.
+    this.metrics = new MetricsRecorder(metricsStore);
+    ai = new StagedAIManager(ai, this.traces, defaultStageEngine(this.brain), systemClock, this.metrics);
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);
     this.brands = new BrandService(repos.brands, bus);
@@ -189,7 +211,7 @@ export class App {
     // The worker runs the same governed brief step an operator would, out of band,
     // and stops at the human gate. Started explicitly (startWorker) so tests that
     // only construct/`start()` the app never spawn a background loop.
-    this.worker = new QueueWorker(this.missionQueue, (job) => runApplyJob(this, job));
+    this.worker = new QueueWorker(this.missionQueue, (job) => runApplyJob(this, job), { metrics: this.metrics });
   }
 
   /**
@@ -244,6 +266,9 @@ export class App {
     // Prepare the maintenance + backup bookkeeping tables (no-op when in-memory).
     if (this.maintenance) await this.maintenance.init();
     if (this.backups) await this.backups.init();
+    // Prepare the operational-metrics store + prune anything already past retention.
+    await this.metrics.init();
+    await this.metrics.maintain(Date.now());
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,
@@ -315,6 +340,12 @@ export class App {
   /** Start the background queue worker (production). No-op if already running. */
   startWorker(): void {
     this.worker.start();
+    // Persist buffered metric samples and prune stale aggregates on a slow cadence
+    // (the hot path only folds into memory). Unref'd so it never holds the process.
+    if (!this.metricsTimer) {
+      this.metricsTimer = setInterval(() => void this.metrics.maintain(Date.now()).catch(() => {}), 60_000);
+      this.metricsTimer.unref?.();
+    }
   }
 
   /**
@@ -326,8 +357,14 @@ export class App {
     return this.worker.tick();
   }
 
-  /** Graceful shutdown: stop claiming and await the in-flight queue job. */
+  /** Graceful shutdown: stop claiming, await the in-flight job, and persist metrics. */
   async stop(): Promise<void> {
     await this.worker.stop();
+    if (this.metricsTimer) {
+      clearInterval(this.metricsTimer);
+      this.metricsTimer = undefined;
+    }
+    // Flush the last buffered samples so a snapshot after restart is complete.
+    await this.metrics.maintain(Date.now());
   }
 }
