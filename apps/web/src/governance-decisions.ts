@@ -39,8 +39,24 @@ export interface ApprovalFunnel {
   overrideRatePct: number;
 }
 
-export class InMemoryGovernanceDecisionLog {
+/**
+ * The gate-decision log as a port (data-calibration sprint). Implementations may
+ * be synchronous (in-memory) or asynchronous (durable SQL) — callers `await`
+ * either way. `recentByGate` reads across tenants (governance enforcement is a
+ * platform-global property), the substrate the Auto-Calibration engine measures.
+ */
+export interface GovernanceDecisionLog {
+  init?(): Promise<void> | void;
+  record(tenantId: string, decision: GateDecision): void | Promise<void>;
+  list(tenantId: string): GateDecision[] | Promise<GateDecision[]>;
+  /** Most recent decisions for a gate across ALL tenants, newest first. */
+  recentByGate(gate: string, limit: number): GateDecision[] | Promise<GateDecision[]>;
+}
+
+export class InMemoryGovernanceDecisionLog implements GovernanceDecisionLog {
   private readonly byTenant = new Map<string, GateDecision[]>();
+  /** Newest-first log across all tenants, for gate-scoped calibration reads. */
+  private readonly all: Array<{ tenantId: string; decision: GateDecision }> = [];
   private readonly max: number;
 
   constructor(max = 200) {
@@ -52,11 +68,87 @@ export class InMemoryGovernanceDecisionLog {
     list.unshift(decision);
     if (list.length > this.max) list.length = this.max;
     this.byTenant.set(tenantId, list);
+    this.all.unshift({ tenantId, decision });
   }
 
   list(tenantId: string): GateDecision[] {
     return this.byTenant.get(tenantId) ?? [];
   }
+
+  recentByGate(gate: string, limit: number): GateDecision[] {
+    const out: GateDecision[] = [];
+    for (const { decision } of this.all) {
+      if (decision.gate === gate) out.push(decision);
+      if (out.length >= limit) break;
+    }
+    return out;
+  }
+}
+
+/** Query executor shape the durable log needs (SQLite/Postgres). */
+interface Exec {
+  query<T = unknown>(sql: string, params?: unknown[]): Promise<T[]>;
+  execute(sql: string, params?: unknown[]): Promise<{ rowCount: number }>;
+}
+
+/**
+ * Durable gate-decision log — one row per decision on the shared local SQLite
+ * file. The in-memory log is bounded (200) and wiped on restart, which cannot
+ * support the Auto-Calibration engine's "last 500 decisions / 30-day stability"
+ * questions; this makes the funnel and the calibration window real across
+ * restarts. 100% local, no server/API.
+ */
+export class SqlGovernanceDecisionLog implements GovernanceDecisionLog {
+  constructor(private readonly db: Exec) {}
+
+  async init(): Promise<void> {
+    await this.db.execute(
+      'CREATE TABLE IF NOT EXISTS governance_decisions (id INTEGER PRIMARY KEY AUTOINCREMENT, tenant_id TEXT, gate TEXT, flagged INTEGER, acknowledged INTEGER, review_ms INTEGER, capability TEXT, at TEXT)',
+    );
+  }
+
+  async record(tenantId: string, d: GateDecision): Promise<void> {
+    await this.db.execute(
+      'INSERT INTO governance_decisions (tenant_id, gate, flagged, acknowledged, review_ms, capability, at) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [tenantId, d.gate, d.flagged ? 1 : 0, d.acknowledged ? 1 : 0, d.reviewMs ?? null, d.capability ?? null, d.at],
+    );
+  }
+
+  async list(tenantId: string): Promise<GateDecision[]> {
+    const rows = await this.db.query<DecisionRow>(
+      'SELECT gate, flagged, acknowledged, review_ms, capability, at FROM governance_decisions WHERE tenant_id = $1 ORDER BY at DESC LIMIT 500',
+      [tenantId],
+    );
+    return rows.map(toDecision);
+  }
+
+  async recentByGate(gate: string, limit: number): Promise<GateDecision[]> {
+    const rows = await this.db.query<DecisionRow>(
+      'SELECT gate, flagged, acknowledged, review_ms, capability, at FROM governance_decisions WHERE gate = $1 ORDER BY at DESC LIMIT $2',
+      [gate, limit],
+    );
+    return rows.map(toDecision);
+  }
+}
+
+interface DecisionRow {
+  gate: string;
+  flagged: number;
+  acknowledged: number;
+  review_ms: number | null;
+  capability: string | null;
+  at: string;
+}
+
+function toDecision(r: DecisionRow): GateDecision {
+  return {
+    gate: r.gate,
+    flagged: !!r.flagged,
+    acknowledged: !!r.acknowledged,
+    at: r.at,
+    ...(r.capability != null ? { capability: r.capability } : {}),
+    ...(r.review_ms != null ? { reviewMs: Number(r.review_ms) } : {}),
+  };
 }
 
 /** Aggregate a set of gate decisions into an approval/override funnel. */

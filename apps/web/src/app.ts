@@ -26,14 +26,21 @@ import { createOfflineGovernedManager } from './governed-inference.js';
 import { StagedAIManager } from './staged-ai-manager.js';
 import { defaultStageEngine } from './stage-engine.js';
 import { InMemoryExecutionTraceStore } from './execution-trace-store.js';
-import { InMemoryGovernanceDecisionLog } from './governance-decisions.js';
+import { InMemoryGovernanceDecisionLog, type GovernanceDecisionLog } from './governance-decisions.js';
+import {
+  GovernanceCalibration,
+  InMemoryCalibrationStore,
+  DEFAULT_CALIBRATION_CONFIG,
+  type CalibrationStore,
+  type CalibrationConfig,
+} from './governance-calibration.js';
 import { InMemoryMissionQueue, type MissionQueue } from './mission-queue.js';
 import { MaintenanceService } from './maintenance.js';
 import { QueueWorker } from './queue-worker.js';
 import { runApplyJob } from './mission-runner.js';
 import { isRestorableBrain } from './brain-persistence.js';
 import { isRestorable } from './executive-persistence.js';
-import { REVIEW_ONLY, type GovernancePolicy } from './governance-policy.js';
+import { isEnforced, REVIEW_ONLY, type GovernancePolicy } from './governance-policy.js';
 import { inMemoryRepositories, type RepositoryBundle } from './db/repositories.js';
 
 /** A single event as surfaced on the dashboard activity feed. */
@@ -76,9 +83,15 @@ export class App {
   /** Every AI task leaves an auditable ExecutionTrace here (Sprint 4.1). */
   readonly traces: InMemoryExecutionTraceStore;
   /** Each gate approval records flagged/override for the approval funnel (Sprint 5). */
-  readonly governanceDecisions: InMemoryGovernanceDecisionLog;
+  readonly governanceDecisions: GovernanceDecisionLog;
   /** Which gates hard-enforce a failing governance verdict (Sprint 8; default none). */
   readonly governance: GovernancePolicy;
+  /**
+   * Governance Auto-Calibration — the data-driven Observe→Candidate→Enforced
+   * state machine over {@link governanceDecisions}. Always present (works over an
+   * in-memory store); durable when `main.ts` injects the SQLite-backed stores.
+   */
+  readonly calibration: GovernanceCalibration;
   /** Durable queue of missions an agent created from applied recommendations. */
   readonly missionQueue: MissionQueue;
   /**
@@ -115,6 +128,11 @@ export class App {
     // Undefined for the in-memory default; `main.ts` injects one bound to the
     // BRAIN_DB SQLite file + the compactable Decision Journal.
     maintenance?: MaintenanceService,
+    // Governance Auto-Calibration wiring (data-calibration sprint). All optional:
+    // `decisions` durable gate-decision log (default in-memory), `store` durable
+    // calibration state (default in-memory), `config` the thresholds (tests lower
+    // them). `main.ts` injects the SQLite-backed decisions + state stores.
+    calibrationDeps?: { decisions?: GovernanceDecisionLog; store?: CalibrationStore; config?: CalibrationConfig },
   ) {
     this.bus = bus;
     // The Company Brain must exist before the AI wrap: the Stage Engine's
@@ -127,7 +145,12 @@ export class App {
     // orchestration stages run observably around generation; Sprint 4.3 — real
     // governance stages run in observe mode, recorded but never enforced).
     this.traces = new InMemoryExecutionTraceStore();
-    this.governanceDecisions = new InMemoryGovernanceDecisionLog();
+    this.governanceDecisions = calibrationDeps?.decisions ?? new InMemoryGovernanceDecisionLog();
+    this.calibration = new GovernanceCalibration(
+      this.governanceDecisions,
+      calibrationDeps?.store ?? new InMemoryCalibrationStore(),
+      calibrationDeps?.config ?? DEFAULT_CALIBRATION_CONFIG,
+    );
     ai = new StagedAIManager(ai, this.traces, defaultStageEngine(this.brain));
     this.workspaces = new WorkspaceService(repos.workspaces, bus);
     this.clients = new ClientService(repos.clients, bus);
@@ -192,6 +215,11 @@ export class App {
     await this.missionQueue.recoverStale(Date.now());
     // Prepare the maintenance bookkeeping table (no-op when in-memory).
     if (this.maintenance) await this.maintenance.init();
+    // Restore calibration state + inits the durable decision log, then recompute
+    // once so gate states reflect the accumulated history at boot (and any
+    // Enforced→Observe auto-relax is applied before the first approval is served).
+    await this.calibration.restore();
+    await this.calibration.recompute(Date.now());
     await this.bus.subscribe('>', async (envelope) => {
       const entry: FeedEntry = {
         eventName: envelope.eventName,
@@ -207,6 +235,15 @@ export class App {
   /** Most recent events for the current tenant, newest first. */
   recentEvents(tenantId: string, limit = 10): FeedEntry[] {
     return this.feed.filter((e) => e.tenantId === tenantId).slice(0, limit);
+  }
+
+  /**
+   * Whether a failing verdict at this gate hard-blocks approval — the effective
+   * enforcement, combining the static operator policy (`GOVERNANCE_ENFORCED_GATES`)
+   * with any gate the Auto-Calibration state machine has promoted to Enforced.
+   */
+  enforcedAt(gate: string): boolean {
+    return isEnforced(this.governance, gate) || this.calibration.isEnforced(gate);
   }
 
   /** Start the background queue worker (production). No-op if already running. */

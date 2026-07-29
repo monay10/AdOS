@@ -59,7 +59,7 @@ import { approvalFunnel, reviewStats } from './governance-decisions.js';
 import { stageLatency } from './stage-latency.js';
 import { revisionFunnel, type MissionSummary } from './revision-funnel.js';
 import { resilienceStats } from './resilience-stats.js';
-import { isEnforced, type MissionGate } from './governance-policy.js';
+import { type MissionGate } from './governance-policy.js';
 import { planMission } from './mission-planner.js';
 import { briefGenerateAndAdvance } from './mission-runner.js';
 import { recommend, type VerticalStat } from './recommendation-engine.js';
@@ -722,7 +722,7 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
   // ── AI Execution Traces (Sprint 4.1) + governance metrics/funnel (Sprint 5) ──
   if (path === '/traces' && method === 'GET') {
     const traces = app.traces.list(session.tenantId, 50);
-    const decisions = app.governanceDecisions.list(session.tenantId);
+    const decisions = await app.governanceDecisions.list(session.tenantId);
     const metrics = governanceMetrics(app.traces.list(session.tenantId, 100));
     const funnel = approvalFunnel(decisions);
     const review = reviewStats(decisions);
@@ -732,7 +732,20 @@ async function route(app: App, secret: string, session: Session, req: Req, res: 
       .filter((m) => m.tenantId === session.tenantId)
       .map((m) => ({ revisionCount: m.revisionCount, status: m.status }));
     const revisions = revisionFunnel(missionRows);
-    return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions, resilience }));
+    // Auto-Calibration: recompute gate states from the durable decision history
+    // (applies any automatic Observe/Candidate/relax transitions) and surface them.
+    const calibration = await app.calibration.recompute(Date.now());
+    return res.html(tracesPage({ session, traces, metrics, funnel, review, latency, revisions, resilience, calibration }));
+  }
+
+  // Governance Auto-Calibration operator actions (data-calibration sprint).
+  if (path === '/governance/calibration/promote' && method === 'POST') {
+    await app.calibration.promote((req.body['gate'] ?? '').trim());
+    return res.redirect('/traces');
+  }
+  if (path === '/governance/calibration/demote' && method === 'POST') {
+    await app.calibration.demote((req.body['gate'] ?? '').trim());
+    return res.redirect('/traces');
   }
 
   // ── Maintenance (data-lifecycle — storage metrics, journal compaction, VACUUM) ──
@@ -977,7 +990,7 @@ function spreadGovernance(app: App, tenantId: string, missionId: string, activeG
   const violations = Array.isArray(detail['violations']) ? (detail['violations'] as string[]) : [];
   // Sprint 8: mark the view as enforced when this gate hard-blocks a failing
   // verdict, so the UI shows a block (no ack/approve) instead of the ack path.
-  const enforced = !!activeGate && isEnforced(app.governance, activeGate);
+  const enforced = !!activeGate && app.enforcedAt(activeGate);
   return { governance: { passed: Boolean(detail['passed']), confidence: trace.confidence?.score ?? 0, violations, enforced } };
 }
 
@@ -1004,7 +1017,7 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   const flagged = !!trace && !constitutionPassed(trace);
   // Sprint 8 — Enforced tier: when this gate is hard-enforced and governance
   // flagged the artifact, approval is BLOCKED server-side with no override.
-  if (flagged && isEnforced(app.governance, gate)) {
+  if (flagged && app.enforcedAt(gate)) {
     return renderMissionDetail(app, session, res, id, t('gov.enforcedBlock'));
   }
   if (!acknowledged && flagged) {
@@ -1018,7 +1031,7 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
   // when the trace could be matched, so review-duration stats stay honest.
   const finishedAt = trace?.finishedAt ? Date.parse(trace.finishedAt) : NaN;
   const reviewMs = Number.isNaN(finishedAt) ? undefined : Math.max(0, Date.now() - finishedAt);
-  app.governanceDecisions.record(session.tenantId, {
+  await app.governanceDecisions.record(session.tenantId, {
     gate,
     flagged,
     acknowledged,
@@ -1026,6 +1039,9 @@ async function gateApprove(app: App, session: Session, res: Res, id: string, gat
     ...(trace?.capability ? { capability: trace.capability } : {}),
     ...(reviewMs !== undefined ? { reviewMs } : {}),
   });
+  // Recompute this metric's calibration so a rising override rate auto-relaxes an
+  // Enforced gate before the next approval (the only automatic enforcement change).
+  await app.calibration.recompute(Date.now());
   return res.redirect(`/missions/${id}`);
 }
 

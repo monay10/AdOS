@@ -15,6 +15,9 @@
  */
 export type MissionGate = 'strategy_and_budget' | 'creative_assets' | 'campaign_launch';
 
+/** Every human approval gate, in pipeline order — the calibration engine iterates these. */
+export const MISSION_GATES: readonly MissionGate[] = ['strategy_and_budget', 'creative_assets', 'campaign_launch'];
+
 export interface GovernancePolicy {
   /**
    * Gates where a failing governance verdict hard-blocks approval (no override).

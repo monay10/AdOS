@@ -328,6 +328,23 @@ that hold across the whole platform hold here in their strongest form:
   human approved or rejected. There is no cloud approval service, no external workflow connector,
   no API in the path. The human's judgement stays on the human's machine.
 
+> **Addendum (Governance Auto-Calibration — the safety asymmetry, ✅ SHIPPED).** Enforcement — whether a
+> failing verdict at a gate *hard-blocks* — is no longer a static operator flag; a policy engine
+> (`apps/web/src/governance-calibration.ts`) runs an explainable state machine per gate, `Observe →
+> Candidate → Enforced → Observe`, driven by that gate's **durable** decision history (override rate,
+> sample count, stability, false-positive rate, review-time trend — each an independent pass/fail plus a
+> sample-gated confidence). This does not weaken §6's boundaries; it encodes them. The machine's automatic
+> transitions can only ever **relax**: `Observe → Candidate` and `Candidate → Observe` change no
+> enforcement at all, and `Enforced → Observe` *removes* a block when the override rate climbs back up (a
+> block the data no longer justifies). The one transition that **tightens** — `Candidate → Enforced`, adding
+> a hard block — is **operator-only**, exactly as "the system never auto-approves" is operator-only in the
+> other direction. A machine may drop a constraint it can no longer defend; only a human may impose one.
+> The effective enforcement is `GOVERNANCE_ENFORCED_GATES ∪ calibration-enforced`, read through
+> `app.enforcedAt(gate)`; the operator sees each gate's state, confidence, and per-signal reasons on
+> `/traces`. 100% local. Proven by `governance-calibration{,.state,.e2e}.test.ts` +
+> `sql-governance-decisions.test.ts`. **Not yet:** per-tenant calibration (global per-gate today); a
+> standalone scheduler (recompute runs on view + after each decision).
+
 These boundaries are not features layered on top of the pipeline; they *are* the pipeline's
 contract at its human stages. Removing any of them would turn a human-sovereign operating system
 back into an autonomous tool that occasionally asks permission.

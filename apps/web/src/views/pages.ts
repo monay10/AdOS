@@ -8,6 +8,7 @@ import type { MissionPlan } from '../mission-planner.js';
 import type { Recommendation } from '../recommendation-engine.js';
 import type { QueuedMission } from '../mission-queue.js';
 import type { StorageStats } from '../maintenance.js';
+import type { GateCalibration, CalibrationReason } from '../governance-calibration.js';
 import type { Session } from '../session.js';
 import { t } from '../i18n.js';
 import { bare, esc, layout, steps } from './layout.js';
@@ -1245,8 +1246,10 @@ export function tracesPage(opts: {
   latency?: StageTiming[];
   revisions?: RevisionFunnel;
   resilience?: ResilienceStats;
+  calibration?: GateCalibration[];
 }): string {
   const time = (iso?: string): string => (iso ? esc(iso.slice(11, 19)) : '—');
+  const calibrationPanelHtml = opts.calibration && opts.calibration.length > 0 ? calibrationPanel(opts.calibration) : '';
   const metricsPanel = opts.metrics && opts.metrics.total > 0 ? governanceMetricsPanel(opts.metrics) : '';
   const funnelPanel = opts.funnel && opts.funnel.approvals > 0 ? approvalFunnelPanel(opts.funnel) : '';
   const reviewPanel = opts.review && opts.review.count > 0 ? reviewStatsPanel(opts.review) : '';
@@ -1289,8 +1292,62 @@ export function tracesPage(opts: {
     active: '/traces',
     session: opts.session,
     body: `<div class="head"><div><h1>${esc(t('traces.title'))}</h1><p>${esc(t('traces.subtitle'))}</p></div>
-      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${resiliencePanel}${body}`,
+      <span class="badge active">${esc(t('traces.summary', { n: String(opts.traces.length) }))}</span></div>${calibrationPanelHtml}${metricsPanel}${funnelPanel}${reviewPanel}${revisionPanel}${latencyPanel}${resiliencePanel}${body}`,
   });
+}
+
+/**
+ * Governance Auto-Calibration — the explainable Observe→Candidate→Enforced state
+ * machine per gate (data-calibration sprint). Shows WHY each gate is where it is
+ * (per-signal pass/fail + a blended confidence) and the human-only control to
+ * promote an eligible Candidate to Enforced (tightening is never automatic).
+ */
+function calibrationPanel(gates: GateCalibration[]): string {
+  const stateBadge = (s: GateCalibration['state']): string => {
+    const cls = s === 'enforced' ? 'active' : '';
+    return `<span class="badge ${cls}">${esc(t(`cal.state.${s}`))}</span>`;
+  };
+  const reasonChip = (r: CalibrationReason): string => {
+    const label = t(`cal.signal.${r.signal}`);
+    const val =
+      r.signal === 'samples'
+        ? String(r.value)
+        : r.signal === 'stability'
+          ? t('cal.days', { n: String(r.value) })
+          : `${r.value}%`;
+    return `<span class="step" style="opacity:${r.ok ? 1 : 0.55}">${r.ok ? '✓' : '✗'} ${esc(label)}: ${esc(val)}</span>`;
+  };
+  const control = (g: GateCalibration): string => {
+    if (g.state === 'candidate' && g.eligible) {
+      return `<form method="post" action="/governance/calibration/promote" style="display:inline">
+        <input type="hidden" name="gate" value="${esc(g.gate)}">
+        <button type="submit">${esc(t('cal.promote'))}</button></form>`;
+    }
+    if (g.state === 'enforced') {
+      return `<form method="post" action="/governance/calibration/demote" style="display:inline">
+        <input type="hidden" name="gate" value="${esc(g.gate)}">
+        <button type="submit" class="ghost">${esc(t('cal.demote'))}</button></form>`;
+    }
+    return `<span class="sub">${esc(t('cal.noAction'))}</span>`;
+  };
+  const rows = gates
+    .map(
+      (g) => `<div class="panel" style="margin:0 0 12px;padding:14px 16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div><strong>${esc(t(`gate.${g.gate}`))}</strong> ${stateBadge(g.state)}
+            <span class="sub" style="margin-left:8px">${esc(t('cal.confidence'))}: ${g.confidence}% · ${esc(t('cal.inState', { d: String(g.daysInState), n: String(g.samplesSinceChange) }))}</span></div>
+          <div>${control(g)}</div>
+        </div>
+        <div class="steps" style="margin:10px 0 0">${g.reasons.map(reasonChip).join(' ')}</div>
+        ${g.state === 'observe' && g.lastReason.startsWith('auto-relax') ? `<p class="sub" style="margin:8px 0 0;color:#c0392b">${esc(t('cal.relaxed'))}: ${esc(g.lastReason)}</p>` : ''}
+      </div>`,
+    )
+    .join('');
+  return `<div class="panel" style="margin-bottom:16px">
+    <h2>${esc(t('cal.title'))}</h2><p class="sub">${esc(t('cal.sub'))}</p>
+    ${rows}
+    <p class="sub" style="margin-top:6px">${esc(t('cal.safety'))}</p>
+  </div>`;
 }
 
 /** Human-readable byte size (B / KB / MB). */
